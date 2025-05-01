@@ -1,132 +1,66 @@
 <% content_for :title, 'Bottoni - Documentazione Componenti' %>
 
-<div class="mb-8">
-  <h1 class="text-3xl font-bold mb-4">Bottoni</h1>
-  <p class="mb-4">I bottoni sono elementi fondamentali per l'interazione utente. BetterUi offre un componente bottone versatile con numerose opzioni di personalizzazione.</p>
-</div>
+<%
+  # Definizione degli esempi dei bottoni
+  examples = [
+    {
+      id: 'basic',
+      title: 'Utilizzo base',
+      snippets: [
+        'BetterUi::ButtonComponent.new(label: "Primary", type: :primary)',
+        'BetterUi::ButtonComponent.new(label: "Secondary", type: :secondary)',
+        'BetterUi::ButtonComponent.new(label: "Success", type: :success)',
+        'BetterUi::ButtonComponent.new(label: "Danger", type: :danger)'
+      ]
+    },
+    {
+      id: 'outline',
+      title: 'Bottoni Outline',
+      description: 'I bottoni outline hanno uno stile con bordo colorato e sfondo trasparente.',
+      snippets: [
+        'BetterUi::ButtonComponent.new(label: "Primary", type: :primary, outline: true)',
+        'BetterUi::ButtonComponent.new(label: "Success", type: :success, outline: true)',
+        'BetterUi::ButtonComponent.new(label: "Danger", type: :danger, outline: true)'
+      ]
+    },
+    {
+      id: 'sizes',
+      title: 'Dimensioni',
+      description: 'I bottoni possono avere diverse dimensioni.',
+      snippets: [
+        'BetterUi::ButtonComponent.new(label: "Grande", type: :primary, size: :lg)',
+        'BetterUi::ButtonComponent.new(label: "Medio (default)", type: :primary)',
+        'BetterUi::ButtonComponent.new(label: "Piccolo", type: :primary, size: :sm)'
+      ]
+    }
+  ]
 
-<div class="flex flex-col md:flex-row gap-8">
-  <div class="md:w-64 flex-shrink-0">
-    <div class="sticky top-4">
-      <div class="bg-gray-50 rounded-lg p-4 shadow-sm border border-gray-100">
-        <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-3">Contenuti</h3>
-        <nav class="space-y-1">
-          <div class="mb-3">
-            <h4 class="text-sm font-medium text-gray-700 mb-2">Esempi</h4>
-            <ul class="ml-3 space-y-1">
-              <li>
-                <a href="#basic" class="text-sm text-indigo-600 hover:text-indigo-800 hover:underline">
-                  Utilizzo base
-                </a>
-              </li>
-              <li>
-                <a href="#outline" class="text-sm text-indigo-600 hover:text-indigo-800 hover:underline">
-                  Bottoni Outline
-                </a>
-              </li>
-            </ul>
-          </div>
-          
-          <div>
-            <h4 class="text-sm font-medium text-gray-700 mb-2">Sezioni</h4>
-            <ul class="ml-3 space-y-1">
-              <li>
-                <a href="#api" class="text-sm text-indigo-600 hover:text-indigo-800 hover:underline">
-                  API Completa
-                </a>
-              </li>
-            </ul>
-          </div>
-        </nav>
-      </div>
-    </div>
-  </div>
+  # Definizione delle sezioni della documentazione
+  sections = [
+    {
+      id: 'api',
+      title: 'API Completa'
+    }
+  ]
 
-  <div class="flex-1">
-    <!-- Esempio Base -->
-    <div id="basic" class="mb-8">
-      <h3 class="text-xl font-semibold mb-3">Utilizzo base</h3>
-      <div class="border rounded-lg overflow-hidden">
-        <div class="p-6 bg-white border-b">
-          <div class="flex space-x-2">
-            <%= render BetterUi::ButtonComponent.new(label: "Primary", type: :primary) %>
-            <%= render BetterUi::ButtonComponent.new(label: "Secondary", type: :secondary) %>
-            <%= render BetterUi::ButtonComponent.new(label: "Success", type: :success) %>
-            <%= render BetterUi::ButtonComponent.new(label: "Danger", type: :danger) %>
-          </div>
-        </div>
-        
-        <div class="bg-gray-50 p-4">
-          <pre class="language-erb overflow-x-auto text-sm"><code>&lt;%= render BetterUi::ButtonComponent.new(label: "Primary", type: :primary) %&gt;
-&lt;%= render BetterUi::ButtonComponent.new(label: "Secondary", type: :secondary) %&gt;
-&lt;%= render BetterUi::ButtonComponent.new(label: "Success", type: :success) %&gt;
-&lt;%= render BetterUi::ButtonComponent.new(label: "Danger", type: :danger) %&gt;</code></pre>
-        </div>
-      </div>
-    </div>
-    
-    <!-- Bottoni Outline -->
-    <div id="outline" class="mb-8">
-      <h3 class="text-xl font-semibold mb-3">Bottoni Outline</h3>
-      <p class="mb-4 text-gray-600">I bottoni outline hanno uno stile con bordo colorato e sfondo trasparente.</p>
-      <div class="border rounded-lg overflow-hidden">
-        <div class="p-6 bg-white border-b">
-          <div class="flex space-x-2">
-            <%= render BetterUi::ButtonComponent.new(label: "Primary", type: :primary, outline: true) %>
-            <%= render BetterUi::ButtonComponent.new(label: "Success", type: :success, outline: true) %>
-            <%= render BetterUi::ButtonComponent.new(label: "Danger", type: :danger, outline: true) %>
-          </div>
-        </div>
-        
-        <div class="bg-gray-50 p-4">
-          <pre class="language-erb overflow-x-auto text-sm"><code>&lt;%= render BetterUi::ButtonComponent.new(label: "Primary", type: :primary, outline: true) %&gt;
-&lt;%= render BetterUi::ButtonComponent.new(label: "Success", type: :success, outline: true) %&gt;
-&lt;%= render BetterUi::ButtonComponent.new(label: "Danger", type: :danger, outline: true) %&gt;</code></pre>
-        </div>
-      </div>
-    </div>
-    
-    <!-- API Completa -->
-    <div id="api" class="mb-8">
-      <h2 class="text-2xl font-semibold mb-4">API Completa</h2>
-      <div class="overflow-x-auto mb-6">
-        <table class="min-w-full border-collapse bg-white">
-          <thead>
-            <tr>
-              <th class="py-3 px-4 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border">Opzione</th>
-              <th class="py-3 px-4 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border">Tipo</th>
-              <th class="py-3 px-4 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border">Default</th>
-              <th class="py-3 px-4 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border">Descrizione</th>
-            </tr>
-          </thead>
-          <tbody class="divide-y divide-gray-200">
-            <tr>
-              <td class="py-2 px-4 border">label</td>
-              <td class="py-2 px-4 border">String</td>
-              <td class="py-2 px-4 border">nil</td>
-              <td class="py-2 px-4 border">Testo del bottone</td>
-            </tr>
-            <tr>
-              <td class="py-2 px-4 border">type</td>
-              <td class="py-2 px-4 border">Symbol</td>
-              <td class="py-2 px-4 border">:primary</td>
-              <td class="py-2 px-4 border">Tipo del bottone (primary, secondary, success, danger)</td>
-            </tr>
-            <tr>
-              <td class="py-2 px-4 border">size</td>
-              <td class="py-2 px-4 border">Symbol</td>
-              <td class="py-2 px-4 border">:md</td>
-              <td class="py-2 px-4 border">Dimensione del bottone (sm, md, lg)</td>
-            </tr>
-            <tr>
-              <td class="py-2 px-4 border">outline</td>
-              <td class="py-2 px-4 border">Boolean</td>
-              <td class="py-2 px-4 border">false</td>
-              <td class="py-2 px-4 border">Se il bottone deve essere outline</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
-</div>
+  # Definizione delle intestazioni e righe per la tabella API
+  api_headers = ['Opzione', 'Tipo', 'Default', 'Descrizione']
+  api_rows = [
+    ['label', 'String', 'nil', 'Testo del bottone'],
+    ['type', 'Symbol', ':primary', 'Tipo del bottone (primary, secondary, success, danger)'],
+    ['size', 'Symbol', ':md', 'Dimensione del bottone (sm, md, lg)'],
+    ['outline', 'Boolean', 'false', 'Se il bottone deve essere outline']
+  ]
+%>
+
+<%= render partial: 'better_ui/docs/shared/component_layout', 
+           locals: { 
+             title: 'Bottoni', 
+             description: 'I bottoni sono elementi fondamentali per l\'interazione utente. BetterUi offre un componente bottone versatile con numerose opzioni di personalizzazione.',
+             examples: examples,
+             sections: sections,
+             api: {
+              headers: api_headers,
+              rows: api_rows
+             }
+           } %>

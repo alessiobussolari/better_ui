@@ -3,7 +3,7 @@
 # - id: ID dell'esempio per l'ancora
 # - title: Titolo dell'esempio
 # - description: Descrizione opzionale dell'esempio
-# - code: Codice ERB da mostrare (come stringa)
+# - snippets: Codice ERB da mostrare e renderizzare
 %>
 
 <div id="<%= id %>" class="mb-8">
@@ -15,11 +15,21 @@
   
   <div class="mb-6">
     <div class="p-6 bg-white rounded-t-lg border border-gray-200 shadow-sm">
-      <%= yield %>
+      <% if defined?(snippets) && snippets.present? %>
+        <div class="flex flex-wrap gap-4">
+          <% snippets.each do |snippet| %>
+            <%= render eval(snippet) %>
+          <% end %>
+        </div>
+      <% else %>
+        <%= yield %>
+      <% end %>
     </div>
     
     <div class="bg-gray-50 p-4 rounded-b-lg border border-gray-200 border-t-0">
-      <pre class="language-erb overflow-x-auto text-sm"><code><%= h code %></code></pre>
+      <pre class="language-ruby overflow-x-auto text-sm font-mono bg-gray-800 text-gray-100 p-3 rounded shadow-inner"><code class="text-pink-400">
+      <%= h snippets.join("\n\n") %>
+      </code></pre>
     </div>
   </div>
 </div> 

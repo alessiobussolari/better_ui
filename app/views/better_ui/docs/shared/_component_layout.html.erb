@@ -6,6 +6,13 @@
 # - examples: Array di hash con gli esempi (id, title)
 %>
 
+<% Rails.logger.info("Rendering component_layout with locals:") %>
+<% Rails.logger.info("  title: #{local_assigns.fetch(:title, 'MISSING')}") %>
+<% Rails.logger.info("  description: #{local_assigns.fetch(:description, 'MISSING')}") %>
+<% Rails.logger.info("  examples type: #{examples.class}") %>
+<% Rails.logger.info("  sections type: #{sections.class}") %>
+<% Rails.logger.info("  API: #{api}") %>
+
 <div class="mb-8">
   <h1 class="text-3xl font-bold mb-4"><%= title %></h1>
   
@@ -58,6 +65,19 @@
   
   <!-- Contenuto principale -->
   <div class="flex-1">
-    <%= yield %>
+    
+    <%= render partial: 'better_ui/docs/shared/examples_list', locals: { examples: examples } %>
+  
+
+
+    <%= render partial: 'better_ui/docs/shared/api_table', 
+             locals: { 
+               id: 'api', 
+               title: 'API Completa',
+               headers: api[:headers],
+               rows: api[:rows]
+             } %>
+             
+
   </div>
 </div> 
