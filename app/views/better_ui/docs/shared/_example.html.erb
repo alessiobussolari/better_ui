@@ -27,9 +27,9 @@
     </div>
     
     <div class="bg-gray-50 p-4 rounded-b-lg border border-gray-200 border-t-0">
-      <pre class="language-ruby overflow-x-auto text-sm font-mono bg-gray-800 text-gray-100 p-3 rounded shadow-inner"><code class="text-pink-400">
-      <%= h snippets.join("\n\n") %>
-      </code></pre>
+      <pre class="overflow-x-auto text-sm rounded border border-gray-200 mb-0">
+        <code class="syntax-ruby block whitespace-pre p-4"><%= raw CodeRay.scan(snippets.join("\n\n"), :ruby).html(line_numbers: nil, css: :class) %></code>
+      </pre>
     </div>
   </div>
 </div> 

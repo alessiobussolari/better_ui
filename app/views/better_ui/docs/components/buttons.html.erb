@@ -14,6 +14,17 @@
       ]
     },
     {
+      id: 'more_types',
+      title: 'Altri tipi di bottoni',
+      description: 'Oltre ai tipi base, sono disponibili anche warning, info, light e dark.',
+      snippets: [
+        'BetterUi::ButtonComponent.new(label: "Warning", type: :warning)',
+        'BetterUi::ButtonComponent.new(label: "Info", type: :info)',
+        'BetterUi::ButtonComponent.new(label: "Light", type: :light)',
+        'BetterUi::ButtonComponent.new(label: "Dark", type: :dark)'
+      ]
+    },
+    {
       id: 'outline',
       title: 'Bottoni Outline',
       description: 'I bottoni outline hanno uno stile con bordo colorato e sfondo trasparente.',
@@ -32,6 +43,41 @@
         'BetterUi::ButtonComponent.new(label: "Medio (default)", type: :primary)',
         'BetterUi::ButtonComponent.new(label: "Piccolo", type: :primary, size: :sm)'
       ]
+    },
+    {
+      id: 'full_width',
+      title: 'Larghezza piena',
+      description: 'I bottoni possono occupare tutta la larghezza disponibile.',
+      snippets: [
+        'BetterUi::ButtonComponent.new(label: "Bottone a larghezza piena", type: :primary, full_width: true)'
+      ]
+    },
+    {
+      id: 'disabled',
+      title: 'Bottoni disabilitati',
+      description: 'I bottoni possono essere disabilitati quando un\'azione non è disponibile.',
+      snippets: [
+        'BetterUi::ButtonComponent.new(label: "Bottone disabilitato", type: :primary, disabled: true)',
+        'BetterUi::ButtonComponent.new(label: "Outline disabilitato", type: :primary, outline: true, disabled: true)'
+      ]
+    },
+    {
+      id: 'icons',
+      title: 'Bottoni con icone',
+      description: 'I bottoni possono includere icone a sinistra o a destra del testo.',
+      snippets: [
+        'BetterUi::ButtonComponent.new(label: "Con icona a sinistra", type: :primary, icon: "download")',
+        'BetterUi::ButtonComponent.new(label: "Con icona a destra", type: :primary, icon: "arrow-right", icon_position: :right)'
+      ]
+    },
+    {
+      id: 'links',
+      title: 'Bottoni come link',
+      description: 'I bottoni possono comportarsi come link specificando un URL.',
+      snippets: [
+        'BetterUi::ButtonComponent.new(label: "Link semplice", type: :primary, href: "#url-esempio")',
+        'BetterUi::ButtonComponent.new(label: "Link con metodo", type: :danger, href: "#url-esempio", method: :delete)'
+      ]
     }
   ]
 
@@ -47,9 +93,18 @@
   api_headers = ['Opzione', 'Tipo', 'Default', 'Descrizione']
   api_rows = [
     ['label', 'String', 'nil', 'Testo del bottone'],
-    ['type', 'Symbol', ':primary', 'Tipo del bottone (primary, secondary, success, danger)'],
-    ['size', 'Symbol', ':md', 'Dimensione del bottone (sm, md, lg)'],
-    ['outline', 'Boolean', 'false', 'Se il bottone deve essere outline']
+    ['type', 'Symbol', ':primary', 'Tipo del bottone (:primary, :secondary, :success, :danger, :warning, :info, :light, :dark)'],
+    ['size', 'Symbol', ':md', 'Dimensione del bottone (:sm, :md, :lg)'],
+    ['outline', 'Boolean', 'false', 'Se il bottone deve essere outline'],
+    ['full_width', 'Boolean', 'false', 'Se il bottone deve occupare tutta la larghezza disponibile'],
+    ['disabled', 'Boolean', 'false', 'Se il bottone deve essere disabilitato'],
+    ['icon', 'String', 'nil', 'Nome dell\'icona da mostrare nel bottone'],
+    ['icon_position', 'Symbol', ':left', 'Posizione dell\'icona (:left, :right)'],
+    ['href', 'String', 'nil', 'URL per i bottoni che fungono da link'],
+    ['method', 'Symbol', 'nil', 'Metodo HTTP da utilizzare per bottoni link (es. :delete, :put)'],
+    ['data', 'Hash', '{}', 'Attributi data aggiuntivi per il bottone'],
+    ['classes', 'String', 'nil', 'Classi CSS aggiuntive da applicare al bottone'],
+    ['id', 'String', 'nil', 'ID HTML del bottone']
   ]
 %>
 

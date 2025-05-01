@@ -9,7 +9,8 @@ module.exports = {
     './app/views/**/*.{erb,haml,html,slim}',
     // File della gemma BetterUI
     '../../app/views/**/*.{erb,haml,html,slim}',
-    '../../app/helpers/**/*.rb'
+    '../../app/helpers/**/*.rb',
+    '../../app/components/**/*.{rb,erb}'
   ],
   theme: {
     extend: {

@@ -27,6 +27,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "view_component", ">= 3.0.0"
   spec.add_dependency "redcarpet", "~> 3.6"
   spec.add_dependency "tailwindcss-rails", "~> 2.0"
+  spec.add_dependency "coderay", "~> 1.1"
 
   # Dipendenze di sviluppo
   spec.add_development_dependency "sqlite3"

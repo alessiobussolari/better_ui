@@ -1,6 +1,7 @@
 require 'view_component'
 require 'redcarpet'
 require 'tailwindcss-rails'
+require 'coderay'
 
 module BetterUi
   class Engine < ::Rails::Engine

@@ -1,6 +1,6 @@
 module BetterUi
   class ButtonComponent < ViewComponent::Base
-    # Tipi di bottoni disponibili
+    # Tipi di bottoni disponibili con classi Tailwind staticamente definite
     BUTTON_TYPES = {
       primary: "bg-blue-600 hover:bg-blue-700 text-white",
       secondary: "bg-gray-200 hover:bg-gray-300 text-gray-800",
@@ -10,6 +10,18 @@ module BetterUi
       info: "bg-sky-500 hover:bg-sky-600 text-white",
       light: "bg-white hover:bg-gray-100 text-gray-800 border border-gray-300",
       dark: "bg-gray-800 hover:bg-gray-900 text-white"
+    }
+
+    # Classi per bottoni outline
+    OUTLINE_BUTTON_TYPES = {
+      primary: "bg-transparent text-blue-600 border-blue-600 border hover:text-white hover:bg-blue-600",
+      secondary: "bg-transparent text-gray-800 border-gray-200 border hover:text-white hover:bg-gray-200",
+      success: "bg-transparent text-green-600 border-green-600 border hover:text-white hover:bg-green-600",
+      danger: "bg-transparent text-red-600 border-red-600 border hover:text-white hover:bg-red-600",
+      warning: "bg-transparent text-yellow-500 border-yellow-500 border hover:text-white hover:bg-yellow-500",
+      info: "bg-transparent text-sky-500 border-sky-500 border hover:text-white hover:bg-sky-500",
+      light: "bg-transparent text-gray-800 border-gray-300 border hover:text-gray-900 hover:bg-gray-100",
+      dark: "bg-transparent text-gray-800 border-gray-800 border hover:text-white hover:bg-gray-800"
     }
 
     # Dimensioni disponibili
@@ -63,19 +75,15 @@ module BetterUi
     # Classe CSS per il tipo di bottone
     def type_class
       if @outline
-        type_styles = BUTTON_TYPES[@type].split
-        bg_class = type_styles.detect { |c| c.start_with?("bg-") }
-        text_color = bg_class.sub("bg-", "text-")
-        border_color = bg_class.sub("bg-", "border-")
-        "bg-transparent #{text_color} #{border_color} border hover:text-white hover:#{bg_class}"
+        OUTLINE_BUTTON_TYPES[@type] || OUTLINE_BUTTON_TYPES[:primary]
       else
-        BUTTON_TYPES[@type]
+        BUTTON_TYPES[@type] || BUTTON_TYPES[:primary]
       end
     end
 
     # Classe CSS per la dimensione
     def size_class
-      BUTTON_SIZES[@size]
+      BUTTON_SIZES[@size] || BUTTON_SIZES[:md]
     end
 
     # Classe CSS per larghezza piena
