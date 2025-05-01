@@ -39,6 +39,21 @@
         </li>
       </ul>
     </div>
+    
+    <!-- Sezione Componenti -->
+    <div class="mb-6">
+      <h3 class="text-xs uppercase tracking-wider text-indigo-500 font-semibold ml-2 mb-3">Componenti</h3>
+      <ul class="space-y-1">
+        <li>
+          <%= link_to better_ui.docs_page_path('components/buttons'), class: "flex items-center px-3 py-2 text-gray-700 hover:bg-indigo-100 hover:text-indigo-700 rounded-lg transition-all duration-200 #{current_page?(better_ui.docs_page_path('components/buttons')) ? 'bg-indigo-100 text-indigo-700 font-medium' : ''}" do %>
+            <svg class="w-5 h-5 mr-2 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122"></path>
+            </svg>
+            <span>Bottoni</span>
+          <% end %>
+        </li>
+      </ul>
+    </div>
   </nav>
   
   <!-- Footer della sidebar -->

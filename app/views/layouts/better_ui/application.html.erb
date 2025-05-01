@@ -1,30 +1,29 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>BetterUI - <%= yield(:title) || 'Componenti UI per Rails' %></title>
+  <title><%= content_for(:title) || "BetterUI" %></title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
 
-  <% if defined?(main_app) %>
-    <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
-    <%= stylesheet_link_tag "application" %>
-  <% else %>
-    <%= stylesheet_link_tag "better_ui/application" %>
-  <% end %>
+  <%= yield :head %>
+
+  <link rel="icon" href="/icon.png" type="image/png">
+  <link rel="icon" href="/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/icon.png">
+
+  <%# Includes all stylesheet files in app/assets/stylesheets %>
+  <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
+  <%= stylesheet_link_tag "better_ui/application" %>
 </head>
 
-<body class="font-sans text-gray-800 leading-normal m-0 p-0 bg-gray-50">
-  <div class="flex min-h-screen">
-    <!-- Sidebar -->
-    <%= render 'better_ui/sidebar' %>
-    
-    <!-- Contenuto principale -->
-    <div class="ml-72 p-8 flex-grow">
-      <div class="bg-white rounded-lg shadow-sm p-8 max-w-4xl">
-        <%= yield %>
-      </div>
-    </div>
-  </div>
+<body class="bg-white text-gray-800">
+  <%= render "better_ui/sidebar" %>
+  
+  <main class="ml-72 min-h-screen p-8">
+    <%= yield %>
+  </main>
 </body>
 </html>
