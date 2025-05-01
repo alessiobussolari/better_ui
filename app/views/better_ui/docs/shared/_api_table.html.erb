@@ -5,16 +5,11 @@
 # - headers: Array di stringhe con le intestazioni della tabella
 # - rows: Array di array con i dati delle righe
 %>
-<% Rails.logger.info("Rendering api_table with locals:") %>
-<% Rails.logger.info("  id: #{id}") %>
-<% Rails.logger.info("  title: #{title}") %>
-<% Rails.logger.info("  headers: #{headers}") %>
-<% Rails.logger.info("  rows: #{rows}") %>
 
 <div id="<%= id %>" class="mb-8">
   <h2 class="text-2xl font-semibold mb-4"><%= title %></h2>
   
-  <div class="overflow-x-auto mb-6">
+  <div class="overflow-x-auto mb-6 rounded border">
     <table class="min-w-full border-collapse bg-white">
       <thead>
         <tr>
@@ -26,8 +21,8 @@
       <tbody class="divide-y divide-gray-200">
         <% rows.each do |row| %>
           <tr>
-            <% row.each do |cell| %>
-              <td class="py-2 px-4 border"><%= cell %></td>
+            <% row.each_with_index do |cell, index| %>
+              <td class="py-2 px-4 border text-sm <%= index == headers.size - 1 ? 'break-words' : '' %>" <%= index == headers.size - 1 ? 'style="max-width: 300px;"' : '' %>><%= cell %></td>
             <% end %>
           </tr>
         <% end %>

@@ -3,7 +3,9 @@
 # - id: ID dell'esempio per l'ancora
 # - title: Titolo dell'esempio
 # - description: Descrizione opzionale dell'esempio
-# - snippets: Codice ERB da mostrare e renderizzare
+# - snippets: Array di oggetti. Ogni oggetto ha:
+#   - code: Codice ERB da valutare e renderizzare
+#   - block: Blocco HTML opzionale da passare al componente
 %>
 
 <div id="<%= id %>" class="mb-8">
@@ -14,11 +16,21 @@
   <% end %>
   
   <div class="mb-6">
-    <div class="p-6 bg-white rounded-t-lg border border-gray-200 shadow-sm">
+    <div class="p-6 bg-white rounded-t-lg border border-gray-200 shadow-sm overflow-x-auto">
       <% if defined?(snippets) && snippets.present? %>
-        <div class="flex flex-wrap gap-4">
+        <div class="flex flex-wrap gap-4 max-w-full">
           <% snippets.each do |snippet| %>
-            <%= render eval(snippet) %>
+            <% if snippet.is_a?(Hash) && snippet[:code].present? %>
+              <div class="flex-grow min-w-0 overflow-hidden">
+                <%= render eval(snippet[:code]) do %>
+                  <%= raw snippet[:block] if snippet[:block].present? %>
+                <% end %>
+              </div>
+            <% elsif snippet.is_a?(String) %>
+              <div class="flex-grow min-w-0 overflow-hidden">
+                <%= render eval(snippet) %>
+              </div>
+            <% end %>
           <% end %>
         </div>
       <% else %>
@@ -26,9 +38,14 @@
       <% end %>
     </div>
     
-    <div class="bg-gray-50 p-4 rounded-b-lg border border-gray-200 border-t-0">
-      <pre class="overflow-x-auto text-sm rounded border border-gray-200 mb-0">
-        <code class="syntax-ruby block whitespace-pre p-4"><%= raw CodeRay.scan(snippets.join("\n\n"), :ruby).html(line_numbers: nil, css: :class) %></code>
+    <div class="bg-gray-50 p-4 rounded-b-lg border border-gray-200 border-t-0 overflow-hidden">
+      <pre class="overflow-x-auto text-sm rounded border border-gray-200 mb-0 max-w-full">
+        <code class="syntax-ruby block whitespace-pre p-4 break-normal"><%=
+          raw CodeRay.scan(
+            snippets.map { |s| s.is_a?(Hash) ? s[:code] : s.to_s }.join("\n\n"),
+            :ruby
+          ).html(line_numbers: nil, css: :class)
+        %></code>
       </pre>
     </div>
   </div>

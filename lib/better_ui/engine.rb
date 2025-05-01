@@ -2,6 +2,7 @@ require 'view_component'
 require 'redcarpet'
 require 'tailwindcss-rails'
 require 'coderay'
+require 'font-awesome-sass'
 
 module BetterUi
   class Engine < ::Rails::Engine

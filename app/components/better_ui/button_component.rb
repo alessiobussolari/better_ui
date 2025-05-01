@@ -134,8 +134,12 @@ module BetterUi
     
     # Helper per renderizzare le icone
     def render_icon(icon_name)
-      # Implementazione base per le icone
-      content_tag :i, "", class: "icon icon-#{icon_name}"
+      # Utilizziamo il nuovo componente Icon
+      render BetterUi::IconComponent.new(
+        name: icon_name,
+        size: @size == :lg ? :lg : :md,
+        fixed_width: true
+      )
     end
   end
 end 

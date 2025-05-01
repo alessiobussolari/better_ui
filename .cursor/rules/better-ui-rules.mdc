@@ -3,4 +3,5 @@ description:
 globs: 
 alwaysApply: true
 ---
-Non generare file js questa libreria è solo presentazionale e non prevede javascript o cose simili
+Non generare file js questa libreria è solo presentazionale e non prevede javascript o cose simili.
+Se devi generare un componente ViewComponent usa sempre la relativa cli di cui allego un esempio "bin/rails generate component Example param1 param2".

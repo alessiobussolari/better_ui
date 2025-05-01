@@ -7,7 +7,7 @@ module BetterUi
     def show
       # Verifica se esiste una vista con il nome richiesto
       page = params[:page]
-      valid_pages = %w[introduction installation customization components/buttons]
+      valid_pages = %w[introduction installation customization components/buttons components/icons components/panel components/table]
       
       if valid_pages.include?(page)
         if page.start_with?('components/')

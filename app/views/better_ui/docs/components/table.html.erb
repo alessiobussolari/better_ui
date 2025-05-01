@@ -1,0 +1,210 @@
+<% content_for :title, 'Tabelle - Documentazione Componenti' %>
+
+<%
+  # Dati di esempio per le tabelle
+  users_data = [
+    { id: 1, name: "Mario Rossi", email: "mario@example.com", role: "Admin" },
+    { id: 2, name: "Giulia Bianchi", email: "giulia@example.com", role: "Editor" },
+    { id: 3, name: "Luca Verdi", email: "luca@example.com", role: "User" }
+  ]
+
+  # Definizione degli esempi delle tabelle
+  examples = [
+    {
+      id: 'basic',
+      title: 'Utilizzo base',
+      description: 'Una tabella base con dati e intestazioni.',
+      snippets: [
+        { 
+          code: 'BetterUi::TableComponent.new(
+  data: [
+    { id: 1, name: "Mario Rossi", email: "mario@example.com", role: "Admin" },
+    { id: 2, name: "Giulia Bianchi", email: "giulia@example.com", role: "Editor" },
+    { id: 3, name: "Luca Verdi", email: "luca@example.com", role: "User" }
+  ],
+  headers: ["name", "email", "role"]
+)'
+        }
+      ]
+    },
+    {
+      id: 'auto_headers',
+      title: 'Intestazioni automatiche',
+      description: 'Le intestazioni vengono generate automaticamente dalle chiavi dei dati se non specificate.',
+      snippets: [
+        { 
+          code: 'BetterUi::TableComponent.new(
+  data: [
+    { name: "Mario Rossi", email: "mario@example.com", role: "Admin" },
+    { name: "Giulia Bianchi", email: "giulia@example.com", role: "Editor" },
+    { name: "Luca Verdi", email: "luca@example.com", role: "User" }
+  ]
+)'
+        }
+      ]
+    },
+    {
+      id: 'caption',
+      title: 'Tabella con didascalia',
+      description: 'Le tabelle possono avere una didascalia che descrive il contenuto.',
+      snippets: [
+        { 
+          code: 'BetterUi::TableComponent.new(
+  data: [
+    { name: "Mario Rossi", email: "mario@example.com", role: "Admin" },
+    { name: "Giulia Bianchi", email: "giulia@example.com", role: "Editor" },
+    { name: "Luca Verdi", email: "luca@example.com", role: "User" }
+  ],
+  headers: ["name", "email", "role"],
+  caption: "Elenco degli utenti e relativi ruoli"
+)'
+        }
+      ]
+    },
+    {
+      id: 'striped',
+      title: 'Tabella a righe alternate',
+      description: 'Le righe della tabella possono essere mostrate con colori alternati per migliorare la leggibilità.',
+      snippets: [
+        { 
+          code: 'BetterUi::TableComponent.new(
+  data: [
+    { name: "Mario Rossi", email: "mario@example.com", role: "Admin" },
+    { name: "Giulia Bianchi", email: "giulia@example.com", role: "Editor" },
+    { name: "Luca Verdi", email: "luca@example.com", role: "User" }
+  ],
+  headers: ["name", "email", "role"],
+  striped: true
+)'
+        }
+      ]
+    },
+    {
+      id: 'hoverable',
+      title: 'Tabella con effetto hover',
+      description: 'Le righe della tabella possono cambiare colore quando il mouse ci passa sopra.',
+      snippets: [
+        { 
+          code: 'BetterUi::TableComponent.new(
+  data: [
+    { name: "Mario Rossi", email: "mario@example.com", role: "Admin" },
+    { name: "Giulia Bianchi", email: "giulia@example.com", role: "Editor" },
+    { name: "Luca Verdi", email: "luca@example.com", role: "User" }
+  ],
+  headers: ["name", "email", "role"],
+  hoverable: true
+)'
+        }
+      ]
+    },
+    {
+      id: 'bordered',
+      title: 'Tabella con bordi',
+      description: 'Puoi aggiungere bordi alla tabella e alle sue celle per migliorare la separazione visiva dei dati.',
+      snippets: [
+        { 
+          code: 'BetterUi::TableComponent.new(
+  data: [
+    { name: "Mario Rossi", email: "mario@example.com", role: "Admin" },
+    { name: "Giulia Bianchi", email: "giulia@example.com", role: "Editor" },
+    { name: "Luca Verdi", email: "luca@example.com", role: "User" }
+  ],
+  headers: ["name", "email", "role"],
+  bordered: true
+)'
+        }
+      ]
+    },
+    {
+      id: 'compact',
+      title: 'Tabella compatta',
+      description: 'Riduce lo spazio tra le celle per creare tabelle più dense con molti dati.',
+      snippets: [
+        { 
+          code: 'BetterUi::TableComponent.new(
+  data: [
+    { name: "Mario Rossi", email: "mario@example.com", role: "Admin" },
+    { name: "Giulia Bianchi", email: "giulia@example.com", role: "Editor" },
+    { name: "Luca Verdi", email: "luca@example.com", role: "User" }
+  ],
+  headers: ["name", "email", "role"],
+  compact: true
+)'
+        }
+      ]
+    },
+    {
+      id: 'combined',
+      title: 'Stili combinati',
+      description: 'Puoi combinare più stili per creare tabelle personalizzate.',
+      snippets: [
+        { 
+          code: 'BetterUi::TableComponent.new(
+  data: [
+    { name: "Mario Rossi", email: "mario@example.com", role: "Admin" },
+    { name: "Giulia Bianchi", email: "giulia@example.com", role: "Editor" },
+    { name: "Luca Verdi", email: "luca@example.com", role: "User" }
+  ],
+  headers: ["name", "email", "role"],
+  caption: "Elenco utenti",
+  striped: true,
+  hoverable: true,
+  bordered: true,
+  compact: false
+)'
+        }
+      ]
+    },
+    {
+      id: 'custom_classes',
+      title: 'Classi personalizzate',
+      description: 'Puoi aggiungere classi CSS personalizzate alla tabella.',
+      snippets: [
+        { 
+          code: 'BetterUi::TableComponent.new(
+  data: [
+    { name: "Mario Rossi", email: "mario@example.com", role: "Admin" },
+    { name: "Giulia Bianchi", email: "giulia@example.com", role: "Editor" },
+    { name: "Luca Verdi", email: "luca@example.com", role: "User" }
+  ],
+  headers: ["name", "email", "role"],
+  classes: "my-custom-class text-indigo-600"
+)'
+        }
+      ]
+    }
+  ]
+
+  # Definizione delle sezioni della documentazione
+  sections = [
+    {
+      id: 'api',
+      title: 'API Completa'
+    }
+  ]
+
+  # Definizione delle intestazioni e righe per la tabella API
+  api_headers = ['Opzione', 'Tipo', 'Default', 'Descrizione']
+  api_rows = [
+    ['data', 'Array', '[]', 'Array di hash o oggetti contenente i dati della tabella.'],
+    ['headers', 'Array', 'nil', 'Array di stringhe per le intestazioni. Se omesso, vengono derivate dalle chiavi del primo elemento di data.'],
+    ['caption', 'String', 'nil', 'Didascalia opzionale che appare sopra la tabella.'],
+    ['striped', 'Boolean', 'false', 'Se true, le righe della tabella avranno colori alternati.'],
+    ['hoverable', 'Boolean', 'false', 'Se true, le righe della tabella cambieranno colore quando il mouse ci passerà sopra.'],
+    ['bordered', 'Boolean', 'true', 'Se true, aggiungerà bordi alla tabella e alle celle.'],
+    ['compact', 'Boolean', 'false', 'Se true, riduce lo spazio tra le celle per creare tabelle più dense.'],
+    ['classes', 'String', 'nil', 'Classi CSS aggiuntive da applicare alla tabella.']
+  ]
+%>
+
+<%= render partial: 'better_ui/docs/shared/component_layout', 
+           locals: { 
+             title: 'Tabelle', 
+             description: 'Il componente Table permette di visualizzare dati strutturati in formato tabellare con varie opzioni di stile. È ideale per presentare collezioni di dati correlati in modo organizzato e leggibile.',
+             examples: examples,
+             sections: sections,
+             api: {
+              headers: api_headers,
+              rows: api_rows
+             }
+           } %> 

@@ -3,6 +3,7 @@ PATH
   specs:
     better_ui (0.1.0)
       coderay (~> 1.1)
+      font-awesome-sass (~> 6.5.1)
       rails (>= 7.0.0)
       redcarpet (~> 3.6)
       tailwindcss-rails (~> 2.0)
@@ -94,6 +95,16 @@ GEM
     date (3.4.1)
     drb (2.2.1)
     erubi (1.13.1)
+    ffi (1.17.2-aarch64-linux-gnu)
+    ffi (1.17.2-aarch64-linux-musl)
+    ffi (1.17.2-arm-linux-gnu)
+    ffi (1.17.2-arm-linux-musl)
+    ffi (1.17.2-arm64-darwin)
+    ffi (1.17.2-x86_64-darwin)
+    ffi (1.17.2-x86_64-linux-gnu)
+    ffi (1.17.2-x86_64-linux-musl)
+    font-awesome-sass (6.5.2)
+      sassc (~> 2.0)
     globalid (1.2.1)
       activesupport (>= 6.1)
     i18n (1.14.7)
@@ -238,6 +249,8 @@ GEM
       rubocop-performance (>= 1.24)
       rubocop-rails (>= 2.30)
     ruby-progressbar (1.13.0)
+    sassc (2.4.0)
+      ffi (~> 1.9)
     securerandom (0.4.1)
     sqlite3 (2.6.0-aarch64-linux-gnu)
     sqlite3 (2.6.0-aarch64-linux-musl)
@@ -292,6 +305,7 @@ PLATFORMS
 
 DEPENDENCIES
   better_ui!
+  font-awesome-sass (~> 6.5)
   propshaft
   puma
   redcarpet

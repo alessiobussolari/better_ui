@@ -1,0 +1,37 @@
+<div class="<%= table_container_classes %>">
+  <table class="<%= table_classes %>">
+    <% if caption.present? %>
+      <caption class="<%= caption_classes %>">
+        <%= caption %>
+      </caption>
+    <% end %>
+    
+    <thead class="<%= thead_classes %>">
+      <tr>
+        <% headers_for_display.each do |header| %>
+          <th scope="col" class="<%= th_classes %>">
+            <%= header.to_s.humanize %>
+          </th>
+        <% end %>
+      </tr>
+    </thead>
+    
+    <tbody class="<%= tbody_classes %>">
+      <% data.each_with_index do |row, index| %>
+        <tr class="<%= tr_classes(index) %>">
+          <% headers_for_display.each do |header| %>
+            <td class="<%= td_classes %>">
+              <% if row.is_a?(Hash) %>
+                <%= row[header.to_s] || row[header.to_sym] %>
+              <% elsif row.respond_to?(header.to_sym) %>
+                <%= row.send(header.to_sym) %>
+              <% else %>
+                —
+              <% end %>
+            </td>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div> 

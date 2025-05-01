@@ -1,0 +1,107 @@
+<% content_for :title, 'Icone - Documentazione Componenti' %>
+
+<%
+  # Definizione degli esempi delle icone
+  examples = [
+    {
+      id: 'basic',
+      title: 'Utilizzo base',
+      snippets: [
+        { code: 'BetterUi::IconComponent.new(name: "user")' },
+        { code: 'BetterUi::IconComponent.new(name: "download")' },
+        { code: 'BetterUi::IconComponent.new(name: "cog")' },
+        { code: 'BetterUi::IconComponent.new(name: "trash")' }
+      ]
+    },
+    {
+      id: 'styles',
+      title: 'Stili di icone',
+      description: 'Le icone possono avere diversi stili. Lo stile regular e light potrebbero non essere disponibili nella versione free di Font Awesome.',
+      snippets: [
+        { code: 'BetterUi::IconComponent.new(name: "user", style: :solid)' },
+        { code: 'BetterUi::IconComponent.new(name: "user", style: :regular)' },
+        { code: 'BetterUi::IconComponent.new(name: "github", style: :brands)' }
+      ]
+    },
+    {
+      id: 'sizes',
+      title: 'Dimensioni',
+      description: 'Le icone possono avere diverse dimensioni.',
+      snippets: [
+        { code: 'BetterUi::IconComponent.new(name: "user", size: :xs)' },
+        { code: 'BetterUi::IconComponent.new(name: "user", size: :sm)' },
+        { code: 'BetterUi::IconComponent.new(name: "user", size: :md)' },
+        { code: 'BetterUi::IconComponent.new(name: "user", size: :lg)' },
+        { code: 'BetterUi::IconComponent.new(name: "user", size: :xl)' },
+        { code: 'BetterUi::IconComponent.new(name: "user", size: :"2xl")' }
+      ]
+    },
+    {
+      id: 'fixed_width',
+      title: 'Larghezza fissa',
+      description: 'Le icone possono avere una larghezza fissa, utile quando si allineano in liste o menu.',
+      snippets: [
+        { code: 'BetterUi::IconComponent.new(name: "home", fixed_width: true)' },
+        { code: 'BetterUi::IconComponent.new(name: "user", fixed_width: true)' },
+        { code: 'BetterUi::IconComponent.new(name: "cog", fixed_width: true)' }
+      ]
+    },
+    {
+      id: 'animations',
+      title: 'Animazioni',
+      description: 'Le icone possono essere animate con effetti di rotazione.',
+      snippets: [
+        { code: 'BetterUi::IconComponent.new(name: "spinner", spin: true)' },
+        { code: 'BetterUi::IconComponent.new(name: "circle-notch", spin: true)' },
+        { code: 'BetterUi::IconComponent.new(name: "cog", pulse: true)' }
+      ]
+    },
+    {
+      id: 'transformations',
+      title: 'Trasformazioni',
+      description: 'Le icone possono essere ruotate o capovolte.',
+      snippets: [
+        { code: 'BetterUi::IconComponent.new(name: "arrow-right", rotation: 90)' },
+        { code: 'BetterUi::IconComponent.new(name: "arrow-right", rotation: 180)' },
+        { code: 'BetterUi::IconComponent.new(name: "arrow-right", rotation: 270)' },
+        { code: 'BetterUi::IconComponent.new(name: "arrow-right", flip: "horizontal")' },
+        { code: 'BetterUi::IconComponent.new(name: "arrow-right", flip: "vertical")' }
+      ]
+    }
+  ]
+
+  # Definizione delle sezioni della documentazione
+  sections = [
+    {
+      id: 'api',
+      title: 'API Completa'
+    }
+  ]
+
+  # Definizione delle intestazioni e righe per la tabella API
+  api_headers = ['Opzione', 'Tipo', 'Default', 'Descrizione']
+  api_rows = [
+    ['name', 'String/Symbol', 'nil', 'Nome dell\'icona Font Awesome'],
+    ['size', 'Symbol', ':md', 'Dimensione dell\'icona (:xs, :sm, :md, :lg, :xl, :2xl)'],
+    ['style', 'Symbol', ':solid', 'Stile dell\'icona (:solid, :regular, :light, :brands, :duotone)'],
+    ['fixed_width', 'Boolean', 'false', 'Se l\'icona deve avere larghezza fissa'],
+    ['spin', 'Boolean', 'false', 'Se l\'icona deve ruotare continuamente'],
+    ['pulse', 'Boolean', 'false', 'Se l\'icona deve ruotare a intervalli'],
+    ['border', 'Boolean', 'false', 'Se l\'icona deve avere un bordo'],
+    ['flip', 'String', 'nil', 'Specifica come capovolgere l\'icona ("horizontal", "vertical")'],
+    ['rotation', 'Integer', 'nil', 'Rotazione dell\'icona in gradi (90, 180, 270)'],
+    ['classes', 'String', 'nil', 'Classi CSS aggiuntive da applicare all\'icona']
+  ]
+%>
+
+<%= render partial: 'better_ui/docs/shared/component_layout', 
+           locals: { 
+             title: 'Icone', 
+             description: 'BetterUI include un componente per le icone che sfrutta Font Awesome per fornire una vasta libreria di simboli e icone per le tue applicazioni. Questo componente ti permette di utilizzare facilmente le icone Font Awesome con varie opzioni di personalizzazione.',
+             examples: examples,
+             sections: sections,
+             api: {
+              headers: api_headers,
+              rows: api_rows
+             }
+           } %> 
