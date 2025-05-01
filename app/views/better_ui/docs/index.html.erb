@@ -1,100 +1,20 @@
 <% content_for :title, 'Documentazione' %>
 
-<div class="better-ui-doc-header">
-  <h1>BetterUI - Componenti UI per Rails</h1>
-  <p>Una libreria di componenti UI riutilizzabili per Rails con documentazione integrata.</p>
-</div>
+<h1 class="text-3xl font-bold mb-6">BetterUI - Documentazione</h1>
 
-<div class="better-ui-doc-section">
-  <h2>Introduzione</h2>
-  <p>
-    BetterUI è una gemma Rails che fornisce componenti UI riutilizzabili pronti all'uso.
-    L'obiettivo principale è fornire un set di componenti UI coerenti e facilmente personalizzabili
-    che possono essere integrati in qualsiasi applicazione Rails.
-  </p>
-</div>
+<p class="mb-4">BetterUI è una libreria di componenti UI per Rails.</p>
 
-<div class="better-ui-doc-section">
-  <h2>Installazione</h2>
-  <p>Aggiungi questa riga al tuo Gemfile:</p>
-  <pre><code>gem 'better_ui'</code></pre>
-  
-  <p>Quindi esegui:</p>
-  <pre><code>$ bundle install</code></pre>
-  
-  <p>O installa tu stesso la gemma:</p>
-  <pre><code>$ gem install better_ui</code></pre>
-</div>
-
-<div class="better-ui-doc-section">
-  <h2>Configurazione</h2>
-  <p>Per montare l'engine nel tuo file routes.rb:</p>
-  <pre><code>Rails.application.routes.draw do
-  mount BetterUi::Engine => "/better_ui"
-end</code></pre>
-</div>
-
-<div class="better-ui-doc-section">
-  <h2>Componenti disponibili</h2>
-  <div class="better-ui-component-grid">
-    <% @components.each do |component| %>
-      <div class="better-ui-component-card">
-        <h3><%= component[:name] %></h3>
-        <p>Esplora la documentazione e gli esempi per il componente <%= component[:name] %>.</p>
-        <%= link_to "Visualizza dettagli", component[:path], class: "better-ui-component-link" %>
-      </div>
-    <% end %>
-  </div>
-</div>
-
-<style>
-  .better-ui-doc-header {
-    margin-bottom: 2rem;
-    border-bottom: 1px solid #e0e0e0;
-    padding-bottom: 1rem;
-  }
-  
-  .better-ui-doc-section {
-    margin-bottom: 2rem;
-  }
-  
-  .better-ui-doc-section h2 {
-    margin-bottom: 1rem;
-    color: #333;
-  }
-  
-  pre {
-    background-color: #f5f5f5;
-    padding: 1rem;
-    border-radius: 4px;
-    overflow-x: auto;
-  }
-  
-  code {
-    font-family: monospace;
-  }
-  
-  .better-ui-component-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 1rem;
-  }
-  
-  .better-ui-component-card {
-    border: 1px solid #e0e0e0;
-    border-radius: 4px;
-    padding: 1rem;
-    background-color: #f9f9f9;
-  }
-  
-  .better-ui-component-link {
-    display: inline-block;
-    margin-top: 1rem;
-    color: #007bff;
-    text-decoration: none;
-  }
-  
-  .better-ui-component-link:hover {
-    text-decoration: underline;
-  }
-</style> 
+<div class="mb-8">
+  <h2 class="text-2xl font-semibold mb-4">Sezioni della documentazione</h2>
+  <ul class="list-disc pl-6">
+    <li class="mb-2">
+      <%= link_to "Introduzione", better_ui.docs_page_path('introduction'), class: "text-blue-600 hover:underline" %>
+    </li>
+    <li class="mb-2">
+      <%= link_to "Guida all'installazione", better_ui.docs_page_path('installation'), class: "text-blue-600 hover:underline" %>
+    </li>
+    <li class="mb-2">
+      <%= link_to "Personalizzazione", better_ui.docs_page_path('customization'), class: "text-blue-600 hover:underline" %>
+    </li>
+  </ul>
+</div> 

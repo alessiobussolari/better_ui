@@ -6,129 +6,24 @@
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
 
-  <%= stylesheet_link_tag "better_ui/application" %>
-
-  <style>
-    body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-      line-height: 1.5;
-      color: #333;
-      margin: 0;
-      padding: 0;
-    }
-    
-    .better-ui-container {
-      width: 100%;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 1rem;
-    }
-    
-    .better-ui-sidebar {
-      width: 250px;
-      padding: 1rem;
-      background-color: #f5f5f5;
-      border-right: 1px solid #e0e0e0;
-      position: fixed;
-      top: 0;
-      left: 0;
-      bottom: 0;
-      overflow-y: auto;
-    }
-    
-    .better-ui-content {
-      margin-left: 250px;
-      padding: 2rem;
-    }
-    
-    .better-ui-nav-title {
-      font-size: 1.25rem;
-      font-weight: 600;
-      margin-bottom: 1rem;
-    }
-    
-    .better-ui-nav-list {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-    
-    .better-ui-nav-item {
-      margin-bottom: 0.5rem;
-    }
-    
-    .better-ui-nav-link {
-      color: #333;
-      text-decoration: none;
-      padding: 0.5rem;
-      display: block;
-      border-radius: 4px;
-    }
-    
-    .better-ui-nav-link:hover {
-      background-color: #e0e0e0;
-    }
-    
-    .better-ui-nav-link.active {
-      background-color: #007bff;
-      color: white;
-    }
-  </style>
+  <% if defined?(main_app) %>
+    <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "application" %>
+  <% else %>
+    <%= stylesheet_link_tag "better_ui/application" %>
+  <% end %>
 </head>
 
-<body>
-  <div class="better-ui-container">
-    <div class="better-ui-sidebar">
-      <div class="better-ui-nav-title">BetterUI</div>
-      <nav>
-        <div class="better-ui-nav-section">
-          <h3>Documentazione</h3>
-          <ul class="better-ui-nav-list">
-            <li class="better-ui-nav-item">
-              <%= link_to "Guida all'installazione", better_ui.docs_page_path('installation'), class: "better-ui-nav-link" %>
-            </li>
-            <li class="better-ui-nav-item">
-              <%= link_to "Personalizzazione", better_ui.docs_page_path('customization'), class: "better-ui-nav-link" %>
-            </li>
-          </ul>
-        </div>
-        
-        <div class="better-ui-nav-section">
-          <h3>Componenti</h3>
-          <ul class="better-ui-nav-list">
-            <% if @components %>
-              <% @components.each do |component| %>
-                <li class="better-ui-nav-item">
-                  <%= link_to component[:name], component[:path], class: "better-ui-nav-link" %>
-                </li>
-              <% end %>
-            <% else %>
-              <li class="better-ui-nav-item">
-                <%= link_to "Button", better_ui.docs_component_path('button'), class: "better-ui-nav-link" %>
-              </li>
-              <li class="better-ui-nav-item">
-                <%= link_to "Alert", better_ui.docs_component_path('alert'), class: "better-ui-nav-link" %>
-              </li>
-              <li class="better-ui-nav-item">
-                <%= link_to "Card", better_ui.docs_component_path('card'), class: "better-ui-nav-link" %>
-              </li>
-              <li class="better-ui-nav-item">
-                <%= link_to "Modal", better_ui.docs_component_path('modal'), class: "better-ui-nav-link" %>
-              </li>
-              <li class="better-ui-nav-item">
-                <%= link_to "Tabs", better_ui.docs_component_path('tabs'), class: "better-ui-nav-link" %>
-              </li>
-              <li class="better-ui-nav-item">
-                <%= link_to "Form Elements", better_ui.docs_component_path('form_elements'), class: "better-ui-nav-link" %>
-              </li>
-            <% end %>
-          </ul>
-        </div>
-      </nav>
-    </div>
+<body class="font-sans text-gray-800 leading-normal m-0 p-0 bg-gray-50">
+  <div class="flex min-h-screen">
+    <!-- Sidebar -->
+    <%= render 'better_ui/sidebar' %>
     
-    <div class="better-ui-content">
-      <%= yield %>
+    <!-- Contenuto principale -->
+    <div class="ml-72 p-8 flex-grow">
+      <div class="bg-white rounded-lg shadow-sm p-8 max-w-4xl">
+        <%= yield %>
+      </div>
     </div>
   </div>
 </body>

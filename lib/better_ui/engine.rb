@@ -12,8 +12,13 @@ module BetterUi
       app.config.assets.paths << root.join('app', 'assets', 'images')
     end
     
+    # Assicuriamo che gli helper siano correttamente caricati
+    config.autoload_paths << root.join('app', 'helpers')
+    
     # Configurazione per rendere disponibili i componenti all'applicazione host
     initializer 'better_ui.view_helpers' do
+      require_relative '../../app/helpers/better_ui_application_helper'
+      
       ActiveSupport.on_load :action_controller do
         helper BetterUi::ApplicationHelper
       end
