@@ -1,0 +1,37 @@
+<%#
+  Partial per mostrare tabelle API in modo standardizzato
+  
+  Parametri:
+  - id: ID per l'ancoraggio (opzionale)
+  - title: Titolo della sezione API
+  - headers: Array di stringhe con le intestazioni della tabella (es. ["Opzione", "Tipo", "Default", "Descrizione"])
+  - rows: Array di array con i dati delle righe (es. [["label", "String", "nil", "Descrizione"]])
+%>
+
+<% id_attr = local_assigns[:id].present? ? "id=#{local_assigns[:id]}" : "" %>
+<div <%= id_attr %> class="mb-8">
+  <% if local_assigns[:title].present? %>
+    <h2 class="text-2xl font-semibold mb-4"><%= local_assigns[:title] %></h2>
+  <% end %>
+  
+  <div class="overflow-x-auto mb-6">
+    <table class="min-w-full border-collapse bg-white">
+      <thead>
+        <tr>
+          <% local_assigns[:headers].each do |header| %>
+            <th class="py-3 px-4 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border"><%= header %></th>
+          <% end %>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-gray-200">
+        <% local_assigns[:rows].each do |row| %>
+          <tr>
+            <% row.each do |cell| %>
+              <td class="py-2 px-4 border"><%= cell %></td>
+            <% end %>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div> 

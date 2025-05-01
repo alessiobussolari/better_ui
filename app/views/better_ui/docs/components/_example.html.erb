@@ -1,0 +1,25 @@
+<%
+# Parametri:
+# - id: ID dell'esempio per l'ancora
+# - title: Titolo dell'esempio
+# - description: Descrizione opzionale dell'esempio
+# - code: Codice ERB da mostrare (come stringa)
+%>
+
+<div id="<%= id %>" class="mb-8">
+  <h3 class="text-xl font-semibold mb-3"><%= title %></h3>
+  
+  <% if defined?(description) && description.present? %>
+    <p class="mb-4 text-gray-600"><%= description %></p>
+  <% end %>
+  
+  <div class="mb-6">
+    <div class="p-6 bg-white rounded-t-lg border border-gray-200 shadow-sm">
+      <%= yield %>
+    </div>
+    
+    <div class="bg-gray-50 p-4 rounded-b-lg border border-gray-200 border-t-0">
+      <pre class="language-erb overflow-x-auto text-sm"><code><%= h code %></code></pre>
+    </div>
+  </div>
+</div> 
