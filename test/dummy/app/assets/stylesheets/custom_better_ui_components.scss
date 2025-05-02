@@ -1,7 +1,7 @@
 /*
  * custom_better_ui_components.scss
  * Foglio di stile SCSS per la personalizzazione dei componenti di BetterUi
- * Generato il: 02/05/2025 21:15
+ * Generato il: 02/05/2025 21:48
  */
 
 /**
@@ -91,4 +91,56 @@ $bui-radius-full: theme('borderRadius.full') !default;
     @apply bg-violet-500 text-white hover:bg-violet-600;
   }
   
+  /* Varianti di dimensione per i bottoni */
+  &-size-small {
+    @apply py-1 px-2.5 text-xs;
+  }
+  
+  &-size-medium {
+    @apply py-2 px-4 text-sm;
+  }
+  
+  &-size-large {
+    @apply py-2.5 px-6 text-base;
+  }
+  
+  /* Varianti di border-radius per i bottoni */
+  &-radius-none {
+    @apply rounded-none;
+  }
+  
+  &-radius-small {
+    @apply rounded-sm;
+  }
+  
+  &-radius-medium {
+    @apply rounded-md;
+  }
+  
+  &-radius-large {
+    @apply rounded-lg;
+  }
+  
+  &-radius-full {
+    @apply rounded-full;
+  }
+  
+  /* Stati del bottone */
+  &-disabled {
+    @apply opacity-50 cursor-not-allowed;
+  }
+  
+  &-full-width {
+    @apply w-full;
+  }
+  
+  /* Focus */
+  &-focus {
+    @apply focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500;
+  }
+  
+  /* Layout e posizionamento */
+  &-layout-default {
+    @apply inline-flex items-center justify-center font-medium;
+  }
 }
