@@ -1,91 +1,95 @@
 module BetterUi
   module Application
     class AlertComponent < ViewComponent::Base
-      attr_reader :title, :message, :variant, :icon, :dismissible, :classes, :data, :icon_position, :outline
+      attr_reader :title, :message, :variant, :icon, :dismissible, :classes, :data, :icon_position, :outline, :rounded
 
       # Varianti di colore disponibili
       VARIANTS = {
-        primary: {
-          bg: "bg-orange-50",
-          border: "border-orange-300",
-          title: "text-orange-800",
-          text: "text-orange-700",
-          icon: "text-orange-500",
-          close: "text-orange-500 hover:bg-orange-100",
-          outline_bg: "bg-white",
-          outline_text: "text-orange-700"
-        },
-        info: {
-          bg: "bg-blue-50",
-          border: "border-blue-300",
-          title: "text-blue-800",
-          text: "text-blue-700",
-          icon: "text-blue-500",
-          close: "text-blue-500 hover:bg-blue-100",
-          outline_bg: "bg-white",
-          outline_text: "text-blue-700"
-        },
-        success: {
-          bg: "bg-green-50",
-          border: "border-green-300",
-          title: "text-green-800",
-          text: "text-green-700",
-          icon: "text-green-500",
-          close: "text-green-500 hover:bg-green-100",
-          outline_bg: "bg-white",
-          outline_text: "text-green-700"
-        },
-        warning: {
-          bg: "bg-yellow-50",
-          border: "border-yellow-300",
-          title: "text-yellow-800",
-          text: "text-yellow-700",
-          icon: "text-yellow-500",
-          close: "text-yellow-500 hover:bg-yellow-100",
-          outline_bg: "bg-white",
-          outline_text: "text-yellow-700"
-        },
-        danger: {
-          bg: "bg-red-50",
-          border: "border-red-300",
-          title: "text-red-800",
-          text: "text-red-700",
-          icon: "text-red-500",
-          close: "text-red-500 hover:bg-red-100",
-          outline_bg: "bg-white",
-          outline_text: "text-red-700"
-        },
-        dark: {
-          bg: "bg-gray-800",
-          border: "border-gray-700",
+        default: {
+          bg: "bg-black",
+          border: "border-gray-900",
           title: "text-white",
-          text: "text-gray-300",
-          icon: "text-gray-400",
-          close: "text-gray-400 hover:bg-gray-700",
-          outline_bg: "bg-white",
-          outline_text: "text-gray-800"
+          text: "text-white",
+          icon: "text-white",
+          close: "text-white hover:bg-gray-800"
         },
-        simple: {
+        white: {
           bg: "bg-white",
           border: "border-gray-200",
-          title: "text-gray-800 font-semibold",
-          text: "text-gray-600",
-          icon: "text-gray-500",
-          close: "text-gray-500 hover:bg-gray-100",
-          outline_bg: "bg-white",
-          outline_text: "text-gray-700"
+          title: "text-black",
+          text: "text-black",
+          icon: "text-black",
+          close: "text-black hover:bg-gray-100"
+        },
+        red: {
+          bg: "bg-red-500",
+          border: "border-red-600",
+          title: "text-white",
+          text: "text-white",
+          icon: "text-white",
+          close: "text-white hover:bg-red-600"
+        },
+        rose: {
+          bg: "bg-rose-500",
+          border: "border-rose-600",
+          title: "text-white",
+          text: "text-white",
+          icon: "text-white",
+          close: "text-white hover:bg-rose-600"
+        },
+        orange: {
+          bg: "bg-orange-500",
+          border: "border-orange-600",
+          title: "text-white",
+          text: "text-white",
+          icon: "text-white",
+          close: "text-white hover:bg-orange-600"
+        },
+        green: {
+          bg: "bg-green-500",
+          border: "border-green-600",
+          title: "text-white",
+          text: "text-white",
+          icon: "text-white",
+          close: "text-white hover:bg-green-600"
+        },
+        blue: {
+          bg: "bg-blue-500",
+          border: "border-blue-600",
+          title: "text-white",
+          text: "text-white",
+          icon: "text-white",
+          close: "text-white hover:bg-blue-600"
+        },
+        yellow: {
+          bg: "bg-yellow-500",
+          border: "border-yellow-600",
+          title: "text-black",
+          text: "text-black",
+          icon: "text-black",
+          close: "text-black hover:bg-yellow-600"
+        },
+        violet: {
+          bg: "bg-violet-500",
+          border: "border-violet-600",
+          title: "text-white",
+          text: "text-white",
+          icon: "text-white",
+          close: "text-white hover:bg-violet-600"
         }
       }
 
       # Icone predefinite per ciascuna variante
       DEFAULT_ICONS = {
-        primary: "bell",
-        info: "info-circle",
-        success: "check-circle",
-        warning: "exclamation-triangle",
-        danger: "exclamation-circle",
-        dark: "shield-exclamation",
-        simple: "info-circle"
+        default: "bell",
+        white: "info-circle",
+        red: "exclamation-circle",
+        rose: "exclamation-circle",
+        orange: "bell",
+        green: "check-circle",
+        blue: "info-circle",
+        yellow: "exclamation-triangle",
+        violet: "shield-exclamation"
       }
 
       # Posizioni possibili per le icone
@@ -95,13 +99,14 @@ module BetterUi
       def initialize(
         title: nil,
         message: nil,
-        variant: :simple,
+        variant: :default,
         icon: nil, 
         dismissible: false,
         classes: nil,
         data: {},
         icon_position: :left,
-        outline: false
+        outline: false,
+        rounded: :sm
       )
         @title = title
         @message = message
@@ -112,58 +117,59 @@ module BetterUi
         @data = data
         @icon_position = icon_position.to_sym
         @outline = outline
+        @rounded = rounded.to_sym
       end
 
       # Genera l'icona in base alla variante se non specificata
       def effective_icon
         return @icon if @icon.present?
-        DEFAULT_ICONS[@variant]
+        DEFAULT_ICONS[@variant] || DEFAULT_ICONS[:default]
       end
 
       # Genera le classi per il container
       def container_classes
-        styles = VARIANTS.fetch(@variant, VARIANTS[:simple])
+        styles = VARIANTS.fetch(@variant, VARIANTS[:default])
         
-        base_classes = ["p-4 mb-4 flex"]
-        
-        if @variant == :simple
-          base_classes << "border rounded-md"
-        else
-          base_classes << "rounded-lg border"
-        end
+        base_classes = ["p-4 mb-4 flex border"]
+        base_classes << get_border_radius_class
         
         [
           *base_classes,
-          @outline ? styles[:outline_bg] : styles[:bg],
+          styles[:bg],
           styles[:border],
           @icon_position == :top ? "flex-col" : "items-start",
           @classes
         ].compact.join(" ")
       end
 
+      # Genera il border-radius
+      def get_border_radius_class
+        ThemeHelper::BORDER_RADIUS[@rounded] || ThemeHelper::BORDER_RADIUS[:sm]
+      end
+
       # Genera le classi per il titolo
       def title_classes
-        styles = VARIANTS.fetch(@variant, VARIANTS[:simple])
+        styles = VARIANTS.fetch(@variant, VARIANTS[:default])
         
         [
-          @variant == :simple ? "font-semibold" : "font-medium",
-          @outline ? styles[:outline_text] : styles[:title]
+          "font-medium",
+          styles[:title]
         ].compact.join(" ")
       end
 
       # Genera le classi per il messaggio
       def message_classes
-        styles = VARIANTS.fetch(@variant, VARIANTS[:simple])
+        styles = VARIANTS.fetch(@variant, VARIANTS[:default])
         
         [
           "mt-1",
-          @outline ? styles[:outline_text] : styles[:text]
+          styles[:text]
         ].compact.join(" ")
       end
 
       # Genera le classi per l'icona
       def icon_classes
-        styles = VARIANTS.fetch(@variant, VARIANTS[:simple])
+        styles = VARIANTS.fetch(@variant, VARIANTS[:default])
         
         [
           "flex-shrink-0",
@@ -174,7 +180,7 @@ module BetterUi
 
       # Genera le classi per il pulsante di chiusura
       def close_button_classes
-        styles = VARIANTS.fetch(@variant, VARIANTS[:simple])
+        styles = VARIANTS.fetch(@variant, VARIANTS[:default])
         
         [
           "ml-auto -mr-1.5 -mt-1.5 inline-flex h-8 w-8 rounded-lg p-1.5 focus:ring-2 focus:ring-gray-400",

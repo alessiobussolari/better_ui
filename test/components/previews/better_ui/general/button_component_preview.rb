@@ -4,9 +4,9 @@ module BetterUi
       # Bottone configurabile
       #
       # @param label text "Testo del bottone"
-      # @param type select { choices: [primary, secondary, success, danger, warning, info, light, dark] } "Tipo di bottone"
+      # @param type select { choices: [default, white, red, rose, orange, green, blue, yellow, violet] } "Tipo di bottone"
       # @param size select { choices: [sm, md, lg] } "Dimensione del bottone"
-      # @param outline toggle "Mostra solo contorno"
+      # @param rounded select { choices: [none, xs, sm, md, lg, xl, full] } "Tipo di border-radius"
       # @param full_width toggle "Larghezza completa"
       # @param disabled toggle "Disabilitato"
       # @param icon text "Nome icona (opzionale)"
@@ -16,7 +16,7 @@ module BetterUi
         label: "Bottone",
         type: :primary,
         size: :md,
-        outline: false,
+        rounded: :sm,
         full_width: false,
         disabled: false,
         icon: nil,
@@ -26,18 +26,20 @@ module BetterUi
         # Conversione dei tipi
         type = type.to_sym if type.is_a?(String)
         size = size.to_sym if size.is_a?(String)
+        rounded = rounded.to_sym if rounded.is_a?(String)
         icon_position = icon_position.to_sym if icon_position.is_a?(String)
-        outline = outline == true || outline == "true"
         full_width = full_width == true || full_width == "true"
         disabled = disabled == true || disabled == "true"
         
         # Validazione
-        valid_types = [:primary, :secondary, :success, :danger, :warning, :info, :light, :dark]
+        valid_types = [:default, :white, :red, :rose, :orange, :green, :blue, :yellow, :violet]
         valid_sizes = [:sm, :md, :lg]
+        valid_rounded = [:none, :xs, :sm, :md, :lg, :xl, :full]
         valid_icon_positions = [:left, :right]
         
         type = :primary unless valid_types.include?(type)
         size = :md unless valid_sizes.include?(size)
+        rounded = :sm unless valid_rounded.include?(rounded)
         icon_position = :left unless valid_icon_positions.include?(icon_position)
         
         # Pulisci valori vuoti
@@ -48,7 +50,7 @@ module BetterUi
           label: label, 
           type: type,
           size: size,
-          outline: outline,
+          rounded: rounded,
           full_width: full_width,
           disabled: disabled,
           icon: icon,
@@ -74,6 +76,21 @@ module BetterUi
           href: "#", 
           method: :delete
         )
+      end
+      
+      # @label Varianti di border-radius
+      def border_radius_variants
+        render_with_template(locals: {
+          variants: [
+            { label: "Nessun radius", rounded: :none },
+            { label: "Extra-small", rounded: :xs },
+            { label: "Small (default)", rounded: :sm },
+            { label: "Medium", rounded: :md },
+            { label: "Large", rounded: :lg },
+            { label: "Extra-large", rounded: :xl },
+            { label: "Full (circolare)", rounded: :full }
+          ]
+        })
       end
       
       # @!endgroup

@@ -1,0 +1,56 @@
+===============================================================================
+
+Installazione completata!
+
+Il tuo foglio di stile SCSS per la personalizzazione dei componenti di BetterUi
+è stato creato in:
+
+  app/assets/stylesheets/<%= options[:prefix] %>_better_ui_components.scss
+
+===============================================================================
+
+PROSSIMI PASSI:
+
+1. Assicurati che Tailwind CSS sia correttamente configurato nel tuo progetto.
+   Questo foglio di stile utilizza le utility @apply di Tailwind CSS.
+
+2. Importa il foglio di stile nella tua applicazione:
+
+   In app/assets/stylesheets/application.scss:
+   
+   @import '<%= options[:prefix] %>_better_ui_components';
+
+   Oppure in app/assets/stylesheets/application.css:
+   
+   /*
+    *= require <%= options[:prefix] %>_better_ui_components
+    */
+
+3. Personalizza le variabili SCSS e le classi secondo le tue esigenze.
+   Il foglio di stile utilizza le classi di Tailwind CSS tramite la direttiva
+   @apply, consentendoti di sfruttare l'ecosistema Tailwind mantenendo un
+   codice SCSS organizzato e modulare.
+
+4. Nei componenti Ruby, usa le classi con prefisso 'bui-' invece di includere
+   direttamente le classi Tailwind. Ad esempio per i bottoni:
+   
+   # Esempio di utilizzo di classi CSS personalizzate
+   BUTTON_TYPES = {
+     default: "bui-btn-default",
+     red: "bui-btn-red",
+     blue: "bui-btn-blue"
+   }
+   
+   Questo approccio centralizza gli stili nel foglio SCSS e rende più facile
+   mantenere e modificare l'aspetto dei componenti.
+
+5. Assicurati che il tuo foglio di stile venga caricato dopo i fogli di stile
+   di BetterUI per sovrascrivere correttamente gli stili predefiniti.
+
+===============================================================================
+
+Per ulteriori informazioni sulla personalizzazione dei componenti,
+consulta la documentazione ufficiale su:
+https://github.com/YOUR_USERNAME/better_ui
+
+=============================================================================== 

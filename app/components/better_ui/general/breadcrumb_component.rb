@@ -1,27 +1,45 @@
 module BetterUi
   module General
     class BreadcrumbComponent < ViewComponent::Base
-      attr_reader :items, :separator, :size, :variant, :classes, :inverse
+      attr_reader :items, :separator, :size, :theme, :classes
 
-      # Varianti di colore disponibili
-      VARIANTS = {
+      # Temi di colore disponibili
+      THEMES = {
         default: {
-          container: "text-gray-600",
-          item: "text-gray-500 hover:text-gray-700",
-          active: "text-gray-900 font-medium",
+          container: "text-white",
+          separator: "text-gray-500"
+        },
+        white: {
+          container: "text-black",
           separator: "text-gray-400"
         },
-        primary: {
-          container: "text-orange-600",
-          item: "text-orange-500 hover:text-orange-700",
-          active: "text-orange-800 font-medium",
+        red: {
+          container: "text-white",
+          separator: "text-red-300"
+        },
+        rose: {
+          container: "text-white",
+          separator: "text-rose-300"
+        },
+        orange: {
+          container: "text-white",
           separator: "text-orange-300"
         },
-        light: {
-          container: "text-gray-100",
-          item: "text-gray-200 hover:text-white",
-          active: "text-white font-medium",
-          separator: "text-gray-300"
+        green: {
+          container: "text-white",
+          separator: "text-green-300"
+        },
+        blue: {
+          container: "text-white", 
+          separator: "text-blue-300"
+        },
+        yellow: {
+          container: "text-black",
+          separator: "text-yellow-600"
+        },
+        violet: {
+          container: "text-white",
+          separator: "text-violet-300"
         }
       }
 
@@ -46,16 +64,14 @@ module BetterUi
         items: [],
         separator: :chevron, 
         size: :md,
-        variant: :default,
-        classes: nil,
-        inverse: false
+        theme: :default,
+        classes: nil
       )
         @items = items || []
         @separator = separator.to_sym
         @size = size.to_sym
-        @variant = variant.to_sym
+        @theme = theme.to_sym
         @classes = classes
-        @inverse = inverse
       end
 
       # Restituisce il separatore come stringa
@@ -72,28 +88,16 @@ module BetterUi
         [
           "flex items-center flex-wrap",
           SIZES.fetch(@size, SIZES[:md]),
-          VARIANTS.fetch(@variant, VARIANTS[:default])[:container],
-          @inverse ? "bg-gray-800 p-2 rounded" : "",
+          THEMES.fetch(@theme, THEMES[:default])[:container],
           @classes
         ].compact.join(" ")
-      end
-
-      # Genera le classi per un elemento
-      def item_classes(active = false)
-        variant_classes = VARIANTS.fetch(@variant, VARIANTS[:default])
-        
-        if active
-          variant_classes[:active]
-        else
-          variant_classes[:item]
-        end
       end
 
       # Genera le classi per il separatore
       def separator_classes
         [
           "mx-2",
-          VARIANTS.fetch(@variant, VARIANTS[:default])[:separator]
+          THEMES.fetch(@theme, THEMES[:default])[:separator]
         ].compact.join(" ")
       end
 
@@ -102,27 +106,21 @@ module BetterUi
         index == @items.length - 1
       end
 
-      # Formatta il testo dell'item
-      def item_text(item)
-        item.is_a?(Hash) ? item[:label] : item.to_s
-      end
-
-      # Restituisce l'URL dell'item
-      def item_url(item)
-        item.is_a?(Hash) ? item[:url] : nil
-      end
-
-      # Restituisce l'icona dell'item se presente
-      def item_icon(item)
-        return nil unless item.is_a?(Hash) && item[:icon].present?
+      # Crea un componente link per l'item
+      def link_for_item(item, active: false)
+        label = item.is_a?(Hash) ? item[:label] : item.to_s
+        href = item.is_a?(Hash) ? item[:url] : nil
+        icon = item.is_a?(Hash) ? item[:icon] : nil
         
-        if item[:icon].is_a?(String)
-          render BetterUi::General::IconComponent.new(name: item[:icon])
-        else
-          item[:icon] # Assumiamo che sia già un componente renderizzato
-        end
+        BetterUi::General::LinkComponent.new(
+          label: label,
+          href: href,
+          theme: @theme,
+          icon: icon,
+          active: active
+        )
       end
-
+      
       # Verifica se rendere il componente
       def render?
         @items.present? && @items.length > 0

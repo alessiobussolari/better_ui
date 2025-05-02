@@ -1,0 +1,36 @@
+<%
+  bg_classes = {
+    default: "bg-black",
+    white: "bg-white",
+    red: "bg-red-500",
+    rose: "bg-rose-500",
+    orange: "bg-orange-500",
+    green: "bg-green-500",
+    blue: "bg-blue-500",
+    yellow: "bg-yellow-500",
+    violet: "bg-violet-500"
+  }
+%>
+
+<div class="<%= bg_classes[theme] %> p-6 rounded-md">
+  <%= render BetterUi::General::LinkComponent.new(
+    label: label,
+    href: href,
+    theme: theme,
+    icon: icon,
+    active: active,
+    target: target
+  ) %>
+</div>
+
+<div class="mt-4 p-4 border rounded-md">
+  <h3 class="text-lg font-medium mb-2">Dettagli</h3>
+  <ul class="space-y-1 text-sm">
+    <li><strong>Label:</strong> <%= label %></li>
+    <li><strong>Href:</strong> <%= href.present? ? href : "Non impostato (testo semplice)" %></li>
+    <li><strong>Tema:</strong> <%= theme %></li>
+    <li><strong>Icona:</strong> <%= icon.present? ? icon : "Non impostata" %></li>
+    <li><strong>Attivo:</strong> <%= active ? "Sì" : "No" %></li>
+    <li><strong>Target:</strong> <%= target.present? ? target : "Non impostato" %></li>
+  </ul>
+</div> 

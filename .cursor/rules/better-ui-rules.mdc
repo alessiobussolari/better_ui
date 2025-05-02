@@ -8,3 +8,4 @@ Se devi generare un componente ViewComponent usa sempre la relativa cli di cui a
 Per ogni componente crea sempre le preview con i relativi params da modificare in lookbook
 Ogni componente nella propria preview ha 2 gruppi 'default' e 'esempi specifici'
 Cerca sempre di categorizzare i componenti in application (elementi utilizzabili in una dashboard) e general (elementi semplici che possono essere elementi di altri componenti più complessi)
+Se devi creare il nome di una classe usa sempre 'bui-' che sta per better-ui.

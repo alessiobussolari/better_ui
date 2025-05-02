@@ -1,9 +1,9 @@
 module BetterUi
   module General
     class TableComponent < ViewComponent::Base
-      attr_reader :data, :headers, :caption, :striped, :hoverable, :bordered, :compact, :classes, :variant
+      attr_reader :data, :headers, :caption, :striped, :hoverable, :bordered, :compact, :classes, :variant, :rounded
       
-      def initialize(data:, headers: nil, caption: nil, striped: false, hoverable: false, bordered: true, compact: false, classes: nil, variant: :default)
+      def initialize(data:, headers: nil, caption: nil, striped: false, hoverable: false, bordered: true, compact: false, classes: nil, variant: :default, rounded: :sm)
         @data = data || []
         @headers = headers
         @caption = caption
@@ -13,6 +13,7 @@ module BetterUi
         @compact = compact
         @classes = classes
         @variant = variant.to_sym
+        @rounded = rounded.to_sym
       end
 
       def table_classes
@@ -22,8 +23,13 @@ module BetterUi
       def table_container_classes
         [
           ThemeHelper::LAYOUT_STYLES[:table][:container],
+          get_border_radius_class,
           get_border_color
         ].compact.join(' ')
+      end
+
+      def get_border_radius_class
+        ThemeHelper::BORDER_RADIUS[@rounded] || ThemeHelper::BORDER_RADIUS[:sm]
       end
 
       def caption_classes
@@ -69,52 +75,76 @@ module BetterUi
       
       def get_border_color
         case @variant
-        when :primary
-          'border-orange-200'
-        when :success
-          'border-green-200'
-        when :warning
-          'border-amber-200'
-        when :danger
-          'border-red-200'
-        when :info
-          'border-blue-200'
-        else
+        when :default
+          'border-gray-900'
+        when :white
           'border-gray-200'
+        when :red
+          'border-red-600'
+        when :rose
+          'border-rose-600'
+        when :orange
+          'border-orange-600'
+        when :green
+          'border-green-600'
+        when :blue
+          'border-blue-600'
+        when :yellow
+          'border-yellow-600'
+        when :violet
+          'border-violet-600'
+        else
+          'border-gray-900'
         end
       end
       
       def caption_color_classes
         case @variant
-        when :primary
-          'bg-orange-50 text-orange-700'
-        when :success
-          'bg-green-50 text-green-700'
-        when :warning
-          'bg-amber-50 text-amber-700'
-        when :danger
-          'bg-red-50 text-red-700'
-        when :info
-          'bg-blue-50 text-blue-700'
+        when :default
+          'bg-black text-white'
+        when :white
+          'bg-white text-black'
+        when :red
+          'bg-red-500 text-white'
+        when :rose
+          'bg-rose-500 text-white'
+        when :orange
+          'bg-orange-500 text-white'
+        when :green
+          'bg-green-500 text-white'
+        when :blue
+          'bg-blue-500 text-white'
+        when :yellow
+          'bg-yellow-500 text-black'
+        when :violet
+          'bg-violet-500 text-white'
         else
-          'bg-gray-50 text-gray-700'
+          'bg-black text-white'
         end
       end
       
       def th_color_classes
         case @variant
-        when :primary
-          'text-orange-700'
-        when :success
-          'text-green-700'
-        when :warning
-          'text-amber-700'
-        when :danger
-          'text-red-700'
-        when :info
-          'text-blue-700'
+        when :default
+          'text-white'
+        when :white
+          'text-black'
+        when :red
+          'text-white'
+        when :rose
+          'text-white'
+        when :orange
+          'text-white'
+        when :green
+          'text-white'
+        when :blue
+          'text-white'
+        when :yellow
+          'text-black'
+        when :violet
+          'text-white'
         else
-          'text-gray-700'
+          'text-white'
         end
       end
 

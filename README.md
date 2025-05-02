@@ -152,6 +152,20 @@ Lookbook è disponibile solo negli ambienti di sviluppo e test.
 
 ## 🎮 Personalizzazione
 
+### Genera un foglio di stile personalizzato
+
+BetterUI include un generator per creare un foglio di stile base per personalizzare i componenti:
+
+```bash
+# Genera un foglio di stile con il prefisso predefinito "custom"
+rails generate better_ui:stylesheet
+
+# Genera un foglio di stile con un prefisso personalizzato
+rails generate better_ui:stylesheet --prefix=my_theme
+```
+
+Questo creerà un file CSS con variabili e classi per tutti i componenti della gemma, che potrai facilmente personalizzare secondo le esigenze del tuo progetto.
+
 ### Usa l'inizializzatore
 
 Crea un file `config/initializers/better_ui.rb`:

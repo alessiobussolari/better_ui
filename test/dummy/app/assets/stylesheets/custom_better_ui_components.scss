@@ -1,0 +1,94 @@
+/*
+ * custom_better_ui_components.scss
+ * Foglio di stile SCSS per la personalizzazione dei componenti di BetterUi
+ * Generato il: 02/05/2025 21:15
+ */
+
+/**
+ * INDICE:
+ * 1. Variabili
+ * 2. Componenti generali
+ * 3. Componenti applicativi
+ * 4. Personalizzazioni
+ */
+
+/*==================================
+  1. VARIABILI
+====================================*/
+/* Colori principali - usa i colori di Tailwind */
+$bui-primary: theme('colors.blue.500') !default;
+$bui-primary-hover: theme('colors.blue.600') !default;
+$bui-secondary: theme('colors.gray.500') !default;
+$bui-secondary-hover: theme('colors.gray.600') !default;
+$bui-success: theme('colors.emerald.500') !default;
+$bui-warning: theme('colors.amber.500') !default;
+$bui-danger: theme('colors.red.500') !default;
+$bui-info: theme('colors.blue.500') !default;
+
+/* Spaziature - usa gli spacing di Tailwind */
+$bui-spacing-xs: theme('spacing.1') !default;
+$bui-spacing-sm: theme('spacing.2') !default;
+$bui-spacing-md: theme('spacing.4') !default;
+$bui-spacing-lg: theme('spacing.6') !default;
+$bui-spacing-xl: theme('spacing.8') !default;
+
+/* Tipografia - usa i font di Tailwind */
+$bui-font-family: theme('fontFamily.sans') !default;
+$bui-font-size-sm: theme('fontSize.sm[0]') !default;
+$bui-font-size-base: theme('fontSize.base[0]') !default;
+$bui-font-size-lg: theme('fontSize.lg[0]') !default;
+$bui-font-size-xl: theme('fontSize.xl[0]') !default;
+
+/* Border radius - usa i radius di Tailwind */
+$bui-radius-sm: theme('borderRadius.sm') !default;
+$bui-radius-md: theme('borderRadius.md') !default;
+$bui-radius-lg: theme('borderRadius.lg') !default;
+$bui-radius-full: theme('borderRadius.full') !default;
+
+/*==================================
+  2. COMPONENTI GENERALI
+====================================*/
+
+/* Bottoni */
+.bui-btn {
+  /* Proprietà base del bottone */
+  @apply py-2 px-4 font-medium rounded transition-colors;
+  
+  /* Varianti di colore per i bottoni */
+  &-default {
+    @apply bg-black text-white hover:bg-gray-900;
+  }
+  
+  &-white {
+    @apply bg-white text-black hover:bg-gray-100;
+  }
+  
+  &-red {
+    @apply bg-red-500 text-white hover:bg-red-600;
+  }
+  
+  &-rose {
+    @apply bg-rose-500 text-white hover:bg-rose-600;
+  }
+  
+  &-orange {
+    @apply bg-orange-500 text-white hover:bg-orange-600;
+  }
+  
+  &-green {
+    @apply bg-green-500 text-white hover:bg-green-600;
+  }
+  
+  &-blue {
+    @apply bg-blue-500 text-white hover:bg-blue-600;
+  }
+  
+  &-yellow {
+    @apply bg-yellow-500 text-black hover:bg-yellow-600;
+  }
+  
+  &-violet {
+    @apply bg-violet-500 text-white hover:bg-violet-600;
+  }
+  
+}

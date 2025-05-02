@@ -4,72 +4,84 @@ module BetterUi
   module ThemeHelper
     # Colori principali del tema
     THEME_COLORS = {
-      # Neutrali
-      white: 'bg-white',
-      black: 'bg-black',
-      
-      # Colori del tema
-      primary: {
-        light: 'bg-orange-100',
-        default: 'bg-orange-500',
-        dark: 'bg-orange-600',
-        text: 'text-white'
+      # Varianti cromatiche
+      default: {
+        bg: 'bg-black',
+        text: 'text-white',
+        hover: 'hover:bg-gray-900'
       },
-      secondary: {
-        light: 'bg-gray-100',
-        default: 'bg-gray-200',
-        dark: 'bg-gray-300',
-        text: 'text-gray-800'
+      white: {
+        bg: 'bg-white',
+        text: 'text-black',
+        hover: 'hover:bg-gray-100'
       },
-      success: {
-        light: 'bg-green-100',
-        default: 'bg-green-500',
-        dark: 'bg-green-600',
-        text: 'text-white'
+      red: {
+        bg: 'bg-red-500',
+        text: 'text-white',
+        hover: 'hover:bg-red-600'
       },
-      warning: {
-        light: 'bg-amber-100',
-        default: 'bg-amber-500',
-        dark: 'bg-amber-600',
-        text: 'text-white'
+      rose: {
+        bg: 'bg-rose-500',
+        text: 'text-white',
+        hover: 'hover:bg-rose-600'
       },
-      danger: {
-        light: 'bg-red-100',
-        default: 'bg-red-500',
-        dark: 'bg-red-600',
-        text: 'text-white'
+      orange: {
+        bg: 'bg-orange-500',
+        text: 'text-white',
+        hover: 'hover:bg-orange-600'
       },
-      info: {
-        light: 'bg-blue-100',
-        default: 'bg-blue-500',
-        dark: 'bg-blue-600',
-        text: 'text-white'
+      green: {
+        bg: 'bg-green-500',
+        text: 'text-white',
+        hover: 'hover:bg-green-600'
+      },
+      blue: {
+        bg: 'bg-blue-500',
+        text: 'text-white',
+        hover: 'hover:bg-blue-600'
+      },
+      yellow: {
+        bg: 'bg-yellow-500',
+        text: 'text-black',
+        hover: 'hover:bg-yellow-600'
+      },
+      violet: {
+        bg: 'bg-violet-500',
+        text: 'text-white',
+        hover: 'hover:bg-violet-600'
       }
     }
     
     # Bordi del tema
     THEME_BORDERS = {
-      primary: 'border-orange-200',
-      secondary: 'border-gray-200',
-      success: 'border-green-200',
-      warning: 'border-amber-200',
-      danger: 'border-red-200',
-      info: 'border-blue-200'
+      default: 'border-gray-900',
+      white: 'border-gray-200',
+      red: 'border-red-600',
+      rose: 'border-rose-600',
+      orange: 'border-orange-600',
+      green: 'border-green-600',
+      blue: 'border-blue-600',
+      yellow: 'border-yellow-600',
+      violet: 'border-violet-600'
+    }
+    
+    # Valori di border-radius
+    BORDER_RADIUS = {
+      none: 'rounded-none',
+      xs: 'rounded-xs',
+      sm: 'rounded-sm',
+      md: 'rounded-md',
+      lg: 'rounded-lg',
+      xl: 'rounded-xl',
+      full: 'rounded-full'
     }
     
     # Effetti hover
-    THEME_HOVER = {
-      primary: 'hover:bg-orange-600',
-      secondary: 'hover:bg-gray-300',
-      success: 'hover:bg-green-600',
-      warning: 'hover:bg-amber-600',
-      danger: 'hover:bg-red-600',
-      info: 'hover:bg-blue-600'
-    }
+    THEME_HOVER = THEME_COLORS.transform_values { |v| v[:hover] }
     
     # Stili base comuni
     COMMON_STYLES = {
-      rounded: 'rounded-md',
+      rounded: 'rounded-sm',
       shadow: 'shadow-sm',
       transitions: 'transition-all duration-200'
     }
@@ -77,13 +89,13 @@ module BetterUi
     # Stili per elementi di layout
     LAYOUT_STYLES = {
       panel: {
-        base: 'rounded-lg border shadow-sm',
+        base: 'border shadow-sm',
         header: 'px-4 py-3 border-b',
         body: 'p-4',
         footer: 'px-4 py-3 border-t'
       },
       table: {
-        container: 'overflow-hidden rounded-md border shadow-sm',
+        container: 'overflow-hidden border shadow-sm',
         header: 'bg-gray-50 text-left text-xs uppercase tracking-wider text-gray-500 font-medium',
         row: {
           base: '',
@@ -102,21 +114,15 @@ module BetterUi
       when :button
         base_classes << 'inline-flex items-center justify-center'
         base_classes << 'font-medium'
-        base_classes << COMMON_STYLES[:rounded]
+        base_classes << (options[:rounded] ? BORDER_RADIUS[options[:rounded]] : BORDER_RADIUS[:sm])
         base_classes << COMMON_STYLES[:transitions]
         
-        if options[:outline]
-          # Versione outline
-          base_classes << 'border-2'
-          base_classes << "border-#{variant}-500"
-          base_classes << "text-#{variant}-500"
-          base_classes << "hover:bg-#{variant}-50"
-        else
-          # Versione piena
-          base_classes << THEME_COLORS.dig(variant.to_sym, :default)&.sub('bg-', '') || "bg-#{variant}-500"
-          base_classes << THEME_COLORS.dig(variant.to_sym, :text) || 'text-white'
-          base_classes << THEME_HOVER[variant.to_sym] || "hover:bg-#{variant}-600"
-        end
+        variant_colors = THEME_COLORS[variant.to_sym] || THEME_COLORS[:default]
+        
+        # Versione piena
+        base_classes << variant_colors[:bg]
+        base_classes << variant_colors[:text]
+        base_classes << THEME_HOVER[variant.to_sym] || THEME_HOVER[:default]
         
         # Dimensione
         case options[:size]
@@ -140,23 +146,25 @@ module BetterUi
       
       when :panel
         base_classes << LAYOUT_STYLES[:panel][:base]
+        base_classes << (options[:rounded] ? BORDER_RADIUS[options[:rounded]] : BORDER_RADIUS[:sm])
         
-        # Colore di sfondo in base alla variante
-        if variant.to_sym == :default
-          base_classes << 'bg-white'
-          base_classes << 'border-gray-200'
-        else
-          base_classes << THEME_COLORS.dig(variant.to_sym, :light)&.sub('bg-', '') || "bg-#{variant}-50"
-          base_classes << THEME_BORDERS[variant.to_sym] || "border-#{variant}-200"
-        end
+        variant_colors = THEME_COLORS[variant.to_sym] || THEME_COLORS[:default]
+        
+        base_classes << variant_colors[:bg]
+        base_classes << variant_colors[:text]
+        base_classes << THEME_BORDERS[variant.to_sym] || THEME_BORDERS[:default]
         
       when :table
-        base_classes << 'min-w-full bg-white'
+        base_classes << 'min-w-full'
+        
+        variant_colors = THEME_COLORS[variant.to_sym] || THEME_COLORS[:default]
+        base_classes << variant_colors[:bg]
+        base_classes << variant_colors[:text]
         
         # Bordi
         if options[:bordered]
           base_classes << 'border-collapse'
-          base_classes << (THEME_BORDERS[variant.to_sym] || 'border-gray-200')
+          base_classes << (THEME_BORDERS[variant.to_sym] || THEME_BORDERS[:default])
         end
         
         # Classi personalizzate

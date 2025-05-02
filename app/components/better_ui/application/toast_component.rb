@@ -1,68 +1,95 @@
 module BetterUi
   module Application
     class ToastComponent < ViewComponent::Base
-      attr_reader :title, :message, :variant, :icon, :dismissible, :classes, :data, :position, :duration, :auto_hide
+      attr_reader :title, :message, :variant, :icon, :dismissible, :classes, :data, :position, :duration, :auto_hide, :rounded
 
       # Varianti di colore disponibili
       VARIANTS = {
-        primary: {
-          bg: "bg-orange-50",
-          border: "border-orange-300",
-          title: "text-orange-800",
-          text: "text-orange-700",
-          icon: "text-orange-500",
-          close: "text-orange-500 hover:bg-orange-100"
-        },
-        info: {
-          bg: "bg-blue-50",
-          border: "border-blue-300",
-          title: "text-blue-800",
-          text: "text-blue-700",
-          icon: "text-blue-500",
-          close: "text-blue-500 hover:bg-blue-100"
-        },
-        success: {
-          bg: "bg-green-50",
-          border: "border-green-300",
-          title: "text-green-800",
-          text: "text-green-700",
-          icon: "text-green-500",
-          close: "text-green-500 hover:bg-green-100"
-        },
-        warning: {
-          bg: "bg-yellow-50",
-          border: "border-yellow-300",
-          title: "text-yellow-800",
-          text: "text-yellow-700",
-          icon: "text-yellow-500",
-          close: "text-yellow-500 hover:bg-yellow-100"
-        },
-        danger: {
-          bg: "bg-red-50",
-          border: "border-red-300",
-          title: "text-red-800",
-          text: "text-red-700",
-          icon: "text-red-500",
-          close: "text-red-500 hover:bg-red-100"
-        },
-        dark: {
-          bg: "bg-gray-800",
-          border: "border-gray-700",
+        default: {
+          bg: "bg-black",
+          border: "border-gray-900",
           title: "text-white",
-          text: "text-gray-300",
-          icon: "text-gray-400",
-          close: "text-gray-400 hover:bg-gray-700"
+          text: "text-white",
+          icon: "text-white",
+          close: "text-white hover:bg-gray-800"
+        },
+        white: {
+          bg: "bg-white",
+          border: "border-gray-200",
+          title: "text-black",
+          text: "text-black",
+          icon: "text-black",
+          close: "text-black hover:bg-gray-100"
+        },
+        red: {
+          bg: "bg-red-500",
+          border: "border-red-600",
+          title: "text-white",
+          text: "text-white",
+          icon: "text-white",
+          close: "text-white hover:bg-red-600"
+        },
+        rose: {
+          bg: "bg-rose-500",
+          border: "border-rose-600",
+          title: "text-white",
+          text: "text-white",
+          icon: "text-white",
+          close: "text-white hover:bg-rose-600"
+        },
+        orange: {
+          bg: "bg-orange-500",
+          border: "border-orange-600",
+          title: "text-white",
+          text: "text-white",
+          icon: "text-white",
+          close: "text-white hover:bg-orange-600"
+        },
+        green: {
+          bg: "bg-green-500",
+          border: "border-green-600",
+          title: "text-white",
+          text: "text-white",
+          icon: "text-white",
+          close: "text-white hover:bg-green-600"
+        },
+        blue: {
+          bg: "bg-blue-500",
+          border: "border-blue-600",
+          title: "text-white",
+          text: "text-white",
+          icon: "text-white",
+          close: "text-white hover:bg-blue-600"
+        },
+        yellow: {
+          bg: "bg-yellow-500",
+          border: "border-yellow-600",
+          title: "text-black",
+          text: "text-black",
+          icon: "text-black",
+          close: "text-black hover:bg-yellow-600"
+        },
+        violet: {
+          bg: "bg-violet-500",
+          border: "border-violet-600",
+          title: "text-white",
+          text: "text-white",
+          icon: "text-white",
+          close: "text-white hover:bg-violet-600"
         }
       }
 
       # Icone predefinite per ciascuna variante
       DEFAULT_ICONS = {
-        primary: "bell",
-        info: "info-circle",
-        success: "check-circle",
-        warning: "exclamation-triangle",
-        danger: "exclamation-circle",
-        dark: "shield-exclamation"
+        default: "bell",
+        white: "info-circle",
+        red: "exclamation-circle",
+        rose: "exclamation-circle",
+        orange: "bell",
+        green: "check-circle",
+        blue: "info-circle",
+        yellow: "exclamation-triangle",
+        violet: "shield-exclamation"
       }
 
       # Posizioni possibili per i toast
@@ -79,14 +106,15 @@ module BetterUi
       def initialize(
         title: nil,
         message: nil,
-        variant: :info,
+        variant: :default,
         icon: nil, 
         dismissible: true,
         classes: nil,
         data: {},
         position: :"top-right",
         duration: 5000,
-        auto_hide: true
+        auto_hide: true,
+        rounded: :sm
       )
         @title = title
         @message = message
@@ -98,6 +126,7 @@ module BetterUi
         @position = position.to_sym
         @duration = duration
         @auto_hide = auto_hide
+        @rounded = rounded.to_sym
 
         # Aggiungiamo dati per il comportamento del toast
         @data[:controller] = "toast" if @data[:controller].blank?
@@ -109,16 +138,17 @@ module BetterUi
       # Genera l'icona in base alla variante se non specificata
       def effective_icon
         return @icon if @icon.present?
-        DEFAULT_ICONS[@variant]
+        DEFAULT_ICONS[@variant] || DEFAULT_ICONS[:default]
       end
 
       # Genera le classi per il container
       def container_classes
-        styles = VARIANTS.fetch(@variant, VARIANTS[:info])
+        styles = VARIANTS.fetch(@variant, VARIANTS[:default])
         position_class = POSITIONS.fetch(@position, POSITIONS[:"top-right"])
         
         [
-          "fixed z-50 rounded-lg p-4 border shadow-lg",
+          "fixed z-50 p-4 border shadow-lg",
+          get_border_radius_class,
           "transform transition-transform duration-300",
           "data-toast-enter-from-class='translate-y-2 opacity-0'",
           "data-toast-enter-to-class='translate-y-0 opacity-100'",
@@ -133,9 +163,14 @@ module BetterUi
         ].compact.join(" ")
       end
 
+      # Genera il border-radius
+      def get_border_radius_class
+        ThemeHelper::BORDER_RADIUS[@rounded] || ThemeHelper::BORDER_RADIUS[:sm]
+      end
+
       # Genera le classi per il titolo
       def title_classes
-        styles = VARIANTS.fetch(@variant, VARIANTS[:info])
+        styles = VARIANTS.fetch(@variant, VARIANTS[:default])
         
         [
           "font-medium",
@@ -145,7 +180,7 @@ module BetterUi
 
       # Genera le classi per il messaggio
       def message_classes
-        styles = VARIANTS.fetch(@variant, VARIANTS[:info])
+        styles = VARIANTS.fetch(@variant, VARIANTS[:default])
         
         [
           "mt-1",
@@ -155,7 +190,7 @@ module BetterUi
 
       # Genera le classi per l'icona
       def icon_classes
-        styles = VARIANTS.fetch(@variant, VARIANTS[:info])
+        styles = VARIANTS.fetch(@variant, VARIANTS[:default])
         
         [
           "flex-shrink-0",
@@ -166,7 +201,7 @@ module BetterUi
 
       # Genera le classi per il pulsante di chiusura
       def close_button_classes
-        styles = VARIANTS.fetch(@variant, VARIANTS[:info])
+        styles = VARIANTS.fetch(@variant, VARIANTS[:default])
         
         [
           "ml-auto -mr-1.5 -mt-1.5 inline-flex h-8 w-8 rounded-lg p-1.5 focus:ring-2 focus:ring-gray-400",

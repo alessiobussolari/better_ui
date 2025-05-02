@@ -2,36 +2,12 @@
   <ol class="flex flex-wrap items-center">
     <% @items.each_with_index do |item, index| %>
       <li class="flex items-center">
-        <% if last_item?(index) %>
-          <span class="<%= item_classes(true) %> flex items-center" aria-current="page">
-            <% if item_icon(item) %>
-              <span class="mr-1.5"><%= item_icon(item) %></span>
-            <% end %>
-            <%= item_text(item) %>
+        <%= render link_for_item(item, active: last_item?(index)) %>
+        
+        <% unless last_item?(index) %>
+          <span class="<%= separator_classes %>" aria-hidden="true">
+            <%= separator_text %>
           </span>
-        <% else %>
-          <% url = item_url(item) %>
-          <% if url.present? %>
-            <%= link_to url, class: "#{item_classes} flex items-center" do %>
-              <% if item_icon(item) %>
-                <span class="mr-1.5"><%= item_icon(item) %></span>
-              <% end %>
-              <%= item_text(item) %>
-            <% end %>
-          <% else %>
-            <span class="<%= item_classes %> flex items-center">
-              <% if item_icon(item) %>
-                <span class="mr-1.5"><%= item_icon(item) %></span>
-              <% end %>
-              <%= item_text(item) %>
-            </span>
-          <% end %>
-          
-          <% unless last_item?(index) %>
-            <span class="<%= separator_classes %>" aria-hidden="true">
-              <%= separator_text %>
-            </span>
-          <% end %>
         <% end %>
       </li>
     <% end %>

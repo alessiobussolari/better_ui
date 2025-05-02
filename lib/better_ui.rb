@@ -23,3 +23,7 @@ module BetterUi
     end
   end
 end
+
+# Caricamento del generator
+require 'rails/generators'
+require 'generators/better_ui/stylesheet_generator' if defined?(Rails::Generators)

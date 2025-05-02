@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+@import "custom_better_ui_components";
 /*
 
 @layer components {

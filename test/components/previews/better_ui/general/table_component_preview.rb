@@ -4,7 +4,7 @@ module BetterUi
       # Tabella configurabile
       #
       # @param caption text "Didascalia della tabella (opzionale)"
-      # @param variant select { choices: [default, primary, success, warning, danger, info] } "Variante di colore"
+      # @param variant select { choices: [default, white, red, rose, orange, green, blue, yellow, violet] } "Variante di colore"
       # @param striped toggle "Righe alternate"
       # @param hoverable toggle "Effetto hover sulle righe"
       # @param bordered toggle "Mostra bordi"
@@ -31,7 +31,7 @@ module BetterUi
         row_count = row_count.to_i if row_count.is_a?(String)
         
         # Validazione
-        valid_variants = [:default, :primary, :success, :warning, :danger, :info]
+        valid_variants = [:default, :white, :red, :rose, :orange, :green, :blue, :yellow, :violet]
         valid_data_types = [:array, :hash]
         valid_row_counts = [3, 5]
         
