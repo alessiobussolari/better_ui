@@ -1,0 +1,134 @@
+<nav class="<%= navbar_classes %>" <%= @data&.map { |k, v| "data-#{k}=\"#{v}\"" }&.join(' ')&.html_safe %>>
+  <div class="<%= container_class %>">
+    <div class="flex flex-wrap items-center justify-between mx-auto py-4">
+      <% # Logo / Brand %>
+      <% if @brand.present? %>
+        <div class="flex items-center">
+          <% if @brand.is_a?(Hash) %>
+            <% if @brand[:logo].present? %>
+              <% if @brand[:url].present? %>
+                <a href="<%= @brand[:url] %>" class="flex items-center">
+                  <%= @brand[:logo].html_safe %>
+                  <% if @brand[:name].present? %>
+                    <span class="self-center text-xl font-semibold whitespace-nowrap ml-3"><%= @brand[:name] %></span>
+                  <% end %>
+                </a>
+              <% else %>
+                <div class="flex items-center">
+                  <%= @brand[:logo].html_safe %>
+                  <% if @brand[:name].present? %>
+                    <span class="self-center text-xl font-semibold whitespace-nowrap ml-3"><%= @brand[:name] %></span>
+                  <% end %>
+                </div>
+              <% end %>
+            <% elsif @brand[:name].present? %>
+              <% if @brand[:url].present? %>
+                <a href="<%= @brand[:url] %>" class="self-center text-xl font-semibold whitespace-nowrap">
+                  <%= @brand[:name] %>
+                </a>
+              <% else %>
+                <span class="self-center text-xl font-semibold whitespace-nowrap"><%= @brand[:name] %></span>
+              <% end %>
+            <% end %>
+          <% else %>
+            <span class="self-center text-xl font-semibold whitespace-nowrap"><%= @brand %></span>
+          <% end %>
+        </div>
+      <% end %>
+      
+      <% # Pulsante hamburger per menu mobile %>
+      <button 
+        data-action="navbar#toggleMenu" 
+        type="button" 
+        class="<%= mobile_toggle_classes %>" 
+        aria-controls="navbar-menu" 
+        aria-expanded="false"
+      >
+        <span class="sr-only">Apri menu</span>
+        <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
+        </svg>
+      </button>
+      
+      <% # Menu principale della navbar %>
+      <div class="<%= mobile_menu_classes %>" id="navbar-menu" data-navbar-target="menu">
+        <% if navigation_items.any? %>
+          <ul class="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg md:flex-row md:space-x-8 md:mt-0 md:border-0">
+            <% navigation_items.each do |item| %>
+              <li class="<%= has_dropdown?(item) ? 'group relative' : '' %>">
+                <% if item[:url].present? %>
+                  <a 
+                    href="<%= item[:url] %>" 
+                    class="<%= nav_link_classes(active_item?(item)) %>"
+                    <% if item[:target].present? %>target="<%= item[:target] %>"<% end %>
+                  >
+                    <% if item[:icon].present? %>
+                      <span class="mr-1">
+                        <%= render BetterUi::General::IconComponent.new(name: item[:icon]) %>
+                      </span>
+                    <% end %>
+                    <%= item[:label] %>
+                    <% if has_dropdown?(item) %>
+                      <span class="ml-1">
+                        <%= render BetterUi::General::IconComponent.new(name: "chevron-down") %>
+                      </span>
+                    <% end %>
+                  </a>
+                <% else %>
+                  <span class="<%= nav_link_classes(active_item?(item)) %>">
+                    <% if item[:icon].present? %>
+                      <span class="mr-1">
+                        <%= render BetterUi::General::IconComponent.new(name: item[:icon]) %>
+                      </span>
+                    <% end %>
+                    <%= item[:label] %>
+                    <% if has_dropdown?(item) %>
+                      <span class="ml-1">
+                        <%= render BetterUi::General::IconComponent.new(name: "chevron-down") %>
+                      </span>
+                    <% end %>
+                  </span>
+                <% end %>
+                
+                <% # Dropdown menu %>
+                <% if has_dropdown?(item) %>
+                  <div class="<%= dropdown_classes %>" style="min-width: 200px;">
+                    <% item[:dropdown].each do |dropdown_item| %>
+                      <a 
+                        href="<%= dropdown_item[:url] || '#' %>" 
+                        class="<%= dropdown_link_classes %>"
+                        <% if dropdown_item[:target].present? %>target="<%= dropdown_item[:target] %>"<% end %>
+                      >
+                        <% if dropdown_item[:icon].present? %>
+                          <span class="mr-2 inline-block">
+                            <%= render BetterUi::General::IconComponent.new(name: dropdown_item[:icon]) %>
+                          </span>
+                        <% end %>
+                        <%= dropdown_item[:label] %>
+                      </a>
+                    <% end %>
+                  </div>
+                <% end %>
+              </li>
+            <% end %>
+          </ul>
+        <% end %>
+        
+        <% # Azioni aggiuntive (pulsanti, ricerca, ecc.) %>
+        <% if action_items.any? %>
+          <div class="md:flex md:items-center md:ml-6 mt-4 md:mt-0">
+            <% action_items.each do |action| %>
+              <div class="mt-2 md:mt-0 md:ml-2">
+                <% if action.is_a?(Hash) && action[:content].present? %>
+                  <%= action[:content].html_safe %>
+                <% elsif action.is_a?(String) %>
+                  <%= action.html_safe %>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</nav> 

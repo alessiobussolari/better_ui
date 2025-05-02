@@ -1,0 +1,27 @@
+<div role="alert" class="<%= container_classes %>" <%= @data&.map { |k, v| "data-#{k}=\"#{v}\"" }&.join(' ')&.html_safe %>>
+  <% if effective_icon.present? %>
+    <div class="<%= icon_classes %>">
+      <%= render BetterUi::General::IconComponent.new(name: effective_icon) %>
+    </div>
+  <% end %>
+  
+  <div class="<%= content_classes %>">
+    <% if @title.present? %>
+      <div class="<%= title_classes %>"><%= @title %></div>
+    <% end %>
+    
+    <% if @message.present? %>
+      <div class="<%= message_classes %>"><%= @message %></div>
+    <% end %>
+    
+    <% if content.present? %>
+      <div class="<%= message_classes %>"><%= content %></div>
+    <% end %>
+  </div>
+  
+  <% if @dismissible %>
+    <button type="button" class="<%= close_button_classes %>" data-dismiss-target="[role='alert']" aria-label="Chiudi">
+      <%= render BetterUi::General::IconComponent.new(name: "xmark") %>
+    </button>
+  <% end %>
+</div> 

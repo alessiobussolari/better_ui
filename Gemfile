@@ -20,3 +20,12 @@ gem "tailwindcss-rails"
 # gem "debug", ">= 1.0.0"
 
 gem "font-awesome-sass", "~> 6.5"
+
+# Lookbook per la preview dei componenti
+gem "lookbook", group: [:development, :test]
+
+# Gemme aggiuntive per funzionalità avanzate di Lookbook
+group :development do
+  gem "listen"
+  gem "actioncable"
+end

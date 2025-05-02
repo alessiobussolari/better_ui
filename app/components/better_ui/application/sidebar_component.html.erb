@@ -1,0 +1,162 @@
+<%# Overlay per chiudere la sidebar su mobile %>
+<div data-sidebar-target="overlay" data-action="click->sidebar#close" class="<%= overlay_classes %>"></div>
+
+<%# Container principale della sidebar %>
+<div class="<%= container_classes %>" data-sidebar-target="container" <%= @data&.map { |k, v| "data-#{k}=\"#{v}\"" }&.join(' ')&.html_safe %>>
+  <%# Header della sidebar con titolo e pulsante di chiusura (opzionale) %>
+  <% if @title.present? %>
+    <div class="<%= header_classes %>">
+      <% if @title.is_a?(String) %>
+        <h2 class="text-lg font-semibold"><%= @title %></h2>
+      <% else %>
+        <%= @title.html_safe %>
+      <% end %>
+      
+      <%# Pulsante per chiudere la sidebar su mobile %>
+      <button 
+        type="button" 
+        data-action="sidebar#close" 
+        class="md:hidden rounded-lg p-1.5 focus:outline-none focus:ring-2 focus:ring-gray-200"
+        aria-label="Chiudi"
+      >
+        <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+      </button>
+    </div>
+  <% end %>
+  
+  <%# Menu principale della sidebar %>
+  <div class="flex-grow overflow-y-auto">
+    <nav class="py-4">
+      <ul class="space-y-1">
+        <% @items.each do |item| %>
+          <% if item[:divider] %>
+            <li><hr class="<%= divider_classes %>"></li>
+          <% elsif item[:heading] %>
+            <li class="px-6 py-2 text-xs font-semibold uppercase tracking-wider opacity-60">
+              <%= item[:heading] %>
+            </li>
+          <% else %>
+            <li>
+              <% if item[:url].present? && !has_children?(item) %>
+                <a 
+                  href="<%= item[:url] %>" 
+                  class="<%= menu_item_classes(active_item?(item)) %>"
+                  <% if item[:target].present? %>target="<%= item[:target] %>"<% end %>
+                >
+                  <% if item[:icon].present? %>
+                    <span class="<%= icon_classes %>">
+                      <%= render BetterUi::General::IconComponent.new(name: item[:icon]) %>
+                    </span>
+                  <% end %>
+                  <span class="<%= item_label_classes %>"><%= item[:label] %></span>
+                  <% if has_badge?(item) %>
+                    <span class="<%= badge_classes(badge_type(item)) %>">
+                      <%= badge_text(item) %>
+                    </span>
+                  <% end %>
+                </a>
+              <% else %>
+                <% dropdown_id = "dropdown-#{SecureRandom.hex(4)}" %>
+                <button 
+                  type="button" 
+                  class="<%= menu_item_classes(active_item?(item), false, has_children?(item)) %>" 
+                  data-action="sidebar#toggleSubmenu"
+                  data-sidebar-target="dropdown"
+                  aria-expanded="false"
+                  aria-controls="<%= dropdown_id %>"
+                >
+                  <% if item[:icon].present? %>
+                    <span class="<%= icon_classes %>">
+                      <%= render BetterUi::General::IconComponent.new(name: item[:icon]) %>
+                    </span>
+                  <% end %>
+                  <span class="<%= item_label_classes %>"><%= item[:label] %></span>
+                  <% if has_badge?(item) %>
+                    <span class="<%= badge_classes(badge_type(item)) %>">
+                      <%= badge_text(item) %>
+                    </span>
+                  <% end %>
+                  
+                  <% if has_children?(item) %>
+                    <span class="<%= chevron_classes %>" data-sidebar-target="chevron">
+                      <%= render BetterUi::General::IconComponent.new(name: "chevron-down") %>
+                    </span>
+                  <% end %>
+                </button>
+                
+                <% if has_children?(item) %>
+                  <ul 
+                    id="<%= dropdown_id %>" 
+                    class="space-y-1 mt-1 hidden" 
+                    data-sidebar-target="submenu"
+                  >
+                    <% item[:children].each do |child| %>
+                      <li>
+                        <a 
+                          href="<%= child[:url] || '#' %>" 
+                          class="<%= menu_item_classes(active_item?(child), true) %>"
+                          <% if child[:target].present? %>target="<%= child[:target] %>"<% end %>
+                        >
+                          <% if child[:icon].present? %>
+                            <span class="<%= icon_classes %>">
+                              <%= render BetterUi::General::IconComponent.new(name: child[:icon]) %>
+                            </span>
+                          <% end %>
+                          <span class="<%= item_label_classes %>"><%= child[:label] %></span>
+                          <% if has_badge?(child) %>
+                            <span class="<%= badge_classes(badge_type(child)) %>">
+                              <%= badge_text(child) %>
+                            </span>
+                          <% end %>
+                        </a>
+                      </li>
+                    <% end %>
+                  </ul>
+                <% end %>
+              <% end %>
+            </li>
+          <% end %>
+        <% end %>
+      </ul>
+    </nav>
+  </div>
+  
+  <%# Footer della sidebar (opzionale) %>
+  <% if @footer.present? %>
+    <div class="<%= footer_classes %>">
+      <% if @footer.is_a?(String) %>
+        <%= @footer.html_safe %>
+      <% else %>
+        <%= @footer.html_safe %>
+      <% end %>
+    </div>
+  <% end %>
+  
+  <%# Pulsante per il toggle della sidebar (opzionale) %>
+  <% if @collapsible %>
+    <button 
+      type="button" 
+      class="<%= toggle_button_classes %>" 
+      data-action="sidebar#toggle" 
+      data-sidebar-target="toggleButton"
+      aria-label="<%= @position == :left ? 'Espandi/Contrai sidebar' : 'Espandi/Contrai sidebar' %>"
+    >
+      <svg 
+        class="w-4 h-4 transition-transform" 
+        data-sidebar-target="toggleIcon"
+        aria-hidden="true" 
+        xmlns="http://www.w3.org/2000/svg" 
+        fill="none" 
+        viewBox="0 0 24 24"
+      >
+        <% if @position == :left %>
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 19l-7-7 7-7"/>
+        <% else %>
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 19l7-7-7-7"/>
+        <% end %>
+      </svg>
+    </button>
+  <% end %>
+</div> 

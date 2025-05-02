@@ -1,0 +1,25 @@
+<div class="<%= container_classes %>">
+  <%# Utilizzo di tag heading dinamico in base al livello specificato %>
+  <<%= "h#{@level}" %> class="<%= heading_classes %>">
+    <% if @icon.present? %>
+      <span class="inline-flex items-center">
+        <span class="mr-2">
+          <%= render BetterUi::General::IconComponent.new(name: @icon) %>
+        </span>
+        <%= @text || content %>
+      </span>
+    <% else %>
+      <%= @text || content %>
+    <% end %>
+  </<%= "h#{@level}" %>>
+  
+  <% if @subtitle.present? %>
+    <div class="<%= subtitle_classes %>">
+      <%= @subtitle %>
+    </div>
+  <% end %>
+  
+  <% if @with_divider %>
+    <div class="<%= divider_classes %>"></div>
+  <% end %>
+</div> 

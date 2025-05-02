@@ -31,6 +31,22 @@ module BetterUi
     end
     
     # Configurazione per ViewComponent
-    config.view_component.preview_paths << root.join('spec', 'components', 'previews')
+    config.view_component.preview_paths << root.join('test', 'components', 'previews')
+    
+    # Configurazione per Lookbook in sviluppo e test
+    initializer 'better_ui.lookbook' do
+      if defined?(Lookbook) && (Rails.env.development? || Rails.env.test?)
+        # Carica esplicitamente le dipendenze per le funzionalità avanzate di Lookbook
+        begin
+          require 'listen'
+          require 'action_cable'
+        rescue LoadError => e
+          # Log che le dipendenze opzionali non sono disponibili
+          puts "NOTA: Alcune funzionalità avanzate di Lookbook potrebbero non essere disponibili: #{e.message}"
+        end
+        
+        config.lookbook = Lookbook
+      end
+    end
   end
 end

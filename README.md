@@ -14,6 +14,7 @@ BetterUI è una gemma Rails che fornisce componenti UI riutilizzabili con docume
 - **Documentazione integrata** - Visualizza esempi e documentazione direttamente nel browser
 - **Altamente personalizzabile** - Adatta facilmente lo stile al tuo brand
 - **Componenti modulari** - Usa solo ciò di cui hai bisogno
+- **Preview dei componenti** - Visualizza e interagisci con i componenti usando Lookbook
 
 ## 📦 Componenti disponibili
 
@@ -86,7 +87,18 @@ Una volta installato, puoi iniziare ad usare i componenti:
 
 Visita `/better_ui` nella tua applicazione per vedere la documentazione completa e gli esempi.
 
-## 🎨 Personalizzazione
+### Preview dei componenti con Lookbook
+
+BetterUI integra [Lookbook](https://github.com/allmarkedup/lookbook) per visualizzare in anteprima i componenti UI:
+
+1. Accedi a `/better_ui/lookbook` nella tua applicazione per visualizzare il catalogo componenti
+2. Esplora le varianti e le configurazioni disponibili per ogni componente
+3. Visualizza il codice sorgente e il markup generato
+4. Interagisci con i componenti in tempo reale
+
+Lookbook è disponibile solo negli ambienti di sviluppo e test.
+
+## �� Personalizzazione
 
 ### Usa l'inizializzatore
 

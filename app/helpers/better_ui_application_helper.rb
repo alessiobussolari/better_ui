@@ -44,5 +44,56 @@ module BetterUi
     def current_page?(path)
       request.path == path
     end
+    
+    # Helper per i componenti General
+    def better_ui_general_button(label = nil, **options)
+      render BetterUi::General::ButtonComponent.new(label: label, **options)
+    end
+    
+    def better_ui_general_panel(**options, &block)
+      render BetterUi::General::PanelComponent.new(**options), &block
+    end
+    
+    def better_ui_general_table(**options)
+      render BetterUi::General::TableComponent.new(**options)
+    end
+    
+    def better_ui_general_icon(name, **options)
+      render BetterUi::General::IconComponent.new(name: name, **options)
+    end
+    
+    # Helper per i componenti Application
+    def better_ui_application_button(label = nil, **options)
+      render BetterUi::Application::ButtonComponent.new(label: label, **options)
+    end
+    
+    def better_ui_application_panel(**options, &block)
+      render BetterUi::Application::PanelComponent.new(**options), &block
+    end
+    
+    def better_ui_application_table(**options)
+      render BetterUi::Application::TableComponent.new(**options)
+    end
+    
+    def better_ui_application_icon(name, **options)
+      render BetterUi::Application::IconComponent.new(name: name, **options)
+    end
+    
+    # Helper per i componenti Website
+    def better_ui_website_button(label = nil, **options)
+      render BetterUi::Website::ButtonComponent.new(label: label, **options)
+    end
+    
+    def better_ui_website_panel(**options, &block)
+      render BetterUi::Website::PanelComponent.new(**options), &block
+    end
+    
+    def better_ui_website_table(**options)
+      render BetterUi::Website::TableComponent.new(**options)
+    end
+    
+    def better_ui_website_icon(name, **options)
+      render BetterUi::Website::IconComponent.new(name: name, **options)
+    end
   end
 end 

@@ -1,0 +1,76 @@
+<div class="p-4">
+  <h2 class="text-lg font-bold mb-4">Tutte le varianti di Toast</h2>
+  
+  <div class="space-y-4">
+    <%= render BetterUi::Application::ToastComponent.new(
+      title: "Toast Primary",
+      message: "Questo è un toast di tipo primary con l'icona predefinita.",
+      variant: :primary,
+      data: { controller: "" },
+      classes: "static transform-none min-w-0"
+    ) %>
+    
+    <%= render BetterUi::Application::ToastComponent.new(
+      title: "Toast Info",
+      message: "Questo è un toast di tipo info con l'icona predefinita.",
+      variant: :info,
+      data: { controller: "" },
+      classes: "static transform-none min-w-0"
+    ) %>
+    
+    <%= render BetterUi::Application::ToastComponent.new(
+      title: "Toast Success",
+      message: "Questo è un toast di tipo success con l'icona predefinita.",
+      variant: :success,
+      data: { controller: "" },
+      classes: "static transform-none min-w-0"
+    ) %>
+    
+    <%= render BetterUi::Application::ToastComponent.new(
+      title: "Toast Warning",
+      message: "Questo è un toast di tipo warning con l'icona predefinita.",
+      variant: :warning,
+      data: { controller: "" },
+      classes: "static transform-none min-w-0"
+    ) %>
+    
+    <%= render BetterUi::Application::ToastComponent.new(
+      title: "Toast Danger",
+      message: "Questo è un toast di tipo danger con l'icona predefinita.",
+      variant: :danger,
+      data: { controller: "" },
+      classes: "static transform-none min-w-0"
+    ) %>
+    
+    <%= render BetterUi::Application::ToastComponent.new(
+      title: "Toast Dark",
+      message: "Questo è un toast di tipo dark con l'icona predefinita.",
+      variant: :dark,
+      data: { controller: "" },
+      classes: "static transform-none min-w-0"
+    ) %>
+  </div>
+  
+  <h2 class="text-lg font-bold my-6">Varianti senza pulsante di chiusura</h2>
+  
+  <div class="space-y-4">
+    <%= render BetterUi::Application::ToastComponent.new(
+      title: "Toast Info",
+      message: "Questo è un toast senza pulsante di chiusura.",
+      variant: :info,
+      dismissible: false,
+      data: { controller: "" },
+      classes: "static transform-none min-w-0"
+    ) %>
+    
+    <%= render BetterUi::Application::ToastComponent.new(
+      title: "Toast Success",
+      message: "Questo è un toast senza pulsante di chiusura.",
+      variant: :success,
+      dismissible: false,
+      auto_hide: true,
+      data: { controller: "" },
+      classes: "static transform-none min-w-0"
+    ) %>
+  </div>
+</div> 

@@ -1,0 +1,87 @@
+<div class="p-4">
+  <h2 class="text-lg font-bold mb-4">Tutte le varianti di Alert</h2>
+  
+  <div class="space-y-4">
+    <%= render BetterUi::Application::AlertComponent.new(
+      title: "Alert Primary",
+      message: "Questo è un alert di tipo primary con l'icona predefinita.",
+      variant: :primary
+    ) %>
+    
+    <%= render BetterUi::Application::AlertComponent.new(
+      title: "Alert Info",
+      message: "Questo è un alert di tipo info con l'icona predefinita.",
+      variant: :info
+    ) %>
+    
+    <%= render BetterUi::Application::AlertComponent.new(
+      title: "Alert Success",
+      message: "Questo è un alert di tipo success con l'icona predefinita.",
+      variant: :success
+    ) %>
+    
+    <%= render BetterUi::Application::AlertComponent.new(
+      title: "Alert Warning",
+      message: "Questo è un alert di tipo warning con l'icona predefinita.",
+      variant: :warning
+    ) %>
+    
+    <%= render BetterUi::Application::AlertComponent.new(
+      title: "Alert Danger",
+      message: "Questo è un alert di tipo danger con l'icona predefinita.",
+      variant: :danger
+    ) %>
+    
+    <%= render BetterUi::Application::AlertComponent.new(
+      title: "Alert Dark",
+      message: "Questo è un alert di tipo dark con l'icona predefinita.",
+      variant: :dark
+    ) %>
+  </div>
+  
+  <h2 class="text-lg font-bold my-6">Varianti con stile outline</h2>
+  
+  <div class="space-y-4">
+    <%= render BetterUi::Application::AlertComponent.new(
+      title: "Alert Primary Outline",
+      message: "Questo è un alert di tipo primary con stile outline.",
+      variant: :primary,
+      outline: true
+    ) %>
+    
+    <%= render BetterUi::Application::AlertComponent.new(
+      title: "Alert Info Outline",
+      message: "Questo è un alert di tipo info con stile outline.",
+      variant: :info,
+      outline: true
+    ) %>
+    
+    <%= render BetterUi::Application::AlertComponent.new(
+      title: "Alert Success Outline",
+      message: "Questo è un alert di tipo success con stile outline.",
+      variant: :success,
+      outline: true
+    ) %>
+    
+    <%= render BetterUi::Application::AlertComponent.new(
+      title: "Alert Warning Outline",
+      message: "Questo è un alert di tipo warning con stile outline.",
+      variant: :warning,
+      outline: true
+    ) %>
+    
+    <%= render BetterUi::Application::AlertComponent.new(
+      title: "Alert Danger Outline",
+      message: "Questo è un alert di tipo danger con stile outline.",
+      variant: :danger,
+      outline: true
+    ) %>
+    
+    <%= render BetterUi::Application::AlertComponent.new(
+      title: "Alert Dark Outline",
+      message: "Questo è un alert di tipo dark con stile outline.",
+      variant: :dark,
+      outline: true
+    ) %>
+  </div>
+</div> 

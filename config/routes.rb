@@ -7,4 +7,9 @@ BetterUi::Engine.routes.draw do
   
   # Route specifica per i componenti
   get 'docs/components/:component', to: 'docs#component', as: :docs_component
+  
+  # Montaggio di Lookbook per lo sviluppo e il test
+  if Rails.env.development? || Rails.env.test?
+    mount Lookbook::Engine, at: "/lookbook"
+  end
 end

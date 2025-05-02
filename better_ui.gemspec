@@ -33,4 +33,7 @@ Gem::Specification.new do |spec|
   # Dipendenze di sviluppo
   spec.add_development_dependency "sqlite3"
   spec.add_development_dependency "puma"
+  spec.add_development_dependency "lookbook", "~> 2.1"
+  spec.add_development_dependency "listen"
+  spec.add_development_dependency "actioncable"
 end
