@@ -64,6 +64,16 @@ module BetterUi
           close: "text-gray-400 hover:bg-gray-700",
           outline_bg: "bg-white",
           outline_text: "text-gray-800"
+        },
+        simple: {
+          bg: "bg-white",
+          border: "border-gray-200",
+          title: "text-gray-800 font-semibold",
+          text: "text-gray-600",
+          icon: "text-gray-500",
+          close: "text-gray-500 hover:bg-gray-100",
+          outline_bg: "bg-white",
+          outline_text: "text-gray-700"
         }
       }
 
@@ -74,7 +84,8 @@ module BetterUi
         success: "check-circle",
         warning: "exclamation-triangle",
         danger: "exclamation-circle",
-        dark: "shield-exclamation"
+        dark: "shield-exclamation",
+        simple: "info-circle"
       }
 
       # Posizioni possibili per le icone
@@ -84,7 +95,7 @@ module BetterUi
       def initialize(
         title: nil,
         message: nil,
-        variant: :info,
+        variant: :simple,
         icon: nil, 
         dismissible: false,
         classes: nil,
@@ -111,13 +122,20 @@ module BetterUi
 
       # Genera le classi per il container
       def container_classes
-        styles = VARIANTS.fetch(@variant, VARIANTS[:info])
+        styles = VARIANTS.fetch(@variant, VARIANTS[:simple])
+        
+        base_classes = ["p-4 mb-4 flex"]
+        
+        if @variant == :simple
+          base_classes << "border rounded-md"
+        else
+          base_classes << "rounded-lg border"
+        end
         
         [
-          "rounded-lg p-4 mb-4 border",
+          *base_classes,
           @outline ? styles[:outline_bg] : styles[:bg],
           styles[:border],
-          "flex",
           @icon_position == :top ? "flex-col" : "items-start",
           @classes
         ].compact.join(" ")
@@ -125,17 +143,17 @@ module BetterUi
 
       # Genera le classi per il titolo
       def title_classes
-        styles = VARIANTS.fetch(@variant, VARIANTS[:info])
+        styles = VARIANTS.fetch(@variant, VARIANTS[:simple])
         
         [
-          "font-medium",
+          @variant == :simple ? "font-semibold" : "font-medium",
           @outline ? styles[:outline_text] : styles[:title]
         ].compact.join(" ")
       end
 
       # Genera le classi per il messaggio
       def message_classes
-        styles = VARIANTS.fetch(@variant, VARIANTS[:info])
+        styles = VARIANTS.fetch(@variant, VARIANTS[:simple])
         
         [
           "mt-1",
@@ -145,7 +163,7 @@ module BetterUi
 
       # Genera le classi per l'icona
       def icon_classes
-        styles = VARIANTS.fetch(@variant, VARIANTS[:info])
+        styles = VARIANTS.fetch(@variant, VARIANTS[:simple])
         
         [
           "flex-shrink-0",
@@ -156,7 +174,7 @@ module BetterUi
 
       # Genera le classi per il pulsante di chiusura
       def close_button_classes
-        styles = VARIANTS.fetch(@variant, VARIANTS[:info])
+        styles = VARIANTS.fetch(@variant, VARIANTS[:simple])
         
         [
           "ml-auto -mr-1.5 -mt-1.5 inline-flex h-8 w-8 rounded-lg p-1.5 focus:ring-2 focus:ring-gray-400",

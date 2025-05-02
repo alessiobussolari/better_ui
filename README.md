@@ -25,6 +25,10 @@ BetterUI è una gemma Rails che fornisce componenti UI riutilizzabili con docume
 | **Card** | Contenitori flessibili con header, body e footer |
 | **Modal** | Finestre di dialogo modali |
 | **Tabs** | Navigazione a schede |
+| **Navbar** | Barra di navigazione responsive con supporto per menu dropdown |
+| **Sidebar** | Menu laterale con supporto per navigazione gerarchica |
+| **Toast** | Notifiche temporanee con timer e animazioni |
+| **Header** | Intestazioni di pagina con titolo, sottotitolo, breadcrumb e azioni |
 | **Form Elements** | Campi di input stilizzati (in arrivo) |
 
 ## 🚀 Installazione
@@ -83,9 +87,57 @@ Una volta installato, puoi iniziare ad usare i componenti:
     <p>Contenuto della card...</p>
   <% end %>
 <% end %>
+
+<%# Header con breadcrumb %>
+<%= render BetterUi::Application::HeaderComponent.new(
+  title: "Dashboard",
+  subtitle: "Gestisci tutto da qui",
+  breadcrumbs: [
+    { text: "Home", url: "/" },
+    { text: "Dashboard" }
+  ],
+  actions: [
+    { content: button_html("Nuovo", "primary") }
+  ]
+) %>
 ```
 
 Visita `/better_ui` nella tua applicazione per vedere la documentazione completa e gli esempi.
+
+### Il componente Header
+
+Il componente Header è progettato per creare intestazioni di pagina complete con numerose funzionalità:
+
+```erb
+<%= render BetterUi::Application::HeaderComponent.new(
+  title: {
+    text: "Impostazioni",
+    icon: "settings"
+  },
+  subtitle: "Configura le preferenze del sistema",
+  breadcrumbs: [
+    { text: "Home", url: "/" },
+    { text: "Admin", url: "/admin" },
+    { text: "Impostazioni" }
+  ],
+  variant: :modern,
+  fixed: :top,
+  show_breadcrumbs: true,
+  actions: [
+    { content: button_html("Salva", "primary") },
+    { content: button_html("Annulla", "secondary") }
+  ]
+) %>
+```
+
+Il componente supporta:
+- Titolo con opzionale icona integrata
+- Sottotitolo descrittivo
+- Breadcrumbs completi con link di navigazione
+- Azioni contestuali (pulsanti, menu, ecc.)
+- Varianti di stile: modern, light, dark, primary, transparent
+- Posizionamento fisso (in alto o in basso)
+- Controllo della visibilità dei breadcrumb
 
 ### Preview dei componenti con Lookbook
 
@@ -98,7 +150,7 @@ BetterUI integra [Lookbook](https://github.com/allmarkedup/lookbook) per visuali
 
 Lookbook è disponibile solo negli ambienti di sviluppo e test.
 
-## �� Personalizzazione
+## 🎮 Personalizzazione
 
 ### Usa l'inizializzatore
 

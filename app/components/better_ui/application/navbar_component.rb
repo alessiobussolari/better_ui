@@ -44,6 +44,16 @@ module BetterUi
           dropdown_hover: "hover:bg-gray-100",
           mobile_bg: "bg-white bg-opacity-90 backdrop-blur-sm",
           mobile_divider: "border-gray-100"
+        },
+        modern: {
+          navbar: "bg-white border-gray-200 shadow-none",
+          text: "text-gray-700",
+          hover: "hover:text-gray-900 hover:bg-gray-50",
+          active: "text-gray-900 bg-gray-100",
+          dropdown_bg: "bg-white",
+          dropdown_hover: "hover:bg-gray-50",
+          mobile_bg: "bg-white",
+          mobile_divider: "border-gray-100"
         }
       }
 
@@ -59,7 +69,7 @@ module BetterUi
       # Inizializzazione del componente
       def initialize(
         brand: nil,
-        variant: :light,
+        variant: :modern,
         fixed: nil,
         container_class: "container mx-auto px-4",
         classes: nil,
@@ -84,75 +94,119 @@ module BetterUi
 
       # Genera le classi per il container della navbar
       def navbar_classes
-        styles = VARIANTS.fetch(@variant, VARIANTS[:light])
+        styles = VARIANTS.fetch(@variant, VARIANTS[:modern])
         position_class = @fixed.present? ? FIXED_POSITIONS[@fixed] : nil
 
-        [
+        cls = [
           "w-full",
           styles[:navbar],
           position_class,
-          "border-b",
           @classes
-        ].compact.join(" ")
+        ]
+        
+        # Aggiungi il bordo solo se non è la variante moderna
+        cls << "border-b" unless @variant == :modern
+        
+        cls.compact.join(" ")
       end
 
       # Genera classi per i link della navbar
       def nav_link_classes(active = false)
-        styles = VARIANTS.fetch(@variant, VARIANTS[:light])
+        styles = VARIANTS.fetch(@variant, VARIANTS[:modern])
 
-        base_classes = "block py-2 px-3 rounded md:p-0 md:hover:bg-transparent"
+        if @variant == :modern
+          base_classes = "block py-2 px-3 rounded-md"
+          
+          if active
+            [
+              base_classes,
+              styles[:active],
+              "font-medium"
+            ].join(" ")
+          else
+            [
+              base_classes,
+              styles[:text],
+              styles[:hover]
+            ].join(" ")
+          end
+        else
+          base_classes = "block py-2 px-3 rounded md:p-0 md:hover:bg-transparent"
+          
+          if active
+            [
+              base_classes,
+              styles[:active],
+              "md:border-b-2 md:bg-transparent"
+            ].join(" ")
+          else
+            [
+              base_classes,
+              styles[:text],
+              styles[:hover]
+            ].join(" ")
+          end
+        end
+      end
+
+      # Genera classi per il dropdown
+      def dropdown_classes
+        styles = VARIANTS.fetch(@variant, VARIANTS[:modern])
         
-        if active
+        if @variant == :modern
           [
-            base_classes,
-            styles[:active],
-            "md:border-b-2 md:bg-transparent"
+            "absolute z-10 mt-1 rounded-md shadow-lg py-1 border border-gray-200",
+            styles[:dropdown_bg],
+            "hidden group-hover:block min-w-[200px]"
           ].join(" ")
         else
           [
-            base_classes,
+            "absolute z-10 mt-2 rounded-lg shadow-lg py-1",
+            styles[:dropdown_bg],
+            "hidden group-hover:block"
+          ].join(" ")
+        end
+      end
+
+      # Genera classi per i link nel dropdown
+      def dropdown_link_classes
+        styles = VARIANTS.fetch(@variant, VARIANTS[:modern])
+
+        if @variant == :modern
+          [
+            "block px-4 py-2 text-sm text-gray-700",
+            styles[:dropdown_hover]
+          ].join(" ")
+        else
+          [
+            "block px-4 py-2 text-sm",
+            styles[:text],
+            styles[:dropdown_hover]
+          ].join(" ")
+        end
+      end
+
+      # Genera la classe per il pulsante del menu mobile
+      def mobile_toggle_classes
+        styles = VARIANTS.fetch(@variant, VARIANTS[:modern])
+        
+        if @variant == :modern
+          [
+            "inline-flex items-center p-2 rounded-md ml-3 md:hidden",
+            "text-gray-700 hover:bg-gray-50"
+          ].join(" ")
+        else
+          [
+            "inline-flex items-center p-2 ml-3 rounded-lg md:hidden",
             styles[:text],
             styles[:hover]
           ].join(" ")
         end
       end
 
-      # Genera classi per il dropdown
-      def dropdown_classes
-        styles = VARIANTS.fetch(@variant, VARIANTS[:light])
-
-        [
-          "absolute z-10 mt-2 rounded-lg shadow-lg py-1",
-          styles[:dropdown_bg],
-          "hidden group-hover:block"
-        ].join(" ")
-      end
-
-      # Genera classi per i link nel dropdown
-      def dropdown_link_classes
-        styles = VARIANTS.fetch(@variant, VARIANTS[:light])
-
-        [
-          "block px-4 py-2 text-sm",
-          styles[:text],
-          styles[:dropdown_hover]
-        ].join(" ")
-      end
-
-      # Genera la classe per il pulsante del menu mobile
-      def mobile_toggle_classes
-        styles = VARIANTS.fetch(@variant, VARIANTS[:light])
-
-        [
-          "inline-flex items-center p-2 ml-3 rounded-lg md:hidden",
-          styles[:text],
-          styles[:hover]
-        ].join(" ")
-      end
-
       # Genera classi per il menu mobile
       def mobile_menu_classes
-        styles = VARIANTS.fetch(@variant, VARIANTS[:light])
+        styles = VARIANTS.fetch(@variant, VARIANTS[:modern])
 
         [
           "w-full md:flex md:w-auto",

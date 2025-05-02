@@ -1,95 +1,88 @@
-<div class="lg:flex lg:items-center lg:justify-between">
-  <div class="min-w-0 flex-1">
-    <% if breadcrumbs.any? %>
-      <nav class="flex" aria-label="Breadcrumb">
-        <ol role="list" class="flex items-center space-x-4">
-          <% breadcrumbs.each_with_index do |breadcrumb, index| %>
-            <li>
-              <div class="flex<%= index > 0 ? ' items-center' : '' %>">
-                <% if index > 0 %>
-                  <%= render BetterUi::General::IconComponent.new(
-                    name: "chevron-right",
-                    size: :sm,
-                    classes: "size-5 shrink-0 text-gray-400"
-                  ) %>
-                <% end %>
-                <a href="<%= breadcrumb[:href] %>" class="<%= index > 0 ? 'ml-4 ' : '' %>text-sm font-medium text-gray-500 hover:text-gray-700">
-                  <%= breadcrumb[:text] %>
-                </a>
-              </div>
-            </li>
+<header class="<%= header_classes %>" <%= @data&.map { |k, v| "data-#{k}=\"#{v}\"" }&.join(' ')&.html_safe %>>
+  <div class="<%= container_class %>">
+    <div class="md:flex md:justify-between md:items-start">
+      <div class="min-w-0 flex-1">
+        <% if has_breadcrumbs? %>
+          <nav class="<%= breadcrumb_container_classes %>" aria-label="Breadcrumb">
+            <ol class="flex items-center">
+              <% @breadcrumbs.each_with_index do |breadcrumb, index| %>
+                <li class="flex items-center">
+                  <% if index > 0 %>
+                    <span class="<%= breadcrumb_divider_classes %>" aria-hidden="true">
+                      <% if variant == :modern %>
+                        <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                      <% else %>
+                        /
+                      <% end %>
+                    </span>
+                  <% end %>
+                  <% is_last = index == @breadcrumbs.length - 1 %>
+                  <% if is_last || !breadcrumb[:url].present? %>
+                    <span class="<%= breadcrumb_link_classes(is_last) %>" <%= is_last ? 'aria-current="page"' : '' %>>
+                      <%= breadcrumb[:text] %>
+                    </span>
+                  <% else %>
+                    <a href="<%= breadcrumb[:url] %>" class="<%= breadcrumb_link_classes %>">
+                      <%= breadcrumb[:text] %>
+                    </a>
+                  <% end %>
+                </li>
+              <% end %>
+            </ol>
+          </nav>
+        <% end %>
+        
+        <div class="flex items-center">
+          <% if @title.is_a?(Hash) && @title[:icon].present? %>
+            <div class="mr-3 bg-gray-100 rounded-md p-2 flex-shrink-0">
+              <% if @title[:icon] == "document" %>
+                <svg class="h-5 w-5 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+              <% elsif @title[:icon] == "users" %>
+                <svg class="h-5 w-5 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                </svg>
+              <% elsif @title[:icon] == "settings" || @title[:icon] == "gear" %>
+                <svg class="h-5 w-5 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+              <% elsif @title[:icon] == "dashboard" %>
+                <svg class="h-5 w-5 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" />
+                </svg>
+              <% else %>
+                <%= render BetterUi::General::IconComponent.new(name: @title[:icon], classes: "h-5 w-5 text-gray-500") %>
+              <% end %>
+            </div>
+            <h1 class="<%= title_classes %>"><%= @title[:text] %></h1>
+          <% else %>
+            <h1 class="<%= title_classes %>"><%= @title %></h1>
           <% end %>
-        </ol>
-      </nav>
-    <% end %>
-    
-    <h2 class="mt-2 text-2xl/7 font-bold text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight"><%= title %></h2>
-    
-    <% if meta_items.any? %>
-      <div class="mt-1 flex flex-col sm:mt-0 sm:flex-row sm:flex-wrap sm:space-x-6">
-        <% meta_items.each do |item| %>
-          <div class="mt-2 flex items-center text-sm text-gray-500">
-            <%= render BetterUi::General::IconComponent.new(
-              name: item[:icon],
-              size: :sm,
-              classes: "mr-1.5 size-5 shrink-0 text-gray-400"
-            ) %>
-            <%= item[:text] %>
-          </div>
+        </div>
+        <% if @subtitle.present? %>
+          <p class="<%= subtitle_classes %>">
+            <%= @subtitle %>
+          </p>
         <% end %>
       </div>
-    <% end %>
-  </div>
-  
-  <% if actions.any? %>
-    <div class="mt-5 flex lg:mt-0 lg:ml-4">
-      <% actions.each_with_index do |action, index| %>
-        <% next if action[:mobile_only] %>
-        <% button_type = action[:type] == :primary ? :primary : :secondary %>
-        <% type_class = action[:type] == :primary ? "" : "hidden sm:block" %>
-        <% margin_class = index > 0 ? (action[:type] == :primary ? "sm:ml-3" : "ml-3 hidden sm:block") : type_class %>
-        
-        <span class="<%= margin_class %>">
-          <%= render BetterUi::General::ButtonComponent.new(
-            label: action[:text],
-            type: button_type,
-            href: action[:href],
-            method: action[:method],
-            icon: action[:icon],
-            data: action[:data],
-            classes: action[:classes]
-          ) %>
-        </span>
-      <% end %>
 
-      <% if mobile_menu && has_mobile_only_actions? %>
-        <!-- Menu mobile -->
-        <div class="relative ml-3 sm:hidden">
-          <button type="button" class="inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-xs ring-1 ring-gray-300 ring-inset hover:ring-gray-400" id="mobile-menu-button" aria-expanded="false" aria-haspopup="true">
-            Altro
-            <%= render BetterUi::General::IconComponent.new(
-              name: "chevron-down",
-              size: :sm,
-              classes: "-mr-1 ml-1.5 size-5 text-gray-400"
-            ) %>
-          </button>
-
-          <div class="absolute right-0 z-10 mt-2 -mr-1 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black/5 focus:outline-hidden hidden" 
-               role="menu" 
-               aria-orientation="vertical"
-               aria-labelledby="mobile-menu-button"
-               tabindex="-1">
-            <% mobile_menu_actions.each do |action| %>
-              <a href="<%= action[:href] %>" 
-                 class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" 
-                 role="menuitem" 
-                 tabindex="-1">
-                <%= action[:text] %>
-              </a>
-            <% end %>
-          </div>
+      <% if action_items.any? %>
+        <div class="<%= actions_container_classes %>">
+          <% action_items.each do |action| %>
+            <div class="ml-2">
+              <% if action.is_a?(Hash) && action[:content].present? %>
+                <%= action[:content].html_safe %>
+              <% elsif action.is_a?(String) %>
+                <%= action.html_safe %>
+              <% end %>
+            </div>
+          <% end %>
         </div>
       <% end %>
     </div>
-  <% end %>
-</div> 
+  </div>
+</header> 

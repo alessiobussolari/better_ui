@@ -3,6 +3,12 @@
   
   <div class="space-y-4">
     <%= render BetterUi::Application::AlertComponent.new(
+      title: "Alert Simple (Default)",
+      message: "Questo è un alert con stile semplice, simile a quello che si trova in molte interfacce moderne.",
+      variant: :simple
+    ) %>
+    
+    <%= render BetterUi::Application::AlertComponent.new(
       title: "Alert Primary",
       message: "Questo è un alert di tipo primary con l'icona predefinita.",
       variant: :primary
@@ -42,6 +48,13 @@
   <h2 class="text-lg font-bold my-6">Varianti con stile outline</h2>
   
   <div class="space-y-4">
+    <%= render BetterUi::Application::AlertComponent.new(
+      title: "Alert Simple Outline",
+      message: "Questo è un alert con stile simple outline.",
+      variant: :simple,
+      outline: true
+    ) %>
+    
     <%= render BetterUi::Application::AlertComponent.new(
       title: "Alert Primary Outline",
       message: "Questo è un alert di tipo primary con stile outline.",

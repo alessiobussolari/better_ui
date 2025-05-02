@@ -4,17 +4,17 @@ module BetterUi
       # Sidebar configurabile
       #
       # @param title text "Titolo della sidebar"
-      # @param variant select { choices: [light, dark, primary, blue] } "Variante di colore"
+      # @param variant select { choices: [modern, light, dark, primary, blue] } "Variante di colore"
       # @param position select { choices: [left, right] } "Posizione della sidebar"
       # @param width select { choices: [narrow, medium, wide] } "Larghezza della sidebar"
       # @param collapsible toggle "Permette di collassare la sidebar"
       # @param collapsed_default toggle "Sidebar collassata all'avvio"
       def default(
-        title: "Sidebar",
-        variant: :light,
+        title: "Acme Inc",
+        variant: :modern,
         position: :left,
-        width: :medium,
-        collapsible: true,
+        width: :narrow,
+        collapsible: false,
         collapsed_default: false
       )
         # Conversione dei tipi
@@ -25,21 +25,21 @@ module BetterUi
         collapsed_default = collapsed_default == true || collapsed_default == "true"
         
         # Costruisci gli elementi del menu
-        items = create_menu_items
+        items = create_modern_menu_items
         
         # Aggiungi un footer
         footer_content = <<-HTML
-          <div class="flex items-center">
-            <div class="flex-shrink-0">
-              <img class="h-10 w-10 rounded-full" src="https://ui-avatars.com/api/?name=Mario+Rossi&background=random" alt="Mario Rossi">
+          <div class="flex items-center justify-between rounded-md p-2 hover:bg-gray-100 cursor-pointer">
+            <div class="flex items-center">
+              <img class="h-8 w-8 rounded-md" src="https://ui-avatars.com/api/?name=shadcn&background=6366f1&color=fff&bold=true" alt="shadcn">
+              <div class="ml-3">
+                <p class="text-sm font-medium text-gray-900">shadcn</p>
+                <p class="text-xs text-gray-500">m@example.com</p>
+              </div>
             </div>
-            <div class="ml-3">
-              <p class="text-sm font-medium">Mario Rossi</p>
-              <p class="text-xs opacity-70">mario.rossi@example.com</p>
-            </div>
-            <button type="button" class="ml-auto p-1 rounded-full hover:bg-gray-200">
+            <button type="button" class="p-1 rounded-full text-gray-400 hover:text-gray-500">
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"></path>
               </svg>
             </button>
           </div>
@@ -61,6 +61,36 @@ module BetterUi
       end
       
       # @!group Esempi specifici
+      
+      # @label Sidebar moderna (come nell'immagine)
+      def modern_sidebar
+        items = create_modern_menu_items
+        
+        footer_content = <<-HTML
+          <div class="flex items-center justify-between rounded-md p-2 hover:bg-gray-100 cursor-pointer">
+            <div class="flex items-center">
+              <img class="h-8 w-8 rounded-md" src="https://ui-avatars.com/api/?name=shadcn&background=6366f1&color=fff&bold=true" alt="shadcn">
+              <div class="ml-3">
+                <p class="text-sm font-medium text-gray-900">shadcn</p>
+                <p class="text-xs text-gray-500">m@example.com</p>
+              </div>
+            </div>
+            <button type="button" class="p-1 rounded-full text-gray-400 hover:text-gray-500">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"></path>
+              </svg>
+            </button>
+          </div>
+        HTML
+        
+        render BetterUi::Application::SidebarComponent.new(
+          title: "Acme Inc",
+          variant: :modern,
+          items: items,
+          footer: footer_content,
+          width: :narrow
+        )
+      end
       
       # @label Sidebar scura con badge
       def dark_with_badges
@@ -119,6 +149,46 @@ module BetterUi
       # @!endgroup
       
       private
+      
+      # Metodo helper per creare le voci di menu moderno
+      def create_modern_menu_items
+        [
+          {
+            label: "Playground",
+            icon: "table-cells",
+            active: true,
+            children: [
+              {
+                label: "History",
+                url: "#",
+              },
+              {
+                label: "Starred",
+                url: "#",
+              },
+              {
+                label: "Settings",
+                url: "#",
+              }
+            ]
+          },
+          {
+            label: "Models",
+            url: "#",
+            icon: "cube",
+          },
+          {
+            label: "Documentation",
+            url: "#",
+            icon: "book",
+          },
+          {
+            label: "Settings",
+            url: "#",
+            icon: "gear",
+          }
+        ]
+      end
       
       # Metodo helper per creare le voci di menu standard
       def create_menu_items

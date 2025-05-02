@@ -9,13 +9,14 @@ module BetterUi
           bg: "bg-white",
           border: "border-gray-200",
           text: "text-gray-700",
-          active_bg: "bg-gray-100",
-          active_text: "text-orange-600",
-          hover: "hover:bg-gray-50 hover:text-orange-500",
+          active_bg: "bg-gray-50",
+          active_text: "text-gray-900",
+          hover: "hover:bg-gray-50 hover:text-gray-900",
           divider: "border-gray-200",
-          shadow: "shadow-md",
+          shadow: "shadow-sm",
           icon: "text-gray-500",
-          chevron: "text-gray-400"
+          chevron: "text-gray-400",
+          heading: "text-gray-500"
         },
         dark: {
           bg: "bg-gray-800",
@@ -27,7 +28,8 @@ module BetterUi
           divider: "border-gray-700",
           shadow: "shadow-lg",
           icon: "text-gray-400",
-          chevron: "text-gray-500"
+          chevron: "text-gray-500",
+          heading: "text-gray-400"
         },
         primary: {
           bg: "bg-orange-600",
@@ -39,7 +41,8 @@ module BetterUi
           divider: "border-orange-500",
           shadow: "shadow-lg",
           icon: "text-orange-300",
-          chevron: "text-orange-400"
+          chevron: "text-orange-400",
+          heading: "text-orange-200"
         },
         blue: {
           bg: "bg-blue-800",
@@ -51,15 +54,29 @@ module BetterUi
           divider: "border-blue-700",
           shadow: "shadow-lg",
           icon: "text-blue-300",
-          chevron: "text-blue-400"
+          chevron: "text-blue-400",
+          heading: "text-blue-200"
+        },
+        modern: {
+          bg: "bg-white",
+          border: "border-gray-200",
+          text: "text-gray-700",
+          active_bg: "bg-gray-100",
+          active_text: "text-gray-900",
+          hover: "hover:bg-gray-50",
+          divider: "border-gray-100",
+          shadow: "shadow-none",
+          icon: "text-gray-500",
+          chevron: "text-gray-400",
+          heading: "text-gray-500 uppercase text-xs font-medium"
         }
       }
 
       # Dimensioni disponibili per la sidebar
       WIDTHS = {
-        narrow: "w-64",
-        medium: "w-72",
-        wide: "w-80",
+        narrow: "w-60",
+        medium: "w-64",
+        wide: "w-72",
         custom: "" # La larghezza custom viene specificata nelle classi aggiuntive
       }
 
@@ -72,7 +89,7 @@ module BetterUi
       # Inizializzazione del componente
       def initialize(
         title: nil,
-        variant: :light,
+        variant: :modern,
         items: [],
         footer: nil,
         classes: nil,
@@ -80,7 +97,7 @@ module BetterUi
         collapsible: true,
         collapsed_default: false,
         position: :left,
-        width: :medium,
+        width: :narrow,
         overlay_on_mobile: true
       )
         @title = title
@@ -104,8 +121,8 @@ module BetterUi
 
       # Genera le classi per il container della sidebar
       def container_classes
-        styles = VARIANTS.fetch(@variant, VARIANTS[:light])
-        width_class = WIDTHS.fetch(@width, WIDTHS[:medium])
+        styles = VARIANTS.fetch(@variant, VARIANTS[:modern])
+        width_class = WIDTHS.fetch(@width, WIDTHS[:narrow])
         position_class = POSITIONS.fetch(@position, POSITIONS[:left])
 
         [
@@ -133,7 +150,7 @@ module BetterUi
 
       # Genera le classi per il pulsante del toggle
       def toggle_button_classes
-        styles = VARIANTS.fetch(@variant, VARIANTS[:light])
+        styles = VARIANTS.fetch(@variant, VARIANTS[:modern])
         position_class = @position == :left ? "right-0 -mr-3" : "left-0 -ml-3"
 
         [
@@ -150,31 +167,36 @@ module BetterUi
 
       # Genera le classi per l'intestazione
       def header_classes
-        styles = VARIANTS.fetch(@variant, VARIANTS[:light])
+        styles = VARIANTS.fetch(@variant, VARIANTS[:modern])
 
         [
-          "px-4 py-4 flex items-center justify-between",
-          styles[:border],
-          "border-b"
-        ].join(" ")
+          "px-4 py-4 flex items-center",
+          @variant == :modern ? "" : "border-b #{styles[:border]}"
+        ].compact.join(" ")
       end
 
       # Genera le classi per i link nel menu
       def menu_item_classes(active = false, nested = false, has_children = false)
-        styles = VARIANTS.fetch(@variant, VARIANTS[:light])
+        styles = VARIANTS.fetch(@variant, VARIANTS[:modern])
         
-        padding_left = nested ? "pl-10" : "pl-4"
+        padding_x = @variant == :modern ? "pl-5 pr-3" : "px-3"
+        padding_y = @variant == :modern ? "py-2.5" : "py-2"
+        rounded = @variant == :modern ? "" : "rounded-md"
+        
+        base_classes = [
+          "flex items-center #{padding_y} #{padding_x} #{rounded} my-0.5 w-full",
+        ]
         
         if active
+          active_classes = @variant == :modern ? "bg-gray-100 font-medium" : styles[:active_bg]
           [
-            "flex items-center py-2 px-4 #{padding_left} pr-4",
-            styles[:active_bg],
+            *base_classes,
+            active_classes,
             styles[:active_text],
-            "font-medium"
           ].join(" ")
         else
           [
-            "flex items-center py-2 px-4 #{padding_left} pr-4",
+            *base_classes,
             styles[:text],
             styles[:hover],
             has_children ? "cursor-pointer" : ""
@@ -184,7 +206,7 @@ module BetterUi
 
       # Genera le classi per i separatori
       def divider_classes
-        styles = VARIANTS.fetch(@variant, VARIANTS[:light])
+        styles = VARIANTS.fetch(@variant, VARIANTS[:modern])
         
         [
           "my-2 border-t",
@@ -194,21 +216,20 @@ module BetterUi
 
       # Genera le classi per il footer
       def footer_classes
-        styles = VARIANTS.fetch(@variant, VARIANTS[:light])
+        styles = VARIANTS.fetch(@variant, VARIANTS[:modern])
         
         [
-          "mt-auto px-4 py-4",
-          styles[:border],
-          "border-t"
+          "mt-auto px-4 py-3",
+          @variant == :modern ? "" : "border-t #{styles[:border]}"
         ].join(" ")
       end
 
       # Genera le classi per le icone
       def icon_classes
-        styles = VARIANTS.fetch(@variant, VARIANTS[:light])
+        styles = VARIANTS.fetch(@variant, VARIANTS[:modern])
         
         [
-          "mr-3",
+          "mr-3 flex-shrink-0",
           styles[:icon]
         ].join(" ")
       end
@@ -216,7 +237,7 @@ module BetterUi
       # Genera le classi per la label della voce di menu
       def item_label_classes
         [
-          "flex-1"
+          "flex-1 truncate"
         ].join(" ")
       end
 
@@ -237,9 +258,23 @@ module BetterUi
         ].join(" ")
       end
 
+      # Genera le classi per il titolo di sezione
+      def section_heading_classes
+        styles = VARIANTS.fetch(@variant, VARIANTS[:modern])
+        
+        if @variant == :modern
+          "px-5 py-2 text-xs font-medium text-gray-500"
+        else
+          [
+            "px-4 py-2 text-xs tracking-wider",
+            styles[:heading]
+          ].join(" ")
+        end
+      end
+
       # Genera le classi per icona chevron
       def chevron_classes
-        styles = VARIANTS.fetch(@variant, VARIANTS[:light])
+        styles = VARIANTS.fetch(@variant, VARIANTS[:modern])
         
         [
           "ml-auto",

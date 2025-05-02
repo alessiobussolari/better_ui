@@ -5,15 +5,15 @@ module BetterUi
       #
       # @param title text "Titolo dell'alert"
       # @param message text "Messaggio dell'alert"
-      # @param variant select { choices: [primary, info, success, warning, danger, dark] } "Variante di colore"
+      # @param variant select { choices: [simple, primary, info, success, warning, danger, dark] } "Variante di colore"
       # @param icon text "Nome icona personalizzata (opzionale)"
       # @param dismissible toggle "Mostra pulsante di chiusura"
       # @param icon_position select { choices: [left, top] } "Posizione dell'icona"
       # @param outline toggle "Stile outline"
       def default(
-        title: "Titolo dell'alert",
-        message: "Questo è un messaggio informativo all'utente.",
-        variant: :info,
+        title: "Heads up!",
+        message: "You can add components to your app using the cli.",
+        variant: :simple,
         icon: nil,
         dismissible: false,
         icon_position: :left,
@@ -26,10 +26,10 @@ module BetterUi
         outline = outline == true || outline == "true"
         
         # Validazione
-        valid_variants = [:primary, :info, :success, :warning, :danger, :dark]
+        valid_variants = [:simple, :primary, :info, :success, :warning, :danger, :dark]
         valid_icon_positions = [:left, :top]
         
-        variant = :info unless valid_variants.include?(variant)
+        variant = :simple unless valid_variants.include?(variant)
         icon_position = :left unless valid_icon_positions.include?(icon_position)
         
         # Pulisci valori vuoti
@@ -53,6 +53,15 @@ module BetterUi
       # @label Tutte le varianti
       def all_variants
         render_with_template
+      end
+      
+      # @label Alert semplice (default)
+      def simple_alert
+        render BetterUi::Application::AlertComponent.new(
+          title: "Heads up!",
+          message: "You can add components to your app using the cli.",
+          variant: :simple
+        )
       end
       
       # @label Alert con icona in alto
