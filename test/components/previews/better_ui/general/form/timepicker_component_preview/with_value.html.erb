@@ -1,0 +1,8 @@
+<%= form_with(url: "/example", method: :post, html: { class: "w-full" }) do |form| %>
+  <%= render(BetterUi::General::Form::TimepickerComponent.new(
+    name: "orario_riunione",
+    label: "Orario riunione",
+    form: form,
+    value: "14:30"
+  )) %>
+<% end %> 

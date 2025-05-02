@@ -1,0 +1,53 @@
+<div class="p-4 space-y-6">
+  <h3 class="text-lg font-semibold">Dimensioni disponibili</h3>
+  
+  <div class="flex flex-wrap gap-8 items-end">
+    <div class="flex flex-col items-center">
+      <%= render BetterUi::General::SpinnerComponent.new(size: :xs) %>
+      <span class="mt-2 text-sm text-gray-500">xs</span>
+    </div>
+    
+    <div class="flex flex-col items-center">
+      <%= render BetterUi::General::SpinnerComponent.new(size: :sm) %>
+      <span class="mt-2 text-sm text-gray-500">sm</span>
+    </div>
+    
+    <div class="flex flex-col items-center">
+      <%= render BetterUi::General::SpinnerComponent.new(size: :md) %>
+      <span class="mt-2 text-sm text-gray-500">md (default)</span>
+    </div>
+    
+    <div class="flex flex-col items-center">
+      <%= render BetterUi::General::SpinnerComponent.new(size: :lg) %>
+      <span class="mt-2 text-sm text-gray-500">lg</span>
+    </div>
+    
+    <div class="flex flex-col items-center">
+      <%= render BetterUi::General::SpinnerComponent.new(size: :xl) %>
+      <span class="mt-2 text-sm text-gray-500">xl</span>
+    </div>
+    
+    <div class="flex flex-col items-center">
+      <%= render BetterUi::General::SpinnerComponent.new(size: :'2xl') %>
+      <span class="mt-2 text-sm text-gray-500">2xl</span>
+    </div>
+    
+    <div class="flex flex-col items-center">
+      <%= render BetterUi::General::SpinnerComponent.new(size: :'3xl') %>
+      <span class="mt-2 text-sm text-gray-500">3xl</span>
+    </div>
+  </div>
+  
+  <div class="flex flex-col space-y-2 text-sm text-gray-500 mt-6">
+    <p>Dimensioni disponibili:</p>
+    <ul class="list-disc list-inside">
+      <li>xs: 12px</li>
+      <li>sm: 16px</li>
+      <li>md: 20px (default)</li>
+      <li>lg: 24px</li>
+      <li>xl: 32px</li>
+      <li>2xl: 40px</li>
+      <li>3xl: 48px</li>
+    </ul>
+  </div>
+</div> 

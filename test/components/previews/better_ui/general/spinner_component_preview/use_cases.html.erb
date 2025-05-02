@@ -1,0 +1,91 @@
+<div class="p-4 space-y-8">
+  <h3 class="text-lg font-semibold">Casi d'uso comuni</h3>
+  
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <!-- Pulsante con spinner -->
+    <div class="border rounded-lg p-4">
+      <h4 class="font-medium mb-3">Pulsante con spinner</h4>
+      <div class="flex gap-4">
+        <button class="inline-flex items-center px-4 py-2 bg-primary-600 text-white rounded-md font-medium">
+          <%= render BetterUi::General::SpinnerComponent.new(
+            variant: :white,
+            size: :sm,
+            custom_class: "mr-2"
+          ) %>
+          Salvataggio in corso...
+        </button>
+        
+        <button class="inline-flex items-center px-4 py-2 bg-gray-200 text-gray-800 rounded-md font-medium">
+          <%= render BetterUi::General::SpinnerComponent.new(
+            variant: :primary,
+            size: :sm,
+            custom_class: "mr-2"
+          ) %>
+          Caricamento...
+        </button>
+      </div>
+    </div>
+    
+    <!-- Caricamento schermo intero -->
+    <div class="border rounded-lg p-4">
+      <h4 class="font-medium mb-3">Caricamento schermo intero</h4>
+      <div class="flex h-40 items-center justify-center bg-white/80 border rounded-md">
+        <div class="flex flex-col items-center">
+          <%= render BetterUi::General::SpinnerComponent.new(
+            variant: :primary,
+            size: :xl
+          ) %>
+          <p class="mt-3 text-sm text-gray-600">Caricamento dati in corso...</p>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Card con caricamento -->
+    <div class="border rounded-lg p-4">
+      <h4 class="font-medium mb-3">Card con caricamento</h4>
+      <div class="border rounded-md p-4 flex flex-col">
+        <div class="flex items-center justify-between">
+          <h5 class="font-medium">Dati utente</h5>
+          <div>
+            <%= render BetterUi::General::SpinnerComponent.new(
+              variant: :primary,
+              size: :sm
+            ) %>
+          </div>
+        </div>
+        <div class="mt-4 space-y-2">
+          <div class="h-4 bg-gray-200 rounded animate-pulse"></div>
+          <div class="h-4 bg-gray-200 rounded animate-pulse w-3/4"></div>
+          <div class="h-4 bg-gray-200 rounded animate-pulse w-1/2"></div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Loader inline -->
+    <div class="border rounded-lg p-4">
+      <h4 class="font-medium mb-3">Loader inline nel testo</h4>
+      <div class="space-y-4">
+        <p class="text-gray-700">
+          I dati stanno caricando 
+          <%= render BetterUi::General::SpinnerComponent.new(
+            variant: :primary,
+            size: :sm,
+            custom_class: "inline-block align-middle mx-1"
+          ) %>
+          attendere prego.
+        </p>
+        
+        <p class="text-gray-700">
+          Il processo è in corso
+          <%= render BetterUi::General::SpinnerComponent.new(
+            variant: :info,
+            size: :sm,
+            type: :svg,
+            custom_class: "inline-block align-middle mx-1"
+          ) %>
+          e potrebbe richiedere alcuni minuti.
+        </p>
+      </div>
+    </div>
+  </div>
+</div> 

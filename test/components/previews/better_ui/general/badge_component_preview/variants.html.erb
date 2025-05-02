@@ -1,0 +1,39 @@
+<div class="p-4 space-y-8">
+  <h3 class="text-lg font-semibold">Tutte le varianti</h3>
+  
+  <div class="space-y-4">
+    <div class="flex flex-wrap gap-4">
+      <%= render BetterUi::General::BadgeComponent.new(text: "Default", variant: :default) %>
+      <%= render BetterUi::General::BadgeComponent.new(text: "Primary", variant: :primary) %>
+      <%= render BetterUi::General::BadgeComponent.new(text: "Success", variant: :success) %>
+      <%= render BetterUi::General::BadgeComponent.new(text: "Warning", variant: :warning) %>
+      <%= render BetterUi::General::BadgeComponent.new(text: "Danger", variant: :danger) %>
+      <%= render BetterUi::General::BadgeComponent.new(text: "Info", variant: :info) %>
+      <%= render BetterUi::General::BadgeComponent.new(text: "Dark", variant: :dark) %>
+      <%= render BetterUi::General::BadgeComponent.new(text: "Light", variant: :light) %>
+    </div>
+  </div>
+  
+  <h3 class="text-lg font-semibold">Dimensioni</h3>
+  
+  <div class="space-y-4">
+    <div class="flex flex-wrap items-center gap-4">
+      <%= render BetterUi::General::BadgeComponent.new(text: "Extra small", variant: :primary, size: :xs) %>
+      <%= render BetterUi::General::BadgeComponent.new(text: "Small", variant: :primary, size: :sm) %>
+      <%= render BetterUi::General::BadgeComponent.new(text: "Medium", variant: :primary, size: :md) %>
+      <%= render BetterUi::General::BadgeComponent.new(text: "Large", variant: :primary, size: :lg) %>
+    </div>
+  </div>
+  
+  <h3 class="text-lg font-semibold">Arrotondamento</h3>
+  
+  <div class="space-y-4">
+    <div class="flex flex-wrap items-center gap-4">
+      <%= render BetterUi::General::BadgeComponent.new(text: "None", variant: :info, rounded: :none) %>
+      <%= render BetterUi::General::BadgeComponent.new(text: "Small", variant: :info, rounded: :sm) %>
+      <%= render BetterUi::General::BadgeComponent.new(text: "Medium", variant: :info, rounded: :md) %>
+      <%= render BetterUi::General::BadgeComponent.new(text: "Large", variant: :info, rounded: :lg) %>
+      <%= render BetterUi::General::BadgeComponent.new(text: "Full", variant: :info, rounded: :full) %>
+    </div>
+  </div>
+</div> 

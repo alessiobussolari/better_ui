@@ -6,3 +6,5 @@ alwaysApply: true
 Non generare file js questa libreria è solo presentazionale e non prevede javascript o cose simili.
 Se devi generare un componente ViewComponent usa sempre la relativa cli di cui allego un esempio "bin/rails generate component Example param1 param2".
 Per ogni componente crea sempre le preview con i relativi params da modificare in lookbook
+Ogni componente nella propria preview ha 2 gruppi 'default' e 'esempi specifici'
+Cerca sempre di categorizzare i componenti in application (elementi utilizzabili in una dashboard) e general (elementi semplici che possono essere elementi di altri componenti più complessi)

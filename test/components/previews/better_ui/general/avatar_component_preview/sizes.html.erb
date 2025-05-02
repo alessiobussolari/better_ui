@@ -1,0 +1,53 @@
+<div class="p-4 space-y-6">
+  <h3 class="text-lg font-semibold">Dimensioni degli avatar</h3>
+  
+  <div class="flex flex-wrap items-end gap-6">
+    <%= render BetterUi::General::AvatarComponent.new(
+      name: "Mario Rossi",
+      size: :xs
+    ) %>
+    
+    <%= render BetterUi::General::AvatarComponent.new(
+      name: "Mario Rossi",
+      size: :sm
+    ) %>
+    
+    <%= render BetterUi::General::AvatarComponent.new(
+      name: "Mario Rossi",
+      size: :md
+    ) %>
+    
+    <%= render BetterUi::General::AvatarComponent.new(
+      name: "Mario Rossi",
+      size: :lg
+    ) %>
+    
+    <%= render BetterUi::General::AvatarComponent.new(
+      name: "Mario Rossi",
+      size: :xl
+    ) %>
+    
+    <%= render BetterUi::General::AvatarComponent.new(
+      name: "Mario Rossi",
+      size: :'2xl'
+    ) %>
+    
+    <%= render BetterUi::General::AvatarComponent.new(
+      name: "Mario Rossi",
+      size: :'3xl'
+    ) %>
+  </div>
+  
+  <div class="flex flex-col space-y-2 text-sm text-gray-500">
+    <p>Dimensioni disponibili:</p>
+    <ul class="list-disc list-inside">
+      <li>xs: 24px</li>
+      <li>sm: 32px</li>
+      <li>md: 40px (default)</li>
+      <li>lg: 48px</li>
+      <li>xl: 64px</li>
+      <li>2xl: 80px</li>
+      <li>3xl: 96px</li>
+    </ul>
+  </div>
+</div> 

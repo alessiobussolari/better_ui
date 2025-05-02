@@ -1,0 +1,66 @@
+<div class="p-4 space-y-6">
+  <h3 class="text-lg font-semibold">Forme degli avatar</h3>
+  
+  <div class="flex flex-wrap items-end gap-6">
+    <div class="flex flex-col items-center">
+      <%= render BetterUi::General::AvatarComponent.new(
+        name: "Marco Bianchi",
+        size: :lg,
+        shape: :circle
+      ) %>
+      <span class="mt-2 text-sm text-gray-500">circle (default)</span>
+    </div>
+    
+    <div class="flex flex-col items-center">
+      <%= render BetterUi::General::AvatarComponent.new(
+        name: "Marco Bianchi",
+        size: :lg,
+        shape: :square
+      ) %>
+      <span class="mt-2 text-sm text-gray-500">square</span>
+    </div>
+    
+    <div class="flex flex-col items-center">
+      <%= render BetterUi::General::AvatarComponent.new(
+        name: "Marco Bianchi",
+        size: :lg,
+        shape: :rounded
+      ) %>
+      <span class="mt-2 text-sm text-gray-500">rounded</span>
+    </div>
+  </div>
+  
+  <h3 class="text-lg font-semibold mt-6">Con immagini</h3>
+  
+  <div class="flex flex-wrap items-end gap-6">
+    <div class="flex flex-col items-center">
+      <%= render BetterUi::General::AvatarComponent.new(
+        name: "Laura Verdi",
+        src: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+        size: :lg,
+        shape: :circle
+      ) %>
+      <span class="mt-2 text-sm text-gray-500">circle (default)</span>
+    </div>
+    
+    <div class="flex flex-col items-center">
+      <%= render BetterUi::General::AvatarComponent.new(
+        name: "Laura Verdi",
+        src: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+        size: :lg,
+        shape: :square
+      ) %>
+      <span class="mt-2 text-sm text-gray-500">square</span>
+    </div>
+    
+    <div class="flex flex-col items-center">
+      <%= render BetterUi::General::AvatarComponent.new(
+        name: "Laura Verdi",
+        src: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+        size: :lg,
+        shape: :rounded
+      ) %>
+      <span class="mt-2 text-sm text-gray-500">rounded</span>
+    </div>
+  </div>
+</div> 

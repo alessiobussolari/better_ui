@@ -1,0 +1,85 @@
+<div class="p-4 space-y-6">
+  <h3 class="text-lg font-semibold">Stati online</h3>
+  
+  <div class="flex flex-wrap items-end gap-10">
+    <div class="flex flex-col items-center">
+      <%= render BetterUi::General::AvatarComponent.new(
+        name: "Paolo Neri",
+        size: :lg,
+        status: :online
+      ) %>
+      <span class="mt-2 text-sm text-gray-500">online</span>
+    </div>
+    
+    <div class="flex flex-col items-center">
+      <%= render BetterUi::General::AvatarComponent.new(
+        name: "Paolo Neri",
+        size: :lg,
+        status: :offline
+      ) %>
+      <span class="mt-2 text-sm text-gray-500">offline</span>
+    </div>
+    
+    <div class="flex flex-col items-center">
+      <%= render BetterUi::General::AvatarComponent.new(
+        name: "Paolo Neri",
+        size: :lg,
+        status: :busy
+      ) %>
+      <span class="mt-2 text-sm text-gray-500">busy</span>
+    </div>
+    
+    <div class="flex flex-col items-center">
+      <%= render BetterUi::General::AvatarComponent.new(
+        name: "Paolo Neri",
+        size: :lg,
+        status: :away
+      ) %>
+      <span class="mt-2 text-sm text-gray-500">away</span>
+    </div>
+  </div>
+  
+  <h3 class="text-lg font-semibold mt-6">Posizione dell'indicatore di stato</h3>
+  
+  <div class="flex flex-wrap items-end gap-10">
+    <div class="flex flex-col items-center">
+      <%= render BetterUi::General::AvatarComponent.new(
+        name: "Paolo Neri",
+        size: :lg,
+        status: :online,
+        status_position: :bottom_right
+      ) %>
+      <span class="mt-2 text-sm text-gray-500">bottom_right (default)</span>
+    </div>
+    
+    <div class="flex flex-col items-center">
+      <%= render BetterUi::General::AvatarComponent.new(
+        name: "Paolo Neri",
+        size: :lg,
+        status: :online,
+        status_position: :bottom_left
+      ) %>
+      <span class="mt-2 text-sm text-gray-500">bottom_left</span>
+    </div>
+    
+    <div class="flex flex-col items-center">
+      <%= render BetterUi::General::AvatarComponent.new(
+        name: "Paolo Neri",
+        size: :lg,
+        status: :online,
+        status_position: :top_right
+      ) %>
+      <span class="mt-2 text-sm text-gray-500">top_right</span>
+    </div>
+    
+    <div class="flex flex-col items-center">
+      <%= render BetterUi::General::AvatarComponent.new(
+        name: "Paolo Neri",
+        size: :lg,
+        status: :online,
+        status_position: :top_left
+      ) %>
+      <span class="mt-2 text-sm text-gray-500">top_left</span>
+    </div>
+  </div>
+</div> 

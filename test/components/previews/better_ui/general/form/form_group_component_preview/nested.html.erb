@@ -1,0 +1,28 @@
+<%= render(BetterUi::General::Form::FormGroupComponent.new(
+  title: "Configurazione avanzata",
+  description: "Impostazioni per utenti esperti"
+)) do %>
+  <div class="space-y-6">
+    <%= render(BetterUi::General::Form::FormGroupComponent.new(
+      title: "Notifiche",
+      border: true
+    )) do %>
+      <div class="space-y-2">
+        <%= render BetterUi::General::Form::CheckboxComponent.new(name: "email_notifiche", label: "Notifiche email") %>
+        <%= render BetterUi::General::Form::CheckboxComponent.new(name: "browser_notifiche", label: "Notifiche browser") %>
+        <%= render BetterUi::General::Form::CheckboxComponent.new(name: "sms_notifiche", label: "Notifiche SMS") %>
+      </div>
+    <% end %>
+    
+    <%= render(BetterUi::General::Form::FormGroupComponent.new(
+      title: "Permessi",
+      border: true
+    )) do %>
+      <div class="space-y-2">
+        <%= render BetterUi::General::Form::CheckboxComponent.new(name: "lettura", label: "Permessi di lettura") %>
+        <%= render BetterUi::General::Form::CheckboxComponent.new(name: "scrittura", label: "Permessi di scrittura") %>
+        <%= render BetterUi::General::Form::CheckboxComponent.new(name: "admin", label: "Permessi di amministrazione") %>
+      </div>
+    <% end %>
+  </div>
+<% end %> 

@@ -1,0 +1,59 @@
+<div class="p-4 space-y-6">
+  <h3 class="text-lg font-semibold">Contatori numerici</h3>
+  
+  <div class="flex flex-wrap gap-6">
+    <div class="flex items-center">
+      <button class="relative">
+        <%= render BetterUi::General::IconComponent.new(name: "bell", size: :lg) %>
+        <%= render BetterUi::General::BadgeComponent.new(
+          text: "5",
+          variant: :danger,
+          size: :xs,
+          rounded: :full,
+          custom_class: "absolute -top-1 -right-1"
+        ) %>
+      </button>
+      <span class="ml-3 text-sm">Notifiche non lette</span>
+    </div>
+    
+    <div class="flex items-center">
+      <button class="relative">
+        <%= render BetterUi::General::IconComponent.new(name: "envelope", size: :lg) %>
+        <%= render BetterUi::General::BadgeComponent.new(
+          text: "99+",
+          variant: :primary,
+          size: :xs,
+          rounded: :full,
+          custom_class: "absolute -top-1 -right-3"
+        ) %>
+      </button>
+      <span class="ml-3 text-sm">Messaggi non letti</span>
+    </div>
+    
+    <div class="flex items-center">
+      <button class="relative flex items-center">
+        <span class="mr-2">Carrello</span>
+        <%= render BetterUi::General::BadgeComponent.new(
+          text: "3",
+          variant: :success,
+          size: :sm,
+          rounded: :full
+        ) %>
+      </button>
+    </div>
+    
+    <div class="flex items-center">
+      <button class="relative">
+        <%= render BetterUi::General::IconComponent.new(name: "shopping-cart", size: :lg) %>
+        <%= render BetterUi::General::BadgeComponent.new(
+          text: "0",
+          variant: :light,
+          size: :xs,
+          rounded: :full,
+          custom_class: "absolute -top-1 -right-1"
+        ) %>
+      </button>
+      <span class="ml-3 text-sm">Carrello vuoto</span>
+    </div>
+  </div>
+</div> 
