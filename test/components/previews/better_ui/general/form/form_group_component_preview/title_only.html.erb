@@ -1,9 +1,0 @@
-<%= render(BetterUi::General::Form::FormGroupComponent.new(
-  title: "Impostazioni account"
-)) do %>
-  <div class="space-y-4">
-    <%= render BetterUi::General::Form::TextInputComponent.new(name: "username", label: "Username") %>
-    <%= render BetterUi::General::Form::TextInputComponent.new(name: "password", label: "Password", type: "password") %>
-    <%= render BetterUi::General::Form::TextInputComponent.new(name: "password_confirmation", label: "Conferma password", type: "password") %>
-  </div>
-<% end %> 

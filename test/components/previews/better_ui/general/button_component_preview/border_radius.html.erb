@@ -1,0 +1,9 @@
+<% variants.each do |variant| %>
+    <%= better_ui_general_button(
+        variant[:label],
+        type: :default,
+        size: :medium,
+        rounded: variant[:rounded],
+        full_width: false,
+        disabled: false) %>
+<% end %> 
