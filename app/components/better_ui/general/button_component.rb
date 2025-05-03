@@ -4,8 +4,8 @@ module BetterUi
       attr_reader :label, :type, :size, :full_width, :disabled, 
                   :icon, :icon_position, :href, :method, :data, :classes, :id, :rounded
 
-      # Tipi di bottoni disponibili con classi CSS personalizzate
-      BUTTON_TYPES = {
+      # Temi di bottoni disponibili con classi CSS personalizzate
+      BUTTON_THEME = {
         default: "bui-btn-default",
         white: "bui-btn-white",
         red: "bui-btn-red",
@@ -97,7 +97,7 @@ module BetterUi
       end
       
       def get_button_type_classes
-        BUTTON_TYPES[@type] || BUTTON_TYPES[:default]
+        BUTTON_THEME[@type] || BUTTON_THEME[:default]
       end
       
       def get_border_radius_class

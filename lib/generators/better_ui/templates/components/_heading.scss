@@ -1,0 +1,197 @@
+/* Heading/Intestazioni */
+.bui-header {
+  /* Varianti di colore per le intestazioni */
+  &-default {
+    &-heading {
+      @apply text-gray-900;
+    }
+    
+    &-subtitle {
+      @apply text-gray-600;
+    }
+    
+    &-divider {
+      @apply border-gray-200;
+    }
+  }
+  
+  &-white {
+    &-heading {
+      @apply text-gray-100;
+    }
+    
+    &-subtitle {
+      @apply text-gray-300;
+    }
+    
+    &-divider {
+      @apply border-gray-200;
+    }
+  }
+  
+  &-red {
+    &-heading {
+      @apply text-red-700;
+    }
+    
+    &-subtitle {
+      @apply text-red-500;
+    }
+    
+    &-divider {
+      @apply border-red-300;
+    }
+  }
+  
+  &-rose {
+    &-heading {
+      @apply text-rose-700;
+    }
+    
+    &-subtitle {
+      @apply text-rose-500;
+    }
+    
+    &-divider {
+      @apply border-rose-300;
+    }
+  }
+  
+  &-orange {
+    &-heading {
+      @apply text-orange-700;
+    }
+    
+    &-subtitle {
+      @apply text-orange-500;
+    }
+    
+    &-divider {
+      @apply border-orange-300;
+    }
+  }
+  
+  &-green {
+    &-heading {
+      @apply text-green-700;
+    }
+    
+    &-subtitle {
+      @apply text-green-500;
+    }
+    
+    &-divider {
+      @apply border-green-300;
+    }
+  }
+  
+  &-blue {
+    &-heading {
+      @apply text-blue-700;
+    }
+    
+    &-subtitle {
+      @apply text-blue-500;
+    }
+    
+    &-divider {
+      @apply border-blue-300;
+    }
+  }
+  
+  &-yellow {
+    &-heading {
+      @apply text-yellow-700;
+    }
+    
+    &-subtitle {
+      @apply text-yellow-500;
+    }
+    
+    &-divider {
+      @apply border-yellow-300;
+    }
+  }
+  
+  &-violet {
+    &-heading {
+      @apply text-violet-700;
+    }
+    
+    &-subtitle {
+      @apply text-violet-500;
+    }
+    
+    &-divider {
+      @apply border-violet-300;
+    }
+  }
+  
+  /* Classi per le dimensioni dell'intestazione */
+  &-small {
+    &-heading {
+      @apply text-xl;
+    }
+    
+    &-subtitle {
+      @apply text-base;
+    }
+  }
+  
+  &-medium {
+    &-heading {
+      @apply text-2xl;
+    }
+    
+    &-subtitle {
+      @apply text-lg;
+    }
+  }
+  
+  &-large {
+    &-heading {
+      @apply text-3xl;
+    }
+    
+    &-subtitle {
+      @apply text-xl;
+    }
+  }
+  
+  /* Classi per l'allineamento dell'intestazione */
+  &-left {
+    @apply text-left;
+  }
+  
+  &-center {
+    @apply text-center;
+  }
+  
+  &-right {
+    @apply text-right;
+  }
+  
+  /* Stili comuni per heading */
+  &-heading-base {
+    @apply font-bold;
+  }
+  
+  /* Stili comuni per sottotitolo */
+  &-subtitle-base {
+    @apply mt-1;
+  }
+  
+  /* Stili per divisore */
+  &-divider-base {
+    @apply border-t mt-2;
+  }
+  
+  /* Stili per container */
+  &-container-base {
+    @apply mb-4;
+  }
+  
+  &-container-with-divider {
+    @apply mb-4 pb-2;
+  }
+} 

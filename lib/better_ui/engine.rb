@@ -3,6 +3,9 @@ require 'redcarpet'
 require 'tailwindcss-rails'
 require 'coderay'
 require 'font-awesome-sass'
+require 'lookbook'
+require 'listen'
+require 'action_cable'
 
 module BetterUi
   class Engine < ::Rails::Engine
@@ -35,16 +38,7 @@ module BetterUi
     
     # Configurazione per Lookbook in sviluppo e test
     initializer 'better_ui.lookbook' do
-      if defined?(Lookbook) && (Rails.env.development? || Rails.env.test?)
-        # Carica esplicitamente le dipendenze per le funzionalità avanzate di Lookbook
-        begin
-          require 'listen'
-          require 'action_cable'
-        rescue LoadError => e
-          # Log che le dipendenze opzionali non sono disponibili
-          puts "NOTA: Alcune funzionalità avanzate di Lookbook potrebbero non essere disponibili: #{e.message}"
-        end
-        
+      if Rails.env.development? || Rails.env.test?
         config.lookbook = Lookbook
       end
     end

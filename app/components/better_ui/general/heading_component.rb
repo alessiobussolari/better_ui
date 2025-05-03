@@ -4,77 +4,75 @@ module BetterUi
       attr_reader :text, :level, :variant, :size, :align, :classes, :icon, :subtitle, :with_divider
 
       # Varianti di colore disponibili
-      VARIANTS = {
+      HEADER_THEME = {
         default: {
-          heading: "text-gray-900",
-          subtitle: "text-gray-600",
-          divider: "border-gray-200"
+          heading: "bui-header-default-heading",
+          subtitle: "bui-header-default-subtitle",
+          divider: "bui-header-default-divider"
         },
-        primary: {
-          heading: "text-orange-700",
-          subtitle: "text-orange-500",
-          divider: "border-orange-300"
+        white: {
+          heading: "bui-header-white-heading",
+          subtitle: "bui-header-white-subtitle",
+          divider: "bui-header-white-divider"
         },
-        success: {
-          heading: "text-green-700",
-          subtitle: "text-green-500",
-          divider: "border-green-300"
+        red: {
+          heading: "bui-header-red-heading",
+          subtitle: "bui-header-red-subtitle",
+          divider: "bui-header-red-divider"
         },
-        warning: {
-          heading: "text-yellow-700",
-          subtitle: "text-yellow-500",
-          divider: "border-yellow-300"
+        rose: {
+          heading: "bui-header-rose-heading",
+          subtitle: "bui-header-rose-subtitle",
+          divider: "bui-header-rose-divider"
         },
-        danger: {
-          heading: "text-red-700",
-          subtitle: "text-red-500",
-          divider: "border-red-300"
+        orange: {
+          heading: "bui-header-orange-heading",
+          subtitle: "bui-header-orange-subtitle",
+          divider: "bui-header-orange-divider"
         },
-        info: {
-          heading: "text-blue-700",
-          subtitle: "text-blue-500",
-          divider: "border-blue-300"
+        green: {
+          heading: "bui-header-green-heading",
+          subtitle: "bui-header-green-subtitle",
+          divider: "bui-header-green-divider"
         },
-        light: {
-          heading: "text-gray-100",
-          subtitle: "text-gray-300",
-          divider: "border-gray-700"
+        blue: {
+          heading: "bui-header-blue-heading",
+          subtitle: "bui-header-blue-subtitle",
+          divider: "bui-header-blue-divider"
+        },
+        yellow: {
+          heading: "bui-header-yellow-heading",
+          subtitle: "bui-header-yellow-subtitle",
+          divider: "bui-header-yellow-divider"
+        },
+        violet: {
+          heading: "bui-header-violet-heading",
+          subtitle: "bui-header-violet-subtitle",
+          divider: "bui-header-violet-divider"
         }
       }
 
       # Dimensioni disponibili
-      SIZES = {
-        xs: {
-          heading: "text-lg", 
-          subtitle: "text-sm"
+      HEADER_SIZES = {
+        small: {
+          heading: "bui-header-small-heading", 
+          subtitle: "bui-header-small-subtitle"
         },
-        sm: {
-          heading: "text-xl", 
-          subtitle: "text-base"
+        medium: {
+          heading: "bui-header-medium-heading", 
+          subtitle: "bui-header-medium-subtitle"
         },
-        md: {
-          heading: "text-2xl", 
-          subtitle: "text-lg"
-        },
-        lg: {
-          heading: "text-3xl", 
-          subtitle: "text-xl"
-        },
-        xl: {
-          heading: "text-4xl", 
-          subtitle: "text-2xl"
-        },
-        xxl: {
-          heading: "text-5xl", 
-          subtitle: "text-3xl"
+        large: {
+          heading: "bui-header-large-heading", 
+          subtitle: "bui-header-large-subtitle"
         }
       }
 
       # Allineamenti disponibili
-      ALIGNMENTS = {
-        left: "text-left",
-        center: "text-center",
-        right: "text-right"
+      HEADER_ALIGNMENTS = {
+        left: "bui-header-left",
+        center: "bui-header-center",
+        right: "bui-header-right"
       }
 
       # Inizializzazione del componente
@@ -82,7 +80,7 @@ module BetterUi
         text: nil,
         level: 2,
         variant: :default,
-        size: :md,
+        size: :medium,
         align: :left,
         classes: nil,
         icon: nil,
@@ -103,10 +101,10 @@ module BetterUi
       # Genera le classi per l'heading
       def heading_classes
         [
-          VARIANTS.fetch(@variant, VARIANTS[:default])[:heading],
-          SIZES.fetch(@size, SIZES[:md])[:heading],
-          ALIGNMENTS.fetch(@align, ALIGNMENTS[:left]),
-          "font-bold",
+          HEADER_THEME.fetch(@variant, HEADER_THEME[:default])[:heading],
+          HEADER_SIZES.fetch(@size, HEADER_SIZES[:medium])[:heading],
+          HEADER_ALIGNMENTS.fetch(@align, HEADER_ALIGNMENTS[:left]),
+          "bui-header-heading-base",
           @classes
         ].compact.join(" ")
       end
@@ -114,28 +112,24 @@ module BetterUi
       # Genera le classi per il sottotitolo
       def subtitle_classes
         [
-          VARIANTS.fetch(@variant, VARIANTS[:default])[:subtitle],
-          SIZES.fetch(@size, SIZES[:md])[:subtitle],
-          ALIGNMENTS.fetch(@align, ALIGNMENTS[:left]),
-          "mt-1"
+          HEADER_THEME.fetch(@variant, HEADER_THEME[:default])[:subtitle],
+          HEADER_SIZES.fetch(@size, HEADER_SIZES[:medium])[:subtitle],
+          HEADER_ALIGNMENTS.fetch(@align, HEADER_ALIGNMENTS[:left]),
+          "bui-header-subtitle-base"
         ].compact.join(" ")
       end
 
       # Genera le classi per il divisore
       def divider_classes
         [
-          "border-t",
-          "mt-2",
-          VARIANTS.fetch(@variant, VARIANTS[:default])[:divider]
+          "bui-header-divider-base",
+          HEADER_THEME.fetch(@variant, HEADER_THEME[:default])[:divider]
         ].compact.join(" ")
       end
 
       # Genera le classi per il container
       def container_classes
-        [
-          "mb-4",
-          @with_divider ? "pb-2" : ""
-        ].compact.join(" ")
+        @with_divider ? "bui-header-container-with-divider" : "bui-header-container-base"
       end
     end
   end

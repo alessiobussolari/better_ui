@@ -29,11 +29,11 @@ Gem::Specification.new do |spec|
   spec.add_dependency "tailwindcss-rails", "~> 2.0"
   spec.add_dependency "coderay", "~> 1.1"
   spec.add_dependency "font-awesome-sass", "~> 6.5.1"
+  spec.add_dependency "lookbook", "~> 2.1"
+  spec.add_dependency "listen"
+  spec.add_dependency "actioncable"
 
   # Dipendenze di sviluppo
   spec.add_development_dependency "sqlite3"
   spec.add_development_dependency "puma"
-  spec.add_development_dependency "lookbook", "~> 2.1"
-  spec.add_development_dependency "listen"
-  spec.add_development_dependency "actioncable"
 end

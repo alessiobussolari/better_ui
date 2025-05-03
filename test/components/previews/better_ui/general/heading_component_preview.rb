@@ -5,8 +5,8 @@ module BetterUi
       #
       # @param text text "Testo dell'heading"
       # @param level select { choices: [1, 2, 3, 4, 5, 6] } "Livello dell'heading"
-      # @param variant select { choices: [default, primary, success, warning, danger, info, light] } "Variante di colore"
-      # @param size select { choices: [xs, sm, md, lg, xl, xxl] } "Dimensione del testo"
+      # @param variant select { choices: [default, white, red, rose, orange, green, blue, yellow, violet] } "Variante di colore"
+      # @param size select { choices: [small, medium, large] } "Dimensione del testo"
       # @param align select { choices: [left, center, right] } "Allineamento del testo"
       # @param icon text "Nome icona (opzionale)"
       # @param subtitle text "Sottotitolo (opzionale)"
@@ -15,7 +15,7 @@ module BetterUi
         text: "Titolo di esempio",
         level: 2,
         variant: :default,
-        size: :md,
+        size: :medium,
         align: :left,
         icon: nil,
         subtitle: nil,
@@ -30,21 +30,21 @@ module BetterUi
         
         # Validazione
         valid_levels = [1, 2, 3, 4, 5, 6]
-        valid_variants = [:default, :primary, :success, :warning, :danger, :info, :light]
-        valid_sizes = [:xs, :sm, :md, :lg, :xl, :xxl]
+        valid_variants = [:default, :white, :red, :rose, :orange, :green, :blue, :yellow, :violet]
+        valid_sizes = [:small, :medium, :large]
         valid_aligns = [:left, :center, :right]
         
         level = 2 unless valid_levels.include?(level)
         variant = :default unless valid_variants.include?(variant)
-        size = :md unless valid_sizes.include?(size)
+        size = :medium unless valid_sizes.include?(size)
         align = :left unless valid_aligns.include?(align)
         
         # Pulisci valori vuoti
         icon = nil if icon.is_a?(String) && icon.strip.empty?
         subtitle = nil if subtitle.is_a?(String) && subtitle.strip.empty?
         
-        # Se lo sfondo è chiaro e la variante è light, mostriamo con sfondo scuro
-        if variant == :light
+        # Se lo sfondo è chiaro e la variante è white, mostriamo con sfondo scuro
+        if variant == :white
           render_with_template(locals: {
             variant: variant,
             level: level,
@@ -81,7 +81,7 @@ module BetterUi
         render BetterUi::General::HeadingComponent.new(
           text: "Titolo con sottotitolo",
           level: 2,
-          variant: :primary,
+          variant: :blue,
           subtitle: "Questo è un sottotitolo che fornisce informazioni aggiuntive",
           with_divider: true
         )
@@ -92,7 +92,7 @@ module BetterUi
         render BetterUi::General::HeadingComponent.new(
           text: "Titolo con icona",
           level: 2,
-          variant: :info,
+          variant: :green,
           icon: "info-circle",
           subtitle: "Informazioni importanti"
         )
