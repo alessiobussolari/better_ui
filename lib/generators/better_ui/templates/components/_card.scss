@@ -1,0 +1,69 @@
+/* ==============================
+ * Card Component
+ * ============================== */
+
+/* Struttura di base */
+.bui-card-base {
+  @apply bg-white border shadow-sm overflow-hidden;
+}
+
+/* Contenuto */
+.bui-card-content {
+  @apply p-4;
+}
+
+/* Intestazione */
+.bui-card-header {
+  @apply p-4 border-b;
+}
+
+/* Piè di pagina */
+.bui-card-footer {
+  @apply p-4 border-t;
+}
+
+/* Corpo */
+.bui-card-body {
+  @apply flex flex-col;
+}
+
+/* Titolo */
+.bui-card-title {
+  @apply text-lg font-medium;
+}
+
+/* Valore */
+.bui-card-value {
+  @apply text-2xl font-bold mt-2;
+}
+
+/* Valore di riferimento */
+.bui-card-value-from {
+  @apply text-sm text-gray-500 mt-1;
+}
+
+/* Trend */
+.bui-card-trend {
+  @apply mt-2 inline-flex items-center px-2 py-1 text-xs font-medium rounded;
+}
+
+/* Opzioni di border-radius */
+.bui-card-radius-none {
+  @apply rounded-none;
+}
+    
+.bui-card-radius-small {
+  @apply rounded-md;
+}
+    
+.bui-card-radius-medium {
+  @apply rounded-lg;
+}
+    
+.bui-card-radius-large {
+  @apply rounded-xl;
+}
+    
+.bui-card-radius-full {
+  @apply rounded-full;
+} 

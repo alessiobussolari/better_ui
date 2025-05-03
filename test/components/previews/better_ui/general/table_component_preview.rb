@@ -9,6 +9,7 @@ module BetterUi
       # @param hoverable toggle "Effetto hover sulle righe"
       # @param bordered toggle "Mostra bordi"
       # @param compact toggle "Stile compatto"
+      # @param rounded select { choices: [none, small, medium, large, full] } "Tipo di border-radius"
       # @param data_type select { choices: [array, hash] } "Tipo di dati da mostrare"
       # @param row_count select { choices: [3, 5] } "Numero di righe"
       def default(
@@ -18,12 +19,14 @@ module BetterUi
         hoverable: false,
         bordered: true,
         compact: false,
+        rounded: :small,
         data_type: :array,
         row_count: 3
       )
         # Conversione dei tipi
         variant = variant.to_sym if variant.is_a?(String)
         data_type = data_type.to_sym if data_type.is_a?(String)
+        rounded = rounded.to_sym if rounded.is_a?(String)
         striped = striped == true || striped == "true"
         hoverable = hoverable == true || hoverable == "true"
         bordered = bordered == true || bordered == "true" 
@@ -34,10 +37,12 @@ module BetterUi
         valid_variants = [:default, :white, :red, :rose, :orange, :green, :blue, :yellow, :violet]
         valid_data_types = [:array, :hash]
         valid_row_counts = [3, 5]
+        valid_rounded = [:none, :small, :medium, :large, :full]
         
         variant = :default unless valid_variants.include?(variant)
         data_type = :array unless valid_data_types.include?(data_type)
         row_count = 3 unless valid_row_counts.include?(row_count)
+        rounded = :small unless valid_rounded.include?(rounded)
         
         # Dati di esempio
         headers = ['Nome', 'Email', 'Ruolo']
@@ -73,7 +78,8 @@ module BetterUi
           striped: striped,
           hoverable: hoverable,
           bordered: bordered,
-          compact: compact
+          compact: compact,
+          rounded: rounded
         )
       end
       
@@ -94,7 +100,8 @@ module BetterUi
           striped: true,
           hoverable: true,
           bordered: true,
-          variant: :primary
+          variant: :blue,
+          rounded: :medium
         )
       end
       
@@ -109,8 +116,35 @@ module BetterUi
         render BetterUi::General::TableComponent.new(
           data: data,
           caption: 'Tabella con dati in formato Hash',
-          hoverable: true
+          hoverable: true,
+          rounded: :large
         )
+      end
+      
+      # @label Varianti di colore
+      def color_variants
+        render_with_template(locals: {
+          variants: [
+            { name: "Default", variant: :default },
+            { name: "White", variant: :white },
+            { name: "Red", variant: :red },
+            { name: "Green", variant: :green },
+            { name: "Blue", variant: :blue }
+          ]
+        })
+      end
+      
+      # @label Varianti di border-radius
+      def border_radius_variants
+        render_with_template(locals: {
+          variants: [
+            { name: "Nessun radius", rounded: :none },
+            { name: "Small", rounded: :small },
+            { name: "Medium", rounded: :medium },
+            { name: "Large", rounded: :large },
+            { name: "Full", rounded: :full }
+          ]
+        })
       end
       
       # @!endgroup

@@ -1,0 +1,23 @@
+<div class="p-8 space-y-8 bg-gray-100">
+  <% variants.each do |variant| %>
+    <div class="mb-6">
+      <h3 class="text-lg font-medium mb-2"><%= variant[:name] %></h3>
+      <% 
+        data = [
+          { nome: 'Mario Rossi', email: 'mario.rossi@example.com', ruolo: 'Amministratore' },
+          { nome: 'Giulia Bianchi', email: 'giulia.bianchi@example.com', ruolo: 'Utente' }
+        ]
+        
+        headers = ['Nome', 'Email', 'Ruolo']
+      %>
+      
+      <%= render BetterUi::General::TableComponent.new(
+        data: data,
+        headers: headers,
+        caption: 'Esempio tabella',
+        variant: variant[:variant],
+        bordered: true
+      ) %>
+    </div>
+  <% end %>
+</div> 

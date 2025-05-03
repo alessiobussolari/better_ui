@@ -23,6 +23,10 @@ module BetterUi
         copy_file "components/_variables.scss", File.join(directory, "_variables.scss")
         copy_file "components/_button.scss", File.join(directory, "_button.scss")
         copy_file "components/_heading.scss", File.join(directory, "_heading.scss")
+        copy_file "components/_breadcrumb.scss", File.join(directory, "_breadcrumb.scss")
+        copy_file "components/_link.scss", File.join(directory, "_link.scss")
+        copy_file "components/_panel.scss", File.join(directory, "_panel.scss")
+        copy_file "components/_icon.scss", File.join(directory, "_icon.scss")
       end
       
       def show_readme

@@ -1,95 +1,106 @@
-/* Bottoni */
+/* ==============================
+ * Button Component
+ * ============================== */
+
+/* Stile base */
 .bui-btn {
-  /* Proprietà base del bottone */
   @apply py-2 px-4 font-medium rounded transition-colors;
-  
-  /* Varianti di colore per i bottoni */
-  &-default {
-    @apply bg-black text-white hover:bg-gray-900;
-  }
-  
-  &-white {
-    @apply bg-white text-black hover:bg-gray-100;
-  }
-  
-  &-red {
-    @apply bg-red-500 text-white hover:bg-red-600;
-  }
-  
-  &-rose {
-    @apply bg-rose-500 text-white hover:bg-rose-600;
-  }
-  
-  &-orange {
-    @apply bg-orange-500 text-white hover:bg-orange-600;
-  }
-  
-  &-green {
-    @apply bg-green-500 text-white hover:bg-green-600;
-  }
-  
-  &-blue {
-    @apply bg-blue-500 text-white hover:bg-blue-600;
-  }
-  
-  &-yellow {
-    @apply bg-yellow-500 text-black hover:bg-yellow-600;
-  }
-  
-  &-violet {
-    @apply bg-violet-500 text-white hover:bg-violet-600;
-  }
-  
-  /* Varianti di dimensione per i bottoni */
-  &-size-small {
-    @apply py-1 px-2.5 text-xs;
-  }
-  
-  &-size-medium {
-    @apply py-2 px-4 text-sm;
-  }
-  
-  &-size-large {
-    @apply py-2.5 px-6 text-base;
-  }
-  
-  /* Varianti di border-radius per i bottoni */
-  &-radius-none {
-    @apply rounded-none;
-  }
-  
-  &-radius-small {
-    @apply rounded-md;
-  }
-  
-  &-radius-medium {
-    @apply rounded-lg;
-  }
-  
-  &-radius-large {
-    @apply rounded-xl;
-  }
-  
-  &-radius-full {
-    @apply rounded-full;
-  }
-  
-  /* Stati del bottone */
-  &-disabled {
-    @apply opacity-50 cursor-not-allowed;
-  }
-  
-  &-full-width {
-    @apply w-full;
-  }
-  
-  /* Focus */
-  &-focus {
-    @apply focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500;
-  }
-  
-  /* Layout e posizionamento */
-  &-layout-default {
-    @apply inline-flex items-center justify-center font-medium;
-  }
+}
+
+/* Layout e posizionamento */
+.bui-btn-layout-default {
+  @apply inline-flex items-center justify-center font-medium;
+}
+
+.bui-btn-focus {
+  @apply focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500;
+}
+
+/* Varianti di colore */
+.bui-btn-default {
+  @apply bg-black text-white hover:bg-gray-900;
+}
+
+.bui-btn-white {
+  @apply bg-white text-black hover:bg-gray-100;
+}
+
+.bui-btn-red {
+  @apply bg-red-500 text-white hover:bg-red-600;
+}
+
+.bui-btn-rose {
+  @apply bg-rose-500 text-white hover:bg-rose-600;
+}
+
+.bui-btn-orange {
+  @apply bg-orange-500 text-white hover:bg-orange-600;
+}
+
+.bui-btn-green {
+  @apply bg-green-500 text-white hover:bg-green-600;
+}
+
+.bui-btn-blue {
+  @apply bg-blue-500 text-white hover:bg-blue-600;
+}
+
+.bui-btn-yellow {
+  @apply bg-yellow-500 text-black hover:bg-yellow-600;
+}
+
+.bui-btn-violet {
+  @apply bg-violet-500 text-white hover:bg-violet-600;
+}
+
+/* Varianti di dimensione */
+.bui-btn-size-small {
+  @apply py-1 px-2.5 text-xs;
+}
+
+.bui-btn-size-medium {
+  @apply py-2 px-4 text-sm;
+}
+
+.bui-btn-size-large {
+  @apply py-2.5 px-6 text-base;
+}
+
+/* Varianti di border-radius */
+.bui-btn-radius-none {
+  @apply rounded-none;
+}
+
+.bui-btn-radius-small {
+  @apply rounded-md;
+}
+
+.bui-btn-radius-medium {
+  @apply rounded-lg;
+}
+
+.bui-btn-radius-large {
+  @apply rounded-xl;
+}
+
+.bui-btn-radius-full {
+  @apply rounded-full;
+}
+
+/* Stati e modificatori */
+.bui-btn-disabled {
+  @apply opacity-50 cursor-not-allowed;
+}
+
+.bui-btn-full-width {
+  @apply w-full;
+}
+
+/* Posizionamento icone */
+.bui-btn-icon-left {
+  @apply mr-2;
+}
+
+.bui-btn-icon-right {
+  @apply ml-2;
 } 

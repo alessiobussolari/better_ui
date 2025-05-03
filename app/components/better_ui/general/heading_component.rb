@@ -131,6 +131,18 @@ module BetterUi
       def container_classes
         @with_divider ? "bui-header-container-with-divider" : "bui-header-container-base"
       end
+      
+      # Helper per determinare la dimensione dell'icona in base alla dimensione dell'heading
+      def get_icon_size
+        case @size
+        when :large
+          :medium
+        when :small
+          :xsmall
+        else
+          :small
+        end
+      end
     end
   end
 end 

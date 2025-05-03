@@ -140,10 +140,20 @@ module BetterUi
       
       # Helper per renderizzare le icone
       def render_icon(icon_name)
+        # Mappa le dimensioni del bottone alle dimensioni dell'icona
+        icon_size = case @size
+                   when :large
+                     :large
+                   when :small
+                     :small
+                   else
+                     :medium
+                   end
+        
         # Utilizziamo il componente Icon
         render BetterUi::General::IconComponent.new(
           name: icon_name,
-          size: @size == :large ? :lg : :md,
+          size: icon_size,
           fixed_width: true
         )
       end

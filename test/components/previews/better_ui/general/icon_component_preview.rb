@@ -32,7 +32,7 @@ module BetterUi
       def extra_small
         render BetterUi::General::IconComponent.new(
           name: 'star',
-          size: :xs
+          size: :xsmall
         )
       end
       
@@ -40,7 +40,7 @@ module BetterUi
       def small
         render BetterUi::General::IconComponent.new(
           name: 'star',
-          size: :sm
+          size: :small
         )
       end
       
@@ -48,7 +48,7 @@ module BetterUi
       def medium
         render BetterUi::General::IconComponent.new(
           name: 'star',
-          size: :md
+          size: :medium
         )
       end
       
@@ -56,7 +56,7 @@ module BetterUi
       def large
         render BetterUi::General::IconComponent.new(
           name: 'star',
-          size: :lg
+          size: :large
         )
       end
       
@@ -64,7 +64,7 @@ module BetterUi
       def extra_large
         render BetterUi::General::IconComponent.new(
           name: 'star',
-          size: :xl
+          size: :xlarge
         )
       end
       
@@ -85,7 +85,7 @@ module BetterUi
         render BetterUi::General::IconComponent.new(
           name: 'spinner',
           spin: true,
-          size: :xl
+          size: :xlarge
         )
       end
       
@@ -94,7 +94,7 @@ module BetterUi
         render BetterUi::General::IconComponent.new(
           name: 'circle-notch',
           pulse: true,
-          size: :xl
+          size: :xlarge
         )
       end
       
@@ -127,7 +127,7 @@ module BetterUi
         render BetterUi::General::IconComponent.new(
           name: 'star',
           border: true,
-          size: :xl
+          size: :xlarge
         )
       end
       
@@ -140,7 +140,7 @@ module BetterUi
         render BetterUi::General::IconComponent.new(
           name: 'arrow-up',
           rotation: 90,
-          size: :xl
+          size: :xlarge
         )
       end
       
@@ -149,7 +149,7 @@ module BetterUi
         render BetterUi::General::IconComponent.new(
           name: 'arrow-right',
           flip: :horizontal,
-          size: :xl
+          size: :xlarge
         )
       end
       
@@ -158,7 +158,7 @@ module BetterUi
         render BetterUi::General::IconComponent.new(
           name: 'arrow-up',
           flip: :vertical,
-          size: :xl
+          size: :xlarge
         )
       end
       
@@ -171,35 +171,35 @@ module BetterUi
         render(inline: <<~ERB)
           <div class="grid grid-cols-4 gap-4 p-4">
             <div class="flex flex-col items-center">
-              <%= render BetterUi::General::IconComponent.new(name: 'home', size: :xl) %>
+              <%= render BetterUi::General::IconComponent.new(name: 'home', size: :xlarge) %>
               <span class="mt-2 text-sm">home</span>
             </div>
             <div class="flex flex-col items-center">
-              <%= render BetterUi::General::IconComponent.new(name: 'user', size: :xl) %>
+              <%= render BetterUi::General::IconComponent.new(name: 'user', size: :xlarge) %>
               <span class="mt-2 text-sm">user</span>
             </div>
             <div class="flex flex-col items-center">
-              <%= render BetterUi::General::IconComponent.new(name: 'cog', size: :xl) %>
+              <%= render BetterUi::General::IconComponent.new(name: 'cog', size: :xlarge) %>
               <span class="mt-2 text-sm">cog</span>
             </div>
             <div class="flex flex-col items-center">
-              <%= render BetterUi::General::IconComponent.new(name: 'trash', size: :xl) %>
+              <%= render BetterUi::General::IconComponent.new(name: 'trash', size: :xlarge) %>
               <span class="mt-2 text-sm">trash</span>
             </div>
             <div class="flex flex-col items-center">
-              <%= render BetterUi::General::IconComponent.new(name: 'check', size: :xl) %>
+              <%= render BetterUi::General::IconComponent.new(name: 'check', size: :xlarge) %>
               <span class="mt-2 text-sm">check</span>
             </div>
             <div class="flex flex-col items-center">
-              <%= render BetterUi::General::IconComponent.new(name: 'times', size: :xl) %>
+              <%= render BetterUi::General::IconComponent.new(name: 'times', size: :xlarge) %>
               <span class="mt-2 text-sm">times</span>
             </div>
             <div class="flex flex-col items-center">
-              <%= render BetterUi::General::IconComponent.new(name: 'search', size: :xl) %>
+              <%= render BetterUi::General::IconComponent.new(name: 'search', size: :xlarge) %>
               <span class="mt-2 text-sm">search</span>
             </div>
             <div class="flex flex-col items-center">
-              <%= render BetterUi::General::IconComponent.new(name: 'download', size: :xl) %>
+              <%= render BetterUi::General::IconComponent.new(name: 'download', size: :xlarge) %>
               <span class="mt-2 text-sm">download</span>
             </div>
           </div>

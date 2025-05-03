@@ -5,18 +5,18 @@ module BetterUi
       #
       # @param theme select { choices: [default, white, red, rose, orange, green, blue, yellow, violet] } "Tema di colore"
       # @param separator select { choices: [chevron, slash, arrow, dot, pipe] } "Tipo di separatore"
-      # @param size select { choices: [sm, md, lg] } "Dimensione del testo"
+      # @param size select { choices: [small, medium, large] } "Dimensione del testo"
       # @param with_icons toggle "Mostra icone"
       def default(
         theme: :default,
         separator: :chevron,
-        size: :md,
+        size: :medium,
         with_icons: false
       )
         # Valori validi per i parametri:
         # theme: :default, :white, :red, :rose, :orange, :green, :blue, :yellow, :violet
         # separator: :chevron, :slash, :arrow, :dot, :pipe
-        # size: :sm, :md, :lg
+        # size: :small, :medium, :large
         # with_icons: true, false
         
         items = [
@@ -34,11 +34,11 @@ module BetterUi
         # Validiamo i valori per garantire opzioni corrette
         valid_themes = [:default, :white, :red, :rose, :orange, :green, :blue, :yellow, :violet]
         valid_separators = [:chevron, :slash, :arrow, :dot, :pipe]
-        valid_sizes = [:sm, :md, :lg]
+        valid_sizes = [:small, :medium, :large]
         
         theme = :default unless valid_themes.include?(theme)
         separator = :chevron unless valid_separators.include?(separator)
-        size = :md unless valid_sizes.include?(size)
+        size = :medium unless valid_sizes.include?(size)
         
         # Se richieste le icone, aggiungile
         if with_icons

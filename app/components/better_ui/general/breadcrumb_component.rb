@@ -4,54 +4,54 @@ module BetterUi
       attr_reader :items, :separator, :size, :theme, :classes
 
       # Temi di colore disponibili
-      THEMES = {
+      BREADCRUMB_THEME = {
         default: {
-          container: "text-white",
-          separator: "text-gray-500"
+          container: "bui-breadcrumb-default-container",
+          separator: "bui-breadcrumb-default-separator"
         },
         white: {
-          container: "text-black",
-          separator: "text-gray-400"
+          container: "bui-breadcrumb-white-container",
+          separator: "bui-breadcrumb-white-separator"
         },
         red: {
-          container: "text-white",
-          separator: "text-red-300"
+          container: "bui-breadcrumb-red-container",
+          separator: "bui-breadcrumb-red-separator"
         },
         rose: {
-          container: "text-white",
-          separator: "text-rose-300"
+          container: "bui-breadcrumb-rose-container",
+          separator: "bui-breadcrumb-rose-separator"
         },
         orange: {
-          container: "text-white",
-          separator: "text-orange-300"
+          container: "bui-breadcrumb-orange-container",
+          separator: "bui-breadcrumb-orange-separator"
         },
         green: {
-          container: "text-white",
-          separator: "text-green-300"
+          container: "bui-breadcrumb-green-container",
+          separator: "bui-breadcrumb-green-separator"
         },
         blue: {
-          container: "text-white", 
-          separator: "text-blue-300"
+          container: "bui-breadcrumb-blue-container", 
+          separator: "bui-breadcrumb-blue-separator"
         },
         yellow: {
-          container: "text-black",
-          separator: "text-yellow-600"
+          container: "bui-breadcrumb-yellow-container",
+          separator: "bui-breadcrumb-yellow-separator"
         },
         violet: {
-          container: "text-white",
-          separator: "text-violet-300"
+          container: "bui-breadcrumb-violet-container",
+          separator: "bui-breadcrumb-violet-separator"
         }
       }
 
       # Dimensioni disponibili
-      SIZES = {
-        sm: "text-xs",
-        md: "text-sm",
-        lg: "text-base"
+      BREADCRUMB_SIZES = {
+        small: "bui-breadcrumb-small",
+        medium: "bui-breadcrumb-medium",
+        large: "bui-breadcrumb-large"
       }
 
       # Separatori predefiniti
-      SEPARATORS = {
+      BREADCRUMB_SEPARATORS = {
         slash: "/",
         chevron: "›",
         arrow: "→",
@@ -63,7 +63,7 @@ module BetterUi
       def initialize(
         items: [],
         separator: :chevron, 
-        size: :md,
+        size: :medium,
         theme: :default,
         classes: nil
       )
@@ -76,8 +76,8 @@ module BetterUi
 
       # Restituisce il separatore come stringa
       def separator_text
-        if SEPARATORS.key?(@separator)
-          SEPARATORS[@separator]
+        if BREADCRUMB_SEPARATORS.key?(@separator)
+          BREADCRUMB_SEPARATORS[@separator]
         else
           @separator.to_s
         end
@@ -86,9 +86,9 @@ module BetterUi
       # Genera le classi per il container
       def container_classes
         [
-          "flex items-center flex-wrap",
-          SIZES.fetch(@size, SIZES[:md]),
-          THEMES.fetch(@theme, THEMES[:default])[:container],
+          "bui-breadcrumb-container",
+          BREADCRUMB_SIZES.fetch(@size, BREADCRUMB_SIZES[:medium]),
+          BREADCRUMB_THEME.fetch(@theme, BREADCRUMB_THEME[:default])[:container],
           @classes
         ].compact.join(" ")
       end
@@ -96,8 +96,8 @@ module BetterUi
       # Genera le classi per il separatore
       def separator_classes
         [
-          "mx-2",
-          THEMES.fetch(@theme, THEMES[:default])[:separator]
+          "bui-breadcrumb-separator",
+          BREADCRUMB_THEME.fetch(@theme, BREADCRUMB_THEME[:default])[:separator]
         ].compact.join(" ")
       end
 

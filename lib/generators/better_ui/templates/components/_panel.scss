@@ -1,0 +1,144 @@
+/* ==============================
+ * Panel Component
+ * ============================== */
+
+/* Struttura di base */
+.bui-panel-base {
+  @apply border shadow-sm;
+}
+
+/* Intestazione */
+.bui-panel-header {
+  @apply px-4 py-3 border-b;
+}
+
+/* Corpo */
+.bui-panel-body {
+  @apply p-4;
+}
+
+.bui-panel-body-content {
+  @apply overflow-x-auto break-words;
+}
+
+/* Piè di pagina */
+.bui-panel-footer {
+  @apply px-4 py-3 border-t;
+}
+
+/* Titolo */
+.bui-panel-title {
+  @apply text-lg font-medium;
+}
+
+/* Opzioni di padding */
+.bui-panel-padding-none {
+  @apply p-0;
+}
+
+.bui-panel-padding-small {
+  @apply p-2;
+}
+
+.bui-panel-padding-medium {
+  @apply p-4;
+}
+
+.bui-panel-padding-large {
+  @apply p-6;
+}
+
+/* Opzioni di border-radius */
+.bui-panel-radius-none {
+  @apply rounded-none;
+}
+
+.bui-panel-radius-small {
+  @apply rounded-md;
+}
+
+.bui-panel-radius-medium {
+  @apply rounded-lg;
+}
+
+.bui-panel-radius-large {
+  @apply rounded-xl;
+}
+
+.bui-panel-radius-full {
+  @apply rounded-full;
+}
+
+/* Temi di colore per header */
+.bui-panel-default-header {
+  @apply bg-black text-white;
+}
+
+.bui-panel-white-header {
+  @apply bg-white text-black;
+}
+
+.bui-panel-red-header {
+  @apply bg-red-500 text-white;
+}
+
+.bui-panel-rose-header {
+  @apply bg-rose-500 text-white;
+}
+
+.bui-panel-orange-header {
+  @apply bg-orange-500 text-white;
+}
+
+.bui-panel-green-header {
+  @apply bg-green-500 text-white;
+}
+
+.bui-panel-blue-header {
+  @apply bg-blue-500 text-white;
+}
+
+.bui-panel-yellow-header {
+  @apply bg-yellow-500 text-black;
+}
+
+.bui-panel-violet-header {
+  @apply bg-violet-500 text-white;
+}
+
+/* Temi di colore per footer */
+.bui-panel-default-footer {
+  @apply bg-black text-white;
+}
+
+.bui-panel-white-footer {
+  @apply bg-white text-black;
+}
+
+.bui-panel-red-footer {
+  @apply bg-red-500 text-white;
+}
+
+.bui-panel-rose-footer {
+  @apply bg-rose-500 text-white;
+}
+
+.bui-panel-orange-footer {
+  @apply bg-orange-500 text-white;
+}
+
+.bui-panel-green-footer {
+  @apply bg-green-500 text-white;
+}
+
+.bui-panel-blue-footer {
+  @apply bg-blue-500 text-white;
+}
+
+.bui-panel-yellow-footer {
+  @apply bg-yellow-500 text-black;
+}
+
+.bui-panel-violet-footer {
+  @apply bg-violet-500 text-white;
+} 

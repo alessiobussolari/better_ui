@@ -2,9 +2,9 @@
   <%# Utilizzo di tag heading dinamico in base al livello specificato %>
   <<%= "h#{@level}" %> class="<%= heading_classes %>">
     <% if @icon.present? %>
-      <span class="inline-flex items-center">
-        <span class="mr-2">
-          <%= render BetterUi::General::IconComponent.new(name: @icon) %>
+      <span class="bui-header-icon-container">
+        <span class="bui-header-icon-wrapper">
+          <%= render BetterUi::General::IconComponent.new(name: @icon, size: get_icon_size) %>
         </span>
         <%= @text || content %>
       </span>

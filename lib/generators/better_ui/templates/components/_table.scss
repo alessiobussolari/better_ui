@@ -1,0 +1,96 @@
+/* ==============================
+ * Table Component
+ * ============================== */
+
+/* Contenitore e base */
+.bui-table-container {
+  @apply overflow-hidden;
+}
+
+.bui-table-base {
+  @apply w-full;
+}
+
+.bui-table-bordered {
+  @apply border-collapse;
+}
+
+/* Bordi arrotondati */
+.bui-table-radius-none { @apply rounded-none; }
+.bui-table-radius-small { @apply rounded-md; }
+.bui-table-radius-medium { @apply rounded-lg; }
+.bui-table-radius-large { @apply rounded-xl; }
+.bui-table-radius-full { @apply rounded-3xl; }
+
+/* Celle e righe */
+.bui-table-cell { 
+  @apply px-4 py-3; 
+}
+
+.bui-table-cell-compact { 
+  @apply px-2 py-1 text-sm; 
+}
+
+.bui-table-cell-bordered {
+  @apply border;
+}
+
+/* Stili per le righe */
+.bui-table-row-hover tr:hover td { 
+  @apply bg-opacity-10 bg-gray-500; 
+}
+
+.bui-table-row-striped tr:nth-child(odd) td { 
+  @apply bg-gray-50; 
+}
+
+.bui-table-row-alternate {
+  @apply bg-gray-50;
+}
+
+/* Caption */
+.bui-table-caption { 
+  @apply p-3 font-medium; 
+}
+
+.bui-table-caption-bordered {
+  @apply border-b;
+}
+
+/* Header */
+.bui-table-header th { 
+  @apply font-semibold; 
+}
+
+/* Varianti bordi */
+.bui-table-border-default { @apply border-gray-900; }
+.bui-table-border-white { @apply border-gray-200; }
+.bui-table-border-red { @apply border-red-600; }
+.bui-table-border-rose { @apply border-rose-600; }
+.bui-table-border-orange { @apply border-orange-600; }
+.bui-table-border-green { @apply border-green-600; }
+.bui-table-border-blue { @apply border-blue-600; }
+.bui-table-border-yellow { @apply border-yellow-600; }
+.bui-table-border-violet { @apply border-violet-600; }
+
+/* Varianti background */
+.bui-table-bg-default { @apply bg-black; }
+.bui-table-bg-white { @apply bg-white; }
+.bui-table-bg-red { @apply bg-red-500; }
+.bui-table-bg-rose { @apply bg-rose-500; }
+.bui-table-bg-orange { @apply bg-orange-500; }
+.bui-table-bg-green { @apply bg-green-500; }
+.bui-table-bg-blue { @apply bg-blue-500; }
+.bui-table-bg-yellow { @apply bg-yellow-500; }
+.bui-table-bg-violet { @apply bg-violet-500; }
+
+/* Varianti testo */
+.bui-table-text-default { @apply text-white; }
+.bui-table-text-white { @apply text-black; }
+.bui-table-text-red { @apply text-white; }
+.bui-table-text-rose { @apply text-white; }
+.bui-table-text-orange { @apply text-white; }
+.bui-table-text-green { @apply text-white; }
+.bui-table-text-blue { @apply text-white; }
+.bui-table-text-yellow { @apply text-black; }
+.bui-table-text-violet { @apply text-white; } 

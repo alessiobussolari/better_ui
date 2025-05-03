@@ -2,8 +2,11 @@ PATH
   remote: .
   specs:
     better_ui (0.4.0)
+      actioncable
       coderay (~> 1.1)
       font-awesome-sass (~> 6.5.1)
+      listen
+      lookbook (~> 2.1)
       rails (>= 7.0.0)
       redcarpet (~> 3.6)
       tailwindcss-rails (~> 2.0)

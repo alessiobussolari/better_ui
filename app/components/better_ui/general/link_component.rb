@@ -4,51 +4,51 @@ module BetterUi
       attr_reader :label, :href, :theme, :icon, :classes, :active, :data, :method, :target
 
       # Temi di colore disponibili
-      THEMES = {
+      LINK_THEME = {
         default: {
-          link: "text-gray-300 hover:text-white",
-          active: "text-white font-medium",
-          text: "text-white"
+          link: "bui-link-default-link",
+          active: "bui-link-default-active",
+          text: "bui-link-default-text"
         },
         white: {
-          link: "text-gray-600 hover:text-gray-900",
-          active: "text-black font-medium",
-          text: "text-black"
+          link: "bui-link-white-link",
+          active: "bui-link-white-active",
+          text: "bui-link-white-text"
         },
         red: {
-          link: "text-red-200 hover:text-white",
-          active: "text-white font-medium",
-          text: "text-white"
+          link: "bui-link-red-link",
+          active: "bui-link-red-active",
+          text: "bui-link-red-text"
         },
         rose: {
-          link: "text-rose-200 hover:text-white",
-          active: "text-white font-medium",
-          text: "text-white"
+          link: "bui-link-rose-link",
+          active: "bui-link-rose-active",
+          text: "bui-link-rose-text"
         },
         orange: {
-          link: "text-orange-200 hover:text-white",
-          active: "text-white font-medium",
-          text: "text-white"
+          link: "bui-link-orange-link",
+          active: "bui-link-orange-active",
+          text: "bui-link-orange-text"
         },
         green: {
-          link: "text-green-200 hover:text-white",
-          active: "text-white font-medium",
-          text: "text-white"
+          link: "bui-link-green-link",
+          active: "bui-link-green-active",
+          text: "bui-link-green-text"
         },
         blue: {
-          link: "text-blue-200 hover:text-white",
-          active: "text-white font-medium",
-          text: "text-white"
+          link: "bui-link-blue-link",
+          active: "bui-link-blue-active",
+          text: "bui-link-blue-text"
         },
         yellow: {
-          link: "text-yellow-700 hover:text-black",
-          active: "text-black font-medium",
-          text: "text-black"
+          link: "bui-link-yellow-link",
+          active: "bui-link-yellow-active",
+          text: "bui-link-yellow-text"
         },
         violet: {
-          link: "text-violet-200 hover:text-white",
-          active: "text-white font-medium",
-          text: "text-white"
+          link: "bui-link-violet-link",
+          active: "bui-link-violet-active",
+          text: "bui-link-violet-text"
         }
       }
 
@@ -87,9 +87,9 @@ module BetterUi
 
       # Genera le classi per il componente
       def component_classes
-        theme_classes = THEMES.fetch(@theme, THEMES[:default])
+        theme_classes = LINK_THEME.fetch(@theme, LINK_THEME[:default])
         
-        base_classes = ["flex items-center"]
+        base_classes = ["bui-link-base"]
         
         if active?
           base_classes << theme_classes[:active]

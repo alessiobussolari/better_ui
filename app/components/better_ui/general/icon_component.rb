@@ -2,28 +2,27 @@ module BetterUi
   module General
     class IconComponent < ViewComponent::Base
       # Dimensioni disponibili
-      SIZE_CLASSES = {
-        xs: "fa-xs",
-        sm: "fa-sm",
-        md: "", # Default di Font Awesome
-        lg: "fa-lg",
-        xl: "fa-xl",
-        "2xl": "fa-2xl"
+      ICON_SIZES = {
+        xsmall: "bui-icon-xsmall",
+        small: "bui-icon-small",
+        medium: "bui-icon-medium",
+        large: "bui-icon-large",
+        xlarge: "bui-icon-xlarge"
       }
 
       # Stili disponibili
-      STYLE_CLASSES = {
-        solid: "fas",
-        regular: "far",
-        light: "fal",
-        brands: "fab",
-        duotone: "fad"
+      ICON_STYLES = {
+        solid: "bui-icon-solid",
+        regular: "bui-icon-regular",
+        light: "bui-icon-light",
+        brands: "bui-icon-brands",
+        duotone: "bui-icon-duotone"
       }
 
       # Inizializzazione del componente
       def initialize(
         name:,
-        size: :md,
+        size: :medium,
         style: :solid,
         fixed_width: false,
         spin: false,
@@ -47,39 +46,39 @@ module BetterUi
 
       # Classe CSS per lo stile dell'icona
       def style_class
-        STYLE_CLASSES[@style] || STYLE_CLASSES[:solid]
+        ICON_STYLES[@style] || ICON_STYLES[:solid]
       end
 
       # Classe CSS per la dimensione
       def size_class
-        SIZE_CLASSES[@size] || SIZE_CLASSES[:md]
+        ICON_SIZES[@size] || ICON_SIZES[:medium]
       end
 
       # Classe per rotazione
       def rotation_class
         return "" unless @rotation
-        "fa-rotate-#{@rotation}"
+        "bui-icon-rotate-#{@rotation}"
       end
 
       # Classe per rovesciamento
       def flip_class
         return "" unless @flip
-        "fa-flip-#{@flip}"
+        "bui-icon-flip-#{@flip}"
       end
 
       # Classi per animazioni
       def animation_classes
         classes = []
-        classes << "fa-spin" if @spin
-        classes << "fa-pulse" if @pulse
+        classes << "bui-icon-spin" if @spin
+        classes << "bui-icon-pulse" if @pulse
         classes.join(" ")
       end
 
       # Classi per caratteristiche aggiuntive
       def feature_classes
         classes = []
-        classes << "fa-fw" if @fixed_width
-        classes << "fa-border" if @border
+        classes << "bui-icon-fw" if @fixed_width
+        classes << "bui-icon-border" if @border
         classes.join(" ")
       end
 
@@ -87,7 +86,7 @@ module BetterUi
       def combined_classes
         [
           style_class,
-          "fa-#{@name}",
+          "fa-#{@name}", # Questa classe deve rimanere specifica di Font Awesome
           size_class,
           rotation_class,
           flip_class,

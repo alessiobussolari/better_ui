@@ -1,0 +1,90 @@
+/* ==============================
+ * Icon Component
+ * ============================== */
+
+/* Stili di base e presentazione */
+.bui-icon-base {
+  @apply inline-block;
+}
+
+/* Varianti di stile */
+.bui-icon-solid {
+  @apply fas;
+}
+
+.bui-icon-regular {
+  @apply far;
+}
+
+.bui-icon-light {
+  @apply fal;
+}
+
+.bui-icon-brands {
+  @apply fab;
+}
+
+.bui-icon-duotone {
+  @apply fad;
+}
+
+/* Dimensioni */
+.bui-icon-xsmall {
+  @apply fa-xs;
+}
+
+.bui-icon-small {
+  @apply fa-sm;
+}
+
+.bui-icon-medium {
+  /* Default di Font Awesome, non richiede classi aggiuntive */
+}
+
+.bui-icon-large {
+  @apply fa-lg;
+}
+
+.bui-icon-xlarge {
+  @apply fa-xl;
+}
+
+/* Rotazioni */
+.bui-icon-rotate-90 {
+  @apply fa-rotate-90;
+}
+
+.bui-icon-rotate-180 {
+  @apply fa-rotate-180;
+}
+
+.bui-icon-rotate-270 {
+  @apply fa-rotate-270;
+}
+
+/* Flip */
+.bui-icon-flip-horizontal {
+  @apply fa-flip-horizontal;
+}
+
+.bui-icon-flip-vertical {
+  @apply fa-flip-vertical;
+}
+
+/* Animazioni */
+.bui-icon-spin {
+  @apply fa-spin;
+}
+
+.bui-icon-pulse {
+  @apply fa-pulse;
+}
+
+/* Altre opzioni */
+.bui-icon-fw {
+  @apply fa-fw;
+}
+
+.bui-icon-border {
+  @apply fa-border;
+} 

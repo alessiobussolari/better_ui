@@ -3,14 +3,50 @@ module BetterUi
     class PanelComponent < ViewComponent::Base
       attr_reader :header, :footer, :body, :title, :padding, :variant, :rounded
       
-      PADDING_OPTIONS = {
-        none: '',
-        small: 'p-2',
-        medium: 'p-4',
-        large: 'p-6'
+      # Opzioni di padding disponibili
+      PANEL_PADDING = {
+        none: 'bui-panel-padding-none',
+        small: 'bui-panel-padding-small',
+        medium: 'bui-panel-padding-medium',
+        large: 'bui-panel-padding-large'
       }.freeze
       
-      def initialize(title: nil, body: nil, header: nil, footer: nil, padding: :medium, variant: :default, rounded: :sm)
+      # Temi di colore per l'header
+      PANEL_HEADER_THEME = {
+        default: 'bui-panel-default-header',
+        white: 'bui-panel-white-header',
+        red: 'bui-panel-red-header',
+        rose: 'bui-panel-rose-header',
+        orange: 'bui-panel-orange-header',
+        green: 'bui-panel-green-header',
+        blue: 'bui-panel-blue-header',
+        yellow: 'bui-panel-yellow-header',
+        violet: 'bui-panel-violet-header'
+      }.freeze
+      
+      # Temi di colore per il footer
+      PANEL_FOOTER_THEME = {
+        default: 'bui-panel-default-footer',
+        white: 'bui-panel-white-footer',
+        red: 'bui-panel-red-footer',
+        rose: 'bui-panel-rose-footer',
+        orange: 'bui-panel-orange-footer',
+        green: 'bui-panel-green-footer',
+        blue: 'bui-panel-blue-footer',
+        yellow: 'bui-panel-yellow-footer',
+        violet: 'bui-panel-violet-footer'
+      }.freeze
+      
+      # Opzioni di bordi arrotondati standardizzati
+      PANEL_RADIUS = {
+        none: 'bui-panel-radius-none',
+        small: 'bui-panel-radius-small',
+        medium: 'bui-panel-radius-medium',
+        large: 'bui-panel-radius-large',
+        full: 'bui-panel-radius-full'
+      }.freeze
+      
+      def initialize(title: nil, body: nil, header: nil, footer: nil, padding: :medium, variant: :default, rounded: :small)
         @title = title
         @body = body
         @header = header
@@ -22,95 +58,41 @@ module BetterUi
 
       def panel_classes
         [
-          ThemeHelper.generate_component_classes(:panel, @variant, { rounded: @rounded }),
+          'bui-panel-base',
           get_border_radius_class
         ].compact.join(' ')
       end
 
       def get_border_radius_class
-        ThemeHelper::BORDER_RADIUS[@rounded] || ThemeHelper::BORDER_RADIUS[:sm]
+        PANEL_RADIUS[@rounded] || PANEL_RADIUS[:small]
       end
 
       def header_classes
         [
-          'panel-header',
-          ThemeHelper::LAYOUT_STYLES[:panel][:header],
-          header_color_classes,
-          PADDING_OPTIONS.fetch(@padding, PADDING_OPTIONS[:medium])
+          'bui-panel-header',
+          PANEL_HEADER_THEME[@variant] || PANEL_HEADER_THEME[:default],
+          PANEL_PADDING.fetch(@padding, PANEL_PADDING[:medium])
         ].compact.join(' ')
       end
 
       def body_classes
         [
-          'panel-body',
-          ThemeHelper::LAYOUT_STYLES[:panel][:body],
-          'overflow-x-auto break-words',
-          PADDING_OPTIONS.fetch(@padding, PADDING_OPTIONS[:medium])
+          'bui-panel-body',
+          'bui-panel-body-content',
+          PANEL_PADDING.fetch(@padding, PANEL_PADDING[:medium])
         ].compact.join(' ')
       end
 
       def footer_classes
         [
-          'panel-footer',
-          ThemeHelper::LAYOUT_STYLES[:panel][:footer],
-          footer_color_classes,
-          'overflow-x-auto break-words',
-          PADDING_OPTIONS.fetch(@padding, PADDING_OPTIONS[:medium])
+          'bui-panel-footer',
+          PANEL_FOOTER_THEME[@variant] || PANEL_FOOTER_THEME[:default],
+          PANEL_PADDING.fetch(@padding, PANEL_PADDING[:medium])
         ].compact.join(' ')
       end
 
       def title_classes
-        'text-lg font-medium'
-      end
-      
-      def header_color_classes
-        case @variant
-        when :default
-          'bg-black text-white'
-        when :white
-          'bg-white text-black'
-        when :red
-          'bg-red-500 text-white'
-        when :rose
-          'bg-rose-500 text-white'
-        when :orange
-          'bg-orange-500 text-white'
-        when :green
-          'bg-green-500 text-white'
-        when :blue
-          'bg-blue-500 text-white'
-        when :yellow
-          'bg-yellow-500 text-black'
-        when :violet
-          'bg-violet-500 text-white'
-        else
-          'bg-black text-white'
-        end
-      end
-      
-      def footer_color_classes
-        case @variant
-        when :default
-          'bg-black text-white'
-        when :white
-          'bg-white text-black'
-        when :red
-          'bg-red-500 text-white'
-        when :rose
-          'bg-rose-500 text-white'
-        when :orange
-          'bg-orange-500 text-white'
-        when :green
-          'bg-green-500 text-white'
-        when :blue
-          'bg-blue-500 text-white'
-        when :yellow
-          'bg-yellow-500 text-black'
-        when :violet
-          'bg-violet-500 text-white'
-        else
-          'bg-black text-white'
-        end
+        'bui-panel-title'
       end
 
       def render?

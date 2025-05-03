@@ -29,10 +29,26 @@
   /* Importa il componente Heading */
   @import "components/heading";
   
+  /* Importa il componente Breadcrumb */
+  @import "components/breadcrumb";
+  
+  /* Importa il componente Link */
+  @import "components/link";
+  
+  /* Importa il componente Panel */
+  @import "components/panel";
+  
+  /* Importa il componente Icon */
+  @import "components/icon";
+  
+  /* Importa il componente Table */
+  @import "components/table";
+  
   /*==================================
     COMPONENTI APPLICATIVI
   ====================================*/
-  /* In questo spazio è possibile aggiungere importazioni di componenti applicativi */
+  /* Importa il componente Card */
+  @import "components/card";
   
   /*==================================
     PERSONALIZZAZIONI

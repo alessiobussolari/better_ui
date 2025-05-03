@@ -3,161 +3,125 @@ module BetterUi
     class TableComponent < ViewComponent::Base
       attr_reader :data, :headers, :caption, :striped, :hoverable, :bordered, :compact, :classes, :variant, :rounded
       
-      def initialize(data:, headers: nil, caption: nil, striped: false, hoverable: false, bordered: true, compact: false, classes: nil, variant: :default, rounded: :sm)
+      # Costanti per configurazione stili
+      TABLE_THEMES = {
+        default: { base: "bui-table-default", border: "bui-table-border-default", bg: "bui-table-bg-default", text: "bui-table-text-default" },
+        white:   { base: "bui-table-white",   border: "bui-table-border-white",   bg: "bui-table-bg-white",   text: "bui-table-text-white" },
+        red:     { base: "bui-table-red",     border: "bui-table-border-red",     bg: "bui-table-bg-red",     text: "bui-table-text-red" },
+        rose:    { base: "bui-table-rose",    border: "bui-table-border-rose",    bg: "bui-table-bg-rose",    text: "bui-table-text-rose" },
+        orange:  { base: "bui-table-orange",  border: "bui-table-border-orange",  bg: "bui-table-bg-orange",  text: "bui-table-text-orange" },
+        green:   { base: "bui-table-green",   border: "bui-table-border-green",   bg: "bui-table-bg-green",   text: "bui-table-text-green" },
+        blue:    { base: "bui-table-blue",    border: "bui-table-border-blue",    bg: "bui-table-bg-blue",    text: "bui-table-text-blue" },
+        yellow:  { base: "bui-table-yellow",  border: "bui-table-border-yellow",  bg: "bui-table-bg-yellow",  text: "bui-table-text-yellow" },
+        violet:  { base: "bui-table-violet",  border: "bui-table-border-violet",  bg: "bui-table-bg-violet",  text: "bui-table-text-violet" }
+      }.freeze
+      
+      # Opzioni di bordi arrotondati standardizzati
+      TABLE_RADIUS = {
+        none: "bui-table-radius-none",
+        small: "bui-table-radius-small",
+        medium: "bui-table-radius-medium",
+        large: "bui-table-radius-large",
+        full: "bui-table-radius-full"
+      }.freeze
+      
+      def initialize(data:, headers: nil, caption: nil, striped: false, hoverable: false, bordered: true, compact: false, classes: nil, variant: :default, rounded: :small)
         @data = data || []
         @headers = headers
         @caption = caption
-        @striped = striped
-        @hoverable = hoverable
-        @bordered = bordered
-        @compact = compact
+        @striped = !!striped
+        @hoverable = !!hoverable
+        @bordered = !!bordered
+        @compact = !!compact
         @classes = classes
-        @variant = variant.to_sym
-        @rounded = rounded.to_sym
+        @variant = (TABLE_THEMES.key?(variant.to_sym) ? variant.to_sym : :default)
+        @rounded = (TABLE_RADIUS.key?(rounded.to_sym) ? rounded.to_sym : :small)
       end
 
       def table_classes
-        ThemeHelper.generate_component_classes(:table, @variant, { bordered: @bordered, classes: @classes })
+        [
+          "bui-table-base",
+          @bordered ? "bui-table-bordered" : nil,
+          @classes
+        ].compact.join(" ")
       end
 
       def table_container_classes
         [
-          ThemeHelper::LAYOUT_STYLES[:table][:container],
-          get_border_radius_class,
-          get_border_color
-        ].compact.join(' ')
+          "bui-table-container",
+          get_border_radius_class
+        ].compact.join(" ")
       end
 
       def get_border_radius_class
-        ThemeHelper::BORDER_RADIUS[@rounded] || ThemeHelper::BORDER_RADIUS[:sm]
+        TABLE_RADIUS[@rounded] || TABLE_RADIUS[:small]
       end
 
       def caption_classes
         [
-          'px-4 py-2',
-          'text-sm font-medium text-left',
-          caption_color_classes,
-          @bordered ? "border-b #{get_border_color}" : nil
-        ].compact.join(' ')
+          "bui-table-caption",
+          get_theme_bg_color,
+          get_theme_text_class,
+          @bordered ? "bui-table-caption-bordered #{get_theme_border_color}" : nil
+        ].compact.join(" ")
       end
 
       def thead_classes
-        ThemeHelper::LAYOUT_STYLES[:table][:header]
+        "bui-table-header"
       end
 
       def tbody_classes
-        @striped ? ThemeHelper::LAYOUT_STYLES[:table][:row][:striped] : nil
+        @striped ? "bui-table-row-striped" : nil
       end
 
       def tr_classes(index)
         [
-          @hoverable ? ThemeHelper::LAYOUT_STYLES[:table][:row][:hover] : nil,
-          @striped ? nil : (index.odd? ? 'bg-gray-50' : nil)
-        ].compact.join(' ')
+          @hoverable ? "bui-table-row-hover" : nil,
+          @striped ? nil : (index.odd? ? "bui-table-row-alternate" : nil)
+        ].compact.join(" ")
       end
 
       def th_classes
         [
-          @compact ? 'px-2 py-1' : 'px-4 py-3',
-          'text-left text-xs font-medium uppercase tracking-wider',
-          th_color_classes,
-          @bordered ? "border #{get_border_color}" : nil
-        ].compact.join(' ')
+          @compact ? "bui-table-cell-compact" : "bui-table-cell",
+          get_theme_bg_color,
+          get_theme_text_class,
+          @bordered ? "bui-table-cell-bordered #{get_theme_border_color}" : nil
+        ].compact.join(" ")
       end
 
       def td_classes
         [
-          @compact ? 'px-2 py-1' : 'px-4 py-3',
-          @bordered ? "border #{get_border_color}" : nil,
-          'text-sm'
-        ].compact.join(' ')
+          @compact ? "bui-table-cell-compact" : "bui-table-cell",
+          @bordered ? "bui-table-cell-bordered #{get_theme_border_color}" : nil
+        ].compact.join(" ")
       end
       
-      def get_border_color
-        case @variant
-        when :default
-          'border-gray-900'
-        when :white
-          'border-gray-200'
-        when :red
-          'border-red-600'
-        when :rose
-          'border-rose-600'
-        when :orange
-          'border-orange-600'
-        when :green
-          'border-green-600'
-        when :blue
-          'border-blue-600'
-        when :yellow
-          'border-yellow-600'
-        when :violet
-          'border-violet-600'
-        else
-          'border-gray-900'
-        end
+      def get_theme_base_class
+        TABLE_THEMES[@variant][:base] || TABLE_THEMES[:default][:base]
       end
       
-      def caption_color_classes
-        case @variant
-        when :default
-          'bg-black text-white'
-        when :white
-          'bg-white text-black'
-        when :red
-          'bg-red-500 text-white'
-        when :rose
-          'bg-rose-500 text-white'
-        when :orange
-          'bg-orange-500 text-white'
-        when :green
-          'bg-green-500 text-white'
-        when :blue
-          'bg-blue-500 text-white'
-        when :yellow
-          'bg-yellow-500 text-black'
-        when :violet
-          'bg-violet-500 text-white'
-        else
-          'bg-black text-white'
-        end
+      def get_theme_border_color
+        TABLE_THEMES[@variant][:border] || TABLE_THEMES[:default][:border]
       end
       
-      def th_color_classes
-        case @variant
-        when :default
-          'text-white'
-        when :white
-          'text-black'
-        when :red
-          'text-white'
-        when :rose
-          'text-white'
-        when :orange
-          'text-white'
-        when :green
-          'text-white'
-        when :blue
-          'text-white'
-        when :yellow
-          'text-black'
-        when :violet
-          'text-white'
-        else
-          'text-white'
-        end
+      def get_theme_bg_color
+        TABLE_THEMES[@variant][:bg] || TABLE_THEMES[:default][:bg]
+      end
+      
+      def get_theme_text_class
+        TABLE_THEMES[@variant][:text] || TABLE_THEMES[:default][:text]
       end
 
       def headers_for_display
         return @headers if @headers.present?
         return [] if @data.empty?
         
-        # Se non sono stati forniti headers, li derivo dalle chiavi del primo elemento
-        first_item = @data.first
-        if first_item.is_a?(Hash)
+        case first_item = @data.first
+        when Hash
           first_item.keys
-        elsif first_item.respond_to?(:attributes)
-          first_item.attributes.keys - ['id', 'created_at', 'updated_at']
+        when -> (item) { item.respond_to?(:attributes) }
+          first_item.attributes.keys - %w[id created_at updated_at]
         else
           []
         end

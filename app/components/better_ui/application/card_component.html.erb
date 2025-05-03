@@ -1,12 +1,12 @@
-<div class="px-4 py-5 sm:p-6">
-  <dt class="text-base font-normal text-gray-900"><%= title %></dt>
-  <dd class="mt-1 flex items-baseline justify-between md:block lg:flex">
-    <div class="flex items-baseline text-2xl font-semibold text-indigo-600">
-      <%= value %>
-      <span class="ml-2 text-sm font-medium text-gray-500">from <%= value_from %></span>
+<div class="bui-card-base <%= get_border_radius_class %> px-4 py-5 sm:p-6">
+  <dt class="bui-card-title text-gray-900"><%= title %></dt>
+  <dd class="bui-card-body mt-1 flex items-baseline justify-between md:block lg:flex">
+    <div class="flex items-baseline">
+      <span class="bui-card-value text-indigo-600"><%= value %></span>
+      <span class="bui-card-value-from ml-2">from <%= value_from %></span>
     </div>
 
-    <div class="inline-flex items-baseline rounded-full <%= trend_classes %> px-2.5 py-0.5 text-sm font-medium md:mt-2 lg:mt-0">
+    <div class="bui-card-trend <%= trend_classes %>">
       <% if trend_type == :up %>
         <svg class="mr-0.5 -ml-1 size-5 shrink-0 self-center <%= trend_icon_classes %>" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
           <path fill-rule="evenodd" d="M10 17a.75.75 0 0 1-.75-.75V5.612L5.29 9.77a.75.75 0 0 1-1.08-1.04l5.25-5.5a.75.75 0 0 1 1.08 0l5.25 5.5a.75.75 0 1 1-1.08 1.04l-3.96-4.158V16.25A.75.75 0 0 1 10 17Z" clip-rule="evenodd" />

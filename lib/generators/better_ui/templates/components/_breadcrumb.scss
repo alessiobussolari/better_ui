@@ -1,0 +1,107 @@
+/* ==============================
+ * Breadcrumb Component
+ * ============================== */
+
+/* Classi di base per il container e gli elementi */
+.bui-breadcrumb-container {
+  @apply flex items-center flex-wrap;
+}
+
+.bui-breadcrumb-list {
+  @apply flex flex-wrap items-center;
+}
+
+.bui-breadcrumb-item {
+  @apply flex items-center;
+}
+
+.bui-breadcrumb-separator {
+  @apply mx-2;
+}
+
+/* Dimensioni */
+.bui-breadcrumb-small {
+  @apply text-xs;
+}
+
+.bui-breadcrumb-medium {
+  @apply text-sm;
+}
+
+.bui-breadcrumb-large {
+  @apply text-base;
+}
+
+/* Temi colore - Container */
+.bui-breadcrumb-default-container {
+  @apply text-white;
+}
+
+.bui-breadcrumb-white-container {
+  @apply text-black;
+}
+
+.bui-breadcrumb-red-container {
+  @apply text-white;
+}
+
+.bui-breadcrumb-rose-container {
+  @apply text-white;
+}
+
+.bui-breadcrumb-orange-container {
+  @apply text-white;
+}
+
+.bui-breadcrumb-green-container {
+  @apply text-white;
+}
+
+.bui-breadcrumb-blue-container {
+  @apply text-white;
+}
+
+.bui-breadcrumb-yellow-container {
+  @apply text-black;
+}
+
+.bui-breadcrumb-violet-container {
+  @apply text-white;
+}
+
+/* Temi colore - Separatori */
+.bui-breadcrumb-default-separator {
+  @apply text-gray-500;
+}
+
+.bui-breadcrumb-white-separator {
+  @apply text-gray-400;
+}
+
+.bui-breadcrumb-red-separator {
+  @apply text-red-300;
+}
+
+.bui-breadcrumb-rose-separator {
+  @apply text-rose-300;
+}
+
+.bui-breadcrumb-orange-separator {
+  @apply text-orange-300;
+}
+
+.bui-breadcrumb-green-separator {
+  @apply text-green-300;
+}
+
+.bui-breadcrumb-blue-separator {
+  @apply text-blue-300;
+}
+
+.bui-breadcrumb-yellow-separator {
+  @apply text-yellow-600;
+}
+
+.bui-breadcrumb-violet-separator {
+  @apply text-violet-300;
+} 

@@ -1,197 +1,180 @@
-/* Heading/Intestazioni */
-.bui-header {
-  /* Varianti di colore per le intestazioni */
-  &-default {
-    &-heading {
-      @apply text-gray-900;
-    }
-    
-    &-subtitle {
-      @apply text-gray-600;
-    }
-    
-    &-divider {
-      @apply border-gray-200;
-    }
-  }
-  
-  &-white {
-    &-heading {
-      @apply text-gray-100;
-    }
-    
-    &-subtitle {
-      @apply text-gray-300;
-    }
-    
-    &-divider {
-      @apply border-gray-200;
-    }
-  }
-  
-  &-red {
-    &-heading {
-      @apply text-red-700;
-    }
-    
-    &-subtitle {
-      @apply text-red-500;
-    }
-    
-    &-divider {
-      @apply border-red-300;
-    }
-  }
-  
-  &-rose {
-    &-heading {
-      @apply text-rose-700;
-    }
-    
-    &-subtitle {
-      @apply text-rose-500;
-    }
-    
-    &-divider {
-      @apply border-rose-300;
-    }
-  }
-  
-  &-orange {
-    &-heading {
-      @apply text-orange-700;
-    }
-    
-    &-subtitle {
-      @apply text-orange-500;
-    }
-    
-    &-divider {
-      @apply border-orange-300;
-    }
-  }
-  
-  &-green {
-    &-heading {
-      @apply text-green-700;
-    }
-    
-    &-subtitle {
-      @apply text-green-500;
-    }
-    
-    &-divider {
-      @apply border-green-300;
-    }
-  }
-  
-  &-blue {
-    &-heading {
-      @apply text-blue-700;
-    }
-    
-    &-subtitle {
-      @apply text-blue-500;
-    }
-    
-    &-divider {
-      @apply border-blue-300;
-    }
-  }
-  
-  &-yellow {
-    &-heading {
-      @apply text-yellow-700;
-    }
-    
-    &-subtitle {
-      @apply text-yellow-500;
-    }
-    
-    &-divider {
-      @apply border-yellow-300;
-    }
-  }
-  
-  &-violet {
-    &-heading {
-      @apply text-violet-700;
-    }
-    
-    &-subtitle {
-      @apply text-violet-500;
-    }
-    
-    &-divider {
-      @apply border-violet-300;
-    }
-  }
-  
-  /* Classi per le dimensioni dell'intestazione */
-  &-small {
-    &-heading {
-      @apply text-xl;
-    }
-    
-    &-subtitle {
-      @apply text-base;
-    }
-  }
-  
-  &-medium {
-    &-heading {
-      @apply text-2xl;
-    }
-    
-    &-subtitle {
-      @apply text-lg;
-    }
-  }
-  
-  &-large {
-    &-heading {
-      @apply text-3xl;
-    }
-    
-    &-subtitle {
-      @apply text-xl;
-    }
-  }
-  
-  /* Classi per l'allineamento dell'intestazione */
-  &-left {
-    @apply text-left;
-  }
-  
-  &-center {
-    @apply text-center;
-  }
-  
-  &-right {
-    @apply text-right;
-  }
-  
-  /* Stili comuni per heading */
-  &-heading-base {
-    @apply font-bold;
-  }
-  
-  /* Stili comuni per sottotitolo */
-  &-subtitle-base {
-    @apply mt-1;
-  }
-  
-  /* Stili per divisore */
-  &-divider-base {
-    @apply border-t mt-2;
-  }
-  
-  /* Stili per container */
-  &-container-base {
-    @apply mb-4;
-  }
-  
-  &-container-with-divider {
-    @apply mb-4 pb-2;
-  }
+/* ==============================
+ * Heading Component
+ * ============================== */
+
+/* Varianti di colore per le intestazioni */
+.bui-header-default-heading {
+  @apply text-gray-900;
+}
+
+.bui-header-default-subtitle {
+  @apply text-gray-600;
+}
+
+.bui-header-default-divider {
+  @apply border-gray-200;
+}
+
+.bui-header-white-heading {
+  @apply text-gray-100;
+}
+
+.bui-header-white-subtitle {
+  @apply text-gray-300;
+}
+
+.bui-header-white-divider {
+  @apply border-gray-200;
+}
+
+.bui-header-red-heading {
+  @apply text-red-700;
+}
+
+.bui-header-red-subtitle {
+  @apply text-red-500;
+}
+
+.bui-header-red-divider {
+  @apply border-red-300;
+}
+
+.bui-header-rose-heading {
+  @apply text-rose-700;
+}
+
+.bui-header-rose-subtitle {
+  @apply text-rose-500;
+}
+
+.bui-header-rose-divider {
+  @apply border-rose-300;
+}
+
+.bui-header-orange-heading {
+  @apply text-orange-700;
+}
+
+.bui-header-orange-subtitle {
+  @apply text-orange-500;
+}
+
+.bui-header-orange-divider {
+  @apply border-orange-300;
+}
+
+.bui-header-green-heading {
+  @apply text-green-700;
+}
+
+.bui-header-green-subtitle {
+  @apply text-green-500;
+}
+
+.bui-header-green-divider {
+  @apply border-green-300;
+}
+
+.bui-header-blue-heading {
+  @apply text-blue-700;
+}
+
+.bui-header-blue-subtitle {
+  @apply text-blue-500;
+}
+
+.bui-header-blue-divider {
+  @apply border-blue-300;
+}
+
+.bui-header-yellow-heading {
+  @apply text-yellow-700;
+}
+
+.bui-header-yellow-subtitle {
+  @apply text-yellow-500;
+}
+
+.bui-header-yellow-divider {
+  @apply border-yellow-300;
+}
+
+.bui-header-violet-heading {
+  @apply text-violet-700;
+}
+
+.bui-header-violet-subtitle {
+  @apply text-violet-500;
+}
+
+.bui-header-violet-divider {
+  @apply border-violet-300;
+}
+
+/* Classi per le dimensioni dell'intestazione */
+.bui-header-small-heading {
+  @apply text-xl;
+}
+
+.bui-header-small-subtitle {
+  @apply text-base;
+}
+
+.bui-header-medium-heading {
+  @apply text-2xl;
+}
+
+.bui-header-medium-subtitle {
+  @apply text-lg;
+}
+
+.bui-header-large-heading {
+  @apply text-3xl;
+}
+
+.bui-header-large-subtitle {
+  @apply text-xl;
+}
+
+/* Classi per l'allineamento dell'intestazione */
+.bui-header-left {
+  @apply text-left;
+}
+
+.bui-header-center {
+  @apply text-center;
+}
+
+.bui-header-right {
+  @apply text-right;
+}
+
+/* Stili comuni */
+.bui-header-heading-base {
+  @apply font-bold;
+}
+
+.bui-header-subtitle-base {
+  @apply mt-1;
+}
+
+.bui-header-divider-base {
+  @apply border-t mt-2;
+}
+
+.bui-header-container-base {
+  @apply mb-4;
+}
+
+.bui-header-container-with-divider {
+  @apply mb-4 pb-2;
+}
+
+/* Stili per le icone */
+.bui-header-icon-container {
+  @apply inline-flex items-center;
+}
+
+.bui-header-icon-wrapper {
+  @apply mr-2;
 } 

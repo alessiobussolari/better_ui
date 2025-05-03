@@ -65,23 +65,19 @@ module BetterUi
       violet: 'border-violet-600'
     }
     
-    # Valori di border-radius
-    BORDER_RADIUS = {
-      none: 'rounded-none',
-      xs: 'rounded-xs',
-      sm: 'rounded-sm',
-      md: 'rounded-md',
-      lg: 'rounded-lg',
-      xl: 'rounded-xl',
-      full: 'rounded-full'
-    }
+    # NOTA: I valori di border-radius sono ora definiti nelle costanti specifiche di ogni componente
+    # per garantire una nomenclatura standardizzata:
+    # - none: nessun arrotondamento (rounded-none)
+    # - small: arrotondamento piccolo (rounded-md)
+    # - medium: arrotondamento medio (rounded-lg)
+    # - large: arrotondamento grande (rounded-xl)
+    # - full: arrotondamento completo (rounded-full)
     
     # Effetti hover
     THEME_HOVER = THEME_COLORS.transform_values { |v| v[:hover] }
     
     # Stili base comuni
     COMMON_STYLES = {
-      rounded: 'rounded-sm',
       shadow: 'shadow-sm',
       transitions: 'transition-all duration-200'
     }
@@ -114,7 +110,6 @@ module BetterUi
       when :button
         base_classes << 'inline-flex items-center justify-center'
         base_classes << 'font-medium'
-        base_classes << (options[:rounded] ? BORDER_RADIUS[options[:rounded]] : BORDER_RADIUS[:sm])
         base_classes << COMMON_STYLES[:transitions]
         
         variant_colors = THEME_COLORS[variant.to_sym] || THEME_COLORS[:default]
@@ -146,7 +141,6 @@ module BetterUi
       
       when :panel
         base_classes << LAYOUT_STYLES[:panel][:base]
-        base_classes << (options[:rounded] ? BORDER_RADIUS[options[:rounded]] : BORDER_RADIUS[:sm])
         
         variant_colors = THEME_COLORS[variant.to_sym] || THEME_COLORS[:default]
         
