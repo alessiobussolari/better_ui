@@ -1,15 +1,4 @@
 BetterUi::Engine.routes.draw do
-  # Route principale per la documentazione
-  root to: 'docs#index'
-  
-  # Route per le pagine di documentazione generiche
-  get 'docs/:page', to: 'docs#show', as: :docs_page
-  
-  # Route specifica per i componenti
-  get 'docs/components/:component', to: 'docs#component', as: :docs_component
-  
-  # Montaggio di Lookbook per lo sviluppo e il test
-  if Rails.env.development? || Rails.env.test?
-    mount Lookbook::Engine, at: "/lookbook"
-  end
+  # Montaggio di Lookbook come root
+  mount Lookbook::Engine, at: "/"
 end
