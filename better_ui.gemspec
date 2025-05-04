@@ -6,8 +6,8 @@ Gem::Specification.new do |spec|
   spec.authors     = [ "alessiobussolari" ]
   spec.email       = [ "alessio.bussolari@pandev.it" ]
   spec.homepage    = "https://github.com/alessiobussolari/better_ui"
-  spec.summary     = "Componenti UI riutilizzabili per Rails con documentazione integrata"
-  spec.description = "Una gem Rails che funziona come engine montabile contenente componenti UI riutilizzabili e pagine di documentazione"
+  spec.summary     = "Reusable UI components for Rails with integrated documentation"
+  spec.description = "A Rails gem that works as a mountable engine containing reusable UI components and documentation pages"
   spec.license     = "MIT"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the "allowed_push_host"
@@ -22,7 +22,7 @@ Gem::Specification.new do |spec|
     Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
   end
 
-  # Dipendenze di runtime
+  # Runtime dependencies
   spec.add_dependency "rails", ">= 7.0.0"
   spec.add_dependency "view_component", ">= 3.0.0"
   spec.add_dependency "redcarpet", "~> 3.6"
@@ -33,7 +33,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "listen"
   spec.add_dependency "actioncable"
 
-  # Dipendenze di sviluppo
+  # Development dependencies
   spec.add_development_dependency "sqlite3"
   spec.add_development_dependency "puma"
 end
