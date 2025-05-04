@@ -62,6 +62,15 @@
   @apply font-semibold; 
 }
 
+/* Footer */
+.bui-table-footer td { 
+  @apply font-semibold; 
+}
+
+.bui-table-footer-cell {
+  @apply bg-opacity-90;
+}
+
 /* Varianti bordi */
 .bui-table-border-default { @apply border-gray-900; }
 .bui-table-border-white { @apply border-gray-200; }

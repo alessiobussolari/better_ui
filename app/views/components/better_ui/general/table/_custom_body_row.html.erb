@@ -1,0 +1,17 @@
+<tr class="<%= component.tr_classes(index) %>">
+  <% headers.each_with_index do |header, cell_index| %>
+    <td class="<%= component.td_classes %>">
+      <% cell_value = component.get_cell_value(row, header) %>
+      <% if cell_index == 0 %>
+        <div class="flex items-center">
+          <div class="w-8 h-8 rounded-full bg-blue-100 mr-2 flex items-center justify-center text-blue-700">
+            <%= cell_value.to_s.first&.upcase || 'N/A' %>
+          </div>
+          <%= cell_value %>
+        </div>
+      <% else %>
+        <%= cell_value %>
+      <% end %>
+    </td>
+  <% end %>
+</tr> 

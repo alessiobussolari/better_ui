@@ -7,31 +7,67 @@
     <% end %>
     
     <thead class="<%= thead_classes %>">
-      <tr>
-        <% headers_for_display.each do |header| %>
-          <th scope="col" class="<%= th_classes %>">
-            <%= header.to_s.humanize %>
-          </th>
-        <% end %>
-      </tr>
+      <% if header_rows_partial.present? %>
+        <%= render partial: header_rows_partial, locals: { 
+          component: self, 
+          headers: headers_for_display 
+        } %>
+      <% else %>
+        <tr>
+          <% headers_for_display.each do |header| %>
+            <th scope="col" class="<%= th_classes %>">
+              <%= header.to_s.humanize %>
+            </th>
+          <% end %>
+        </tr>
+      <% end %>
     </thead>
     
     <tbody class="<%= tbody_classes %>">
       <% data.each_with_index do |row, index| %>
-        <tr class="<%= tr_classes(index) %>">
-          <% headers_for_display.each do |header| %>
-            <td class="<%= td_classes %>">
-              <% if row.is_a?(Hash) %>
-                <%= row[header.to_s] || row[header.to_sym] %>
-              <% elsif row.respond_to?(header.to_sym) %>
-                <%= row.send(header.to_sym) %>
-              <% else %>
-                —
-              <% end %>
-            </td>
-          <% end %>
-        </tr>
+        <% if body_row_partial.present? %>
+          <%= render partial: body_row_partial, locals: { 
+            component: self, 
+            row: row,
+            index: index,
+            headers: headers_for_display 
+          } %>
+        <% else %>
+          <tr class="<%= tr_classes(index) %>">
+            <% headers_for_display.each do |header| %>
+              <td class="<%= td_classes %>">
+                <% if row.is_a?(Hash) %>
+                  <%= row[header.to_s] || row[header.to_sym] %>
+                <% elsif row.respond_to?(header.to_sym) %>
+                  <%= row.send(header.to_sym) %>
+                <% else %>
+                  —
+                <% end %>
+              </td>
+            <% end %>
+          </tr>
+        <% end %>
       <% end %>
     </tbody>
+    
+    <% if footer.present? %>
+      <tfoot class="<%= tfoot_classes %>">
+        <% if footer_rows_partial.present? %>
+          <%= render partial: footer_rows_partial, locals: { 
+            component: self, 
+            footer: footer, 
+            headers: headers_for_display 
+          } %>
+        <% else %>
+          <tr>
+            <% footer.each_with_index do |value, index| %>
+              <td class="<%= tf_classes %>">
+                <%= value || "—" %>
+              </td>
+            <% end %>
+          </tr>
+        <% end %>
+      </tfoot>
+    <% end %>
   </table>
 </div> 

@@ -1,0 +1,46 @@
+<div class="p-8 flex flex-col space-y-6">
+  <h1 class="text-xl font-bold">Badge Component</h1>
+  
+  <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-8">
+    <div class="flex flex-col items-center justify-center p-6 bg-slate-100 rounded-lg">
+      <h3 class="mb-4 font-semibold">Anteprima</h3>
+      
+      <div class="flex">
+        <%= render BetterUi::General::BadgeComponent.new(
+          label: label,
+          type: type,
+          size: size,
+          rounded: rounded,
+          outline: outline,
+          notification: notification,
+          icon: icon,
+          icon_position: icon_position
+        ) %>
+      </div>
+    </div>
+    
+    <div class="w-full max-w-lg">
+      <h3 class="mb-2 font-semibold">Proprietà configurate:</h3>
+      <ul class="list-disc list-inside space-y-1">
+        <li><strong>Label:</strong> <%= label.present? ? label : "(nessuna)" %></li>
+        <li><strong>Type:</strong> <%= type %></li>
+        <li><strong>Size:</strong> <%= size %></li>
+        <li><strong>Rounded:</strong> <%= rounded %></li>
+        <li><strong>Outline:</strong> <%= outline ? "attivo" : "disattivo" %></li>
+        <li><strong>Notification:</strong> <%= notification ? "attivo" : "disattivo" %></li>
+        <li><strong>Icon:</strong> <%= icon.present? ? icon : "(nessuna)" %></li>
+        <li><strong>Icon Position:</strong> <%= icon_position %></li>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="w-full">
+    <h3 class="mb-2 font-semibold">Codice di esempio:</h3>
+    <pre class="bg-gray-100 p-4 rounded-md overflow-x-auto"><code><%= %{<%= render BetterUi::General::BadgeComponent.new(
+  label: "#{label}",
+  type: :#{type},
+  size: :#{size},
+  rounded: :#{rounded}#{outline ? ",\n  outline: true" : ""}#{notification ? ",\n  notification: true" : ""}#{icon.present? ? ",\n  icon: \"#{icon}\"" : ""}#{icon.present? ? ",\n  icon_position: :#{icon_position}" : ""}
+) %>} %></code></pre>
+  </div>
+</div> 

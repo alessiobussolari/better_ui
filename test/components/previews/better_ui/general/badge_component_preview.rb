@@ -1,81 +1,134 @@
 module BetterUi
   module General
     class BadgeComponentPreview < ViewComponent::Preview
-      # Badge configurabile
-      #
-      # @param text text "Testo del badge"
-      # @param variant select { choices: [default, primary, success, warning, danger, info, dark, light] } "Variante di colore"
-      # @param size select { choices: [xs, sm, md, lg] } "Dimensione"
-      # @param rounded select { choices: [none, sm, md, lg, full] } "Arrotondamento angoli"
+      # @!group Default
+      
+      # @label Default
+      # @param label text "Testo del badge"
+      # @param type select { choices: [default, white, red, rose, orange, green, blue, yellow, violet, gray] } "Tipo di badge"
+      # @param size select { choices: [small, medium, large] } "Dimensione del badge"
+      # @param rounded select { choices: [none, small, medium, large, full] } "Tipo di border-radius"
+      # @param outline toggle "Stile outline"
+      # @param notification toggle "Stile notifica"
       # @param icon text "Nome icona (opzionale)"
+      # @param icon_position select { choices: [left, right] } "Posizione icona"
       def default(
-        text: "Badge",
-        variant: :default,
-        size: :md,
-        rounded: :md,
-        icon: nil
+        label: "Badge",
+        type: :default,
+        size: :medium,
+        rounded: :medium,
+        outline: false,
+        notification: false,
+        icon: nil,
+        icon_position: :left
       )
-        # Conversione dei tipi
-        variant = variant.to_sym if variant.is_a?(String)
+        # Normalizzazione parametri
+        type = type.to_sym if type.is_a?(String)
         size = size.to_sym if size.is_a?(String)
         rounded = rounded.to_sym if rounded.is_a?(String)
+        icon_position = icon_position.to_sym if icon_position.is_a?(String)
+        outline = outline == true || outline == "true"
+        notification = notification == true || notification == "true"
         
-        # Validazione
-        valid_variants = [:default, :primary, :success, :warning, :danger, :info, :dark, :light]
-        valid_sizes = [:xs, :sm, :md, :lg]
-        valid_rounded = [:none, :sm, :md, :lg, :full]
-        
-        variant = :default unless valid_variants.include?(variant)
-        size = :md unless valid_sizes.include?(size)
-        rounded = :md unless valid_rounded.include?(rounded)
-        
-        # Pulisci valori vuoti
+        # Pulizia valori vuoti
         icon = nil if icon.is_a?(String) && icon.strip.empty?
-        text = nil if text.is_a?(String) && text.strip.empty?
         
-        render BetterUi::General::BadgeComponent.new(
-          text: text,
-          variant: variant,
+        render_with_template(locals: {
+          label: label,
+          type: type,
           size: size,
           rounded: rounded,
-          icon: icon
-        )
+          outline: outline,
+          notification: notification,
+          icon: icon,
+          icon_position: icon_position
+        })
       end
-
-      # @!group Esempi specifici
       
-      # @label Tutte le varianti
-      def variants(preview_params = {})
+      # @!endgroup
+      
+      # @!group Esempi
+      
+      # @label Tipi e colori
+      def tipi_colori
+        render_with_template(locals: {
+          variants: [
+            { label: "Default", type: :default },
+            { label: "White", type: :white },
+            { label: "Red", type: :red },
+            { label: "Green", type: :green },
+            { label: "Blue", type: :blue },
+            { label: "Yellow", type: :yellow },
+            { label: "Violet", type: :violet },
+            { label: "Gray", type: :gray }
+          ]
+        })
+      end
+      
+      # @label Dimensioni
+      def dimensioni
+        render_with_template(locals: {
+          variants: [
+            { label: "Small", size: :small },
+            { label: "Medium", size: :medium },
+            { label: "Large", size: :large }
+          ]
+        })
+      end
+      
+      # @label Border Radius
+      def border_radius
+        render_with_template(locals: {
+          variants: [
+            { label: "Nessun radius", rounded: :none },
+            { label: "Small", rounded: :small },
+            { label: "Medium", rounded: :medium },
+            { label: "Large", rounded: :large },
+            { label: "Full (pill)", rounded: :full }
+          ]
+        })
+      end
+      
+      # @label Con Icona
+      def con_icona
+        render_with_template(locals: {
+          variants: [
+            { label: "Icona sx", icon: "check", icon_position: :left },
+            { label: "Icona dx", icon: "check", icon_position: :right },
+            { label: "Icona only", icon: "check", label: nil }
+          ]
+        })
+      end
+      
+      # @label Stile Outline
+      def outline
+        render_with_template(locals: {
+          variants: [
+            { label: "Default", type: :default, outline: true },
+            { label: "Red", type: :red, outline: true },
+            { label: "Green", type: :green, outline: true },
+            { label: "Blue", type: :blue, outline: true }
+          ]
+        })
+      end
+      
+      # @label Notifica
+      def notifica
+        render_with_template(locals: {
+          variants: [
+            { label: "1", type: :red, notification: true, rounded: :full },
+            { label: "2", type: :blue, notification: true, rounded: :full },
+            { label: "3", type: :green, notification: true, rounded: :full },
+            { label: "99+", type: :orange, notification: true, rounded: :full, size: :small }
+          ]
+        })
+      end
+      
+      # @label Casi d'uso
+      def casi_uso
         render_with_template(locals: {})
       end
       
-      # @label Con icona
-      def with_icon(preview_params = {})
-        render BetterUi::General::BadgeComponent.new(
-          text: "Nuovo",
-          variant: :success,
-          icon: "check-circle"
-        )
-      end
-      
-      # @label Solo icona
-      def icon_only(preview_params = {})
-        render BetterUi::General::BadgeComponent.new(
-          variant: :primary,
-          rounded: :full,
-          icon: "star"
-        )
-      end
-      
-      # @label Contatore numerico
-      def counter(preview_params = {})
-        render_with_template(locals: {})
-      end
-      
-      # @label Status
-      def status(preview_params = {})
-        render_with_template(locals: {})
-      end
       # @!endgroup
     end
   end

@@ -1,0 +1,16 @@
+<div class="p-8">
+  <h1 class="text-xl font-bold mb-6">Dimensioni Badge</h1>
+  
+  <div class="flex flex-col md:flex-row gap-8 items-center">
+    <% variants.each do |variant| %>
+      <div class="flex flex-col items-center space-y-3">
+        <h3 class="font-medium"><%= variant[:label] %></h3>
+        <%= render BetterUi::General::BadgeComponent.new(
+          label: variant[:label],
+          type: :blue,
+          size: variant[:size]
+        ) %>
+      </div>
+    <% end %>
+  </div>
+</div> 

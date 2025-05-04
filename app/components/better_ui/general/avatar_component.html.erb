@@ -1,0 +1,19 @@
+<div <%= avatar_attributes.to_s.html_safe %>>
+  <% if show_image? %>
+    <img 
+      src="<%= @src %>" 
+      alt="<%= @name || 'Avatar' %>" 
+      class="bui-avatar-image"
+      width="<%= pixel_size %>"
+      height="<%= pixel_size %>"
+    >
+  <% else %>
+    <div class="bui-avatar-initials">
+      <%= initials %>
+    </div>
+  <% end %>
+  
+  <% if show_status? %>
+    <span class="<%= status_indicator_classes %>"></span>
+  <% end %>
+</div> 

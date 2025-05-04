@@ -1,7 +1,8 @@
 module BetterUi
   module General
     class TableComponent < ViewComponent::Base
-      attr_reader :data, :headers, :caption, :striped, :hoverable, :bordered, :compact, :classes, :variant, :rounded
+      attr_reader :data, :headers, :caption, :striped, :hoverable, :bordered, :compact, :classes, :variant, :rounded, :footer,
+                  :header_rows_partial, :body_row_partial, :footer_rows_partial
       
       # Costanti per configurazione stili
       TABLE_THEMES = {
@@ -25,7 +26,7 @@ module BetterUi
         full: "bui-table-radius-full"
       }.freeze
       
-      def initialize(data:, headers: nil, caption: nil, striped: false, hoverable: false, bordered: true, compact: false, classes: nil, variant: :default, rounded: :small)
+      def initialize(data:, headers: nil, caption: nil, striped: false, hoverable: false, bordered: true, compact: false, classes: nil, variant: :default, rounded: :small, footer: nil, header_rows_partial: nil, body_row_partial: nil, footer_rows_partial: nil)
         @data = data || []
         @headers = headers
         @caption = caption
@@ -36,6 +37,10 @@ module BetterUi
         @classes = classes
         @variant = (TABLE_THEMES.key?(variant.to_sym) ? variant.to_sym : :default)
         @rounded = (TABLE_RADIUS.key?(rounded.to_sym) ? rounded.to_sym : :small)
+        @footer = footer.is_a?(Array) ? footer : nil  # Valida che sia un array
+        @header_rows_partial = header_rows_partial
+        @body_row_partial = body_row_partial
+        @footer_rows_partial = footer_rows_partial
       end
 
       def table_classes
@@ -73,6 +78,10 @@ module BetterUi
       def tbody_classes
         @striped ? "bui-table-row-striped" : nil
       end
+      
+      def tfoot_classes
+        "bui-table-footer"
+      end
 
       def tr_classes(index)
         [
@@ -93,6 +102,16 @@ module BetterUi
       def td_classes
         [
           @compact ? "bui-table-cell-compact" : "bui-table-cell",
+          @bordered ? "bui-table-cell-bordered #{get_theme_border_color}" : nil
+        ].compact.join(" ")
+      end
+      
+      def tf_classes
+        [
+          @compact ? "bui-table-cell-compact" : "bui-table-cell",
+          "bui-table-footer-cell",
+          get_theme_bg_color,
+          get_theme_text_class,
           @bordered ? "bui-table-cell-bordered #{get_theme_border_color}" : nil
         ].compact.join(" ")
       end
@@ -124,6 +143,19 @@ module BetterUi
           first_item.attributes.keys - %w[id created_at updated_at]
         else
           []
+        end
+      end
+      
+      # Ottiene il valore di una cella in modo consistente
+      def get_cell_value(row, header)
+        if row.is_a?(Hash)
+          row[header.to_s] || row[header.to_sym] || "—"
+        elsif row.respond_to?(header.to_sym)
+          row.send(header.to_sym)
+        elsif row.is_a?(Array) && headers_for_display.index(header)
+          row[headers_for_display.index(header)] || "—"
+        else
+          "—"
         end
       end
 

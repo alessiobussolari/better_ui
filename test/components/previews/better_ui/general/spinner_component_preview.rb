@@ -3,71 +3,100 @@ module BetterUi
     class SpinnerComponentPreview < ViewComponent::Preview
       # Spinner configurabile
       #
-      # @param variant select { choices: [primary, secondary, success, warning, danger, info, light, dark, white] } "Variante di colore"
-      # @param size select { choices: [xs, sm, md, lg, xl, 2xl, 3xl] } "Dimensione"
-      # @param type select { choices: [border, svg] } "Tipo di spinner"
-      # @param label text "Testo (opzionale)"
+      # @param theme select { choices: [default, white, red, rose, orange, green, blue, yellow, violet] } "Tema di colore"
+      # @param size select { choices: [small, medium, large] } "Dimensione dello spinner"
+      # @param label text "Testo da mostrare (opzionale)"
+      # @param fullscreen toggle "Modalità fullscreen"
       def default(
-        variant: :primary,
-        size: :md,
-        type: :border,
-        label: nil
+        theme: :default,
+        size: :medium,
+        label: nil,
+        fullscreen: false
       )
-        # Conversione dei tipi
-        variant = variant.to_sym if variant.is_a?(String)
+        # Valori validi per i parametri:
+        # theme: :default, :white, :red, :rose, :orange, :green, :blue, :yellow, :violet
+        # size: :small, :medium, :large
+        # fullscreen: true, false
+        
+        # Assicuriamoci che i parametri siano convertiti nel tipo corretto
+        theme = theme.to_sym if theme.is_a?(String)
         size = size.to_sym if size.is_a?(String)
-        type = type.to_sym if type.is_a?(String)
+        fullscreen = fullscreen == true || fullscreen == "true"
         
-        # Validazione
-        valid_variants = [:primary, :secondary, :success, :warning, :danger, :info, :light, :dark, :white]
-        valid_sizes = [:xs, :sm, :md, :lg, :xl, :'2xl', :'3xl']
-        valid_types = [:border, :svg]
-        
-        variant = :primary unless valid_variants.include?(variant)
-        size = :md unless valid_sizes.include?(size)
-        type = :border unless valid_types.include?(type)
-        
-        # Pulisci valori vuoti
+        # Pulizia valori vuoti
         label = nil if label.is_a?(String) && label.strip.empty?
         
-        render BetterUi::General::SpinnerComponent.new(
-            variant: variant,
-            size: size,
-            type: type,
-            label: label
-          )
+        # Validiamo i valori per garantire opzioni corrette
+        valid_themes = [:default, :white, :red, :rose, :orange, :green, :blue, :yellow, :violet]
+        valid_sizes = [:small, :medium, :large]
+        
+        theme = :default unless valid_themes.include?(theme)
+        size = :medium unless valid_sizes.include?(size)
+        
+        render_with_template(locals: {
+          theme: theme,
+          size: size,
+          label: label,
+          fullscreen: fullscreen
+        })
       end
-
+      
       # @!group Esempi specifici
       
-      # @label Varianti
-      def variants(preview_params = {})
-        render_with_template(locals: {})
-      end
-      
       # @label Dimensioni
-      def sizes(preview_params = {})
-        render_with_template(locals: {})
+      def dimensioni
+        render_with_template(locals: {
+          variants: [
+            { label: "Small", size: :small },
+            { label: "Medium", size: :medium },
+            { label: "Large", size: :large }
+          ]
+        })
       end
       
-      # @label Tipi
-      def types(preview_params = {})
-        render_with_template(locals: {})
+      # @label Temi di colore
+      def temi_colore
+        render_with_template(locals: {
+          variants: [
+            { label: "Default", theme: :default },
+            { label: "White", theme: :white },
+            { label: "Red", theme: :red },
+            { label: "Rose", theme: :rose },
+            { label: "Orange", theme: :orange },
+            { label: "Green", theme: :green },
+            { label: "Blue", theme: :blue },
+            { label: "Yellow", theme: :yellow },
+            { label: "Violet", theme: :violet }
+          ]
+        })
       end
       
       # @label Con etichetta
-      def with_label(preview_params = {})
+      def con_etichetta
         render BetterUi::General::SpinnerComponent.new(
-          variant: :primary,
-          size: :md,
-          label: "Caricamento..."
+          label: "Caricamento in corso...",
+          size: :medium,
+          theme: :blue
         )
       end
       
-      # @label Casi d'uso
-      def use_cases(preview_params = {})
-        render_with_template(locals: {})
+      # @label Con contenuto personalizzato
+      def con_contenuto
+        render_with_template(locals: {
+          content: true
+        })
       end
+      
+      # @label Modalità fullscreen
+      def fullscreen
+        render BetterUi::General::SpinnerComponent.new(
+          label: "Caricamento della pagina...",
+          fullscreen: true,
+          theme: :blue,
+          size: :large
+        )
+      end
+      
       # @!endgroup
     end
   end

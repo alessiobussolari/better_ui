@@ -1,0 +1,151 @@
+/* ==============================
+ * Avatar Component
+ * ============================== */
+
+/* Stile base */
+.bui-avatar {
+  @apply relative inline-flex items-center justify-center;
+  @apply box-border;
+  @apply overflow-hidden;
+}
+
+/* Dimensioni */
+.bui-avatar-size-xxsmall {
+  @apply w-5 h-5;
+  @apply text-[0.625rem];
+}
+
+.bui-avatar-size-xsmall {
+  @apply w-6 h-6;
+  @apply text-xs;
+}
+
+.bui-avatar-size-small {
+  @apply w-8 h-8;
+  @apply text-sm;
+}
+
+.bui-avatar-size-medium {
+  @apply w-10 h-10;
+  @apply text-base;
+}
+
+.bui-avatar-size-large {
+  @apply w-12 h-12;
+  @apply text-lg;
+}
+
+.bui-avatar-size-xlarge {
+  @apply w-16 h-16;
+  @apply text-xl;
+}
+
+.bui-avatar-size-xxlarge {
+  @apply w-24 h-24;
+  @apply text-2xl;
+}
+
+/* Forme */
+.bui-avatar-shape-circle {
+  @apply rounded-full;
+}
+
+.bui-avatar-shape-square {
+  @apply rounded-none;
+}
+
+.bui-avatar-shape-rounded {
+  @apply rounded-md;
+}
+
+/* Immagine */
+.bui-avatar-image {
+  @apply w-full h-full object-cover;
+}
+
+/* Iniziali di fallback */
+.bui-avatar-initials {
+  @apply w-full h-full flex items-center justify-center font-medium text-white;
+}
+
+/* Temi di colore */
+.bui-avatar-default {
+  @apply bg-gray-700 text-white;
+}
+
+.bui-avatar-white {
+  @apply bg-white text-gray-800 border border-gray-200;
+}
+
+.bui-avatar-red {
+  @apply bg-red-500 text-white;
+}
+
+.bui-avatar-rose {
+  @apply bg-rose-500 text-white;
+}
+
+.bui-avatar-orange {
+  @apply bg-orange-500 text-white;
+}
+
+.bui-avatar-green {
+  @apply bg-green-500 text-white;
+}
+
+.bui-avatar-blue {
+  @apply bg-blue-500 text-white;
+}
+
+.bui-avatar-yellow {
+  @apply bg-yellow-500 text-black;
+}
+
+.bui-avatar-violet {
+  @apply bg-violet-500 text-white;
+}
+
+.bui-avatar-gray {
+  @apply bg-gray-400 text-white;
+}
+
+/* Indicatore di stato */
+.bui-avatar-status-indicator {
+  @apply absolute block rounded-full border-2 border-white;
+  @apply w-3 h-3;
+  @apply z-10;
+}
+
+/* Posizioni dell'indicatore di stato */
+.bui-avatar-status-position-bottom-right {
+  @apply bottom-0 right-0;
+}
+
+.bui-avatar-status-position-bottom-left {
+  @apply bottom-0 left-0;
+}
+
+.bui-avatar-status-position-top-right {
+  @apply top-0 right-0;
+}
+
+.bui-avatar-status-position-top-left {
+  @apply top-0 left-0;
+}
+
+/* Varianti di stato */
+.bui-avatar-status-online {
+  @apply bg-green-500;
+}
+
+.bui-avatar-status-offline {
+  @apply bg-gray-400;
+}
+
+.bui-avatar-status-busy {
+  @apply bg-red-500;
+}
+
+.bui-avatar-status-away {
+  @apply bg-yellow-500;
+} 
