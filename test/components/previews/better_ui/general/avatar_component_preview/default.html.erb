@@ -6,8 +6,8 @@
       <h3 class="mb-4 font-semibold">Anteprima</h3>
       
       <div class="flex">
-        <%= render BetterUi::General::AvatarComponent.new(
-          name: name,
+        <%= bui_avatar(
+          name,
           size: size,
           shape: shape,
           type: type,
@@ -32,8 +32,8 @@
   
   <div class="w-full">
     <h3 class="mb-2 font-semibold">Codice di esempio:</h3>
-    <pre class="bg-gray-100 p-4 rounded-md overflow-x-auto"><code><%= %{<%= render BetterUi::General::AvatarComponent.new(
-  name: "#{name}",
+    <pre class="bg-gray-100 p-4 rounded-md overflow-x-auto"><code><%= %{<%= bui_avatar(
+  "#{name}",
   size: :#{size},
   shape: :#{shape},
   type: :#{type}#{status.present? ? ",\n  status: :#{status}" : ""}#{status.present? ? ",\n  status_position: :#{status_position}" : ""}

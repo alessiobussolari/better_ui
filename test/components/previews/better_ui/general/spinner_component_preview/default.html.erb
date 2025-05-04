@@ -2,10 +2,10 @@
   <h1 class="text-xl font-bold">Spinner Component</h1>
   
   <div class="flex flex-col items-center justify-center p-8 bg-slate-100 rounded-lg w-64 h-64">
-    <%= render BetterUi::General::SpinnerComponent.new(
+    <%= bui_spinner(
+      label,
       theme: theme,
       size: size,
-      label: label,
       fullscreen: fullscreen
     ) %>
   </div>

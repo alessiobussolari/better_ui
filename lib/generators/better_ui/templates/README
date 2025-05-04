@@ -5,7 +5,7 @@ Installazione completata!
 Il tuo foglio di stile SCSS per la personalizzazione dei componenti di BetterUi
 è stato creato in:
 
-  app/assets/stylesheets/<%= options[:prefix] %>_better_ui_components.scss
+  <%= options[:path] %>/<%= options[:prefix] %>_better_ui_components.scss
 
 ===============================================================================
 
@@ -25,6 +25,9 @@ PROSSIMI PASSI:
    /*
     *= require <%= options[:prefix] %>_better_ui_components
     */
+
+   Se hai utilizzato un path personalizzato, assicurati di importare
+   correttamente il file dal percorso specificato.
 
 3. Personalizza le variabili SCSS e le classi secondo le tue esigenze.
    Il foglio di stile utilizza le classi di Tailwind CSS tramite la direttiva

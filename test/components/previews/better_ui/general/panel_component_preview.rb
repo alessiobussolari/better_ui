@@ -39,7 +39,7 @@ module BetterUi
         header = nil if header.is_a?(String) && header.strip.empty?
         footer = nil if footer.is_a?(String) && footer.strip.empty?
         
-        render BetterUi::General::PanelComponent.new(
+        bui_panel(
           title: title,
           body: body,
           header: header,

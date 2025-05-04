@@ -1,7 +1,7 @@
 <% if variant == :white %>
   <div class="p-4 bg-gray-800">
-    <%= render BetterUi::General::HeadingComponent.new(
-      text: text,
+    <%= bui_heading(
+      text,
       level: level,
       variant: variant,
       size: size,

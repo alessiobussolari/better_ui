@@ -6,8 +6,8 @@
       <h3 class="mb-4 font-semibold">Anteprima</h3>
       
       <div class="flex">
-        <%= render BetterUi::General::BadgeComponent.new(
-          label: label,
+        <%= bui_badge(
+          label,
           type: type,
           size: size,
           rounded: rounded,
@@ -36,8 +36,8 @@
   
   <div class="w-full">
     <h3 class="mb-2 font-semibold">Codice di esempio:</h3>
-    <pre class="bg-gray-100 p-4 rounded-md overflow-x-auto"><code><%= %{<%= render BetterUi::General::BadgeComponent.new(
-  label: "#{label}",
+    <pre class="bg-gray-100 p-4 rounded-md overflow-x-auto"><code><%= %{<%= bui_badge(
+  "#{label}",
   type: :#{type},
   size: :#{size},
   rounded: :#{rounded}#{outline ? ",\n  outline: true" : ""}#{notification ? ",\n  notification: true" : ""}#{icon.present? ? ",\n  icon: \"#{icon}\"" : ""}#{icon.present? ? ",\n  icon_position: :#{icon_position}" : ""}

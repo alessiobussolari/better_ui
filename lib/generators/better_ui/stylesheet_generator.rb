@@ -9,14 +9,16 @@ module BetterUi
       
       class_option :prefix, type: :string, default: "custom", 
                   desc: "Prefisso da utilizzare per il foglio di stile (default: 'custom')"
+      class_option :path, type: :string, default: "app/assets/stylesheets", 
+                  desc: "Path dove installare i file CSS all'interno della cartella app (default: 'app/assets/stylesheets')"
       
       def create_stylesheet
         # Crea il file principale
         template "components_stylesheet.scss", 
-                File.join("app/assets/stylesheets", "#{options[:prefix]}_better_ui_components.scss")
+                File.join(options[:path], "#{options[:prefix]}_better_ui_components.scss")
         
         # Crea la directory dei componenti se non esiste
-        directory = File.join("app/assets/stylesheets", "components")
+        directory = File.join(options[:path], "components")
         FileUtils.mkdir_p(directory) unless File.directory?(directory)
         
         # Lista dei file dei componenti
@@ -32,7 +34,7 @@ module BetterUi
 
       def create_overrides
         # Crea la directory dei componenti se non esiste
-        directory = File.join("app/assets/stylesheets", "components")
+        directory = File.join(options[:path], "components")
         FileUtils.mkdir_p(directory) unless File.directory?(directory)
         
         # Lista dei file dei componenti

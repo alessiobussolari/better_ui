@@ -13,8 +13,8 @@
 %>
 
 <div class="<%= bg_classes[theme] %> p-4 rounded-md">
-  <%= render BetterUi::General::BreadcrumbComponent.new(
-    items: items,
+  <%= bui_breadcrumb(
+    items,
     theme: theme,
     separator: separator,
     size: size

@@ -165,11 +165,17 @@ rails generate better_ui:stylesheet
 
 # Generate a stylesheet with a custom prefix
 rails generate better_ui:stylesheet --prefix=my_theme
+
+# Generate a stylesheet in a custom path
+rails generate better_ui:stylesheet --path=app/assets/custom_styles
+
+# Generate a stylesheet with both custom prefix and path
+rails generate better_ui:stylesheet --prefix=my_theme --path=app/assets/custom_styles
 ```
 
 This will create:
 1. A main SCSS file with imports for all components
-2. Individual SCSS files for each component in the `app/assets/stylesheets/components/` directory
+2. Individual SCSS files for each component in the specified directory (default: `app/assets/stylesheets/components/`)
 3. Special `*_overrides.scss` files for each component that allow you to override styles without modifying the original files
 
 ### Component Overrides System ✨

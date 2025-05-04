@@ -5,7 +5,7 @@ module BetterUi
       
       # @label Icona base
       def default
-        render BetterUi::General::IconComponent.new(name: 'star')
+        bui_icon('star')
       end
       
       # @label Icona brands

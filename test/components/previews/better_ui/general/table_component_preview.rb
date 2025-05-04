@@ -83,9 +83,9 @@ module BetterUi
           end
         end
         
-        render BetterUi::General::TableComponent.new(
+        bui_table(
+          data,
           headers: data_type == :array ? headers : nil,
-          data: data,
           caption: caption,
           variant: variant,
           striped: striped,

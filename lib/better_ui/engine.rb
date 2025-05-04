@@ -19,17 +19,30 @@ module BetterUi
     
     # Assicuriamo che gli helper siano correttamente caricati
     config.autoload_paths << root.join('app', 'helpers')
+    config.eager_load_paths << root.join('app', 'helpers')
+    
+    # Caricamento dei componenti helper
+    initializer 'better_ui.load_helpers', before: :load_config_initializers do
+      # Carica prima i componenti singoli
+      Dir.glob(root.join('app/helpers/better_ui/general/components/*.rb')).sort.each do |component|
+        require component
+      end
+      
+      # Poi carica il general_helper che li unisce tutti
+      require_relative '../../app/helpers/better_ui/general_helper'
+      
+      # Infine carica il modulo principale
+      require_relative '../../app/helpers/better_ui_helper'
+    end
     
     # Configurazione per rendere disponibili i componenti all'applicazione host
-    initializer 'better_ui.view_helpers' do
-      require_relative '../../app/helpers/better_ui_application_helper'
-      
+    initializer 'better_ui.view_helpers' do      
       ActiveSupport.on_load :action_controller do
-        helper BetterUi::ApplicationHelper
+        helper BetterUi::Helper
       end
       
       ActiveSupport.on_load :action_view do
-        include BetterUi::ApplicationHelper
+        include BetterUi::Helper
       end
     end
     

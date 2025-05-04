@@ -20,6 +20,16 @@ module BetterUi
         assert_file "app/assets/stylesheets/my_better_ui_components.css"
       end
 
+      test "genera il file CSS nel path personalizzato" do
+        run_generator ["--path=app/assets/custom_styles"]
+        assert_file "app/assets/custom_styles/custom_better_ui_components.css"
+      end
+
+      test "genera il file CSS con prefisso e path personalizzati" do
+        run_generator ["--prefix=my", "--path=app/assets/custom_styles"]
+        assert_file "app/assets/custom_styles/my_better_ui_components.css"
+      end
+
       test "il file CSS generato contiene le sezioni necessarie" do
         run_generator
         assert_file "app/assets/stylesheets/custom_better_ui_components.css" do |content|
