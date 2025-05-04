@@ -1,151 +1,200 @@
-/* ==============================
- * Avatar Component
- * ============================== */
-
-/* Stile base */
-.bui-avatar {
-  @apply relative inline-flex items-center justify-center;
-  @apply box-border;
-  @apply overflow-hidden;
-}
-
-/* Dimensioni */
-.bui-avatar-size-xxsmall {
-  @apply w-5 h-5;
-  @apply text-[0.625rem];
-}
-
-.bui-avatar-size-xsmall {
-  @apply w-6 h-6;
-  @apply text-xs;
-}
-
-.bui-avatar-size-small {
-  @apply w-8 h-8;
-  @apply text-sm;
-}
-
-.bui-avatar-size-medium {
-  @apply w-10 h-10;
-  @apply text-base;
-}
-
-.bui-avatar-size-large {
-  @apply w-12 h-12;
-  @apply text-lg;
-}
-
-.bui-avatar-size-xlarge {
-  @apply w-16 h-16;
-  @apply text-xl;
-}
-
-.bui-avatar-size-xxlarge {
-  @apply w-24 h-24;
-  @apply text-2xl;
-}
-
-/* Forme */
-.bui-avatar-shape-circle {
-  @apply rounded-full;
-}
-
-.bui-avatar-shape-square {
-  @apply rounded-none;
-}
-
-.bui-avatar-shape-rounded {
-  @apply rounded-md;
-}
-
-/* Immagine */
-.bui-avatar-image {
-  @apply w-full h-full object-cover;
-}
-
-/* Iniziali di fallback */
-.bui-avatar-initials {
-  @apply w-full h-full flex items-center justify-center font-medium text-white;
-}
-
-/* Temi di colore */
-.bui-avatar-default {
-  @apply bg-gray-700 text-white;
-}
-
-.bui-avatar-white {
-  @apply bg-white text-gray-800 border border-gray-200;
-}
-
-.bui-avatar-red {
-  @apply bg-red-500 text-white;
-}
-
-.bui-avatar-rose {
-  @apply bg-rose-500 text-white;
-}
-
-.bui-avatar-orange {
-  @apply bg-orange-500 text-white;
-}
-
-.bui-avatar-green {
-  @apply bg-green-500 text-white;
-}
-
-.bui-avatar-blue {
-  @apply bg-blue-500 text-white;
-}
-
-.bui-avatar-yellow {
-  @apply bg-yellow-500 text-black;
-}
-
-.bui-avatar-violet {
-  @apply bg-violet-500 text-white;
-}
-
-.bui-avatar-gray {
-  @apply bg-gray-400 text-white;
-}
-
-/* Indicatore di stato */
-.bui-avatar-status-indicator {
-  @apply absolute block rounded-full border-2 border-white;
-  @apply w-3 h-3;
-  @apply z-10;
-}
-
-/* Posizioni dell'indicatore di stato */
-.bui-avatar-status-position-bottom-right {
-  @apply bottom-0 right-0;
-}
-
-.bui-avatar-status-position-bottom-left {
-  @apply bottom-0 left-0;
-}
-
-.bui-avatar-status-position-top-right {
-  @apply top-0 right-0;
-}
-
-.bui-avatar-status-position-top-left {
-  @apply top-0 left-0;
-}
-
-/* Varianti di stato */
-.bui-avatar-status-online {
-  @apply bg-green-500;
-}
-
-.bui-avatar-status-offline {
-  @apply bg-gray-400;
-}
-
-.bui-avatar-status-busy {
-  @apply bg-red-500;
-}
-
-.bui-avatar-status-away {
-  @apply bg-yellow-500;
+@layer components {
+  // Classe base per l'avatar (Block)
+  .bui-avatar {
+    @apply inline-flex items-center justify-center relative;
+    
+    // Elements
+    &__image {
+      @apply object-cover;
+    }
+    
+    &__placeholder {
+      @apply flex items-center justify-center font-medium text-white uppercase;
+    }
+    
+    &__status {
+      @apply absolute bottom-0 right-0 block rounded-full ring-2 ring-white;
+      
+      &--online {
+        @apply bg-green-400;
+      }
+      
+      &--offline {
+        @apply bg-gray-400;
+      }
+      
+      &--busy {
+        @apply bg-red-400;
+      }
+      
+      &--away {
+        @apply bg-yellow-400;
+      }
+    }
+    
+    &__presence {
+      @apply absolute block rounded-full ring-2 ring-white;
+    }
+    
+    &__badge {
+      @apply absolute -top-1 -right-1 flex items-center justify-center;
+    }
+    
+    // Modifiers (dimensioni)
+    &--xs {
+      @apply h-6 w-6;
+      
+      .bui-avatar__placeholder {
+        @apply text-xs;
+      }
+      
+      .bui-avatar__status {
+        @apply h-1.5 w-1.5;
+      }
+      
+      .bui-avatar__badge {
+        @apply h-4 w-4 text-[0.6rem];
+      }
+    }
+    
+    &--sm {
+      @apply h-8 w-8;
+      
+      .bui-avatar__placeholder {
+        @apply text-xs;
+      }
+      
+      .bui-avatar__status {
+        @apply h-2 w-2;
+      }
+      
+      .bui-avatar__badge {
+        @apply h-5 w-5 text-xs;
+      }
+    }
+    
+    &--md {
+      @apply h-10 w-10;
+      
+      .bui-avatar__placeholder {
+        @apply text-sm;
+      }
+      
+      .bui-avatar__status {
+        @apply h-2.5 w-2.5;
+      }
+      
+      .bui-avatar__badge {
+        @apply h-6 w-6 text-xs;
+      }
+    }
+    
+    &--lg {
+      @apply h-12 w-12;
+      
+      .bui-avatar__placeholder {
+        @apply text-base;
+      }
+      
+      .bui-avatar__status {
+        @apply h-3 w-3;
+      }
+      
+      .bui-avatar__badge {
+        @apply h-7 w-7 text-sm;
+      }
+    }
+    
+    &--xl {
+      @apply h-16 w-16;
+      
+      .bui-avatar__placeholder {
+        @apply text-lg;
+      }
+      
+      .bui-avatar__status {
+        @apply h-4 w-4;
+      }
+      
+      .bui-avatar__badge {
+        @apply h-8 w-8 text-sm;
+      }
+    }
+    
+    // Modifiers (colori placeholders)
+    &--gray {
+      .bui-avatar__placeholder {
+        @apply bg-gray-500;
+      }
+    }
+    
+    &--red {
+      .bui-avatar__placeholder {
+        @apply bg-red-500;
+      }
+    }
+    
+    &--blue {
+      .bui-avatar__placeholder {
+        @apply bg-blue-500;
+      }
+    }
+    
+    &--green {
+      .bui-avatar__placeholder {
+        @apply bg-green-500;
+      }
+    }
+    
+    &--violet {
+      .bui-avatar__placeholder {
+        @apply bg-violet-500;
+      }
+    }
+    
+    &--orange {
+      .bui-avatar__placeholder {
+        @apply bg-orange-500;
+      }
+    }
+    
+    &--yellow {
+      .bui-avatar__placeholder {
+        @apply bg-yellow-500 text-yellow-900;
+      }
+    }
+    
+    // Modifiers (forma)
+    &--circle {
+      @apply rounded-full;
+      
+      .bui-avatar__image,
+      .bui-avatar__placeholder {
+        @apply rounded-full;
+      }
+    }
+    
+    &--square {
+      @apply rounded-md;
+      
+      .bui-avatar__image,
+      .bui-avatar__placeholder {
+        @apply rounded-md;
+      }
+    }
+    
+    // Modifiers (gruppo)
+    &--group {
+      @apply -ml-2 first:ml-0;
+    }
+  }
+  
+  // Avatar group container
+  .bui-avatar-group {
+    @apply flex;
+    
+    .bui-avatar {
+      @apply border-2 border-white;
+    }
+  }
 } 

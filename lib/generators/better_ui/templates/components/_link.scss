@@ -1,130 +1,100 @@
-/* ==============================
- * Link Component
- * ============================== */
-
-/* Classe base per i link */
-.bui-link-base {
-  @apply flex items-center;
-}
-
-/* Contenitore icona */
-.bui-link-icon-wrapper {
-  @apply mr-1.5;
-}
-
-/* Temi di colore - Default */
-.bui-link-default-link {
-  @apply text-gray-300 hover:text-white;
-}
-
-.bui-link-default-active {
-  @apply text-white font-medium;
-}
-
-.bui-link-default-text {
-  @apply text-white;
-}
-
-/* Temi di colore - White */
-.bui-link-white-link {
-  @apply text-gray-600 hover:text-gray-900;
-}
-
-.bui-link-white-active {
-  @apply text-black font-medium;
-}
-
-.bui-link-white-text {
-  @apply text-black;
-}
-
-/* Temi di colore - Red */
-.bui-link-red-link {
-  @apply text-red-200 hover:text-white;
-}
-
-.bui-link-red-active {
-  @apply text-white font-medium;
-}
-
-.bui-link-red-text {
-  @apply text-white;
-}
-
-/* Temi di colore - Rose */
-.bui-link-rose-link {
-  @apply text-rose-200 hover:text-white;
-}
-
-.bui-link-rose-active {
-  @apply text-white font-medium;
-}
-
-.bui-link-rose-text {
-  @apply text-white;
-}
-
-/* Temi di colore - Orange */
-.bui-link-orange-link {
-  @apply text-orange-200 hover:text-white;
-}
-
-.bui-link-orange-active {
-  @apply text-white font-medium;
-}
-
-.bui-link-orange-text {
-  @apply text-white;
-}
-
-/* Temi di colore - Green */
-.bui-link-green-link {
-  @apply text-green-200 hover:text-white;
-}
-
-.bui-link-green-active {
-  @apply text-white font-medium;
-}
-
-.bui-link-green-text {
-  @apply text-white;
-}
-
-/* Temi di colore - Blue */
-.bui-link-blue-link {
-  @apply text-blue-200 hover:text-white;
-}
-
-.bui-link-blue-active {
-  @apply text-white font-medium;
-}
-
-.bui-link-blue-text {
-  @apply text-white;
-}
-
-/* Temi di colore - Yellow */
-.bui-link-yellow-link {
-  @apply text-yellow-700 hover:text-black;
-}
-
-.bui-link-yellow-active {
-  @apply text-black font-medium;
-}
-
-.bui-link-yellow-text {
-  @apply text-black;
-}
-
-/* Temi di colore - Violet */
-.bui-link-violet-link {
-  @apply text-violet-200 hover:text-white;
-}
-
-.bui-link-violet-active {
-  @apply text-white font-medium;
-}
-
-.bui-link-violet-text {
-  @apply text-white;
+@layer components {
+  // Classe base per il link (Block)
+  .bui-link {
+    @apply inline-flex items-center transition-colors duration-200;
+    
+    // Elements
+    &__icon {
+      @apply flex-shrink-0;
+      
+      &--left {
+        @apply mr-1.5;
+      }
+      
+      &--right {
+        @apply ml-1.5;
+      }
+    }
+    
+    &__text {
+      @apply inline;
+    }
+    
+    // Modifiers (varianti colore)
+    &--default {
+      @apply text-gray-700 hover:text-gray-900;
+    }
+    
+    &--white {
+      @apply text-white hover:text-gray-100;
+    }
+    
+    &--red {
+      @apply text-red-600 hover:text-red-700;
+    }
+    
+    &--rose {
+      @apply text-rose-600 hover:text-rose-700;
+    }
+    
+    &--orange {
+      @apply text-orange-600 hover:text-orange-700;
+    }
+    
+    &--green {
+      @apply text-green-600 hover:text-green-700;
+    }
+    
+    &--blue {
+      @apply text-blue-600 hover:text-blue-700;
+    }
+    
+    &--yellow {
+      @apply text-yellow-600 hover:text-yellow-700;
+    }
+    
+    &--violet {
+      @apply text-violet-600 hover:text-violet-700;
+    }
+    
+    // Modifiers (varianti stile)
+    &--underlined {
+      @apply underline decoration-1 underline-offset-2;
+    }
+    
+    &--hover-underlined {
+      @apply no-underline hover:underline decoration-1 underline-offset-2;
+    }
+    
+    &--bold {
+      @apply font-semibold;
+    }
+    
+    // Modifiers (dimensioni)
+    &--sm {
+      @apply text-sm;
+    }
+    
+    &--base {
+      @apply text-base;
+    }
+    
+    &--lg {
+      @apply text-lg;
+    }
+    
+    // Stati
+    &--active {
+      @apply font-medium;
+    }
+    
+    &--disabled {
+      @apply pointer-events-none opacity-50;
+    }
+    
+    // Stili specifici per bottoni che sembrano link
+    &--button {
+      @apply appearance-none bg-transparent border-none p-0 cursor-pointer;
+    }
+  }
 } 

@@ -1,132 +1,129 @@
-/* ==============================
- * Spinner Component
- * ============================== */
-
-/* Stile base */
-.bui-spinner {
-  @apply inline-flex flex-col items-center justify-center;
-}
-
-/* Animazione dello spinner */
-.bui-spinner-animation {
-  @apply inline-block rounded-full animate-spin;
-  border-top-color: transparent;
-}
-
-/* Base per il contenuto */
-.bui-spinner-label {
-  @apply mt-2 text-center;
-}
-
-.bui-spinner-content {
-  @apply mt-4;
-}
-
-/* Modalità fullscreen */
-.bui-spinner-fullscreen {
-  @apply fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50;
-}
-
-/* Varianti di dimensione */
-.bui-spinner-small .bui-spinner-animation {
-  @apply w-5 h-5 border-2;
-}
-
-.bui-spinner-medium .bui-spinner-animation {
-  @apply w-8 h-8 border-3;
-}
-
-.bui-spinner-large .bui-spinner-animation {
-  @apply w-12 h-12 border-4;
-}
-
-/* Varianti di colore */
-.bui-spinner-default {
-  .bui-spinner-animation {
-    @apply border-gray-200 border-t-gray-800;
-  }
-
-  .bui-spinner-label {
-    @apply text-gray-800;
-  }
-}
-
-.bui-spinner-white {
-  .bui-spinner-animation {
-    @apply border-gray-100 border-t-white;
-  }
-
-  .bui-spinner-label {
-    @apply text-white;
-  }
-}
-
-.bui-spinner-red {
-  .bui-spinner-animation {
-    @apply border-red-100 border-t-red-600;
-  }
-
-  .bui-spinner-label {
-    @apply text-red-600;
-  }
-}
-
-.bui-spinner-rose {
-  .bui-spinner-animation {
-    @apply border-rose-100 border-t-rose-600;
-  }
-
-  .bui-spinner-label {
-    @apply text-rose-600;
-  }
-}
-
-.bui-spinner-orange {
-  .bui-spinner-animation {
-    @apply border-orange-100 border-t-orange-500;
-  }
-
-  .bui-spinner-label {
-    @apply text-orange-500;
-  }
-}
-
-.bui-spinner-green {
-  .bui-spinner-animation {
-    @apply border-green-100 border-t-green-600;
-  }
-
-  .bui-spinner-label {
-    @apply text-green-600;
-  }
-}
-
-.bui-spinner-blue {
-  .bui-spinner-animation {
-    @apply border-blue-100 border-t-blue-600;
-  }
-
-  .bui-spinner-label {
-    @apply text-blue-600;
-  }
-}
-
-.bui-spinner-yellow {
-  .bui-spinner-animation {
-    @apply border-yellow-100 border-t-yellow-500;
-  }
-
-  .bui-spinner-label {
-    @apply text-yellow-500;
-  }
-}
-
-.bui-spinner-violet {
-  .bui-spinner-animation {
-    @apply border-violet-100 border-t-violet-600;
-  }
-
-  .bui-spinner-label {
-    @apply text-violet-600;
+@layer components {
+  // Classe base per lo spinner (Block)
+  .bui-spinner {
+    @apply inline-flex flex-col items-center justify-center;
+    
+    // Elements
+    &__animation {
+      @apply inline-block rounded-full animate-spin;
+      border-top-color: transparent;
+    }
+    
+    &__label {
+      @apply mt-2 text-center;
+    }
+    
+    &__content {
+      @apply mt-4;
+    }
+    
+    // Modifiers (dimensioni)
+    &--small &__animation {
+      @apply w-5 h-5 border-2;
+    }
+    
+    &--medium &__animation {
+      @apply w-8 h-8 border-3;
+    }
+    
+    &--large &__animation {
+      @apply w-12 h-12 border-4;
+    }
+    
+    // Modifiers (temi colore)
+    &--default {
+      .bui-spinner__animation {
+        @apply border-gray-200 border-t-gray-800;
+      }
+      
+      .bui-spinner__label {
+        @apply text-gray-800;
+      }
+    }
+    
+    &--white {
+      .bui-spinner__animation {
+        @apply border-gray-100 border-t-white;
+      }
+      
+      .bui-spinner__label {
+        @apply text-white;
+      }
+    }
+    
+    &--red {
+      .bui-spinner__animation {
+        @apply border-red-100 border-t-red-600;
+      }
+      
+      .bui-spinner__label {
+        @apply text-red-600;
+      }
+    }
+    
+    &--rose {
+      .bui-spinner__animation {
+        @apply border-rose-100 border-t-rose-600;
+      }
+      
+      .bui-spinner__label {
+        @apply text-rose-600;
+      }
+    }
+    
+    &--orange {
+      .bui-spinner__animation {
+        @apply border-orange-100 border-t-orange-500;
+      }
+      
+      .bui-spinner__label {
+        @apply text-orange-500;
+      }
+    }
+    
+    &--green {
+      .bui-spinner__animation {
+        @apply border-green-100 border-t-green-600;
+      }
+      
+      .bui-spinner__label {
+        @apply text-green-600;
+      }
+    }
+    
+    &--blue {
+      .bui-spinner__animation {
+        @apply border-blue-100 border-t-blue-600;
+      }
+      
+      .bui-spinner__label {
+        @apply text-blue-600;
+      }
+    }
+    
+    &--yellow {
+      .bui-spinner__animation {
+        @apply border-yellow-100 border-t-yellow-500;
+      }
+      
+      .bui-spinner__label {
+        @apply text-yellow-500;
+      }
+    }
+    
+    &--violet {
+      .bui-spinner__animation {
+        @apply border-violet-100 border-t-violet-600;
+      }
+      
+      .bui-spinner__label {
+        @apply text-violet-600;
+      }
+    }
+    
+    // Modifiers (stati)
+    &--fullscreen {
+      @apply fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50;
+    }
   }
 } 

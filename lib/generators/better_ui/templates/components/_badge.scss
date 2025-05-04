@@ -1,142 +1,154 @@
-/* ==============================
- * Badge Component
- * ============================== */
-
-/* Stile base */
-.bui-badge {
-  @apply inline-flex items-center justify-center;
-  @apply font-medium whitespace-nowrap;
-  @apply transition-colors;
-}
-
-/* Posizionamento icone */
-.bui-badge-icon-left {
-  @apply mr-1;
-}
-
-.bui-badge-icon-right {
-  @apply ml-1;
-}
-
-/* Varianti di dimensione */
-.bui-badge-size-small {
-  @apply py-0.5 px-1.5 text-xs;
-}
-
-.bui-badge-size-medium {
-  @apply py-1 px-2 text-sm;
-}
-
-.bui-badge-size-large {
-  @apply py-1.5 px-3 text-base;
-}
-
-/* Varianti di border-radius */
-.bui-badge-radius-none {
-  @apply rounded-none;
-}
-
-.bui-badge-radius-small {
-  @apply rounded;
-}
-
-.bui-badge-radius-medium {
-  @apply rounded-md;
-}
-
-.bui-badge-radius-large {
-  @apply rounded-lg;
-}
-
-.bui-badge-radius-full {
-  @apply rounded-full;
-}
-
-/* Varianti stile */
-.bui-badge-outline {
-  @apply bg-transparent border;
-}
-
-.bui-badge-notification {
-  @apply absolute -top-1 -right-1 min-w-[1.25rem] h-5 py-0 px-1.5;
-  @apply flex items-center justify-center text-xs;
-  @apply rounded-full;
-}
-
-/* Varianti di colore - Standard */
-.bui-badge-default {
-  @apply bg-gray-800 text-white;
-}
-
-.bui-badge-white {
-  @apply bg-white text-gray-800 border border-gray-200;
-}
-
-.bui-badge-red {
-  @apply bg-red-500 text-white;
-}
-
-.bui-badge-rose {
-  @apply bg-rose-500 text-white;
-}
-
-.bui-badge-orange {
-  @apply bg-orange-500 text-white;
-}
-
-.bui-badge-green {
-  @apply bg-green-500 text-white;
-}
-
-.bui-badge-blue {
-  @apply bg-blue-500 text-white;
-}
-
-.bui-badge-yellow {
-  @apply bg-yellow-500 text-black;
-}
-
-.bui-badge-violet {
-  @apply bg-violet-500 text-white;
-}
-
-.bui-badge-gray {
-  @apply bg-gray-200 text-gray-800;
-}
-
-/* Varianti di colore - Outline */
-.bui-badge-outline.bui-badge-default {
-  @apply border-gray-800 text-gray-800;
-}
-
-.bui-badge-outline.bui-badge-red {
-  @apply border-red-500 text-red-600;
-}
-
-.bui-badge-outline.bui-badge-rose {
-  @apply border-rose-500 text-rose-600;
-}
-
-.bui-badge-outline.bui-badge-orange {
-  @apply border-orange-500 text-orange-600;
-}
-
-.bui-badge-outline.bui-badge-green {
-  @apply border-green-500 text-green-600;
-}
-
-.bui-badge-outline.bui-badge-blue {
-  @apply border-blue-500 text-blue-600;
-}
-
-.bui-badge-outline.bui-badge-yellow {
-  @apply border-yellow-500 text-yellow-600;
-}
-
-.bui-badge-outline.bui-badge-violet {
-  @apply border-violet-500 text-violet-600;
-}
-
-.bui-badge-outline.bui-badge-gray {
-  @apply border-gray-300 text-gray-600;
+@layer components {
+  // Classe base per il badge (Block)
+  .bui-badge {
+    @apply inline-flex items-center justify-center rounded-full px-2.5 py-0.5 text-xs font-medium;
+    
+    // Elements
+    &__icon {
+      @apply flex-shrink-0;
+      
+      &--left {
+        @apply -ml-0.5 mr-1.5;
+      }
+      
+      &--right {
+        @apply -mr-0.5 ml-1.5;
+      }
+    }
+    
+    &__text {
+      @apply whitespace-nowrap;
+    }
+    
+    &__dot {
+      @apply h-2 w-2 rounded-full mr-1.5;
+    }
+    
+    // Modifiers (varianti colore)
+    &--default {
+      @apply bg-gray-100 text-gray-800;
+      
+      .bui-badge__dot {
+        @apply bg-gray-500;
+      }
+    }
+    
+    &--white {
+      @apply bg-white text-gray-800 border border-gray-200;
+      
+      .bui-badge__dot {
+        @apply bg-gray-400;
+      }
+    }
+    
+    &--red {
+      @apply bg-red-100 text-red-800;
+      
+      .bui-badge__dot {
+        @apply bg-red-500;
+      }
+    }
+    
+    &--rose {
+      @apply bg-rose-100 text-rose-800;
+      
+      .bui-badge__dot {
+        @apply bg-rose-500;
+      }
+    }
+    
+    &--orange {
+      @apply bg-orange-100 text-orange-800;
+      
+      .bui-badge__dot {
+        @apply bg-orange-500;
+      }
+    }
+    
+    &--green {
+      @apply bg-green-100 text-green-800;
+      
+      .bui-badge__dot {
+        @apply bg-green-500;
+      }
+    }
+    
+    &--blue {
+      @apply bg-blue-100 text-blue-800;
+      
+      .bui-badge__dot {
+        @apply bg-blue-500;
+      }
+    }
+    
+    &--yellow {
+      @apply bg-yellow-100 text-yellow-800;
+      
+      .bui-badge__dot {
+        @apply bg-yellow-500;
+      }
+    }
+    
+    &--violet {
+      @apply bg-violet-100 text-violet-800;
+      
+      .bui-badge__dot {
+        @apply bg-violet-500;
+      }
+    }
+    
+    // Modifiers (varianti dimensione)
+    &--small {
+      @apply text-xs px-2 py-0.5;
+    }
+    
+    &--medium {
+      @apply text-sm px-2.5 py-0.5;
+    }
+    
+    &--large {
+      @apply text-sm px-3 py-1;
+    }
+    
+    // Modifiers (varianti stile)
+    &--pill {
+      @apply rounded-full;
+    }
+    
+    &--square {
+      @apply rounded-md;
+    }
+    
+    &--outline {
+      @apply bg-transparent border;
+      
+      &.bui-badge--red {
+        @apply border-red-500 text-red-700 bg-transparent;
+      }
+      
+      &.bui-badge--green {
+        @apply border-green-500 text-green-700 bg-transparent;
+      }
+      
+      &.bui-badge--blue {
+        @apply border-blue-500 text-blue-700 bg-transparent;
+      }
+      
+      &.bui-badge--yellow {
+        @apply border-yellow-500 text-yellow-700 bg-transparent;
+      }
+      
+      &.bui-badge--violet {
+        @apply border-violet-500 text-violet-700 bg-transparent;
+      }
+      
+      &.bui-badge--orange {
+        @apply border-orange-500 text-orange-700 bg-transparent;
+      }
+      
+      &.bui-badge--rose {
+        @apply border-rose-500 text-rose-700 bg-transparent;
+      }
+    }
+  }
 } 

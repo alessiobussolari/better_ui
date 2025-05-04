@@ -1,4 +1,7 @@
 // Index file che raggruppa e riespone tutti i componenti
+// Nota: È possibile utilizzare le variabili con @use "better_ui/components/variables" as vars;
+
+// Componenti generali
 @forward "button";
 @forward "panel";
 @forward "table";
@@ -9,4 +12,6 @@
 @forward "heading";
 @forward "breadcrumb";
 @forward "spinner";
+
+// Componenti applicativi
 @forward "card"; 

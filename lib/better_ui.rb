@@ -21,9 +21,17 @@ module BetterUi
     def configure
       yield(configuration) if block_given?
     end
+    
+    # Metodo utile per accedere al percorso degli stilesheets
+    def stylesheets_path
+      File.join(File.dirname(__FILE__), '..', 'app', 'assets', 'stylesheets')
+    end
   end
 end
 
-# Caricamento del generator
+# Caricamento dei generator
 require 'rails/generators'
-require 'generators/better_ui/stylesheet_generator' if defined?(Rails::Generators)
+if defined?(Rails::Generators)
+  require 'generators/better_ui/stylesheet_generator'
+  require 'generators/better_ui/install_generator'
+end

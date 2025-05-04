@@ -1,17 +1,17 @@
-// Utilizziamo @use per le variabili
-@use "variables" as vars;
+// Index file che raggruppa e riespone tutti i componenti
+// Nota: È possibile utilizzare le variabili con @use "better_ui/components/variables" as vars;
 
-// Forwarding dei componenti generali
+// Componenti generali
 @forward "button";
-@forward "heading";
-@forward "breadcrumb";
-@forward "link";
 @forward "panel";
-@forward "icon";
 @forward "table";
-@forward "spinner";
 @forward "badge";
 @forward "avatar";
+@forward "icon";
+@forward "link";
+@forward "heading";
+@forward "breadcrumb";
+@forward "spinner";
 
-// Forwarding dei componenti applicativi
+// Componenti applicativi
 @forward "card"; 

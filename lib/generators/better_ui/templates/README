@@ -1,3 +1,67 @@
+==========================================================
+                     BETTER UI
+==========================================================
+
+Fogli di stile per componenti generati con successo!
+
+STRUTTURA DEI FILE:
+----------------------------------------------------------
+I seguenti file sono stati creati:
+
+1. File principale:
+   * <%= options[:prefix] %>_better_ui_components.scss
+
+2. Componenti originali:
+   * components/_variables.scss
+   * components/_button.scss
+   * components/_heading.scss
+   * components/_link.scss
+   ... e altri componenti
+
+3. File di override:
+   * components/_variables_overrides.scss
+   * components/_button_overrides.scss
+   * components/_heading_overrides.scss
+   ... e altri file di override
+
+COME UTILIZZARE:
+----------------------------------------------------------
+1. Importa il file principale nel tuo foglio di stile:
+   @import '<%= options[:prefix] %>_better_ui_components';
+
+2. Personalizza i componenti modificando i file *_overrides.scss:
+   Ogni file di override contiene classi vuote corrispondenti
+   alle classi originali, pronte per essere personalizzate.
+
+3. Non modificare i file originali dei componenti!
+   Usa sempre i file *_overrides.scss per le personalizzazioni,
+   così da mantenere la compatibilità con gli aggiornamenti futuri.
+
+BEST PRACTICES:
+----------------------------------------------------------
+* Segui la metodologia BEM per le tue personalizzazioni
+* Usa le variabili CSS definite in _variables.scss
+* Mantieni la coerenza visiva tra i componenti
+* Aggiungi nuovi modificatori nei file di override
+
+ESEMPIO DI PERSONALIZZAZIONE:
+----------------------------------------------------------
+// In _button_overrides.scss
+.bui-button {
+  // Modifica la classe base
+  @apply transition-all;
+  
+  // Modifica uno specifico modificatore
+  &--primary {
+    @apply bg-indigo-600 hover:bg-indigo-700;
+  }
+  
+  // Aggiungi un nuovo modificatore
+  &--custom {
+    @apply bg-gradient-to-r from-purple-500 to-pink-500;
+  }
+}
+
 ===============================================================================
 
 Installazione completata!
