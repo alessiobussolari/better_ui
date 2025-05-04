@@ -1,0 +1,171 @@
+@layer components {
+  // Classe base per il titolo (Block)
+  .bui-heading {
+    @apply font-bold text-gray-900 leading-tight;
+    
+    // Elements
+    &__subtitle {
+      @apply mt-1 text-gray-500 font-normal;
+    }
+    
+    &__actions {
+      @apply mt-2 sm:mt-0 sm:ml-4 flex space-x-3;
+    }
+    
+    &__divider {
+      @apply mt-2 border-b border-gray-200;
+    }
+    
+    &__icon {
+      @apply mr-2 flex-shrink-0;
+    }
+    
+    &__badge {
+      @apply ml-2;
+    }
+    
+    // Modifiers (dimensioni)
+    &--1 {
+      @apply text-3xl sm:text-4xl;
+      
+      .bui-heading__subtitle {
+        @apply text-xl;
+      }
+    }
+    
+    &--2 {
+      @apply text-2xl sm:text-3xl;
+      
+      .bui-heading__subtitle {
+        @apply text-lg;
+      }
+    }
+    
+    &--3 {
+      @apply text-xl sm:text-2xl;
+      
+      .bui-heading__subtitle {
+        @apply text-base;
+      }
+    }
+    
+    &--4 {
+      @apply text-lg sm:text-xl;
+      
+      .bui-heading__subtitle {
+        @apply text-sm;
+      }
+    }
+    
+    &--5 {
+      @apply text-base sm:text-lg;
+      
+      .bui-heading__subtitle {
+        @apply text-sm;
+      }
+    }
+    
+    &--6 {
+      @apply text-sm sm:text-base;
+      
+      .bui-heading__subtitle {
+        @apply text-xs;
+      }
+    }
+    
+    // Modifiers (varianti colore)
+    &--default {
+      @apply text-gray-900;
+      
+      .bui-heading__subtitle {
+        @apply text-gray-500;
+      }
+    }
+    
+    &--white {
+      @apply text-white;
+      
+      .bui-heading__subtitle {
+        @apply text-gray-200;
+      }
+    }
+    
+    &--red {
+      @apply text-red-600;
+      
+      .bui-heading__subtitle {
+        @apply text-red-500;
+      }
+    }
+    
+    &--rose {
+      @apply text-rose-600;
+      
+      .bui-heading__subtitle {
+        @apply text-rose-500;
+      }
+    }
+    
+    &--orange {
+      @apply text-orange-600;
+      
+      .bui-heading__subtitle {
+        @apply text-orange-500;
+      }
+    }
+    
+    &--green {
+      @apply text-green-600;
+      
+      .bui-heading__subtitle {
+        @apply text-green-500;
+      }
+    }
+    
+    &--blue {
+      @apply text-blue-600;
+      
+      .bui-heading__subtitle {
+        @apply text-blue-500;
+      }
+    }
+    
+    &--violet {
+      @apply text-violet-600;
+      
+      .bui-heading__subtitle {
+        @apply text-violet-500;
+      }
+    }
+    
+    // Modifiers (allineamento)
+    &--left {
+      @apply text-left;
+    }
+    
+    &--center {
+      @apply text-center;
+      
+      .bui-heading__subtitle {
+        @apply mx-auto;
+      }
+    }
+    
+    &--right {
+      @apply text-right;
+    }
+    
+    // Modifiers (stile)
+    &--with-action {
+      @apply flex flex-col sm:flex-row sm:items-center sm:justify-between;
+    }
+    
+    &--with-divider {
+      @apply pb-2;
+    }
+    
+    &--light {
+      @apply font-medium;
+    }
+  }
+} 

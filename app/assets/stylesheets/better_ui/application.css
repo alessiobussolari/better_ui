@@ -13,10 +13,12 @@
  *= require_tree .
  *= require_self
  *= require font-awesome
+ *= require better_ui
  */
 
 /* 
- * BetterUI - Utilizziamo Tailwind CSS per tutti gli stili
+ * BetterUI - Utilizziamo Tailwind CSS per tutti gli stili 
+ * Ora organizzati con la moderna sintassi di Sass (@use/@forward)
  */
 
 /* Stili per il syntax highlighting di CodeRay */

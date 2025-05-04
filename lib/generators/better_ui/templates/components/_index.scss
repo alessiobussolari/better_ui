@@ -1,0 +1,17 @@
+// Utilizziamo @use per le variabili
+@use "variables" as vars;
+
+// Forwarding dei componenti generali
+@forward "button";
+@forward "heading";
+@forward "breadcrumb";
+@forward "link";
+@forward "panel";
+@forward "icon";
+@forward "table";
+@forward "spinner";
+@forward "badge";
+@forward "avatar";
+
+// Forwarding dei componenti applicativi
+@forward "card"; 
