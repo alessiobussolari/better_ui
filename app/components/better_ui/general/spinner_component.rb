@@ -5,27 +5,27 @@ module BetterUi
 
       # Temi di colore disponibili
       SPINNER_THEME = {
-        default: "bui-spinner-default",
-        white: "bui-spinner-white",
-        red: "bui-spinner-red",
-        rose: "bui-spinner-rose",
-        orange: "bui-spinner-orange",
-        green: "bui-spinner-green",
-        blue: "bui-spinner-blue",
-        yellow: "bui-spinner-yellow",
-        violet: "bui-spinner-violet"
+        default: "bui-spinner--default",
+        white: "bui-spinner--white",
+        red: "bui-spinner--red",
+        rose: "bui-spinner--rose",
+        orange: "bui-spinner--orange",
+        green: "bui-spinner--green",
+        blue: "bui-spinner--blue",
+        yellow: "bui-spinner--yellow",
+        violet: "bui-spinner--violet"
       }
 
       # Dimensioni disponibili
       SPINNER_SIZES = {
-        small: "bui-spinner-small",
-        medium: "bui-spinner-medium",
-        large: "bui-spinner-large"
+        small: "bui-spinner--small",
+        medium: "bui-spinner--medium",
+        large: "bui-spinner--large"
       }
 
       # Stati e comportamenti dello spinner
       SPINNER_STATES = {
-        fullscreen: "bui-spinner-fullscreen"
+        fullscreen: "bui-spinner--fullscreen"
       }
 
       # Inizializzazione del componente

@@ -1,7 +1,7 @@
 <nav aria-label="Breadcrumb" class="<%= container_classes %>">
-  <ol class="bui-breadcrumb-list">
+  <ol class="bui-breadcrumb__list">
     <% @items.each_with_index do |item, index| %>
-      <li class="bui-breadcrumb-item">
+      <li class="bui-breadcrumb__item">
         <%= render link_for_item(item, active: last_item?(index)) %>
         
         <% unless last_item?(index) %>

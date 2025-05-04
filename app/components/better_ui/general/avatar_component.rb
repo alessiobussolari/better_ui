@@ -5,50 +5,50 @@ module BetterUi
 
       # Temi di colore disponibili
       AVATAR_THEME = {
-        default: "bui-avatar-default",
-        white: "bui-avatar-white",
-        red: "bui-avatar-red",
-        rose: "bui-avatar-rose",
-        orange: "bui-avatar-orange",
-        green: "bui-avatar-green",
-        blue: "bui-avatar-blue",
-        yellow: "bui-avatar-yellow",
-        violet: "bui-avatar-violet",
-        gray: "bui-avatar-gray"
+        default: "bui-avatar--default",
+        white: "bui-avatar--white",
+        red: "bui-avatar--red",
+        rose: "bui-avatar--rose",
+        orange: "bui-avatar--orange",
+        green: "bui-avatar--green",
+        blue: "bui-avatar--blue",
+        yellow: "bui-avatar--yellow",
+        violet: "bui-avatar--violet",
+        gray: "bui-avatar--gray"
       }
       
       # Dimensioni disponibili
       AVATAR_SIZES = {
-        xxsmall: "bui-avatar-size-xxsmall",
-        xsmall: "bui-avatar-size-xsmall",
-        small: "bui-avatar-size-small",
-        medium: "bui-avatar-size-medium",
-        large: "bui-avatar-size-large",
-        xlarge: "bui-avatar-size-xlarge",
-        xxlarge: "bui-avatar-size-xxlarge"
+        xxsmall: "bui-avatar--xxsmall",
+        xsmall: "bui-avatar--xsmall",
+        small: "bui-avatar--small",
+        medium: "bui-avatar--medium",
+        large: "bui-avatar--large",
+        xlarge: "bui-avatar--xlarge",
+        xxlarge: "bui-avatar--xxlarge"
       }
       
       # Forme disponibili
       AVATAR_SHAPES = {
-        circle: "bui-avatar-shape-circle",
-        square: "bui-avatar-shape-square",
-        rounded: "bui-avatar-shape-rounded"
+        circle: "bui-avatar--circle",
+        square: "bui-avatar--square",
+        rounded: "bui-avatar--rounded"
       }
       
       # Stati online disponibili
       AVATAR_STATUS = {
-        online: "bui-avatar-status-online",
-        offline: "bui-avatar-status-offline",
-        busy: "bui-avatar-status-busy",
-        away: "bui-avatar-status-away"
+        online: "bui-avatar__status--online",
+        offline: "bui-avatar__status--offline",
+        busy: "bui-avatar__status--busy",
+        away: "bui-avatar__status--away"
       }
       
       # Posizioni dell'indicatore di stato
       AVATAR_STATUS_POSITION = {
-        bottom_right: "bui-avatar-status-position-bottom-right",
-        bottom_left: "bui-avatar-status-position-bottom-left",
-        top_right: "bui-avatar-status-position-top-right",
-        top_left: "bui-avatar-status-position-top-left"
+        bottom_right: "bui-avatar__status--bottom-right",
+        bottom_left: "bui-avatar__status--bottom-left",
+        top_right: "bui-avatar__status--top-right",
+        top_left: "bui-avatar__status--top-left"
       }
 
       def initialize(
@@ -117,7 +117,7 @@ module BetterUi
       # Restituisce le classi per l'indicatore di stato
       def status_indicator_classes
         [
-          "bui-avatar-status-indicator",
+          "bui-avatar__status",
           get_avatar_status_class,
           get_avatar_status_position_class
         ].compact.join(" ")

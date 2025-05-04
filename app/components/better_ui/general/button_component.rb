@@ -6,37 +6,37 @@ module BetterUi
 
       # Temi di bottoni disponibili con classi CSS personalizzate
       BUTTON_THEME = {
-        default: "bui-btn-default",
-        white: "bui-btn-white",
-        red: "bui-btn-red",
-        rose: "bui-btn-rose",
-        orange: "bui-btn-orange",
-        green: "bui-btn-green",
-        blue: "bui-btn-blue",
-        yellow: "bui-btn-yellow",
-        violet: "bui-btn-violet"
+        default: "bui-button--default",
+        white: "bui-button--white",
+        red: "bui-button--red",
+        rose: "bui-button--rose",
+        orange: "bui-button--orange",
+        green: "bui-button--green",
+        blue: "bui-button--blue",
+        yellow: "bui-button--yellow",
+        violet: "bui-button--violet"
       }
 
       # Dimensioni disponibili con classi CSS personalizzate
       BUTTON_SIZES = {
-        small: "bui-btn-size-small",
-        medium: "bui-btn-size-medium",
-        large: "bui-btn-size-large"
+        small: "bui-button--small",
+        medium: "bui-button--medium",
+        large: "bui-button--large"
       }
       
       # Border radius disponibili con classi CSS personalizzate
       BUTTON_RADIUS = {
-        none: "bui-btn-radius-none",
-        small: "bui-btn-radius-small",
-        medium: "bui-btn-radius-medium",
-        large: "bui-btn-radius-large",
-        full: "bui-btn-radius-full"
+        none: "bui-button--radius-none",
+        small: "bui-button--radius-small",
+        medium: "bui-button--radius-medium",
+        large: "bui-button--radius-large",
+        full: "bui-button--radius-full"
       }
       
       # Stati e comportamenti del bottone
       BUTTON_STATES = {
-        disabled: "bui-btn-disabled",
-        full_width: "bui-btn-full-width"
+        disabled: "bui-button--disabled",
+        full_width: "bui-button--full-width"
       }
       
       # Layout e stili comuni
@@ -84,9 +84,7 @@ module BetterUi
       # Combina tutte le classi
       def combined_classes
         [
-          "bui-btn", # Classe base per tutti i bottoni
-          BUTTON_LAYOUT[:default],
-          BUTTON_LAYOUT[:focus],
+          "bui-button", # Classe base per tutti i bottoni
           get_border_radius_class,
           get_button_type_classes,
           get_button_size_classes,

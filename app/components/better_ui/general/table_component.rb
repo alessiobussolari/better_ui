@@ -6,24 +6,24 @@ module BetterUi
       
       # Costanti per configurazione stili
       TABLE_THEMES = {
-        default: { base: "bui-table-default", border: "bui-table-border-default", bg: "bui-table-bg-default", text: "bui-table-text-default" },
-        white:   { base: "bui-table-white",   border: "bui-table-border-white",   bg: "bui-table-bg-white",   text: "bui-table-text-white" },
-        red:     { base: "bui-table-red",     border: "bui-table-border-red",     bg: "bui-table-bg-red",     text: "bui-table-text-red" },
-        rose:    { base: "bui-table-rose",    border: "bui-table-border-rose",    bg: "bui-table-bg-rose",    text: "bui-table-text-rose" },
-        orange:  { base: "bui-table-orange",  border: "bui-table-border-orange",  bg: "bui-table-bg-orange",  text: "bui-table-text-orange" },
-        green:   { base: "bui-table-green",   border: "bui-table-border-green",   bg: "bui-table-bg-green",   text: "bui-table-text-green" },
-        blue:    { base: "bui-table-blue",    border: "bui-table-border-blue",    bg: "bui-table-bg-blue",    text: "bui-table-text-blue" },
-        yellow:  { base: "bui-table-yellow",  border: "bui-table-border-yellow",  bg: "bui-table-bg-yellow",  text: "bui-table-text-yellow" },
-        violet:  { base: "bui-table-violet",  border: "bui-table-border-violet",  bg: "bui-table-bg-violet",  text: "bui-table-text-violet" }
+        default: "bui-table--default",
+        white:   "bui-table--white",
+        red:     "bui-table--red",
+        rose:    "bui-table--rose",
+        orange:  "bui-table--orange",
+        green:   "bui-table--green",
+        blue:    "bui-table--blue",
+        yellow:  "bui-table--yellow",
+        violet:  "bui-table--violet"
       }.freeze
       
       # Opzioni di bordi arrotondati standardizzati
       TABLE_RADIUS = {
-        none: "bui-table-radius-none",
-        small: "bui-table-radius-small",
-        medium: "bui-table-radius-medium",
-        large: "bui-table-radius-large",
-        full: "bui-table-radius-full"
+        none: "bui-table--radius-none",
+        small: "bui-table--radius-small",
+        medium: "bui-table--radius-medium",
+        large: "bui-table--radius-large",
+        full: "bui-table--radius-full"
       }.freeze
       
       def initialize(data:, headers: nil, caption: nil, striped: false, hoverable: false, bordered: true, compact: false, classes: nil, variant: :default, rounded: :small, footer: nil, header_rows_partial: nil, body_row_partial: nil, footer_rows_partial: nil)
@@ -45,15 +45,19 @@ module BetterUi
 
       def table_classes
         [
-          "bui-table-base",
-          @bordered ? "bui-table-bordered" : nil,
+          "bui-table",
+          get_theme_class,
+          @bordered ? "bui-table--bordered" : nil,
+          @striped ? "bui-table--striped" : nil,
+          @hoverable ? "bui-table--hoverable" : nil,
+          @compact ? "bui-table--compact" : nil,
           @classes
         ].compact.join(" ")
       end
 
       def table_container_classes
         [
-          "bui-table-container",
+          "bui-table__container",
           get_border_radius_class
         ].compact.join(" ")
       end
@@ -61,75 +65,47 @@ module BetterUi
       def get_border_radius_class
         TABLE_RADIUS[@rounded] || TABLE_RADIUS[:small]
       end
+      
+      def get_theme_class
+        TABLE_THEMES[@variant] || TABLE_THEMES[:default]
+      end
 
       def caption_classes
-        [
-          "bui-table-caption",
-          get_theme_bg_color,
-          get_theme_text_class,
-          @bordered ? "bui-table-caption-bordered #{get_theme_border_color}" : nil
-        ].compact.join(" ")
+        "bui-table__caption"
       end
 
       def thead_classes
-        "bui-table-header"
+        "bui-table__header"
       end
 
       def tbody_classes
-        @striped ? "bui-table-row-striped" : nil
+        "bui-table__body"
       end
       
       def tfoot_classes
-        "bui-table-footer"
+        "bui-table__footer"
       end
 
       def tr_classes(index)
-        [
-          @hoverable ? "bui-table-row-hover" : nil,
-          @striped ? nil : (index.odd? ? "bui-table-row-alternate" : nil)
-        ].compact.join(" ")
+        "bui-table__row"
       end
 
       def th_classes
         [
-          @compact ? "bui-table-cell-compact" : "bui-table-cell",
-          get_theme_bg_color,
-          get_theme_text_class,
-          @bordered ? "bui-table-cell-bordered #{get_theme_border_color}" : nil
+          "bui-table__cell",
+          "bui-table__cell--header"
         ].compact.join(" ")
       end
 
       def td_classes
-        [
-          @compact ? "bui-table-cell-compact" : "bui-table-cell",
-          @bordered ? "bui-table-cell-bordered #{get_theme_border_color}" : nil
-        ].compact.join(" ")
+        "bui-table__cell"
       end
       
       def tf_classes
         [
-          @compact ? "bui-table-cell-compact" : "bui-table-cell",
-          "bui-table-footer-cell",
-          get_theme_bg_color,
-          get_theme_text_class,
-          @bordered ? "bui-table-cell-bordered #{get_theme_border_color}" : nil
+          "bui-table__cell",
+          "bui-table__cell--footer"
         ].compact.join(" ")
-      end
-      
-      def get_theme_base_class
-        TABLE_THEMES[@variant][:base] || TABLE_THEMES[:default][:base]
-      end
-      
-      def get_theme_border_color
-        TABLE_THEMES[@variant][:border] || TABLE_THEMES[:default][:border]
-      end
-      
-      def get_theme_bg_color
-        TABLE_THEMES[@variant][:bg] || TABLE_THEMES[:default][:bg]
-      end
-      
-      def get_theme_text_class
-        TABLE_THEMES[@variant][:text] || TABLE_THEMES[:default][:text]
       end
 
       def headers_for_display

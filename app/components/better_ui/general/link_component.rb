@@ -6,49 +6,49 @@ module BetterUi
       # Temi di colore disponibili
       LINK_THEME = {
         default: {
-          link: "bui-link-default-link",
-          active: "bui-link-default-active",
-          text: "bui-link-default-text"
+          link: "bui-link--default",
+          active: "bui-link--active bui-link--default",
+          text: "bui-link--text bui-link--default"
         },
         white: {
-          link: "bui-link-white-link",
-          active: "bui-link-white-active",
-          text: "bui-link-white-text"
+          link: "bui-link--white",
+          active: "bui-link--active bui-link--white",
+          text: "bui-link--text bui-link--white"
         },
         red: {
-          link: "bui-link-red-link",
-          active: "bui-link-red-active",
-          text: "bui-link-red-text"
+          link: "bui-link--red",
+          active: "bui-link--active bui-link--red",
+          text: "bui-link--text bui-link--red"
         },
         rose: {
-          link: "bui-link-rose-link",
-          active: "bui-link-rose-active",
-          text: "bui-link-rose-text"
+          link: "bui-link--rose",
+          active: "bui-link--active bui-link--rose",
+          text: "bui-link--text bui-link--rose"
         },
         orange: {
-          link: "bui-link-orange-link",
-          active: "bui-link-orange-active",
-          text: "bui-link-orange-text"
+          link: "bui-link--orange",
+          active: "bui-link--active bui-link--orange",
+          text: "bui-link--text bui-link--orange"
         },
         green: {
-          link: "bui-link-green-link",
-          active: "bui-link-green-active",
-          text: "bui-link-green-text"
+          link: "bui-link--green",
+          active: "bui-link--active bui-link--green",
+          text: "bui-link--text bui-link--green"
         },
         blue: {
-          link: "bui-link-blue-link",
-          active: "bui-link-blue-active",
-          text: "bui-link-blue-text"
+          link: "bui-link--blue",
+          active: "bui-link--active bui-link--blue",
+          text: "bui-link--text bui-link--blue"
         },
         yellow: {
-          link: "bui-link-yellow-link",
-          active: "bui-link-yellow-active",
-          text: "bui-link-yellow-text"
+          link: "bui-link--yellow",
+          active: "bui-link--active bui-link--yellow",
+          text: "bui-link--text bui-link--yellow"
         },
         violet: {
-          link: "bui-link-violet-link",
-          active: "bui-link-violet-active",
-          text: "bui-link-violet-text"
+          link: "bui-link--violet",
+          active: "bui-link--active bui-link--violet",
+          text: "bui-link--text bui-link--violet"
         }
       }
 
@@ -89,7 +89,7 @@ module BetterUi
       def component_classes
         theme_classes = LINK_THEME.fetch(@theme, LINK_THEME[:default])
         
-        base_classes = ["bui-link-base"]
+        base_classes = ["bui-link"]
         
         if active?
           base_classes << theme_classes[:active]

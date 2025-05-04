@@ -3,12 +3,12 @@
     <img 
       src="<%= @src %>" 
       alt="<%= @name || 'Avatar' %>" 
-      class="bui-avatar-image"
+      class="bui-avatar__image"
       width="<%= pixel_size %>"
       height="<%= pixel_size %>"
     >
   <% else %>
-    <div class="bui-avatar-initials">
+    <div class="bui-avatar__placeholder">
       <%= initials %>
     </div>
   <% end %>

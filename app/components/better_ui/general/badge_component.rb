@@ -5,38 +5,38 @@ module BetterUi
 
       # Temi di colore disponibili
       BADGE_THEME = {
-        default: "bui-badge-default",
-        white: "bui-badge-white",
-        red: "bui-badge-red",
-        rose: "bui-badge-rose",
-        orange: "bui-badge-orange",
-        green: "bui-badge-green",
-        blue: "bui-badge-blue",
-        yellow: "bui-badge-yellow",
-        violet: "bui-badge-violet",
-        gray: "bui-badge-gray"
+        default: "bui-badge--default",
+        white: "bui-badge--white",
+        red: "bui-badge--red",
+        rose: "bui-badge--rose",
+        orange: "bui-badge--orange",
+        green: "bui-badge--green",
+        blue: "bui-badge--blue",
+        yellow: "bui-badge--yellow",
+        violet: "bui-badge--violet",
+        gray: "bui-badge--gray"
       }
 
       # Dimensioni disponibili
       BADGE_SIZES = {
-        small: "bui-badge-size-small",
-        medium: "bui-badge-size-medium",
-        large: "bui-badge-size-large"
+        small: "bui-badge--small",
+        medium: "bui-badge--medium",
+        large: "bui-badge--large"
       }
       
       # Border radius disponibili
       BADGE_RADIUS = {
-        none: "bui-badge-radius-none",
-        small: "bui-badge-radius-small",
-        medium: "bui-badge-radius-medium",
-        large: "bui-badge-radius-large",
-        full: "bui-badge-radius-full"
+        none: "bui-badge--square",
+        small: "bui-badge--square",
+        medium: "bui-badge--square",
+        large: "bui-badge--square",
+        full: "bui-badge--pill"
       }
       
       # Stati e varianti
       BADGE_VARIANTS = {
-        outline: "bui-badge-outline",
-        notification: "bui-badge-notification"
+        outline: "bui-badge--outline",
+        notification: "bui-badge--notification"
       }
 
       # Inizializzazione del componente
@@ -97,6 +97,18 @@ module BetterUi
         }
         
         attrs
+      end
+      
+      def icon_classes
+        if @icon_position == :left
+          "bui-badge__icon bui-badge__icon--left"
+        else
+          "bui-badge__icon bui-badge__icon--right"
+        end
+      end
+      
+      def text_classes
+        "bui-badge__text"
       end
       
       # Helper per renderizzare le icone

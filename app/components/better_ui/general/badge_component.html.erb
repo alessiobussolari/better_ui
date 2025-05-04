@@ -1,16 +1,16 @@
 <span <%= badge_attributes.to_s.html_safe %>>
   <% if @icon && @icon_position == :left %>
-    <span class="bui-badge-icon-left">
+    <span class="<%= icon_classes %>">
       <%= render_icon(@icon) %>
     </span>
   <% end %>
   
   <% if @label.present? %>
-    <span class="bui-badge-label"><%= @label %></span>
+    <span class="<%= text_classes %>"><%= @label %></span>
   <% end %>
   
   <% if @icon && @icon_position == :right %>
-    <span class="bui-badge-icon-right">
+    <span class="<%= icon_classes %>">
       <%= render_icon(@icon) %>
     </span>
   <% end %>

@@ -6,48 +6,48 @@ module BetterUi
       # Temi di colore disponibili
       BREADCRUMB_THEME = {
         default: {
-          container: "bui-breadcrumb-default-container",
-          separator: "bui-breadcrumb-default-separator"
+          container: "bui-breadcrumb--default",
+          separator: "bui-breadcrumb__separator--default"
         },
         white: {
-          container: "bui-breadcrumb-white-container",
-          separator: "bui-breadcrumb-white-separator"
+          container: "bui-breadcrumb--white",
+          separator: "bui-breadcrumb__separator--white"
         },
         red: {
-          container: "bui-breadcrumb-red-container",
-          separator: "bui-breadcrumb-red-separator"
+          container: "bui-breadcrumb--red",
+          separator: "bui-breadcrumb__separator--red"
         },
         rose: {
-          container: "bui-breadcrumb-rose-container",
-          separator: "bui-breadcrumb-rose-separator"
+          container: "bui-breadcrumb--rose",
+          separator: "bui-breadcrumb__separator--rose"
         },
         orange: {
-          container: "bui-breadcrumb-orange-container",
-          separator: "bui-breadcrumb-orange-separator"
+          container: "bui-breadcrumb--orange",
+          separator: "bui-breadcrumb__separator--orange"
         },
         green: {
-          container: "bui-breadcrumb-green-container",
-          separator: "bui-breadcrumb-green-separator"
+          container: "bui-breadcrumb--green",
+          separator: "bui-breadcrumb__separator--green"
         },
         blue: {
-          container: "bui-breadcrumb-blue-container", 
-          separator: "bui-breadcrumb-blue-separator"
+          container: "bui-breadcrumb--blue", 
+          separator: "bui-breadcrumb__separator--blue"
         },
         yellow: {
-          container: "bui-breadcrumb-yellow-container",
-          separator: "bui-breadcrumb-yellow-separator"
+          container: "bui-breadcrumb--yellow",
+          separator: "bui-breadcrumb__separator--yellow"
         },
         violet: {
-          container: "bui-breadcrumb-violet-container",
-          separator: "bui-breadcrumb-violet-separator"
+          container: "bui-breadcrumb--violet",
+          separator: "bui-breadcrumb__separator--violet"
         }
       }
 
       # Dimensioni disponibili
       BREADCRUMB_SIZES = {
-        small: "bui-breadcrumb-small",
-        medium: "bui-breadcrumb-medium",
-        large: "bui-breadcrumb-large"
+        small: "bui-breadcrumb--small",
+        medium: "bui-breadcrumb--medium",
+        large: "bui-breadcrumb--large"
       }
 
       # Separatori predefiniti
@@ -86,7 +86,7 @@ module BetterUi
       # Genera le classi per il container
       def container_classes
         [
-          "bui-breadcrumb-container",
+          "bui-breadcrumb",
           BREADCRUMB_SIZES.fetch(@size, BREADCRUMB_SIZES[:medium]),
           BREADCRUMB_THEME.fetch(@theme, BREADCRUMB_THEME[:default])[:container],
           @classes
@@ -96,7 +96,7 @@ module BetterUi
       # Genera le classi per il separatore
       def separator_classes
         [
-          "bui-breadcrumb-separator",
+          "bui-breadcrumb__separator",
           BREADCRUMB_THEME.fetch(@theme, BREADCRUMB_THEME[:default])[:separator]
         ].compact.join(" ")
       end

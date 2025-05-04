@@ -1,14 +1,14 @@
 <div <%= spinner_attributes.to_s.html_safe %>>
-  <div class="bui-spinner-animation"></div>
+  <div class="bui-spinner__animation"></div>
   
   <% if @label.present? %>
-    <div class="bui-spinner-label">
+    <div class="bui-spinner__label">
       <%= @label %>
     </div>
   <% end %>
   
   <% if content.present? %>
-    <div class="bui-spinner-content">
+    <div class="bui-spinner__content">
       <%= content %>
     </div>
   <% end %>

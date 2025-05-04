@@ -1,17 +1,17 @@
 <% if link? %>
   <%= link_to href, **link_attributes do %>
     <% if render_icon %>
-      <span class="bui-link-icon-wrapper"><%= render_icon %></span>
+      <span class="bui-link__icon"><%= render_icon %></span>
     <% end %>
-    <span><%= label %></span>
+    <span class="bui-link__text"><%= label %></span>
     <%= content if content.present? %>
   <% end %>
 <% else %>
   <span class="<%= component_classes %>" <%= "aria-current='page'" if active? %>>
     <% if render_icon %>
-      <span class="bui-link-icon-wrapper"><%= render_icon %></span>
+      <span class="bui-link__icon"><%= render_icon %></span>
     <% end %>
-    <span><%= label %></span>
+    <span class="bui-link__text"><%= label %></span>
     <%= content if content.present? %>
   </span>
 <% end %> 
