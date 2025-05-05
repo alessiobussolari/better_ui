@@ -3,7 +3,7 @@ import { defineConfig } from "vite";
 
 export default defineConfig({
   base: "/",
-  plugins: [tailwindcss()],
+  plugins: [],
   build: {
     outDir: "test/dummy/app/assets/builds/",
     lib: {

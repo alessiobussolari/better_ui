@@ -1,4 +1,7 @@
 // File principale che importa tutti i moduli
+// Base che importa Tailwind
+@use "tailwindcss";
+
 @use "better_ui/base";
 @use "better_ui/components";
-@use "better_ui/utilities"; 
+@use "better_ui/utilities";
