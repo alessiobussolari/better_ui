@@ -13,14 +13,15 @@
     }
     
     &__status {
-      @apply absolute bottom-0 right-0 block rounded-full ring-2 ring-white;
+      @apply absolute bottom-0 right-0 block rounded-full ring-2 ring-white
+             dark:ring-gray-800;
       
       &--online {
         @apply bg-green-400;
       }
       
       &--offline {
-        @apply bg-gray-400;
+        @apply bg-gray-400 dark:bg-gray-600;
       }
       
       &--busy {
@@ -33,7 +34,8 @@
     }
     
     &__presence {
-      @apply absolute block rounded-full ring-2 ring-white;
+      @apply absolute block rounded-full ring-2 ring-white
+             dark:ring-gray-800;
     }
     
     &__badge {
@@ -124,43 +126,43 @@
     // Modifiers (colori placeholders)
     &--gray {
       .bui-avatar__placeholder {
-        @apply bg-gray-500;
+        @apply bg-gray-500 dark:bg-gray-600;
       }
     }
     
     &--red {
       .bui-avatar__placeholder {
-        @apply bg-red-500;
+        @apply bg-red-500 dark:bg-red-600;
       }
     }
     
     &--blue {
       .bui-avatar__placeholder {
-        @apply bg-blue-500;
+        @apply bg-blue-500 dark:bg-blue-600;
       }
     }
     
     &--green {
       .bui-avatar__placeholder {
-        @apply bg-green-500;
+        @apply bg-green-500 dark:bg-green-600;
       }
     }
     
     &--violet {
       .bui-avatar__placeholder {
-        @apply bg-violet-500;
+        @apply bg-violet-500 dark:bg-violet-600;
       }
     }
     
     &--orange {
       .bui-avatar__placeholder {
-        @apply bg-orange-500;
+        @apply bg-orange-500 dark:bg-orange-600;
       }
     }
     
     &--yellow {
       .bui-avatar__placeholder {
-        @apply bg-yellow-500 text-yellow-900;
+        @apply bg-yellow-500 text-yellow-900 dark:bg-yellow-600 dark:text-yellow-100;
       }
     }
     
@@ -194,7 +196,7 @@
     @apply flex;
     
     .bui-avatar {
-      @apply border-2 border-white;
+      @apply border-2 border-white dark:border-gray-800;
     }
   }
 } 

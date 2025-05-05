@@ -11,4 +11,15 @@
       with_divider: with_divider
     ) %>
   </div>
-<% end %> 
+<% else %>
+  <%= bui_heading(
+    text,
+    level: level,
+    variant: variant,
+    size: size,
+    align: align,
+    icon: icon,
+    subtitle: subtitle,
+    with_divider: with_divider
+  ) %>
+<% end %>

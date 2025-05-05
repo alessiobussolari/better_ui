@@ -1,5 +1,5 @@
 // Stili comuni dell'applicazione
 html,
 body {
-  @apply font-sans text-gray-900 leading-normal;
+  @apply font-sans text-gray-900 leading-normal dark:text-white dark:bg-gray-900;
 }

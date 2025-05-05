@@ -1,11 +1,11 @@
 @layer components {
   // Classe base per il pannello (Block)
   .bui-panel {
-    @apply border shadow-sm;
+    @apply border shadow-sm dark:border-gray-700 dark:shadow-gray-900/20;
     
     // Elements
     &__header {
-      @apply px-4 py-3 border-b;
+      @apply px-4 py-3 border-b dark:border-gray-700;
     }
     
     &__body {
@@ -13,11 +13,11 @@
     }
     
     &__footer {
-      @apply px-4 py-3 border-t;
+      @apply px-4 py-3 border-t dark:border-gray-700;
     }
     
     &__title {
-      @apply text-lg font-medium;
+      @apply text-lg font-medium dark:text-white;
     }
     
     // Modifiers (varianti colore)
@@ -34,26 +34,29 @@
     }
     
     &--white {
-      @apply bg-white text-black border-gray-200;
+      @apply bg-white text-black border-gray-200
+             dark:bg-gray-800 dark:text-white dark:border-gray-700;
       
       .bui-panel__header {
-        @apply bg-gray-50;
+        @apply bg-gray-50 dark:bg-gray-700;
       }
       
       .bui-panel__footer {
-        @apply bg-gray-50;
+        @apply bg-gray-50 dark:bg-gray-700;
       }
     }
     
     &--red {
-      @apply bg-red-50 text-red-900 border-red-200;
+      @apply bg-red-50 text-red-900 border-red-200
+             dark:bg-red-900/20 dark:text-red-100 dark:border-red-800/30;
       
       .bui-panel__header {
-        @apply bg-red-100 text-red-800;
+        @apply bg-red-100 text-red-800
+               dark:bg-red-900/30 dark:text-red-100;
       }
       
       .bui-panel__footer {
-        @apply bg-red-100;
+        @apply bg-red-100 dark:bg-red-900/30;
       }
     }
     
