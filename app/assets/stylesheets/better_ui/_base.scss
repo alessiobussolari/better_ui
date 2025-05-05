@@ -1,9 +1,7 @@
 // Base che importa Tailwind
-@use "tailwindcss/base";
-@use "tailwindcss/components";
-@use "tailwindcss/utilities";
 
 // Stili comuni dell'applicazione
-html, body {
+html,
+body {
   @apply font-sans text-gray-900 leading-normal;
-} 
+}
