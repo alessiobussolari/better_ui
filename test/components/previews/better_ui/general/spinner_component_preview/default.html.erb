@@ -1,22 +1,8 @@
-<div class="p-8 flex flex-col items-center space-y-6">
-  <h1 class="text-xl font-bold">Spinner Component</h1>
-  
-  <div class="flex flex-col items-center justify-center p-8 bg-slate-100 rounded-lg w-64 h-64">
-    <%= bui_spinner(
-      label,
-      theme: theme,
-      size: size,
-      fullscreen: fullscreen
-    ) %>
-  </div>
-  
-  <div class="w-full max-w-lg">
-    <h2 class="text-lg font-semibold mb-2">Parametri configurabili:</h2>
-    <ul class="list-disc list-inside">
-      <li><strong>theme</strong>: <%= theme %></li>
-      <li><strong>size</strong>: <%= size %></li>
-      <li><strong>label</strong>: <%= label.present? ? label : "(nessuna)" %></li>
-      <li><strong>fullscreen</strong>: <%= fullscreen ? "attivato" : "disattivato" %></li>
-    </ul>
-  </div>
-</div> 
+<%= render BetterUi::General::SpinnerComponent.new(
+  theme: theme,
+  size: size,
+  orientation: orientation,
+  style: style,
+  label: label,
+  fullscreen: fullscreen
+) %>

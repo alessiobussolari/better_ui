@@ -1,4 +1,4 @@
-<div <%= avatar_attributes.to_s.html_safe %>>
+<div <%= tag.attributes(avatar_attributes) %>>
   <% if show_image? %>
     <img 
       src="<%= @src %>" 

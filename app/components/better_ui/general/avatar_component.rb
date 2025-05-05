@@ -1,9 +1,9 @@
 module BetterUi
   module General
     class AvatarComponent < ViewComponent::Base
-      attr_reader :name, :src, :size, :shape, :status, :status_position, :type, :classes, :id
+      attr_reader :name, :src, :size, :shape, :status, :status_position, :theme, :style, :classes, :id
 
-      # Temi di colore disponibili
+      # Temi di avatar disponibili
       AVATAR_THEME = {
         default: "bui-avatar--default",
         white: "bui-avatar--white",
@@ -18,7 +18,7 @@ module BetterUi
       }
       
       # Dimensioni disponibili
-      AVATAR_SIZES = {
+      AVATAR_SIZE = {
         xxsmall: "bui-avatar--xxsmall",
         xsmall: "bui-avatar--xsmall",
         small: "bui-avatar--small",
@@ -29,7 +29,7 @@ module BetterUi
       }
       
       # Forme disponibili
-      AVATAR_SHAPES = {
+      AVATAR_SHAPE = {
         circle: "bui-avatar--circle",
         square: "bui-avatar--square",
         rounded: "bui-avatar--rounded"
@@ -51,6 +51,13 @@ module BetterUi
         top_left: "bui-avatar__status--top-left"
       }
 
+      # Stili disponibili
+      AVATAR_STYLE = {
+        filled: "bui-avatar--filled",
+        outline: "bui-avatar--outline",
+        light: "bui-avatar--light"
+      }
+
       def initialize(
         name: nil,
         src: nil,
@@ -58,9 +65,11 @@ module BetterUi
         shape: :circle,
         status: nil,
         status_position: :bottom_right,
-        type: :default,
+        theme: :default,
+        style: :filled,
         classes: nil,
-        id: nil
+        id: nil,
+        **html_options
       )
         @name = name
         @src = src
@@ -68,39 +77,49 @@ module BetterUi
         @shape = shape.to_sym
         @status = status&.to_sym
         @status_position = status_position.to_sym
-        @type = type.to_sym
+        @theme = theme.to_sym
+        @style = style.to_sym
         @classes = classes
         @id = id
+        @html_options = html_options
+        
+        validate_params
       end
 
       # Combina tutte le classi
       def combined_classes
         [
           "bui-avatar", # Classe base per tutti gli avatar
-          get_avatar_theme_class,
-          get_avatar_size_class,
-          get_avatar_shape_class,
-          @classes
+          get_theme_class,
+          get_size_class,
+          get_shape_class,
+          get_style_class,
+          @classes,
+          @html_options[:class]
         ].compact.join(" ")
       end
       
-      def get_avatar_theme_class
-        AVATAR_THEME[@type] || AVATAR_THEME[:default]
+      def get_theme_class
+        AVATAR_THEME[@theme] || AVATAR_THEME[:default]
       end
       
-      def get_avatar_size_class
-        AVATAR_SIZES[@size] || AVATAR_SIZES[:medium]
+      def get_size_class
+        AVATAR_SIZE[@size] || AVATAR_SIZE[:medium]
       end
       
-      def get_avatar_shape_class
-        AVATAR_SHAPES[@shape] || AVATAR_SHAPES[:circle]
+      def get_shape_class
+        AVATAR_SHAPE[@shape] || AVATAR_SHAPE[:circle]
       end
       
-      def get_avatar_status_class
+      def get_style_class
+        AVATAR_STYLE[@style] || AVATAR_STYLE[:filled]
+      end
+      
+      def get_status_class
         AVATAR_STATUS[@status] || ""
       end
       
-      def get_avatar_status_position_class
+      def get_status_position_class
         AVATAR_STATUS_POSITION[@status_position] || AVATAR_STATUS_POSITION[:bottom_right]
       end
       
@@ -111,6 +130,11 @@ module BetterUi
           id: @id
         }
         
+        # Aggiungi altri attributi HTML se presenti
+        @html_options.except(:class).each do |key, value|
+          attrs[key] = value
+        end
+        
         attrs
       end
       
@@ -118,8 +142,8 @@ module BetterUi
       def status_indicator_classes
         [
           "bui-avatar__status",
-          get_avatar_status_class,
-          get_avatar_status_position_class
+          get_status_class,
+          get_status_position_class
         ].compact.join(" ")
       end
       
@@ -164,6 +188,55 @@ module BetterUi
           96
         else
           40
+        end
+      end
+
+      private
+
+      def validate_params
+        validate_size
+        validate_shape
+        validate_theme
+        validate_style
+        validate_status
+        validate_status_position
+      end
+
+      def validate_size
+        unless AVATAR_SIZE.keys.include?(@size)
+          raise ArgumentError, "La dimensione deve essere una tra: #{AVATAR_SIZE.keys.join(', ')}"
+        end
+      end
+
+      def validate_shape
+        unless AVATAR_SHAPE.keys.include?(@shape)
+          raise ArgumentError, "La forma deve essere una tra: #{AVATAR_SHAPE.keys.join(', ')}"
+        end
+      end
+
+      def validate_theme
+        unless AVATAR_THEME.keys.include?(@theme)
+          raise ArgumentError, "Il tema deve essere uno tra: #{AVATAR_THEME.keys.join(', ')}"
+        end
+      end
+
+      def validate_style
+        unless AVATAR_STYLE.keys.include?(@style)
+          raise ArgumentError, "Lo stile deve essere uno tra: #{AVATAR_STYLE.keys.join(', ')}"
+        end
+      end
+
+      def validate_status
+        return if @status.nil?
+        
+        unless AVATAR_STATUS.keys.include?(@status)
+          raise ArgumentError, "Lo stato deve essere uno tra: #{AVATAR_STATUS.keys.join(', ')}"
+        end
+      end
+
+      def validate_status_position
+        unless AVATAR_STATUS_POSITION.keys.include?(@status_position)
+          raise ArgumentError, "La posizione dello stato deve essere una tra: #{AVATAR_STATUS_POSITION.keys.join(', ')}"
         end
       end
     end

@@ -1,103 +1,90 @@
 module BetterUi
   module General
-    class BreadcrumbComponentPreview < ViewComponent::Preview
-      # Breadcrumb configurabile
-      #
-      # @param theme select { choices: [default, white, red, rose, orange, green, blue, yellow, violet] } "Tema di colore"
+    class BreadcrumbComponentPreview < Lookbook::Preview
+      # @!group Esempi Base
+      
+      # @label Con Helper
+      # @param theme select { choices: [default, white, red, rose, orange, green, blue, yellow, violet, gray] } "Tema del breadcrumb"
       # @param separator select { choices: [chevron, slash, arrow, dot, pipe] } "Tipo di separatore"
       # @param size select { choices: [small, medium, large] } "Dimensione del testo"
+      # @param style select { choices: [filled, outline, light] } "Stile del breadcrumb"
+      # @param orientation select { choices: [horizontal, vertical] } "Orientamento del breadcrumb"
       # @param with_icons toggle "Mostra icone"
       def default(
         theme: :default,
         separator: :chevron,
         size: :medium,
+        style: :filled,
+        orientation: :horizontal,
         with_icons: false
       )
-        # Valori validi per i parametri:
-        # theme: :default, :white, :red, :rose, :orange, :green, :blue, :yellow, :violet
-        # separator: :chevron, :slash, :arrow, :dot, :pipe
-        # size: :small, :medium, :large
-        # with_icons: true, false
+        items = generate_items(with_icons)
         
-        items = [
-          { label: "Home", url: "#" },
-          { label: "Prodotti", url: "#" },
-          "Dettaglio prodotto"
-        ]
-        
-        # Assicuriamoci che i parametri siano convertiti nel tipo corretto
-        theme = theme.to_sym if theme.is_a?(String)
-        separator = separator.to_sym if separator.is_a?(String)
-        size = size.to_sym if size.is_a?(String)
-        with_icons = with_icons == true || with_icons == "true"
-        
-        # Validiamo i valori per garantire opzioni corrette
-        valid_themes = [:default, :white, :red, :rose, :orange, :green, :blue, :yellow, :violet]
-        valid_separators = [:chevron, :slash, :arrow, :dot, :pipe]
-        valid_sizes = [:small, :medium, :large]
-        
-        theme = :default unless valid_themes.include?(theme)
-        separator = :chevron unless valid_separators.include?(separator)
-        size = :medium unless valid_sizes.include?(size)
-        
-        # Se richieste le icone, aggiungile
-        if with_icons
-          icon_names = ["home", "box", "info-circle"]
-          items = items.each_with_index.map do |item, index|
-            if item.is_a?(Hash)
-              item.merge(icon: icon_names[index])
-            else
-              { label: item, icon: icon_names[index] }
-            end
-          end
-        end
+        normalize_params!(
+          theme: theme,
+          separator: separator,
+          size: size,
+          style: style,
+          orientation: orientation,
+          with_icons: with_icons
+        )
         
         render_with_template(locals: {
           items: items,
           theme: theme,
           separator: separator,
-          size: size
+          size: size,
+          style: style,
+          orientation: orientation
         })
       end
       
-      # @!group Raw
-      
-      # @param theme select { choices: [default, white, red, rose, orange, green, blue, yellow, violet] } "Tema di colore"
+      # @label Istanziazione Diretta
+      # @param theme select { choices: [default, white, red, rose, orange, green, blue, yellow, violet, gray] } "Tema del breadcrumb"
       # @param separator select { choices: [chevron, slash, arrow, dot, pipe] } "Tipo di separatore"
       # @param size select { choices: [small, medium, large] } "Dimensione del testo"
+      # @param style select { choices: [filled, outline, light] } "Stile del breadcrumb"
+      # @param orientation select { choices: [horizontal, vertical] } "Orientamento del breadcrumb"
       # @param with_icons toggle "Mostra icone"
       def raw(
         theme: :default,
         separator: :chevron,
         size: :medium,
+        style: :filled,
+        orientation: :horizontal,
         with_icons: false
       )
-        # Valori validi per i parametri:
-        # theme: :default, :white, :red, :rose, :orange, :green, :blue, :yellow, :violet
-        # separator: :chevron, :slash, :arrow, :dot, :pipe
-        # size: :small, :medium, :large
-        # with_icons: true, false
+        items = generate_items(with_icons)
         
+        normalize_params!(
+          theme: theme,
+          separator: separator,
+          size: size,
+          style: style,
+          orientation: orientation,
+          with_icons: with_icons
+        )
+        
+        render BetterUi::General::BreadcrumbComponent.new(
+          items: items,
+          theme: theme,
+          separator: separator,
+          size: size,
+          style: style,
+          orientation: orientation
+        )
+      end
+      
+      # @!endgroup
+      
+      private
+      
+      def generate_items(with_icons)
         items = [
           { label: "Home", url: "#" },
           { label: "Prodotti", url: "#" },
           "Dettaglio prodotto"
         ]
-        
-        # Assicuriamoci che i parametri siano convertiti nel tipo corretto
-        theme = theme.to_sym if theme.is_a?(String)
-        separator = separator.to_sym if separator.is_a?(String)
-        size = size.to_sym if size.is_a?(String)
-        with_icons = with_icons == true || with_icons == "true"
-        
-        # Validiamo i valori per garantire opzioni corrette
-        valid_themes = [:default, :white, :red, :rose, :orange, :green, :blue, :yellow, :violet]
-        valid_separators = [:chevron, :slash, :arrow, :dot, :pipe]
-        valid_sizes = [:small, :medium, :large]
-        
-        theme = :default unless valid_themes.include?(theme)
-        separator = :chevron unless valid_separators.include?(separator)
-        size = :medium unless valid_sizes.include?(size)
         
         # Se richieste le icone, aggiungile
         if with_icons
@@ -111,15 +98,20 @@ module BetterUi
           end
         end
         
-        render_with_template(locals: {
-          items: items,
-          theme: theme,
-          separator: separator,
-          size: size
-        })
+        items
       end
       
-      # @!endgroup
+      def normalize_params!(options)
+        # Conversione dei tipi
+        options[:theme] = options[:theme].to_sym if options[:theme].is_a?(String)
+        options[:separator] = options[:separator].to_sym if options[:separator].is_a?(String)
+        options[:size] = options[:size].to_sym if options[:size].is_a?(String)
+        options[:style] = options[:style].to_sym if options[:style].is_a?(String)
+        options[:orientation] = options[:orientation].to_sym if options[:orientation].is_a?(String)
+        options[:with_icons] = options[:with_icons] == true || options[:with_icons] == "true"
+        
+        options
+      end
     end
   end
-end 
+end

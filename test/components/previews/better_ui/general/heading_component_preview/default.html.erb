@@ -1,25 +1,10 @@
-<% if variant == :white %>
-  <div class="p-4 bg-gray-800">
-    <%= bui_heading(
-      text,
-      level: level,
-      variant: variant,
-      size: size,
-      align: align,
-      icon: icon,
-      subtitle: subtitle,
-      with_divider: with_divider
-    ) %>
-  </div>
-<% else %>
-  <%= bui_heading(
-    text,
-    level: level,
-    variant: variant,
-    size: size,
-    align: align,
-    icon: icon,
-    subtitle: subtitle,
-    with_divider: with_divider
-  ) %>
-<% end %>
+<%= render BetterUi::General::HeadingComponent.new(
+  level: level,
+  theme: theme,
+  align: align,
+  size: size,
+  style: style,
+  icon: icon,
+  subtitle: subtitle,
+  with_divider: with_divider
+).with_content(text) %>

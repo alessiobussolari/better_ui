@@ -1,4 +1,4 @@
-<span <%= badge_attributes.to_s.html_safe %>>
+<span <%= tag.attributes(badge_attributes) %>>
   <% if @icon && @icon_position == :left %>
     <span class="<%= icon_classes %>">
       <%= render_icon(@icon) %>

@@ -1,4 +1,4 @@
-<div <%= spinner_attributes.to_s.html_safe %>>
+<div <%= tag.attributes(spinner_attributes) %>>
   <div class="bui-spinner__animation"></div>
   
   <% if @label.present? %>

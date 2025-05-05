@@ -1,74 +1,72 @@
 module BetterUi
   module General
     class LinkComponentPreview < ViewComponent::Preview
-      # @!group Esempi Base
+      # @!group Default
       
-      # Link configurabile
-      #
+      # @label Con Helper
       # @param label text "Testo del link"
       # @param href text "URL di destinazione (lasciare vuoto per semplice testo)"
-      # @param theme select { choices: [default, white, red, rose, orange, green, blue, yellow, violet] } "Tema di colore"
+      # @param theme select { choices: [default, white, red, rose, orange, green, blue, yellow, violet, gray] } "Tema di colore"
+      # @param orientation select { choices: [horizontal, vertical] } "Orientamento"
+      # @param style select { choices: [default, underline, bold, text] } "Stile del link"
       # @param icon text "Nome icona (opzionale)"
       # @param active toggle "Link attivo/corrente"
+      # @param disabled toggle "Link disabilitato"
       # @param target select { choices: [_blank, _self, _parent, _top] } "Target del link (opzionale)"
       def default(
         label: "Esempio link",
         href: "#",
         theme: :default,
+        orientation: :horizontal,
+        style: :default,
         icon: nil,
         active: false,
+        disabled: false,
         target: nil
       )
-        normalize_params!(
-          label: label,
-          href: href,
-          theme: theme,
-          icon: icon,
-          active: active,
-          target: target
-        )
-        
         render_with_template(locals: {
           label: label,
           href: href,
           theme: theme,
+          orientation: orientation,
+          style: style,
           icon: icon,
           active: active,
-          target: target,
-          bg_classes: bg_classes
+          disabled: disabled,
+          target: target
         })
       end
       
-      # @label Componente diretto
+      # @label Istanziazione Diretta
       # @param label text "Testo del link"
       # @param href text "URL di destinazione (lasciare vuoto per semplice testo)"
-      # @param theme select { choices: [default, white, red, rose, orange, green, blue, yellow, violet] } "Tema di colore"
+      # @param theme select { choices: [default, white, red, rose, orange, green, blue, yellow, violet, gray] } "Tema di colore"
+      # @param orientation select { choices: [horizontal, vertical] } "Orientamento"
+      # @param style select { choices: [default, underline, bold, text] } "Stile del link"
       # @param icon text "Nome icona (opzionale)"
       # @param active toggle "Link attivo/corrente"
+      # @param disabled toggle "Link disabilitato"
       # @param target select { choices: [_blank, _self, _parent, _top] } "Target del link (opzionale)"
       def raw(
         label: "Esempio link",
         href: "#",
         theme: :default,
+        orientation: :horizontal,
+        style: :default,
         icon: nil,
         active: false,
+        disabled: false,
         target: nil
       )
-        normalize_params!(
-          label: label,
-          href: href,
-          theme: theme,
-          icon: icon,
-          active: active,
-          target: target
-        )
-        
         render BetterUi::General::LinkComponent.new(
           label: label,
           href: href,
           theme: theme,
+          orientation: orientation,
+          style: style,
           icon: icon,
           active: active,
+          disabled: disabled,
           target: target
         )
       end

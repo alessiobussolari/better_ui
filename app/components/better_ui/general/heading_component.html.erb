@@ -1,1 +1,21 @@
-<%= content_tag("h#{@level}", content, class: heading_classes) %>
+<div class="bui-heading-container">
+  <<%= "h#{@level}" %> <%= tag.attributes(heading_attributes) %>>
+    <% if @icon %>
+      <span class="bui-heading__icon">
+        <%= render BetterUi::General::IconComponent.new(name: @icon) %>
+      </span>
+    <% end %>
+    
+    <span class="bui-heading__text"><%= content %></span>
+  </<%= "h#{@level}" %>>
+  
+  <% if @subtitle %>
+    <div class="bui-heading__subtitle">
+      <%= @subtitle %>
+    </div>
+  <% end %>
+  
+  <% if @with_divider %>
+    <div class="bui-heading__divider"></div>
+  <% end %>
+</div>

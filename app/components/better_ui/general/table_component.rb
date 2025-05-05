@@ -4,8 +4,8 @@ module BetterUi
       attr_reader :data, :headers, :caption, :striped, :hoverable, :bordered, :compact, :classes, :variant, :rounded, :footer,
                   :header_rows_partial, :body_row_partial, :footer_rows_partial
       
-      # Costanti per configurazione stili
-      TABLE_THEMES = {
+      # Temi di colore disponibili
+      TABLE_THEME = {
         default: "bui-table--default",
         white:   "bui-table--white",
         red:     "bui-table--red",
@@ -14,7 +14,8 @@ module BetterUi
         green:   "bui-table--green",
         blue:    "bui-table--blue",
         yellow:  "bui-table--yellow",
-        violet:  "bui-table--violet"
+        violet:  "bui-table--violet",
+        gray:    "bui-table--gray"
       }.freeze
       
       # Opzioni di bordi arrotondati standardizzati
@@ -26,48 +27,111 @@ module BetterUi
         full: "bui-table--radius-full"
       }.freeze
       
-      def initialize(data:, headers: nil, caption: nil, striped: false, hoverable: false, bordered: true, compact: false, classes: nil, variant: :default, rounded: :small, footer: nil, header_rows_partial: nil, body_row_partial: nil, footer_rows_partial: nil)
+      # Orientamenti disponibili
+      TABLE_ORIENTATION = {
+        horizontal: "bui-table--horizontal",
+        vertical: "bui-table--vertical"
+      }.freeze
+      
+      # Stili disponibili
+      TABLE_STYLE = {
+        default: "bui-table--style-default",
+        bordered: "bui-table--style-bordered",
+        striped: "bui-table--style-striped",
+        compact: "bui-table--style-compact",
+        minimal: "bui-table--style-minimal"
+      }.freeze
+      
+      def initialize(
+        data:, 
+        headers: nil, 
+        caption: nil, 
+        theme: :default, 
+        orientation: :horizontal, 
+        style: :default, 
+        radius: :small, 
+        striped: false, 
+        hoverable: false, 
+        bordered: false, 
+        compact: false, 
+        footer: nil, 
+        header_rows_partial: nil, 
+        body_row_partial: nil, 
+        footer_rows_partial: nil,
+        **html_options
+      )
         @data = data || []
         @headers = headers
         @caption = caption
+        @theme = theme.to_sym
+        @orientation = orientation.to_sym
+        @style = style.to_sym
+        @radius = radius.to_sym
+        # Mantieni queste flag per retrocompatibilità
         @striped = !!striped
         @hoverable = !!hoverable
         @bordered = !!bordered
         @compact = !!compact
-        @classes = classes
-        @variant = (TABLE_THEMES.key?(variant.to_sym) ? variant.to_sym : :default)
-        @rounded = (TABLE_RADIUS.key?(rounded.to_sym) ? rounded.to_sym : :small)
-        @footer = footer.is_a?(Array) ? footer : nil  # Valida che sia un array
+        @footer = footer.is_a?(Array) ? footer : nil
         @header_rows_partial = header_rows_partial
         @body_row_partial = body_row_partial
         @footer_rows_partial = footer_rows_partial
+        @html_options = html_options
+        
+        validate_params
       end
 
-      def table_classes
+      # Combina tutte le classi per la tabella
+      def combined_classes
         [
           "bui-table",
           get_theme_class,
+          get_orientation_class,
+          get_style_class,
           @bordered ? "bui-table--bordered" : nil,
           @striped ? "bui-table--striped" : nil,
           @hoverable ? "bui-table--hoverable" : nil,
           @compact ? "bui-table--compact" : nil,
-          @classes
+          @html_options[:class]
         ].compact.join(" ")
       end
 
+      # Restituisce gli attributi HTML per la tabella
+      def table_attributes
+        attrs = @html_options.except(:class)
+        attrs[:class] = combined_classes
+        attrs
+      end
+
+      # Combina le classi per il container
       def table_container_classes
         [
           "bui-table__container",
-          get_border_radius_class
+          get_radius_class
         ].compact.join(" ")
       end
+      
+      # Restituisce gli attributi HTML per il container
+      def container_attributes
+        {
+          class: table_container_classes
+        }
+      end
 
-      def get_border_radius_class
-        TABLE_RADIUS[@rounded] || TABLE_RADIUS[:small]
+      def get_radius_class
+        TABLE_RADIUS[@radius] || TABLE_RADIUS[:small]
       end
       
       def get_theme_class
-        TABLE_THEMES[@variant] || TABLE_THEMES[:default]
+        TABLE_THEME[@theme] || TABLE_THEME[:default]
+      end
+
+      def get_orientation_class
+        TABLE_ORIENTATION[@orientation] || TABLE_ORIENTATION[:horizontal]
+      end
+
+      def get_style_class
+        TABLE_STYLE[@style] || TABLE_STYLE[:default]
       end
 
       def caption_classes
@@ -137,6 +201,39 @@ module BetterUi
 
       def render?
         @data.present?
+      end
+      
+      private
+      
+      def validate_params
+        validate_theme
+        validate_orientation
+        validate_style
+        validate_radius
+      end
+      
+      def validate_theme
+        unless TABLE_THEME.keys.include?(@theme)
+          raise ArgumentError, "Il tema deve essere uno tra: #{TABLE_THEME.keys.join(', ')}"
+        end
+      end
+      
+      def validate_orientation
+        unless TABLE_ORIENTATION.keys.include?(@orientation)
+          raise ArgumentError, "L'orientamento deve essere uno tra: #{TABLE_ORIENTATION.keys.join(', ')}"
+        end
+      end
+      
+      def validate_style
+        unless TABLE_STYLE.keys.include?(@style)
+          raise ArgumentError, "Lo stile deve essere uno tra: #{TABLE_STYLE.keys.join(', ')}"
+        end
+      end
+      
+      def validate_radius
+        unless TABLE_RADIUS.keys.include?(@radius)
+          raise ArgumentError, "Il radius deve essere uno tra: #{TABLE_RADIUS.keys.join(', ')}"
+        end
       end
     end
   end

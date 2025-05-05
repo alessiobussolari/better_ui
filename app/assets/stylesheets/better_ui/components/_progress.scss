@@ -1,0 +1,111 @@
+@layer components {
+  // Classe base per la barra di progresso (Block)
+  .bui-progress {
+    @apply w-full;
+    
+    &__container {
+      @apply overflow-hidden bg-gray-200 rounded-full h-2
+             dark:bg-gray-700;
+    }
+    
+    &__bar {
+      @apply h-full rounded-full transition-all duration-300;
+    }
+    
+    &__label {
+      @apply text-xs font-medium text-right mt-1 text-gray-700
+             dark:text-gray-300;
+    }
+    
+    &__circle {
+      @apply relative inline-flex;
+      
+      svg {
+        @apply h-16 w-16 transform -rotate-90;
+      }
+    }
+    
+    &__circle-background {
+      @apply stroke-current text-gray-200
+             dark:text-gray-700;
+    }
+    
+    &__circle-value {
+      @apply stroke-current transition-all duration-300 ease-in-out;
+    }
+    
+    &__circle-text {
+      @apply absolute inset-0 flex items-center justify-center font-medium text-sm;
+    }
+    
+    // Modifiers (stili)
+    &--indeterminate &__bar {
+      @apply animate-pulse w-3/4;
+    }
+    
+    &--linear {
+      // Default
+    }
+    
+    &--circular {
+      @apply inline-flex;
+    }
+    
+    // Dimensioni (linear)
+    &--sm &__container {
+      @apply h-1;
+    }
+    
+    &--md &__container {
+      @apply h-2;
+    }
+    
+    &--lg &__container {
+      @apply h-3;
+    }
+    
+    // Dimensioni (circular)
+    &--sm &__circle svg {
+      @apply h-10 w-10;
+    }
+    
+    &--md &__circle svg {
+      @apply h-16 w-16;
+    }
+    
+    &--lg &__circle svg {
+      @apply h-24 w-24;
+    }
+    
+    // Varianti colore
+    &--default &__bar,
+    &--default &__circle-value {
+      @apply bg-gray-700 text-gray-700
+             dark:bg-gray-300 dark:text-gray-300;
+    }
+    
+    &--red &__bar,
+    &--red &__circle-value {
+      @apply bg-red-500 text-red-500
+             dark:bg-red-400 dark:text-red-400;
+    }
+    
+    &--blue &__bar,
+    &--blue &__circle-value {
+      @apply bg-blue-500 text-blue-500
+             dark:bg-blue-400 dark:text-blue-400;
+    }
+    
+    &--green &__bar,
+    &--green &__circle-value {
+      @apply bg-green-500 text-green-500
+             dark:bg-green-400 dark:text-green-400;
+    }
+    
+    &--yellow &__bar,
+    &--yellow &__circle-value {
+      @apply bg-yellow-500 text-yellow-500
+             dark:bg-yellow-400 dark:text-yellow-400;
+    }
+  }
+} 

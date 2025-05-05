@@ -1,42 +1,10 @@
-<div class="p-8 flex flex-col space-y-6">
-  <h1 class="text-xl font-bold">Avatar Component</h1>
-  
-  <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-8">
-    <div class="flex flex-col items-center justify-center p-6 bg-slate-100 rounded-lg">
-      <h3 class="mb-4 font-semibold">Anteprima</h3>
-      
-      <div class="flex">
-        <%= bui_avatar(
-          name,
-          size: size,
-          shape: shape,
-          type: type,
-          status: status,
-          status_position: status_position
-        ) %>
-      </div>
-    </div>
-    
-    <div class="w-full max-w-lg">
-      <h3 class="mb-2 font-semibold">Proprietà configurate:</h3>
-      <ul class="list-disc list-inside space-y-1">
-        <li><strong>Name:</strong> <%= name %></li>
-        <li><strong>Size:</strong> <%= size %></li>
-        <li><strong>Shape:</strong> <%= shape %></li>
-        <li><strong>Type:</strong> <%= type %></li>
-        <li><strong>Status:</strong> <%= status.present? ? status : "(nessuno)" %></li>
-        <li><strong>Status Position:</strong> <%= status_position %></li>
-      </ul>
-    </div>
-  </div>
-  
-  <div class="w-full">
-    <h3 class="mb-2 font-semibold">Codice di esempio:</h3>
-    <pre class="bg-gray-100 p-4 rounded-md overflow-x-auto"><code><%= %{<%= bui_avatar(
-  "#{name}",
-  size: :#{size},
-  shape: :#{shape},
-  type: :#{type}#{status.present? ? ",\n  status: :#{status}" : ""}#{status.present? ? ",\n  status_position: :#{status_position}" : ""}
-) %>} %></code></pre>
-  </div>
-</div> 
+<%= bui_avatar(
+    name: name,
+    src: src,
+    size: size,
+    shape: shape,
+    theme: theme,
+    style: style,
+    status: status,
+    status_position: status_position
+) %>

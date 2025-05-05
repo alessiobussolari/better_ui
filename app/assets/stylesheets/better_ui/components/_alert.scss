@@ -1,0 +1,162 @@
+@layer components {
+  // Classe base per l'alert (Block)
+  .bui-alert {
+    @apply flex p-4 mb-4 rounded-md border;
+    
+    &__icon {
+      @apply flex-shrink-0 mr-3 w-5 h-5;
+    }
+    
+    &__content {
+      @apply flex-1;
+    }
+    
+    &__title {
+      @apply font-medium mb-1;
+    }
+    
+    &__message {
+      @apply text-sm;
+    }
+    
+    &__close {
+      @apply ml-auto -my-1.5 -mr-1.5 p-1.5 rounded-md focus:ring-2 focus:ring-offset-2
+             hover:bg-gray-100 dark:hover:bg-gray-800;
+    }
+    
+    // Temi
+    &--default {
+      @apply bg-black text-white border-gray-900
+             dark:bg-gray-800 dark:text-white dark:border-gray-700;
+      
+      .bui-alert__icon {
+        @apply text-white dark:text-white;
+      }
+      
+      .bui-alert__close {
+        @apply text-white focus:ring-gray-600
+               dark:text-white dark:focus:ring-gray-500;
+      }
+    }
+    
+    &--white {
+      @apply bg-white text-black border-gray-200
+             dark:bg-gray-700 dark:text-white dark:border-gray-600;
+      
+      .bui-alert__icon {
+        @apply text-black dark:text-white;
+      }
+      
+      .bui-alert__close {
+        @apply text-black focus:ring-gray-400
+               dark:text-white dark:focus:ring-gray-500;
+      }
+    }
+    
+    &--red {
+      @apply bg-red-500 text-white border-red-600
+             dark:bg-red-600 dark:text-white dark:border-red-700;
+      
+      .bui-alert__icon {
+        @apply text-white dark:text-white;
+      }
+      
+      .bui-alert__close {
+        @apply text-white focus:ring-red-400
+               dark:text-white dark:focus:ring-red-500;
+      }
+    }
+    
+    &--rose {
+      @apply bg-rose-500 text-white border-rose-600
+             dark:bg-rose-600 dark:text-white dark:border-rose-700;
+      
+      .bui-alert__icon {
+        @apply text-white dark:text-white;
+      }
+      
+      .bui-alert__close {
+        @apply text-white focus:ring-rose-400
+               dark:text-white dark:focus:ring-rose-500;
+      }
+    }
+    
+    &--orange {
+      @apply bg-orange-500 text-white border-orange-600
+             dark:bg-orange-600 dark:text-white dark:border-orange-700;
+      
+      .bui-alert__icon {
+        @apply text-white dark:text-white;
+      }
+      
+      .bui-alert__close {
+        @apply text-white focus:ring-orange-400
+               dark:text-white dark:focus:ring-orange-500;
+      }
+    }
+    
+    &--green {
+      @apply bg-green-500 text-white border-green-600
+             dark:bg-green-600 dark:text-white dark:border-green-700;
+      
+      .bui-alert__icon {
+        @apply text-white dark:text-white;
+      }
+      
+      .bui-alert__close {
+        @apply text-white focus:ring-green-400
+               dark:text-white dark:focus:ring-green-500;
+      }
+    }
+    
+    &--blue {
+      @apply bg-blue-500 text-white border-blue-600
+             dark:bg-blue-600 dark:text-white dark:border-blue-700;
+      
+      .bui-alert__icon {
+        @apply text-white dark:text-white;
+      }
+      
+      .bui-alert__close {
+        @apply text-white focus:ring-blue-400
+               dark:text-white dark:focus:ring-blue-500;
+      }
+    }
+    
+    &--yellow {
+      @apply bg-yellow-500 text-black border-yellow-600
+             dark:bg-yellow-600 dark:text-white dark:border-yellow-700;
+      
+      .bui-alert__icon {
+        @apply text-black dark:text-white;
+      }
+      
+      .bui-alert__close {
+        @apply text-black focus:ring-yellow-400
+               dark:text-white dark:focus:ring-yellow-500;
+      }
+    }
+    
+    &--violet {
+      @apply bg-violet-500 text-white border-violet-600
+             dark:bg-violet-600 dark:text-white dark:border-violet-700;
+      
+      .bui-alert__icon {
+        @apply text-white dark:text-white;
+      }
+      
+      .bui-alert__close {
+        @apply text-white focus:ring-violet-400
+               dark:text-white dark:focus:ring-violet-500;
+      }
+    }
+    
+    &--dismissible {
+      @apply pr-12 relative;
+      
+      .bui-alert__close {
+        @apply absolute right-4 top-4;
+      }
+    }
+  }
+} 

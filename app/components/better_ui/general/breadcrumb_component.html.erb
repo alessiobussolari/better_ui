@@ -1,4 +1,4 @@
-<nav aria-label="Breadcrumb" class="<%= container_classes %>">
+<nav <%= tag.attributes(breadcrumb_attributes) %>>
   <ol class="bui-breadcrumb__list">
     <% @items.each_with_index do |item, index| %>
       <li class="bui-breadcrumb__item">

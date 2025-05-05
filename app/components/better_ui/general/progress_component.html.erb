@@ -1,0 +1,52 @@
+<div <%= tag.attributes(progress_attributes) %>>
+  <% if linear? %>
+    <div class="bui-progress__container">
+      <div class="bui-progress__bar" style="<%= bar_inline_styles %>"></div>
+    </div>
+    <% if @label && determinate? %>
+      <div class="bui-progress__label"><%= @value %>%</div>
+    <% end %>
+  <% else %>
+    <div class="bui-progress__circle">
+      <svg viewBox="0 0 44 44">
+        <circle
+          class="bui-progress__circle-background"
+          cx="22" cy="22" r="20"
+          fill="none"
+          stroke-width="4"
+        />
+        <% if determinate? %>
+          <circle
+            class="bui-progress__circle-value"
+            cx="22" cy="22" r="20"
+            fill="none"
+            stroke-width="4"
+            stroke-dasharray="<%= circle_circumference %>"
+            stroke-dashoffset="<%= circle_dash_offset %>"
+            style="<%= circle_inline_styles %>"
+          />
+        <% else %>
+          <circle
+            class="bui-progress__circle-value"
+            cx="22" cy="22" r="20"
+            fill="none"
+            stroke-width="4"
+            stroke-dasharray="<%= circle_circumference * 0.75 %> <%= circle_circumference * 0.25 %>"
+            style="<%= circle_inline_styles %>"
+          />
+        <% end %>
+      </svg>
+      <% if @label && determinate? %>
+        <div class="bui-progress__circle-text"><%= @value %>%</div>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+
+<% if indeterminate? && circular? %>
+  <style>
+    @keyframes bui-progress-spin {
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+<% end %>

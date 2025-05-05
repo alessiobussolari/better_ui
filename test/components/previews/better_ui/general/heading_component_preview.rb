@@ -1,104 +1,76 @@
 module BetterUi
   module General
     class HeadingComponentPreview < ViewComponent::Preview
-      # Heading configurabile
-      #
+      # @!group Default
+      
+      # @label Con Helper
       # @param text text "Testo dell'heading"
       # @param level select { choices: [1, 2, 3, 4, 5, 6] } "Livello dell'heading"
-      # @param variant select { choices: [default, white, red, rose, orange, green, blue, yellow, violet] } "Variante di colore"
+      # @param theme select { choices: [default, white, red, rose, orange, green, blue, yellow, violet, gray] } "Tema di colore"
       # @param size select { choices: [small, medium, large] } "Dimensione del testo"
       # @param align select { choices: [left, center, right] } "Allineamento del testo"
+      # @param style select { choices: [normal, bold, italic, underline] } "Stile del testo"
       # @param icon text "Nome icona (opzionale)"
       # @param subtitle text "Sottotitolo (opzionale)"
       # @param with_divider toggle "Mostra linea divisoria"
       def default(
         text: "Titolo di esempio",
         level: 2,
-        variant: :default,
+        theme: :default,
         size: :medium,
         align: :left,
+        style: :normal,
         icon: nil,
         subtitle: nil,
         with_divider: false
       )
-        # Conversione dei tipi
-        level = level.to_i if level.is_a?(String)
-        variant = variant.to_sym if variant.is_a?(String)
-        size = size.to_sym if size.is_a?(String)
-        align = align.to_sym if align.is_a?(String)
-        with_divider = with_divider == true || with_divider == "true"
-        
-        # Validazione
-        valid_levels = [1, 2, 3, 4, 5, 6]
-        valid_variants = [:default, :white, :red, :rose, :orange, :green, :blue, :yellow, :violet]
-        valid_sizes = [:small, :medium, :large]
-        valid_aligns = [:left, :center, :right]
-        
-        level = 2 unless valid_levels.include?(level)
-        variant = :default unless valid_variants.include?(variant)
-        size = :medium unless valid_sizes.include?(size)
-        align = :left unless valid_aligns.include?(align)
-        
-        # Pulisci valori vuoti
-        icon = nil if icon.is_a?(String) && icon.strip.empty?
-        subtitle = nil if subtitle.is_a?(String) && subtitle.strip.empty?
-        
-        # Se lo sfondo è chiaro e la variante è white, mostriamo con sfondo scuro
-        if variant == :white
-          render_with_template(locals: {
-            variant: variant,
-            level: level,
-            size: size,
-            align: align,
-            text: text,
-            icon: icon,
-            subtitle: subtitle,
-            with_divider: with_divider
-          })
-        else
-          render BetterUi::General::HeadingComponent.new(
-            text: text,
-            level: level,
-            variant: variant,
-            size: size,
-            align: align,
-            icon: icon,
-            subtitle: subtitle,
-            with_divider: with_divider
-          )
-        end
+        render_with_template(locals: {
+          text: text,
+          level: level,
+          theme: theme,
+          size: size,
+          align: align,
+          style: style,
+          icon: icon,
+          subtitle: subtitle,
+          with_divider: with_divider
+        })
       end
       
-      # @!group Esempi specifici
-      
-      # @label Gerarchia di titoli
-      def heading_hierarchy
-        render_with_template
-      end
-      
-      # @label Con sottotitolo e divisore
-      def with_subtitle_and_divider
+      # @label Istanziazione Diretta
+      # @param text text "Testo dell'heading"
+      # @param level select { choices: [1, 2, 3, 4, 5, 6] } "Livello dell'heading"
+      # @param theme select { choices: [default, white, red, rose, orange, green, blue, yellow, violet, gray] } "Tema di colore"
+      # @param size select { choices: [small, medium, large] } "Dimensione del testo"
+      # @param align select { choices: [left, center, right] } "Allineamento del testo"
+      # @param style select { choices: [normal, bold, italic, underline] } "Stile del testo"
+      # @param icon text "Nome icona (opzionale)"
+      # @param subtitle text "Sottotitolo (opzionale)"
+      # @param with_divider toggle "Mostra linea divisoria"
+      def raw(
+        text: "Titolo di esempio",
+        level: 2,
+        theme: :default,
+        size: :medium,
+        align: :left,
+        style: :normal,
+        icon: nil,
+        subtitle: nil,
+        with_divider: false
+      )
         render BetterUi::General::HeadingComponent.new(
-          text: "Titolo con sottotitolo",
-          level: 2,
-          variant: :blue,
-          subtitle: "Questo è un sottotitolo che fornisce informazioni aggiuntive",
-          with_divider: true
-        )
-      end
-      
-      # @label Con icona
-      def with_icon
-        render BetterUi::General::HeadingComponent.new(
-          text: "Titolo con icona",
-          level: 2,
-          variant: :green,
-          icon: "info-circle",
-          subtitle: "Informazioni importanti"
-        )
+          level: level,
+          theme: theme,
+          align: align,
+          size: size,
+          style: style,
+          icon: icon,
+          subtitle: subtitle,
+          with_divider: with_divider
+        ).with_content(text)
       end
       
       # @!endgroup
     end
   end
-end 
+end

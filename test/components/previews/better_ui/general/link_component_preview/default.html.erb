@@ -1,8 +1,11 @@
-<%= bui_link(
-    label,
-    href: href,
-    theme: theme,
-    icon: icon,
-    active: active,
-    target: target
-  ) %>
+<%= render BetterUi::General::LinkComponent.new(
+  label: label,
+  href: href,
+  theme: theme,
+  orientation: orientation,
+  style: style,
+  icon: icon,
+  active: active,
+  disabled: disabled,
+  target: target
+) %>

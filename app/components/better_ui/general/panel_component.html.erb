@@ -1,4 +1,4 @@
-<div class="<%= panel_classes %>">
+<div <%= tag.attributes(panel_attributes) %>>
   <% if @header.present? %>
     <div class="<%= header_classes %>">
       <%= raw @header %>

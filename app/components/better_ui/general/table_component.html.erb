@@ -1,14 +1,14 @@
-<div class="<%= table_container_classes %>">
-  <table class="<%= table_classes %>">
-    <% if caption.present? %>
+<div <%= tag.attributes(container_attributes) %>>
+  <table <%= tag.attributes(table_attributes) %>>
+    <% if @caption.present? %>
       <caption class="<%= caption_classes %>">
-        <%= caption %>
+        <%= @caption %>
       </caption>
     <% end %>
     
     <thead class="<%= thead_classes %>">
-      <% if header_rows_partial.present? %>
-        <%= render partial: header_rows_partial, locals: { 
+      <% if @header_rows_partial.present? %>
+        <%= render partial: @header_rows_partial, locals: { 
           component: self, 
           headers: headers_for_display 
         } %>
@@ -24,9 +24,9 @@
     </thead>
     
     <tbody class="<%= tbody_classes %>">
-      <% data.each_with_index do |row, index| %>
-        <% if body_row_partial.present? %>
-          <%= render partial: body_row_partial, locals: { 
+      <% @data.each_with_index do |row, index| %>
+        <% if @body_row_partial.present? %>
+          <%= render partial: @body_row_partial, locals: { 
             component: self, 
             row: row,
             index: index,
@@ -50,17 +50,17 @@
       <% end %>
     </tbody>
     
-    <% if footer.present? %>
+    <% if @footer.present? %>
       <tfoot class="<%= tfoot_classes %>">
-        <% if footer_rows_partial.present? %>
-          <%= render partial: footer_rows_partial, locals: { 
+        <% if @footer_rows_partial.present? %>
+          <%= render partial: @footer_rows_partial, locals: { 
             component: self, 
-            footer: footer, 
+            footer: @footer, 
             headers: headers_for_display 
           } %>
         <% else %>
           <tr>
-            <% footer.each_with_index do |value, index| %>
+            <% @footer.each_with_index do |value, index| %>
               <td class="<%= tf_classes %>">
                 <%= value || "—" %>
               </td>

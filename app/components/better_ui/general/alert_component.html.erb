@@ -1,0 +1,20 @@
+<div <%= tag.attributes(alert_attributes) %>>
+  <% if @icon || default_icon %>
+    <div class="bui-alert__icon">
+      <%= render BetterUi::General::IconComponent.new(name: @icon || default_icon) %>
+    </div>
+  <% end %>
+  
+  <div class="bui-alert__content">
+    <% if @title.present? %>
+      <div class="bui-alert__title"><%= @title %></div>
+    <% end %>
+    <div class="bui-alert__message"><%= @message %></div>
+  </div>
+  
+  <% if @dismissible %>
+    <button type="button" class="bui-alert__close">
+      <%= render BetterUi::General::IconComponent.new(name: "x", size: :sm) %>
+    </button>
+  <% end %>
+</div>

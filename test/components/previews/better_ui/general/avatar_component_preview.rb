@@ -1,53 +1,109 @@
 module BetterUi
   module General
-    class AvatarComponentPreview < ViewComponent::Preview
-      # Avatar configurabile
-      #
+    class AvatarComponentPreview < Lookbook::Preview
+      # @!group Esempi Base
+      
+      # @label Con Helper
       # @param name text "Nome utente (per iniziali)"
+      # @param src text "URL immagine (opzionale)"
       # @param size select { choices: [xxsmall, xsmall, small, medium, large, xlarge, xxlarge] } "Dimensione dell'avatar"
       # @param shape select { choices: [circle, square, rounded] } "Forma dell'avatar"
-      # @param type select { choices: [default, white, red, rose, orange, green, blue, yellow, violet, gray] } "Colore dell'avatar"
+      # @param theme select { choices: [default, white, red, rose, orange, green, blue, yellow, violet, gray] } "Tema dell'avatar"
+      # @param style select { choices: [filled, outline, light] } "Stile dell'avatar"
       # @param status select { choices: [online, offline, busy, away] } "Stato online (opzionale)"
       # @param status_position select { choices: [bottom_right, bottom_left, top_right, top_left] } "Posizione dello stato"
       def default(
         name: "Mario Rossi",
+        src: nil,
         size: :medium,
         shape: :circle,
-        type: :default,
+        theme: :default,
+        style: :filled,
         status: nil,
         status_position: :bottom_right
       )
-        # Conversione dei tipi
-        size = size.to_sym if size.is_a?(String)
-        shape = shape.to_sym if shape.is_a?(String)
-        type = type.to_sym if type.is_a?(String)
-        status = status.present? ? status.to_sym : nil
-        status_position = status_position.to_sym if status_position.is_a?(String)
-        
-        # Validazione
-        valid_sizes = [:xxsmall, :xsmall, :small, :medium, :large, :xlarge, :xxlarge]
-        valid_shapes = [:circle, :square, :rounded]
-        valid_types = [:default, :white, :red, :rose, :orange, :green, :blue, :yellow, :violet, :gray]
-        valid_statuses = [nil, :online, :offline, :busy, :away]
-        valid_positions = [:bottom_right, :bottom_left, :top_right, :top_left]
-        
-        size = :medium unless valid_sizes.include?(size)
-        shape = :circle unless valid_shapes.include?(shape)
-        type = :default unless valid_types.include?(type)
-        status = nil unless valid_statuses.include?(status)
-        status_position = :bottom_right unless valid_positions.include?(status_position)
+        normalize_params!(
+          name: name,
+          src: src,
+          size: size,
+          shape: shape,
+          theme: theme,
+          style: style,
+          status: status,
+          status_position: status_position
+        )
         
         render_with_template(locals: {
           name: name,
+          src: src,
           size: size,
           shape: shape,
-          type: type,
+          theme: theme,
+          style: style,
           status: status,
           status_position: status_position
         })
       end
-
-      # @!group Esempi specifici
+      
+      # @label Istanziazione Diretta
+      # @param name text "Nome utente (per iniziali)"
+      # @param src text "URL immagine (opzionale)"
+      # @param size select { choices: [xxsmall, xsmall, small, medium, large, xlarge, xxlarge] } "Dimensione dell'avatar"
+      # @param shape select { choices: [circle, square, rounded] } "Forma dell'avatar"
+      # @param theme select { choices: [default, white, red, rose, orange, green, blue, yellow, violet, gray] } "Tema dell'avatar"
+      # @param style select { choices: [filled, outline, light] } "Stile dell'avatar"
+      # @param status select { choices: [online, offline, busy, away] } "Stato online (opzionale)"
+      # @param status_position select { choices: [bottom_right, bottom_left, top_right, top_left] } "Posizione dello stato"
+      def raw(
+        name: "Mario Rossi",
+        src: nil,
+        size: :medium,
+        shape: :circle,
+        theme: :default,
+        style: :filled,
+        status: nil,
+        status_position: :bottom_right
+      )
+        normalize_params!(
+          name: name,
+          src: src,
+          size: size,
+          shape: shape,
+          theme: theme,
+          style: style,
+          status: status,
+          status_position: status_position
+        )
+        
+        render BetterUi::General::AvatarComponent.new(
+          name: name,
+          src: src,
+          size: size,
+          shape: shape,
+          theme: theme,
+          style: style,
+          status: status,
+          status_position: status_position
+        )
+      end
+      
+      # @!endgroup
+      
+      private
+      
+      def normalize_params!(options)
+        # Conversione dei tipi
+        options[:size] = options[:size].to_sym if options[:size].is_a?(String)
+        options[:shape] = options[:shape].to_sym if options[:shape].is_a?(String)
+        options[:theme] = options[:theme].to_sym if options[:theme].is_a?(String)
+        options[:style] = options[:style].to_sym if options[:style].is_a?(String)
+        options[:status] = options[:status].present? ? options[:status].to_sym : nil
+        options[:status_position] = options[:status_position].to_sym if options[:status_position].is_a?(String)
+        
+        options
+      end
+      
+      # @!group esempi_specifici
       
       # @label Dimensioni
       def sizes
@@ -114,4 +170,4 @@ module BetterUi
       # @!endgroup
     end
   end
-end 
+end

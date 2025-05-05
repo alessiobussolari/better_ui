@@ -1,0 +1,10 @@
+<%= render BetterUi::General::TooltipComponent.new(
+    tooltip_text: tooltip_text, 
+    theme: theme, 
+    position: position,
+    orientation: orientation,
+    style: style, 
+    size: size
+) do %>
+  <button class="bui-button bui-button--default bui-button--medium">Passa sopra per il tooltip</button>
+<% end %>
