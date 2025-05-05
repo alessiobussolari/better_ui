@@ -294,7 +294,7 @@ Add new variants to components:
 .bui-button {
   // Custom variant
   &--glass {
-    @apply bg-white bg-opacity-20 backdrop-blur-lg 
+    @apply bg-white opacity-20 backdrop-blur-lg 
            border border-white border-opacity-20
            text-white shadow-lg;
   }

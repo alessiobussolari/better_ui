@@ -142,7 +142,7 @@ module BetterUi
       # Genera le classi per l'overlay
       def overlay_classes
         [
-          "fixed inset-0 bg-black bg-opacity-50 z-30",
+          "fixed inset-0 bg-black opacity-50 z-30",
           "transition-opacity duration-300 ease-in-out",
           "hidden"
         ].join(" ")

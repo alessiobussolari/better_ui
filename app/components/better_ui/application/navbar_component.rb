@@ -40,9 +40,9 @@ module BetterUi
           text: "text-gray-700",
           hover: "hover:text-orange-500",
           active: "text-orange-600 border-orange-500",
-          dropdown_bg: "bg-white bg-opacity-90 backdrop-blur-sm",
+          dropdown_bg: "bg-white opacity-90 backdrop-blur-sm",
           dropdown_hover: "hover:bg-gray-100",
-          mobile_bg: "bg-white bg-opacity-90 backdrop-blur-sm",
+          mobile_bg: "bg-white opacity-90 backdrop-blur-sm",
           mobile_divider: "border-gray-100"
         },
         modern: {
