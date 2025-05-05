@@ -14,9 +14,3 @@
  *= require_self
  *= require better_ui/application
  */
-
-@import "tailwindcss/base";
-@import "tailwindcss/components";
-@import "tailwindcss/utilities";
-
-@import "custom_better_ui_components";

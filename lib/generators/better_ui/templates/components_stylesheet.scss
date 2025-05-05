@@ -1,61 +1,35 @@
 /*
  * <%= options[:prefix] %>_better_ui_components.scss
  * ========================================================================
- * Questo file importa tutti i componenti di Better UI e i relativi override
- * personalizzati. Non modificare questo file, ma usa i file *_overrides.scss
- * per personalizzare i singoli componenti.
- */
-
-// Importazioni originali BetterUI
-@import 'better_ui/components/index';
-
-// Importa le variabili personalizzate
-@import 'components/variables_overrides';
-
-// Importa gli override dei componenti
-@import 'components/button_overrides';
-@import 'components/heading_overrides';
-@import 'components/breadcrumb_overrides';
-@import 'components/link_overrides';
-@import 'components/panel_overrides';
-@import 'components/icon_overrides';
-@import 'components/table_overrides';
-@import 'components/badge_overrides';
-@import 'components/spinner_overrides';
-@import 'components/avatar_overrides';
-@import 'components/card_overrides';
-
-/*
- * <%= options[:prefix] %>_better_ui_components.scss
- * Foglio di stile SCSS per la personalizzazione dei componenti di BetterUi
+ * File principale che utilizza il sistema moderno di moduli Sass
  * Generato il: <%= Time.now.strftime('%d/%m/%Y %H:%M') %>
  */
 
-/**
- * INDICE:
- * 1. Variabili
- * 2. Componenti generali
- * 3. Componenti applicativi
- * 4. Personalizzazioni
- */
-
-/*==================================
-  IMPORTAZIONE COMPONENTI E VARIABILI
-====================================*/
-/* Importa base Tailwind */
+/* Base Tailwind - importazioni fondamentali */
 @use "tailwindcss/base";
 @use "tailwindcss/components";
 @use "tailwindcss/utilities";
 
+/* 
+ * Importa i componenti originali della gemma attraverso un namespace
+ * per evitare conflitti
+ */
+@use 'better_ui/components' as bui;
+
+/* 
+ * Importa le personalizzazioni con namespace per organizzazione
+ * e chiarezza nel codice
+ */
+@use 'components/variables_overrides' as vars;
+@use 'components/index' as overrides;
+
+/* 
+ * Aggiungi stili personalizzati dell'applicazione
+ * all'interno del layer components per mantenerli organizzati
+ */
 @layer components {
-  /*==================================
-    COMPONENTI
-  ====================================*/
-  /* Utilizziamo il pattern moderno con @use/@forward */
-  @use "components";
-  
-  /*==================================
-    PERSONALIZZAZIONI
-  ====================================*/
-  /* Qui è possibile aggiungere personalizzazioni specifiche */
+  /* 
+   * Qui puoi inserire stili personalizzati aggiuntivi
+   * che non rientrano nei file di override
+   */
 }

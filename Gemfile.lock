@@ -7,7 +7,7 @@ PATH
       rails (>= 7.0.0)
       redcarpet (~> 3.6)
       tailwindcss-rails (~> 4.0)
-      view_component (~> 3.0)
+      view_component (~> 3.22)
 
 GEM
   remote: https://rubygems.org/

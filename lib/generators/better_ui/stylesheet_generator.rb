@@ -5,9 +5,9 @@ module BetterUi
     # Generatore per creare file SCSS personalizzati per i componenti BetterUI
     #
     # Questo generatore crea:
-    # 1. Un foglio di stile principale che importa tutti i componenti
-    # 2. Copie dei file SCSS originali dei componenti
-    # 3. File di override per ogni componente che permettono personalizzazioni senza modificare i file originali
+    # 1. Un foglio di stile principale che importa tutti i componenti usando @use/@forward
+    # 2. File di override per ogni componente che permettono personalizzazioni senza modificare i file originali
+    # 3. Un file indice che raccoglie tutti gli override usando @forward
     class StylesheetGenerator < Rails::Generators::Base
       source_root File.expand_path('templates', __dir__)
       
@@ -35,20 +35,18 @@ module BetterUi
         '_card.scss'
       ].freeze
       
-      # Crea il foglio di stile principale e copia i file dei componenti
+      # Crea il foglio di stile principale
       def create_stylesheet
         # Crea il file principale che importa tutti i componenti
         template "components_stylesheet.scss", 
-                File.join(options[:path], "#{options[:prefix]}_better_ui_components.scss")
+                File.join(options[:path], "#{options[:prefix]}_better_ui.scss")
         
         # Crea la directory dei componenti se non esiste
         directory = File.join(options[:path], "components")
         FileUtils.mkdir_p(directory) unless File.directory?(directory)
         
-        # Copia i file originali dei componenti nella directory dell'app
-        COMPONENT_FILES.each do |filename|
-          copy_file "components/#{filename}", File.join(directory, filename)
-        end
+        # Crea il file indice che raccoglie tutti gli override
+        template "index.scss", File.join(directory, "_index.scss")
       end
 
       # Crea i file di override per ogni componente
@@ -102,21 +100,59 @@ module BetterUi
         result += " * Aggiungi qui le tue personalizzazioni.\n"
         result += " */\n\n"
         
-        # Estrae le classi principali (Block) con regex
-        # Cerca pattern tipo ".bui-button { ... }"
+        # Aggiungiamo il layer di Tailwind se presente nell'originale
+        if content.include?('@layer components')
+          result += "@layer components {\n"
+          layer_present = true
+        end
+        
+        # Estrae le classi principali (Block) usando regex
         class_matches = content.scan(/\.(bui-[a-zA-Z0-9_-]+)\s*\{/)
         class_matches.flatten.uniq.each do |css_class|
-          result += ".#{css_class} {\n  // Sovrascrivi qui gli stili per .#{css_class}\n}\n\n"
+          result += layer_present ? "  " : ""
+          result += ".#{css_class} {\n    // Aggiungi personalizzazioni qui\n#{layer_present ? "  " : ""}}\n\n"
         end
         
-        # Estrae anche classi annidate usando la sintassi SCSS
-        # Cerca pattern tipo ".bui-button { ... .icon { ... } }"
-        nested_matches = content.scan(/\.(bui-[a-zA-Z0-9_-]+)\s*{[^{]*\.([\w-]+)\s*{/)
-        nested_matches.each do |parent_class, child_class|
-          result += ".#{parent_class} {\n  .#{child_class} {\n    // Sovrascrivi qui gli stili annidati\n  }\n}\n\n"
+        # Estrae classi modifier (es. &--small, &__icon, ecc.)
+        modifier_matches = content.scan(/&([a-zA-Z0-9_-]+)\s*\{/)
+        if !modifier_matches.empty?
+          # Raggruppa i modifier per classe principale
+          main_classes = class_matches.flatten.uniq
+          main_classes.each do |main_class|
+            # Estrae tutti i modifier di questa classe principale
+            class_content = extract_class_block(content, main_class)
+            modifiers = class_content.scan(/&([a-zA-Z0-9_-]+)\s*\{/).flatten.uniq
+            
+            if !modifiers.empty?
+              result += layer_present ? "  " : ""
+              result += ".#{main_class} {\n"
+              
+              modifiers.each do |modifier|
+                result += layer_present ? "    " : "  "
+                result += "&#{modifier} {\n      // Aggiungi personalizzazioni qui\n#{layer_present ? "    " : "  "}}\n\n"
+              end
+              
+              result += layer_present ? "  " : ""
+              result += "}\n\n"
+            end
+          end
         end
+        
+        # Chiude il layer se presente
+        result += "}\n" if layer_present
         
         result
+      end
+      
+      # Estrae il blocco di codice relativo a una classe CSS specifica
+      #
+      # @param content [String] Il contenuto del file SCSS completo
+      # @param css_class [String] Il nome della classe CSS da estrarre
+      # @return [String] Il blocco di codice della classe
+      def extract_class_block(content, css_class)
+        regex = /\.(#{css_class})\s*\{((?:[^{}]|\{(?:[^{}]|\{[^{}]*\})*\})*)\}/m
+        match = content.match(regex)
+        match ? match[2] : ""
       end
     end
   end
