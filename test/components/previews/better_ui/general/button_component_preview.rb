@@ -1,9 +1,9 @@
 module BetterUi
   module General
     class ButtonComponentPreview < Lookbook::Preview
-      # @!group Default
+      # @!group Esempi Base
       
-      # @label Default
+      # @label Con Helper
       # @param label text "Testo del bottone"
       # @param type select { choices: [default, white, red, rose, orange, green, blue, yellow, violet] } "Tipo di bottone"
       # @param size select { choices: [small, medium, large] } "Dimensione del bottone"
@@ -26,16 +26,18 @@ module BetterUi
         href: nil,
         method: nil
       )
-        # Normalizzazione parametri
-        type = type.to_sym if type.is_a?(String)
-        size = size.to_sym if size.is_a?(String)
-        rounded = rounded.to_sym if rounded.is_a?(String)
-        icon_position = icon_position.to_sym if icon_position.is_a?(String)
-        method = method.to_sym if method.is_a?(String) && !method.empty?
-        
-        # Pulizia valori vuoti
-        icon = nil if icon.is_a?(String) && icon.strip.empty?
-        href = nil if href.is_a?(String) && href.strip.empty?
+        normalize_params!(
+          label: label,
+          type: type,
+          size: size,
+          rounded: rounded,
+          full_width: full_width,
+          disabled: disabled,
+          icon: icon,
+          icon_position: icon_position,
+          href: href,
+          method: method
+        )
         
         render_with_template(locals: {
           label: label,
@@ -51,11 +53,7 @@ module BetterUi
         })
       end
       
-      # @!endgroup
-      
-      # @!group Raw
-      
-      # @label Raw
+      # @label Istanziazione Diretta
       # @param label text "Testo del bottone"
       # @param type select { choices: [default, white, red, rose, orange, green, blue, yellow, violet] } "Tipo di bottone"
       # @param size select { choices: [small, medium, large] } "Dimensione del bottone"
@@ -78,16 +76,18 @@ module BetterUi
         href: nil,
         method: nil
       )
-        # Normalizzazione parametri
-        type = type.to_sym if type.is_a?(String)
-        size = size.to_sym if size.is_a?(String)
-        rounded = rounded.to_sym if rounded.is_a?(String)
-        icon_position = icon_position.to_sym if icon_position.is_a?(String)
-        method = method.to_sym if method.is_a?(String) && !method.empty?
-        
-        # Pulizia valori vuoti
-        icon = nil if icon.is_a?(String) && icon.strip.empty?
-        href = nil if href.is_a?(String) && href.strip.empty?
+        normalize_params!(
+          label: label,
+          type: type,
+          size: size,
+          rounded: rounded,
+          full_width: full_width,
+          disabled: disabled,
+          icon: icon,
+          icon_position: icon_position,
+          href: href,
+          method: method
+        )
         
         render_with_template(locals: {
           label: label,
@@ -105,78 +105,22 @@ module BetterUi
       
       # @!endgroup
       
-      # @!group Esempi
+      private
       
-      # @label Tipo
-      def tipo
-        render_with_template(locals: {
-          variants: [
-            { label: "Default", type: :default },
-            { label: "White", type: :white },
-            { label: "Red", type: :red },
-            { label: "Green", type: :green },
-            { label: "Blue", type: :blue },
-            { label: "Yellow", type: :yellow },
-            { label: "Violet", type: :violet }
-          ]
-        })
+      def normalize_params!(options)
+        # Normalizzazione parametri
+        options[:type] = options[:type].to_sym if options[:type].is_a?(String)
+        options[:size] = options[:size].to_sym if options[:size].is_a?(String)
+        options[:rounded] = options[:rounded].to_sym if options[:rounded].is_a?(String)
+        options[:icon_position] = options[:icon_position].to_sym if options[:icon_position].is_a?(String)
+        options[:method] = options[:method].to_sym if options[:method].is_a?(String) && !options[:method].empty?
+        
+        # Pulizia valori vuoti
+        options[:icon] = nil if options[:icon].is_a?(String) && options[:icon].strip.empty?
+        options[:href] = nil if options[:href].is_a?(String) && options[:href].strip.empty?
+        
+        options
       end
-      
-      # @label Dimensione
-      def dimensione
-        render_with_template(locals: {
-          variants: [
-            { label: "Small", size: :small },
-            { label: "Medium", size: :medium },
-            { label: "Large", size: :large }
-          ]
-        })
-      end
-      
-      # @label Border Radius
-      def border_radius
-        render_with_template(locals: {
-          variants: [
-            { label: "Nessun radius", rounded: :none },
-            { label: "Small", rounded: :small },
-            { label: "Medium", rounded: :medium },
-            { label: "Large", rounded: :large },
-            { label: "Full (circolare)", rounded: :full }
-          ]
-        })
-      end
-      
-      # @label Larghezza Completa
-      def larghezza_completa
-        render_with_template(locals: {
-          variants: [
-            { label: "Normale", full_width: false },
-            { label: "Full width", full_width: true }
-          ]
-        })
-      end
-      
-      # @label Con Icona
-      def con_icona
-        render_with_template(locals: {
-          variants: [
-            { label: "Icona sx", icon: "home", icon_position: :left },
-            { label: "Icona dx", icon: "home", icon_position: :right }
-          ]
-        })
-      end
-      
-      # @label Disabilitato
-      def disabilitato
-        render_with_template(locals: {
-          variants: [
-            { label: "Abilitato", disabled: false },
-            { label: "Disabilitato", disabled: true }
-          ]
-        })
-      end
-      
-      # @!endgroup
     end
   end
 end 

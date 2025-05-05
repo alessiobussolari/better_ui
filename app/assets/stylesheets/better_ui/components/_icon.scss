@@ -1,7 +1,7 @@
 @layer components {
   // Classe base per l'icona (Block)
   .bui-icon {
-    @apply inline-flex items-center justify-center;
+    @apply inline-flex items-center justify-center flex-shrink-0;
     
     // Modifiers (dimensioni)
     &--xs {
@@ -44,87 +44,199 @@
       }
     }
     
-    // Modifiers (varianti colore)
+    &--2xl {
+      @apply w-10 h-10;
+    }
+    
+    // Modifiers (temi colore)
     &--default {
-      @apply text-gray-500;
+      @apply text-gray-700;
+      @apply dark:text-gray-300;
     }
     
     &--white {
       @apply text-white;
     }
     
+    &--black {
+      @apply text-black;
+      @apply dark:text-white;
+    }
+    
+    &--light {
+      @apply text-gray-400;
+      @apply dark:text-gray-500;
+    }
+    
+    &--dark {
+      @apply text-gray-900;
+      @apply dark:text-gray-100;
+    }
+    
     &--red {
-      @apply text-red-500;
+      @apply text-red-600;
+      @apply dark:text-red-400;
     }
     
     &--rose {
-      @apply text-rose-500;
+      @apply text-rose-600;
+      @apply dark:text-rose-400;
     }
     
     &--orange {
       @apply text-orange-500;
+      @apply dark:text-orange-400;
     }
     
     &--green {
-      @apply text-green-500;
+      @apply text-green-600;
+      @apply dark:text-green-400;
     }
     
     &--blue {
-      @apply text-blue-500;
+      @apply text-blue-600;
+      @apply dark:text-blue-400;
     }
     
     &--yellow {
       @apply text-yellow-500;
+      @apply dark:text-yellow-400;
     }
     
     &--violet {
-      @apply text-violet-500;
+      @apply text-violet-600;
+      @apply dark:text-violet-400;
     }
     
-    // Modifiers (varianti stile)
+    // Modifiers (effetti)
     &--solid {
-      @apply rounded-full p-2 bg-gray-100;
-    }
-    
-    &--solid-primary {
       @apply rounded-full p-2 text-white;
       
+      &.bui-icon--default {
+        @apply bg-gray-700;
+        @apply dark:bg-gray-600;
+      }
+      
+      &.bui-icon--white {
+        @apply bg-white text-gray-900;
+        @apply dark:bg-gray-100;
+      }
+      
+      &.bui-icon--light {
+        @apply bg-gray-300 text-gray-800;
+        @apply dark:bg-gray-600 dark:text-gray-200;
+      }
+      
+      &.bui-icon--dark {
+        @apply bg-gray-900;
+        @apply dark:bg-gray-800;
+      }
+      
       &.bui-icon--red {
-        @apply bg-red-500;
+        @apply bg-red-600;
+        @apply dark:bg-red-700;
       }
       
       &.bui-icon--rose {
-        @apply bg-rose-500;
+        @apply bg-rose-600;
+        @apply dark:bg-rose-700;
       }
       
       &.bui-icon--orange {
         @apply bg-orange-500;
+        @apply dark:bg-orange-600;
       }
       
       &.bui-icon--green {
-        @apply bg-green-500;
+        @apply bg-green-600;
+        @apply dark:bg-green-700;
       }
       
       &.bui-icon--blue {
-        @apply bg-blue-500;
+        @apply bg-blue-600;
+        @apply dark:bg-blue-700;
       }
       
       &.bui-icon--yellow {
         @apply bg-yellow-500;
+        @apply dark:bg-yellow-600;
       }
       
       &.bui-icon--violet {
-        @apply bg-violet-500;
+        @apply bg-violet-600;
+        @apply dark:bg-violet-700;
       }
     }
     
-    // Stati
+    &--outlined {
+      @apply border-2 rounded-full p-1.5;
+      
+      &.bui-icon--default {
+        @apply border-gray-700 text-gray-700;
+        @apply dark:border-gray-400 dark:text-gray-400;
+      }
+      
+      &.bui-icon--white {
+        @apply border-white text-white;
+      }
+      
+      &.bui-icon--light {
+        @apply border-gray-300 text-gray-300;
+        @apply dark:border-gray-600 dark:text-gray-600;
+      }
+      
+      &.bui-icon--dark {
+        @apply border-gray-900 text-gray-900;
+        @apply dark:border-gray-200 dark:text-gray-200;
+      }
+      
+      &.bui-icon--red {
+        @apply border-red-600 text-red-600;
+        @apply dark:border-red-400 dark:text-red-400;
+      }
+      
+      &.bui-icon--rose {
+        @apply border-rose-600 text-rose-600;
+        @apply dark:border-rose-400 dark:text-rose-400;
+      }
+      
+      &.bui-icon--orange {
+        @apply border-orange-500 text-orange-500;
+        @apply dark:border-orange-400 dark:text-orange-400;
+      }
+      
+      &.bui-icon--green {
+        @apply border-green-600 text-green-600;
+        @apply dark:border-green-400 dark:text-green-400;
+      }
+      
+      &.bui-icon--blue {
+        @apply border-blue-600 text-blue-600;
+        @apply dark:border-blue-400 dark:text-blue-400;
+      }
+      
+      &.bui-icon--yellow {
+        @apply border-yellow-500 text-yellow-500;
+        @apply dark:border-yellow-400 dark:text-yellow-400;
+      }
+      
+      &.bui-icon--violet {
+        @apply border-violet-600 text-violet-600;
+        @apply dark:border-violet-400 dark:text-violet-400;
+      }
+    }
+    
+    // Modifiers (animazioni)
     &--spin {
       @apply animate-spin;
     }
     
     &--pulse {
       @apply animate-pulse;
+    }
+    
+    &--bounce {
+      @apply animate-bounce;
     }
     
     &--fixed-width {

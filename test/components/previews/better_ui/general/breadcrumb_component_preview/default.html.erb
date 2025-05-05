@@ -1,22 +1,6 @@
-<%
-  bg_classes = {
-    default: "bg-black",
-    white: "bg-white",
-    red: "bg-red-500",
-    rose: "bg-rose-500",
-    orange: "bg-orange-500",
-    green: "bg-green-500",
-    blue: "bg-blue-500",
-    yellow: "bg-yellow-500",
-    violet: "bg-violet-500"
-  }
-%>
-
-<div class="<%= bg_classes[theme] %> p-4 rounded-md">
-  <%= bui_breadcrumb(
+<%= bui_breadcrumb(
     items,
     theme: theme,
     separator: separator,
     size: size
   ) %>
-</div> 
