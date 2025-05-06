@@ -10,3 +10,4 @@ Ogni componente nella propria preview ha 2 gruppi 'default' e 'esempi specifici'
 Cerca sempre di categorizzare i componenti in application (elementi utilizzabili in una dashboard) e general (elementi semplici che possono essere elementi di altri componenti più complessi)
 Se devi creare il nome di una classe usa sempre 'bui-' che sta per better-ui.
 Per le classi CSS usa sempre la nomenclatura secondo lo standard BEM
+Gli unici temi che devi considerare sono: default, white, red, rose, orange, green, blue, yellow, violet.
