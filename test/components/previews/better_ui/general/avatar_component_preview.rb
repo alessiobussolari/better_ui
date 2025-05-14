@@ -2,7 +2,7 @@ module BetterUi
   module General
     class AvatarComponentPreview < Lookbook::Preview
       # @!group Esempi Base
-      
+
       # @label Con Helper
       # @param name text "Nome utente (per iniziali)"
       # @param src text "URL immagine (opzionale)"
@@ -32,7 +32,7 @@ module BetterUi
           status: status,
           status_position: status_position
         )
-        
+
         render_with_template(locals: {
           name: name,
           src: src,
@@ -44,7 +44,7 @@ module BetterUi
           status_position: status_position
         })
       end
-      
+
       # @label Istanziazione Diretta
       # @param name text "Nome utente (per iniziali)"
       # @param src text "URL immagine (opzionale)"
@@ -74,8 +74,8 @@ module BetterUi
           status: status,
           status_position: status_position
         )
-        
-        render BetterUi::General::AvatarComponent.new(
+
+        render_with_template(locals: {
           name: name,
           src: src,
           size: size,
@@ -84,13 +84,13 @@ module BetterUi
           style: style,
           status: status,
           status_position: status_position
-        )
+        })
       end
-      
+
       # @!endgroup
-      
+
       private
-      
+
       def normalize_params!(options)
         # Conversione dei tipi
         options[:size] = options[:size].to_sym if options[:size].is_a?(String)
@@ -99,12 +99,12 @@ module BetterUi
         options[:style] = options[:style].to_sym if options[:style].is_a?(String)
         options[:status] = options[:status].present? ? options[:status].to_sym : nil
         options[:status_position] = options[:status_position].to_sym if options[:status_position].is_a?(String)
-        
+
         options
       end
-      
+
       # @!group esempi_specifici
-      
+
       # @label Dimensioni
       def sizes
         render_with_template(locals: {
@@ -119,7 +119,7 @@ module BetterUi
           ]
         })
       end
-      
+
       # @label Forme
       def shapes
         render_with_template(locals: {
@@ -148,21 +148,21 @@ module BetterUi
           ]
         })
       end
-      
+
       # @label Con immagine
       def with_image
-        render BetterUi::General::AvatarComponent.new(
+        render_with_template(locals: {
           name: "John Doe",
           src: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
           size: :large
-        )
+        })
       end
-      
+
       # @label Stati online
       def online_states
         render_with_template(locals: {})
       end
-      
+
       # @label Gruppo di avatar
       def avatar_group
         render_with_template(locals: {})

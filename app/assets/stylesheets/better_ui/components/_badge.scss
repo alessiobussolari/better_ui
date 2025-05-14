@@ -2,168 +2,178 @@
   // Classe base per il badge (Block)
   .bui-badge {
     @apply inline-flex items-center justify-center rounded-full px-2.5 py-0.5 text-xs font-medium;
-    
+
     // Elements
     &__icon {
       @apply flex-shrink-0;
-      
+
       &--left {
         @apply -ml-0.5 mr-1.5;
       }
-      
+
       &--right {
         @apply -mr-0.5 ml-1.5;
       }
     }
-    
+
     &__text {
       @apply whitespace-nowrap;
     }
-    
+
     &__dot {
       @apply h-2 w-2 rounded-full mr-1.5;
     }
-    
-    // Modifiers (varianti colore)
+
+    // Modifiers (varianti colore) - Allineati con i colori dei bottoni
     &--default {
-      @apply bg-gray-100 text-gray-800
-             dark:bg-gray-700 dark:text-gray-200;
-      
+      @apply bg-black text-white
+             dark:bg-gray-800 dark:text-white;
+
       .bui-badge__dot {
         @apply bg-gray-500 dark:bg-gray-400;
       }
     }
-    
+
     &--white {
-      @apply bg-white text-gray-800 border border-gray-200
-             dark:bg-gray-800 dark:text-gray-200 dark:border-gray-700;
-      
+      @apply bg-white text-black
+             dark:bg-gray-700 dark:text-white;
+
       .bui-badge__dot {
         @apply bg-gray-400 dark:bg-gray-500;
       }
     }
-    
+
     &--red {
-      @apply bg-red-100 text-red-800
-             dark:bg-red-900/50 dark:text-red-300;
-      
+      @apply bg-red-500 text-white
+             dark:bg-red-600 dark:text-white;
+
       .bui-badge__dot {
-        @apply bg-red-500 dark:bg-red-400;
+        @apply bg-red-700 dark:bg-red-400;
       }
     }
-    
+
     &--rose {
-      @apply bg-rose-100 text-rose-800
-             dark:bg-rose-900/50 dark:text-rose-300;
-      
+      @apply bg-rose-500 text-white
+             dark:bg-rose-600 dark:text-white;
+
       .bui-badge__dot {
-        @apply bg-rose-500 dark:bg-rose-400;
+        @apply bg-rose-700 dark:bg-rose-400;
       }
     }
-    
+
     &--orange {
-      @apply bg-orange-100 text-orange-800
-             dark:bg-orange-900/50 dark:text-orange-300;
-      
+      @apply bg-orange-500 text-white
+             dark:bg-orange-600 dark:text-white;
+
       .bui-badge__dot {
-        @apply bg-orange-500 dark:bg-orange-400;
+        @apply bg-orange-700 dark:bg-orange-400;
       }
     }
-    
+
     &--green {
-      @apply bg-green-100 text-green-800
-             dark:bg-green-900/50 dark:text-green-300;
-      
+      @apply bg-green-500 text-white
+             dark:bg-green-600 dark:text-white;
+
       .bui-badge__dot {
-        @apply bg-green-500 dark:bg-green-400;
+        @apply bg-green-700 dark:bg-green-400;
       }
     }
-    
+
     &--blue {
-      @apply bg-blue-100 text-blue-800
-             dark:bg-blue-900/50 dark:text-blue-300;
-      
+      @apply bg-blue-500 text-white
+             dark:bg-blue-600 dark:text-white;
+
       .bui-badge__dot {
-        @apply bg-blue-500 dark:bg-blue-400;
+        @apply bg-blue-700 dark:bg-blue-400;
       }
     }
-    
+
     &--yellow {
-      @apply bg-yellow-100 text-yellow-800
-             dark:bg-yellow-900/50 dark:text-yellow-300;
-      
+      @apply bg-yellow-500 text-black
+             dark:bg-yellow-600 dark:text-white;
+
       .bui-badge__dot {
-        @apply bg-yellow-500 dark:bg-yellow-400;
+        @apply bg-yellow-700 dark:bg-yellow-400;
       }
     }
-    
+
     &--violet {
-      @apply bg-violet-100 text-violet-800
-             dark:bg-violet-900/50 dark:text-violet-300;
-      
+      @apply bg-violet-500 text-white
+             dark:bg-violet-600 dark:text-white;
+
       .bui-badge__dot {
-        @apply bg-violet-500 dark:bg-violet-400;
+        @apply bg-violet-700 dark:bg-violet-400;
       }
     }
-    
+
     // Modifiers (varianti dimensione)
     &--small {
       @apply text-xs px-2 py-0.5;
     }
-    
+
     &--medium {
       @apply text-sm px-2.5 py-0.5;
     }
-    
+
     &--large {
       @apply text-sm px-3 py-1;
     }
-    
+
     // Modifiers (varianti stile)
     &--pill {
       @apply rounded-full;
     }
-    
+
     &--square {
       @apply rounded-md;
     }
-    
+
     &--outline {
       @apply bg-transparent border;
-      
+
+      &.bui-badge--default {
+        @apply border-black text-black bg-transparent
+               dark:border-gray-800 dark:text-gray-200 dark:bg-transparent;
+      }
+
+      &.bui-badge--white {
+        @apply border-gray-300 text-gray-700 bg-transparent
+               dark:border-gray-600 dark:text-gray-200 dark:bg-transparent;
+      }
+
       &.bui-badge--red {
-        @apply border-red-500 text-red-700 bg-transparent
-               dark:border-red-400 dark:text-red-400 dark:bg-transparent;
+        @apply border-red-500 text-red-500 bg-transparent
+               dark:border-red-600 dark:text-red-500 dark:bg-transparent;
       }
-      
+
       &.bui-badge--green {
-        @apply border-green-500 text-green-700 bg-transparent
-               dark:border-green-400 dark:text-green-400 dark:bg-transparent;
+        @apply border-green-500 text-green-500 bg-transparent
+               dark:border-green-600 dark:text-green-500 dark:bg-transparent;
       }
-      
+
       &.bui-badge--blue {
-        @apply border-blue-500 text-blue-700 bg-transparent
-               dark:border-blue-400 dark:text-blue-400 dark:bg-transparent;
+        @apply border-blue-500 text-blue-500 bg-transparent
+               dark:border-blue-600 dark:text-blue-500 dark:bg-transparent;
       }
-      
+
       &.bui-badge--yellow {
-        @apply border-yellow-500 text-yellow-700 bg-transparent
-               dark:border-yellow-400 dark:text-yellow-400 dark:bg-transparent;
+        @apply border-yellow-500 text-yellow-500 bg-transparent
+               dark:border-yellow-600 dark:text-yellow-500 dark:bg-transparent;
       }
-      
+
       &.bui-badge--violet {
-        @apply border-violet-500 text-violet-700 bg-transparent
-               dark:border-violet-400 dark:text-violet-400 dark:bg-transparent;
+        @apply border-violet-500 text-violet-500 bg-transparent
+               dark:border-violet-600 dark:text-violet-500 dark:bg-transparent;
       }
-      
+
       &.bui-badge--orange {
-        @apply border-orange-500 text-orange-700 bg-transparent
-               dark:border-orange-400 dark:text-orange-400 dark:bg-transparent;
+        @apply border-orange-500 text-orange-500 bg-transparent
+               dark:border-orange-600 dark:text-orange-500 dark:bg-transparent;
       }
-      
+
       &.bui-badge--rose {
-        @apply border-rose-500 text-rose-700 bg-transparent
-               dark:border-rose-400 dark:text-rose-400 dark:bg-transparent;
+        @apply border-rose-500 text-rose-500 bg-transparent
+               dark:border-rose-600 dark:text-rose-500 dark:bg-transparent;
       }
     }
   }

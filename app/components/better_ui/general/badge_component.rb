@@ -1,7 +1,7 @@
 module BetterUi
   module General
     class BadgeComponent < ViewComponent::Base
-      attr_reader :label, :theme, :size, :shape, :style, :orientation, :variant, :icon, :icon_position, :classes, :id
+      attr_reader :label, :theme, :size, :shape, :style, :variant, :icon, :icon_position, :classes, :id
 
       # Temi di badge disponibili
       BADGE_THEME = {
@@ -23,25 +23,17 @@ module BetterUi
         medium: "bui-badge--medium",
         large: "bui-badge--large"
       }
-      
+
       # Border radius disponibili
       BADGE_SHAPE = {
         square: "bui-badge--square",
-        rounded: "bui-badge--rounded",
-        pill: "bui-badge--pill"
+        rounded: "bui-badge--rounded"
       }
-      
+
       # Stili disponibili
       BADGE_STYLE = {
         filled: "bui-badge--filled",
-        outline: "bui-badge--outline",
-        light: "bui-badge--light"
-      }
-
-      # Orientamenti disponibili
-      BADGE_ORIENTATION = {
-        horizontal: "bui-badge--horizontal",
-        vertical: "bui-badge--vertical"
+        outline: "bui-badge--outline"
       }
 
       # Varianti di badge
@@ -54,9 +46,8 @@ module BetterUi
       # @param label [String] Testo del badge
       # @param theme [Symbol] default, white, red, rose, orange, green, blue, yellow, violet, gray
       # @param size [Symbol] small, medium, large
-      # @param shape [Symbol] square, rounded, pill
-      # @param style [Symbol] filled, outline, light
-      # @param orientation [Symbol] horizontal, vertical
+      # @param shape [Symbol] square, rounded
+      # @param style [Symbol] filled, outline
       # @param variant [Symbol] nil, notification, counter, dot
       # @param icon [String] Nome icona (opzionale)
       # @param icon_position [Symbol] left, right
@@ -67,7 +58,6 @@ module BetterUi
         size: :medium,
         shape: :rounded,
         style: :filled,
-        orientation: :horizontal,
         variant: nil,
         icon: nil,
         icon_position: :left,
@@ -80,14 +70,13 @@ module BetterUi
         @size = size.to_sym
         @shape = shape.to_sym
         @style = style.to_sym
-        @orientation = orientation.to_sym
         @variant = variant&.to_sym
         @icon = icon
         @icon_position = icon_position.to_sym
         @classes = classes
         @id = id
         @html_options = html_options
-        
+
         validate_params
       end
 
@@ -99,52 +88,47 @@ module BetterUi
           get_size_class,
           get_shape_class,
           get_style_class,
-          get_orientation_class,
           get_variant_class,
           @classes,
           @html_options[:class]
         ].compact.join(" ")
       end
-      
+
       def get_theme_class
         BADGE_THEME[@theme] || BADGE_THEME[:default]
       end
-      
+
       def get_size_class
         BADGE_SIZE[@size] || BADGE_SIZE[:medium]
       end
-      
+
       def get_shape_class
         BADGE_SHAPE[@shape] || BADGE_SHAPE[:rounded]
       end
-      
+
       def get_style_class
         BADGE_STYLE[@style] || BADGE_STYLE[:filled]
       end
-      
-      def get_orientation_class
-        BADGE_ORIENTATION[@orientation] || BADGE_ORIENTATION[:horizontal]
-      end
-      
+
       def get_variant_class
         @variant ? BADGE_VARIANT[@variant] : nil
       end
-      
+
       # Restituisce gli attributi per il badge
       def badge_attributes
         attrs = {
           class: combined_classes,
           id: @id
         }
-        
+
         # Aggiungi altri attributi HTML se presenti
         @html_options.except(:class).each do |key, value|
           attrs[key] = value
         end
-        
+
         attrs
       end
-      
+
       def icon_classes
         if @icon_position == :left
           "bui-badge__icon bui-badge__icon--left"
@@ -152,11 +136,11 @@ module BetterUi
           "bui-badge__icon bui-badge__icon--right"
         end
       end
-      
+
       def text_classes
         "bui-badge__text"
       end
-      
+
       # Helper per renderizzare le icone
       def render_icon(icon_name)
         # Mappa le dimensioni del badge alle dimensioni dell'icona
@@ -168,7 +152,7 @@ module BetterUi
                    else
                      :tiny
                    end
-        
+
         # Utilizziamo il componente Icon
         render BetterUi::General::IconComponent.new(
           name: icon_name,
@@ -184,7 +168,6 @@ module BetterUi
         validate_size
         validate_shape
         validate_style
-        validate_orientation
         validate_variant
         validate_icon_position
       end
@@ -213,15 +196,9 @@ module BetterUi
         end
       end
 
-      def validate_orientation
-        unless BADGE_ORIENTATION.keys.include?(@orientation)
-          raise ArgumentError, "L'orientamento deve essere uno tra: #{BADGE_ORIENTATION.keys.join(', ')}"
-        end
-      end
-
       def validate_variant
         return if @variant.nil?
-        
+
         unless BADGE_VARIANT.keys.include?(@variant)
           raise ArgumentError, "La variante deve essere una tra: #{BADGE_VARIANT.keys.join(', ')}"
         end
