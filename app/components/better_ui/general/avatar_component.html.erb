@@ -3,7 +3,7 @@
     <img 
       src="<%= @src %>" 
       alt="<%= @name || 'Avatar' %>" 
-      class="bui-avatar__image"
+      class="bui-avatar__img"
       width="<%= pixel_size %>"
       height="<%= pixel_size %>"
     >
@@ -12,7 +12,7 @@
       <%= initials %>
     </div>
   <% end %>
-  
+
   <% if show_status? %>
     <span class="<%= status_indicator_classes %>"></span>
   <% end %>

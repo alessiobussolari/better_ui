@@ -16,25 +16,25 @@ module BetterUi
         violet: "bui-avatar--violet",
         gray: "bui-avatar--gray"
       }
-      
+
       # Dimensioni disponibili
       AVATAR_SIZE = {
-        xxsmall: "bui-avatar--xxsmall",
-        xsmall: "bui-avatar--xsmall",
-        small: "bui-avatar--small",
-        medium: "bui-avatar--medium",
-        large: "bui-avatar--large",
-        xlarge: "bui-avatar--xlarge",
-        xxlarge: "bui-avatar--xxlarge"
+        xxsmall: "bui-avatar--2xs",
+        xsmall: "bui-avatar--xs",
+        small: "bui-avatar--sm",
+        medium: "bui-avatar--md",
+        large: "bui-avatar--lg",
+        xlarge: "bui-avatar--xl",
+        xxlarge: "bui-avatar--lgg"
       }
-      
+
       # Forme disponibili
       AVATAR_SHAPE = {
         circle: "bui-avatar--circle",
         square: "bui-avatar--square",
         rounded: "bui-avatar--rounded"
       }
-      
+
       # Stati online disponibili
       AVATAR_STATUS = {
         online: "bui-avatar__status--online",
@@ -42,7 +42,7 @@ module BetterUi
         busy: "bui-avatar__status--busy",
         away: "bui-avatar__status--away"
       }
-      
+
       # Posizioni dell'indicatore di stato
       AVATAR_STATUS_POSITION = {
         bottom_right: "bui-avatar__status--bottom-right",
@@ -82,7 +82,7 @@ module BetterUi
         @classes = classes
         @id = id
         @html_options = html_options
-        
+
         validate_params
       end
 
@@ -98,46 +98,46 @@ module BetterUi
           @html_options[:class]
         ].compact.join(" ")
       end
-      
+
       def get_theme_class
         AVATAR_THEME[@theme] || AVATAR_THEME[:default]
       end
-      
+
       def get_size_class
         AVATAR_SIZE[@size] || AVATAR_SIZE[:medium]
       end
-      
+
       def get_shape_class
         AVATAR_SHAPE[@shape] || AVATAR_SHAPE[:circle]
       end
-      
+
       def get_style_class
         AVATAR_STYLE[@style] || AVATAR_STYLE[:filled]
       end
-      
+
       def get_status_class
         AVATAR_STATUS[@status] || ""
       end
-      
+
       def get_status_position_class
         AVATAR_STATUS_POSITION[@status_position] || AVATAR_STATUS_POSITION[:bottom_right]
       end
-      
+
       # Restituisce gli attributi per l'avatar
       def avatar_attributes
         attrs = {
           class: combined_classes,
           id: @id
         }
-        
+
         # Aggiungi altri attributi HTML se presenti
         @html_options.except(:class).each do |key, value|
           attrs[key] = value
         end
-        
+
         attrs
       end
-      
+
       # Restituisce le classi per l'indicatore di stato
       def status_indicator_classes
         [
@@ -146,16 +146,16 @@ module BetterUi
           get_status_position_class
         ].compact.join(" ")
       end
-      
+
       # Determina se mostrare l'indicatore di stato
       def show_status?
         @status.present? && AVATAR_STATUS.key?(@status)
       end
-      
+
       # Ottiene le iniziali dal nome
       def initials
         return "" unless @name.present?
-        
+
         words = @name.strip.split(/\s+/)
         if words.size >= 2
           "#{words[0][0]}#{words[1][0]}".upcase
@@ -163,12 +163,12 @@ module BetterUi
           @name[0..1].upcase
         end
       end
-      
+
       # Determina se mostrare l'immagine
       def show_image?
         @src.present?
       end
-      
+
       # Ottiene le dimensioni dell'avatar in pixel
       def pixel_size
         case @size
@@ -228,7 +228,7 @@ module BetterUi
 
       def validate_status
         return if @status.nil?
-        
+
         unless AVATAR_STATUS.keys.include?(@status)
           raise ArgumentError, "Lo stato deve essere uno tra: #{AVATAR_STATUS.keys.join(', ')}"
         end
