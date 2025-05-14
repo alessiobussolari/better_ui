@@ -5,39 +5,39 @@
   // Classe base per la sidebar (Block)
   .bui-sidebar {
     @apply h-screen fixed top-0 z-40 transition-all duration-300 ease-in-out overflow-y-auto flex flex-col;
-    
+
     // Gestione posizioni
     &--position-left {
       @apply left-0;
     }
-    
+
     &--position-right {
       @apply right-0;
     }
-    
+
     // Gestione comportamento al collasso
     &--expanded {
       @apply translate-x-0;
     }
-    
+
     &--collapsed {
       &.bui-sidebar--position-left {
         @apply -translate-x-full;
-        
+
         @media (min-width: 768px) {
           @apply translate-x-0;
         }
       }
-      
+
       &.bui-sidebar--position-right {
         @apply translate-x-full;
-        
+
         @media (min-width: 768px) {
           @apply translate-x-0;
         }
       }
     }
-    
+
     // Gestione modalità compatta
     &--compact {
       .bui-sidebar-brand__name,
@@ -46,7 +46,7 @@
       .bui-sidebar-link__text {
         @apply hidden;
       }
-      
+
       .bui-sidebar-brand,
       .bui-sidebar-user,
       .bui-sidebar-group__header,
@@ -54,12 +54,12 @@
         @apply justify-center;
       }
     }
-    
+
     // Gestione collassabilità
     &--collapsible {
       @apply cursor-pointer;
     }
-    
+
     // Gestione overlay per mobile
     &--with-overlay {
       @media (max-width: 768px) {
@@ -69,7 +69,7 @@
         }
       }
     }
-    
+
     // Gestione backdrop per mobile
     &--with-backdrop {
       @media (max-width: 768px) {
@@ -79,245 +79,242 @@
         }
       }
     }
-    
+
     // Contenuto della sidebar
     &__content {
       @apply flex-1 flex flex-col h-full w-full overflow-y-auto;
     }
-    
+
     // Temi
     &--theme-default {
       @apply bg-gray-800 text-white;
     }
-    
+
     &--theme-white {
       @apply bg-white text-gray-800 border-r border-gray-200;
-      
+
       &.bui-sidebar--position-right {
         @apply border-r-0 border-l border-gray-200;
       }
     }
-    
+
     &--theme-light {
       @apply bg-white border-r border-gray-200;
-      
+
       .bui-sidebar__logo {
         @apply border-b border-gray-200;
       }
-      
+
       .bui-sidebar__link {
         &:not(.bui-sidebar__link--active):hover {
           @apply bg-gray-50 text-gray-900;
         }
-        
+
         &--active {
           @apply bg-indigo-50 text-indigo-700;
         }
       }
-      
+
       .bui-sidebar__heading {
         @apply text-gray-600;
       }
-      
+
       .bui-sidebar__user {
         @apply border-t border-gray-200;
       }
-      
+
       .bui-sidebar__footer {
         @apply border-t border-gray-200;
       }
     }
-    
+
     &--theme-gray {
       @apply bg-gray-200 text-gray-800 border-r border-gray-300;
-      
+
       &.bui-sidebar--position-right {
         @apply border-r-0 border-l border-gray-300;
       }
     }
-    
+
     // Stili
     &--style-filled {
       @apply shadow-md;
     }
-    
+
     &--style-outline {
       @apply border border-gray-200;
-      
+
       &.bui-sidebar--theme-default {
         @apply border-gray-700;
       }
-      
-      &.bui-sidebar--theme-dark {
-        @apply border-gray-800;
-      }
+
     }
-    
+
     &--style-flat {
       @apply shadow-none;
     }
   }
-  
+
   // Brand component
   .bui-sidebar-brand {
     @apply p-4 flex items-center;
-    
+
     &__link {
       @apply flex items-center no-underline text-current;
     }
-    
+
     &__logo {
       @apply h-8 w-auto mr-3;
     }
-    
+
     &__name {
       @apply text-lg font-semibold;
     }
   }
-  
+
   // User info component
   .bui-sidebar-user {
     @apply p-4 flex items-center;
-    
+
     &__avatar {
       @apply flex-shrink-0 h-10 w-10 rounded-full overflow-hidden mr-3 flex items-center justify-center text-lg font-medium bg-black/20;
     }
-    
+
     &__avatar-img {
       @apply h-full w-full object-cover;
     }
-    
+
     &__info {
       @apply overflow-hidden;
     }
-    
+
     &__name {
       @apply font-medium text-sm truncate;
     }
-    
+
     &__email {
       @apply text-xs opacity-75 truncate;
     }
-    
+
     &__role {
       @apply text-xs opacity-60 truncate mt-1;
     }
   }
-  
+
   // Group component
   .bui-sidebar-group {
     @apply mb-2;
-    
+
     &__header {
       @apply flex items-center px-4 py-2 text-xs font-semibold uppercase tracking-wider opacity-60;
     }
-    
+
     &__icon {
       @apply mr-2;
     }
-    
+
     &__title {
       @apply flex-1;
     }
-    
+
     &__toggle {
       @apply p-1 opacity-70 hover:opacity-100 transition-opacity rounded-full;
     }
-    
+
     &__toggle-icon {
       @apply transition-transform;
-      
+
       .bui-sidebar-group--collapsed & {
         @apply transform -rotate-90;
       }
     }
-    
+
     &__content {
       @apply space-y-1;
-      
+
       .bui-sidebar-group--collapsed & {
         @apply hidden;
       }
     }
-    
+
     &--collapsible {
       .bui-sidebar-group__header {
         @apply cursor-pointer;
       }
     }
-    
+
     &--compact {
       .bui-sidebar-group__header {
         @apply justify-center;
       }
     }
   }
-  
+
   // Link component
   .bui-sidebar-link {
     @apply flex items-center px-4 py-2 text-sm rounded-md mx-2 transition-colors no-underline text-current;
-    
+
     &:hover {
       @apply bg-black/20;
     }
-    
+
     &--active {
       @apply font-medium bg-black/20;
     }
-    
+
     &__icon {
       @apply mr-3 text-lg flex-shrink-0 opacity-80;
     }
-    
+
     &__text {
       @apply flex-1 truncate;
     }
-    
+
     &__badge {
       @apply ml-2 px-2 py-0.5 text-xs rounded-full bg-black/20;
     }
-    
+
     &__external-icon {
       @apply ml-1 opacity-60;
     }
-    
+
     &--compact {
       @apply justify-center;
-      
+
       .bui-sidebar-link__icon {
         @apply mr-0;
       }
-      
+
       .bui-sidebar-link__badge {
         @apply absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2;
       }
     }
   }
-  
+
   // Divider component
   .bui-sidebar-divider {
     @apply my-3 px-4 relative;
-    
+
     &::before {
       content: '';
       @apply block h-px bg-current opacity-10;
     }
-    
+
     &__label {
       @apply absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 px-2 text-xs bg-inherit opacity-60;
     }
   }
-  
+
   // Footer component
   .bui-sidebar-footer {
     @apply mt-auto p-4 bg-black/10;
-    
+
     .bui-sidebar--theme-white &,
     .bui-sidebar--theme-light &,
     .bui-sidebar--theme-gray & {
       @apply border-gray-200;
     }
-    
+
     &--compact {
       @apply text-center;
     }
