@@ -1,6 +1,7 @@
 module BetterUi
-  # Includi esplicitamente il GeneralHelper
+  # Includi esplicitamente gli helper
   require_relative 'better_ui/general_helper'
+  require_relative 'better_ui/application_helper'
   
   module Helper
     # Estendi il modulo con ActiveSupport::Concern per funzionalità helper
@@ -8,5 +9,6 @@ module BetterUi
     
     # Includi gli helper disponibili
     include BetterUi::GeneralHelper
+    include BetterUi::ApplicationHelper
   end
 end 

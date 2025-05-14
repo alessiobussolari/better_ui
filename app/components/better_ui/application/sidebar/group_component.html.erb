@@ -1,0 +1,25 @@
+<div class="<%= group_classes %>">
+  <% if title.present? %>
+    <div class="bui-sidebar-group__header">
+      <% if icon.present? %>
+        <span class="bui-sidebar-group__icon"><%= icon %></span>
+      <% end %>
+      
+      <% unless compact %>
+        <h3 class="bui-sidebar-group__title"><%= title %></h3>
+      <% end %>
+      
+      <% if collapsible %>
+        <button class="bui-sidebar-group__toggle">
+          <svg class="bui-sidebar-group__toggle-icon" width="12" height="12" viewBox="0 0 12 12">
+            <path d="M6 8L2 4h8l-4 4z" fill="currentColor" />
+          </svg>
+        </button>
+      <% end %>
+    </div>
+  <% end %>
+  
+  <div class="bui-sidebar-group__content">
+    <%= content %>
+  </div>
+</div> 

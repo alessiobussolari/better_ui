@@ -21,40 +21,42 @@
     }
     
     // Modifiers (varianti colore)
-    &--default {
-      @apply text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white;
-    }
-    
-    &--white {
-      @apply text-white hover:text-gray-100 dark:text-gray-200 dark:hover:text-white;
-    }
-    
-    &--red {
-      @apply text-red-600 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300;
-    }
-    
-    &--rose {
-      @apply text-rose-600 hover:text-rose-700 dark:text-rose-400 dark:hover:text-rose-300;
-    }
-    
-    &--orange {
-      @apply text-orange-600 hover:text-orange-700 dark:text-orange-400 dark:hover:text-orange-300;
-    }
-    
-    &--green {
-      @apply text-green-600 hover:text-green-700 dark:text-green-400 dark:hover:text-green-300;
-    }
-    
-    &--blue {
-      @apply text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300;
-    }
-    
-    &--yellow {
-      @apply text-yellow-600 hover:text-yellow-700 dark:text-yellow-400 dark:hover:text-yellow-300;
-    }
-    
-    &--violet {
-      @apply text-violet-600 hover:text-violet-700 dark:text-violet-400 dark:hover:text-violet-300;
+    &--color {
+      &-gray {
+        @apply text-gray-700 hover:text-gray-900;
+      }
+
+      &-white {
+        @apply text-white hover:text-gray-100;
+      }
+
+      &-red {
+        @apply text-red-600 hover:text-red-700;
+      }
+
+      &-rose {
+        @apply text-rose-600 hover:text-rose-700;
+      }
+
+      &-orange {
+        @apply text-orange-600 hover:text-orange-700;
+      }
+
+      &-green {
+        @apply text-green-600 hover:text-green-700;
+      }
+
+      &-blue {
+        @apply text-blue-600 hover:text-blue-700;
+      }
+
+      &-yellow {
+        @apply text-yellow-600 hover:text-yellow-700;
+      }
+
+      &-violet {
+        @apply text-violet-600 hover:text-violet-700;
+      }
     }
     
     // Modifiers (varianti stile)

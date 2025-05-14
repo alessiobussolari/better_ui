@@ -34,115 +34,167 @@
     &--default {
       .bui-spinner__animation {
         @apply border-gray-200 border-t-gray-800;
-        @apply dark:border-gray-700 dark:border-t-gray-300;
       }
       
       .bui-spinner__label {
         @apply text-gray-800;
-        @apply dark:text-gray-300;
       }
     }
     
     &--white {
       .bui-spinner__animation {
         @apply border-gray-100 border-t-white;
-        @apply dark:border-gray-800 dark:border-t-gray-300;
       }
       
       .bui-spinner__label {
         @apply text-white;
-        @apply dark:text-gray-300;
       }
     }
     
     &--red {
       .bui-spinner__animation {
         @apply border-red-100 border-t-red-600;
-        @apply dark:border-red-900/30 dark:border-t-red-400;
       }
       
       .bui-spinner__label {
         @apply text-red-600;
-        @apply dark:text-red-400;
       }
     }
     
     &--rose {
       .bui-spinner__animation {
         @apply border-rose-100 border-t-rose-600;
-        @apply dark:border-rose-900/30 dark:border-t-rose-400;
       }
       
       .bui-spinner__label {
         @apply text-rose-600;
-        @apply dark:text-rose-400;
       }
     }
     
     &--orange {
       .bui-spinner__animation {
         @apply border-orange-100 border-t-orange-500;
-        @apply dark:border-orange-900/30 dark:border-t-orange-400;
       }
       
       .bui-spinner__label {
         @apply text-orange-500;
-        @apply dark:text-orange-400;
       }
     }
     
     &--green {
       .bui-spinner__animation {
         @apply border-green-100 border-t-green-600;
-        @apply dark:border-green-900/30 dark:border-t-green-400;
       }
       
       .bui-spinner__label {
         @apply text-green-600;
-        @apply dark:text-green-400;
       }
     }
     
     &--blue {
       .bui-spinner__animation {
         @apply border-blue-100 border-t-blue-600;
-        @apply dark:border-blue-900/30 dark:border-t-blue-400;
       }
       
       .bui-spinner__label {
         @apply text-blue-600;
-        @apply dark:text-blue-400;
       }
     }
     
     &--yellow {
       .bui-spinner__animation {
         @apply border-yellow-100 border-t-yellow-500;
-        @apply dark:border-yellow-900/30 dark:border-t-yellow-400;
       }
       
       .bui-spinner__label {
         @apply text-yellow-500;
-        @apply dark:text-yellow-400;
       }
     }
     
     &--violet {
       .bui-spinner__animation {
         @apply border-violet-100 border-t-violet-600;
-        @apply dark:border-violet-900/30 dark:border-t-violet-400;
       }
       
       .bui-spinner__label {
         @apply text-violet-600;
-        @apply dark:text-violet-400;
       }
     }
     
     // Modifiers (stati)
     &--fullscreen {
       @apply fixed inset-0 flex items-center justify-center z-50 bg-black opacity-50;
-      @apply dark:bg-gray-900 dark:opacity-70;
+    }
+
+    &--xs {
+      // Varianti di colore per la size xs
+      &.bui-spinner--gray {
+        @apply border-gray-200 border-t-gray-700;
+      }
+
+      &.bui-spinner--gray &__label {
+        @apply text-gray-700;
+      }
+
+      &.bui-spinner--red {
+        @apply border-red-200 border-t-red-600;
+      }
+
+      &.bui-spinner--red &__label {
+        @apply text-red-600;
+      }
+
+      &.bui-spinner--rose {
+        @apply border-rose-200 border-t-rose-600;
+      }
+
+      &.bui-spinner--rose &__label {
+        @apply text-rose-600;
+      }
+
+      &.bui-spinner--orange {
+        @apply border-orange-200 border-t-orange-600;
+      }
+
+      &.bui-spinner--orange &__label {
+        @apply text-orange-600;
+      }
+
+      &.bui-spinner--green {
+        @apply border-green-200 border-t-green-600;
+      }
+
+      &.bui-spinner--green &__label {
+        @apply text-green-600;
+      }
+
+      &.bui-spinner--blue {
+        @apply border-blue-200 border-t-blue-600;
+      }
+
+      &.bui-spinner--blue &__label {
+        @apply text-blue-600;
+      }
+
+      &.bui-spinner--yellow {
+        @apply border-yellow-200 border-t-yellow-600;
+      }
+
+      &.bui-spinner--yellow &__label {
+        @apply text-yellow-600;
+      }
+
+      &.bui-spinner--violet {
+        @apply border-violet-200 border-t-violet-600;
+      }
+
+      &.bui-spinner--violet &__label {
+        @apply text-violet-600;
+      }
+    }
+
+    &--overlay {
+      @apply fixed inset-0 flex items-center justify-center z-50 bg-white opacity-60;
     }
   }
 } 

@@ -1,0 +1,11 @@
+<div class="bui-sidebar-brand">
+  <a href="<%= url %>" class="bui-sidebar-brand__link">
+    <% if logo.present? %>
+      <img src="<%= logo %>" alt="<%= name %>" class="bui-sidebar-brand__logo">
+    <% end %>
+    
+    <% unless compact %>
+      <span class="bui-sidebar-brand__name"><%= name %></span>
+    <% end %>
+  </a>
+</div> 
