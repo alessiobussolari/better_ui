@@ -1,8 +1,30 @@
 @layer components {
+  // Container per il heading
+  .bui-heading-container {
+    @apply mb-4;
+  }
+
   // Classe base per il titolo (Block)
   .bui-heading {
-    @apply font-bold text-gray-900 leading-tight dark:text-white;
-    
+    @apply font-bold text-gray-900 leading-tight ;
+
+    // Elements
+    &__icon {
+      @apply inline-flex mr-2 items-center;
+    }
+
+    &__text {
+      @apply inline;
+    }
+
+    &__subtitle {
+      @apply mt-1 text-gray-600 ;
+    }
+
+    &__divider {
+      @apply mt-2 border-t border-gray-200 ;
+    }
+
     // Modifiers (dimensioni/livelli)
     &--1 {
       @apply text-3xl sm:text-4xl;
@@ -27,7 +49,71 @@
     &--6 {
       @apply text-sm sm:text-base;
     }
-    
+
+    // Modifiers (dimensioni)
+    &--small {
+      &.bui-heading--1 {
+        @apply text-2xl sm:text-3xl;
+      }
+      &.bui-heading--2 {
+        @apply text-xl sm:text-2xl;
+      }
+      &.bui-heading--3 {
+        @apply text-lg sm:text-xl;
+      }
+      &.bui-heading--4 {
+        @apply text-base sm:text-lg;
+      }
+      &.bui-heading--5 {
+        @apply text-sm sm:text-base;
+      }
+      &.bui-heading--6 {
+        @apply text-xs sm:text-sm;
+      }
+    }
+
+    &--medium {
+      // Usa le dimensioni di default
+    }
+
+    &--large {
+      &.bui-heading--1 {
+        @apply text-4xl sm:text-5xl;
+      }
+      &.bui-heading--2 {
+        @apply text-3xl sm:text-4xl;
+      }
+      &.bui-heading--3 {
+        @apply text-2xl sm:text-3xl;
+      }
+      &.bui-heading--4 {
+        @apply text-xl sm:text-2xl;
+      }
+      &.bui-heading--5 {
+        @apply text-lg sm:text-xl;
+      }
+      &.bui-heading--6 {
+        @apply text-base sm:text-lg;
+      }
+    }
+
+    // Modifiers (stili)
+    &--normal {
+      @apply font-normal;
+    }
+
+    &--bold {
+      @apply font-bold;
+    }
+
+    &--italic {
+      @apply italic;
+    }
+
+    &--underline {
+      @apply underline;
+    }
+
     // Modifiers (varianti colore)
     &--default {
       @apply text-gray-900 dark:text-white;
@@ -77,5 +163,10 @@
     &--right {
       @apply text-right;
     }
+
+    // Modifier (con divisore)
+    &--with-divider {
+      // Nessuno stile aggiuntivo necessario, il divisore è un elemento separato
+    }
   }
-} 
+}

@@ -48,13 +48,36 @@
     
     &--double {
       @apply border-double;
-      
+    }
+
+    // Dimensioni
+    &--thin {
+      &.bui-divider--horizontal {
+        @apply border-t;
+      }
+
+      &.bui-divider--vertical {
+        @apply border-l;
+      }
+    }
+
+    &--medium {
       &.bui-divider--horizontal {
         @apply border-t-2;
       }
       
       &.bui-divider--vertical {
-        @apply border-l-2 border-t-0;
+        @apply border-l-2;
+      }
+    }
+
+    &--thick {
+      &.bui-divider--horizontal {
+        @apply border-t-4;
+      }
+
+      &.bui-divider--vertical {
+        @apply border-l-4;
       }
     }
     

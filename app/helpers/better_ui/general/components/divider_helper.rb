@@ -10,6 +10,7 @@ module BetterUi
         # @option options [Symbol] :theme (:default) tema del divider (:default, :white, :red, etc.)
         # @option options [Symbol] :orientation (:horizontal) :horizontal o :vertical
         # @option options [Symbol] :style (:solid) :solid, :dashed, :dotted o :double
+        # @option options [Symbol] :size (:medium) :thin, :medium o :thick
         # @option options [String] :height (nil) altezza per divider verticale (es. "100px", "100%")
         #
         # @return [String] HTML del componente
