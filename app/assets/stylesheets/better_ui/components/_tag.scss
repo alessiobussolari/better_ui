@@ -2,124 +2,124 @@
   // Classe base per il tag/chip (Block)
   .bui-tag {
     @apply inline-flex items-center py-1 px-2.5 text-sm font-medium rounded-md;
-    
+
     &__text {
       @apply leading-4;
     }
-    
+
     &__icon {
       @apply mr-1.5 -ml-0.5 h-4 w-4;
     }
-    
+
     &__remove {
       @apply ml-1.5 -mr-0.5 h-4 w-4 p-0.5 rounded-full
-             hover:bg-black/10 dark:hover:bg-white/10;
+             hover:bg-black/10;
     }
-    
+
     // Modifiers (forme)
     &--rounded {
       @apply rounded-full;
     }
-    
+
     &--square {
       @apply rounded-md;
     }
-    
+
     // Modifiers (interazioni)
     &--clickable {
       @apply cursor-pointer hover:shadow-sm transition-shadow;
     }
-    
+
     &--removable {
       @apply pr-1.5;
     }
-    
+
     &--selected {
       @apply ring-2;
     }
-    
+
     // Varianti base
     &--solid {
       &.bui-tag--gray {
         @apply bg-gray-100 text-gray-700;
-        
+
         &.bui-tag--clickable:hover {
           @apply bg-gray-200;
         }
-        
+
         &.bui-tag--with-remove .bui-tag__remove:hover {
           @apply ring-gray-400;
         }
       }
-      
+
       &.bui-tag--red {
         @apply bg-red-100 text-red-700;
-        
+
         &.bui-tag--clickable:hover {
           @apply bg-red-200;
         }
-        
+
         &.bui-tag--with-remove .bui-tag__remove:hover {
           @apply ring-red-400;
         }
       }
-      
+
       &.bui-tag--blue {
         @apply bg-blue-100 text-blue-700;
-        
+
         &.bui-tag--clickable:hover {
           @apply bg-blue-200;
         }
-        
+
         &.bui-tag--with-remove .bui-tag__remove:hover {
           @apply ring-blue-400;
         }
       }
-      
+
       &.bui-tag--green {
         @apply bg-green-100 text-green-700;
-        
+
         &.bui-tag--clickable:hover {
           @apply bg-green-200;
         }
-        
+
         &.bui-tag--with-remove .bui-tag__remove:hover {
           @apply ring-green-400;
         }
       }
-      
+
       &.bui-tag--yellow {
         @apply bg-yellow-100 text-yellow-700;
-        
+
         &.bui-tag--clickable:hover {
           @apply bg-yellow-200;
         }
-        
+
         &.bui-tag--with-remove .bui-tag__remove:hover {
           @apply ring-yellow-400;
         }
       }
     }
-    
+
     &--outline {
       @apply bg-transparent;
-      
+
       &.bui-tag--gray {
         @apply border-gray-300 text-gray-700;
       }
-      
+
       &.bui-tag--red {
         @apply border-red-500 text-red-600;
       }
-      
+
       &.bui-tag--blue {
         @apply border-blue-500 text-blue-600;
       }
-      
+
       &.bui-tag--green {
         @apply border-green-500 text-green-600;
       }
-      
+
       &.bui-tag--yellow {
         @apply border-yellow-500 text-yellow-600;
       }

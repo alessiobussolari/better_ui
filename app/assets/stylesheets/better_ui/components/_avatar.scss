@@ -151,55 +151,55 @@
   // Modifiers (colori placeholders) - Allineati con i colori dei bottoni
   &--red {
     .bui-avatar__placeholder {
-      @apply bg-red-500 text-white dark:bg-red-600;
+      @apply bg-red-500 text-white;
     }
   }
 
   &--rose {
     .bui-avatar__placeholder {
-      @apply bg-rose-500 text-white dark:bg-rose-600;
+      @apply bg-rose-500 text-white;
     }
   }
 
   &--orange {
     .bui-avatar__placeholder {
-      @apply bg-orange-500 text-white dark:bg-orange-600;
+      @apply bg-orange-500 text-white;
     }
   }
 
   &--green {
     .bui-avatar__placeholder {
-      @apply bg-green-500 text-white dark:bg-green-600;
+      @apply bg-green-500 text-white;
     }
   }
 
   &--blue {
     .bui-avatar__placeholder {
-      @apply bg-blue-500 text-white dark:bg-blue-600;
+      @apply bg-blue-500 text-white;
     }
   }
 
   &--yellow {
     .bui-avatar__placeholder {
-      @apply bg-yellow-500 text-black dark:bg-yellow-600 dark:text-white;
+      @apply bg-yellow-500 text-black;
     }
   }
 
   &--violet {
     .bui-avatar__placeholder {
-      @apply bg-violet-500 text-white dark:bg-violet-600;
+      @apply bg-violet-500 text-white;
     }
   }
 
   &--white {
     .bui-avatar__placeholder {
-      @apply bg-white text-black dark:bg-gray-700 dark:text-white;
+      @apply bg-white text-black;
     }
   }
 
   &--default {
     .bui-avatar__placeholder {
-      @apply bg-black text-white dark:bg-gray-800;
+      @apply bg-black text-white;
     }
   }
 
