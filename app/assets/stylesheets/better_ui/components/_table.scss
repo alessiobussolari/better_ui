@@ -2,155 +2,438 @@
   // Classe base per la tabella (Block)
   .bui-table {
     @apply w-full border-collapse;
-    
+
     // Elements
     &__container {
       @apply overflow-hidden border shadow-sm;
     }
-    
+
     &__caption {
       @apply p-4 font-medium text-left;
     }
-    
+
     &__header {
       @apply bg-gray-50;
     }
-    
+
     &__footer {
       @apply bg-gray-50;
     }
-    
+
     &__body {
-      // Styling base per il corpo della tabella
-      @apply bg-gray-50;
+      // Rimuoviamo lo sfondo di default per evitare conflitti
     }
-    
+
     &__cell {
       @apply px-4 py-3 text-sm text-gray-700;
-      
+
       &--header {
         @apply bg-gray-50 text-left text-xs uppercase tracking-wider text-gray-500 font-medium;
       }
-      
+
       &--footer {
         @apply font-medium;
       }
     }
-    
+
     &__row {
       @apply border-b border-gray-200;
     }
-    
+
     // Modifiers (varianti)
     &--default {
       @apply bg-white text-gray-900 border-gray-200;
+
+      .bui-table__header {
+        @apply bg-gray-50;
+      }
+
+      .bui-table__footer {
+        @apply bg-gray-50;
+      }
+
+      .bui-table__cell--header {
+        @apply bg-gray-50 text-gray-800;
+      }
     }
-    
+
+    &--white {
+      @apply bg-white text-gray-900 border-gray-200;
+
+      .bui-table__header {
+        @apply bg-gray-50;
+      }
+
+      .bui-table__footer {
+        @apply bg-gray-50;
+      }
+
+      .bui-table__cell--header {
+        @apply bg-gray-50 text-gray-800;
+      }
+    }
+
     &--red {
       @apply bg-red-50 text-red-900 border-red-200;
-      
+
       .bui-table__header {
         @apply bg-red-100;
       }
-      
+
       .bui-table__footer {
         @apply bg-red-100;
       }
-      
+
       .bui-table__cell--header {
         @apply bg-red-100 text-red-800;
       }
     }
-    
+
+    &--rose {
+      @apply bg-rose-50 text-rose-900 border-rose-200;
+
+      .bui-table__header {
+        @apply bg-rose-100;
+      }
+
+      .bui-table__footer {
+        @apply bg-rose-100;
+      }
+
+      .bui-table__cell--header {
+        @apply bg-rose-100 text-rose-800;
+      }
+    }
+
+    &--orange {
+      @apply bg-orange-50 text-orange-900 border-orange-200;
+
+      .bui-table__header {
+        @apply bg-orange-100;
+      }
+
+      .bui-table__footer {
+        @apply bg-orange-100;
+      }
+
+      .bui-table__cell--header {
+        @apply bg-orange-100 text-orange-800;
+      }
+    }
+
     &--blue {
       @apply bg-blue-50 text-blue-900 border-blue-200;
-      
+
       .bui-table__header {
         @apply bg-blue-100;
       }
-      
+
       .bui-table__footer {
         @apply bg-blue-100;
       }
-      
+
       .bui-table__cell--header {
         @apply bg-blue-100 text-blue-800;
       }
     }
-    
+
     &--green {
       @apply bg-green-50 text-green-900 border-green-200;
-      
+
       .bui-table__header {
         @apply bg-green-100;
       }
-      
+
       .bui-table__footer {
         @apply bg-green-100;
       }
-      
+
       .bui-table__cell--header {
         @apply bg-green-100 text-green-800;
       }
     }
-    
-    // Stati tabella
-    &--striped {
-      .bui-table__row:nth-child(even) {
-        @apply bg-gray-50;
+
+    &--yellow {
+      @apply bg-yellow-50 text-yellow-900 border-yellow-200;
+
+      .bui-table__header {
+        @apply bg-yellow-100;
+      }
+
+      .bui-table__footer {
+        @apply bg-yellow-100;
+      }
+
+      .bui-table__cell--header {
+        @apply bg-yellow-100 text-yellow-800;
       }
     }
-    
-    &--hoverable {
-      .bui-table__row:hover {
+
+    &--violet {
+      @apply bg-violet-50 text-violet-900 border-violet-200;
+
+      .bui-table__header {
+        @apply bg-violet-100;
+      }
+
+      .bui-table__footer {
+        @apply bg-violet-100;
+      }
+
+      .bui-table__cell--header {
+        @apply bg-violet-100 text-violet-800;
+      }
+    }
+
+    &--gray {
+      @apply bg-gray-50 text-gray-900 border-gray-200;
+
+      .bui-table__header {
         @apply bg-gray-100;
       }
+
+      .bui-table__footer {
+        @apply bg-gray-100;
+      }
+
+      .bui-table__cell--header {
+        @apply bg-gray-100 text-gray-800;
+      }
     }
-    
-    &--bordered {
+
+    // Orientamento
+    &--horizontal {
+      // Stile predefinito, nessuna modifica necessaria
+    }
+
+    &--vertical {
+      // Trasforma la tabella per visualizzazione verticale
+      th {
+        @apply block;
+      }
+
+      td {
+        @apply block;
+      }
+
+      tr {
+        @apply flex flex-col border-b;
+      }
+    }
+
+    // Stili
+    &--style-default {
+      // Stile predefinito, nessuna modifica necessaria
+    }
+
+    &--style-bordered {
       @apply border;
-      
+
       .bui-table__cell {
         @apply border;
       }
     }
-    
+
+    &--style-striped {
+      .bui-table__row:nth-child(even) {
+       //@apply bg-opacity-20;
+      }
+
+      &.bui-table--default .bui-table__row:nth-child(even),
+      &.bui-table--white .bui-table__row:nth-child(even) {
+        @apply bg-gray-50;
+      }
+
+      &.bui-table--red .bui-table__row:nth-child(even) {
+        @apply bg-red-100;
+      }
+
+      &.bui-table--rose .bui-table__row:nth-child(even) {
+        @apply bg-rose-100;
+      }
+
+      &.bui-table--orange .bui-table__row:nth-child(even) {
+        @apply bg-orange-100;
+      }
+
+      &.bui-table--green .bui-table__row:nth-child(even) {
+        @apply bg-green-100;
+      }
+
+      &.bui-table--blue .bui-table__row:nth-child(even) {
+        @apply bg-blue-100;
+      }
+
+      &.bui-table--yellow .bui-table__row:nth-child(even) {
+        @apply bg-yellow-100;
+      }
+
+      &.bui-table--violet .bui-table__row:nth-child(even) {
+        @apply bg-violet-100;
+      }
+
+      &.bui-table--gray .bui-table__row:nth-child(even) {
+        @apply bg-gray-100;
+      }
+    }
+
+    &--style-compact {
+      .bui-table__cell {
+        @apply px-2 py-1 text-xs;
+      }
+    }
+
+    &--style-minimal {
+      @apply border-none shadow-none;
+
+      .bui-table__container {
+        @apply border-none shadow-none;
+      }
+
+      .bui-table__cell {
+        @apply border-none;
+      }
+    }
+
+    // Stati tabella (mantenuti per retrocompatibilità)
+    &--striped {
+      .bui-table__row:nth-child(even) {
+        //@apply bg-opacity-20;
+      }
+
+      &.bui-table--default .bui-table__row:nth-child(even),
+      &.bui-table--white .bui-table__row:nth-child(even) {
+        @apply bg-gray-50;
+      }
+
+      &.bui-table--red .bui-table__row:nth-child(even) {
+        @apply bg-red-100;
+      }
+
+      &.bui-table--rose .bui-table__row:nth-child(even) {
+        @apply bg-rose-100;
+      }
+
+      &.bui-table--orange .bui-table__row:nth-child(even) {
+        @apply bg-orange-100;
+      }
+
+      &.bui-table--green .bui-table__row:nth-child(even) {
+        @apply bg-green-100;
+      }
+
+      &.bui-table--blue .bui-table__row:nth-child(even) {
+        @apply bg-blue-100;
+      }
+
+      &.bui-table--yellow .bui-table__row:nth-child(even) {
+        @apply bg-yellow-100;
+      }
+
+      &.bui-table--violet .bui-table__row:nth-child(even) {
+        @apply bg-violet-100;
+      }
+
+      &.bui-table--gray .bui-table__row:nth-child(even) {
+        @apply bg-gray-100;
+      }
+    }
+
+    &--hoverable {
+      .bui-table__row:hover {
+        //@apply bg-opacity-80;
+      }
+
+      &.bui-table--default .bui-table__row:hover,
+      &.bui-table--white .bui-table__row:hover {
+        @apply bg-gray-100;
+      }
+
+      &.bui-table--red .bui-table__row:hover {
+        @apply bg-red-200;
+      }
+
+      &.bui-table--rose .bui-table__row:hover {
+        @apply bg-rose-200;
+      }
+
+      &.bui-table--orange .bui-table__row:hover {
+        @apply bg-orange-200;
+      }
+
+      &.bui-table--green .bui-table__row:hover {
+        @apply bg-green-200;
+      }
+
+      &.bui-table--blue .bui-table__row:hover {
+        @apply bg-blue-200;
+      }
+
+      &.bui-table--yellow .bui-table__row:hover {
+        @apply bg-yellow-200;
+      }
+
+      &.bui-table--violet .bui-table__row:hover {
+        @apply bg-violet-200;
+      }
+
+      &.bui-table--gray .bui-table__row:hover {
+        @apply bg-gray-200;
+      }
+    }
+
+    &--bordered {
+      @apply border;
+
+      .bui-table__cell {
+        @apply border;
+      }
+    }
+
     &--compact {
       .bui-table__cell {
         @apply px-2 py-1 text-xs;
       }
     }
-    
+
     // Modifiers (border radius)
     &--radius-none {
       @apply rounded-none;
-      
+
       .bui-table__container {
         @apply rounded-none;
       }
     }
-    
+
     &--radius-small {
       @apply rounded-md;
-      
+
       .bui-table__container {
-        @apply rounded-md overflow-hidden;
+        @apply rounded-md;
       }
     }
-    
+
     &--radius-medium {
       @apply rounded-lg;
-      
+
       .bui-table__container {
-        @apply rounded-lg overflow-hidden;
+        @apply rounded-lg;
       }
     }
-    
+
     &--radius-large {
       @apply rounded-xl;
-      
+
       .bui-table__container {
-        @apply rounded-xl overflow-hidden;
+        @apply rounded-xl;
+      }
+    }
+
+    &--radius-full {
+      @apply rounded-full;
+
+      .bui-table__container {
+        @apply rounded-full;
       }
     }
   }

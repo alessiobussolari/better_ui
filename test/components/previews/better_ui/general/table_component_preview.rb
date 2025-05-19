@@ -1,8 +1,8 @@
 module BetterUi
   module General
-    class TableComponentPreview < ViewComponent::Preview
-      # @!group Default
-      
+    class TableComponentPreview < Lookbook::Preview
+      # @!group Esempi Base
+
       # @label Con Helper
       # @param caption text "Didascalia della tabella (opzionale)"
       # @param theme select { choices: [default, white, red, rose, orange, green, blue, yellow, violet, gray] } "Tema di colore"
@@ -30,9 +30,24 @@ module BetterUi
         row_count: 3,
         has_footer: false
       )
+        normalize_params!(
+          caption: caption,
+          theme: theme,
+          orientation: orientation,
+          style: style,
+          radius: radius,
+          striped: striped,
+          hoverable: hoverable,
+          bordered: bordered,
+          compact: compact,
+          data_type: data_type,
+          row_count: row_count,
+          has_footer: has_footer
+        )
+
         # Dati di esempio
         headers = ['Nome', 'Email', 'Ruolo']
-        
+
         array_data = [
           ['Mario Rossi', 'mario.rossi@example.com', 'Amministratore'],
           ['Giulia Bianchi', 'giulia.bianchi@example.com', 'Utente'],
@@ -40,7 +55,7 @@ module BetterUi
           ['Chiara Neri', 'chiara.neri@example.com', 'Utente'],
           ['Luca Gialli', 'luca.gialli@example.com', 'Moderatore']
         ]
-        
+
         hash_data = [
           { nome: 'Mario Rossi', email: 'mario.rossi@example.com', ruolo: 'Amministratore' },
           { nome: 'Giulia Bianchi', email: 'giulia.bianchi@example.com', ruolo: 'Utente' },
@@ -48,11 +63,11 @@ module BetterUi
           { nome: 'Chiara Neri', email: 'chiara.neri@example.com', ruolo: 'Utente' },
           { nome: 'Luca Gialli', email: 'luca.gialli@example.com', ruolo: 'Moderatore' }
         ]
-        
+
         # Selezione dei dati in base al tipo e al numero di righe
         data = data_type == :array ? array_data : hash_data
         data = data.take(row_count)
-        
+
         # Prepara il footer se richiesto
         footer = nil
         if has_footer
@@ -62,7 +77,7 @@ module BetterUi
             footer = ['Totale', "#{row_count} utenti", '']
           end
         end
-        
+
         render_with_template(locals: {
           data: data,
           headers: data_type == :array ? headers : nil,
@@ -78,7 +93,7 @@ module BetterUi
           footer: footer
         })
       end
-      
+
       # @label Istanziazione Diretta
       # @param caption text "Didascalia della tabella (opzionale)"
       # @param theme select { choices: [default, white, red, rose, orange, green, blue, yellow, violet, gray] } "Tema di colore"
@@ -106,9 +121,24 @@ module BetterUi
         row_count: 3,
         has_footer: false
       )
+        normalize_params!(
+          caption: caption,
+          theme: theme,
+          orientation: orientation,
+          style: style,
+          radius: radius,
+          striped: striped,
+          hoverable: hoverable,
+          bordered: bordered,
+          compact: compact,
+          data_type: data_type,
+          row_count: row_count,
+          has_footer: has_footer
+        )
+
         # Dati di esempio
         headers = ['Nome', 'Email', 'Ruolo']
-        
+
         array_data = [
           ['Mario Rossi', 'mario.rossi@example.com', 'Amministratore'],
           ['Giulia Bianchi', 'giulia.bianchi@example.com', 'Utente'],
@@ -116,7 +146,7 @@ module BetterUi
           ['Chiara Neri', 'chiara.neri@example.com', 'Utente'],
           ['Luca Gialli', 'luca.gialli@example.com', 'Moderatore']
         ]
-        
+
         hash_data = [
           { nome: 'Mario Rossi', email: 'mario.rossi@example.com', ruolo: 'Amministratore' },
           { nome: 'Giulia Bianchi', email: 'giulia.bianchi@example.com', ruolo: 'Utente' },
@@ -124,11 +154,11 @@ module BetterUi
           { nome: 'Chiara Neri', email: 'chiara.neri@example.com', ruolo: 'Utente' },
           { nome: 'Luca Gialli', email: 'luca.gialli@example.com', ruolo: 'Moderatore' }
         ]
-        
+
         # Selezione dei dati in base al tipo e al numero di righe
         data = data_type == :array ? array_data : hash_data
         data = data.take(row_count)
-        
+
         # Prepara il footer se richiesto
         footer = nil
         if has_footer
@@ -138,8 +168,8 @@ module BetterUi
             footer = ['Totale', "#{row_count} utenti", '']
           end
         end
-        
-        render BetterUi::General::TableComponent.new(
+
+        render_with_template(locals: {
           data: data,
           headers: data_type == :array ? headers : nil,
           caption: caption,
@@ -152,10 +182,26 @@ module BetterUi
           bordered: bordered,
           compact: compact,
           footer: footer
-        )
+        })
       end
-      
+
       # @!endgroup
+
+      private
+
+      def normalize_params!(options)
+        # Normalizzazione parametri
+        options[:theme] = options[:theme].to_sym if options[:theme].is_a?(String)
+        options[:orientation] = options[:orientation].to_sym if options[:orientation].is_a?(String)
+        options[:style] = options[:style].to_sym if options[:style].is_a?(String)
+        options[:radius] = options[:radius].to_sym if options[:radius].is_a?(String)
+        options[:data_type] = options[:data_type].to_sym if options[:data_type].is_a?(String)
+
+        # Pulizia valori vuoti
+        options[:caption] = nil if options[:caption].is_a?(String) && options[:caption].strip.empty?
+
+        options
+      end
     end
   end
 end 

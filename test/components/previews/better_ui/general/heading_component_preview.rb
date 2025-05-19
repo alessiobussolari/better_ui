@@ -1,8 +1,8 @@
 module BetterUi
   module General
-    class HeadingComponentPreview < ViewComponent::Preview
-      # @!group Default
-      
+    class HeadingComponentPreview < Lookbook::Preview
+      # @!group Esempi Base
+
       # @label Con Helper
       # @param text text "Testo dell'heading"
       # @param level select { choices: [1, 2, 3, 4, 5, 6] } "Livello dell'heading"
@@ -24,6 +24,18 @@ module BetterUi
         subtitle: nil,
         with_divider: false
       )
+        normalize_params!(
+          text: text,
+          level: level,
+          theme: theme,
+          size: size,
+          align: align,
+          style: style,
+          icon: icon,
+          subtitle: subtitle,
+          with_divider: with_divider
+        )
+
         render_with_template(locals: {
           text: text,
           level: level,
@@ -36,7 +48,7 @@ module BetterUi
           with_divider: with_divider
         })
       end
-      
+
       # @label Istanziazione Diretta
       # @param text text "Testo dell'heading"
       # @param level select { choices: [1, 2, 3, 4, 5, 6] } "Livello dell'heading"
@@ -58,19 +70,48 @@ module BetterUi
         subtitle: nil,
         with_divider: false
       )
-        render BetterUi::General::HeadingComponent.new(
+        normalize_params!(
+          text: text,
           level: level,
           theme: theme,
-          align: align,
           size: size,
+          align: align,
           style: style,
           icon: icon,
           subtitle: subtitle,
           with_divider: with_divider
-        ).with_content(text)
+        )
+
+        render_with_template(locals: {
+          text: text,
+          level: level,
+          theme: theme,
+          size: size,
+          align: align,
+          style: style,
+          icon: icon,
+          subtitle: subtitle,
+          with_divider: with_divider
+        })
       end
-      
+
       # @!endgroup
+
+      private
+
+      def normalize_params!(options)
+        # Normalizzazione parametri
+        options[:theme] = options[:theme].to_sym if options[:theme].is_a?(String)
+        options[:size] = options[:size].to_sym if options[:size].is_a?(String)
+        options[:align] = options[:align].to_sym if options[:align].is_a?(String)
+        options[:style] = options[:style].to_sym if options[:style].is_a?(String)
+
+        # Pulizia valori vuoti
+        options[:icon] = nil if options[:icon].is_a?(String) && options[:icon].strip.empty?
+        options[:subtitle] = nil if options[:subtitle].is_a?(String) && options[:subtitle].strip.empty?
+
+        options
+      end
     end
   end
 end

@@ -1,8 +1,8 @@
 module BetterUi
   module General
-    class LinkComponentPreview < ViewComponent::Preview
-      # @!group Default
-      
+    class LinkComponentPreview < Lookbook::Preview
+      # @!group Esempi Base
+
       # @label Con Helper
       # @param label text "Testo del link"
       # @param href text "URL di destinazione (lasciare vuoto per semplice testo)"
@@ -24,6 +24,18 @@ module BetterUi
         disabled: false,
         target: nil
       )
+        normalize_params!(
+          label: label,
+          href: href,
+          theme: theme,
+          orientation: orientation,
+          style: style,
+          icon: icon,
+          active: active,
+          disabled: disabled,
+          target: target
+        )
+
         render_with_template(locals: {
           label: label,
           href: href,
@@ -36,7 +48,7 @@ module BetterUi
           target: target
         })
       end
-      
+
       # @label Istanziazione Diretta
       # @param label text "Testo del link"
       # @param href text "URL di destinazione (lasciare vuoto per semplice testo)"
@@ -58,7 +70,7 @@ module BetterUi
         disabled: false,
         target: nil
       )
-        render BetterUi::General::LinkComponent.new(
+        normalize_params!(
           label: label,
           href: href,
           theme: theme,
@@ -69,22 +81,34 @@ module BetterUi
           disabled: disabled,
           target: target
         )
+
+        render_with_template(locals: {
+          label: label,
+          href: href,
+          theme: theme,
+          orientation: orientation,
+          style: style,
+          icon: icon,
+          active: active,
+          disabled: disabled,
+          target: target
+        })
       end
-      
+
       # @!endgroup
-      
+
       private
-      
+
       def normalize_params!(options)
         # Conversione dei tipi
         options[:theme] = options[:theme].to_sym if options[:theme].is_a?(String)
         options[:active] = options[:active] == true || options[:active] == "true"
         options[:href] = nil if options[:href].is_a?(String) && options[:href].strip.empty?
         options[:icon] = nil if options[:icon].is_a?(String) && options[:icon].strip.empty?
-        
+
         options
       end
-      
+
       def bg_classes
         {
           default: "bg-black",

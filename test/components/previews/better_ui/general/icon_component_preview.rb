@@ -1,8 +1,8 @@
 module BetterUi
   module General
-    class IconComponentPreview < ViewComponent::Preview
+    class IconComponentPreview < Lookbook::Preview
       # @!group Esempi Base
-      
+
       # @label Con Helper
       # @param name text "Nome dell'icona"
       # @param style select { choices: [solid, regular, brands] } "Stile dell'icona"
@@ -35,7 +35,7 @@ module BetterUi
           rotation: rotation,
           flip: flip
         )
-        
+
         bui_icon(
           name,
           style: style,
@@ -48,7 +48,7 @@ module BetterUi
           flip: flip
         )
       end
-      
+
       # @label Istanziazione Diretta
       # @param name text "Nome dell'icona"
       # @param style select { choices: [solid, regular, brands] } "Stile dell'icona"
@@ -81,7 +81,7 @@ module BetterUi
           rotation: rotation,
           flip: flip
         )
-        
+
         render BetterUi::General::IconComponent.new(
           name: name,
           style: style,
@@ -94,11 +94,11 @@ module BetterUi
           flip: flip
         )
       end
-      
+
       # @!endgroup
-      
+
       private
-      
+
       def normalize_params!(options)
         # Conversione dei tipi
         options[:style] = options[:style].to_sym if options[:style].is_a?(String)
@@ -107,35 +107,35 @@ module BetterUi
         options[:pulse] = options[:pulse] == true || options[:pulse] == "true"
         options[:border] = options[:border] == true || options[:border] == "true"
         options[:fixed_width] = options[:fixed_width] == true || options[:fixed_width] == "true"
-        
+
         if options[:rotation].present?
           options[:rotation] = options[:rotation].to_i if options[:rotation].is_a?(String)
         end
-        
+
         if options[:flip].present? && options[:flip] != "none"
           options[:flip] = options[:flip].to_sym if options[:flip].is_a?(String)
         else
           options[:flip] = nil
         end
-        
+
         # Validazione
         valid_styles = [:solid, :regular, :brands]
         valid_sizes = [:xsmall, :small, :medium, :large, :xlarge, :'2xl']
         valid_rotations = [nil, 0, 90, 180, 270]
         valid_flips = [nil, :horizontal, :vertical, :both]
-        
+
         options[:style] = :solid unless valid_styles.include?(options[:style])
         options[:size] = :medium unless valid_sizes.include?(options[:size])
         options[:rotation] = nil unless valid_rotations.include?(options[:rotation])
         options[:flip] = nil unless valid_flips.include?(options[:flip])
-        
+
         options
       end
-      
+
       # @!group esempi_specifici
-      
+
       # @!group Dimensioni
-      
+
       # @label Extra small
       def extra_small
         render BetterUi::General::IconComponent.new(
@@ -143,7 +143,7 @@ module BetterUi
           size: :xsmall
         )
       end
-      
+
       # @label Small
       def small
         render BetterUi::General::IconComponent.new(
@@ -151,7 +151,7 @@ module BetterUi
           size: :small
         )
       end
-      
+
       # @label Medium (default)
       def medium
         render BetterUi::General::IconComponent.new(
@@ -159,7 +159,7 @@ module BetterUi
           size: :medium
         )
       end
-      
+
       # @label Large
       def large
         render BetterUi::General::IconComponent.new(
@@ -167,7 +167,7 @@ module BetterUi
           size: :large
         )
       end
-      
+
       # @label Extra large
       def extra_large
         render BetterUi::General::IconComponent.new(
@@ -175,7 +175,7 @@ module BetterUi
           size: :xlarge
         )
       end
-      
+
       # @label 2x large
       def double_extra_large
         render BetterUi::General::IconComponent.new(
@@ -183,11 +183,11 @@ module BetterUi
           size: :'2xl'
         )
       end
-      
+
       # @!endgroup
-      
+
       # @!group Animazioni
-      
+
       # @label Rotazione (spin)
       def spinning
         render BetterUi::General::IconComponent.new(
@@ -196,7 +196,7 @@ module BetterUi
           size: :xlarge
         )
       end
-      
+
       # @label Pulsazione (pulse)
       def pulsing
         render BetterUi::General::IconComponent.new(
@@ -205,11 +205,11 @@ module BetterUi
           size: :xlarge
         )
       end
-      
+
       # @!endgroup
-      
+
       # @!group Formattazione
-      
+
       # @label Larghezza fissa
       def fixed_width
         render(inline: <<~ERB)
@@ -229,7 +229,7 @@ module BetterUi
           </div>
         ERB
       end
-      
+
       # @label Con bordo
       def bordered
         render BetterUi::General::IconComponent.new(
@@ -238,11 +238,11 @@ module BetterUi
           size: :xlarge
         )
       end
-      
+
       # @!endgroup
-      
+
       # @!group Trasformazioni
-      
+
       # @label Rotazione 90°
       def rotated_90
         render BetterUi::General::IconComponent.new(
@@ -251,7 +251,7 @@ module BetterUi
           size: :xlarge
         )
       end
-      
+
       # @label Flip orizzontale
       def horizontal_flip
         render BetterUi::General::IconComponent.new(
@@ -260,7 +260,7 @@ module BetterUi
           size: :xlarge
         )
       end
-      
+
       # @label Flip verticale
       def vertical_flip
         render BetterUi::General::IconComponent.new(
@@ -269,11 +269,11 @@ module BetterUi
           size: :xlarge
         )
       end
-      
+
       # @!endgroup
-      
+
       # @!group Icone comuni
-      
+
       # @label Icone comuni
       def common_icons
         render(inline: <<~ERB)
@@ -313,7 +313,7 @@ module BetterUi
           </div>
         ERB
       end
-      
+
       # @!endgroup
     end
   end

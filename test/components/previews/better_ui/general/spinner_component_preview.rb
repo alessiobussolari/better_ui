@@ -1,8 +1,8 @@
 module BetterUi
   module General
-    class SpinnerComponentPreview < ViewComponent::Preview
-      # @!group Default
-      
+    class SpinnerComponentPreview < Lookbook::Preview
+      # @!group Esempi Base
+
       # @label Con Helper
       # @param theme select { choices: [default, white, red, rose, orange, green, blue, yellow, violet, gray] } "Tema di colore"
       # @param size select { choices: [small, medium, large] } "Dimensione dello spinner"
@@ -18,6 +18,15 @@ module BetterUi
         label: nil,
         fullscreen: false
       )
+        normalize_params!(
+          theme: theme,
+          size: size,
+          orientation: orientation,
+          style: style,
+          label: label,
+          fullscreen: fullscreen
+        )
+
         render_with_template(locals: {
           theme: theme,
           size: size,
@@ -43,7 +52,7 @@ module BetterUi
         label: nil,
         fullscreen: false
       )
-        render BetterUi::General::SpinnerComponent.new(
+        normalize_params!(
           theme: theme,
           size: size,
           orientation: orientation,
@@ -51,9 +60,33 @@ module BetterUi
           label: label,
           fullscreen: fullscreen
         )
+
+        render_with_template(locals: {
+          theme: theme,
+          size: size,
+          orientation: orientation,
+          style: style,
+          label: label,
+          fullscreen: fullscreen
+        })
       end
-      
+
       # @!endgroup
+
+      private
+
+      def normalize_params!(options)
+        # Normalizzazione parametri
+        options[:theme] = options[:theme].to_sym if options[:theme].is_a?(String)
+        options[:size] = options[:size].to_sym if options[:size].is_a?(String)
+        options[:orientation] = options[:orientation].to_sym if options[:orientation].is_a?(String)
+        options[:style] = options[:style].to_sym if options[:style].is_a?(String)
+
+        # Pulizia valori vuoti
+        options[:label] = nil if options[:label].is_a?(String) && options[:label].strip.empty?
+
+        options
+      end
     end
   end
 end 

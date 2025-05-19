@@ -5,7 +5,7 @@
         <%= @caption %>
       </caption>
     <% end %>
-    
+
     <thead class="<%= thead_classes %>">
       <% if @header_rows_partial.present? %>
         <%= render partial: @header_rows_partial, locals: { 
@@ -22,7 +22,7 @@
         </tr>
       <% end %>
     </thead>
-    
+
     <tbody class="<%= tbody_classes %>">
       <% @data.each_with_index do |row, index| %>
         <% if @body_row_partial.present? %>
@@ -36,20 +36,14 @@
           <tr class="<%= tr_classes(index) %>">
             <% headers_for_display.each do |header| %>
               <td class="<%= td_classes %>">
-                <% if row.is_a?(Hash) %>
-                  <%= row[header.to_s] || row[header.to_sym] %>
-                <% elsif row.respond_to?(header.to_sym) %>
-                  <%= row.send(header.to_sym) %>
-                <% else %>
-                  —
-                <% end %>
+                <%= get_cell_value(row, header) %>
               </td>
             <% end %>
           </tr>
         <% end %>
       <% end %>
     </tbody>
-    
+
     <% if @footer.present? %>
       <tfoot class="<%= tfoot_classes %>">
         <% if @footer_rows_partial.present? %>
