@@ -1,0 +1,22 @@
+<%# Template per il heading %>
+<div class="<%= container_classes %>">
+  <%= tag.public_send(heading_tag, **heading_attributes) do %>
+    <% if show_icon? %>
+      <span class="<%= icon_classes %>">
+        <%= render BetterUi::General::IconComponent.new(name: @icon) %>
+      </span>
+    <% end %>
+    
+    <span><%= content %></span>
+  <% end %>
+  
+  <% if show_subtitle? %>
+    <div class="<%= subtitle_classes %>">
+      <%= @subtitle %>
+    </div>
+  <% end %>
+  
+  <% if show_divider? %>
+    <div class="<%= divider_classes %>"></div>
+  <% end %>
+</div>

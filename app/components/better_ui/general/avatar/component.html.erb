@@ -1,0 +1,20 @@
+<%# Template per l'avatar %>
+<%= tag.div(**avatar_attributes) do %>
+  <% if show_image? %>
+    <%= tag.img(
+      src: @src,
+      alt: @name || 'Avatar',
+      class: img_classes,
+      width: pixel_size,
+      height: pixel_size
+    ) %>
+  <% else %>
+    <%= tag.div(class: placeholder_classes) do %>
+      <%= initials %>
+    <% end %>
+  <% end %>
+
+  <% if show_status? %>
+    <%= tag.span(class: status_indicator_classes) %>
+  <% end %>
+<% end %>

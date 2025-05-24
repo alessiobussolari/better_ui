@@ -1,0 +1,32 @@
+<div <%= tag.attributes(alert_attributes) %>>
+  <% if (@icon || default_icon) && @icon_position == :left %>
+    <div class="<%= get_icon_classes %> <%= get_icon_theme_class %>">
+      <%= render BetterUi::General::IconComponent.new(name: @icon || default_icon) %>
+    </div>
+  <% end %>
+
+  <div class="<%= get_content_classes %>">
+    <% if @title.present? %>
+      <div class="<%= ALERT_TITLE_CLASSES %>"><%= @title %></div>
+    <% end %>
+    <div class="<%= ALERT_MESSAGE_CLASSES %>">
+      <% if @html_content %>
+        <%= raw @message %>
+      <% else %>
+        <%= @message %>
+      <% end %>
+    </div>
+  </div>
+
+  <% if (@icon || default_icon) && @icon_position == :right %>
+    <div class="<%= get_icon_classes %> <%= get_icon_theme_class %>">
+      <%= render BetterUi::General::IconComponent.new(name: @icon || default_icon) %>
+    </div>
+  <% end %>
+
+  <% if @dismissible %>
+    <button type="button" class="<%= get_close_classes %>" aria-label="Chiudi">
+      <%= render BetterUi::General::IconComponent.new(name: "x", size: :sm) %>
+    </button>
+  <% end %>
+</div>

@@ -1,0 +1,34 @@
+<%# Template per il bottone %>
+<% if link? %>
+  <%= link_to @href, **link_attributes do %>
+    <% if @icon && @icon_position == :left %>
+      <span class="flex-shrink-0 mr-2"><%= render_icon(@icon) %></span>
+    <% end %>
+    
+    <% if @label %>
+      <span class="flex-grow"><%= @label %></span>
+    <% end %>
+    
+    <% if @icon && @icon_position == :right %>
+      <span class="flex-shrink-0 ml-2"><%= render_icon(@icon) %></span>
+    <% end %>
+    
+    <%= content %>
+  <% end %>
+<% else %>
+  <%= tag.button(**button_attributes) do %>
+    <% if @icon && @icon_position == :left %>
+      <span class="flex-shrink-0 mr-2"><%= render_icon(@icon) %></span>
+    <% end %>
+    
+    <% if @label %>
+      <span class="flex-grow"><%= @label %></span>
+    <% end %>
+    
+    <% if @icon && @icon_position == :right %>
+      <span class="flex-shrink-0 ml-2"><%= render_icon(@icon) %></span>
+    <% end %>
+    
+    <%= content %>
+  <% end %>
+<% end %>

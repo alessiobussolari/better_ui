@@ -1,0 +1,23 @@
+<span <%= tag.attributes(badge_attributes) %>>
+  <% if @variant == :dot %>
+    <span class="<%= dot_classes %>"></span>
+  <% end %>
+  
+  <% if @icon && @icon_position == :left %>
+    <span class="<%= icon_classes %>">
+      <%= render_icon(@icon) %>
+    </span>
+  <% end %>
+  
+  <% if @label.present? %>
+    <span class="<%= text_classes %>"><%= @label %></span>
+  <% end %>
+  
+  <% if @icon && @icon_position == :right %>
+    <span class="<%= icon_classes %>">
+      <%= render_icon(@icon) %>
+    </span>
+  <% end %>
+  
+  <%= content %>
+</span>

@@ -1,0 +1,10 @@
+<%# Template per il divider %>
+<% if show_label? %>
+  <%= tag.div(**divider_attributes) do %>
+    <div class="<%= label_line_classes %>"></div>
+    <span class="<%= label_classes %>"><%= @label %></span>
+    <div class="<%= label_line_classes %>"></div>
+  <% end %>
+<% else %>
+  <%= tag.div(**divider_attributes) %>
+<% end %>
