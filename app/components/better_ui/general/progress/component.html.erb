@@ -1,0 +1,11 @@
+<div class="bui-progress-wrapper">
+  <div <%= progress_attributes.map { |k, v| "#{k}=\"#{v}\"" }.join(' ').html_safe %>>
+    <div <%= bar_attributes.map { |k, v| "#{k}=\"#{v}\"" }.join(' ').html_safe %>></div>
+  </div>
+  
+  <% if show_label? %>
+    <div class="bui-progress-label mt-1 text-sm text-gray-600 text-center">
+      <%= value %>%
+    </div>
+  <% end %>
+</div>

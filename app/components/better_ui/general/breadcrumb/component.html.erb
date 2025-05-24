@@ -1,0 +1,15 @@
+<nav <%= tag.attributes(breadcrumb_attributes) %>>
+  <ol class="<%= BREADCRUMB_LIST_CLASSES %>">
+    <% @items.each_with_index do |item, index| %>
+      <li class="<%= BREADCRUMB_ITEM_CLASSES %>">
+        <%= render link_for_item(item, active: last_item?(index)) %>
+        
+        <% unless last_item?(index) %>
+          <span class="<%= separator_classes %>" aria-hidden="true">
+            <%= separator_text %>
+          </span>
+        <% end %>
+      </li>
+    <% end %>
+  </ol>
+</nav>

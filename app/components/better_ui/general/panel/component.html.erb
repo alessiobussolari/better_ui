@@ -1,0 +1,28 @@
+<%# Template per il panel %>
+<div <%= tag.attributes(panel_attributes) %>>
+  <% if show_header? %>
+    <div class="<%= header_classes %>">
+      <% if @header.present? %>
+        <%= raw @header %>
+      <% elsif @title.present? %>
+        <div class="<%= title_classes %>"><%= @title %></div>
+      <% end %>
+    </div>
+  <% end %>
+  
+  <% if show_body? %>
+    <div class="<%= body_classes %>">
+      <% if @body.present? %>
+        <%= raw @body %>
+      <% elsif content.present? %>
+        <%= content %>
+      <% end %>
+    </div>
+  <% end %>
+  
+  <% if show_footer? %>
+    <div class="<%= footer_classes %>">
+      <%= raw @footer %>
+    </div>
+  <% end %>
+</div>

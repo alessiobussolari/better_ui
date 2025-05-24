@@ -1,0 +1,35 @@
+<div <%= tag.attributes(container_attributes) %>>
+  <div class="flex-shrink-0">
+    <svg class="<%= svg_classes %> animate-spin" viewBox="0 0 24 24" fill="none">
+      <circle 
+        cx="12" 
+        cy="12" 
+        r="10" 
+        stroke="currentColor" 
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-dasharray="32" 
+        stroke-dashoffset="32">
+        <animate 
+          attributeName="stroke-dasharray" 
+          dur="2s" 
+          values="0 32;16 16;0 32;0 32" 
+          repeatCount="indefinite" />
+        <animate 
+          attributeName="stroke-dashoffset" 
+          dur="2s" 
+          values="0;-16;-32;-32" 
+          repeatCount="indefinite" />
+        <animateTransform 
+          attributeName="transform" 
+          type="rotate" 
+          dur="2s" 
+          values="0 12 12;360 12 12" 
+          repeatCount="indefinite" />
+      </circle>
+    </svg>
+  </div>
+  <% if show_label? %>
+    <span class="text-sm font-medium"><%= label %></span>
+  <% end %>
+</div>

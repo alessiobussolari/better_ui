@@ -123,7 +123,7 @@ class UserCardComponentTest < ViewComponentTestCase
   test "renders correctly with an avatar" do
     # Avatar component stub
     avatar_component = stub(render: '<div class="bui-avatar">JS</div>'.html_safe)
-    BetterUi::General::AvatarComponent.expects(:new)
+    BetterUi::General::Avatar::Component.expects(:new)
       .with(initials: "JS", size: "medium")
       .returns(avatar_component)
       
@@ -213,4 +213,4 @@ If tests are slow:
 - Mock nested components
 - Use fixtures instead of factories when appropriate
 
-For more information on testing components, see the [official ViewComponent documentation](https://viewcomponent.org/guide/testing.html). 
+For more information on testing components, see the [official ViewComponent documentation](https://viewcomponent.org/guide/testing.html).

@@ -1,0 +1,6 @@
+<th <%= tag.attributes(th_attributes) %>>
+  <%= content %>
+  <% if @sortable %>
+    <span class="ml-1 text-gray-400"><%= sort_icon %></span>
+  <% end %>
+</th>

@@ -90,7 +90,7 @@ Badges are small elements that represent status, counts, or categories.
 Avatars represent users, entities, or groups with images or initials.
 
 ```erb
-<%= render BetterUi::General::AvatarComponent.new(
+<%= render BetterUi::General::Avatar::Component.new(
   src: 'https://example.com/avatar.jpg',
   alt: 'User Name',
   size: 'medium',
@@ -184,7 +184,7 @@ Spinners indicate loading states and processes.
 Tables organize and display structured data.
 
 ```erb
-<%= render BetterUi::General::TableComponent.new(
+<%= render BetterUi::General::Table::Component.new(
   headers: ['Name', 'Email', 'Role'],
   rows: @users.map { |user| [user.name, user.email, user.role] },
   striped: true,
@@ -499,4 +499,4 @@ module MyApp
 end
 ```
 
-For detailed information on extending components, see [CUSTOMIZATION.md](CUSTOMIZATION.md). 
+For detailed information on extending components, see [CUSTOMIZATION.md](CUSTOMIZATION.md).

@@ -1,0 +1,9 @@
+<%= render BetterUi::General::Tooltip::Component.new(
+  text: text,
+  theme: theme,
+  position: position,
+  size: size,
+  style: style
+) do %>
+  <%= bui_button(label: "Hover me", theme: :blue, size: :medium) %>
+<% end %>

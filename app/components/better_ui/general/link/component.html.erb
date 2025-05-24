@@ -1,0 +1,18 @@
+<%# Template per il link %>
+<% if link? %>
+  <%= link_to @href, **element_attributes do %>
+    <% if show_icon? %>
+      <span class="<%= icon_classes %>"><%= render_icon %></span>
+    <% end %>
+    <span class="<%= text_classes %>"><%= @label %></span>
+    <%= content %>
+  <% end %>
+<% else %>
+  <%= tag.span(**element_attributes) do %>
+    <% if show_icon? %>
+      <span class="<%= icon_classes %>"><%= render_icon %></span>
+    <% end %>
+    <span class="<%= text_classes %>"><%= @label %></span>
+    <%= content %>
+  <% end %>
+<% end %>
