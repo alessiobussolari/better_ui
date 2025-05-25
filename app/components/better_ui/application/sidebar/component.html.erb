@@ -1,5 +1,184 @@
-<%= tag.aside(**html_options) do %>
-  <div class="bui-sidebar__content">
-    <%= content %>
-  </div>
-<% end %> 
+<aside class="<%= container_classes %>">
+  <!-- Header Section -->
+  <% if has_header? %>
+    <div class="px-6 py-4 border-b border-gray-200">
+      <% if header[:logo].present? %>
+        <div class="flex items-center">
+          <div class="flex-shrink-0">
+            <% if header[:logo].is_a?(Hash) %>
+              <%= bui_avatar(**header[:logo]) %>
+            <% else %>
+              <%= header[:logo].html_safe %>
+            <% end %>
+          </div>
+          <% if header[:title].present? %>
+            <div class="ml-3">
+              <h2 class="text-lg font-semibold text-gray-900"><%= header[:title] %></h2>
+              <% if header[:subtitle].present? %>
+                <p class="text-sm text-gray-500"><%= header[:subtitle] %></p>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      <% elsif header[:title].present? %>
+        <div>
+          <h2 class="text-lg font-semibold text-gray-900"><%= header[:title] %></h2>
+          <% if header[:subtitle].present? %>
+            <p class="text-sm text-gray-500"><%= header[:subtitle] %></p>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+
+  <!-- Navigation Section -->
+  <nav class="flex-1 px-4 py-6 space-y-6">
+    <% navigation_sections.each do |section| %>
+      <div class="space-y-2">
+        <!-- Section Title -->
+        <% if section[:title].present? %>
+          <h3 class="px-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">
+            <%= section[:title] %>
+          </h3>
+        <% end %>
+
+        <!-- Navigation Items -->
+        <div class="space-y-1">
+          <% (section[:items] || []).each do |item| %>
+            <% if item[:type] == :collapsible && collapsible %>
+              <!-- Collapsible Section -->
+              <div>
+                <button 
+                  type="button" 
+                  class="group flex items-center justify-between w-full px-3 py-2 text-sm font-medium text-gray-700 rounded-md hover:bg-gray-50 hover:text-gray-900 transition-colors duration-150"
+                  data-collapse-target="#<%= item[:id] %>"
+                  aria-expanded="<%= item[:expanded] || false %>"
+                >
+                  <div class="flex items-center">
+                    <% if item[:icon].present? %>
+                      <span class="mr-3 text-gray-400 group-hover:text-gray-500">
+                        <%= bui_icon(item[:icon], size: :medium) %>
+                      </span>
+                    <% end %>
+                    <span><%= item[:label] %></span>
+                  </div>
+                  <span class="ml-3 transform transition-transform duration-150 <%= 'rotate-90' if item[:expanded] %>">
+                    <%= bui_icon("chevron-right", size: :small) %>
+                  </span>
+                </button>
+                
+                <div 
+                  id="<%= item[:id] %>" 
+                  class="<%= item[:expanded] ? 'block' : 'hidden' %> mt-1 space-y-1"
+                >
+                  <% (item[:children] || []).each do |child| %>
+                    <% if child[:href].present? %>
+                      <a 
+                        href="<%= child[:href] %>" 
+                        class="<%= (child[:active] || false) ? 'group flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors duration-150 bg-gray-100 text-gray-900' : 'group flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors duration-150 text-gray-700 hover:bg-gray-50 hover:text-gray-900' %> pl-11"
+                      >
+                        <% if child[:icon].present? %>
+                          <span class="mr-3">
+                            <%= bui_icon(child[:icon], size: :small) %>
+                          </span>
+                        <% end %>
+                        <%= child[:label] %>
+                      </a>
+                    <% else %>
+                      <div class="<%= (child[:active] || false) ? 'group flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors duration-150 bg-gray-100 text-gray-900' : 'group flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors duration-150 text-gray-700 hover:bg-gray-50 hover:text-gray-900' %> pl-11 cursor-default">
+                        <% if child[:icon].present? %>
+                          <span class="mr-3">
+                            <%= bui_icon(child[:icon], size: :small) %>
+                          </span>
+                        <% end %>
+                        <%= child[:label] %>
+                      </div>
+                    <% end %>
+                  <% end %>
+                </div>
+              </div>
+            <% else %>
+              <!-- Regular Navigation Item -->
+              <% if item[:href].present? %>
+                <a 
+                  href="<%= item[:href] %>" 
+                  class="<%= (item[:active] || false) ? 'group flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors duration-150 bg-gray-100 text-gray-900' : 'group flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors duration-150 text-gray-700 hover:bg-gray-50 hover:text-gray-900' %>"
+                >
+                  <% if item[:icon].present? %>
+                    <span class="mr-3 text-gray-400 group-hover:text-gray-500">
+                      <%= bui_icon(item[:icon], size: :medium) %>
+                    </span>
+                  <% end %>
+                  <%= item[:label] %>
+                  <% if item[:badge].present? %>
+                    <span class="ml-auto inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+                      <%= item[:badge] %>
+                    </span>
+                  <% end %>
+                </a>
+              <% else %>
+                <div class="<%= (item[:active] || false) ? 'group flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors duration-150 bg-gray-100 text-gray-900' : 'group flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors duration-150 text-gray-700 hover:bg-gray-50 hover:text-gray-900' %> cursor-default">
+                  <% if item[:icon].present? %>
+                    <span class="mr-3 text-gray-400">
+                      <%= bui_icon(item[:icon], size: :medium) %>
+                    </span>
+                  <% end %>
+                  <%= item[:label] %>
+                  <% if item[:badge].present? %>
+                    <span class="ml-auto inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+                      <%= item[:badge] %>
+                    </span>
+                  <% end %>
+                </div>
+              <% end %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+
+    <%= content if content.present? %>
+  </nav>
+
+  <!-- Footer Section -->
+  <% if has_footer? %>
+    <div class="px-6 py-4 border-t border-gray-200">
+      <% if footer[:user_info].present? %>
+        <div class="flex items-center">
+          <% if footer[:user_info][:avatar].present? %>
+            <div class="flex-shrink-0">
+              <% if footer[:user_info][:avatar].is_a?(Hash) %>
+                <%= bui_avatar(**footer[:user_info][:avatar]) %>
+              <% else %>
+                <%= footer[:user_info][:avatar].html_safe %>
+              <% end %>
+            </div>
+          <% end %>
+          <div class="<%= footer[:user_info][:avatar].present? ? 'ml-3' : '' %>">
+            <% if footer[:user_info][:name].present? %>
+              <p class="text-sm font-medium text-gray-700">
+                <%= footer[:user_info][:name] %>
+              </p>
+            <% end %>
+            <% if footer[:user_info][:email].present? %>
+              <p class="text-xs text-gray-500">
+                <%= footer[:user_info][:email] %>
+              </p>
+            <% end %>
+          </div>
+          <% if footer[:user_info][:menu_button].present? %>
+            <div class="ml-auto">
+              <%= footer[:user_info][:menu_button] %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+      
+      <% if footer[:content].present? %>
+        <div class="<%= footer[:user_info].present? ? 'mt-4' : '' %>">
+          <%= footer[:content] %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</aside>

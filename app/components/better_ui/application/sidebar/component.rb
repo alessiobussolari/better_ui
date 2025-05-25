@@ -4,98 +4,124 @@ module BetterUi
   module Application
     module Sidebar
       class Component < ViewComponent::Base
-        attr_reader :width, :position, :theme, :expanded, :compact_width, :collapsed, :compact, :id, :classes
+        # Include degli helper per utilizzare bui_icon e bui_avatar
+        include BetterUi::General::Components::Icon::IconHelper
+        include BetterUi::General::Components::Avatar::AvatarHelper
+        attr_reader :width, :position, :theme, :shadow, :border, :header, :footer, :navigation_sections, :collapsible, :classes
 
-        # Posizioni possibili per la sidebar
-        SIDEBAR_POSITION = {
-          left: 'bui-sidebar--position-left',
-          right: 'bui-sidebar--position-right'
-        }.freeze
+        # Larghezze sidebar con classi Tailwind dirette
+        SIDEBAR_WIDTHS = {
+          sm: "w-48",
+          md: "w-64",
+          lg: "w-72",
+          xl: "w-80"
+        }
 
-        # Temi disponibili per la sidebar
-        SIDEBAR_THEME = {
-          default: 'bui-sidebar--theme-default',
-          white: 'bui-sidebar--theme-white',
-          light: 'bui-sidebar--theme-light',
-          dark: 'bui-sidebar--theme-dark',
-          gray: 'bui-sidebar--theme-gray'
-        }.freeze
+        # Temi sidebar con classi Tailwind dirette
+        SIDEBAR_THEMES = {
+          default: "bg-white text-gray-900",
+          dark: "bg-gray-900 text-white",
+          light: "bg-white text-gray-900"
+        }
 
-        # Stati della sidebar
-        SIDEBAR_STATE = {
-          expanded: 'bui-sidebar--expanded',
-          collapsed: 'bui-sidebar--collapsed',
-          collapsible: 'bui-sidebar--collapsible',
-          compact: 'bui-sidebar--compact'
-        }.freeze
+        # Ombre sidebar con classi Tailwind dirette
+        SIDEBAR_SHADOWS = {
+          none: "",
+          sm: "shadow-sm",
+          md: "shadow-md",
+          lg: "shadow-lg",
+          xl: "shadow-xl"
+        }
 
-        # @param width [String] Larghezza della sidebar (es. "16rem" o "256px")
-        # @param compact_width [String] Larghezza della sidebar in modalità compatta (es. "4rem" o "64px")
-        # @param position [Symbol] Posizione della sidebar (:left o :right)
-        # @param theme [Symbol] Tema della sidebar (:default, :white, :light, :dark, :gray)
-        # @param expanded [Boolean] Se la sidebar è espansa per default
-        # @param collapsed [Boolean] Se la sidebar è collassabile
-        # @param compact [Boolean] Se mostrare la sidebar in modalità compatta
-        # @param id [String] ID HTML opzionale
+        # Bordi sidebar con classi Tailwind dirette
+        SIDEBAR_BORDERS = {
+          left: "border-r border-gray-200",
+          right: "border-l border-gray-200"
+        }
+
+        # @param width [Symbol] Larghezza della sidebar (:sm, :md, :lg, :xl), default :md (w-64)
+        # @param position [Symbol] Posizione della sidebar (:left, :right), default :left
+        # @param theme [Symbol] Tema colori (:default, :dark, :light), default :default
+        # @param shadow [Symbol] Tipo di ombra (:none, :sm, :md, :lg), default :lg
+        # @param border [Boolean] Se mostrare il bordo destro/sinistro, default true
+        # @param header [Hash] Configurazione header (logo, title, subtitle)
+        # @param footer [Hash] Configurazione footer (content, user_info)
+        # @param navigation_sections [Array] Array di sezioni di navigazione
+        # @param collapsible [Boolean] Se abilitare sezioni collassabili, default true
         # @param classes [String] Classi CSS aggiuntive
         def initialize(
-          width: '16rem',
-          compact_width: '4rem',
+          width: :md,
           position: :left,
           theme: :default,
-          expanded: true,
-          collapsed: false,
-          compact: false,
-          id: nil,
+          shadow: :lg,
+          border: true,
+          header: {},
+          footer: {},
+          navigation_sections: [],
+          collapsible: true,
           classes: nil
         )
-          @width = width
-          @compact_width = compact_width
+          @width = width.to_sym
           @position = position.to_sym
           @theme = theme.to_sym
-          @expanded = expanded
-          @collapsed = collapsed
-          @compact = compact
-          @id = id
+          @shadow = shadow.to_sym
+          @border = border
+          @header = header || {}
+          @footer = footer || {}
+          @navigation_sections = navigation_sections || []
+          @collapsible = collapsible
           @classes = classes
         end
 
-        # Combina tutte le classi in una stringa
-        def combined_classes
-          [
-            'bui-sidebar',
-            get_position_class,
-            get_theme_class,
-            expanded ? SIDEBAR_STATE[:expanded] : SIDEBAR_STATE[:collapsed],
-            collapsed ? SIDEBAR_STATE[:collapsible] : nil,
-            compact ? SIDEBAR_STATE[:compact] : nil,
-            classes
-          ].compact.join(' ')
+        def container_classes
+          base_classes = %w[fixed inset-y-0 z-50 flex flex-col overflow-y-auto]
+          
+          # Posizione
+          base_classes << (position == :right ? "right-0" : "left-0")
+          
+          # Larghezza
+          base_classes << width_class
+          
+          # Tema
+          base_classes.concat(theme_classes)
+          
+          # Shadow
+          base_classes << shadow_class if shadow != :none
+          
+          # Border
+          base_classes << border_class if border
+          
+          # Classi aggiuntive
+          base_classes << classes if classes.present?
+          
+          base_classes.compact.join(" ")
         end
 
-        # Genera gli stili inline per la sidebar
-        def inline_styles
-          sidebar_width = compact ? compact_width : width
-          "width: #{sidebar_width};"
+
+        def has_header?
+          header.present? && (header[:title].present? || header[:logo].present?)
         end
 
-        # Restituisce tutti gli attributi HTML
-        def html_options
-          {
-            class: combined_classes,
-            style: inline_styles,
-            id: @id
-          }.compact
+        def has_footer?
+          footer.present? && (footer[:content].present? || footer[:user_info].present?)
         end
 
         private
 
-        def get_position_class
-          SIDEBAR_POSITION[position] || SIDEBAR_POSITION[:left]
+        def width_class
+          SIDEBAR_WIDTHS[@width] || SIDEBAR_WIDTHS[:md]
         end
 
-        def get_theme_class
-          SIDEBAR_THEME[theme] || SIDEBAR_THEME[:default]
+        def theme_classes
+          (SIDEBAR_THEMES[@theme] || SIDEBAR_THEMES[:default]).split
+        end
+
+        def shadow_class
+          SIDEBAR_SHADOWS[@shadow] || SIDEBAR_SHADOWS[:none]
+        end
+
+        def border_class
+          SIDEBAR_BORDERS[@position] || SIDEBAR_BORDERS[:left]
         end
       end
     end

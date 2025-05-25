@@ -1,3 +1,5 @@
+require_dependency 'better_ui/general/components/icon' # Tentativo di forzare il caricamento
+
 module BetterUi
   module General
     module Icon

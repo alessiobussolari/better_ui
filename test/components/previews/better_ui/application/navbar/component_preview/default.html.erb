@@ -1,0 +1,71 @@
+<%= bui_navbar(
+  theme: theme,
+  position: position,
+  height: height,
+  shadow: shadow,
+  border: border,
+  brand: {
+    logo: { name: "Better UI", size: :small, theme: :violet, shape: :rounded },
+    title: "Better UI",
+    href: "/"
+  },
+  breadcrumb: {
+    items: [
+      { label: "Home", url: "/" },
+      { label: "Dashboard", url: "/dashboard" },
+      { label: "Projects", url: "/projects" },
+      { label: "Current Project" }
+    ],
+    separator: :chevron,
+    theme: :default
+  },
+  navigation_items: [
+    {
+      label: "Dashboard",
+      href: "/dashboard",
+      icon: "home",
+      active: true
+    },
+    {
+      label: "Projects",
+      href: "/projects",
+      icon: "folder"
+    },
+    {
+      label: "Team",
+      href: "/team",
+      icon: "users"
+    },
+    {
+      label: "Analytics",
+      href: "/analytics",
+      icon: "chart-bar"
+    }
+  ],
+  actions: [
+    {
+      type: :icon,
+      icon: "search",
+      href: "/search",
+      data: { tooltip: "Search" }
+    },
+    {
+      type: :icon,
+      icon: "bell",
+      href: "/notifications",
+      data: { tooltip: "Notifications" }
+    },
+    {
+      type: :button,
+      label: "New Project",
+      theme: :primary,
+      href: "/projects/new",
+      icon: "plus"
+    },
+    {
+      type: :avatar,
+      avatar: { name: "Demo User", size: :small },
+      href: "/profile"
+    }
+  ]
+) %>

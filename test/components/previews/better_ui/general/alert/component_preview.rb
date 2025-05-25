@@ -7,12 +7,14 @@ module BetterUi
         # @label Con Helper
         # @param title text "Titolo dell'alert (opzionale)"
         # @param message text "Messaggio dell'alert"
-        # @param theme select { choices: ["default", "white", "red", "rose", "orange", "green", "blue", "yellow", "violet"] } "Tema dell'alert"
+        # @param theme select { choices: [default, white, red, rose, orange, green, blue, yellow, violet] } "Tema dell'alert"
         # @param icon text "Nome dell'icona (opzionale, usa predefinita se vuoto)"
-        # @param icon_position select { choices: ["left", "right"] } "Posizione dell'icona"
+        # @param icon_position select { choices: [left, right] } "Posizione dell'icona"
         # @param dismissible toggle "Permette di chiudere l'alert"
-        # @param rounded select { choices: ["none", "small", "medium", "large", "full"] } "Arrotondamento degli angoli"
-        # @param importance select { choices: ["high", "medium", "low"] } "Livello di importanza"
+        # @param rounded select { choices: [none, small, medium, large, full] } "Arrotondamento degli angoli"
+        # @param importance select { choices: [high, medium, low] } "Livello di importanza"
+        # @param html_content toggle "Il messaggio contiene HTML"
+        # @param classes text "Classi CSS aggiuntive (opzionale)"
         def default(
           title: "Titolo alert",
           message: "Questo è un messaggio di alert di esempio.",
@@ -21,7 +23,9 @@ module BetterUi
           icon_position: :left,
           dismissible: false,
           rounded: :medium,
-          importance: :medium
+          importance: :medium,
+          html_content: false,
+          classes: ""
         )
           normalize_params!(
             title: title,
@@ -31,7 +35,9 @@ module BetterUi
             icon_position: icon_position,
             dismissible: dismissible,
             rounded: rounded,
-            importance: importance
+            importance: importance,
+            html_content: html_content,
+            classes: classes
           )
 
           render_with_template(locals: {
@@ -42,19 +48,23 @@ module BetterUi
             icon_position: icon_position,
             dismissible: dismissible,
             rounded: rounded,
-            importance: importance
+            importance: importance,
+            html_content: html_content,
+            classes: classes
           })
         end
 
         # @label Istanziazione Diretta
         # @param title text "Titolo dell'alert (opzionale)"
         # @param message text "Messaggio dell'alert"
-        # @param theme select { choices: ["default", "white", "red", "rose", "orange", "green", "blue", "yellow", "violet"] } "Tema dell'alert"
+        # @param theme select { choices: [default, white, red, rose, orange, green, blue, yellow, violet] } "Tema dell'alert"
         # @param icon text "Nome dell'icona (opzionale, usa predefinita se vuoto)"
-        # @param icon_position select { choices: ["left", "right"] } "Posizione dell'icona"
+        # @param icon_position select { choices: [left, right] } "Posizione dell'icona"
         # @param dismissible toggle "Permette di chiudere l'alert"
-        # @param rounded select { choices: ["none", "small", "medium", "large", "full"] } "Arrotondamento degli angoli"
-        # @param importance select { choices: ["high", "medium", "low"] } "Livello di importanza"
+        # @param rounded select { choices: [none, small, medium, large, full] } "Arrotondamento degli angoli"
+        # @param importance select { choices: [high, medium, low] } "Livello di importanza"
+        # @param html_content toggle "Il messaggio contiene HTML"
+        # @param classes text "Classi CSS aggiuntive (opzionale)"
         def raw(
           title: "Titolo alert",
           message: "Questo è un messaggio di alert di esempio.",
@@ -63,7 +73,9 @@ module BetterUi
           icon_position: :left,
           dismissible: false,
           rounded: :medium,
-          importance: :medium
+          importance: :medium,
+          html_content: false,
+          classes: ""
         )
           normalize_params!(
             title: title,
@@ -73,7 +85,9 @@ module BetterUi
             icon_position: icon_position,
             dismissible: dismissible,
             rounded: rounded,
-            importance: importance
+            importance: importance,
+            html_content: html_content,
+            classes: classes
           )
 
           render BetterUi::General::Alert::Component.new(
@@ -84,7 +98,9 @@ module BetterUi
             icon_position: icon_position,
             dismissible: dismissible,
             rounded: rounded,
-            importance: importance
+            importance: importance,
+            html_content: html_content,
+            classes: classes
           )
         end
 
@@ -103,6 +119,7 @@ module BetterUi
           # Pulizia valori vuoti
           options[:title] = nil if options[:title].is_a?(String) && options[:title].strip.empty?
           options[:icon] = nil if options[:icon].is_a?(String) && options[:icon].strip.empty?
+          options[:classes] = nil if options[:classes].is_a?(String) && options[:classes].strip.empty?
 
           options
         end

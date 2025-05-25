@@ -1,0 +1,96 @@
+<div class="bg-gray-50 min-h-screen relative">
+  <%= render BetterUi::Application::Sidebar::Component.new(
+    width: :md,
+    position: :left,
+    theme: :default,
+    shadow: :lg,
+    border: true,
+    collapsible: true,
+    header: {
+      logo: '<div class="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center"><span class="text-white font-bold text-sm">B</span></div>',
+      title: "Better UI",
+      subtitle: "Component Library"
+    },
+    footer: {
+      user_info: {
+        avatar: '<div class="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center"><span class="text-gray-600 text-sm">U</span></div>',
+        name: "Demo User",
+        email: "demo@example.com"
+      }
+    },
+    navigation_sections: [
+      {
+        title: "Platform",
+        items: [
+          {
+            type: :collapsible,
+            id: "playground-raw",
+            label: "Playground",
+            icon: '<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h1m4 0h1m-6 4h.01M12 3a9 9 0 100 18 9 9 0 000-18z"></path></svg>',
+            expanded: true,
+            children: [
+              { label: "Workspace", href: "#", active: true },
+              { label: "Projects", href: "#" },
+              { label: "Experiments", href: "#" }
+            ]
+          },
+          {
+            label: "History",
+            href: "#",
+            icon: '<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>'
+          },
+          {
+            label: "Settings",
+            href: "#",
+            icon: '<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>'
+          }
+        ]
+      },
+      {
+        title: "Development",
+        items: [
+          {
+            type: :collapsible,
+            id: "models-raw",
+            label: "Models",
+            icon: '<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>',
+            expanded: false,
+            children: [
+              { label: "GPT-4", href: "#" },
+              { label: "Claude", href: "#" },
+              { label: "Gemini", href: "#" }
+            ]
+          },
+          {
+            label: "Documentation",
+            href: "#",
+            icon: '<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>',
+            badge: "New"
+          }
+        ]
+      }
+    ]
+  ) %>
+
+  <!-- Contenuto principale -->
+  <div class="pl-64 flex-1">
+    <div class="p-8">
+      <h1 class="text-2xl font-bold text-gray-900 mb-4">Utilizzo Raw Component</h1>
+      <p class="text-gray-600 mb-4">
+        Questa sidebar è stata creata utilizzando direttamente il componente ViewComponent 
+        <code class="px-2 py-1 bg-gray-100 rounded text-sm">BetterUi::Application::Sidebar::Component</code>
+        senza helper.
+      </p>
+      
+      <div class="bg-white p-6 rounded-lg shadow">
+        <h3 class="font-semibold text-gray-900 mb-2">Codice di esempio:</h3>
+        <pre class="text-sm text-gray-600 bg-gray-100 p-4 rounded overflow-x-auto"><code>&lt;%= render BetterUi::Application::Sidebar::Component.new(
+  width: :md,
+  theme: :default,
+  header: { title: "App Name" },
+  navigation_sections: [...]
+) %&gt;</code></pre>
+      </div>
+    </div>
+  </div>
+</div>
