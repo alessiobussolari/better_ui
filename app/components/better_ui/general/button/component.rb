@@ -3,7 +3,7 @@ module BetterUi
     module Button
       class Component < ViewComponent::Base
         attr_reader :label, :type, :size, :full_width, :disabled, 
-                    :icon, :icon_position, :href, :method, :data, :classes, :id, :rounded, :html_options
+                    :icon, :icon_position, :href, :method, :data, :classes, :id, :rounded, :button_type, :html_options
 
         # Classi base sempre presenti
         BUTTON_BASE_CLASSES = "inline-flex items-center justify-center font-medium transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2"
@@ -18,7 +18,8 @@ module BetterUi
           green: "bg-green-500 text-white hover:bg-green-600 focus:ring-green-500",
           blue: "bg-blue-500 text-white hover:bg-blue-600 focus:ring-blue-500",
           yellow: "bg-yellow-500 text-black hover:bg-yellow-600 focus:ring-yellow-500",
-          violet: "bg-violet-500 text-white hover:bg-violet-600 focus:ring-violet-500"
+          violet: "bg-violet-500 text-white hover:bg-violet-600 focus:ring-violet-500",
+          purple: "bg-purple-500 text-white hover:bg-purple-600 focus:ring-purple-500",
         }
 
         # Dimensioni con classi Tailwind dirette
@@ -52,6 +53,7 @@ module BetterUi
           classes: nil,
           id: nil,
           rounded: :medium,
+          button_type: :button,
           **html_options
         )
           @label = label
@@ -67,6 +69,7 @@ module BetterUi
           @classes = classes
           @id = id
           @rounded = rounded.to_sym
+          @button_type = button_type.to_sym
           @html_options = html_options
 
           validate_params
@@ -107,7 +110,7 @@ module BetterUi
         def button_attributes
           attrs = {
             class: combined_classes,
-            type: "button",
+            type: button_type,
             id: @id
           }
           
@@ -144,6 +147,10 @@ module BetterUi
           attrs
         end
         
+        def button_type
+          @button_type || 'button'
+        end
+
         # Helper per renderizzare le icone
         def render_icon(icon_name)
           # Mappa le dimensioni del bottone alle dimensioni dell'icona

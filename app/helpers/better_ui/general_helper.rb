@@ -18,5 +18,7 @@ module BetterUi
     include BetterUi::General::Components::Table if defined?(BetterUi::General::Components::Table)
     include BetterUi::General::Components::Tag if defined?(BetterUi::General::Components::Tag)
     include BetterUi::General::Components::Tooltip if defined?(BetterUi::General::Components::Tooltip)
+    include BetterUi::General::Components::Container if defined?(BetterUi::General::Components::Container)
+    include BetterUi::General::Components::Card if defined?(BetterUi::General::Components::Card)
   end
 end

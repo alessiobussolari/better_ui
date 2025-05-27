@@ -22,7 +22,8 @@ module BetterUi
           green: "bui-icon--green text-green-600",
           blue: "bui-icon--blue text-blue-600",
           yellow: "bui-icon--yellow text-yellow-600",
-          violet: "bui-icon--violet text-violet-600"
+          violet: "bui-icon--violet text-violet-600",
+          purple: "bui-icon--purple text-purple-600"
         }.freeze
 
         # Animazioni disponibili

@@ -19,6 +19,7 @@ module BetterUi
           # @param id [String] ID elemento
           # @param rounded [Symbol] Tipo di border-radius (:none, :small, :medium, :large, :full)
           # @param html_options [Hash] Opzioni HTML aggiuntive
+          # @params button_type [Symbol] Tipo di bottone (:button, :submit, :reset)
           #
           # @return [String] HTML del bottone
           def bui_button(
@@ -35,6 +36,7 @@ module BetterUi
             classes: nil,
             id: nil,
             rounded: :medium,
+            button_type: :button,
             **html_options,
             &block
           )
@@ -52,6 +54,7 @@ module BetterUi
               classes: classes,
               id: id,
               rounded: rounded,
+              button_type: button_type,
               **html_options
             ), &block
           end
