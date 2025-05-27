@@ -50,7 +50,7 @@
         <% if item[:href].present? %>
           <a 
             href="<%= item[:href] %>" 
-            class="<%= item[:active] ? 'text-gray-900 font-medium border-b-2 border-gray-900 pb-2' : 'text-gray-600 hover:text-gray-900 transition-colors duration-150 pb-2' %>"
+            class="<%= item[:active] ? 'text-gray-900 font-medium border-b-2 border-gray-900' : 'text-gray-600 hover:text-gray-900 transition-colors duration-150' %>"
           >
             <% if item[:icon].present? %>
               <span class="inline-flex items-center">
