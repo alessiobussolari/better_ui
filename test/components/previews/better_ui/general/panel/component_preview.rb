@@ -1,7 +1,40 @@
 module BetterUi
   module General
     module Panel
-      class ComponentPreview < Lookbook::Preview
+      class ComponentPreview < ViewComponent::Preview
+        #
+        # ## Utilizzo Base
+        # Il componente Panel è un contenitore versatile per raggruppare contenuti correlati.
+        # Supporta header, body e footer personalizzabili con diversi stili e temi.
+        #
+        # ## Casi d'Uso Comuni
+        # - Contenitori per sezioni di contenuto in dashboard
+        # - Card informative con titolo e contenuto
+        # - Box con bordi e ombreggiature personalizzate
+        # - Contenitori di form con intestazione e pulsanti nel footer
+        # - Pannelli informativi con diversi livelli di enfasi
+        #
+        # ## Variabili Principali
+        # - **title**: titolo opzionale del pannello
+        # - **body**: contenuto principale
+        # - **header**: contenuto personalizzato per l'header
+        # - **footer**: contenuto per il footer
+        # - **theme**: tema colore (default, white, red, rose, orange, green, blue, yellow, violet)
+        # - **style**: stile del pannello (default, flat, raised, bordered)
+        # - **padding**: dimensione del padding interno (none, small, medium, large)
+        # - **radius**: border radius (none, small, medium, large, full)
+        #
+        # ## Esempi Codice
+        # ```erb
+        # <%= bui_panel(title: 'Informazioni utente', body: 'Contenuto del pannello') %>
+        # <%= bui_panel(title: 'Statistiche', theme: :blue, style: :raised) %>
+        # <%= bui_panel(title: 'Form', footer: '<button>Salva</button>', padding: :large) %>
+        # <%= bui_panel do |p| %>
+        #   <% p.with_header do %>Intestazione personalizzata<% end %>
+        #   <% p.with_body do %>Contenuto principale<% end %>
+        #   <% p.with_footer do %>Pulsanti e azioni<% end %>
+        # <% end %>
+        # ```
         # @!group Esempi Base
 
         # @label Con Helper

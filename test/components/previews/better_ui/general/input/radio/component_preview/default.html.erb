@@ -1,0 +1,80 @@
+<%# Esempio di GRUPPO RADIO COMPLETO - Stesso name, value diversi %>
+<div class="space-y-3">
+  <h3 class="text-lg font-medium text-gray-900">Gruppo Radio: Selezione Genere</h3>
+  
+  <%= bui_input_radio(
+    name: "gender_demo",
+    value: "male",
+    label: "Maschio",
+    theme: theme,
+    size: size,
+    rounded: rounded,
+    checked: value == "male",
+    required: required,
+    disabled: disabled,
+    classes: classes
+  ) %>
+  
+  <%= bui_input_radio(
+    name: "gender_demo",
+    value: "female", 
+    label: "Femmina",
+    theme: theme,
+    size: size,
+    rounded: rounded,
+    checked: value == "female",
+    required: required,
+    disabled: disabled,
+    classes: classes
+  ) %>
+  
+  <%= bui_input_radio(
+    name: "gender_demo",
+    value: "other",
+    label: "Altro",
+    theme: theme,
+    size: size,
+    rounded: rounded,
+    checked: value == "other",
+    required: required,
+    disabled: disabled,
+    classes: classes
+  ) %>
+</div>
+
+<div class="mt-6 space-y-3">
+  <h3 class="text-lg font-medium text-gray-900">Gruppo Radio: Priorità Task</h3>
+  
+  <%= bui_input_radio(
+    name: "priority_demo",
+    value: "low",
+    label: "Bassa",
+    theme: :green,
+    size: size,
+    rounded: rounded,
+    disabled: disabled,
+    classes: classes
+  ) %>
+  
+  <%= bui_input_radio(
+    name: "priority_demo",
+    value: "medium",
+    label: "Media", 
+    theme: :yellow,
+    size: size,
+    rounded: rounded,
+    disabled: disabled,
+    classes: classes
+  ) %>
+  
+  <%= bui_input_radio(
+    name: "priority_demo",
+    value: "high",
+    label: "Alta",
+    theme: :red,
+    size: size,
+    rounded: rounded,
+    disabled: disabled,
+    classes: classes
+  ) %>
+</div>

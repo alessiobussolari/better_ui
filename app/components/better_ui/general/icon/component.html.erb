@@ -1,1 +1,7 @@
-<i class="<%= fa_class_name %> <%= icon_classes %>"></i>
+<% if href.present? %>
+  <%= tag.a(**icon_attributes) do %>
+    <i class="<%= fa_class_name %> <%= icon_classes %>"></i>
+  <% end %>
+<% else %>
+  <i class="<%= fa_class_name %> <%= icon_classes %>"></i>
+<% end %>

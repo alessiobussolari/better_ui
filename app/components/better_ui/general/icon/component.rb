@@ -49,8 +49,8 @@ module BetterUi
         ICON_BORDER_CLASSES = "bui-icon--border border border-current rounded-full p-1"
         ICON_FIXED_WIDTH_CLASSES = "bui-icon--fixed-width w-5"
 
-        attr_reader :name, :style, :size, :theme, :spin, :pulse, :border, :fixed_width,
-                    :rotation, :flip, :classes, :id, :html_options
+        attr_reader :name, :style, :size, :theme, :spin, :pulse, :border, :fixed_width, 
+                    :rotation, :flip, :classes, :id, :href, :method, :target, :html_options
 
         # @param name [String] Nome dell'icona (richiesto)
         # @param style [Symbol] Stile dell'icona (:solid, :regular, :brands)
@@ -64,6 +64,7 @@ module BetterUi
         # @param flip [Symbol] Tipo di flip (:horizontal, :vertical, :both)
         # @param classes [String] Classi CSS aggiuntive
         # @param id [String] ID HTML
+        # @param href [String] URL per l'icona
         # @param html_options [Hash] Attributi HTML aggiuntivi
         def initialize(
           name:,
@@ -78,6 +79,9 @@ module BetterUi
           flip: nil,
           classes: nil,
           id: nil,
+          href: nil,
+          method: nil,
+          target: nil,
           **html_options
         )
           @name = name
@@ -92,6 +96,9 @@ module BetterUi
           @flip = flip&.to_sym
           @classes = classes
           @id = id
+          @href = href
+          @method = method
+          @target = target
           @html_options = html_options
 
           validate_params!
@@ -113,11 +120,21 @@ module BetterUi
 
         # Attributi HTML per l'elemento icona
         def icon_attributes
-          {
+          attrs = {
             class: icon_classes,
             id: @id,
+            href: @href,
+            target: @target,
             **@html_options
           }.compact
+
+          # Handle method for Turbo
+          if @method.present?
+            attrs[:data] ||= {}
+            attrs[:data][:turbo_method] = @method
+          end
+
+          attrs
         end
 
         # Nome completo della classe FontAwesome basato su stile

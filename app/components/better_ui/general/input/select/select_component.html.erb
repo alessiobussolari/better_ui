@@ -1,0 +1,5 @@
+<select name="<%= name %>" class="<%= classes %>" <%= "required" if required %> <%= "disabled" if disabled %> <%= "multiple" if multiple %> <%= options_html.map { |key, value| "#{key}=\"#{value}\"" }.join(" ") %>>
+  <% options.each do |option| %>
+    <option value="<%= option[:value] %>" <%= "selected" if option[:value] == selected %>><%= option[:label] %></option>
+  <% end %>
+</select>

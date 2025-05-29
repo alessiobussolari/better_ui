@@ -1,7 +1,37 @@
 module BetterUi
   module General
     module Button
-      class ComponentPreview < Lookbook::Preview
+      class ComponentPreview < ViewComponent::Preview
+        #
+        # ## Utilizzo Base
+        # Il componente Button è un elemento interattivo fondamentale per azioni utente.
+        # Supporta diverse configurazioni: testo, icone, link, form submission e stati.
+        #
+        # ## Casi d'Uso Comuni
+        # - Pulsanti di azione primaria/secondaria in form
+        # - Link navigazionali con aspetto di bottone
+        # - Bottoni con icone per azioni specifiche
+        # - Pulsanti disabilitati per stati di caricamento
+        # - Call-to-action a larghezza piena
+        #
+        # ## Variabili Principali
+        # - **type**: tema colore (default, white, red, rose, orange, green, blue, yellow, violet)
+        # - **size**: dimensione (small, medium, large)
+        # - **rounded**: border radius (none, small, medium, large, full)
+        # - **full_width**: larghezza completa del contenitore
+        # - **disabled**: stato disabilitato
+        # - **icon**: nome icona opzionale
+        # - **icon_position**: posizione icona (left, right)
+        # - **href**: URL per comportamento da link
+        # - **method**: metodo HTTP per form (get, post, put, patch, delete)
+        #
+        # ## Esempi Codice
+        # ```erb
+        # <%= bui_button(label: 'Salva') %>
+        # <%= bui_button(label: 'Elimina', type: :red, icon: 'trash') %>
+        # <%= bui_button(label: 'Vai alla pagina', href: '/path', type: :blue) %>
+        # <%= bui_button(label: 'Invia', full_width: true, size: :large) %>
+        # ```
         # @!group Esempi Base
 
         # @label Con Helper

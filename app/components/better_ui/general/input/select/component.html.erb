@@ -1,0 +1,16 @@
+<select <%= tag.attributes(select_attributes).html_safe %>>
+  <% if @placeholder.present? && !@multiple %>
+    <option value="" disabled <%= "selected" if @selected.nil? %>><%= @placeholder %></option>
+  <% end %>
+  <% @options.each do |option| %>
+    <option 
+      value="<%= option[:value] %>" 
+      <%= "selected" if selected?(option) %> 
+      <%= "disabled" if option[:disabled] %>
+      <%= option[:html]&.map { |k, v| "#{k}=\"#{v}\"" }&.join(' ').to_s.html_safe %>
+    >
+      <%= option[:label] %>
+    </option>
+  <% end %>
+  <%= content %>
+</select>

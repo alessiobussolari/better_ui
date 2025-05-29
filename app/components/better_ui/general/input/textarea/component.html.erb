@@ -1,0 +1,5 @@
+<% if @form %>
+  <%= @form.text_area(@name, **form_textarea_attributes) %>
+<% else %>
+  <%= tag.textarea(**textarea_attributes) %>
+<% end %>

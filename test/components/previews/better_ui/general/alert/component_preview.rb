@@ -1,7 +1,36 @@
 module BetterUi
   module General
     module Alert
-      class ComponentPreview < Lookbook::Preview
+      class ComponentPreview < ViewComponent::Preview
+        #
+        # ## Utilizzo Base
+        # Il componente Alert è un elemento di notifica per comunicare messaggi importanti all'utente.
+        # Supporta diverse configurazioni: temi, icone, livelli di importanza e dismissibile.
+        #
+        # ## Casi d'Uso Comuni
+        # - Messaggi di successo dopo un'azione completata
+        # - Avvisi di errore per operazioni fallite
+        # - Notifiche informative per aggiornamenti di sistema
+        # - Avvisi dismissibili per comunicazioni temporanee
+        # - Messaggi con livelli di priorità differenti
+        #
+        # ## Variabili Principali
+        # - **title**: titolo opzionale dell'alert
+        # - **message**: testo principale dell'alert
+        # - **theme**: tema colore (default, white, red, rose, orange, green, blue, yellow, violet)
+        # - **icon**: nome icona opzionale (se vuoto usa icona predefinita basata sul tema)
+        # - **icon_position**: posizione icona (left, right)
+        # - **dismissible**: se l'alert può essere chiuso dall'utente
+        # - **rounded**: border radius (none, small, medium, large, full)
+        # - **importance**: livello di importanza (high, medium, low)
+        #
+        # ## Esempi Codice
+        # ```erb
+        # <%= bui_alert(message: 'Operazione completata con successo') %>
+        # <%= bui_alert(title: 'Errore', message: 'Impossibile completare', theme: :red) %>
+        # <%= bui_alert(message: 'Nuova funzionalità', theme: :blue, dismissible: true) %>
+        # <%= bui_alert(message: 'Avviso importante', importance: :high, icon: 'warning') %>
+        # ```
         # @!group Esempi Base
 
         # @label Con Helper
@@ -27,7 +56,7 @@ module BetterUi
           html_content: false,
           classes: ""
         )
-          normalize_params!(
+          normalized = normalize_params!(
             title: title,
             message: message,
             theme: theme,
@@ -40,18 +69,7 @@ module BetterUi
             classes: classes
           )
 
-          render_with_template(locals: {
-            title: title,
-            message: message,
-            theme: theme,
-            icon: icon,
-            icon_position: icon_position,
-            dismissible: dismissible,
-            rounded: rounded,
-            importance: importance,
-            html_content: html_content,
-            classes: classes
-          })
+          render_with_template(locals: normalized)
         end
 
         # @label Istanziazione Diretta
@@ -77,7 +95,7 @@ module BetterUi
           html_content: false,
           classes: ""
         )
-          normalize_params!(
+          normalized = normalize_params!(
             title: title,
             message: message,
             theme: theme,
@@ -90,18 +108,7 @@ module BetterUi
             classes: classes
           )
 
-          render BetterUi::General::Alert::Component.new(
-            title: title,
-            message: message,
-            theme: theme,
-            icon: icon,
-            icon_position: icon_position,
-            dismissible: dismissible,
-            rounded: rounded,
-            importance: importance,
-            html_content: html_content,
-            classes: classes
-          )
+          render BetterUi::General::Alert::Component.new(**normalized)
         end
 
         # @!endgroup

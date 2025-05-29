@@ -1,0 +1,27 @@
+<%# Form field component template %>
+<div class="<%= BASE_CLASSES %>">
+  <% if label.present? %>
+    <label for="<%= id %>" class="<%= LABEL_CLASSES %>">
+      <%= label %>
+      <% if required %>
+        <span class="<%= REQUIRED_CLASSES %>">*</span>
+      <% end %>
+    </label>
+  <% end %>
+
+  <div class="mt-1">
+    <%= content %>
+  </div>
+
+  <% if error.present? %>
+    <div class="<%= ERROR_CLASSES %>">
+      <%= error %>
+    </div>
+  <% end %>
+
+  <% if help_text.present? %>
+    <div class="<%= HELP_TEXT_CLASSES %>">
+      <%= help_text %>
+    </div>
+  <% end %>
+</div> 
