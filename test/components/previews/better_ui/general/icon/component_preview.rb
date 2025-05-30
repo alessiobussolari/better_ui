@@ -1,5 +1,3 @@
-require_dependency 'better_ui/general/components/icon' # Tentativo di forzare il caricamento
-
 module BetterUi
   module General
     module Icon
@@ -29,7 +27,7 @@ module BetterUi
           rotation: nil,
           flip: nil
         )
-          normalize_params!(
+          normalized = normalize_params!(
             name: name,
             style: style,
             size: size,
@@ -42,18 +40,7 @@ module BetterUi
             flip: flip
           )
 
-          bui_icon(
-            name,
-            style: style,
-            size: size,
-            theme: theme,
-            spin: spin,
-            pulse: pulse,
-            border: border,
-            fixed_width: fixed_width,
-            rotation: rotation,
-            flip: flip
-          )
+          render_with_template(locals: normalized)
         end
 
         # @label Istanziazione Diretta
@@ -131,11 +118,11 @@ module BetterUi
           end
 
           # Validazione
-          valid_styles = [:solid, :regular, :brands]
-          valid_sizes = [:small, :medium, :large]
-          valid_themes = [:default, :white, :red, :rose, :orange, :green, :blue, :yellow, :violet]
-          valid_rotations = [nil, 0, 90, 180, 270]
-          valid_flips = [nil, :horizontal, :vertical, :both]
+          valid_styles = [ :solid, :regular, :brands ]
+          valid_sizes = [ :small, :medium, :large ]
+          valid_themes = [ :default, :white, :red, :rose, :orange, :green, :blue, :yellow, :violet ]
+          valid_rotations = [ nil, 0, 90, 180, 270 ]
+          valid_flips = [ nil, :horizontal, :vertical, :both ]
 
           options[:style] = :solid unless valid_styles.include?(options[:style])
           options[:size] = :medium unless valid_sizes.include?(options[:size])

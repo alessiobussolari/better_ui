@@ -5,10 +5,10 @@ module BetterUi
         attr_reader :theme, :sortable, :sorted, :sort_direction, :scope
 
         def initialize(
-          theme: :default, 
-          sortable: false, 
-          sorted: false, 
-          sort_direction: :asc, 
+          theme: :default,
+          sortable: false,
+          sorted: false,
+          sort_direction: :asc,
           scope: "col",
           **html_options
         )
@@ -38,7 +38,7 @@ module BetterUi
 
         def sort_icon
           return unless @sortable
-          
+
           if @sorted
             @sort_direction == :asc ? "↑" : "↓"
           else

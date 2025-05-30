@@ -21,12 +21,12 @@ module BetterUi
         #   { label: "Dashboard", href: "/dashboard", icon: "home", active: true }
         #   ```
         #
-        # - **Sezione collassabile**: Per menu organizzati gerarchicamente  
+        # - **Sezione collassabile**: Per menu organizzati gerarchicamente
         #   ```ruby
-        #   { 
-        #     type: :collapsible, 
-        #     id: "progetti", 
-        #     label: "Progetti", 
+        #   {
+        #     type: :collapsible,
+        #     id: "progetti",
+        #     label: "Progetti",
         #     icon: "folder",
         #     expanded: false,
         #     children: [
@@ -43,7 +43,7 @@ module BetterUi
         #     title: "Platform",
         #     items: [
         #       { label: "Dashboard", href: "/", icon: "home", active: true },
-        #       { type: :collapsible, id: "menu1", label: "Progetti", 
+        #       { type: :collapsible, id: "menu1", label: "Progetti",
         #         children: [{ label: "Nuovo", href: "/nuovo" }] }
         #     ]
         #   }
@@ -52,7 +52,7 @@ module BetterUi
         # # Con helper
         # bui_sidebar(navigation_sections: navigation_sections, theme: :default)
         #
-        # # Istanziazione diretta  
+        # # Istanziazione diretta
         # render BetterUi::Application::Sidebar::Component.new(
         #   navigation_sections: navigation_sections,
         #   theme: :default

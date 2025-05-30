@@ -144,7 +144,7 @@ module BetterUi
 
         # Restituisce gli attributi per l'alert
         def alert_attributes
-          attrs = { 
+          attrs = {
             class: combined_classes
           }
 
@@ -189,7 +189,7 @@ module BetterUi
         # Genera le classi per il contenuto
         def get_content_classes
           if @icon_position == :right
-            [ALERT_CONTENT_CLASSES, ALERT_CONTENT_RIGHT_CLASSES].join(" ")
+            [ ALERT_CONTENT_CLASSES, ALERT_CONTENT_RIGHT_CLASSES ].join(" ")
           else
             ALERT_CONTENT_CLASSES
           end
@@ -206,7 +206,7 @@ module BetterUi
           theme_classes = ALERT_CLOSE_THEME_CLASSES[@theme] || ALERT_CLOSE_THEME_CLASSES[:white]
           position_classes = @dismissible ? ALERT_CLOSE_POSITION_CLASSES : nil
 
-          [base_classes, theme_classes, position_classes].compact.join(" ")
+          [ base_classes, theme_classes, position_classes ].compact.join(" ")
         end
 
         private
@@ -225,7 +225,7 @@ module BetterUi
           end
 
           # Validazione posizione icona
-          valid_positions = [:left, :right]
+          valid_positions = [ :left, :right ]
           unless valid_positions.include?(@icon_position)
             raise ArgumentError, "La posizione dell'icona deve essere una tra: #{valid_positions.join(', ')}"
           end

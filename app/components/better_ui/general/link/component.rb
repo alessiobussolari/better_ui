@@ -62,7 +62,7 @@ module BetterUi
         # @param target [String] target del link
         # @param html_options [Hash] opzioni HTML aggiuntive
         def initialize(
-          label:, 
+          label:,
           href: nil,
           theme: :white,
           orientation: :horizontal,
@@ -89,7 +89,7 @@ module BetterUi
           @method = method
           @target = target
           @html_options = html_options
-          
+
           validate_params
         end
 
@@ -124,7 +124,7 @@ module BetterUi
         # Classi per l'icona con dimensionamento proporzionale
         def icon_classes
           return "" unless @icon.present?
-          
+
           # Definisce spacing e dimensioni icona basate su size
           base_spacing = case @orientation
           when :horizontal
@@ -134,7 +134,7 @@ module BetterUi
           else
             "mr-2"
           end
-          
+
           icon_size = case @size
           when :small
             "w-4 h-4"
@@ -145,7 +145,7 @@ module BetterUi
           else
             "w-5 h-5"
           end
-          
+
           "#{base_spacing} #{icon_size} inline-block"
         end
 
@@ -158,24 +158,24 @@ module BetterUi
         def element_attributes
           attrs = @html_options.except(:class)
           attrs[:class] = combined_classes
-          
+
           if link?
             # Attributi specifici per i link
             if @method.present?
-              attrs[:data] = @data.merge(turbo_method: @method) 
+              attrs[:data] = @data.merge(turbo_method: @method)
             elsif @data.present?
               attrs[:data] = @data
             end
-            
+
             attrs[:target] = @target if @target.present?
             attrs[:aria] ||= {}
-            attrs[:aria][:current] = 'page' if active?
+            attrs[:aria][:current] = "page" if active?
           else
             # Attributi per span (testo semplice o disabilitato)
             attrs[:aria] ||= {}
             attrs[:aria][:disabled] = true if disabled?
           end
-          
+
           attrs
         end
 
@@ -187,24 +187,24 @@ module BetterUi
         # Renderizza l'icona
         def render_icon
           return nil unless show_icon?
-          
+
           if @icon.is_a?(String)
             render BetterUi::General::IconComponent.new(name: @icon)
           else
             @icon # Assumiamo che sia già un componente renderizzato
           end
         end
-        
+
         private
-        
+
         def get_theme_class
           LINK_THEME_CLASSES[@theme] || LINK_THEME_CLASSES[:white]
         end
-        
+
         def get_orientation_class
           LINK_ORIENTATION_CLASSES[@orientation] || LINK_ORIENTATION_CLASSES[:horizontal]
         end
-        
+
         def get_style_class
           LINK_STYLE_CLASSES[@style] || LINK_STYLE_CLASSES[:default]
         end
@@ -218,26 +218,26 @@ module BetterUi
           return LINK_STATE_CLASSES[:active] if active?
           LINK_STATE_CLASSES[:normal]
         end
-        
+
         def validate_params
           validate_theme
           validate_orientation
           validate_style
           validate_size
         end
-        
+
         def validate_theme
           unless LINK_THEME_CLASSES.keys.include?(@theme)
             raise ArgumentError, "Il tema deve essere uno tra: #{LINK_THEME_CLASSES.keys.join(', ')}"
           end
         end
-        
+
         def validate_orientation
           unless LINK_ORIENTATION_CLASSES.keys.include?(@orientation)
             raise ArgumentError, "L'orientamento deve essere uno tra: #{LINK_ORIENTATION_CLASSES.keys.join(', ')}"
           end
         end
-        
+
         def validate_style
           unless LINK_STYLE_CLASSES.keys.include?(@style)
             raise ArgumentError, "Lo stile deve essere uno tra: #{LINK_STYLE_CLASSES.keys.join(', ')}"

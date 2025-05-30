@@ -119,7 +119,7 @@ module BetterUi
           @subtitle = subtitle
           @with_divider = with_divider
           @html_options = html_options
-          
+
           validate_params
         end
 
@@ -143,7 +143,7 @@ module BetterUi
         # Classi per il subtitle
         def subtitle_classes
           return "" unless @subtitle.present?
-          
+
           [
             "mt-1 text-sm",
             get_subtitle_theme_class,
@@ -154,7 +154,7 @@ module BetterUi
         # Classi per il divider
         def divider_classes
           return "" unless @with_divider
-          
+
           [
             "mt-2 border-t",
             get_divider_theme_class
@@ -193,22 +193,22 @@ module BetterUi
         def show_divider?
           @with_divider
         end
-        
+
         private
-        
+
         def get_theme_class
           HEADING_THEME_CLASSES[@theme] || HEADING_THEME_CLASSES[:white]
         end
-        
+
         def get_align_class
           HEADING_ALIGN_CLASSES[@align] || HEADING_ALIGN_CLASSES[:left]
         end
-        
+
         def get_size_class
           size_map = HEADING_SIZE_CLASSES[@size] || HEADING_SIZE_CLASSES[:medium]
           size_map[@level] || size_map[2]
         end
-        
+
         def get_style_class
           HEADING_STYLE_CLASSES[@style] || HEADING_STYLE_CLASSES[:normal]
         end
@@ -220,32 +220,32 @@ module BetterUi
         def get_divider_theme_class
           HEADING_DIVIDER_THEME_CLASSES[@theme] || HEADING_DIVIDER_THEME_CLASSES[:white]
         end
-        
+
         def validate_params
           validate_theme
           validate_align
           validate_size
           validate_style
         end
-        
+
         def validate_theme
           unless HEADING_THEME_CLASSES.keys.include?(@theme)
             raise ArgumentError, "Il tema deve essere uno tra: #{HEADING_THEME_CLASSES.keys.join(', ')}"
           end
         end
-        
+
         def validate_align
           unless HEADING_ALIGN_CLASSES.keys.include?(@align)
             raise ArgumentError, "L'allineamento deve essere uno tra: #{HEADING_ALIGN_CLASSES.keys.join(', ')}"
           end
         end
-        
+
         def validate_size
           unless HEADING_SIZE_CLASSES.keys.include?(@size)
             raise ArgumentError, "La dimensione deve essere una tra: #{HEADING_SIZE_CLASSES.keys.join(', ')}"
           end
         end
-        
+
         def validate_style
           unless HEADING_STYLE_CLASSES.keys.include?(@style)
             raise ArgumentError, "Lo stile deve essere uno tra: #{HEADING_STYLE_CLASSES.keys.join(', ')}"

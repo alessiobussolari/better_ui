@@ -117,7 +117,7 @@ module BetterUi
 
           # Se richieste le icone, aggiungile
           if with_icons
-            icon_names = ["home", "box", "info-circle"]
+            icon_names = [ "home", "box", "info-circle" ]
             items = items.each_with_index.map do |item, index|
               if item.is_a?(Hash)
                 item.merge(icon: icon_names[index])

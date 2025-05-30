@@ -4,14 +4,14 @@ module BetterUi
       class Component < ViewComponent::Base
         attr_reader :data, :headers, :caption, :striped, :hoverable, :bordered, :compact, :minimal, :footer,
                     :header_rows_partial, :body_row_partial, :footer_rows_partial, :thead_partial, :tfoot_partial
-        
+
         # Classi base sempre presenti
         TABLE_BASE_CLASSES = "w-full table-auto border-collapse"
 
         # Temi di colore con classi Tailwind dirette
         TABLE_THEME = {
           default: "bg-gray-50 text-gray-900",
-          white: "bg-white text-gray-900", 
+          white: "bg-white text-gray-900",
           red: "bg-red-50 text-red-900",
           rose: "bg-rose-50 text-rose-900",
           orange: "bg-orange-50 text-orange-900",
@@ -20,16 +20,16 @@ module BetterUi
           yellow: "bg-yellow-50 text-yellow-900",
           violet: "bg-violet-50 text-violet-900"
         }.freeze
-        
+
         # Opzioni di bordi arrotondati con classi Tailwind dirette
         TABLE_RADIUS = {
           none: "rounded-none",
           small: "rounded-md",
-          medium: "rounded-lg", 
+          medium: "rounded-lg",
           large: "rounded-xl",
           full: "rounded-full"
         }.freeze
-        
+
 
         # Classi per container
         CONTAINER_BASE_CLASSES = "overflow-x-auto"
@@ -43,21 +43,21 @@ module BetterUi
         TD_CLASSES = "px-4 py-3 text-sm text-gray-900"
         TF_CLASSES = "px-4 py-3 text-sm font-medium text-gray-900"
         CAPTION_CLASSES = "mb-2 text-sm text-gray-600 text-left"
-        
+
         def initialize(
           data: nil,
-          headers: nil, 
-          caption: nil, 
-          theme: :default, 
-          radius: :small, 
-          striped: false, 
-          hoverable: false, 
-          bordered: false, 
+          headers: nil,
+          caption: nil,
+          theme: :default,
+          radius: :small,
+          striped: false,
+          hoverable: false,
+          bordered: false,
           compact: false,
           minimal: false,
-          footer: nil, 
-          header_rows_partial: nil, 
-          body_row_partial: nil, 
+          footer: nil,
+          header_rows_partial: nil,
+          body_row_partial: nil,
           footer_rows_partial: nil,
           thead_partial: nil,
           tfoot_partial: nil,
@@ -81,7 +81,7 @@ module BetterUi
           @thead_partial = thead_partial
           @tfoot_partial = tfoot_partial
           @html_options = html_options
-          
+
           validate_params
         end
 
@@ -113,7 +113,7 @@ module BetterUi
             get_radius_class
           ].compact.join(" ")
         end
-        
+
         # Restituisce gli attributi HTML per il container
         def container_attributes
           {
@@ -124,7 +124,7 @@ module BetterUi
         def get_radius_class
           TABLE_RADIUS[@radius] || TABLE_RADIUS[:small]
         end
-        
+
         def get_theme_class
           TABLE_THEME[@theme] || TABLE_THEME[:default]
         end
@@ -141,7 +141,7 @@ module BetterUi
         def tbody_classes
           TBODY_CLASSES
         end
-        
+
         def tfoot_classes
           TFOOT_CLASSES
         end
@@ -157,7 +157,7 @@ module BetterUi
         def td_classes
           TD_CLASSES
         end
-        
+
         def tf_classes
           TF_CLASSES
         end
@@ -165,17 +165,17 @@ module BetterUi
         def headers_for_display
           return @headers if @headers.present?
           return [] if @data.empty?
-          
+
           case first_item = @data.first
           when Hash
             first_item.keys
-          when -> (item) { item.respond_to?(:attributes) }
+          when ->(item) { item.respond_to?(:attributes) }
             first_item.attributes.keys - %w[id created_at updated_at]
           else
             []
           end
         end
-        
+
         # Ottiene il valore di una cella in modo consistente
         def get_cell_value(row, header)
           if row.is_a?(Hash)
@@ -192,20 +192,20 @@ module BetterUi
         def render?
           true
         end
-        
+
         private
-        
+
         def validate_params
           validate_theme
           validate_radius
         end
-        
+
         def validate_theme
           unless TABLE_THEME.keys.include?(@theme)
             raise ArgumentError, "Il tema deve essere uno tra: #{TABLE_THEME.keys.join(', ')}"
           end
         end
-        
+
         def validate_radius
           unless TABLE_RADIUS.keys.include?(@radius)
             raise ArgumentError, "Il radius deve essere uno tra: #{TABLE_RADIUS.keys.join(', ')}"

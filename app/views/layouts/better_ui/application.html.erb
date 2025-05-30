@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Better ui</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+
+  <%= yield :head %>
+
+  <%= stylesheet_link_tag    "better_ui/application", media: "all" %>
+</head>
+<body>
+
+<%= yield %>
+
+</body>
+</html>

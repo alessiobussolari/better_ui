@@ -228,7 +228,7 @@ module BetterUi
         end
 
         def validate_style
-          valid_styles = [:filled, :outline]
+          valid_styles = [ :filled, :outline ]
           unless valid_styles.include?(@style)
             raise ArgumentError, "Lo stile deve essere uno tra: #{valid_styles.join(', ')}"
           end

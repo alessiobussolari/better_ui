@@ -4,11 +4,11 @@ module BetterUi
       class Component < ViewComponent::Base
         # Classi base per l'icona con nomenclatura BEM
         ICON_BASE_CLASSES = "bui-icon inline-flex items-center justify-center"
-        
+
         # Dimensioni dell'icona (standardizzate: small, medium, large)
         ICON_SIZE_CLASSES = {
           small: "bui-icon--small w-4 h-4 text-sm",
-          medium: "bui-icon--medium w-5 h-5 text-base", 
+          medium: "bui-icon--medium w-5 h-5 text-base",
           large: "bui-icon--large w-6 h-6 text-lg"
         }.freeze
 
@@ -17,7 +17,7 @@ module BetterUi
           default: "bui-icon--default text-gray-600",
           white: "bui-icon--white text-white",
           red: "bui-icon--red text-red-600",
-          rose: "bui-icon--rose text-rose-600", 
+          rose: "bui-icon--rose text-rose-600",
           orange: "bui-icon--orange text-orange-600",
           green: "bui-icon--green text-green-600",
           blue: "bui-icon--blue text-blue-600",
@@ -35,7 +35,7 @@ module BetterUi
         # Trasformazioni disponibili
         ICON_ROTATION_CLASSES = {
           90 => "bui-icon--rotate-90 transform rotate-90",
-          180 => "bui-icon--rotate-180 transform rotate-180", 
+          180 => "bui-icon--rotate-180 transform rotate-180",
           270 => "bui-icon--rotate-270 transform rotate-270"
         }.freeze
 
@@ -49,7 +49,7 @@ module BetterUi
         ICON_BORDER_CLASSES = "bui-icon--border border border-current rounded-full p-1"
         ICON_FIXED_WIDTH_CLASSES = "bui-icon--fixed-width w-5"
 
-        attr_reader :name, :style, :size, :theme, :spin, :pulse, :border, :fixed_width, 
+        attr_reader :name, :style, :size, :theme, :spin, :pulse, :border, :fixed_width,
                     :rotation, :flip, :classes, :id, :html_options
 
         # @param name [String] Nome dell'icona (richiesto)
@@ -123,12 +123,12 @@ module BetterUi
         # Nome completo della classe FontAwesome basato su stile
         def fa_class_name
           prefix = case @style
-                   when :solid then "fas"
-                   when :regular then "far" 
-                   when :brands then "fab"
-                   else "fas"
-                   end
-          
+          when :solid then "fas"
+          when :regular then "far"
+          when :brands then "fab"
+          else "fas"
+          end
+
           "#{prefix} fa-#{@name}"
         end
 
@@ -153,7 +153,7 @@ module BetterUi
         end
 
         def validate_style!
-          valid_styles = [:solid, :regular, :brands]
+          valid_styles = [ :solid, :regular, :brands ]
           unless valid_styles.include?(@style)
             raise ArgumentError, "Lo stile deve essere uno tra: #{valid_styles.join(', ')}"
           end

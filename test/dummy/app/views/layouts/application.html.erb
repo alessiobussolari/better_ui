@@ -18,13 +18,10 @@
     <link rel="apple-touch-icon" href="/icon.png">
 
     <%# Includes all stylesheet files in app/assets/stylesheets %>
-    <%# stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
-    <%= stylesheet_link_tag "better_ui" %>
+    <%= stylesheet_link_tag :app %>
   </head>
 
-  <body class="bg-gray-50 text-gray-800">
-    <main class="min-h-screen p-8">
-      <%= yield %>
-    </main>
+  <body>
+    <%= yield %>
   </body>
 </html>

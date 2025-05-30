@@ -1,211 +1,254 @@
-# Better UI
+# BetterUI
 
-[![Gem Version](https://badge.fury.io/rb/better_ui.svg)](https://badge.fury.io/rb/better_ui)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+Elegant and reusable UI components for Rails with integrated documentation. BetterUI is a Rails gem that works as a mountable engine containing reusable UI components, built with ViewComponent and Tailwind CSS, following the BEM methodology.
 
-A comprehensive UI component library for Rails applications built with ViewComponent and Tailwind CSS, following BEM methodology.
+## Features
 
-![Better UI Components](https://via.placeholder.com/800x400?text=Better+UI+Components)
+- 🎨 **Beautiful Components**: Pre-built UI components with Tailwind CSS styling
+- 📖 **Interactive Documentation**: Integrated Lookbook previews for all components
+- 🔧 **Highly Customizable**: Flexible configuration options for each component
+- 🚀 **Production Ready**: Battle-tested components following best practices
+- 📱 **Responsive**: All components are mobile-first and responsive
+- ♿ **Accessible**: Built with accessibility in mind
 
-## Table of Contents
+## Components Available
 
-- [Overview](#overview)
-- [Installation](#installation)
-  - [Basic Installation](#basic-installation)
-  - [Advanced Installation Options](#advanced-installation-options)
-  - [Tailwind CSS Configuration](#tailwind-css-configuration)
-- [Documentation](#documentation)
-- [Usage](#usage)
-- [Customization](#customization)
-- [Components](#components)
-- [Testing](#testing)
-- [Contributing](#contributing)
-- [License](#license)
-- [Resources](#resources)
+### General Components
 
-## Overview
-
-Better UI is a Rails gem that provides a collection of reusable UI components built with ViewComponent and Tailwind CSS. It follows the BEM (Block Element Modifier) methodology to ensure consistent naming and styling conventions.
-
-Key features:
-- **Modern Sass Architecture**: Uses `@use` and `@forward` instead of deprecated `@import`
-- **Modular Components**: Each component is isolated and can be used independently
-- **Customizable**: Override components styles with your own customizations
-- **Interactive Documentation**: Built-in documentation viewer with Lookbook
-- **Responsive Design**: All components are responsive by default
-- **Accessibility**: Components are designed with accessibility in mind
-
-For more detailed information, see the [components documentation](COMPONENTS.md).
+- **Alert**: Notification and alert messages
+- **Avatar**: User profile pictures and placeholders
+- **Badge**: Small status indicators and labels
+- **Breadcrumb**: Navigation breadcrumbs
+- **Button**: Interactive buttons with multiple variants
+- **Card**: Content containers and panels
+- **Divider**: Visual separators
+- **Heading**: Consistent typography headings
+- **Icon**: FontAwesome icon components
+- **Link**: Styled navigation links
+- **Panel**: Content panels and containers
+- **Progress**: Progress bars and indicators
+- **Table**: Data tables with sorting and styling
+- **Tag**: Content tags and labels
+- **Tooltip**: Contextual help tooltips
 
 ## Installation
 
-### Basic Installation
-
-1. Add the gem to your Gemfile:
+Add this line to your application's Gemfile:
 
 ```ruby
-gem 'better_ui'
+gem "better_ui"
 ```
 
-2. Run bundle install:
+For development with Lookbook documentation:
+
+```ruby
+gem "better_ui"
+gem "lookbook", group: :development
+```
+
+And then execute:
 
 ```bash
-bundle install
+$ bundle install
 ```
 
-3. Run the installer:
+## Setup
 
-```bash
-bin/rails generate better_ui:install
+### 1. Mount the Engine (Optional)
+
+If you want to access BetterUI's internal routes, mount the engine in your `config/routes.rb`:
+
+```ruby
+Rails.application.routes.draw do
+  mount BetterUi::Engine => "/better_ui"
+  # your other routes...
+end
 ```
 
-The installer will:
-- Mount the Better UI engine at `/better_ui`
-- Add the necessary assets to your application
-- Create a configuration file at `config/initializers/better_ui.rb`
-- Generate customizable stylesheets in `app/assets/stylesheets/components/`
+### 2. Setup Lookbook (Recommended for Development)
 
-### Advanced Installation Options
+To access the interactive component documentation during development, mount Lookbook in your `config/routes.rb`:
 
-You can customize the installation process with the following options:
+```ruby
+Rails.application.routes.draw do
+  # Mount Lookbook only in development
+  mount Lookbook::Engine => "/lookbook" if Rails.env.development?
 
-```bash
-# Skip mounting the engine in routes
-bin/rails generate better_ui:install --skip-routes
-
-# Skip generating stylesheets
-bin/rails generate better_ui:install --skip-stylesheets
-
-# Skip creating the configuration file
-bin/rails generate better_ui:install --skip-config
-
-# All options together
-bin/rails generate better_ui:install --skip-routes --skip-stylesheets --skip-config
+  # your other routes...
+end
 ```
 
-### Tailwind CSS Configuration
+**That's it!** BetterUI components and their previews are automatically available in Lookbook.
 
-Better UI requires Tailwind CSS to be properly configured in your application. If you haven't already set up Tailwind CSS, follow these steps:
+### 3. Include Tailwind CSS
 
-1. Install Tailwind CSS in your Rails application:
-
-```bash
-bin/rails tailwindcss:install
-```
-
-2. Configure Tailwind to include Better UI's components:
-
-In your `tailwind.config.js` file, add:
-
-```javascript
-module.exports = {
-  content: [
-    './app/views/**/*.{html,html.erb,erb}',
-    './app/helpers/**/*.rb',
-    './app/javascript/**/*.js',
-    './app/components/**/*.{rb,html,html.erb,erb}',
-    // Add this line for Better UI components
-    './app/components/better_ui/**/*.{rb,html,html.erb,erb}'
-  ],
-  // other configurations...
-}
-```
-
-For more detailed installation instructions, see [INSTALLATION.md](INSTALLATION.md).
-
-## Documentation
-
-After installation, you can access the interactive documentation at:
-
-```
-http://localhost:3000/better_ui
-```
-
-This provides:
-- Interactive component previews
-- Component API documentation
-- Usage examples and code snippets
-- Styling reference
+Make sure your application includes Tailwind CSS, as BetterUI components rely on Tailwind classes. If you don't have Tailwind CSS installed, follow the [official Tailwind CSS installation guide](https://tailwindcss.com/docs/guides/ruby-on-rails).
 
 ## Usage
 
-Using Better UI components in your views is straightforward:
+### Basic Component Usage
 
 ```erb
-<%# Basic button %>
-<%= render BetterUi::General::ButtonComponent.new(label: 'Click me') %>
-
-<%# Button with more options %>
-<%= render BetterUi::General::ButtonComponent.new(
-  label: 'Submit',
-  variant: 'primary',
-  size: 'large',
-  icon_left: 'check',
-  data: { turbo: false }
+<!-- Using the Button component -->
+<%= render BetterUi::General::Button::Component.new(
+  label: "Click me",
+  type: :blue,
+  size: :large
 ) %>
 
-<%# Panel component %>
-<%= render BetterUi::General::PanelComponent.new(title: 'User Details') do %>
-  <p>This is the panel content</p>
+<!-- Using the Alert component -->
+<%= render BetterUi::General::Alert::Component.new(
+  message: "Success! Your changes have been saved.",
+  type: :success,
+  dismissible: true
+) %>
+
+<!-- Using the Badge component -->
+<%= render BetterUi::General::Badge::Component.new(
+  label: "New",
+  variant: :success,
+  size: :small
+) %>
+```
+
+### Using with Content Blocks
+
+```erb
+<!-- Button with custom content -->
+<%= render BetterUi::General::Button::Component.new(type: :blue) do %>
+  <i class="fas fa-download"></i>
+  Download File
+<% end %>
+
+<!-- Card with content -->
+<%= render BetterUi::General::Card::Component.new(
+  title: "Card Title",
+  shadow: :medium
+) do %>
+  <p>Your card content goes here...</p>
 <% end %>
 ```
 
-For more detailed usage instructions, see [USAGE.md](USAGE.md).
+### Component Parameters
 
-## Customization
+Each component supports various parameters for customization. Common parameters include:
 
-Better UI is designed to be highly customizable:
+- **type/variant**: Visual style (e.g., `:primary`, `:secondary`, `:success`, `:danger`)
+- **size**: Component size (e.g., `:small`, `:medium`, `:large`)
+- **classes**: Additional CSS classes
+- **html_options**: Any additional HTML attributes
 
-1. **Style Customization**: Edit the generated override files in `app/assets/stylesheets/components/`
-2. **Component Configuration**: Configure default options in `config/initializers/better_ui.rb`
-3. **Component Extensions**: Extend existing components or create your own
+## Lookbook Documentation
 
-Example of customizing a component style:
+Once you have Lookbook mounted, visit `http://localhost:3000/lookbook` in your development environment to:
 
-```scss
-// app/assets/stylesheets/components/_button_overrides.scss
-@layer components {
-  .bui-button {
-    &--primary {
-      @apply bg-indigo-600 hover:bg-indigo-700;
-    }
-  }
-}
+- 📖 Browse all available components
+- 🎛️ Interactive parameter testing
+- 👀 Live preview of components
+- 📋 Copy code examples
+- 🎨 Experiment with different configurations
+
+The Lookbook interface provides:
+
+1. **Component Gallery**: Visual overview of all components
+2. **Interactive Controls**: Real-time parameter adjustment
+3. **Code Examples**: Copy-paste ready code snippets
+4. **Documentation**: Detailed usage instructions
+
+## Development
+
+### Adding Custom Previews
+
+While BetterUI components come with built-in Lookbook previews, you can add your own custom previews in your application:
+
+```ruby
+# spec/components/previews/my_custom_preview.rb
+class MyCustomPreview < Lookbook::Preview
+  def default
+    render BetterUi::General::Button::Component.new(
+      label: "My Custom Button",
+      type: :purple
+    )
+  end
+end
 ```
 
-For more detailed customization instructions, see [CUSTOMIZATION.md](CUSTOMIZATION.md).
+### Customizing Components
 
-## Components
+You can create wrapper components or extend existing ones:
 
-Better UI includes a wide range of components categorized into:
-
-- **General Components**: Basic UI elements like buttons, badges, icons
-- **Application Components**: Complex UI elements like cards, alerts, sidebars
-- **Website Components**: Components specifically designed for websites
-
-For a full list of available components and their documentation, see [COMPONENTS.md](COMPONENTS.md).
-
-## Testing
-
-Better UI components are thoroughly tested. You can run the test suite with:
-
-```bash
-bin/rails test
+```ruby
+# app/components/my_button_component.rb
+class MyButtonComponent < BetterUi::General::Button::Component
+  def initialize(label:, **options)
+    super(label: label, type: :blue, **options)
+  end
+end
 ```
 
-For more detailed testing instructions, see [TESTING.md](TESTING.md).
+## Styling and Customization
+
+BetterUI components use Tailwind CSS classes. You can:
+
+1. **Override classes**: Pass custom classes via the `classes` parameter
+2. **Extend components**: Create your own components that inherit from BetterUI
+3. **Theme customization**: Modify Tailwind configuration for consistent theming
+
+```erb
+<!-- Add custom classes -->
+<%= render BetterUi::General::Button::Component.new(
+  label: "Custom Button",
+  classes: "my-custom-class hover:scale-105"
+) %>
+```
+
+## Browser Support
+
+BetterUI components support all modern browsers that support:
+
+- CSS Grid and Flexbox
+- ES6+ JavaScript features
+- Tailwind CSS
 
 ## Contributing
 
-Contributions are welcome! Please check out our [contribution guidelines](CONTRIBUTING.md).
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-component`)
+3. Add your component with tests and Lookbook previews
+4. Commit your changes (`git commit -am 'Add amazing component'`)
+5. Push to the branch (`git push origin feature/amazing-component`)
+6. Create a Pull Request
+
+### Development Setup
+
+```bash
+git clone https://github.com/alessiobussolari/better_ui.git
+cd better_ui
+bundle install
+cd test/dummy
+bundle exec rails server
+```
+
+Visit `http://localhost:3000/lookbook` to see the component documentation.
+
+## Roadmap
+
+- 🎯 Form components (inputs, selects, checkboxes)
+- 📊 Chart and data visualization components
+- 🎭 Animation and transition components
+- 🌙 Dark mode support
+- 📱 Mobile-specific components
 
 ## License
 
-Better UI is available as open source under the terms of the [MIT License](LICENSE).
+The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
 
-## Resources
+## Support
 
-- [Troubleshooting Guide](TROUBLESHOOTING.md)
-- [FAQs](FAQ.md)
-- [Changelog](CHANGELOG.md)
-- [Roadmap](ROADMAP.md)
+- 📖 [Documentation](https://github.com/alessiobussolari/better_ui)
+- 🐛 [Issue Tracker](https://github.com/alessiobussolari/better_ui/issues)
+- 💬 [Discussions](https://github.com/alessiobussolari/better_ui/discussions)
+
+---
+
+Built with ❤️ by [PanDev](https://github.com/alessiobussolari)

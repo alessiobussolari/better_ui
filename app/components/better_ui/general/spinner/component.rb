@@ -19,7 +19,7 @@ module BetterUi
         # Temi colore con classi Tailwind dirette
         SPINNER_THEMES = {
           default: "text-gray-900",
-          white: "text-white", 
+          white: "text-white",
           red: "text-red-500",
           rose: "text-rose-500",
           orange: "text-orange-500",
@@ -29,7 +29,7 @@ module BetterUi
           violet: "text-violet-500"
         }
 
-        # Stili con classi Tailwind dirette  
+        # Stili con classi Tailwind dirette
         SPINNER_STYLES = {
           default: "",
           outline: "opacity-75"
@@ -61,14 +61,14 @@ module BetterUi
             get_spinner_theme_classes,
             get_spinner_style_classes,
             html_options[:class]
-          ].compact.join(' ')
+          ].compact.join(" ")
         end
 
         def get_spinner_theme_classes
           SPINNER_THEMES[theme] || SPINNER_THEMES[:default]
         end
 
-        def get_spinner_style_classes  
+        def get_spinner_style_classes
           SPINNER_STYLES[style] || SPINNER_STYLES[:default]
         end
 

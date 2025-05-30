@@ -75,25 +75,25 @@ module BetterUi
 
         def container_classes
           base_classes = %w[fixed inset-y-0 z-50 flex flex-col overflow-y-auto]
-          
+
           # Posizione
           base_classes << (position == :right ? "right-0" : "left-0")
-          
+
           # Larghezza
           base_classes << width_class
-          
+
           # Tema
           base_classes.concat(theme_classes)
-          
+
           # Shadow
           base_classes << shadow_class if shadow != :none
-          
+
           # Border
           base_classes << border_class if border
-          
+
           # Classi aggiuntive
           base_classes << classes if classes.present?
-          
+
           base_classes.compact.join(" ")
         end
 

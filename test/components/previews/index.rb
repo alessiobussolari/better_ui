@@ -27,4 +27,4 @@
 #
 # - I parametri di tipo Symbol devono essere inseriti senza i due punti (es. "default" invece di ":default")
 # - I parametri Boolean accettano "true" o "false"
-# - I parametri Integer sono numeri interi (es. 3) 
+# - I parametri Integer sono numeri interi (es. 3)

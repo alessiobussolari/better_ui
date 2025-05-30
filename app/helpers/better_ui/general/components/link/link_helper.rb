@@ -34,7 +34,7 @@ module BetterUi
           #   bui_link("Non disponibile", disabled: true)
           #
           # @example Con attributi Turbo
-          #   bui_link("Elimina", href: "/delete", method: :delete, 
+          #   bui_link("Elimina", href: "/delete", method: :delete,
           #            data: { confirm: "Sei sicuro?" }, theme: :red)
           #
           # @example Con opzioni avanzate

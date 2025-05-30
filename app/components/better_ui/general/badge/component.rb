@@ -175,13 +175,13 @@ module BetterUi
         def render_icon(icon_name)
           # Mappa le dimensioni del badge alle dimensioni dell'icona
           icon_size = case @size
-                     when :large
+          when :large
                        :small
-                     when :small
+          when :small
                        :tiny
-                     else
+          else
                        :tiny
-                     end
+          end
 
           # Utilizziamo il componente Icon
           render BetterUi::General::IconComponent.new(
@@ -221,7 +221,7 @@ module BetterUi
         end
 
         def validate_style
-          valid_styles = [:filled, :outline]
+          valid_styles = [ :filled, :outline ]
           unless valid_styles.include?(@style)
             raise ArgumentError, "Lo stile deve essere uno tra: #{valid_styles.join(', ')}"
           end
@@ -230,14 +230,14 @@ module BetterUi
         def validate_variant
           return if @variant.nil?
 
-          valid_variants = [:notification, :counter, :dot]
+          valid_variants = [ :notification, :counter, :dot ]
           unless valid_variants.include?(@variant)
             raise ArgumentError, "La variante deve essere una tra: #{valid_variants.join(', ')}"
           end
         end
 
         def validate_icon_position
-          valid_positions = [:left, :right]
+          valid_positions = [ :left, :right ]
           unless valid_positions.include?(@icon_position)
             raise ArgumentError, "La posizione dell'icona deve essere una tra: #{valid_positions.join(', ')}"
           end

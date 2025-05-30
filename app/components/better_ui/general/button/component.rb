@@ -2,7 +2,7 @@ module BetterUi
   module General
     module Button
       class Component < ViewComponent::Base
-        attr_reader :label, :type, :size, :full_width, :disabled, 
+        attr_reader :label, :type, :size, :full_width, :disabled,
                     :icon, :icon_position, :href, :method, :data, :classes, :id, :rounded, :button_type, :html_options
 
         # Classi base sempre presenti
@@ -19,7 +19,7 @@ module BetterUi
           blue: "bg-blue-500 text-white hover:bg-blue-600 focus:ring-blue-500",
           yellow: "bg-yellow-500 text-black hover:bg-yellow-600 focus:ring-yellow-500",
           violet: "bg-violet-500 text-white hover:bg-violet-600 focus:ring-violet-500",
-          purple: "bg-purple-500 text-white hover:bg-purple-600 focus:ring-purple-500",
+          purple: "bg-purple-500 text-white hover:bg-purple-600 focus:ring-purple-500"
         }
 
         # Dimensioni con classi Tailwind dirette
@@ -28,7 +28,7 @@ module BetterUi
           medium: "px-4 py-2 text-sm",
           large: "px-6 py-3 text-base"
         }
-        
+
         # Border radius con classi Tailwind dirette
         BUTTON_RADIUS = {
           none: "rounded-none",
@@ -93,19 +93,19 @@ module BetterUi
             @html_options[:class]
           ].compact.join(" ")
         end
-        
+
         def get_button_type_classes
           BUTTON_THEME[@type] || BUTTON_THEME[:white]
         end
-        
+
         def get_border_radius_class
           BUTTON_RADIUS[@rounded] || BUTTON_RADIUS[:medium]
         end
-        
+
         def get_button_size_classes
           BUTTON_SIZES[@size] || BUTTON_SIZES[:medium]
         end
-        
+
         # Restituisce gli attributi per il bottone
         def button_attributes
           attrs = {
@@ -113,56 +113,56 @@ module BetterUi
             type: button_type,
             id: @id
           }
-          
+
           attrs[:disabled] = true if @disabled
           attrs[:data] = @data if @data.present?
-          
+
           # Aggiungi altri attributi HTML se presenti
           @html_options.except(:class).each do |key, value|
             attrs[key] = value
           end
-          
+
           attrs
         end
-        
+
         # Restituisce gli attributi per il link
         def link_attributes
           attrs = {
             class: combined_classes,
             id: @id
           }
-          
+
           attrs[:data] = @data.merge(turbo_method: @method) if @method.present?
           attrs[:data] = @data if @data.present? && !@method.present?
           attrs[:href] = @disabled ? nil : @href
           attrs[:role] = "button"
           attrs[:tabindex] = @disabled ? "-1" : "0"
           attrs[:aria] = { disabled: @disabled } if @disabled
-          
+
           # Aggiungi altri attributi HTML se presenti
           @html_options.except(:class).each do |key, value|
             attrs[key] = value
           end
-          
+
           attrs
         end
-        
+
         def button_type
-          @button_type || 'button'
+          @button_type || "button"
         end
 
         # Helper per renderizzare le icone
         def render_icon(icon_name)
           # Mappa le dimensioni del bottone alle dimensioni dell'icona
           icon_size = case @size
-                     when :large
+          when :large
                        :large
-                     when :small
+          when :small
                        :small
-                     else
+          else
                        :medium
-                     end
-          
+          end
+
           # Utilizziamo il componente Icon
           render BetterUi::General::Icon::Component.new(
             name: icon_name,
@@ -198,7 +198,7 @@ module BetterUi
         end
 
         def validate_icon_position
-          unless [:left, :right].include?(@icon_position)
+          unless [ :left, :right ].include?(@icon_position)
             raise ArgumentError, "La posizione dell'icona deve essere :left o :right"
           end
         end

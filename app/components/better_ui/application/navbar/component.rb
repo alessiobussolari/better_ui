@@ -76,25 +76,25 @@ module BetterUi
 
         def container_classes
           base_classes = %w[w-full flex items-center justify-between px-4 sm:px-6 lg:px-8]
-          
+
           # Posizione
           base_classes.concat(position_classes.split) if position != :top
-          
+
           # Altezza
           base_classes << height_class
-          
+
           # Tema
           base_classes.concat(theme_classes.split)
-          
+
           # Shadow
           base_classes << shadow_class if shadow != :none
-          
+
           # Border
           base_classes << "border-b" if border
-          
+
           # Classi aggiuntive
           base_classes << classes if classes.present?
-          
+
           base_classes.compact.join(" ")
         end
 
@@ -116,7 +116,7 @@ module BetterUi
 
         def render_breadcrumb
           return unless has_breadcrumb?
-          
+
           bui_breadcrumb(
             items: breadcrumb[:items],
             separator: breadcrumb[:separator] || :chevron,

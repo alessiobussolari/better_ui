@@ -87,7 +87,7 @@ module BetterUi
           @padding = padding.to_sym
           @radius = radius.to_sym
           @html_options = html_options
-          
+
           validate_params
         end
 

@@ -11,7 +11,7 @@ module BetterUi
         # Dimensioni della progress bar con classi Tailwind dirette
         PROGRESS_SIZES = {
           small: "h-2",
-          medium: "h-4", 
+          medium: "h-4",
           large: "h-6"
         }
 
@@ -33,7 +33,7 @@ module BetterUi
           default: "bg-gray-200",
           white: "bg-gray-100",
           red: "bg-red-100",
-          rose: "bg-rose-100", 
+          rose: "bg-rose-100",
           orange: "bg-orange-100",
           green: "bg-green-100",
           blue: "bg-blue-100",
@@ -55,7 +55,7 @@ module BetterUi
           classes: nil,
           **html_options
         )
-          @value = [0, [value.to_i, 100].min].max # Clamp tra 0 e 100
+          @value = [ 0, [ value.to_i, 100 ].min ].max # Clamp tra 0 e 100
           @theme = theme.to_sym
           @size = size.to_sym
           @label = label

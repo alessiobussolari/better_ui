@@ -3,7 +3,7 @@ module BetterUi
     module Divider
       class ComponentPreview < Lookbook::Preview
         # @!group Esempi Base
-        
+
         # @label Con Helper
         # @param orientation select { choices: [horizontal, vertical] } "Orientamento del divisore"
         # @param style select { choices: [solid, dashed, dotted, double] } "Stile del divisore"
@@ -27,10 +27,10 @@ module BetterUi
             label: label,
             height: height
           )
-          
+
           render_with_template(locals: normalized)
         end
-        
+
         # @label Istanziazione Diretta
         # @param orientation select { choices: [horizontal, vertical] } "Orientamento del divisore"
         # @param style select { choices: [solid, dashed, dotted, double] } "Stile del divisore"
@@ -54,25 +54,25 @@ module BetterUi
             label: label,
             height: height
           )
-          
+
           render BetterUi::General::Divider::Component.new(**normalized)
         end
-        
+
         # @!endgroup
-        
+
         private
-        
+
         def normalize_params!(options)
           # Normalizzazione parametri
           options[:orientation] = options[:orientation].to_sym if options[:orientation].is_a?(String)
           options[:style] = options[:style].to_sym if options[:style].is_a?(String)
           options[:size] = options[:size].to_sym if options[:size].is_a?(String)
           options[:theme] = options[:theme].to_sym if options[:theme].is_a?(String)
-          
+
           # Pulizia valori vuoti
           options[:label] = nil if options[:label].is_a?(String) && options[:label].strip.empty?
           options[:height] = nil if options[:height].is_a?(String) && options[:height].strip.empty?
-          
+
           options
         end
       end

@@ -58,7 +58,7 @@ module BetterUi
         # Inizializzazione del componente
         def initialize(
           items: [],
-          separator: :chevron, 
+          separator: :chevron,
           theme: :white,
           size: :medium,
           classes: nil,
@@ -117,7 +117,7 @@ module BetterUi
 
         # Restituisce gli attributi per il breadcrumb
         def breadcrumb_attributes
-          attrs = { 
+          attrs = {
             "aria-label": "Breadcrumb",
             class: container_classes
           }

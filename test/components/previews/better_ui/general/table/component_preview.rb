@@ -46,7 +46,7 @@ module BetterUi
         # ## 📦 **SUB-COMPONENTI MODULARI**
         #
         # **6 Componenti Separati:**
-        # - `BetterUi::General::Table::TheadComponent` - Header 
+        # - `BetterUi::General::Table::TheadComponent` - Header
         # - `BetterUi::General::Table::TbodyComponent` - Body (striped, hoverable)
         # - `BetterUi::General::Table::TfootComponent` - Footer
         # - `BetterUi::General::Table::TrComponent` - Righe (highlighted)
@@ -55,7 +55,7 @@ module BetterUi
         #
         # ## 🔧 **HELPER MODULARI**
         # ```ruby
-        # bui_thead         # Header section  
+        # bui_thead         # Header section
         # bui_tbody         # Body section
         # bui_tfoot         # Footer section
         # bui_tr            # Table row
@@ -73,7 +73,7 @@ module BetterUi
         # - `highlighted: true/false` - Evidenzia la riga
         #
         # **ThComponent:**
-        # - `sortable: true/false` - Header cliccabile  
+        # - `sortable: true/false` - Header cliccabile
         # - `sorted: true/false` - Indica se è ordinato
         # - `sort_direction: :asc/:desc` - Direzione ordinamento
         # - `scope: "col"/"row"` - Attributo scope HTML
@@ -92,7 +92,7 @@ module BetterUi
         #       bui_th("Ruolo", scope: "col")
         #     end
         #   end
-        #   
+        #
         #   bui_tbody(striped: true, hoverable: true) do
         #     bui_tr(highlighted: true) do
         #       bui_td("Mario Rossi")
@@ -100,7 +100,7 @@ module BetterUi
         #       bui_td("Admin", compact: true)
         #     end
         #   end
-        #   
+        #
         #   bui_tfoot do
         #     bui_tr do
         #       bui_td("Totale", colspan: 3, align: :center)

@@ -7,7 +7,7 @@ module BetterUi
         def initialize(text:, theme: :white, size: :medium, style: :filled, **options)
           @text = text
           @theme = theme.to_sym
-          @size = size.to_sym 
+          @size = size.to_sym
           @style = style.to_sym
           @options = options
         end
@@ -30,7 +30,7 @@ module BetterUi
           base_classes.concat(size_classes)
           base_classes.concat(theme_classes)
           base_classes.concat(style_classes)
-          base_classes.join(' ')
+          base_classes.join(" ")
         end
 
         def size_classes

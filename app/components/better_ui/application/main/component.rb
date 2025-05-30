@@ -14,12 +14,12 @@ module BetterUi
         # @param with_navbar [Boolean] Se lasciare lo spazio per la navbar
         # @param classes [String] Classi CSS aggiuntive per il contenitore principale
         def initialize(
-          padding: true, 
-          inner_padding: true, 
-          rounded: :small, 
-          shadow: :md, 
-          with_sidebar: true, 
-          with_navbar: true, 
+          padding: true,
+          inner_padding: true,
+          rounded: :small,
+          shadow: :md,
+          with_sidebar: true,
+          with_navbar: true,
           classes: nil
         )
           @padding = padding
@@ -33,7 +33,7 @@ module BetterUi
 
         def container_classes
           base_classes = %w[w-full min-h-screen]
-          
+
           # Gestione layout per sidebar e navbar
           if with_sidebar && with_navbar
             base_classes << "pl-64 pt-16" # Spazio per sidebar + navbar
@@ -42,25 +42,25 @@ module BetterUi
           elsif with_navbar
             base_classes << "pt-16" # Solo navbar
           end
-          
+
           # Padding del contenitore principale
           base_classes << (padding ? "p-6" : "p-0")
-          
+
           # Classi aggiuntive
           base_classes << classes if classes.present?
-          
+
           base_classes.compact.join(" ")
         end
 
         def inner_container_classes
           base_classes = %w[w-full]
-          
+
           # Padding interno
           base_classes << (inner_padding ? "p-6" : "p-0")
-          
+
           # Background
           base_classes << "bg-white"
-          
+
           # Border radius
           case rounded
           when :none
@@ -76,7 +76,7 @@ module BetterUi
           else
             base_classes << "rounded-lg" # Default
           end
-          
+
           # Shadow
           case shadow
           when :none
@@ -90,7 +90,7 @@ module BetterUi
           else
             base_classes << "shadow-md" # Default
           end
-          
+
           base_classes.compact.join(" ")
         end
       end
