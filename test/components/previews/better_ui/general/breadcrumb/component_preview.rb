@@ -9,7 +9,6 @@ module BetterUi
         # @param separator select { choices: [chevron, slash, arrow, dot, pipe] } "Tipo di separatore"
         # @param size select { choices: [small, medium, large] } "Dimensione del testo"
         # @param with_icons toggle "Mostra icone"
-        # @notes
         # **Struttura dell'array `items`:**
         #
         # L'array `items` supporta diversi formati per massima flessibilità:

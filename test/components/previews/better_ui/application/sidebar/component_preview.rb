@@ -11,7 +11,6 @@ module BetterUi
         # @param shadow select { choices: [none, sm, md, lg] } "Tipo di ombra"
         # @param border toggle "Mostra bordo"
         # @param collapsible toggle "Abilita sezioni collassabili"
-        # @notes
         # **Struttura dell'array `navigation_sections`:**
         #
         # Ogni sezione può contenere diversi tipi di elementi di navigazione:

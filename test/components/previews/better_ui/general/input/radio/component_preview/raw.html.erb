@@ -1,0 +1,80 @@
+<%# Esempio di GRUPPO RADIO COMPLETO con istanziazione diretta %>
+<div class="space-y-3">
+  <h3 class="text-lg font-medium text-gray-900">Gruppo Radio: Selezione Genere</h3>
+  
+  <%= render BetterUi::General::Input::Radio::Component.new(
+    name: "gender_direct",
+    value: "male",
+    label: "Maschio",
+    theme: theme,
+    size: size,
+    rounded: rounded,
+    checked: value == "male",
+    required: required,
+    disabled: disabled,
+    classes: classes
+  ) %>
+  
+  <%= render BetterUi::General::Input::Radio::Component.new(
+    name: "gender_direct",
+    value: "female",
+    label: "Femmina", 
+    theme: theme,
+    size: size,
+    rounded: rounded,
+    checked: value == "female",
+    required: required,
+    disabled: disabled,
+    classes: classes
+  ) %>
+  
+  <%= render BetterUi::General::Input::Radio::Component.new(
+    name: "gender_direct",
+    value: "other",
+    label: "Altro",
+    theme: theme,
+    size: size,
+    rounded: rounded,
+    checked: value == "other",
+    required: required,
+    disabled: disabled,
+    classes: classes
+  ) %>
+</div>
+
+<div class="mt-6 space-y-3">
+  <h3 class="text-lg font-medium text-gray-900">Gruppo Radio: Modalità Pagamento</h3>
+  
+  <%= render BetterUi::General::Input::Radio::Component.new(
+    name: "payment_direct",
+    value: "card",
+    label: "Carta di Credito",
+    theme: :blue,
+    size: size,
+    rounded: rounded,
+    disabled: disabled,
+    classes: classes
+  ) %>
+  
+  <%= render BetterUi::General::Input::Radio::Component.new(
+    name: "payment_direct",
+    value: "bank",
+    label: "Bonifico Bancario",
+    theme: :blue,
+    size: size,
+    rounded: rounded,
+    disabled: disabled,
+    classes: classes
+  ) %>
+  
+  <%= render BetterUi::General::Input::Radio::Component.new(
+    name: "payment_direct",
+    value: "cash",
+    label: "Contrassegno",
+    theme: :blue,
+    size: size,
+    rounded: rounded,
+    disabled: disabled,
+    classes: classes
+  ) %>
+</div>

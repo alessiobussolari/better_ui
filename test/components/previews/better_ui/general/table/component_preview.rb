@@ -42,7 +42,6 @@ module BetterUi
 
         # @!endgroup
 
-        # @notes
         # ## 📦 **SUB-COMPONENTI MODULARI**
         #
         # **6 Componenti Separati:**

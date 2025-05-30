@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(bundle exec rails console:*)",
+      "Bash(bundle exec rails runner:*)",
+      "Bash(ruby:*)",
+      "Bash(rm:*)",
+      "Bash(find:*)",
+      "Bash(rg:*)",
+      "Bash(/opt/homebrew/Cellar/ripgrep/14.1.1/bin/rg \"def.*datetime_local|bui_input_datetime_local\" app/)",
+      "Bash(git add:*)"
+    ]
+  },
+  "enableAllProjectMcpServers": false
+}
