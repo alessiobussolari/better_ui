@@ -10,7 +10,7 @@ module BetterUi
           # @param theme [Symbol] tema del colore (:default, :white, etc.)
           # @param orientation [Symbol] orientamento (:horizontal, :vertical)
           # @param style [Symbol] stile (:default, :underline, :bold, :text)
-          # @param size [Symbol] dimensione (:small, :medium, :large)
+          # @param size [Symbol] dimensione (:extra_small, :small, :medium, :large)
           # @param icon [String] icona opzionale
           # @param active [Boolean] stato attivo del link
           # @param disabled [Boolean] stato disabilitato del link

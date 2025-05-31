@@ -41,6 +41,7 @@ module BetterUi
 
         # Dimensioni con classi Tailwind dirette
         BREADCRUMB_SIZE_CLASSES = {
+          extra_small: "text-[0.65rem]",
           small: "text-xs",
           medium: "text-sm",
           large: "text-base"

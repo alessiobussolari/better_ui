@@ -7,7 +7,7 @@ module BetterUi
         # @label Con Helper
         # @param theme select { choices: [default, white, red, rose, orange, green, blue, yellow, violet, gray] } "Tema del breadcrumb"
         # @param separator select { choices: [chevron, slash, arrow, dot, pipe] } "Tipo di separatore"
-        # @param size select { choices: [small, medium, large] } "Dimensione del testo"
+        # @param size select { choices: [extra_small, small, medium, large] } "Dimensione del testo"
         # @param with_icons toggle "Mostra icone"
         # **Struttura dell'array `items`:**
         #
@@ -78,7 +78,7 @@ module BetterUi
         # @label Istanziazione Diretta
         # @param theme select { choices: [default, white, red, rose, orange, green, blue, yellow, violet, gray] } "Tema del breadcrumb"
         # @param separator select { choices: [chevron, slash, arrow, dot, pipe] } "Tipo di separatore"
-        # @param size select { choices: [small, medium, large] } "Dimensione del testo"
+        # @param size select { choices: [extra_small, small, medium, large] } "Dimensione del testo"
         # @param with_icons toggle "Mostra icone"
         def raw(
           theme: :white,

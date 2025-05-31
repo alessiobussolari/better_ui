@@ -1,219 +1,92 @@
-<nav class="<%= container_classes %>">
-  <!-- Left Section: Brand + Breadcrumb -->
-  <div class="flex items-center space-x-4">
-    <!-- Brand Section -->
-    <% if has_brand? %>
-      <div class="flex items-center space-x-3">
-        <% if brand[:href].present? %>
-          <a href="<%= brand[:href] %>" class="flex items-center space-x-3 hover:opacity-75 transition-opacity duration-150">
-        <% else %>
-          <div class="flex items-center space-x-3">
-        <% end %>
-        
-        <% if brand[:logo].present? %>
+<header class="<%= container_classes %>">
+  <div class="flex items-center justify-between">
+    <!-- Left side - custom content-->
+    <div class="flex items-center">
+      <%= content %>
+    </div>
+
+    <!-- User actions -->
+    <div class="flex items-center space-x-4">
+      <% if has_actions? %>
+        <% actions.each do |action| %>
           <div class="flex-shrink-0">
-            <% if brand[:logo].is_a?(Hash) %>
-              <%= bui_avatar(**brand[:logo]) %>
+            <% if action[:type] == :button %>
+              <% if action[:href].present? %>
+                <a 
+                  href="<%= action[:href] %>" 
+                  class="inline-flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors duration-150 <%= action[:theme] == :primary ? 'bg-gray-900 text-white hover:bg-gray-700' : 'bg-gray-100 text-gray-700 hover:bg-gray-200' %>"
+                >
+                  <% if action[:icon].present? %>
+                    <%= bui_icon(action[:icon], size: :small) %>
+                    <% if action[:label].present? %>
+                      <span class="ml-2"><%= action[:label] %></span>
+                    <% end %>
+                  <% else %>
+                    <%= action[:label] %>
+                  <% end %>
+                </a>
+              <% else %>
+                <button 
+                  type="button"
+                  class="inline-flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors duration-150 <%= action[:theme] == :primary ? 'bg-gray-900 text-white hover:bg-gray-700' : 'bg-gray-100 text-gray-700 hover:bg-gray-200' %>"
+                  <% if action[:data].present? %>
+                    <% action[:data].each do |key, value| %>
+                      data-<%= key %>="<%= value %>"
+                    <% end %>
+                  <% end %>
+                >
+                  <% if action[:icon].present? %>
+                    <%= bui_icon(action[:icon], size: :small) %>
+                    <% if action[:label].present? %>
+                      <span class="ml-2"><%= action[:label] %></span>
+                    <% end %>
+                  <% else %>
+                    <%= action[:label] %>
+                  <% end %>
+                </button>
+              <% end %>
+            <% elsif action[:type] == :avatar %>
+              <% if action[:href].present? %>
+                <a href="<%= action[:href] %>" class="flex-shrink-0 hover:opacity-75 transition-opacity duration-150">
+              <% end %>
+              
+              <% if action[:avatar].is_a?(Hash) %>
+                <%= bui_avatar(**action[:avatar]) %>
+              <% else %>
+                <%= action[:avatar].html_safe %>
+              <% end %>
+              
+              <% if action[:href].present? %>
+                </a>
+              <% end %>
+            <% elsif action[:type] == :icon %>
+              <% if action[:href].present? %>
+                <a 
+                  href="<%= action[:href] %>" 
+                  class="p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-md transition-colors duration-150"
+                >
+                  <%= bui_icon(action[:icon], size: :medium) %>
+                </a>
+              <% else %>
+                <button 
+                  type="button"
+                  class="p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-md transition-colors duration-150"
+                  <% if action[:data].present? %>
+                    <% action[:data].each do |key, value| %>
+                      data-<%= key %>="<%= value %>"
+                    <% end %>
+                  <% end %>
+                >
+                  <%= bui_icon(action[:icon], size: :medium) %>
+                </button>
+              <% end %>
             <% else %>
-              <%= brand[:logo].html_safe %>
-            <% end %>
-          </div>
-        <% end %>
-        
-        <% if brand[:title].present? %>
-          <div class="text-lg font-semibold">
-            <%= brand[:title] %>
-          </div>
-        <% end %>
-        
-        <% if brand[:href].present? %>
-          </a>
-        <% else %>
-          </div>
-        <% end %>
-      </div>
-    <% end %>
-
-    <!-- Breadcrumb Section -->
-    <% if has_breadcrumb? %>
-      <div class="hidden sm:flex items-center">
-        <div class="text-gray-300 mx-2">|</div>
-        <%= render_breadcrumb %>
-      </div>
-    <% end %>
-  </div>
-
-  <!-- Center Section: Navigation Items -->
-  <% if has_navigation? %>
-    <div class="hidden md:flex items-center space-x-6">
-      <% navigation_items.each do |item| %>
-        <% if item[:href].present? %>
-          <a 
-            href="<%= item[:href] %>" 
-            class="<%= item[:active] ? 'text-gray-900 font-medium border-b-2 border-gray-900' : 'text-gray-600 hover:text-gray-900 transition-colors duration-150' %>"
-          >
-            <% if item[:icon].present? %>
-              <span class="inline-flex items-center">
-                <%= bui_icon(item[:icon], size: :small) %>
-                <span class="ml-2"><%= item[:label] %></span>
-              </span>
-            <% else %>
-              <%= item[:label] %>
-            <% end %>
-          </a>
-        <% else %>
-          <div class="<%= item[:active] ? 'text-gray-900 font-medium' : 'text-gray-600' %>">
-            <% if item[:icon].present? %>
-              <span class="inline-flex items-center">
-                <%= bui_icon(item[:icon], size: :small) %>
-                <span class="ml-2"><%= item[:label] %></span>
-              </span>
-            <% else %>
-              <%= item[:label] %>
+              <!-- Custom content -->
+              <%= action[:content].html_safe if action[:content].present? %>
             <% end %>
           </div>
         <% end %>
       <% end %>
     </div>
-  <% end %>
-
-  <!-- Right Section: Actions -->
-  <div class="flex items-center space-x-3">
-    <% if has_actions? %>
-      <% actions.each do |action| %>
-        <div class="flex-shrink-0">
-          <% if action[:type] == :button %>
-            <% if action[:href].present? %>
-              <a 
-                href="<%= action[:href] %>" 
-                class="inline-flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors duration-150 <%= action[:theme] == :primary ? 'bg-gray-900 text-white hover:bg-gray-700' : 'bg-gray-100 text-gray-700 hover:bg-gray-200' %>"
-              >
-                <% if action[:icon].present? %>
-                  <%= bui_icon(action[:icon], size: :small) %>
-                  <% if action[:label].present? %>
-                    <span class="ml-2"><%= action[:label] %></span>
-                  <% end %>
-                <% else %>
-                  <%= action[:label] %>
-                <% end %>
-              </a>
-            <% else %>
-              <button 
-                type="button"
-                class="inline-flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors duration-150 <%= action[:theme] == :primary ? 'bg-gray-900 text-white hover:bg-gray-700' : 'bg-gray-100 text-gray-700 hover:bg-gray-200' %>"
-                <% if action[:data].present? %>
-                  <% action[:data].each do |key, value| %>
-                    data-<%= key %>="<%= value %>"
-                  <% end %>
-                <% end %>
-              >
-                <% if action[:icon].present? %>
-                  <%= bui_icon(action[:icon], size: :small) %>
-                  <% if action[:label].present? %>
-                    <span class="ml-2"><%= action[:label] %></span>
-                  <% end %>
-                <% else %>
-                  <%= action[:label] %>
-                <% end %>
-              </button>
-            <% end %>
-          <% elsif action[:type] == :avatar %>
-            <% if action[:href].present? %>
-              <a href="<%= action[:href] %>" class="flex-shrink-0 hover:opacity-75 transition-opacity duration-150">
-            <% end %>
-            
-            <% if action[:avatar].is_a?(Hash) %>
-              <%= bui_avatar(**action[:avatar]) %>
-            <% else %>
-              <%= action[:avatar].html_safe %>
-            <% end %>
-            
-            <% if action[:href].present? %>
-              </a>
-            <% end %>
-          <% elsif action[:type] == :icon %>
-            <% if action[:href].present? %>
-              <a 
-                href="<%= action[:href] %>" 
-                class="p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-md transition-colors duration-150"
-              >
-                <%= bui_icon(action[:icon], size: :medium) %>
-              </a>
-            <% else %>
-              <button 
-                type="button"
-                class="p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-md transition-colors duration-150"
-                <% if action[:data].present? %>
-                  <% action[:data].each do |key, value| %>
-                    data-<%= key %>="<%= value %>"
-                  <% end %>
-                <% end %>
-              >
-                <%= bui_icon(action[:icon], size: :medium) %>
-              </button>
-            <% end %>
-          <% else %>
-            <!-- Custom content -->
-            <%= action[:content].html_safe if action[:content].present? %>
-          <% end %>
-        </div>
-      <% end %>
-    <% end %>
-
-    <!-- Mobile menu button (if has navigation) -->
-    <% if has_navigation? %>
-      <div class="md:hidden">
-        <button 
-          type="button" 
-          class="p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-md transition-colors duration-150"
-          data-toggle="mobile-menu"
-        >
-          <%= bui_icon("menu", size: :medium) %>
-        </button>
-      </div>
-    <% end %>
   </div>
-</nav>
-
-<!-- Mobile Navigation Menu (hidden by default) -->
-<% if has_navigation? %>
-  <div class="md:hidden hidden border-t border-gray-200" data-mobile-menu>
-    <div class="px-4 py-3 space-y-2">
-      <% navigation_items.each do |item| %>
-        <% if item[:href].present? %>
-          <a 
-            href="<%= item[:href] %>" 
-            class="<%= item[:active] ? 'block px-3 py-2 text-sm font-medium text-gray-900 bg-gray-100 rounded-md' : 'block px-3 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-md transition-colors duration-150' %>"
-          >
-            <% if item[:icon].present? %>
-              <span class="inline-flex items-center">
-                <%= bui_icon(item[:icon], size: :small) %>
-                <span class="ml-2"><%= item[:label] %></span>
-              </span>
-            <% else %>
-              <%= item[:label] %>
-            <% end %>
-          </a>
-        <% else %>
-          <div class="<%= item[:active] ? 'block px-3 py-2 text-sm font-medium text-gray-900' : 'block px-3 py-2 text-sm font-medium text-gray-600' %>">
-            <% if item[:icon].present? %>
-              <span class="inline-flex items-center">
-                <%= bui_icon(item[:icon], size: :small) %>
-                <span class="ml-2"><%= item[:label] %></span>
-              </span>
-            <% else %>
-              <%= item[:label] %>
-            <% end %>
-          </div>
-        <% end %>
-      <% end %>
-      
-      <!-- Breadcrumb in mobile if present -->
-      <% if has_breadcrumb? %>
-        <div class="pt-3 border-t border-gray-200">
-          <%= render_breadcrumb %>
-        </div>
-      <% end %>
-    </div>
-  </div>
-<% end %>
+</header>

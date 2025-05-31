@@ -4,84 +4,79 @@ module BetterUi
   module Application
     module Navbar
       class Component < ViewComponent::Base
-        # Include degli helper per utilizzare bui_icon, bui_avatar e bui_breadcrumb
+        # Include degli helper per utilizzare bui_icon e bui_avatar
         include BetterUi::General::Components::Icon::IconHelper
         include BetterUi::General::Components::Avatar::AvatarHelper
-        include BetterUi::General::Components::Breadcrumb::BreadcrumbHelper
-        attr_reader :theme, :position, :height, :shadow, :border, :brand, :breadcrumb, :navigation_items, :actions, :classes
+        
+        attr_reader :theme, :shadow, :border, :actions, :classes, :with_sidebar, :sidebar_width
 
         # Temi navbar con classi Tailwind dirette
-        NAVBAR_THEMES = {
+        NAVBAR_THEME = {
           default: "bg-white text-gray-900 border-gray-200",
-          dark: "bg-gray-900 text-white border-gray-700",
-          light: "bg-gray-50 text-gray-900 border-gray-100"
-        }
-
-        # Altezze navbar con classi Tailwind dirette
-        NAVBAR_HEIGHTS = {
-          sm: "h-12",
-          md: "h-16",
-          lg: "h-20"
-        }
-
-        # Posizioni navbar con classi Tailwind dirette
-        NAVBAR_POSITIONS = {
-          top: "",
-          fixed_top: "fixed top-0 left-0 right-0 z-50",
-          sticky_top: "sticky top-0 z-40"
-        }
+          white: "bg-white text-gray-900 border-gray-200",
+          red: "bg-red-50 text-red-900 border-red-200",
+          rose: "bg-rose-50 text-rose-900 border-rose-200",
+          orange: "bg-orange-50 text-orange-900 border-orange-200",
+          green: "bg-green-50 text-green-900 border-green-200",
+          blue: "bg-blue-50 text-blue-900 border-blue-200",
+          yellow: "bg-yellow-50 text-yellow-900 border-yellow-200",
+          violet: "bg-violet-50 text-violet-900 border-violet-200"
+        }.freeze
 
         # Ombre navbar con classi Tailwind dirette
-        NAVBAR_SHADOWS = {
+        NAVBAR_SHADOW = {
           none: "",
-          sm: "shadow-sm",
-          md: "shadow-md",
-          lg: "shadow-lg",
-          xl: "shadow-xl"
-        }
+          small: "shadow-sm",
+          medium: "shadow-md",
+          large: "shadow-lg"
+        }.freeze
+        
+        # Larghezze sidebar con valori numerici per utilizzo in classi custom
+        NAVBAR_SIDEBAR_WIDTH = {
+          sm: 48,
+          md: 64,
+          lg: 72,
+          xl: 80
+        }.freeze
 
-        # @param theme [Symbol] Tema colori (:default, :dark, :light), default :default
-        # @param position [Symbol] Posizione della navbar (:top, :fixed_top, :sticky_top), default :top
-        # @param height [Symbol] Altezza della navbar (:sm, :md, :lg), default :md
-        # @param shadow [Symbol] Tipo di ombra (:none, :sm, :md, :lg, :xl), default :sm
+        # @param theme [Symbol] Tema colori (default, white, red, rose, orange, green, blue, yellow, violet), default :default
+        # @param shadow [Symbol] Tipo di ombra (none, small, medium, large), default :small
         # @param border [Boolean] Se mostrare il bordo inferiore, default true
-        # @param brand [Hash] Configurazione brand (logo, title, href)
-        # @param breadcrumb [Hash] Configurazione breadcrumb (items, separator, theme)
-        # @param navigation_items [Array] Array di elementi di navigazione centrali
         # @param actions [Array] Array di azioni/pulsanti a destra
         # @param classes [String] Classi CSS aggiuntive
+        # @param with_sidebar [Boolean] Se la navbar è affiancata a una sidebar, default false
+        # @param sidebar_width [Symbol] Larghezza della sidebar affiancata (:sm, :md, :lg, :xl), default :md
         def initialize(
           theme: :default,
-          position: :top,
-          height: :md,
-          shadow: :sm,
-          border: true,
-          brand: {},
-          breadcrumb: {},
-          navigation_items: [],
+          shadow: :small,
+          border: false,
           actions: [],
-          classes: nil
+          classes: nil,
+          with_sidebar: false,
+          sidebar_width: :md
         )
           @theme = theme.to_sym
-          @position = position.to_sym
-          @height = height.to_sym
           @shadow = shadow.to_sym
           @border = border
-          @brand = brand || {}
-          @breadcrumb = breadcrumb || {}
-          @navigation_items = navigation_items || []
           @actions = actions || []
           @classes = classes
+          @with_sidebar = with_sidebar
+          @sidebar_width = sidebar_width.to_sym
+
+          validate_params
         end
 
         def container_classes
-          base_classes = %w[w-full flex items-center justify-between px-4 sm:px-6 lg:px-8]
-
-          # Posizione
-          base_classes.concat(position_classes.split) if position != :top
-
-          # Altezza
-          base_classes << height_class
+          base_classes = %w[h-[81px] px-6 py-4]
+          
+          # Width
+          if with_sidebar
+            sidebar_width_value = NAVBAR_SIDEBAR_WIDTH[@sidebar_width] || NAVBAR_SIDEBAR_WIDTH[:md]
+            base_classes << "pl-#{sidebar_width_value}"
+            base_classes << "ml-auto"
+          else
+            base_classes << "w-full"
+          end
 
           # Tema
           base_classes.concat(theme_classes.split)
@@ -98,49 +93,42 @@ module BetterUi
           base_classes.compact.join(" ")
         end
 
-        def has_brand?
-          brand.present? && (brand[:title].present? || brand[:logo].present?)
-        end
-
-        def has_breadcrumb?
-          breadcrumb.present? && breadcrumb[:items].present? && breadcrumb[:items].any?
-        end
-
-        def has_navigation?
-          navigation_items.present? && navigation_items.any?
-        end
-
         def has_actions?
           actions.present? && actions.any?
         end
 
-        def render_breadcrumb
-          return unless has_breadcrumb?
-
-          bui_breadcrumb(
-            items: breadcrumb[:items],
-            separator: breadcrumb[:separator] || :chevron,
-            theme: breadcrumb[:theme] || theme,
-            size: :small
-          )
-        end
-
         private
 
-        def position_classes
-          NAVBAR_POSITIONS[@position] || NAVBAR_POSITIONS[:top]
-        end
-
-        def height_class
-          NAVBAR_HEIGHTS[@height] || NAVBAR_HEIGHTS[:md]
-        end
-
         def theme_classes
-          NAVBAR_THEMES[@theme] || NAVBAR_THEMES[:default]
+          NAVBAR_THEME[@theme] || NAVBAR_THEME[:default]
         end
 
         def shadow_class
-          NAVBAR_SHADOWS[@shadow] || NAVBAR_SHADOWS[:sm]
+          NAVBAR_SHADOW[@shadow] || NAVBAR_SHADOW[:small]
+        end
+        
+        def validate_params
+          validate_theme
+          validate_shadow
+          validate_sidebar_width if with_sidebar
+        end
+        
+        def validate_theme
+          unless NAVBAR_THEME.keys.include?(@theme)
+            raise ArgumentError, "Il tema deve essere uno tra: #{NAVBAR_THEME.keys.join(', ')}"
+          end
+        end
+        
+        def validate_shadow
+          unless NAVBAR_SHADOW.keys.include?(@shadow)
+            raise ArgumentError, "L'ombra deve essere una tra: #{NAVBAR_SHADOW.keys.join(', ')}"
+          end
+        end
+        
+        def validate_sidebar_width
+          unless NAVBAR_SIDEBAR_WIDTH.keys.include?(@sidebar_width)
+            raise ArgumentError, "La larghezza della sidebar deve essere una tra: #{NAVBAR_SIDEBAR_WIDTH.keys.join(', ')}"
+          end
         end
       end
     end

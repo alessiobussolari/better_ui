@@ -1,72 +1,23 @@
-<!-- Esempio di utilizzo con istanziazione diretta del componente navbar -->
 <%= render BetterUi::Application::Navbar::Component.new(
-  theme: locals[:theme],
-  position: locals[:position],
-  height: locals[:height],
-  shadow: locals[:shadow],
-  border: locals[:border],
-  brand: {
-    logo: { name: "Better UI", size: :small, theme: :violet, shape: :rounded },
-    title: "Better UI",
-    href: "/"
-  },
-  breadcrumb: {
-    items: [
-      { label: "Home", url: "/" },
-      { label: "Dashboard", url: "/dashboard" },
-      { label: "Projects", url: "/projects" },
-      { label: "Current Project" }
-    ],
-    separator: :chevron,
-    theme: :default
-  },
-  navigation_items: [
-    {
-      label: "Dashboard",
-      href: "/dashboard",
-      icon: "home",
-      active: true
-    },
-    {
-      label: "Projects",
-      href: "/projects",
-      icon: "folder"
-    },
-    {
-      label: "Team",
-      href: "/team",
-      icon: "users"
-    },
-    {
-      label: "Analytics",
-      href: "/analytics",
-      icon: "chart-bar"
-    }
-  ],
+  theme: theme,
+  shadow: shadow,
+  border: border,
+  with_sidebar: with_sidebar,
+  sidebar_width: sidebar_width,
   actions: [
     {
       type: :icon,
-      icon: "search",
-      href: "/search",
-      data: { tooltip: "Search" }
-    },
-    {
-      type: :icon,
-      icon: "bell",
-      href: "/notifications",
-      data: { tooltip: "Notifications" }
-    },
-    {
-      type: :button,
-      label: "New Project",
-      theme: :primary,
-      href: "/projects/new",
-      icon: "plus"
+      icon: "chat-bubble-oval",
+      data: { tooltip: "Messages" }
     },
     {
       type: :avatar,
-      avatar: { name: "Demo User", size: :small },
+      avatar: { initials: "DU", size: :small, theme: :green },
       href: "/profile"
     }
   ]
-) %>
+) do %>
+  <div class="flex items-center">
+    <h2 class="text-lg font-semibold">Dashboard</h2>
+  </div>
+<% end %>

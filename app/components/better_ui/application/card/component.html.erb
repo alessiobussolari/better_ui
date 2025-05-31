@@ -1,0 +1,20 @@
+<div class="<%= card_classes %>" <%= options.map { |k, v| "#{k}=\"#{v}\"" }.join(' ').html_safe %>>
+  <p class="<%= title_classes %>"><%= title %></p>
+  <div class="mt-2 flex items-baseline justify-between">
+    <p class="<%= value_classes %>"><%= value %></p>
+    <% if show_trend? %>
+      <span class="<%= trend_classes %>">
+        <% if trend_up? %>
+          <svg xmlns="http://www.w3.org/2000/svg" class="<%= trend_icon_size %>" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+          </svg>
+        <% else %>
+          <svg xmlns="http://www.w3.org/2000/svg" class="<%= trend_icon_size %>" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+          </svg>
+        <% end %>
+        <%= change %>
+      </span>
+    <% end %>
+  </div>
+</div>
