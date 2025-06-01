@@ -9,8 +9,6 @@ module BetterUi
     include General::Components::Badge::BadgeHelper
     include General::Components::Breadcrumb::BreadcrumbHelper
     include General::Components::Button::ButtonHelper
-    include General::Components::Card::CardHelper
-    include General::Components::Container::ContainerHelper
     include General::Components::Divider::DividerHelper
     include General::Components::Heading::HeadingHelper
     include General::Components::Icon::IconHelper

@@ -1,8 +1,0 @@
-<%# Form component template %>
-<%= tag.form(**form_tag_attributes) do %>
-  <%= tag.input(type: :hidden, name: :authenticity_token, value: form_authenticity_token) %>
-  <%= method_override_field %>
-  <div class="space-y-6">
-    <%= content %>
-  </div>
-<% end %> 
