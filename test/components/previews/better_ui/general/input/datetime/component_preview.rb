@@ -4,7 +4,7 @@ module BetterUi
   module General
     module Input
       module Datetime
-        # @label Datetime Input
+        # @label Datetime
         class ComponentPreview < ViewComponent::Preview
           # @!group Esempi Base
 

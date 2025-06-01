@@ -4,7 +4,7 @@ module BetterUi
   module General
     module Input
       module Select
-        # @label Select Input
+        # @label Select
         class ComponentPreview < ViewComponent::Preview
           #
           # ## Utilizzo Base

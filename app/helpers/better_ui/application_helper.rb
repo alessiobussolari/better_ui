@@ -30,6 +30,15 @@ module BetterUi
     include General::Components::Tag::TagHelper
     include General::Components::Tooltip::TooltipHelper
 
+    # General Form Components
+    include General::Components::Input::Checkbox::CheckboxHelper
+    include General::Components::Input::Datetime::DatetimeHelper
+    include General::Components::Input::Radio::RadioHelper
+    include General::Components::Input::RadioGroup::RadioGroupHelper
+    include General::Components::Input::Select::SelectHelper
+    include General::Components::Input::Text::TextHelper
+    include General::Components::Input::Textarea::TextareaHelper
+
     # Application Components
     include Application::Components::Main::MainHelper
     include Application::Components::Navbar::NavbarHelper
