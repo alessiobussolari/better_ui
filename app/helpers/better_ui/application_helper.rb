@@ -10,6 +10,9 @@ module BetterUi
     include General::Components::Breadcrumb::BreadcrumbHelper
     include General::Components::Button::ButtonHelper
     include General::Components::Divider::DividerHelper
+    include General::Components::Dropdown::DropdownHelper
+    include General::Components::Dropdown::ItemHelper
+    include General::Components::Dropdown::DividerHelper
     include General::Components::Heading::HeadingHelper
     include General::Components::Icon::IconHelper
     include General::Components::Link::LinkHelper

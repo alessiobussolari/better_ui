@@ -52,7 +52,7 @@ Questa pagina elenca i componenti pianificati per future versioni di Better UI, 
 <% end %>
 ```
 
-### **Field** 📝
+### **Field** 📝 NO PER ORA!!!!
 **Categoria:** Form  
 **Descrizione:** Wrapper per input con label, errori, descrizione e validazione
 **Variabili pianificate:** `label`, `required`, `error`, `help_text`, `theme`

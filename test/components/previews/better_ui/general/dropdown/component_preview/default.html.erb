@@ -1,0 +1,18 @@
+<%= bui_dropdown(
+  trigger: trigger,
+  position: position,
+  theme: theme,
+  size: size,
+  rounded: rounded,
+  animation: animation,
+  classes: classes
+) do %>
+  <%= bui_dropdown_item(text: "Modifica", icon: "pencil") %>
+  <%= bui_dropdown_item(text: "Elimina", icon: "trash", theme: :red) %>
+  <%= bui_dropdown_divider %>
+  <%= bui_dropdown_item(text: "Condividi", icon: "share") %>
+  <%= bui_dropdown_item(text: "Impostazioni", icon: "cog-6-tooth") %>
+  <%= bui_dropdown_item(text: "Download", icon: "arrow-down-tray") %>
+  <%= bui_dropdown_divider %>
+  <%= bui_dropdown_item(text: "Logout", icon: "arrow-right-on-rectangle", theme: :red) %>
+<% end %>

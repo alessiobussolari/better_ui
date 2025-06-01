@@ -1,0 +1,18 @@
+<%= render BetterUi::General::Dropdown::Component.new(
+  trigger: trigger,
+  position: position,
+  theme: theme,
+  size: size,
+  rounded: rounded,
+  animation: animation,
+  classes: classes
+) do %>
+  <%= render BetterUi::General::Dropdown::ItemComponent.new(text: "Modifica", icon: "pencil") %>
+  <%= render BetterUi::General::Dropdown::ItemComponent.new(text: "Elimina", icon: "trash", theme: :red) %>
+  <%= render BetterUi::General::Dropdown::DividerComponent.new %>
+  <%= render BetterUi::General::Dropdown::ItemComponent.new(text: "Condividi", icon: "share") %>
+  <%= render BetterUi::General::Dropdown::ItemComponent.new(text: "Impostazioni", icon: "cog-6-tooth") %>
+  <%= render BetterUi::General::Dropdown::ItemComponent.new(text: "Download", icon: "arrow-down-tray") %>
+  <%= render BetterUi::General::Dropdown::DividerComponent.new %>
+  <%= render BetterUi::General::Dropdown::ItemComponent.new(text: "Logout", icon: "arrow-right-on-rectangle", theme: :red) %>
+<% end %>

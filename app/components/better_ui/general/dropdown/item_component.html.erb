@@ -1,0 +1,6 @@
+<<%= tag_name %> <%= tag.attributes(item_attributes) %>>
+  <% if @icon.present? %>
+    <span class="mr-3 flex-shrink-0"><%= bui_icon(@icon, classes: "h-5 w-5") %></span>
+  <% end %>
+  <%= @text %>
+</<%= tag_name %>>
