@@ -1,0 +1,85 @@
+<% if should_show_pagination? %>
+  <nav aria-label="Pagination" class="flex items-center justify-between">
+    
+    <!-- Info testo opzionale -->
+    <% if show_info %>
+      <div class="hidden sm:block">
+        <p class="text-sm text-gray-700"><%= info_text %></p>
+      </div>
+    <% end %>
+
+    <!-- Controlli paginazione -->
+    <div class="<%= container_classes %>">
+      
+      <!-- Pulsante Previous -->
+      <% if previous_page %>
+        <a href="<%= build_url(previous_page) %>" 
+           class="<%= page_link_classes(previous_page) %> rounded-l-md"
+           aria-label="Pagina precedente">
+          <span class="sr-only">Precedente</span>
+          <%= bui_icon(name: "chevron-left", size: :medium) %>
+        </a>
+      <% else %>
+        <span class="<%= disabled_classes %> rounded-l-md" aria-label="Pagina precedente">
+          <span class="sr-only">Precedente</span>
+          <%= bui_icon(name: "chevron-left", size: :medium) %>
+        </span>
+      <% end %>
+
+      <!-- Prima pagina se necessaria -->
+      <% if show_left_ellipsis? %>
+        <a href="<%= build_url(1) %>" class="<%= page_link_classes(1) %>">1</a>
+        <span class="<%= disabled_classes %>">...</span>
+      <% end %>
+
+      <!-- Range pagine -->
+      <% page_range.each do |page_num| %>
+        <% if page_num == current_page %>
+          <span aria-current="page" class="<%= page_link_classes(page_num) %>">
+            <%= page_num %>
+          </span>
+        <% else %>
+          <a href="<%= build_url(page_num) %>" 
+             class="<%= page_link_classes(page_num) %>"
+             aria-label="Vai alla pagina <%= page_num %>">
+            <%= page_num %>
+          </a>
+        <% end %>
+      <% end %>
+
+      <!-- Ultima pagina se necessaria -->
+      <% if show_right_ellipsis? %>
+        <span class="<%= disabled_classes %>">...</span>
+        <a href="<%= build_url(total_pages) %>" class="<%= page_link_classes(total_pages) %>">
+          <%= total_pages %>
+        </a>
+      <% end %>
+
+      <!-- Pulsante Next -->
+      <% if next_page %>
+        <a href="<%= build_url(next_page) %>" 
+           class="<%= page_link_classes(next_page) %> rounded-r-md"
+           aria-label="Pagina successiva">
+          <span class="sr-only">Successiva</span>
+          <%= bui_icon(name: "chevron-right", size: :medium) %>
+        </a>
+      <% else %>
+        <span class="<%= disabled_classes %> rounded-r-md" aria-label="Pagina successiva">
+          <span class="sr-only">Successiva</span>
+          <%= bui_icon(name: "chevron-right", size: :medium) %>
+        </span>
+      <% end %>
+
+    </div>
+
+    <!-- Info mobile -->
+    <% if show_info %>
+      <div class="flex flex-1 justify-between sm:hidden">
+        <span class="text-sm text-gray-700">
+          Pagina <%= current_page %> di <%= total_pages %>
+        </span>
+      </div>
+    <% end %>
+
+  </nav>
+<% end %>

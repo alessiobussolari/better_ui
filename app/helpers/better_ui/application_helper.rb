@@ -17,6 +17,7 @@ module BetterUi
     include General::Components::Icon::IconHelper
     include General::Components::Link::LinkHelper
     include General::Components::Modal::ModalHelper
+    include General::Components::Pagination::PaginationHelper
     include General::Components::Panel::PanelHelper
     include General::Components::Progress::ProgressHelper
     include General::Components::Spinner::SpinnerHelper
