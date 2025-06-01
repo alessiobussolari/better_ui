@@ -1,0 +1,13 @@
+<button <%= tag.attributes(tab_attributes) %>>
+  <% if has_icon? %>
+    <%= bui_icon(name: icon, classes: 'w-5 h-5') %>
+  <% end %>
+  
+  <span><%= text %></span>
+  
+  <% if has_badge? %>
+    <span class="ml-2 bg-red-100 text-red-800 text-xs font-medium px-2 py-0.5 rounded-full">
+      <%= badge %>
+    </span>
+  <% end %>
+</button>

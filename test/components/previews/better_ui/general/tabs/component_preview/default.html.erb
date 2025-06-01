@@ -1,0 +1,20 @@
+<!-- Tabs Navigation -->
+<%= bui_tabs(
+  variant: variant,
+  theme: theme,
+  size: size,
+  orientation: orientation,
+  classes: classes
+) do %>
+  <%= bui_tab(text: "Tab 1", target: "tab1", active: true) %>
+  <%= bui_tab(text: "Tab 2", target: "tab2") %>
+<% end %>
+
+<!-- Tab Panels -->
+<%= bui_tab_panel(id: "tab1", active: true, classes: "mt-4 p-4 bg-gray-50 rounded-lg") do %>
+  <p class="text-gray-900">Contenuto del primo pannello</p>
+<% end %>
+
+<%= bui_tab_panel(id: "tab2", classes: "mt-4 p-4 bg-gray-50 rounded-lg") do %>
+  <p class="text-gray-900">Contenuto del secondo pannello</p>
+<% end %>

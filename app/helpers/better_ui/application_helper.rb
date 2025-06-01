@@ -30,6 +30,10 @@ module BetterUi
     include General::Components::Table::TrHelper
 
     include General::Components::Tag::TagHelper
+    include General::Components::Tabs::TabsHelper
+    include General::Components::Tabs::TabHelper
+    
+    include General::Components::Tabs::PanelHelper
     include General::Components::Tooltip::TooltipHelper
 
     # General Form Components
