@@ -41,5 +41,6 @@ module BetterUi
     include Application::Components::Main::MainHelper
     include Application::Components::Navbar::NavbarHelper
     include Application::Components::Sidebar::SidebarHelper
+    include Application::Components::Card::CardHelper
   end
 end

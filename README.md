@@ -1,53 +1,45 @@
 # BetterUI
 
-Elegant and reusable UI components for Rails with integrated documentation. BetterUI is a Rails gem that works as a mountable engine containing reusable UI components, built with ViewComponent and Tailwind CSS, following the BEM methodology.
+Una libreria completa di componenti UI per applicazioni Rails costruita con ViewComponent e Tailwind CSS. Include 26 componenti con un sistema di design unificato e documentazione interattiva.
 
-A comprehensive UI component library for Rails applications built with ViewComponent and Tailwind CSS. Features 24+ components with a unified design system and interactive documentation.
+- 🎨 **Componenti Eleganti**: Componenti UI pre-costruiti con styling Tailwind CSS
+- 📖 **Documentazione Interattiva**: Preview Lookbook integrate per tutti i componenti
+- 🔧 **Altamente Personalizzabile**: Opzioni di configurazione flessibili per ogni componente
+- 🚀 **Production Ready**: Componenti testati che seguono le best practices
+- 📱 **Responsive**: Tutti i componenti sono mobile-first e responsive
+- ♿ **Accessibile**: Costruiti pensando all'accessibilità
 
-- 🎨 **Beautiful Components**: Pre-built UI components with Tailwind CSS styling
-- 📖 **Interactive Documentation**: Integrated Lookbook previews for all components
-- 🔧 **Highly Customizable**: Flexible configuration options for each component
-- 🚀 **Production Ready**: Battle-tested components following best practices
-- 📱 **Responsive**: All components are mobile-first and responsive
-- ♿ **Accessible**: Built with accessibility in mind
+## Panoramica
 
-## Components Available
+Better UI è una gem Rails che fornisce una collezione di componenti UI riutilizzabili costruiti con ViewComponent e Tailwind CSS. Include un sistema di design unificato con tematizzazione consistente e gestione completa dei form.
 
-### General Components
+### Caratteristiche Principali
 
-## Overview
+- **Solo TailwindCSS**: Approccio puro Tailwind senza file CSS/SCSS personalizzati
+- **26 Componenti**: Libreria completa organizzata per scopo
+- **Sistema Input Unificato**: Componenti input supportano 14+ tipi (text, email, password, number, date, time, etc.)
+- **Documentazione Interattiva**: Integrazione Lookbook con preview live
+- **Sistema Helper**: Helper Rails-friendly con integrazione form builder
+- **Tematizzazione Consistente**: 9 temi standard (default, white, red, rose, orange, green, blue, yellow, violet)
+- **Dimensionamento Flessibile**: 3 dimensioni standard (small, medium, large) con 5 opzioni border radius
+- **Accessibilità**: Componenti progettati seguendo le best practices di accessibilità
 
-Better UI is a Rails gem that provides a collection of reusable UI components built with ViewComponent and Tailwind CSS. It features a unified design system with consistent theming and comprehensive form handling capabilities.
+## Installazione
 
-Key features:
-
-- **TailwindCSS Only**: Pure Tailwind approach with no custom CSS/SCSS files
-- **24+ Components**: Comprehensive component library organized by purpose
-- **Unified Input System**: Single text component handles 14+ input types (text, email, password, number, date, time, etc.)
-- **Interactive Documentation**: Built-in Lookbook integration with live previews
-- **Helper System**: Rails-friendly helpers with form builder integration
-- **Consistent Theming**: 9 standard themes (default, white, red, rose, orange, green, blue, yellow, violet)
-- **Flexible Sizing**: 3 standard sizes (small, medium, large) with 5 border radius options
-- **Accessibility**: Components designed with accessibility best practices
-
-For more detailed information, see the [components documentation](COMPONENTS.md).
-
-## Installation
-
-Add this line to your application's Gemfile:
+Aggiungi questa riga al Gemfile della tua applicazione:
 
 ```ruby
 gem "better_ui"
 ```
 
-For development with Lookbook documentation:
+Per lo sviluppo con documentazione Lookbook:
 
 ```ruby
 gem "better_ui"
 gem "lookbook", group: :development
 ```
 
-And then execute:
+Quindi esegui:
 
 ```bash
 $ bundle install
@@ -55,44 +47,44 @@ $ bundle install
 
 ## Setup
 
-### 1. Mount the Engine (Optional)
+### 1. Mount Engine (Opzionale)
 
-If you want to access BetterUI's internal routes, mount the engine in your `config/routes.rb`:
+Se vuoi accedere alle route interne di BetterUI, monta l'engine in `config/routes.rb`:
 
 ```ruby
 Rails.application.routes.draw do
   mount BetterUi::Engine => "/better_ui"
-  # your other routes...
+  # le tue altre route...
 end
 ```
 
-### 2. Setup Lookbook (Recommended for Development)
+### 2. Setup Lookbook (Raccomandato per Development)
 
-To access the interactive component documentation during development, mount Lookbook in your `config/routes.rb`:
+Per accedere alla documentazione interattiva dei componenti durante lo sviluppo, monta Lookbook in `config/routes.rb`:
 
 ```ruby
 Rails.application.routes.draw do
-  # Mount Lookbook only in development
+  # Monta Lookbook solo in development
   mount Lookbook::Engine => "/lookbook" if Rails.env.development?
 
-  # your other routes...
+  # le tue altre route...
 end
 ```
 
-**That's it!** BetterUI components and their previews are automatically available in Lookbook.
+**Fatto!** I componenti BetterUI e le loro preview sono automaticamente disponibili in Lookbook.
 
-### 3. Include Tailwind CSS
+### 3. Includi Tailwind CSS
 
-Make sure your application includes Tailwind CSS, as BetterUI components rely on Tailwind classes. If you don't have Tailwind CSS installed, follow the [official Tailwind CSS installation guide](https://tailwindcss.com/docs/guides/ruby-on-rails).
+Assicurati che la tua applicazione includa Tailwind CSS, dato che i componenti BetterUI si basano sulle classi Tailwind. Se non hai Tailwind CSS installato, segui la [guida ufficiale di installazione Tailwind CSS](https://tailwindcss.com/docs/guides/ruby-on-rails).
 
-## Usage
+## Utilizzo
 
-Better UI components can be used in two ways: direct instantiation or helper methods.
+I componenti Better UI possono essere utilizzati in due modi: istanziazione diretta o metodi helper.
 
-### Helper Methods (Recommended)
+### Metodi Helper (Raccomandato)
 
 ```erb
-<%# Text input with validation %>
+<%# Input di testo con validazione %>
 <%= bui_input_text(
   name: 'email',
   value: @user.email,
@@ -102,31 +94,31 @@ Better UI components can be used in two ways: direct instantiation or helper met
   required: true
 ) %>
 
-<%# Button with theme and size %>
+<%# Button con theme e size %>
 <%= bui_button(
-  'Submit Form',
+  'Invia Form',
   theme: :green,
   size: :large,
   type: :submit
 ) %>
 
-<%# Card with content block %>
-<%= bui_card(title: 'User Profile', theme: :white) do %>
-  <p>User information content here</p>
+<%# Card con blocco di contenuto %>
+<%= bui_card(title: 'Profilo Utente', theme: :white) do %>
+  <p>Contenuto informazioni utente qui</p>
 <% end %>
 
-<%# Form integration %>
+<%# Integrazione con form %>
 <%= form_with model: @user do |form| %>
   <%= bui_input_text(name: 'name', form: form, required: true) %>
   <%= bui_input_text(name: 'email', type: :email, form: form) %>
-  <%= bui_button('Save', type: :submit, theme: :blue) %>
+  <%= bui_button('Salva', type: :submit, theme: :blue) %>
 <% end %>
 ```
 
-### Direct Instantiation
+### Istanziazione Diretta
 
 ```erb
-<%# Direct component rendering %>
+<%# Rendering diretto del componente %>
 <%= render BetterUi::General::Input::Text::Component.new(
   name: 'username',
   type: :text,
@@ -134,31 +126,28 @@ Better UI components can be used in two ways: direct instantiation or helper met
   size: :medium
 ) %>
 
-<%# Button component %>
+<%# Componente button %>
 <%= render BetterUi::General::Button::Component.new(
-  'Click me',
+  'Cliccami',
   theme: :blue,
   size: :large
 ) %>
 ```
 
-### Component Parameters
+### Sistema di Tematizzazione
 
-Each component supports various parameters for customization. Common parameters include:
+Tutti i componenti supportano tematizzazione consistente:
 
-Better UI is designed to be highly customizable while maintaining consistency:
+- **9 Temi Standard**: default, white, red, rose, orange, green, blue, yellow, violet
+- **3 Dimensioni Standard**: small, medium, large
+- **5 Opzioni Border Radius**: none, small, medium, large, full
 
-1. **Theme Customization**: Modify component constants to change default styling
-2. **Component Configuration**: Configure default options in `config/initializers/better_ui.rb`
-3. **TailwindCSS Integration**: All styling uses TailwindCSS classes for maximum flexibility
-4. **Component Extensions**: Extend existing components or create your own following the established patterns
+### Approccio Styling
 
-### Styling Approach
-
-Better UI uses a pure TailwindCSS approach with constants for maintainable styling:
+Better UI usa un approccio TailwindCSS puro con costanti per styling manutenibile:
 
 ```ruby
-# Component constants define styling options
+# Le costanti del componente definiscono le opzioni di styling
 BUTTON_THEME_CLASSES = {
   default: 'bg-gray-100 text-gray-900 hover:bg-gray-200',
   blue: 'bg-blue-600 text-white hover:bg-blue-700',
@@ -172,118 +161,111 @@ BUTTON_SIZE_CLASSES = {
 }.freeze
 ```
 
-### Theming System
+## Componenti Disponibili
 
-All components support consistent theming:
+Better UI include 26 componenti organizzati in tre categorie:
 
-- **9 Standard Themes**: default, white, red, rose, orange, green, blue, yellow, violet
-- **3 Standard Sizes**: small, medium, large
-- **5 Border Radius Options**: none, small, medium, large, full
+### Componenti Application (4)
 
-For more detailed customization instructions, see [CUSTOMIZATION.md](CUSTOMIZATION.md).
+Componenti di layout e navigazione per interfacce applicative:
 
-You can create wrapper components or extend existing ones:
+- **Card**: Container di contenuto con supporto header e azioni
+- **Main**: Area contenuto principale dell'applicazione con layout responsive
+- **Navbar**: Barra di navigazione superiore con supporto contenuto flessibile
+- **Sidebar**: Navigazione laterale collassabile
 
-Better UI includes 24+ components organized into three categories:
+### Componenti General (22)
 
-### Application Components (3)
-
-Layout and navigation components for application interfaces:
-
-- **Main**: Application main content area with responsive layout
-- **Navbar**: Top navigation bar with flexible content support
-- **Sidebar**: Collapsible sidebar navigation
-
-### General Components (21)
-
-Core UI elements for building interfaces:
+Elementi UI core per costruire interfacce:
 
 **Display & Feedback**
 
-- **Alert**: Notification messages with multiple themes and dismissible options
-- **Avatar**: User profile images with fallback support
-- **Badge**: Status indicators and labels
-- **Progress**: Progress bars and loading indicators
-- **Spinner**: Loading animations
-- **Tooltip**: Contextual help and information overlays
+- **Alert**: Messaggi di notifica con temi multipli e opzioni dismissible
+- **Avatar**: Immagini profilo utente con supporto fallback
+- **Badge**: Indicatori di stato e etichette
+- **Progress**: Barre di progresso e indicatori di caricamento
+- **Spinner**: Animazioni di caricamento
+- **Tooltip**: Overlay di aiuto contestuale e informazioni
 
-**Navigation & Structure**
+**Navigazione & Struttura**
 
-- **Breadcrumb**: Navigation path indicators
-- **Card**: Content containers with headers and actions
-- **Container**: Layout containers with responsive widths
-- **Divider**: Visual content separators
-- **Heading**: Styled headings with consistent typography
-- **Link**: Enhanced anchor elements with theme support
-- **Panel**: Organized content sections
-- **Table**: Data tables with sorting and responsive features
-- **Tag**: Categorization and labeling elements
+- **Breadcrumb**: Indicatori di percorso di navigazione
+- **Divider**: Separatori di contenuto visivi
+- **Heading**: Intestazioni con tipografia consistente
+- **Icon**: Sistema icone SVG con libreria estesa
+- **Link**: Elementi anchor potenziati con supporto theme
+- **Panel**: Sezioni di contenuto organizzate
+- **Table**: Tabelle dati con sorting e funzionalità responsive
+- **Tag**: Elementi di categorizzazione ed etichettatura
 
 **Form & Input**
 
-- **Button**: Action buttons with multiple variants and states
-- **Field**: Form field wrapper with label and validation support
-- **Form**: Form container with styling and validation
-- **Input**: Unified input system supporting 14+ types:
+- **Button**: Button azione con varianti multiple e stati
+- **Field**: Wrapper campo form con supporto label e validazione
+- **Input**: Sistema input unificato che supporta 14+ tipi:
   - **Text**: text, email, password, search, url, tel
   - **Number**: number, range
   - **Date/Time**: date, datetime-local, time, month, week
-  - **File**: file upload
+  - **File**: upload file
   - **Color**: color picker
-  - **Checkbox**: Multi-select options
-  - **Radio**: Single-select options
-  - **Select**: Dropdown selections
-  - **Textarea**: Multi-line text input
-- **Icon**: SVG icon system with extensive library
+  - **Checkbox**: Opzioni multi-selezione
+  - **Radio**: Opzioni selezione singola
+  - **Select**: Selezioni dropdown
+  - **Textarea**: Input testo multi-riga
 
-### Form Components (0)
+### Componenti Form (0)
 
-Reserved for future specialized form components and complex form widgets.
+Riservati per futuri componenti form specializzati e widget form complessi.
 
-For detailed component documentation and interactive examples, see [COMPONENTS.md](COMPONENTS.md).
+## Personalizzazione e Styling
+
+I componenti BetterUI usano classi Tailwind CSS. Puoi:
+
+1. **Sovrascrivere classi**: Passa classi personalizzate tramite il parametro `classes`
+2. **Estendere componenti**: Crea i tuoi componenti che ereditano da BetterUI
+3. **Personalizzazione theme**: Modifica la configurazione Tailwind per tematizzazione consistente
+
+```erb
+<!-- Aggiungi classi personalizzate -->
+<%= render BetterUi::General::Button::Component.new(
+  label: "Button Personalizzato",
+  classes: "my-custom-class hover:scale-105"
+) %>
+```
+
+Better UI è progettato per essere altamente personalizzabile mantenendo consistenza:
+
+1. **Personalizzazione Theme**: Modifica le costanti dei componenti per cambiare lo styling di default
+2. **Configurazione Componenti**: Configura opzioni di default in `config/initializers/better_ui.rb`
+3. **Integrazione TailwindCSS**: Tutto lo styling usa classi TailwindCSS per massima flessibilità
+4. **Estensioni Componenti**: Estendi componenti esistenti o crea i tuoi seguendo i pattern stabiliti
 
 ## Testing
 
-Better UI components are thoroughly tested. You can run the test suite with:
+I componenti Better UI sono testati completamente. Puoi eseguire la test suite con:
 
 ```bash
 bin/rails test
 ```
 
-## Styling and Customization
+## Supporto Browser
 
-BetterUI components use Tailwind CSS classes. You can:
+I componenti BetterUI supportano tutti i browser moderni che supportano:
 
-1. **Override classes**: Pass custom classes via the `classes` parameter
-2. **Extend components**: Create your own components that inherit from BetterUI
-3. **Theme customization**: Modify Tailwind configuration for consistent theming
-
-```erb
-<!-- Add custom classes -->
-<%= render BetterUi::General::Button::Component.new(
-  label: "Custom Button",
-  classes: "my-custom-class hover:scale-105"
-) %>
-```
-
-## Browser Support
-
-BetterUI components support all modern browsers that support:
-
-- CSS Grid and Flexbox
-- ES6+ JavaScript features
+- CSS Grid e Flexbox
+- Funzionalità JavaScript ES6+
 - Tailwind CSS
 
 ## Contributing
 
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-component`)
-3. Add your component with tests and Lookbook previews
-4. Commit your changes (`git commit -am 'Add amazing component'`)
-5. Push to the branch (`git push origin feature/amazing-component`)
-6. Create a Pull Request
+1. Forka il repository
+2. Crea il tuo branch feature (`git checkout -b feature/componente-fantastico`)
+3. Aggiungi il tuo componente con test e preview Lookbook
+4. Committa le tue modifiche (`git commit -am 'Aggiungi componente fantastico'`)
+5. Pusha al branch (`git push origin feature/componente-fantastico`)
+6. Crea una Pull Request
 
-### Development Setup
+### Setup Development
 
 ```bash
 git clone https://github.com/alessiobussolari/better_ui.git
@@ -293,26 +275,27 @@ cd test/dummy
 bundle exec rails server
 ```
 
-Visit `http://localhost:3000/lookbook` to see the component documentation.
+Visita `http://localhost:3000/lookbook` per vedere la documentazione dei componenti.
 
 ## Roadmap
 
-- 🎯 Form components (inputs, selects, checkboxes)
-- 📊 Chart and data visualization components
-- 🎭 Animation and transition components
-- 🌙 Dark mode support
-- 📱 Mobile-specific components
+- 🎯 Componenti form avanzati (input complessi, validazioni)
+- 📊 Componenti chart e visualizzazione dati
+- 🎭 Componenti animazione e transizione
+- 🌙 Supporto dark mode
+- 📱 Componenti specifici mobile
+- 🔧 Tool di configurazione e generatori
 
 ## License
 
-The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
+La gem è disponibile come open source sotto i termini della [MIT License](https://opensource.org/licenses/MIT).
 
 ## Support
 
-- 📖 [Documentation](https://github.com/alessiobussolari/better_ui)
+- 📖 [Documentazione](https://github.com/alessiobussolari/better_ui)
 - 🐛 [Issue Tracker](https://github.com/alessiobussolari/better_ui/issues)
-- 💬 [Discussions](https://github.com/alessiobussolari/better_ui/discussions)
+- 💬 [Discussioni](https://github.com/alessiobussolari/better_ui/discussions)
 
 ---
 
-Built with ❤️ by [PanDev](https://github.com/alessiobussolari)
+Costruito con ❤️ da [PanDev](https://github.com/alessiobussolari)
