@@ -92,7 +92,7 @@ module BetterUi
             'aria-controls': target,
             'data-bui-tabs-target': 'tab',
             'data-target': target,
-            'data-action': disabled ? '' : 'click->bui-tabs#switchTab',
+            'data-action': disabled ? '' : 'click->bui-tabs#switchTab keydown->bui-tabs#keydown',
             tabindex: active ? '0' : '-1',
             id: "tab-#{target}"
           }.merge(options)

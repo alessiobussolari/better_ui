@@ -1,3 +1,11 @@
-<div <%= tag.attributes(container_attributes) %>>
-  <%= content %>
+<div <%= tag.attributes(wrapper_attributes) %>>
+  <!-- Navigation Tabs -->
+  <div <%= tag.attributes(navigation_attributes) %>>
+    <%= navigation %>
+  </div>
+  
+  <!-- Tab Panels -->
+  <div <%= tag.attributes(panels_attributes) %>>
+    <%= panels %>
+  </div>
 </div>

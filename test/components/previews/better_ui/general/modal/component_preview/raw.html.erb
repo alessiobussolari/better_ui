@@ -1,11 +1,37 @@
 <%= render BetterUi::General::Modal::Component.new(
-  title: title,
-  theme: theme,
-  size: size,
-  rounded: rounded,
-  backdrop: backdrop,
-  closable: closable,
-  classes: classes
-) do %>
-  <p class="text-gray-700">Contenuto del modal. Questo è un esempio di testo all'interno del modal.</p>
+  close_on_backdrop: close_on_backdrop,
+  close_on_escape: close_on_escape,
+  lock_scroll: lock_scroll
+) do |modal| %>
+  <% modal.with_trigger do %>
+    <%= render BetterUi::General::Button::Component.new(
+      label: trigger_label,
+      type: trigger_type,
+      data: { action: "click->bui-modal#open" }
+    ) %>
+  <% end %>
+  
+  <% modal.with_modal do %>
+    <%= render BetterUi::General::Modal::ModalComponent.new(
+      title: modal_title,
+      theme: modal_theme,
+      size: modal_size,
+      backdrop: modal_backdrop,
+      closable: modal_closable
+    ) do %>
+      <div class="space-y-4">
+        <p class="text-gray-700">
+          Sei sicuro di voler eliminare questo elemento?
+        </p>
+        <p class="text-sm text-gray-600">
+          Questa azione non può essere annullata.
+        </p>
+        
+        <div class="flex justify-end space-x-3 pt-4 border-t border-gray-200">
+          <%= render BetterUi::General::Button::Component.new(label: "Annulla", type: :white) %>
+          <%= render BetterUi::General::Button::Component.new(label: "Elimina", type: :red) %>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
 <% end %>

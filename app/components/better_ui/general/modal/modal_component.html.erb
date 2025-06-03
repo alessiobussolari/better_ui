@@ -1,0 +1,52 @@
+<%# Template per il modal content %>
+<% if @backdrop %>
+  <%= tag.div **backdrop_attributes do %>
+    <%= tag.div **container_attributes do %>
+      <%# Header del modal %>
+      <%= tag.div **header_attributes do %>
+        <h3 class="text-lg font-semibold" id="modal-title"><%= @title %></h3>
+        <% if @closable %>
+          <%= helpers.bui_button(
+            label: "Chiudi", 
+            icon: "x-mark",
+            type: :white,
+            size: :small,
+            data: [
+              { name: 'bui-modal-target', value: 'closeButton' },
+              { name: 'action', value: 'click->bui-modal#closeButtonClicked' }
+            ]
+          ) %>
+        <% end %>
+      <% end %>
+      
+      <%# Body del modal %>
+      <div class="p-6">
+        <%= content %>
+      </div>
+    <% end %>
+  <% end %>
+<% else %>
+  <%= tag.div **container_attributes do %>
+    <%# Header del modal %>
+    <%= tag.div **header_attributes do %>
+      <h3 class="text-lg font-semibold" id="modal-title"><%= @title %></h3>
+      <% if @closable %>
+        <%= helpers.bui_button(
+          label: "Chiudi", 
+          icon: "x-mark",
+          type: :white,
+          size: :small,
+          data: [
+            { name: 'bui-modal-target', value: 'closeButton' },
+            { name: 'action', value: 'click->bui-modal#closeButtonClicked' }
+          ]
+        ) %>
+      <% end %>
+    <% end %>
+    
+    <%# Body del modal %>
+    <div class="p-6">
+      <%= content %>
+    </div>
+  <% end %>
+<% end %>

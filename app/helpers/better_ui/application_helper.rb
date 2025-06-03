@@ -21,6 +21,8 @@ module BetterUi
     include General::Components::Panel::PanelHelper
     include General::Components::Progress::ProgressHelper
     include General::Components::Spinner::SpinnerHelper
+    include General::Components::Tag::TagHelper
+    include General::Components::Tooltip::TooltipHelper
 
     include General::Components::Table::TableHelper
     include General::Components::Table::TbodyHelper
@@ -29,13 +31,10 @@ module BetterUi
     include General::Components::Table::ThHelper
     include General::Components::Table::TheadHelper
     include General::Components::Table::TrHelper
-
-    include General::Components::Tag::TagHelper
+  
     include General::Components::Tabs::TabsHelper
     include General::Components::Tabs::TabHelper
-    
     include General::Components::Tabs::PanelHelper
-    include General::Components::Tooltip::TooltipHelper
 
     # General Form Components
     include General::Components::Input::Checkbox::CheckboxHelper

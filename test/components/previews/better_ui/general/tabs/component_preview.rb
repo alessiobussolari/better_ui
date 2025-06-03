@@ -25,17 +25,19 @@ module BetterUi
         #
         # ## Esempi Codice
         # ```erb
-        # <%= bui_tabs do %>
-        #   <%= bui_tab(text: "Generale", target: "generale", active: true) %>
-        #   <%= bui_tab(text: "Sicurezza", target: "sicurezza") %>
-        # <% end %>
-        #
-        # <%= bui_tab_panel(id: "generale", active: true) do %>
-        #   <p>Contenuto pannello generale</p>
-        # <% end %>
-        #
-        # <%= bui_tab_panel(id: "sicurezza") do %>
-        #   <p>Contenuto pannello sicurezza</p>
+        # <%= bui_tabs do |tabs| %>
+        #   <% tabs.with_navigation do %>
+        #     <%= bui_tab(text: "Generale", target: "generale", active: true) %>
+        #     <%= bui_tab(text: "Sicurezza", target: "sicurezza") %>
+        #   <% end %>
+        #   <% tabs.with_panels do %>
+        #     <%= bui_tab_panel(id: "generale", active: true) do %>
+        #       <p>Contenuto pannello generale</p>
+        #     <% end %>
+        #     <%= bui_tab_panel(id: "sicurezza") do %>
+        #       <p>Contenuto pannello sicurezza</p>
+        #     <% end %>
+        #   <% end %>
         # <% end %>
         # ```
 
@@ -46,14 +48,17 @@ module BetterUi
         # @param theme select { choices: [default, blue, red, green, yellow, violet, orange, rose, white] }
         # @param size select { choices: [small, medium, large] }
         # @param orientation select { choices: [horizontal, vertical] }
-        # @param classes text
-        def default(variant: :pills, theme: :default, size: :medium, orientation: :horizontal, classes: '')
+        # @param navigation_classes text
+        # @param panels_classes text
+        def default(variant: :pills, theme: :default, size: :medium, orientation: :horizontal, 
+                   navigation_classes: '', panels_classes: 'mt-4')
           normalized = normalize_params!(
             variant: variant,
             theme: theme,
             size: size,
             orientation: orientation,
-            classes: classes
+            navigation_classes: navigation_classes,
+            panels_classes: panels_classes
           )
           
           render_with_template(locals: normalized)
@@ -64,14 +69,17 @@ module BetterUi
         # @param theme select { choices: [default, blue, red, green, yellow, violet, orange, rose, white] }
         # @param size select { choices: [small, medium, large] }
         # @param orientation select { choices: [horizontal, vertical] }
-        # @param classes text
-        def raw(variant: :pills, theme: :default, size: :medium, orientation: :horizontal, classes: '')
+        # @param navigation_classes text
+        # @param panels_classes text
+        def raw(variant: :pills, theme: :default, size: :medium, orientation: :horizontal,
+               navigation_classes: '', panels_classes: 'mt-4')
           normalized = normalize_params!(
             variant: variant,
             theme: theme,
             size: size,
             orientation: orientation,
-            classes: classes
+            navigation_classes: navigation_classes,
+            panels_classes: panels_classes
           )
           
           render_with_template(locals: normalized)
@@ -86,7 +94,8 @@ module BetterUi
           options[:theme] = options[:theme].to_sym if options[:theme].is_a?(String)
           options[:size] = options[:size].to_sym if options[:size].is_a?(String)
           options[:orientation] = options[:orientation].to_sym if options[:orientation].is_a?(String)
-          options[:classes] = options[:classes] || ''
+          options[:navigation_classes] = options[:navigation_classes] || ''
+          options[:panels_classes] = options[:panels_classes] || 'mt-4'
           
           options
         end

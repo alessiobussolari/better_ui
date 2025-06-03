@@ -68,7 +68,8 @@ module BetterUi
         def item_attributes
           attrs = {
             class: item_classes,
-            role: "menuitem"
+            role: "menuitem",
+            "data-bui-dropdown-target": "item"
           }
 
           if @href.present? && !@disabled

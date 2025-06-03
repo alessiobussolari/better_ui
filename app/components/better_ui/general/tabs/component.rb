@@ -4,6 +4,8 @@ module BetterUi
   module General
     module Tabs
       class Component < ViewComponent::Base
+        renders_one :navigation
+        renders_one :panels
         TABS_VARIANT = {
           pills: 'bg-gray-100 rounded-lg p-1',
           underline: 'border-b border-gray-200',
@@ -34,12 +36,14 @@ module BetterUi
           vertical: 'flex-col'
         }.freeze
 
-        def initialize(variant: :pills, theme: :default, size: :medium, orientation: :horizontal, classes: '', **options)
+        def initialize(variant: :pills, theme: :default, size: :medium, orientation: :horizontal, 
+                      navigation_classes: '', panels_classes: 'mt-4', **options)
           @variant = variant
           @theme = theme
           @size = size
           @orientation = orientation
-          @classes = classes
+          @navigation_classes = navigation_classes
+          @panels_classes = panels_classes
           @options = options
 
           validate_params
@@ -47,7 +51,7 @@ module BetterUi
 
         private
 
-        attr_reader :variant, :theme, :size, :orientation, :classes, :options
+        attr_reader :variant, :theme, :size, :orientation, :navigation_classes, :panels_classes, :options
 
         def validate_params
           validate_variant
@@ -80,21 +84,35 @@ module BetterUi
           raise ArgumentError, "Invalid orientation: #{orientation}. Must be one of #{TABS_ORIENTATION.keys}"
         end
 
-        def container_attributes
+        # Attributi per il wrapper principale (con data-controller)
+        def wrapper_attributes
+          {
+            'data-controller': 'bui-tabs'
+          }.merge(options)
+        end
+
+        # Attributi per il container della navigazione tabs
+        def navigation_attributes
           base_classes = [
             'flex',
             TABS_ORIENTATION[orientation],
             TABS_VARIANT[variant],
             TABS_THEME_DEFAULT[theme],
             TABS_SIZE[size],
-            classes
+            navigation_classes
           ].compact.join(' ')
 
           {
             class: base_classes,
-            role: 'tablist',
-            'data-controller': 'bui-tabs'
-          }.merge(options)
+            role: 'tablist'
+          }
+        end
+
+        # Attributi per il container dei panel
+        def panels_attributes
+          {
+            class: panels_classes
+          }
         end
       end
     end

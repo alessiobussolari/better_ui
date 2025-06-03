@@ -1,20 +1,28 @@
-<!-- Tabs Navigation -->
-<%= bui_tabs(
+<%= render BetterUi::General::Tabs::Component.new(
   variant: variant,
   theme: theme,
   size: size,
   orientation: orientation,
-  classes: classes
-) do %>
-  <%= bui_tab(text: "Tab 1", target: "tab1", active: true) %>
-  <%= bui_tab(text: "Tab 2", target: "tab2") %>
-<% end %>
-
-<!-- Tab Panels -->
-<%= bui_tab_panel(id: "tab1", active: true, classes: "mt-4 p-4 bg-gray-50 rounded-lg") do %>
-  <p class="text-gray-900">Contenuto del primo pannello</p>
-<% end %>
-
-<%= bui_tab_panel(id: "tab2", classes: "mt-4 p-4 bg-gray-50 rounded-lg") do %>
-  <p class="text-gray-900">Contenuto del secondo pannello</p>
+  navigation_classes: navigation_classes,
+  panels_classes: panels_classes
+) do |tabs| %>
+  <% tabs.with_navigation do %>
+    <%= render BetterUi::General::Tabs::TabComponent.new(text: "Tab 1", target: "tab1", active: true) %>
+    <%= render BetterUi::General::Tabs::TabComponent.new(text: "Tab 2", target: "tab2") %>
+    <%= render BetterUi::General::Tabs::TabComponent.new(text: "Tab 3", target: "tab3") %>
+  <% end %>
+  
+  <% tabs.with_panels do %>
+    <%= render BetterUi::General::Tabs::PanelComponent.new(id: "tab1", active: true, classes: "p-4 bg-gray-50 rounded-lg") do %>
+      <p class="text-gray-900">Contenuto del primo pannello con informazioni dettagliate e funzionalità specifiche.</p>
+    <% end %>
+    
+    <%= render BetterUi::General::Tabs::PanelComponent.new(id: "tab2", classes: "p-4 bg-gray-50 rounded-lg") do %>
+      <p class="text-gray-900">Contenuto del secondo pannello con altre informazioni e opzioni diverse.</p>
+    <% end %>
+    
+    <%= render BetterUi::General::Tabs::PanelComponent.new(id: "tab3", classes: "p-4 bg-gray-50 rounded-lg") do %>
+      <p class="text-gray-900">Contenuto del terzo pannello con ulteriori dettagli e configurazioni.</p>
+    <% end %>
+  <% end %>
 <% end %>

@@ -18,7 +18,7 @@ module BetterUi
         def panel_attributes
           base_classes = [
             'focus:outline-none',
-            active ? 'block' : 'hidden',
+            'hidden', # Sempre nascosto inizialmente, JavaScript gestisce la visibilità
             classes
           ].compact.join(' ')
 

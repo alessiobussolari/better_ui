@@ -4,16 +4,11 @@ module BetterUi
   module General
     module Dropdown
       class Component < ViewComponent::Base
+        include BetterUi::General::Components::Icon::IconHelper
+        
         attr_reader :trigger, :position, :theme, :size, :rounded, :animation, :classes, :html_options
 
-        # Classi base per il contenitore dropdown
-        DROPDOWN_CONTAINER_CLASSES = "relative inline-block"
-
-        # Classi base per il pulsante trigger
-        DROPDOWN_TRIGGER_BASE_CLASSES = "inline-flex items-center justify-center border font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 transition-colors"
-
-        # Classi base per il menu dropdown  
-        DROPDOWN_MENU_BASE_CLASSES = "absolute z-50 mt-2 origin-top-right bg-white border border-gray-200 shadow-lg focus:outline-none"
+        # Classi base spostate nel template HTML per migliore leggibilità
 
         # Temi per il trigger del dropdown con classi Tailwind dirette
         DROPDOWN_TRIGGER_THEME = {
@@ -81,69 +76,25 @@ module BetterUi
           validate_params
         end
 
-        # Combina tutte le classi per il contenitore
-        def container_classes
+        # Restituisce solo le classi dinamiche per il trigger
+        def dynamic_trigger_classes
           [
-            DROPDOWN_CONTAINER_CLASSES,
-            @classes
-          ].compact.join(" ")
-        end
-
-        # Combina tutte le classi per il trigger
-        def trigger_classes
-          [
-            DROPDOWN_TRIGGER_BASE_CLASSES,
             get_trigger_theme_classes,
             get_trigger_size_classes,
             get_trigger_rounded_classes
           ].compact.join(" ")
         end
 
-        # Combina tutte le classi per il menu
-        def menu_classes
+        # Restituisce solo le classi dinamiche per il menu
+        def dynamic_menu_classes
           [
-            DROPDOWN_MENU_BASE_CLASSES,
             get_position_classes,
             get_animation_classes,
             get_menu_rounded_classes
           ].compact.join(" ")
         end
 
-        # Restituisce gli attributi per il contenitore
-        def container_attributes
-          attrs = {
-            class: container_classes,
-            "data-dropdown": true
-          }
-
-          @html_options.except(:class).each do |key, value|
-            attrs[key] = value
-          end
-
-          attrs
-        end
-
-        # Restituisce gli attributi per il trigger
-        def trigger_attributes
-          {
-            type: "button",
-            class: trigger_classes,
-            "data-dropdown-trigger": true,
-            "aria-expanded": "false",
-            "aria-haspopup": "true"
-          }
-        end
-
-        # Restituisce gli attributi per il menu
-        def menu_attributes
-          {
-            class: menu_classes,
-            "data-dropdown-menu": true,
-            role: "menu",
-            "aria-orientation": "vertical",
-            style: "display: none;"
-          }
-        end
+        # Metodi per attributi rimossi - ora gestiti direttamente nel template HTML
 
         # Verifica se rendere il componente
         def render?
