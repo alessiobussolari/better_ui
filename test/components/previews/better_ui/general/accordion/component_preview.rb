@@ -55,6 +55,9 @@ module BetterUi
         # <% end %>
         # ```
 
+        # @!group Esempi Base
+
+        # @label Con Helper
         # @param multiple toggle
         # @param theme select { choices: [default, white, blue, red, green, yellow, violet, orange, rose] }
         # @param variant select { choices: [minimal, bordered, separated] }
@@ -71,6 +74,7 @@ module BetterUi
           render_with_template(locals: normalized)
         end
 
+        # @label Istanziazione Diretta
         # @param multiple toggle
         # @param theme select { choices: [default, white, blue, red, green, yellow, violet, orange, rose] }
         # @param variant select { choices: [minimal, bordered, separated] }
@@ -86,6 +90,8 @@ module BetterUi
           )
           render_with_template(locals: normalized)
         end
+
+        # @!endgroup
 
         private
 
