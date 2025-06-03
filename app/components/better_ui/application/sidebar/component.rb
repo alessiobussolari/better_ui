@@ -4,9 +4,10 @@ module BetterUi
   module Application
     module Sidebar
       class Component < ViewComponent::Base
-        # Include degli helper per utilizzare bui_icon e bui_avatar
+        # Include degli helper per utilizzare bui_icon, bui_avatar e bui_button
         include BetterUi::General::Components::Icon::IconHelper
         include BetterUi::General::Components::Avatar::AvatarHelper
+        include BetterUi::General::Components::Button::ButtonHelper
         attr_reader :width, :position, :theme, :shadow, :border, :header, :footer, :navigation_sections, :collapsible, :classes
 
         # Larghezze sidebar con classi Tailwind dirette
@@ -74,7 +75,7 @@ module BetterUi
         end
 
         def container_classes
-          base_classes = %w[fixed inset-y-0 z-50 flex flex-col overflow-y-auto]
+          base_classes = %w[fixed inset-y-0 h-screen z-50 flex flex-col]
 
           # Posizione
           base_classes << (position == :right ? "right-0" : "left-0")

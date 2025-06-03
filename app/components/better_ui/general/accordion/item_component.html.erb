@@ -1,0 +1,12 @@
+<div <%= tag.attributes(item_attributes) %>>
+  <!-- Header -->
+  <button <%= tag.attributes(header_attributes) %>>
+    <span><%= title %></span>
+    <i class="fas fa-<%= icon %> <%= icon_attributes[:class] %>" <%= tag.attributes(icon_attributes.except(:class)) %>></i>
+  </button>
+  
+  <!-- Content -->
+  <div <%= tag.attributes(content_attributes) %>>
+    <%= content %>
+  </div>
+</div>

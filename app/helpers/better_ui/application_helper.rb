@@ -4,6 +4,7 @@ module BetterUi
     # Questo assicura che tutti gli helper specifici dei componenti siano disponibili.
 
     # General Components
+    include General::Components::Accordion::AccordionHelper
     include General::Components::Alert::AlertHelper
     include General::Components::Avatar::AvatarHelper
     include General::Components::Badge::BadgeHelper

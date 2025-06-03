@@ -1,10 +1,21 @@
-<aside class="<%= container_classes %>">
+<div data-controller="bui-sidebar" 
+     data-bui-sidebar-width-value="<%= @width == :md ? 256 : 320 %>"
+     data-bui-sidebar-min-width-value="200"
+     data-bui-sidebar-max-width-value="400"
+     data-bui-sidebar-pinned-value="true">
+  
+  <!-- Mobile Overlay -->
+  <div data-bui-sidebar-target="overlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden md:hidden"></div>
+  
+  <!-- Sidebar Container -->
+  <aside data-bui-sidebar-target="container" class="<%= container_classes %>">
   <!-- Header Section -->
   <% if has_header? %>
     <div class="px-6 py-4 border-b border-gray-200">
-      <% if header[:logo].present? %>
-        <div class="flex items-center">
-          <div class="flex-shrink-0">
+      <div class="flex items-center justify-between">
+        <% if header[:logo].present? %>
+          <div class="flex items-center">
+            <div class="flex-shrink-0">
             <% if header[:logo].is_a?(Hash) %>
               <%= bui_avatar(**header[:logo]) %>
             <% else %>
@@ -20,19 +31,30 @@
             </div>
           <% end %>
         </div>
-      <% elsif header[:title].present? %>
-        <div>
-          <h2 class="text-lg font-semibold text-gray-900"><%= header[:title] %></h2>
-          <% if header[:subtitle].present? %>
-            <p class="text-sm text-gray-500"><%= header[:subtitle] %></p>
-          <% end %>
-        </div>
-      <% end %>
+        <% elsif header[:title].present? %>
+          <div>
+            <h2 class="text-lg font-semibold text-gray-900"><%= header[:title] %></h2>
+            <% if header[:subtitle].present? %>
+              <p class="text-sm text-gray-500"><%= header[:subtitle] %></p>
+            <% end %>
+          </div>
+        <% end %>
+        
+        <!-- Collapse Button (solo se collapsible) -->
+        <% if collapsible %>
+          <%= bui_button(
+            icon: "arrow-left",
+            type: :white,
+            size: :small,
+            title: "Comprimi sidebar"
+          ) %>
+        <% end %>
+      </div>
     </div>
   <% end %>
 
   <!-- Navigation Section -->
-  <nav class="flex-1 px-4 py-6 space-y-6">
+  <nav class="flex-1 px-4 py-6 space-y-6 overflow-y-auto">
     <% navigation_sections.each do |section| %>
       <div class="space-y-2">
         <!-- Section Title -->
@@ -57,7 +79,9 @@
                 <button 
                   type="button" 
                   class="group flex items-center justify-between w-full px-3 py-2 text-sm font-medium text-gray-700 rounded-md hover:bg-gray-50 hover:text-gray-900 transition-colors duration-150"
-                  data-collapse-target="#<%= item[:id] %>"
+                  data-bui-sidebar-target="sectionTrigger"
+                  data-bui-sidebar-section-id="<%= item[:id] %>"
+                  data-action="click->bui-sidebar#toggleSection"
                   aria-expanded="<%= item[:expanded] || false %>"
                 >
                   <div class="flex items-center">
@@ -68,13 +92,14 @@
                     <% end %>
                     <span><%= item[:label] %></span>
                   </div>
-                  <span class="ml-3 transform transition-transform duration-150 <%= 'rotate-90' if item[:expanded] %>">
+                  <span class="ml-3 transform transition-transform duration-150 <%= 'rotate-90' if item[:expanded] %>" data-bui-sidebar-chevron>
                     <%= bui_icon("chevron-right", size: :small) %>
                   </span>
                 </button>
                 
                 <div 
-                  id="<%= item[:id] %>" 
+                  data-bui-sidebar-target="sectionContent"
+                  data-bui-sidebar-section-id="<%= item[:id] %>"
                   class="<%= item[:expanded] ? 'block' : 'hidden' %> mt-1 space-y-1"
                 >
                   <% (item[:children] || []).each do |child| %>
@@ -187,4 +212,16 @@
       <% end %>
     </div>
   <% end %>
+  
+  <!-- Resize Handle (solo se NON collapsible) -->
+  <% unless collapsible %>
+    <div data-bui-sidebar-target="resizeHandle" 
+         class="absolute top-0 right-0 w-1 h-full bg-transparent hover:bg-blue-500 cursor-col-resize transition-colors duration-150 group">
+      <div class="absolute inset-y-0 -right-1 w-3 flex items-center justify-center">
+        <div class="w-0.5 h-8 bg-gray-300 group-hover:bg-blue-500 transition-colors duration-150"></div>
+      </div>
+    </div>
+  <% end %>
 </aside>
+
+</div>

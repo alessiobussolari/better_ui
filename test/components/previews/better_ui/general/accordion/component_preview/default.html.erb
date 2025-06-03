@@ -1,0 +1,33 @@
+<%= bui_accordion(
+  multiple: multiple,
+  theme: theme,
+  variant: variant,
+  size: size,
+  classes: classes
+) do |accordion| %>
+  <%= accordion.with_item(title: "Come funziona l'accordion?", expanded: true) do %>
+    <p>L'accordion è un componente che permette di organizzare contenuti in sezioni collassabili ed espandibili. Clicca sugli header per aprire e chiudere le sezioni.</p>
+  <% end %>
+  
+  <%= accordion.with_item(title: "Posso avere più sezioni aperte?") do %>
+    <p>Dipende dalla configurazione. Se <code>multiple</code> è impostato a <code>true</code>, puoi avere più sezioni aperte contemporaneamente. Altrimenti, solo una sezione può essere aperta alla volta.</p>
+  <% end %>
+  
+  <%= accordion.with_item(title: "Che temi sono disponibili?") do %>
+    <div>
+      <p>Sono disponibili diversi temi:</p>
+      <ul class="list-disc list-inside mt-2 space-y-1">
+        <li><strong>default</strong> - grigio standard</li>
+        <li><strong>blue</strong> - blu aziendale</li>
+        <li><strong>green</strong> - verde successo</li>
+        <li><strong>red</strong> - rosso errore</li>
+        <li><strong>yellow</strong> - giallo attenzione</li>
+        <li><strong>violet</strong> - viola creativo</li>
+      </ul>
+    </div>
+  <% end %>
+  
+  <%= accordion.with_item(title: "È accessibile?") do %>
+    <p>Sì! L'accordion include supporto completo per navigazione da tastiera (frecce, Enter, Space, Home, End) e attributi ARIA per screen reader.</p>
+  <% end %>
+<% end %>
