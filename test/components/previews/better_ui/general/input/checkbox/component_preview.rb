@@ -5,25 +5,10 @@ module BetterUi
     module Input
       module Checkbox
         class ComponentPreview < ViewComponent::Preview
+
           # @!group Esempi Base
-
           # @label Con Helper
-          # @param name text "Nome del campo checkbox"
-          # @param value text "Valore del checkbox"
-          # @param checked toggle "Checkbox selezionato"
-          # @param required toggle "Campo obbligatorio"
-          # @param disabled toggle "Campo disabilitato"
-          # @param indeterminate toggle "Stato indeterminate"
-          # @param label text "Testo della label"
-          # @param label_position select { choices: [left, right] } "Posizione della label"
-          # @param theme select { choices: [default, white, red, rose, orange, green, blue, yellow, violet] } "Tema del componente"
-          # @param size select { choices: [small, medium, large] } "Dimensione del componente"
-          # @param rounded select { choices: [none, small, medium, large, full] } "Border radius"
-          # @param classes text "Classi CSS aggiuntive"
-          # @param form toggle "Usa Rails form builder"
-
           #
-          # ## Utilizzo Base
           # Il componente Checkbox per selezioni singole o multiple con supporto per label, temi e dimensioni personalizzati.
           #
           # ## Casi d'Uso Comuni
@@ -39,18 +24,27 @@ module BetterUi
           # - **theme**: tema colore (default, red, green, blue, etc.)
           # - **size**: dimensione (small, medium, large)
           # - **indeterminate**: stato parziale
-          # - **form**: supporto Rails form builder
           #
           # ## Esempi Codice
           # ```erb
           # <%= bui_input_checkbox(name: 'accept_terms', label: 'Accetto i termini') %>
           # <%= bui_input_checkbox(name: 'newsletter', label: 'Newsletter', checked: true, theme: :green) %>
           # <%= bui_input_checkbox(name: 'important', label: 'Importante', label_position: :left) %>
-          # <%= form_with model: @user do |form| %>
-          #   <%= bui_input_checkbox(name: :terms, label: 'Termini', form: form) %>
-          # <% end %>
+          # <%= bui_input_checkbox(name: 'required_field', label: 'Campo obbligatorio', required: true) %>
           # ```
-          
+          # @param name text "Nome del campo checkbox"
+          # @param value text "Valore del checkbox"
+          # @param checked toggle "Checkbox selezionato"
+          # @param required toggle "Campo obbligatorio"
+          # @param disabled toggle "Campo disabilitato"
+          # @param indeterminate toggle "Stato indeterminate"
+          # @param label text "Testo della label"
+          # @param label_position select { choices: [left, right] } "Posizione della label"
+          # @param theme select { choices: [default, white, red, rose, orange, green, blue, yellow, violet] } "Tema del componente"
+          # @param size select { choices: [small, medium, large] } "Dimensione del componente"
+          # @param rounded select { choices: [none, small, medium, large, full] } "Border radius"
+          # @param classes text "Classi CSS aggiuntive"
+
           def default(
             name: "checkbox_field",
             value: "1",
@@ -63,8 +57,7 @@ module BetterUi
             theme: :default,
             size: :medium,
             rounded: :medium,
-            classes: "",
-            form: false
+            classes: ""
           )
             normalized = normalize_params!(
               name: name,
@@ -78,8 +71,7 @@ module BetterUi
               theme: theme,
               size: size,
               rounded: rounded,
-              classes: classes,
-              form: form
+              classes: classes
             )
 
             render_with_template(locals: normalized)
@@ -98,8 +90,7 @@ module BetterUi
             theme: :default,
             size: :medium,
             rounded: :medium,
-            classes: "",
-            form: false
+            classes: ""
           )
             normalized = normalize_params!(
               name: name,
@@ -113,8 +104,7 @@ module BetterUi
               theme: theme,
               size: size,
               rounded: rounded,
-              classes: classes,
-              form: form
+              classes: classes
             )
 
             render BetterUi::General::Input::Checkbox::Component.new(**normalized)

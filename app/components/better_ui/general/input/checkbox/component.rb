@@ -7,7 +7,7 @@ module BetterUi
         class Component < ViewComponent::Base
           # Costanti con classi Tailwind dirette
           CHECKBOX_THEME = {
-            default: 'border-gray-300 text-blue-600 focus:border-blue-500 focus:ring-blue-500 checked:bg-blue-600 checked:border-blue-600',
+            default: 'border-gray-300 text-gray-800 focus:border-gray-600 focus:ring-gray-600 checked:bg-gray-800 checked:border-gray-800',
             white: 'border-gray-300 text-gray-900 focus:border-gray-500 focus:ring-gray-500 checked:bg-white checked:border-gray-900 checked:text-gray-900',
             red: 'border-gray-300 text-red-600 focus:border-red-500 focus:ring-red-500 checked:bg-red-600 checked:border-red-600',
             rose: 'border-gray-300 text-rose-600 focus:border-rose-500 focus:ring-rose-500 checked:bg-rose-600 checked:border-rose-600',
@@ -19,9 +19,9 @@ module BetterUi
           }.freeze
 
           CHECKBOX_SIZE = {
-            small: 'h-4 w-4',
-            medium: 'h-5 w-5',
-            large: 'h-6 w-6'
+            small: 'h-3.5 w-3.5',
+            medium: 'h-4 w-4',
+            large: 'h-5 w-5'
           }.freeze
 
           CHECKBOX_ROUNDED = {
@@ -35,9 +35,9 @@ module BetterUi
           CHECKBOX_BASE_CLASSES = 'appearance-none border-2 focus:outline-none focus:ring-2 focus:ring-offset-2 transition-colors duration-200 cursor-pointer disabled:cursor-not-allowed disabled:opacity-50'.freeze
 
           CHECKBOX_LABEL_GAP = {
-            small: 'gap-2',
-            medium: 'gap-2.5',
-            large: 'gap-3'
+            small: 'gap-1.5',
+            medium: 'gap-2',
+            large: 'gap-2.5'
           }.freeze
 
           CHECKBOX_LABEL_TEXT = {
