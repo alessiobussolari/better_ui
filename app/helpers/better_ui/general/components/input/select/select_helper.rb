@@ -6,45 +6,59 @@ module BetterUi
       module Input
         module Select
           module SelectHelper
-            # Renders a Select component for selection fields from option lists.
+            # Renderizza un componente Select personalizzato con ricerca, animazioni e multi-selezione.
             #
-            # @param name [String] Name of the select field
-            # @param options [Array<Hash>] Array of select options in format [{value: 'value', label: 'label'}, ...]
-            # @param selected [String, Array, nil] Selected value or values
-            # @param required [Boolean] Whether the field is required
-            # @param disabled [Boolean] Whether the field is disabled
-            # @param multiple [Boolean] Whether multiple options can be selected
-            # @param theme [Symbol] Component theme (:default, :white, :red, :rose, :orange, :green, :blue, :yellow, :violet)
-            # @param size [Symbol] Component size (:small, :medium, :large)
+            # @param name [String] Nome del campo select (obbligatorio)
+            # @param options [Array<Hash>] Array di opzioni nel formato [{value: 'value', label: 'label'}, ...]
+            # @param selected [String, Array, nil] Valore/i selezionato/i
+            # @param required [Boolean] Se il campo è obbligatorio
+            # @param disabled [Boolean] Se il campo è disabilitato
+            # @param multiple [Boolean] Se multiple opzioni possono essere selezionate
+            # @param searchable [Boolean] Se abilitare la ricerca
+            # @param theme [Symbol] Tema del componente (:default, :white, :red, :rose, :orange, :green, :blue, :yellow, :violet)
+            # @param size [Symbol] Dimensione del componente (:small, :medium, :large)
             # @param rounded [Symbol] Border radius (:none, :small, :medium, :large, :full)
-            # @param placeholder [String, nil] Placeholder text for the field (creates an initial disabled option)
-            # @param classes [String] Additional CSS classes
-            # @param form [ActionView::Helpers::FormBuilder, nil] Optional Rails form builder
-            # @param options_html [Hash] Additional HTML attributes for option tags
-            # @param html_options [Hash] Additional HTML attributes for the select tag
+            # @param placeholder [String] Testo placeholder per il trigger
+            # @param search_placeholder [String] Testo placeholder per il campo search
+            # @param max_height [String] Altezza massima del dropdown (default: "300px")
+            # @param form [ActionView::Helpers::FormBuilder, nil] Form builder Rails opzionale
+            # @param classes [String] Classi CSS aggiuntive
+            # @param options [Hash] Opzioni aggiuntive per attributi HTML
             #
-            # @return [String] Rendered HTML of the Select component
+            # @return [String] HTML del componente Select renderizzato
             #
-            # @example Basic select
-            #   <%= bui_input_select(name: 'country', options: [{value: 'it', label: 'Italy'}, {value: 'fr', label: 'France'}]) %>
+            # @example Uso base
+            #   <%= bui_input_select(name: 'country', options: [{value: 'it', label: 'Italia'}, {value: 'us', label: 'USA'}]) %>
             #
-            # @example Select with selected option
-            #   <%= bui_input_select(name: 'role', options: roles_array, selected: 'admin') %>
+            # @example Con selezione multipla
+            #   <%= bui_input_select(name: 'skills', multiple: true, options: skills_options) %>
             #
-            # @example Multiple select
-            #   <%= bui_input_select(name: 'languages[]', options: languages_array, multiple: true, selected: ['en', 'fr']) %>
+            # @example Con ricerca e temi
+            #   <%= bui_input_select(name: 'category', searchable: true, theme: :blue, options: categories) %>
             #
-            # @example Select with custom theme and size
-            #   <%= bui_input_select(name: 'category', options: categories_array, theme: :blue, size: :large) %>
+            # @example Con dimensioni personalizzate
+            #   <%= bui_input_select(name: 'priority', size: :large, options: priorities, selected: 'high') %>
             #
-            # @example With Rails form builder
+            # @example Con Rails form builder
             #   <%= form_with model: @user do |form| %>
-            #     <%= bui_input_select(name: :country_id, options: countries_array, form: form, required: true) %>
+            #     <%= bui_input_select(name: :role, form: form, options: role_options, theme: :green) %>
             #   <% end %>
+            #
+            # @example Con opzioni avanzate
+            #   <%= bui_input_select(
+            #         name: 'tags', 
+            #         multiple: true, 
+            #         searchable: true,
+            #         placeholder: 'Seleziona tag...',
+            #         search_placeholder: 'Cerca tag...',
+            #         max_height: '200px',
+            #         options: tag_options,
+            #         selected: ['ruby', 'rails']
+            #       ) %>
             def bui_input_select(name:, options:, selected: nil, required: false, disabled: false, 
-                           multiple: false, theme: :default, size: :medium, rounded: :medium, 
-                           placeholder: nil, classes: '', form: nil, options_html: {}, **html_options)
-              
+                                 multiple: false, searchable: true, theme: :default, size: :medium, 
+                                 rounded: :medium, placeholder: nil, search_placeholder: nil, 
+                                 max_height: "300px", form: nil, classes: '', **html_options)
               render BetterUi::General::Input::Select::Component.new(
                 name: name,
                 options: options,
@@ -52,13 +66,15 @@ module BetterUi
                 required: required,
                 disabled: disabled,
                 multiple: multiple,
+                searchable: searchable,
                 theme: theme,
                 size: size,
                 rounded: rounded,
                 placeholder: placeholder,
-                classes: classes,
+                search_placeholder: search_placeholder,
+                max_height: max_height,
                 form: form,
-                options_html: options_html,
+                classes: classes,
                 **html_options
               )
             end

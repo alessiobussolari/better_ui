@@ -1,12 +1,16 @@
 <%= render BetterUi::General::Input::Select::Component.new(
   name: name,
   options: options,
-  placeholder: placeholder,
-  required: required,
-  disabled: disabled,
+  selected: selected,
   multiple: multiple,
+  searchable: searchable,
   theme: theme,
   size: size,
   rounded: rounded,
+  required: required,
+  disabled: disabled,
+  placeholder: placeholder,
+  search_placeholder: search_placeholder,
+  max_height: max_height,
   classes: classes
 ) %>

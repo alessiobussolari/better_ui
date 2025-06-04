@@ -1,16 +1,78 @@
-<select <%= tag.attributes(select_attributes).html_safe %>>
-  <% if @placeholder.present? && !@multiple %>
-    <option value="" disabled <%= "selected" if @selected.nil? %>><%= @placeholder %></option>
-  <% end %>
-  <% @options.each do |option| %>
-    <option 
-      value="<%= option[:value] %>" 
-      <%= "selected" if selected?(option) %> 
-      <%= "disabled" if option[:disabled] %>
-      <%= option[:html]&.map { |k, v| "#{k}=\"#{v}\"" }&.join(' ').to_s.html_safe %>
+<%= tag.div(**container_attributes) do %>
+  <!-- Hidden input for form compatibility -->
+  <input 
+    type="hidden" 
+    name="<%= input_name %>" 
+    id="<%= input_id %>"
+    value="<%= hidden_input_value %>"
+    data-select-target="hiddenInput"
+    <%= "required" if @required %>
+    <%= "disabled" if @disabled %>
+  />
+
+  <!-- Trigger button -->
+  <button 
+    type="button"
+    class="<%= trigger_classes %>"
+    data-select-target="trigger"
+    data-action="click->select#toggle"
+    <%= "disabled" if @disabled %>
+  >
+    <span data-select-text class="<%= trigger_text_classes %>">
+      <%= trigger_text %>
+    </span>
+    <%= chevron_icon %>
+  </button>
+
+  <!-- Badge container for multi-select -->
+  <% if @multiple %>
+    <div 
+      class="<%= badge_container_classes %>"
+      data-select-target="badgeContainer"
+      style="<%= @selected.empty? ? 'display: none;' : '' %>"
     >
-      <%= option[:label] %>
-    </option>
+      <!-- Badges will be populated by Stimulus -->
+    </div>
   <% end %>
-  <%= content %>
-</select>
+
+  <!-- Dropdown panel -->
+  <div class="<%= dropdown_classes %>" data-select-target="dropdown">
+    <!-- Search input -->
+    <% if @searchable %>
+      <div class="p-1">
+        <input 
+          type="text"
+          placeholder="<%= @search_placeholder %>"
+          class="<%= search_input_classes %>"
+          data-select-target="search"
+          data-action="input->select#search"
+        />
+      </div>
+    <% end %>
+
+    <!-- Options container -->
+    <div class="<%= options_container_classes %>">
+      <% @options.each do |option| %>
+        <div 
+          class="<%= option_classes %> <%= 'bg-gray-100' if option_selected?(option) %>"
+          data-select-target="option"
+          data-value="<%= option[:value] %>"
+          data-action="click->select#selectOption"
+          <%= "data-disabled" if option[:disabled] %>
+        >
+          <span><%= option[:label] %></span>
+          <% if option_selected?(option) %>
+            <span class="checkmark text-gray-600">✓</span>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+
+    <!-- Empty state -->
+    <% if @options.empty? %>
+      <div class="px-3 py-6 text-center text-gray-500 text-sm">
+        Nessuna opzione disponibile
+      </div>
+    <% end %>
+  </div>
+<% end %>
