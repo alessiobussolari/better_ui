@@ -19,9 +19,9 @@ module BetterUi
           }.freeze
 
           CHECKBOX_SIZE = {
-            small: 'h-3.5 w-3.5',
-            medium: 'h-4 w-4',
-            large: 'h-5 w-5'
+            small: 'h-2.5 w-2.5',
+            medium: 'h-3 w-3',
+            large: 'h-4 w-4'
           }.freeze
 
           CHECKBOX_ROUNDED = {
@@ -41,9 +41,9 @@ module BetterUi
           }.freeze
 
           CHECKBOX_LABEL_TEXT = {
-            small: 'text-sm',
-            medium: 'text-base',
-            large: 'text-lg'
+            small: 'text-xs',
+            medium: 'text-sm',
+            large: 'text-base'
           }.freeze
 
           attr_reader :name, :value, :checked, :required, :disabled, :indeterminate, 
