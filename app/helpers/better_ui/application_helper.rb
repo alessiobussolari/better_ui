@@ -47,6 +47,7 @@ module BetterUi
     include General::Components::Input::Textarea::TextareaHelper
     include General::Components::Input::Toggle::ToggleHelper
     include General::Components::Input::Rating::RatingHelper
+    include General::Components::Input::Pin::PinHelper
 
     # Application Components
     include Application::Components::Main::MainHelper
