@@ -20,22 +20,25 @@ module BetterUi
           # @return [String] Il markup HTML dell'elemento dropdown
           #
           # @example Uso base
-          #   <%= bui_dropdown_item(text: "Modifica") %>
+          #   <%= bui_dropdown_item("Modifica") %>
           #
           # @example Con icona
-          #   <%= bui_dropdown_item(text: "Elimina", icon: "trash") %>
+          #   <%= bui_dropdown_item("Elimina", icon: "trash") %>
           #
           # @example Come link
-          #   <%= bui_dropdown_item(text: "Profilo", href: "/profile", icon: "user") %>
+          #   <%= bui_dropdown_item("Profilo", href: "/profile", icon: "user") %>
           #
           # @example Con tema colorato
-          #   <%= bui_dropdown_item(text: "Azione pericolosa", theme: :red, icon: "trash") %>
+          #   <%= bui_dropdown_item("Azione pericolosa", theme: :red, icon: "trash") %>
           #
           # @example Disabilitato
-          #   <%= bui_dropdown_item(text: "Non disponibile", disabled: true) %>
+          #   <%= bui_dropdown_item("Non disponibile", disabled: true) %>
+          #
+          # @example Uso con sintassi keyword (backward compatible)
+          #   <%= bui_dropdown_item(text: "Modifica legacy") %>
           #
           def bui_dropdown_item(
-            text:,
+            text = nil,
             icon: nil,
             href: nil,
             theme: :default,
@@ -44,8 +47,11 @@ module BetterUi
             classes: '',
             **options
           )
+            # Supporta sia sintassi posizionale che keyword per backward compatibility
+            item_text = text || options.delete(:text)
+            
             render BetterUi::General::Dropdown::ItemComponent.new(
-              text: text,
+              text: item_text,
               icon: icon,
               href: href,
               theme: theme,

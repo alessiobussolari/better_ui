@@ -14,6 +14,8 @@ module BetterUi
           # @param size [Symbol] La dimensione del trigger (:small, :medium, :large)
           # @param rounded [Symbol] Il border radius (:none, :small, :medium, :large, :full)
           # @param animation [Symbol] Il tipo di animazione (:fade, :slide, :none)
+          # @param fullwidth [Boolean] Se il trigger deve occupare tutta la larghezza disponibile
+          # @param show_chevron [Boolean] Se mostrare l'icona chevron automatica
           # @param classes [String] Classi CSS aggiuntive
           # @param options [Hash] Attributi HTML aggiuntivi
           # @param block [Proc] Il contenuto del menu dropdown
@@ -57,6 +59,8 @@ module BetterUi
             size: :medium,
             rounded: :medium,
             animation: :fade,
+            fullwidth: false,
+            show_chevron: true,
             classes: '',
             **options,
             &block
@@ -68,6 +72,8 @@ module BetterUi
               size: size,
               rounded: rounded,
               animation: animation,
+              fullwidth: fullwidth,
+              show_chevron: show_chevron,
               classes: classes,
               **options
             ), &block

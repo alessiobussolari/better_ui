@@ -5,8 +5,8 @@ module BetterUi
         module ButtonHelper
           # Helper per renderizzare un bottone
           #
-          # @param label [String] Testo del bottone
-          # @param type [Symbol] Tipo del bottone (:default, :white, :red, etc.)
+          # @param text [String] Testo del bottone (argomento posizionale)
+          # @param theme [Symbol] Tema del bottone (:default, :white, :red, etc.)
           # @param size [Symbol] Dimensione del bottone (:small, :medium, :large)
           # @param full_width [Boolean] Larghezza completa
           # @param disabled [Boolean] Stato disabilitato
@@ -23,8 +23,8 @@ module BetterUi
           #
           # @return [String] HTML del bottone
           def bui_button(
-            label: nil,
-            type: :white,
+            text = nil,
+            theme: :white,
             size: :medium,
             full_width: false,
             disabled: false,
@@ -41,8 +41,8 @@ module BetterUi
             &block
           )
             render BetterUi::General::Button::Component.new(
-              label: label,
-              type: type,
+              text: text,
+              theme: theme,
               size: size,
               full_width: full_width,
               disabled: disabled,

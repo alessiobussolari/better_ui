@@ -6,7 +6,7 @@ module BetterUi
       class Component < ViewComponent::Base
         include BetterUi::General::Components::Icon::IconHelper
         
-        attr_reader :trigger, :position, :theme, :size, :rounded, :animation, :classes, :html_options
+        attr_reader :trigger, :position, :theme, :size, :rounded, :animation, :fullwidth, :show_chevron, :classes, :html_options
 
         # Classi base spostate nel template HTML per migliore leggibilità
 
@@ -54,6 +54,12 @@ module BetterUi
           none: ""
         }.freeze
 
+        # Stili per full-width del trigger
+        DROPDOWN_FULLWIDTH = {
+          true => "w-full text-left justify-start",
+          false => "inline-flex justify-center"
+        }.freeze
+
         def initialize(
           trigger:,
           position: :bottom,
@@ -61,6 +67,8 @@ module BetterUi
           size: :medium,
           rounded: :medium,
           animation: :fade,
+          fullwidth: false,
+          show_chevron: true,
           classes: nil,
           **html_options
         )
@@ -70,10 +78,18 @@ module BetterUi
           @size = size.to_sym
           @rounded = rounded.to_sym
           @animation = animation.to_sym
+          @fullwidth = fullwidth
+          @show_chevron = show_chevron
           @classes = classes
           @html_options = html_options
 
           validate_params
+        end
+
+        def fullwidth_classes
+          [
+            get_fullwidth_classes
+          ].compact.join(" ")
         end
 
         # Restituisce solo le classi dinamiche per il trigger
@@ -125,6 +141,10 @@ module BetterUi
 
         def get_animation_classes
           DROPDOWN_ANIMATION[@animation] || DROPDOWN_ANIMATION[:fade]
+        end
+
+        def get_fullwidth_classes
+          DROPDOWN_FULLWIDTH[@fullwidth] || DROPDOWN_FULLWIDTH[false]
         end
 
         def validate_params

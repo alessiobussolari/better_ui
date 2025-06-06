@@ -4,10 +4,12 @@ module BetterUi
   module Application
     module Sidebar
       class Component < ViewComponent::Base
-        # Include degli helper per utilizzare bui_icon, bui_avatar e bui_button
+        # Include degli helper per utilizzare bui_icon, bui_avatar, bui_button e bui_dropdown
         include BetterUi::General::Components::Icon::IconHelper
         include BetterUi::General::Components::Avatar::AvatarHelper
         include BetterUi::General::Components::Button::ButtonHelper
+        include BetterUi::General::Components::Dropdown::DropdownHelper
+        include BetterUi::General::Components::Dropdown::ItemHelper
         attr_reader :width, :position, :theme, :shadow, :border, :header, :footer, :navigation_sections, :collapsible, :classes
 
         # Larghezze sidebar con classi Tailwind dirette
@@ -46,7 +48,7 @@ module BetterUi
         # @param shadow [Symbol] Tipo di ombra (:none, :sm, :md, :lg), default :lg
         # @param border [Boolean] Se mostrare il bordo destro/sinistro, default true
         # @param header [Hash] Configurazione header (logo, title, subtitle)
-        # @param footer [Hash] Configurazione footer (content, user_info)
+        # @param footer [Hash] Configurazione footer (content, user_info, user_dropdown)
         # @param navigation_sections [Array] Array di sezioni di navigazione
         # @param collapsible [Boolean] Se abilitare sezioni collassabili, default true
         # @param classes [String] Classi CSS aggiuntive
@@ -74,14 +76,20 @@ module BetterUi
           @classes = classes
         end
 
-        def container_classes
-          base_classes = %w[fixed inset-y-0 h-screen z-50 flex flex-col]
+        def wrapper_classes
+          base_classes = %w[fixed top-0 inset-y-0 h-screen z-[9999]]
 
           # Posizione
           base_classes << (position == :right ? "right-0" : "left-0")
 
           # Larghezza
           base_classes << width_class
+
+          base_classes.compact.join(" ")
+        end
+
+        def container_classes
+          base_classes = %w[flex flex-col h-full]
 
           # Tema
           base_classes.concat(theme_classes)
@@ -104,7 +112,56 @@ module BetterUi
         end
 
         def has_footer?
-          footer.present? && (footer[:content].present? || footer[:user_info].present?)
+          footer.present? && (footer[:content].present? || footer[:user_info].present? || footer[:user_dropdown].present?)
+        end
+
+        def has_user_dropdown?
+          footer.present? && footer[:user_dropdown].present?
+        end
+
+        def user_dropdown_trigger
+          return '' unless has_user_dropdown?
+          
+          user_dropdown = footer[:user_dropdown]
+          avatar_html = if user_dropdown[:avatar].present?
+            if user_dropdown[:avatar].is_a?(Hash)
+              bui_avatar(**user_dropdown[:avatar])
+            else
+              user_dropdown[:avatar].html_safe
+            end
+          else
+            ''
+          end
+
+          content_tag(:div, class: "flex items-center w-full text-left") do
+            avatar_section = if user_dropdown[:avatar].present?
+              content_tag(:div, avatar_html, class: "flex-shrink-0")
+            else
+              ''
+            end
+
+            text_section = content_tag(:div, class: user_dropdown[:avatar].present? ? 'ml-3 min-w-0 flex-1' : 'min-w-0 flex-1') do
+              name_part = if user_dropdown[:name].present?
+                content_tag(:p, user_dropdown[:name], class: "text-sm font-medium text-gray-700 truncate")
+              else
+                ''
+              end
+
+              subtitle_part = if user_dropdown[:subtitle].present?
+                content_tag(:p, user_dropdown[:subtitle], class: "text-xs text-gray-500 truncate")
+              else
+                ''
+              end
+
+              (name_part + subtitle_part).html_safe
+            end
+
+            chevron_section = content_tag(:div, class: "ml-auto flex-shrink-0") do
+              bui_icon("chevron-down", size: :small, classes: "text-gray-400")
+            end
+
+            (avatar_section + text_section + chevron_section).html_safe
+          end
         end
 
         private

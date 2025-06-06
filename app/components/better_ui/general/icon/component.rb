@@ -9,7 +9,8 @@ module BetterUi
         ICON_SIZE_CLASSES = {
           small: "bui-icon--small w-4 h-4 text-sm",
           medium: "bui-icon--medium w-5 h-5 text-base",
-          large: "bui-icon--large w-6 h-6 text-lg"
+          large: "bui-icon--large w-6 h-6 text-lg",
+          xlarge: "bui-icon--large w-7 h-7 text-xl"
         }.freeze
 
         # Temi dell'icona con colori coerenti

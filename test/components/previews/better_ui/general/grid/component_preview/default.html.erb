@@ -1,0 +1,34 @@
+<%= bui_grid(
+  cols: cols,
+  gap: gap,
+  flow: flow,
+  align_items: align_items,
+  justify_items: justify_items,
+  classes: classes
+) do %>
+  
+  <%= bui_grid_cell do %>
+    <div class="bg-blue-100 p-4 rounded text-center">Cell 1</div>
+  <% end %>
+  
+  <%= bui_grid_cell(col: 2) do %>
+    <div class="bg-red-100 p-4 rounded text-center">Cell Span 2</div>
+  <% end %>
+  
+  <%= bui_grid_cell do %>
+    <div class="bg-green-100 p-4 rounded text-center">Cell 3</div>
+  <% end %>
+  
+  <%= bui_grid_cell(col: 1, row: 2) do %>
+    <div class="bg-yellow-100 p-4 rounded text-center h-full">Tall Cell</div>
+  <% end %>
+  
+  <%= bui_grid_cell do %>
+    <div class="bg-purple-100 p-4 rounded text-center">Cell 5</div>
+  <% end %>
+  
+  <%= bui_grid_cell do %>
+    <div class="bg-pink-100 p-4 rounded text-center">Cell 6</div>
+  <% end %>
+  
+<% end %>

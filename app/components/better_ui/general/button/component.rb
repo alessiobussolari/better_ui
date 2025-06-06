@@ -2,7 +2,7 @@ module BetterUi
   module General
     module Button
       class Component < ViewComponent::Base
-        attr_reader :label, :type, :size, :full_width, :disabled,
+        attr_reader :text, :theme, :size, :full_width, :disabled,
                     :icon, :icon_position, :href, :method, :data, :classes, :id, :rounded, :button_type, :html_options
 
         # Classi base sempre presenti
@@ -40,8 +40,8 @@ module BetterUi
 
         # Inizializzazione del componente
         def initialize(
-          label: nil,
-          type: :white,
+          text: nil,
+          theme: :white,
           size: :medium,
           full_width: false,
           disabled: false,
@@ -56,8 +56,8 @@ module BetterUi
           button_type: :button,
           **html_options
         )
-          @label = label
-          @type = type.to_sym
+          @text = text
+          @theme = theme.to_sym
           @size = size.to_sym
           @full_width = full_width
           @disabled = disabled
@@ -95,7 +95,7 @@ module BetterUi
         end
 
         def get_button_type_classes
-          BUTTON_THEME[@type] || BUTTON_THEME[:white]
+          BUTTON_THEME[@theme] || BUTTON_THEME[:white]
         end
 
         def get_border_radius_class
@@ -173,21 +173,21 @@ module BetterUi
 
         # Verifica se rendere il componente
         def render?
-          @label.present? || @icon.present? || content.present?
+          @text.present? || @icon.present? || content.present?
         end
 
         private
 
         def validate_params
-          validate_type
+          validate_theme
           validate_size
           validate_icon_position
           validate_rounded
         end
 
-        def validate_type
-          unless BUTTON_THEME.keys.include?(@type)
-            raise ArgumentError, "Il tipo deve essere uno tra: #{BUTTON_THEME.keys.join(', ')}"
+        def validate_theme
+          unless BUTTON_THEME.keys.include?(@theme)
+            raise ArgumentError, "Il tema deve essere uno tra: #{BUTTON_THEME.keys.join(', ')}"
           end
         end
 

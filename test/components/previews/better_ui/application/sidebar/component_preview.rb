@@ -138,10 +138,19 @@ module BetterUi
 
         def default_footer
           {
-            user_info: {
-              avatar: { name: "Demo User", size: :small },
-              name: "Demo User",
-              email: "demo@example.com"
+            user_dropdown: {
+              avatar: { name: "AB", size: :small, theme: :blue },
+              name: "Alessio Bussolari",
+              subtitle: "Piano Pro",
+              menu_items: [
+                { text: "Personale", active: true, icon: "check" },
+                { text: "Impostazioni", href: "/settings", icon: "cog" },
+                { text: "Lingua", icon: "chevron-right" },
+                { text: "Ottieni aiuto", href: "/help" },
+                { text: "Visualizza tutti i piani", href: "/plans" },
+                { text: "Scopri di più", icon: "chevron-right" },
+                { text: "Esci", href: "/logout", theme: :red, icon: "log-out" }
+              ]
             }
           }
         end

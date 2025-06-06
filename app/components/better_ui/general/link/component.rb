@@ -36,7 +36,7 @@ module BetterUi
 
         # Dimensioni con classi Tailwind dirette
         LINK_SIZE_CLASSES = {
-          extra_small: "text-[0.65rem]",
+          extra_small: "text-xs",
           small: "text-sm",
           medium: "text-base",
           large: "text-lg"

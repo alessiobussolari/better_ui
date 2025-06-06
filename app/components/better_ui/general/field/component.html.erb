@@ -1,8 +1,8 @@
 <%# Form field component template %>
 <div class="<%= BASE_CLASSES %>">
-  <% if label.present? %>
+  <% if text.present? %>
     <label for="<%= id %>" class="<%= LABEL_CLASSES %>">
-      <%= label %>
+      <%= text %>
       <% if required %>
         <span class="<%= REQUIRED_CLASSES %>">*</span>
       <% end %>
@@ -24,4 +24,4 @@
       <%= help_text %>
     </div>
   <% end %>
-</div> 
+</div>

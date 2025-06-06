@@ -3,15 +3,15 @@ module BetterUi
     module Components
       module Field
         module FieldHelper
-          # @param label [String] Label del campo
+          # @param text [String] Testo della label (argomento posizionale)
           # @param name [String] Nome del campo
           # @param required [Boolean] Se il campo è obbligatorio
           # @param error [String] Messaggio di errore
           # @param help_text [String] Testo di aiuto
           # @return [BetterUi::General::FieldComponent] Componente del campo
-          def bui_field(label:, name:, required: false, error: nil, help_text: nil, id: nil, &block)
+          def bui_field(text = nil, name:, required: false, error: nil, help_text: nil, id: nil, &block)
             render BetterUi::General::Field::Component.new(
-              label: label,
+              text: text,
               name: name,
               required: required,
               error: error,

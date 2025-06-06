@@ -2,7 +2,8 @@
      data-bui-sidebar-width-value="<%= @width == :md ? 256 : 320 %>"
      data-bui-sidebar-min-width-value="200"
      data-bui-sidebar-max-width-value="400"
-     data-bui-sidebar-pinned-value="true">
+     data-bui-sidebar-pinned-value="true"
+     class="<%= wrapper_classes %>">
   
   <!-- Mobile Overlay -->
   <div data-bui-sidebar-target="overlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden md:hidden"></div>
@@ -174,7 +175,28 @@
   <!-- Footer Section -->
   <% if has_footer? %>
     <div class="px-6 py-4 border-t border-gray-200">
-      <% if footer[:user_info].present? %>
+      <% if has_user_dropdown? %>
+        <!-- User Dropdown -->
+        <% user_dropdown = footer[:user_dropdown] %>
+        <%= bui_dropdown(
+          trigger: user_dropdown_trigger,
+          position: :top,
+          theme: :white,
+          fullwidth: true,
+          show_chevron: false
+        ) do %>
+          <% (user_dropdown[:menu_items] || []).each do |item| %>
+            <%= bui_dropdown_item(
+              text: item[:text],
+              icon: item[:icon],
+              href: item[:href],
+              theme: item[:theme] || :default,
+              active: item[:active] || false,
+              disabled: item[:disabled] || false
+            ) %>
+          <% end %>
+        <% end %>
+      <% elsif footer[:user_info].present? %>
         <div class="flex items-center">
           <% if footer[:user_info][:avatar].present? %>
             <div class="flex-shrink-0">
@@ -206,7 +228,7 @@
       <% end %>
       
       <% if footer[:content].present? %>
-        <div class="<%= footer[:user_info].present? ? 'mt-4' : '' %>">
+        <div class="<%= (footer[:user_info].present? || has_user_dropdown?) ? 'mt-4' : '' %>">
           <%= footer[:content] %>
         </div>
       <% end %>

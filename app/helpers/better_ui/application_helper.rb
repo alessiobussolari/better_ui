@@ -24,6 +24,10 @@ module BetterUi
     include General::Components::Spinner::SpinnerHelper
     include General::Components::Tag::TagHelper
     include General::Components::Tooltip::TooltipHelper
+    include General::Components::Field::FieldHelper
+    include General::Components::Grid::GridHelper
+    include General::Components::Text::TextHelper
+    include General::Components::Dropdown::DropdownHelper
 
     include General::Components::Table::TableHelper
     include General::Components::Table::TbodyHelper
