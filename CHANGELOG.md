@@ -5,6 +5,18 @@ Tutte le modifiche importanti a questo progetto saranno documentate in questo fi
 Il formato è basato su [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 e questo progetto aderisce al [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.6.0] - 2025-01-07
+
+### Aggiunto
+- **Rilascio major**: Aggiornamento significativo della versione
+- **Miglioramenti generali**: Consolidamento delle funzionalità esistenti
+- **Stabilità migliorata**: Ottimizzazioni per performance e affidabilità
+
+### Migliorato
+- **Sistema di versioning**: Aggiornamento per allineamento con roadmap di sviluppo
+- **Compatibilità**: Miglioramenti per compatibilità con versioni Rails più recenti
+- **Documentazione**: Aggiornamenti alla documentazione generale
+
 ## [0.4.0] - 2025-01-07
 
 ### Aggiunto
