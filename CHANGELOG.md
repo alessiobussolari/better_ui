@@ -5,6 +5,18 @@ Tutte le modifiche importanti a questo progetto saranno documentate in questo fi
 Il formato è basato su [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 e questo progetto aderisce al [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.4.0] - 2025-01-07
+
+### Aggiunto
+- **Componente PIN Input**: Nuovo componente per inserimento codici PIN/OTP
+- **Dropdown con selezione**: Aggiunta opzione selectable al componente dropdown
+- **Miglioramenti vari**: Correzioni e ottimizzazioni generali
+
+### Migliorato
+- **Namespace icone**: Correzioni al sistema di namespace delle icone
+- **ViewComponent loading**: Migliorato caricamento della gemma ViewComponent
+- **Stabilità**: Varie correzioni per migliorare la stabilità generale
+
 ## [0.3.0] - 2025-01-06
 
 ### Aggiunto
