@@ -1,6 +1,7 @@
 <div class="relative <%= @classes %> <%= fullwidth_classes %>" 
      data-controller="bui-dropdown" 
      data-bui-dropdown-open-value="false"
+     data-bui-dropdown-selectable-value="<%= @selectable.to_s %>"
      <%= tag.attributes(@html_options.except(:class)) %>>
   
   <button type="button"

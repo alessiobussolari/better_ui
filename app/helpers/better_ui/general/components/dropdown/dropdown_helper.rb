@@ -16,6 +16,7 @@ module BetterUi
           # @param animation [Symbol] Il tipo di animazione (:fade, :slide, :none)
           # @param fullwidth [Boolean] Se il trigger deve occupare tutta la larghezza disponibile
           # @param show_chevron [Boolean] Se mostrare l'icona chevron automatica
+          # @param selectable [Boolean] Se il dropdown deve aggiornare il trigger con la selezione
           # @param classes [String] Classi CSS aggiuntive
           # @param options [Hash] Attributi HTML aggiuntivi
           # @param block [Proc] Il contenuto del menu dropdown
@@ -61,6 +62,7 @@ module BetterUi
             animation: :fade,
             fullwidth: false,
             show_chevron: true,
+            selectable: false,
             classes: '',
             **options,
             &block
@@ -74,6 +76,7 @@ module BetterUi
               animation: animation,
               fullwidth: fullwidth,
               show_chevron: show_chevron,
+              selectable: selectable,
               classes: classes,
               **options
             ), &block

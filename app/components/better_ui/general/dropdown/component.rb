@@ -6,7 +6,7 @@ module BetterUi
       class Component < ViewComponent::Base
         include BetterUi::General::Components::Icon::IconHelper
         
-        attr_reader :trigger, :position, :theme, :size, :rounded, :animation, :fullwidth, :show_chevron, :classes, :html_options
+        attr_reader :trigger, :position, :theme, :size, :rounded, :animation, :fullwidth, :show_chevron, :selectable, :classes, :html_options
 
         # Classi base spostate nel template HTML per migliore leggibilità
 
@@ -69,6 +69,7 @@ module BetterUi
           animation: :fade,
           fullwidth: false,
           show_chevron: true,
+          selectable: false,
           classes: nil,
           **html_options
         )
@@ -80,6 +81,7 @@ module BetterUi
           @animation = animation.to_sym
           @fullwidth = fullwidth
           @show_chevron = show_chevron
+          @selectable = selectable
           @classes = classes
           @html_options = html_options
 

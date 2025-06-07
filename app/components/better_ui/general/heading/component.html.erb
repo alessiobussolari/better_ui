@@ -3,7 +3,7 @@
   <%= tag.public_send(heading_tag, **heading_attributes) do %>
     <% if show_icon? %>
       <span class="<%= icon_classes %>">
-        <%= render BetterUi::General::IconComponent.new(name: @icon) %>
+        <%= render BetterUi::General::Icon::Component.new(name: @icon) %>
       </span>
     <% end %>
     
