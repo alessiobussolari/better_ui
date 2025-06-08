@@ -45,16 +45,16 @@ module BetterUi
         
         # @param padding [Boolean] Se applicare il padding al contenitore principale
         # @param inner_padding [Boolean] Se applicare il padding al contenitore interno
-        # @param rounded [Symbol] Tipo di border-radius del contenitore interno (:none, :small, :medium, :large, :full), default :small
-        # @param shadow [Symbol] Tipo di ombra del contenitore interno (:none, :small, :medium, :large), default :medium
+        # @param rounded [Symbol] Tipo di border-radius del contenitore interno (:none, :sm, :md, :lg, :full), default :sm
+        # @param shadow [Symbol] Tipo di ombra del contenitore interno (:none, :sm, :md, :lg), default :md
         # @param with_sidebar [Boolean] Se lasciare lo spazio per la sidebar
         # @param sidebar_width [Symbol] Larghezza della sidebar (:sm, :md, :lg, :xl), default :md
         # @param classes [String] Classi CSS aggiuntive per il contenitore principale
         def initialize(
           padding: true,
           inner_padding: true,
-          rounded: :small,
-          shadow: :medium,
+          rounded: :sm,
+          shadow: :md,
           with_sidebar: true,
           sidebar_width: :md,
           classes: nil
@@ -87,11 +87,11 @@ module BetterUi
         end
         
         def get_rounded_class
-          MAIN_ROUNDED[@rounded] || MAIN_ROUNDED[:small]
+          MAIN_ROUNDED[@rounded] || MAIN_ROUNDED[:sm]
         end
         
         def get_shadow_class
-          MAIN_SHADOW[@shadow] || MAIN_SHADOW[:medium]
+          MAIN_SHADOW[@shadow] || MAIN_SHADOW[:md]
         end
         
         def validate_params

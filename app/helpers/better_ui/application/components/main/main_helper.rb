@@ -7,8 +7,8 @@ module BetterUi
           #
           # @param padding [Boolean] Se applicare il padding al contenitore principale, default true
           # @param inner_padding [Boolean] Se applicare il padding al contenitore interno, default true
-          # @param rounded [Symbol] Tipo di border-radius del contenitore interno (:none, :small, :medium, :large, :full), default :small
-          # @param shadow [Symbol] Tipo di ombra del contenitore interno (:none, :small, :medium, :large), default :medium
+          # @param rounded [Symbol] Tipo di border-radius del contenitore interno (:none, :sm, :md, :lg, :full), default :sm
+          # @param shadow [Symbol] Tipo di ombra del contenitore interno (:none, :sm, :md, :lg), default :md
           # @param with_sidebar [Boolean] Se lasciare lo spazio per la sidebar, default true
           # @param sidebar_width [Symbol] Larghezza della sidebar (:sm, :md, :lg, :xl), default :md
           # @param classes [String] Classi CSS aggiuntive per il contenitore principale
@@ -21,7 +21,7 @@ module BetterUi
           #   <%= bui_main %>
           # 
           # @example Main con tema
-          #   <%= bui_main(rounded: :medium, shadow: :lg) %>
+          #   <%= bui_main(rounded: :md, shadow: :lg) %>
           #
           # @example Main senza sidebar
           #   <%= bui_main(with_sidebar: false) %>
@@ -37,8 +37,8 @@ module BetterUi
           def bui_main(
             padding: true,
             inner_padding: true,
-            rounded: :small,
-            shadow: :medium,
+            rounded: :sm,
+            shadow: :md,
             with_sidebar: true,
             sidebar_width: :md,
             classes: nil,

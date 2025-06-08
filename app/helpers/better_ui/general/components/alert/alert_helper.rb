@@ -11,8 +11,8 @@ module BetterUi
           # @param icon [String, nil] Nome dell'icona (se vuoto usa l'icona predefinita in base al tema)
           # @param icon_position [Symbol] Posizione dell'icona (:left, :right)
           # @param dismissible [Boolean] Se l'alert può essere chiuso dall'utente
-          # @param rounded [Symbol] Arrotondamento degli angoli (:none, :small, :medium, :large, :full)
-          # @param importance [Symbol] Livello di importanza per accessibilità (:high, :medium, :low)
+          # @param rounded [Symbol] Arrotondamento degli angoli (:none, :sm, :md, :lg, :full)
+          # @param importance [Symbol] Livello di importanza per accessibilità (:high, :md, :low)
           # @param html_content [Boolean] Se il messaggio contiene HTML
           # @param classes [String] Classi CSS aggiuntive
           # @param options [Hash] Attributi HTML aggiuntivi
@@ -34,7 +34,7 @@ module BetterUi
           # @example Alert con HTML nel messaggio
           #   <%= bui_alert(message: '<strong>Attenzione!</strong> Controlla i dati.', html_content: true) %>
           def bui_alert(title: nil, message: nil, theme: :default, icon: nil, icon_position: :left, 
-                       dismissible: false, rounded: :medium, importance: :medium, html_content: false, 
+                       dismissible: false, rounded: :md, importance: :md, html_content: false, 
                        classes: nil, **options)
             render BetterUi::General::Alert::Component.new(
               title: title,

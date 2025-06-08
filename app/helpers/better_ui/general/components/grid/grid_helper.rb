@@ -9,7 +9,7 @@ module BetterUi
           #
           # @param cols [Integer, Hash] Numero colonne (1-12, :auto, :none) o hash responsive {sm: 1, md: 2, lg: 3, xl: 4}
           # @param rows [Integer, Hash, nil] Numero righe (1-6, :auto, :none) o hash responsive
-          # @param gap [Symbol, Hash] Spaziatura (:none, :small, :medium, :large) o hash responsive
+          # @param gap [Symbol, Hash] Spaziatura (:none, :sm, :md, :lg) o hash responsive
           # @param flow [Symbol] Direzione flusso (:row, :col, :row_dense, :col_dense)
           # @param align_items [Symbol, nil] Allineamento verticale (:start, :center, :end, :stretch)
           # @param justify_items [Symbol, nil] Allineamento orizzontale (:start, :center, :end, :stretch)
@@ -21,17 +21,17 @@ module BetterUi
           # @return [String] HTML del grid container
           #
           # @example Uso base
-          #   <%= bui_grid(cols: 3, gap: :medium) do %>
+          #   <%= bui_grid(cols: 3, gap: :md) do %>
           #     <%= content %>
           #   <% end %>
           #
           # @example Con responsive
-          #   <%= bui_grid(cols: {sm: 1, md: 2, lg: 3, xl: 4}, gap: :large) do %>
+          #   <%= bui_grid(cols: {sm: 1, md: 2, lg: 3, xl: 4}, gap: :lg) do %>
           #     <%= content %>
           #   <% end %>
           #
           # @example Con righe e allineamento
-          #   <%= bui_grid(cols: 2, rows: 3, gap: :medium, align_items: :center) do %>
+          #   <%= bui_grid(cols: 2, rows: 3, gap: :md, align_items: :center) do %>
           #     <%= content %>
           #   <% end %>
           #
@@ -47,7 +47,7 @@ module BetterUi
           def bui_grid(
             cols: 1,
             rows: nil,
-            gap: :medium,
+            gap: :md,
             flow: :row,
             align_items: nil,
             justify_items: nil,

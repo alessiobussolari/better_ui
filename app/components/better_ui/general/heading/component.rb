@@ -125,7 +125,7 @@ module BetterUi
         # @param level [Integer] livello del heading (1-6)
         # @param theme [Symbol] tema del colore (:default, :white, etc.)
         # @param align [Symbol] allineamento (:left, :center, :right)
-        # @param size [Symbol] dimensione (:small, :medium, :large)
+        # @param size [Symbol] dimensione (:sm, :md, :lg)
         # @param style [Symbol] stile (:normal, :bold, :italic, :underline)
         # @param icon [String] icona opzionale
         # @param subtitle [String] sottotitolo opzionale
@@ -228,29 +228,25 @@ module BetterUi
 
         private
 
-        def get_theme_class
-          HEADING_THEME_CLASSES[@theme] || HEADING_THEME_CLASSES[:white]
+        # Metodi get dinamici
+        [
+          { constant: :HEADING_THEME_CLASSES, var: :@theme, default: :white, method: :get_theme_class },
+          { constant: :HEADING_ALIGN_CLASSES, var: :@align, default: :left, method: :get_align_class },
+          { constant: :HEADING_STYLE_CLASSES, var: :@style, default: :normal, method: :get_style_class },
+          { constant: :HEADING_SUBTITLE_THEME_CLASSES, var: :@theme, default: :white, method: :get_subtitle_theme_class },
+          { constant: :HEADING_DIVIDER_THEME_CLASSES, var: :@theme, default: :white, method: :get_divider_theme_class }
+        ].each do |config|
+          define_method config[:method] do
+            constant_hash = self.class.const_get(config[:constant])
+            value = instance_variable_get(config[:var])
+            constant_hash[value] || constant_hash[config[:default]]
+          end
         end
 
-        def get_align_class
-          HEADING_ALIGN_CLASSES[@align] || HEADING_ALIGN_CLASSES[:left]
-        end
-
+        # Metodo speciale per get_size_class che ha logica diversa
         def get_size_class
           size_map = HEADING_SIZE_CLASSES[@size] || HEADING_SIZE_CLASSES[:md]
           size_map[@level] || size_map[2]
-        end
-
-        def get_style_class
-          HEADING_STYLE_CLASSES[@style] || HEADING_STYLE_CLASSES[:normal]
-        end
-
-        def get_subtitle_theme_class
-          HEADING_SUBTITLE_THEME_CLASSES[@theme] || HEADING_SUBTITLE_THEME_CLASSES[:white]
-        end
-
-        def get_divider_theme_class
-          HEADING_DIVIDER_THEME_CLASSES[@theme] || HEADING_DIVIDER_THEME_CLASSES[:white]
         end
 
         def validate_params
@@ -260,29 +256,21 @@ module BetterUi
           validate_style
         end
 
-        def validate_theme
-          unless HEADING_THEME_CLASSES.keys.include?(@theme)
-            raise ArgumentError, "Il tema deve essere uno tra: #{HEADING_THEME_CLASSES.keys.join(', ')}"
+        # Validazioni dinamiche
+        [
+          { values: HEADING_THEME_CLASSES.keys, method: :validate_theme, param: 'theme', var: :@theme },
+          { values: HEADING_ALIGN_CLASSES.keys, method: :validate_align, param: 'align', var: :@align },
+          { values: HEADING_SIZE_CLASSES.keys, method: :validate_size, param: 'size', var: :@size },
+          { values: HEADING_STYLE_CLASSES.keys, method: :validate_style, param: 'style', var: :@style }
+        ].each do |validation|
+          define_method validation[:method] do
+            value = instance_variable_get(validation[:var])
+            unless validation[:values].include?(value)
+              raise ArgumentError, "#{self.class.name} - parametro '#{validation[:param]}' con valore '#{value}' non è valido. Deve essere uno tra: #{validation[:values].join(', ')}"
+            end
           end
         end
 
-        def validate_align
-          unless HEADING_ALIGN_CLASSES.keys.include?(@align)
-            raise ArgumentError, "L'allineamento deve essere uno tra: #{HEADING_ALIGN_CLASSES.keys.join(', ')}"
-          end
-        end
-
-        def validate_size
-          unless HEADING_SIZE_CLASSES.keys.include?(@size)
-            raise ArgumentError, "La dimensione deve essere una tra: #{HEADING_SIZE_CLASSES.keys.join(', ')}"
-          end
-        end
-
-        def validate_style
-          unless HEADING_STYLE_CLASSES.keys.include?(@style)
-            raise ArgumentError, "Lo stile deve essere uno tra: #{HEADING_STYLE_CLASSES.keys.join(', ')}"
-          end
-        end
       end
     end
   end

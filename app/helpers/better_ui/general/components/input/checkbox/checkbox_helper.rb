@@ -17,8 +17,8 @@ module BetterUi
             # @param label [String, nil] Testo della label associata al checkbox
             # @param label_position [Symbol] Posizione della label (:left, :right)
             # @param theme [Symbol] Tema del componente (:default, :white, :red, :rose, :orange, :green, :blue, :yellow, :violet)
-            # @param size [Symbol] Dimensione del componente (:small, :medium, :large)
-            # @param rounded [Symbol] Border radius (:none, :small, :medium, :large, :full)
+            # @param size [Symbol] Dimensione del componente (:sm, :md, :lg)
+            # @param rounded [Symbol] Border radius (:none, :sm, :md, :lg, :full)
             # @param classes [String] Classi CSS aggiuntive
             # @param form [ActionView::Helpers::FormBuilder, nil] Form builder Rails opzionale
             # @param options [Hash] Opzioni aggiuntive per l'input (es. data attributes, aria attributes)
@@ -35,7 +35,7 @@ module BetterUi
             #   <%= bui_input_checkbox(name: 'terms', label: 'Accetto i termini e condizioni', label_position: :left, required: true) %>
             #
             # @example Con tema e dimensione personalizzati
-            #   <%= bui_input_checkbox(name: 'important', label: 'Importante', theme: :green, size: :large) %>
+            #   <%= bui_input_checkbox(name: 'important', label: 'Importante', theme: :green, size: :lg) %>
             #
             # @example Con border radius personalizzato
             #   <%= bui_input_checkbox(name: 'rounded_option', label: 'Opzione arrotondata', rounded: :full) %>
@@ -55,7 +55,7 @@ module BetterUi
             #   <%= bui_input_checkbox(name: 'partial_selection', label: 'Selezione parziale', indeterminate: true, theme: :blue) %>
             def bui_input_checkbox(name:, value: '1', checked: false, required: false, disabled: false,
                                    indeterminate: false, label: nil, label_position: :right, theme: :default, 
-                                   size: :medium, rounded: :medium, classes: '', form: nil, **options)
+                                   size: :md, rounded: :md, classes: '', form: nil, **options)
               render BetterUi::General::Input::Checkbox::Component.new(
                 name: name,
                 value: value,

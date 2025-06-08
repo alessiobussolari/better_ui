@@ -41,21 +41,41 @@ module BetterUi
           bordered: "border-2"
         }
 
-        # Padding con classi Tailwind dirette
+        # Padding con classi Tailwind dirette - Sistema uniforme 7 livelli
         PANEL_PADDING_CLASSES = {
-          none: "p-0",
-          small: "p-2",
-          medium: "p-4",
-          large: "p-6"
+          xxs: "p-1",           # Extra extra small
+          xs: "p-1.5",          # Extra small
+          sm: "p-2",            # Small
+          md: "p-4",            # Medium (default)
+          lg: "p-6",            # Large
+          xl: "p-8",            # Extra large
+          xxl: "p-10"           # Extra extra large
         }
 
         # Radius con classi Tailwind dirette
         PANEL_RADIUS_CLASSES = {
           none: "rounded-none",
-          small: "rounded",
-          medium: "rounded-md",
-          large: "rounded-lg",
+          xxs: "rounded-sm",
+          xs: "rounded",
+          sm: "rounded-md",
+          md: "rounded-lg",
+          lg: "rounded-xl",
+          xl: "rounded-2xl",
+          xxl: "rounded-3xl",
           full: "rounded-full"
+        }
+
+        # Border theme con classi Tailwind dirette
+        PANEL_BORDER_THEME_CLASSES = {
+          default: "border-gray-600",
+          white: "border-gray-100",
+          red: "border-red-100",
+          rose: "border-rose-100",
+          orange: "border-orange-100",
+          green: "border-green-100",
+          blue: "border-blue-100",
+          yellow: "border-yellow-100",
+          violet: "border-violet-100"
         }
 
         # @param title [String] titolo del pannello (opzionale)
@@ -64,8 +84,8 @@ module BetterUi
         # @param footer [String] footer del pannello (opzionale)
         # @param theme [Symbol] tema del colore (:default, :white, etc.)
         # @param style [Symbol] stile (:default, :flat, :raised, :bordered)
-        # @param padding [Symbol] padding interno (:none, :small, :medium, :large)
-        # @param radius [Symbol] raggio dei bordi (:none, :small, :medium, :large, :full)
+        # @param padding [Symbol] padding interno (:none, :sm, :md, :lg)
+        # @param radius [Symbol] raggio dei bordi (:none, :sm, :md, :lg, :full)
         # @param html_options [Hash] opzioni HTML aggiuntive
         def initialize(
           title: nil,
@@ -74,8 +94,8 @@ module BetterUi
           footer: nil,
           theme: :white,
           style: :default,
-          padding: :medium,
-          radius: :small,
+          padding: :md,
+          radius: :sm,
           **html_options
         )
           @title = title
@@ -171,46 +191,19 @@ module BetterUi
           PANEL_THEME_CLASSES[@theme] || PANEL_THEME_CLASSES[:white]
         end
 
-        def get_text_theme_class
-          PANEL_TEXT_THEME_CLASSES[@theme] || PANEL_TEXT_THEME_CLASSES[:white]
-        end
-
-        def get_border_theme_class
-          # Usa lo stesso colore del bordo principale ma più leggero per i separatori interni
-          case @theme
-          when :default
-            "border-gray-600"
-          when :white
-            "border-gray-100"
-          when :red
-            "border-red-100"
-          when :rose
-            "border-rose-100"
-          when :orange
-            "border-orange-100"
-          when :green
-            "border-green-100"
-          when :blue
-            "border-blue-100"
-          when :yellow
-            "border-yellow-100"
-          when :violet
-            "border-violet-100"
-          else
-            "border-gray-100"
+        [
+          { constant: :PANEL_THEME_CLASSES, var: :@theme, default: :white, method: :get_theme_class },
+          { constant: :PANEL_TEXT_THEME_CLASSES, var: :@theme, default: :white, method: :get_text_theme_class },
+          { constant: :PANEL_BORDER_THEME_CLASSES, var: :@theme, default: :white, method: :get_border_theme_class },
+          { constant: :PANEL_STYLE_CLASSES, var: :@style, default: :default, method: :get_style_class },
+          { constant: :PANEL_RADIUS_CLASSES, var: :@radius, default: :sm, method: :get_radius_class },
+          { constant: :PANEL_PADDING_CLASSES, var: :@padding, default: :md, method: :get_padding_class }
+        ].each do |config|
+          define_method config[:method] do
+            constant_hash = self.class.const_get(config[:constant])
+            value = instance_variable_get(config[:var])
+            constant_hash[value] || constant_hash[config[:default]]
           end
-        end
-
-        def get_style_class
-          PANEL_STYLE_CLASSES[@style] || PANEL_STYLE_CLASSES[:default]
-        end
-
-        def get_radius_class
-          PANEL_RADIUS_CLASSES[@radius] || PANEL_RADIUS_CLASSES[:small]
-        end
-
-        def get_padding_class
-          PANEL_PADDING_CLASSES[@padding] || PANEL_PADDING_CLASSES[:medium]
         end
 
         def validate_params
@@ -220,27 +213,17 @@ module BetterUi
           validate_radius
         end
 
-        def validate_theme
-          unless PANEL_THEME_CLASSES.keys.include?(@theme)
-            raise ArgumentError, "Il tema deve essere uno tra: #{PANEL_THEME_CLASSES.keys.join(', ')}"
-          end
-        end
-
-        def validate_style
-          unless PANEL_STYLE_CLASSES.keys.include?(@style)
-            raise ArgumentError, "Lo stile deve essere uno tra: #{PANEL_STYLE_CLASSES.keys.join(', ')}"
-          end
-        end
-
-        def validate_padding
-          unless PANEL_PADDING_CLASSES.keys.include?(@padding)
-            raise ArgumentError, "Il padding deve essere uno tra: #{PANEL_PADDING_CLASSES.keys.join(', ')}"
-          end
-        end
-
-        def validate_radius
-          unless PANEL_RADIUS_CLASSES.keys.include?(@radius)
-            raise ArgumentError, "Il raggio deve essere uno tra: #{PANEL_RADIUS_CLASSES.keys.join(', ')}"
+        [
+          { values: PANEL_THEME_CLASSES.keys, method: :validate_theme, param: 'theme', var: :@theme },
+          { values: PANEL_STYLE_CLASSES.keys, method: :validate_style, param: 'style', var: :@style },
+          { values: PANEL_PADDING_CLASSES.keys, method: :validate_padding, param: 'padding', var: :@padding },
+          { values: PANEL_RADIUS_CLASSES.keys, method: :validate_radius, param: 'radius', var: :@radius },
+        ].each do |validation|
+          define_method validation[:method] do
+            value = instance_variable_get(validation[:var])
+            unless validation[:values].include?(value)
+              raise ArgumentError, "#{self.class.name} - parametro '#{validation[:param]}' con valore '#{value}' non è valido. Deve essere uno tra: #{validation[:values].join(', ')}"
+            end
           end
         end
       end

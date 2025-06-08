@@ -8,7 +8,7 @@ module BetterUi
           # @param text [String] testo del tooltip
           # @param theme [Symbol] tema del colore (:default, :white, :red, etc.)
           # @param position [Symbol] posizione del tooltip (:top, :right, :bottom, :left)
-          # @param size [Symbol] dimensione del tooltip (:small, :medium, :large)
+          # @param size [Symbol] dimensione del tooltip (:sm, :md, :lg)
           # @param style [Symbol] stile del tooltip (:filled, :outline)
           # @param html_options [Hash] opzioni HTML aggiuntive
           # @param block [Block] contenuto dell'elemento trigger
@@ -29,7 +29,7 @@ module BetterUi
           #     "Tooltip grande con outline",
           #     theme: :blue,
           #     position: :bottom,
-          #     size: :large,
+          #     size: :lg,
           #     style: :outline,
           #     id: "custom-tooltip"
           #   ) do
@@ -39,7 +39,7 @@ module BetterUi
             text,
             theme: :white,
             position: :top,
-            size: :medium,
+            size: :md,
             style: :filled,
             **html_options,
             &block

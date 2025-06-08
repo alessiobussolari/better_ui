@@ -21,14 +21,14 @@ module BetterUi
           # @option theme [Symbol] :yellow Header con sfondo giallo chiaro
           # @option theme [Symbol] :violet Header con sfondo violetto chiaro
           #
-          # @option size [Symbol] :small (max-w-sm) Modal piccolo
-          # @option size [Symbol] :medium (max-w-md, default) Modal medio
-          # @option size [Symbol] :large (max-w-2xl) Modal grande
+          # @option size [Symbol] :sm (max-w-sm) Modal piccolo
+          # @option size [Symbol] :md (max-w-md, default) Modal medio
+          # @option size [Symbol] :lg (max-w-2xl) Modal grande
           #
           # @option rounded [Symbol] :none (rounded-none) Nessun border radius
-          # @option rounded [Symbol] :small (rounded-md) Border radius piccolo
-          # @option rounded [Symbol] :medium (rounded-lg, default) Border radius medio
-          # @option rounded [Symbol] :large (rounded-xl) Border radius grande
+          # @option rounded [Symbol] :sm (rounded-md) Border radius piccolo
+          # @option rounded [Symbol] :md (rounded-lg, default) Border radius medio
+          # @option rounded [Symbol] :lg (rounded-xl) Border radius grande
           # @option rounded [Symbol] :full (rounded-full) Border radius completo
           #
           # @return [String] HTML del modal
@@ -44,21 +44,21 @@ module BetterUi
           # @example Con link trigger
           #   <%= bui_modal do |modal| %>
           #     <% modal.with_trigger(label: "Visualizza dettagli", as: :link, variant: :underline) %>
-          #     <% modal.with_modal(title: "Dettagli elemento", theme: :blue, size: :large) do %>
+          #     <% modal.with_modal(title: "Dettagli elemento", theme: :blue, size: :lg) do %>
           #       <p>Informazioni dettagliate sull'elemento selezionato.</p>
           #     <% end %>
           #   <% end %>
           #
           # @example Modal con configurazione avanzata
           #   <%= bui_modal(close_on_backdrop: false, lock_scroll: false) do |modal| %>
-          #     <% modal.with_trigger(label: "Elimina", as: :button, type: :red, size: :small) %>
+          #     <% modal.with_trigger(label: "Elimina", as: :button, type: :red, size: :sm) %>
           #     <% modal.with_modal(title: "Elimina elemento", theme: :red, backdrop: true, closable: true) do %>
           #       <p>Sei sicuro di voler eliminare questo elemento?</p>
           #       <p class="text-sm text-gray-600 mt-2">Questa azione non può essere annullata.</p>
           #       
           #       <div class="flex justify-end space-x-3 mt-6">
-          #         <%= bui_button(label: "Annulla", type: :white, size: :medium) %>
-          #         <%= bui_button(label: "Elimina", type: :red, size: :medium) %>
+          #         <%= bui_button(label: "Annulla", type: :white, size: :md) %>
+          #         <%= bui_button(label: "Elimina", type: :red, size: :md) %>
           #       </div>
           #     <% end %>
           #   <% end %>

@@ -37,7 +37,7 @@ module BetterUi
         }.freeze
 
         def initialize(text:, target:, active: false, icon: nil, disabled: false, badge: nil, 
-                      theme: :default, size: :medium, classes: '', **options)
+                      theme: :default, size: :md, classes: '', **options)
           @text = text
           @target = target
           @active = active

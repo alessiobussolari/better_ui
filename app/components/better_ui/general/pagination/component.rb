@@ -64,14 +64,18 @@ module BetterUi
           }
         }.freeze
 
-        # Costanti per dimensioni
+        # Costanti per dimensioni - Sistema uniforme 7 livelli
         PAGINATION_SIZE = {
-          small: 'px-2 py-1 text-sm',
-          medium: 'px-3 py-2 text-base',
-          large: 'px-4 py-3 text-lg'
+          xxs: 'px-1 py-0.5 text-xs',      # Extra extra small
+          xs: 'px-1.5 py-0.5 text-xs',     # Extra small
+          sm: 'px-2 py-1 text-sm',         # Small
+          md: 'px-3 py-2 text-base',       # Medium (default)
+          lg: 'px-4 py-3 text-lg',         # Large
+          xl: 'px-5 py-3.5 text-xl',       # Extra large
+          xxl: 'px-6 py-4 text-2xl'        # Extra extra large
         }.freeze
 
-        def initialize(current_page:, total_pages:, path:, theme: :default, size: :medium, 
+        def initialize(current_page:, total_pages:, path:, theme: :default, size: :md,
                        window: 2, show_info: false, per_page: nil, classes: '', **options)
           @current_page = current_page.to_i
           @total_pages = total_pages.to_i

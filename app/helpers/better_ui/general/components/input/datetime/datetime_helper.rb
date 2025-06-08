@@ -18,10 +18,10 @@ module BetterUi
             # @param max [String] Valore massimo selezionabile nel formato appropriato
             # @param theme [Symbol] Tema del componente (default: :default)
             #   Valori disponibili: :default, :white, :red, :rose, :orange, :green, :blue, :yellow, :violet
-            # @param size [Symbol] Dimensione del componente (default: :medium)
-            #   Valori disponibili: :small, :medium, :large
-            # @param rounded [Symbol] Border radius (default: :medium)
-            #   Valori disponibili: :none, :small, :medium, :large, :full
+            # @param size [Symbol] Dimensione del componente (default: :md)
+            #   Valori disponibili: :sm, :md, :lg
+            # @param rounded [Symbol] Border radius (default: :md)
+            #   Valori disponibili: :none, :sm, :md, :lg, :full
             # @param classes [String] Classi CSS aggiuntive
             # @param form [ActionView::Helpers::FormBuilder] Form builder Rails opzionale per integrazione con form
             # @param options [Hash] Attributi HTML aggiuntivi da passare all'elemento input
@@ -34,7 +34,7 @@ module BetterUi
             #   <%= bui_input_datetime(name: 'report_month', type: :month, required: true, min: '2024-01', max: '2024-12') %>
             #
             # @example Input per settimana con tema
-            #   <%= bui_input_datetime(name: 'work_week', type: :week, theme: :blue, size: :large) %>
+            #   <%= bui_input_datetime(name: 'work_week', type: :week, theme: :blue, size: :lg) %>
             #
             # @example Input per time con stili personalizzati
             #   <%= bui_input_datetime(name: 'meeting_time', type: :time, theme: :green, rounded: :full) %>
@@ -45,7 +45,7 @@ module BetterUi
             #     <%= bui_input_datetime(name: :start_time, type: :time, form: form, theme: :green) %>
             #   <% end %>
             def bui_input_datetime(name:, type: :date, value: nil, required: false, disabled: false, 
-                                   min: nil, max: nil, theme: :default, size: :medium, rounded: :medium, 
+                                   min: nil, max: nil, theme: :default, size: :md, rounded: :md, 
                                    classes: '', form: nil, **options)
               render BetterUi::General::Input::Datetime::Component.new(
                 name: name,

@@ -37,9 +37,13 @@ module BetterUi
         # Border radius con classi Tailwind dirette
         DROPDOWN_ROUNDED = {
           none: "rounded-none",
-          small: "rounded-md",
-          medium: "rounded-lg",
-          large: "rounded-xl",
+          xxs: "rounded-sm",
+          xs: "rounded",
+          sm: "rounded-md",
+          md: "rounded-lg",
+          lg: "rounded-xl",
+          xl: "rounded-2xl",
+          xxl: "rounded-3xl",
           full: "rounded-full"
         }.freeze
 
@@ -69,7 +73,7 @@ module BetterUi
           position: :bottom,
           theme: :default,
           size: :md,
-          rounded: :medium,
+          rounded: :md,
           animation: :fade,
           fullwidth: false,
           show_chevron: true,
@@ -125,32 +129,21 @@ module BetterUi
 
         private
 
-        def get_trigger_theme_classes
-          DROPDOWN_TRIGGER_THEME[@theme] || DROPDOWN_TRIGGER_THEME[:default]
-        end
-
-        def get_trigger_size_classes
-          DROPDOWN_TRIGGER_SIZE[@size] || DROPDOWN_TRIGGER_SIZE[:md]
-        end
-
-        def get_trigger_rounded_classes
-          DROPDOWN_ROUNDED[@rounded] || DROPDOWN_ROUNDED[:medium]
-        end
-
-        def get_menu_rounded_classes
-          DROPDOWN_ROUNDED[@rounded] || DROPDOWN_ROUNDED[:medium]
-        end
-
-        def get_position_classes
-          DROPDOWN_POSITION[@position] || DROPDOWN_POSITION[:bottom]
-        end
-
-        def get_animation_classes
-          DROPDOWN_ANIMATION[@animation] || DROPDOWN_ANIMATION[:fade]
-        end
-
-        def get_fullwidth_classes
-          DROPDOWN_FULLWIDTH[@fullwidth] || DROPDOWN_FULLWIDTH[false]
+        # Definizione dinamica dei metodi get
+        [
+          { constant: 'DROPDOWN_TRIGGER_THEME', method: :get_trigger_theme_classes, var: :@theme, default: :default },
+          { constant: 'DROPDOWN_TRIGGER_SIZE', method: :get_trigger_size_classes, var: :@size, default: :md },
+          { constant: 'DROPDOWN_ROUNDED', method: :get_trigger_rounded_classes, var: :@rounded, default: :md },
+          { constant: 'DROPDOWN_ROUNDED', method: :get_menu_rounded_classes, var: :@rounded, default: :md },
+          { constant: 'DROPDOWN_POSITION', method: :get_position_classes, var: :@position, default: :bottom },
+          { constant: 'DROPDOWN_ANIMATION', method: :get_animation_classes, var: :@animation, default: :fade },
+          { constant: 'DROPDOWN_FULLWIDTH', method: :get_fullwidth_classes, var: :@fullwidth, default: false }
+        ].each do |config|
+          define_method(config[:method]) do
+            constant_value = self.class.const_get(config[:constant])
+            value = instance_variable_get(config[:var])
+            constant_value[value] || constant_value[config[:default]]
+          end
         end
 
         def validate_params
@@ -161,33 +154,19 @@ module BetterUi
           validate_animation
         end
 
-        def validate_theme
-          unless DROPDOWN_TRIGGER_THEME.keys.include?(@theme)
-            raise ArgumentError, "Il tema deve essere uno tra: #{DROPDOWN_TRIGGER_THEME.keys.join(', ')}"
-          end
-        end
-
-        def validate_size
-          unless DROPDOWN_TRIGGER_SIZE.keys.include?(@size)
-            raise ArgumentError, "La dimensione deve essere una tra: #{DROPDOWN_TRIGGER_SIZE.keys.join(', ')}"
-          end
-        end
-
-        def validate_rounded
-          unless DROPDOWN_ROUNDED.keys.include?(@rounded)
-            raise ArgumentError, "Il border radius deve essere uno tra: #{DROPDOWN_ROUNDED.keys.join(', ')}"
-          end
-        end
-
-        def validate_position
-          unless DROPDOWN_POSITION.keys.include?(@position)
-            raise ArgumentError, "La posizione deve essere una tra: #{DROPDOWN_POSITION.keys.join(', ')}"
-          end
-        end
-
-        def validate_animation
-          unless DROPDOWN_ANIMATION.keys.include?(@animation)
-            raise ArgumentError, "L'animazione deve essere una tra: #{DROPDOWN_ANIMATION.keys.join(', ')}"
+        # Definizione dinamica delle validazioni
+        [
+          { values: DROPDOWN_TRIGGER_THEME.keys, method: :validate_theme, param: 'tema', var: :@theme },
+          { values: DROPDOWN_TRIGGER_SIZE.keys, method: :validate_size, param: 'dimensione', var: :@size },
+          { values: DROPDOWN_ROUNDED.keys, method: :validate_rounded, param: 'border radius', var: :@rounded },
+          { values: DROPDOWN_POSITION.keys, method: :validate_position, param: 'posizione', var: :@position },
+          { values: DROPDOWN_ANIMATION.keys, method: :validate_animation, param: 'animazione', var: :@animation }
+        ].each do |config|
+          define_method(config[:method]) do
+            value = instance_variable_get(config[:var])
+            unless config[:values].include?(value)
+              raise ArgumentError, "#{config[:param].capitalize} non valido: #{value}. Valori supportati: #{config[:values].join(', ')}"
+            end
           end
         end
       end

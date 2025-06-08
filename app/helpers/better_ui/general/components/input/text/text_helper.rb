@@ -15,8 +15,8 @@ module BetterUi
             # @param disabled [Boolean] Se il campo è disabilitato
             # @param type [Symbol] Tipo del campo input (:text, :password, :email, :tel, :url, :number, :search, :color)
             # @param theme [Symbol] Tema del componente (:default, :white, :red, :rose, :orange, :green, :blue, :yellow, :violet)
-            # @param size [Symbol] Dimensione del componente (:small, :medium, :large)
-            # @param rounded [Symbol] Border radius (:none, :small, :medium, :large, :full)
+            # @param size [Symbol] Dimensione del componente (:sm, :md, :lg)
+            # @param rounded [Symbol] Border radius (:none, :sm, :md, :lg, :full)
             # @param classes [String] Classi CSS aggiuntive
             # @param form [ActionView::Helpers::FormBuilder, nil] Form builder Rails opzionale
             # @param options [Hash] Opzioni aggiuntive per l'input (es. data attributes, aria attributes)
@@ -30,7 +30,7 @@ module BetterUi
             #   <%= bui_input_text(name: 'email', placeholder: 'Inserisci la tua email', required: true) %>
             #
             # @example Con tema e dimensione personalizzati
-            #   <%= bui_input_text(name: 'search', theme: :blue, size: :large, placeholder: 'Cerca...') %>
+            #   <%= bui_input_text(name: 'search', theme: :blue, size: :lg, placeholder: 'Cerca...') %>
             #
             # @example Con border radius personalizzato
             #   <%= bui_input_text(name: 'username', rounded: :full, placeholder: 'Username') %>
@@ -46,7 +46,7 @@ module BetterUi
             #     <%= bui_input_text(name: :email, form: form, theme: :blue, placeholder: 'Email utente') %>
             #   <% end %>
             def bui_input_text(name:, value: nil, placeholder: nil, required: false, disabled: false,
-                               type: :text, theme: :default, size: :medium, rounded: :medium, classes: '', form: nil, **options)
+                               type: :text, theme: :default, size: :md, rounded: :md, classes: '', form: nil, **options)
               render BetterUi::General::Input::Text::Component.new(
                 name: name,
                 value: value,
@@ -67,7 +67,7 @@ module BetterUi
 
             # Input di tipo password
             def bui_input_password(name:, value: nil, placeholder: nil, required: false, disabled: false,
-                                  theme: :default, size: :medium, rounded: :medium, classes: '', form: nil, **options)
+                                  theme: :default, size: :md, rounded: :md, classes: '', form: nil, **options)
               bui_input_text(
                 name: name, value: value, placeholder: placeholder, required: required, disabled: disabled,
                 type: :password, theme: theme, size: size, rounded: rounded, classes: classes, form: form, **options
@@ -76,7 +76,7 @@ module BetterUi
 
             # Input di tipo email
             def bui_input_email(name:, value: nil, placeholder: nil, required: false, disabled: false,
-                               theme: :default, size: :medium, rounded: :medium, classes: '', form: nil, **options)
+                               theme: :default, size: :md, rounded: :md, classes: '', form: nil, **options)
               bui_input_text(
                 name: name, value: value, placeholder: placeholder, required: required, disabled: disabled,
                 type: :email, theme: theme, size: size, rounded: rounded, classes: classes, form: form, **options
@@ -85,7 +85,7 @@ module BetterUi
 
             # Input di tipo tel
             def bui_input_tel(name:, value: nil, placeholder: nil, required: false, disabled: false,
-                             theme: :default, size: :medium, rounded: :medium, classes: '', form: nil, **options)
+                             theme: :default, size: :md, rounded: :md, classes: '', form: nil, **options)
               bui_input_text(
                 name: name, value: value, placeholder: placeholder, required: required, disabled: disabled,
                 type: :tel, theme: theme, size: size, rounded: rounded, classes: classes, form: form, **options
@@ -94,7 +94,7 @@ module BetterUi
 
             # Input di tipo url
             def bui_input_url(name:, value: nil, placeholder: nil, required: false, disabled: false,
-                             theme: :default, size: :medium, rounded: :medium, classes: '', form: nil, **options)
+                             theme: :default, size: :md, rounded: :md, classes: '', form: nil, **options)
               bui_input_text(
                 name: name, value: value, placeholder: placeholder, required: required, disabled: disabled,
                 type: :url, theme: theme, size: size, rounded: rounded, classes: classes, form: form, **options
@@ -103,7 +103,7 @@ module BetterUi
 
             # Input di tipo number
             def bui_input_number(name:, value: nil, placeholder: nil, required: false, disabled: false,
-                                theme: :default, size: :medium, rounded: :medium, classes: '', form: nil, **options)
+                                theme: :default, size: :md, rounded: :md, classes: '', form: nil, **options)
               bui_input_text(
                 name: name, value: value, placeholder: placeholder, required: required, disabled: disabled,
                 type: :number, theme: theme, size: size, rounded: rounded, classes: classes, form: form, **options
@@ -112,7 +112,7 @@ module BetterUi
 
             # Input di tipo search
             def bui_input_search(name:, value: nil, placeholder: nil, required: false, disabled: false,
-                                theme: :default, size: :medium, rounded: :medium, classes: '', form: nil, **options)
+                                theme: :default, size: :md, rounded: :md, classes: '', form: nil, **options)
               bui_input_text(
                 name: name, value: value, placeholder: placeholder, required: required, disabled: disabled,
                 type: :search, theme: theme, size: size, rounded: rounded, classes: classes, form: form, **options
@@ -124,7 +124,7 @@ module BetterUi
 
             # Input di tipo color
             def bui_input_color(name:, value: nil, placeholder: nil, required: false, disabled: false,
-                               theme: :default, size: :medium, rounded: :medium, classes: '', form: nil, **options)
+                               theme: :default, size: :md, rounded: :md, classes: '', form: nil, **options)
               bui_input_text(
                 name: name, value: value, placeholder: placeholder, required: required, disabled: disabled,
                 type: :color, theme: theme, size: size, rounded: rounded, classes: classes, form: form, **options

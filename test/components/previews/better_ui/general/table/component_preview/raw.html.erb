@@ -1,4 +1,4 @@
-<%= render BetterUi::General::Table::Component.new(theme: theme, bordered: bordered, compact: compact, minimal: minimal) do %>
+<%= render BetterUi::General::Table::Component.new(theme: theme, size: size, bordered: bordered, compact: compact, minimal: minimal) do %>
   <%= render BetterUi::General::Table::TheadComponent.new do %>
     <%= render BetterUi::General::Table::TrComponent.new do %>
       <%= render BetterUi::General::Table::ThComponent.new(sortable: true) do %>

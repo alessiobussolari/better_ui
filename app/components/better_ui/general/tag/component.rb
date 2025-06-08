@@ -4,12 +4,54 @@ module BetterUi
   module General
     module Tag
       class Component < ViewComponent::Base
-        def initialize(text:, theme: :white, size: :medium, style: :filled, **options)
+        # Classi base sempre presenti
+        TAG_BASE_CLASSES = "inline-flex items-center justify-center font-medium transition-colors duration-200 bui-tag".freeze
+
+        # Dimensioni con classi Tailwind dirette - Sistema uniforme 7 livelli
+        TAG_SIZE_CLASSES = {
+          xxs: "text-xs px-1.5 py-0.5 rounded-sm",      # Extra extra small
+          xs: "text-xs px-2 py-0.5 rounded",            # Extra small
+          sm: "text-xs px-2 py-1 rounded",              # Small
+          md: "text-sm px-3 py-1.5 rounded-md",         # Medium (default)
+          lg: "text-base px-4 py-2 rounded-lg",         # Large
+          xl: "text-lg px-5 py-2.5 rounded-lg",         # Extra large
+          xxl: "text-xl px-6 py-3 rounded-xl"           # Extra extra large
+        }.freeze
+
+        # Temi filled con classi Tailwind dirette
+        TAG_THEME_FILLED_CLASSES = {
+          default: "bg-gray-100 text-gray-800",
+          white: "bg-white text-gray-700 border border-gray-200",
+          red: "bg-red-100 text-red-800",
+          rose: "bg-rose-100 text-rose-800",
+          orange: "bg-orange-100 text-orange-800",
+          green: "bg-green-100 text-green-800",
+          blue: "bg-blue-100 text-blue-800",
+          yellow: "bg-yellow-100 text-yellow-800",
+          violet: "bg-violet-100 text-violet-800"
+        }.freeze
+
+        # Temi outline con classi Tailwind dirette
+        TAG_THEME_OUTLINE_CLASSES = {
+          default: "bg-transparent border border-gray-300 text-gray-700 hover:bg-gray-50",
+          white: "bg-transparent border border-gray-300 text-gray-700 hover:bg-gray-50",
+          red: "bg-transparent border border-red-300 text-red-700 hover:bg-red-50",
+          rose: "bg-transparent border border-rose-300 text-rose-700 hover:bg-rose-50",
+          orange: "bg-transparent border border-orange-300 text-orange-700 hover:bg-orange-50",
+          green: "bg-transparent border border-green-300 text-green-700 hover:bg-green-50",
+          blue: "bg-transparent border border-blue-300 text-blue-700 hover:bg-blue-50",
+          yellow: "bg-transparent border border-yellow-300 text-yellow-700 hover:bg-yellow-50",
+          violet: "bg-transparent border border-violet-300 text-violet-700 hover:bg-violet-50"
+        }.freeze
+
+        def initialize(text:, theme: :white, size: :md, style: :filled, **options)
           @text = text
           @theme = theme.to_sym
           @size = size.to_sym
           @style = style.to_sym
           @options = options
+
+          validate_params
         end
 
         private
@@ -17,85 +59,50 @@ module BetterUi
         attr_reader :text, :theme, :size, :style, :options
 
         def tag_classes
-          base_classes = %w[
-            inline-flex
-            items-center
-            justify-center
-            font-medium
-            transition-colors
-            duration-200
-            bui-tag
-          ]
-
-          base_classes.concat(size_classes)
-          base_classes.concat(theme_classes)
-          base_classes.concat(style_classes)
-          base_classes.join(" ")
+          [
+            TAG_BASE_CLASSES,
+            get_size_classes,
+            get_theme_classes,
+            @options[:class]
+          ].compact.join(" ")
         end
 
-        def size_classes
-          case size
-          when :small
-            %w[text-xs px-2 py-1 rounded]
-          when :large
-            %w[text-base px-4 py-2 rounded-lg]
-          else # :medium
-            %w[text-sm px-3 py-1.5 rounded-md]
+        def get_size_classes
+          TAG_SIZE_CLASSES[@size] || TAG_SIZE_CLASSES[:md]
+        end
+
+        def get_theme_classes
+          if @style == :outline
+            TAG_THEME_OUTLINE_CLASSES[@theme] || TAG_THEME_OUTLINE_CLASSES[:white]
+          else
+            TAG_THEME_FILLED_CLASSES[@theme] || TAG_THEME_FILLED_CLASSES[:white]
           end
         end
 
-        def theme_classes
-          case theme
-          when :default
-            %w[bg-gray-100 text-gray-800]
-          when :red
-            %w[bg-red-100 text-red-800]
-          when :rose
-            %w[bg-rose-100 text-rose-800]
-          when :orange
-            %w[bg-orange-100 text-orange-800]
-          when :green
-            %w[bg-green-100 text-green-800]
-          when :blue
-            %w[bg-blue-100 text-blue-800]
-          when :yellow
-            %w[bg-yellow-100 text-yellow-800]
-          when :violet
-            %w[bg-violet-100 text-violet-800]
-          else # :white
-            %w[bg-white text-gray-700 border border-gray-200]
+        def validate_params
+          validate_theme
+          validate_size
+          validate_style
+        end
+
+        def validate_theme
+          valid_themes = TAG_THEME_FILLED_CLASSES.keys
+          unless valid_themes.include?(@theme)
+            raise ArgumentError, "Il tema deve essere uno tra: #{valid_themes.join(', ')}"
           end
         end
 
-        def style_classes
-          case style
-          when :outline
-            outline_theme_classes
-          else # :filled
-            []
+        def validate_size
+          valid_sizes = TAG_SIZE_CLASSES.keys
+          unless valid_sizes.include?(@size)
+            raise ArgumentError, "La dimensione deve essere una tra: #{valid_sizes.join(', ')}"
           end
         end
 
-        def outline_theme_classes
-          case theme
-          when :default
-            %w[bg-transparent border-gray-300 text-gray-700 hover:bg-gray-50]
-          when :red
-            %w[bg-transparent border-red-300 text-red-700 hover:bg-red-50]
-          when :rose
-            %w[bg-transparent border-rose-300 text-rose-700 hover:bg-rose-50]
-          when :orange
-            %w[bg-transparent border-orange-300 text-orange-700 hover:bg-orange-50]
-          when :green
-            %w[bg-transparent border-green-300 text-green-700 hover:bg-green-50]
-          when :blue
-            %w[bg-transparent border-blue-300 text-blue-700 hover:bg-blue-50]
-          when :yellow
-            %w[bg-transparent border-yellow-300 text-yellow-700 hover:bg-yellow-50]
-          when :violet
-            %w[bg-transparent border-violet-300 text-violet-700 hover:bg-violet-50]
-          else # :white
-            %w[bg-transparent border-gray-300 text-gray-700 hover:bg-gray-50]
+        def validate_style
+          valid_styles = [:filled, :outline]
+          unless valid_styles.include?(@style)
+            raise ArgumentError, "Lo stile deve essere uno tra: #{valid_styles.join(', ')}"
           end
         end
       end

@@ -13,8 +13,8 @@ module BetterUi
             # @param options [Array<Hash>] Array di opzioni per ogni radio button
             # @param selected [String, nil] Valore dell'opzione selezionata
             # @param theme [Symbol] Tema del componente (:default, :white, :red, :rose, :orange, :green, :blue, :yellow, :violet)
-            # @param size [Symbol] Dimensione del componente (:small, :medium, :large)
-            # @param rounded [Symbol] Border radius (:none, :small, :medium, :large, :full)
+            # @param size [Symbol] Dimensione del componente (:sm, :md, :lg)
+            # @param rounded [Symbol] Border radius (:none, :sm, :md, :lg, :full)
             # @param direction [Symbol] Direzione del gruppo (:vertical, :horizontal)
             # @param required [Boolean] Se il gruppo è obbligatorio
             # @param disabled [Boolean] Se il gruppo è disabilitato
@@ -42,7 +42,7 @@ module BetterUi
             #       { value: "high", label: "Alta", theme: :red }
             #     ],
             #     selected: "medium",
-            #     size: :large
+            #     size: :lg
             #   )
             #
             # @example Gruppo radio orizzontale con Rails form
@@ -85,7 +85,7 @@ module BetterUi
             #     direction: :horizontal
             #   )
             #
-            def bui_input_radio_group(name:, options:, selected: nil, theme: :default, size: :medium, 
+            def bui_input_radio_group(name:, options:, selected: nil, theme: :default, size: :md, 
                                      rounded: :full, direction: :vertical, required: false, disabled: false,
                                      classes: '', form: nil, **html_options)
               container_classes = [

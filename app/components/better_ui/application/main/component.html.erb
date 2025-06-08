@@ -1,7 +1,7 @@
-<main class="w-full <%= get_layout_class %> <%= get_padding_class(padding) %><%= classes ? ' ' + classes : '' %>">
+<main class="w-full mt-[81px] <%= get_layout_class %> <%= get_padding_class(padding) %><%= classes ? ' ' + classes : '' %>">
   <div class="h-[calc(100vh-81px)] p-4">
     <div class="h-full w-full bg-white p-4 <%= get_padding_class(inner_padding) %> <%= get_rounded_class %> <%= get_shadow_class %> overflow-y-auto">
-      <div class="h-full overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+      <div class="h-full overflow-y-auto scrollbar-hide">
       <%= content %>
       </div>
     </div>

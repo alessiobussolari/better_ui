@@ -23,7 +23,7 @@ module BetterUi
           #   <% end %>
           #
           # @example Con tema e configurazioni
-          #   <%= bui_accordion(multiple: true, theme: :blue, size: :large) do |accordion| %>
+          #   <%= bui_accordion(multiple: true, theme: :blue, size: :lg) do |accordion| %>
           #     <%= accordion.with_item(title: "FAQ 1", expanded: true) do %>
           #       <p>Contenuto della prima FAQ</p>
           #     <% end %>
@@ -47,7 +47,7 @@ module BetterUi
           #   <% end %>
           #
           # @example Con item disabilitati e icone personalizzate
-          #   <%= bui_accordion(theme: :violet, size: :small) do |accordion| %>
+          #   <%= bui_accordion(theme: :violet, size: :sm) do |accordion| %>
           #     <%= accordion.with_item(title: "Disponibile", icon: "check-circle") do %>
           #       <p>Questa sezione è disponibile</p>
           #     <% end %>
@@ -55,7 +55,7 @@ module BetterUi
           #       <p>Questa sezione è disabilitata</p>
           #     <% end %>
           #   <% end %>
-          def bui_accordion(multiple: false, theme: :default, variant: :bordered, size: :medium, 
+          def bui_accordion(multiple: false, theme: :default, variant: :bordered, size: :md, 
                            classes: '', **options, &block)
             render BetterUi::General::Accordion::Component.new(
               multiple: multiple,

@@ -9,7 +9,7 @@ module BetterUi
           # @param level [Integer] livello del heading (1-6)
           # @param theme [Symbol] tema del colore (:default, :white, etc.)
           # @param align [Symbol] allineamento (:left, :center, :right)
-          # @param size [Symbol] dimensione (:small, :medium, :large)
+          # @param size [Symbol] dimensione (:sm, :md, :lg)
           # @param style [Symbol] stile (:normal, :bold, :italic, :underline)
           # @param icon [String] icona opzionale
           # @param subtitle [String] sottotitolo opzionale
@@ -33,7 +33,7 @@ module BetterUi
           #     level: 1,
           #     theme: :violet,
           #     align: :center,
-          #     size: :large,
+          #     size: :lg,
           #     style: :bold,
           #     icon: "star",
           #     subtitle: "Con tutte le opzioni",
@@ -46,7 +46,7 @@ module BetterUi
             level: 2,
             theme: :white,
             align: :left,
-            size: :medium,
+            size: :md,
             style: :normal,
             icon: nil,
             subtitle: nil,

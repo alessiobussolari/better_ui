@@ -8,7 +8,7 @@ module BetterUi
           # @param items [Array] Array di items del breadcrumb
           # @param separator [Symbol] Tipo di separatore (:chevron, :slash, :arrow, :dot, :pipe)
           # @param theme [Symbol] Tema del breadcrumb (:default, :white, :red, etc.)
-          # @param size [Symbol] Dimensione del testo (:extra_small, :small, :medium, :large)
+          # @param size [Symbol] Dimensione del testo (:xs, :sm, :md, :lg)
           # @param classes [String] Classi CSS aggiuntive
           # @param html_options [Hash] Opzioni HTML aggiuntive
           #
@@ -17,7 +17,7 @@ module BetterUi
             items: [],
             separator: :chevron,
             theme: :white,
-            size: :medium,
+            size: :md,
             classes: nil,
             **html_options
           )

@@ -17,8 +17,8 @@ module BetterUi
             # @param label [String, nil] Testo della label associata al radio
             # @param label_position [Symbol] Posizione della label (:left, :right)
             # @param theme [Symbol] Tema del componente (:default, :white, :red, :rose, :orange, :green, :blue, :yellow, :violet)
-            # @param size [Symbol] Dimensione del componente (:small, :medium, :large)
-            # @param rounded [Symbol] Border radius (:none, :small, :medium, :large, :full)
+            # @param size [Symbol] Dimensione del componente (:sm, :md, :lg)
+            # @param rounded [Symbol] Border radius (:none, :sm, :md, :lg, :full)
             # @param classes [String] Classi CSS aggiuntive
             # @param form [ActionView::Helpers::FormBuilder, nil] Form builder Rails opzionale
             # @param options [Hash] Opzioni aggiuntive per l'input
@@ -32,7 +32,7 @@ module BetterUi
             # @example Gruppo radio con temi diversi - Priorità task
             #   bui_input_radio(name: "priority", value: "low", label: "Bassa", theme: :green)
             #   bui_input_radio(name: "priority", value: "medium", label: "Media", theme: :yellow)
-            #   bui_input_radio(name: "priority", value: "high", label: "Alta", theme: :red, size: :large)
+            #   bui_input_radio(name: "priority", value: "high", label: "Alta", theme: :red, size: :lg)
             #
             # @example Gruppo radio con Rails form builder
             #   <%= form_with model: @user do |form| %>
@@ -54,7 +54,7 @@ module BetterUi
             #
             def bui_input_radio(name:, value:, checked: false, required: false, disabled: false, 
                                label: nil, label_position: :right, theme: :default, 
-                               size: :medium, rounded: :full, classes: '', form: nil, **options)
+                               size: :md, rounded: :full, classes: '', form: nil, **options)
               render BetterUi::General::Input::Radio::Component.new(
                 name: name,
                 value: value,

@@ -8,7 +8,7 @@ module BetterUi
           # Helper per creare la navbar dell'applicazione
           #
           # @param theme [Symbol] Tema colori (default, white, red, rose, orange, green, blue, yellow, violet), default :default
-          # @param shadow [Symbol] Tipo di ombra (none, small, medium, large), default :small
+          # @param shadow [Symbol] Tipo di ombra (none, small, medium, large), default :sm
           # @param border [Boolean] Se mostrare il bordo inferiore, default true
           # @param actions [Array] Array di azioni/pulsanti a destra
           # @param classes [String] Classi CSS aggiuntive
@@ -50,7 +50,7 @@ module BetterUi
           #   ) %>
           def bui_navbar(
             theme: :default,
-            shadow: :small,
+            shadow: :sm,
             border: true,
             actions: [],
             classes: nil,

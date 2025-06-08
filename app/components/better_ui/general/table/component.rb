@@ -2,7 +2,7 @@ module BetterUi
   module General
     module Table
       class Component < ViewComponent::Base
-        attr_reader :data, :headers, :caption, :striped, :hoverable, :bordered, :compact, :minimal, :footer,
+        attr_reader :data, :headers, :caption, :size, :striped, :hoverable, :bordered, :compact, :minimal, :footer,
                     :header_rows_partial, :body_row_partial, :footer_rows_partial, :thead_partial, :tfoot_partial
 
         # Classi base sempre presenti
@@ -30,6 +30,17 @@ module BetterUi
           full: "rounded-full"
         }.freeze
 
+        # Dimensioni con classi Tailwind dirette - Sistema uniforme 7 livelli
+        TABLE_SIZE_CLASSES = {
+          xxs: "text-xs [&_th]:px-2 [&_th]:py-1 [&_td]:px-2 [&_td]:py-1",
+          xs: "text-xs [&_th]:px-2 [&_th]:py-2 [&_td]:px-2 [&_td]:py-2",
+          sm: "text-sm [&_th]:px-3 [&_th]:py-2 [&_td]:px-3 [&_td]:py-2",
+          md: "text-sm [&_th]:px-4 [&_th]:py-3 [&_td]:px-4 [&_td]:py-3",
+          lg: "text-base [&_th]:px-5 [&_th]:py-4 [&_td]:px-5 [&_td]:py-4",
+          xl: "text-lg [&_th]:px-6 [&_th]:py-5 [&_td]:px-6 [&_td]:py-5",
+          xxl: "text-xl [&_th]:px-8 [&_th]:py-6 [&_td]:px-8 [&_td]:py-6"
+        }.freeze
+
 
         # Classi per container
         CONTAINER_BASE_CLASSES = "overflow-x-auto"
@@ -49,7 +60,8 @@ module BetterUi
           headers: nil,
           caption: nil,
           theme: :default,
-          radius: :small,
+          radius: :sm,
+          size: :md,
           striped: false,
           hoverable: false,
           bordered: false,
@@ -68,6 +80,7 @@ module BetterUi
           @caption = caption
           @theme = theme.to_sym
           @radius = radius.to_sym
+          @size = size.to_sym
           # Flag boolean combinabili
           @striped = !!striped
           @hoverable = !!hoverable
@@ -90,6 +103,7 @@ module BetterUi
           [
             TABLE_BASE_CLASSES,
             get_theme_class,
+            get_size_class,
             @bordered ? "border border-gray-200" : nil,
             @striped ? "[&_tbody_tr:nth-child(odd)]:bg-gray-50" : nil,
             @hoverable ? "[&_tbody_tr]:hover:bg-gray-50" : nil,
@@ -122,11 +136,15 @@ module BetterUi
         end
 
         def get_radius_class
-          TABLE_RADIUS[@radius] || TABLE_RADIUS[:small]
+          TABLE_RADIUS[@radius] || TABLE_RADIUS[:sm]
         end
 
         def get_theme_class
           TABLE_THEME[@theme] || TABLE_THEME[:default]
+        end
+
+        def get_size_class
+          TABLE_SIZE_CLASSES[@size] || TABLE_SIZE_CLASSES[:md]
         end
 
 
@@ -198,6 +216,7 @@ module BetterUi
         def validate_params
           validate_theme
           validate_radius
+          validate_size
         end
 
         def validate_theme
@@ -209,6 +228,12 @@ module BetterUi
         def validate_radius
           unless TABLE_RADIUS.keys.include?(@radius)
             raise ArgumentError, "Il radius deve essere uno tra: #{TABLE_RADIUS.keys.join(', ')}"
+          end
+        end
+
+        def validate_size
+          unless TABLE_SIZE_CLASSES.keys.include?(@size)
+            raise ArgumentError, "La size deve essere una tra: #{TABLE_SIZE_CLASSES.keys.join(', ')}"
           end
         end
       end

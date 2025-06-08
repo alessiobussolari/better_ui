@@ -35,9 +35,13 @@ module BetterUi
           # Border radius supportati per il Text Input
           TEXT_INPUT_RADIUS = {
             none: 'rounded-none',
-            small: 'rounded-sm',
-            medium: 'rounded-md',
-            large: 'rounded-lg',
+            xxs: 'rounded-sm',
+            xs: 'rounded',
+            sm: 'rounded-md',
+            md: 'rounded-lg',
+            lg: 'rounded-xl',
+            xl: 'rounded-2xl',
+            xxl: 'rounded-3xl',
             full: 'rounded-full'
           }.freeze
 
@@ -58,12 +62,12 @@ module BetterUi
           # @param type [Symbol] Tipo del campo input (:text, :password, :email, :tel, :url, :number, :search, :date, :time, :datetime_local, :month, :week, :color)
           # @param theme [Symbol] Tema del componente (:default, :white, :red, :rose, :orange, :green, :blue, :yellow, :violet)
           # @param size [Symbol] Dimensione del componente (:xxs, :xs, :sm, :md, :lg, :xl, :xxl)
-          # @param rounded [Symbol] Border radius (:none, :small, :medium, :large, :full)
+          # @param rounded [Symbol] Border radius (:none, :sm, :md, :lg, :full)
           # @param classes [String] Classi CSS aggiuntive
           # @param form [ActionView::Helpers::FormBuilder] Form builder Rails opzionale
           # @param options [Hash] Opzioni aggiuntive per l'input
           def initialize(name:, value: nil, placeholder: nil, required: false, disabled: false, 
-                         type: :text, theme: :default, size: :md, rounded: :medium, classes: '', form: nil, **options)
+                         type: :text, theme: :default, size: :md, rounded: :md, classes: '', form: nil, **options)
             @name = name
             @value = value
             @placeholder = placeholder
@@ -118,19 +122,15 @@ module BetterUi
             ].compact.join(' ')
           end
 
-          # Restituisce le classi del tema
-          def get_theme_classes
-            TEXT_INPUT_THEME[@theme]
-          end
-
-          # Restituisce le classi della dimensione
-          def get_size_classes
-            TEXT_INPUT_SIZES[@size]
-          end
-
-          # Restituisce le classi del border radius
-          def get_rounded_classes
-            TEXT_INPUT_RADIUS[@rounded]
+          # Definizione dinamica dei metodi get
+          [
+            { constant: :TEXT_INPUT_THEME, var: :@theme, default: :default, method: :get_theme_classes },
+            { constant: :TEXT_INPUT_SIZES, var: :@size, default: :md, method: :get_size_classes },
+            { constant: :TEXT_INPUT_RADIUS, var: :@rounded, default: :md, method: :get_rounded_classes }
+          ].each do |config|
+            define_method(config[:method]) do
+              self.class.const_get(config[:constant])[instance_variable_get(config[:var])] || self.class.const_get(config[:constant])[config[:default]]
+            end
           end
 
           # Valida i parametri del componente
@@ -141,32 +141,19 @@ module BetterUi
             validate_rounded
           end
 
-          # Valida il tema
-          def validate_theme
-            return if TEXT_INPUT_THEME.key?(@theme)
-
-            raise ArgumentError, "Tema non valido: #{@theme}. Temi supportati: #{TEXT_INPUT_THEME.keys.join(', ')}"
-          end
-
-          # Valida la dimensione
-          def validate_size
-            return if TEXT_INPUT_SIZES.key?(@size)
-
-            raise ArgumentError, "Dimensione non valida: #{@size}. Dimensioni supportate: #{TEXT_INPUT_SIZES.keys.join(', ')}"
-          end
-
-          # Valida il border radius
-          def validate_rounded
-            return if TEXT_INPUT_RADIUS.key?(@rounded)
-
-            raise ArgumentError, "Border radius non valido: #{@rounded}. Valori supportati: #{TEXT_INPUT_RADIUS.keys.join(', ')}"
-          end
-
-          # Valida il tipo
-          def validate_type
-            return if TEXT_INPUT_TYPES.include?(@type)
-
-            raise ArgumentError, "Tipo non valido: #{@type}. Tipi supportati: #{TEXT_INPUT_TYPES.join(', ')}"
+          # Definizione dinamica delle validazioni
+          [
+            { values: TEXT_INPUT_THEME.keys, method: :validate_theme, param: 'theme', var: :@theme },
+            { values: TEXT_INPUT_SIZES.keys, method: :validate_size, param: 'size', var: :@size },
+            { values: TEXT_INPUT_RADIUS.keys, method: :validate_rounded, param: 'rounded', var: :@rounded },
+            { values: TEXT_INPUT_TYPES, method: :validate_type, param: 'tipo', var: :@type }
+          ].each do |config|
+            define_method(config[:method]) do
+              value = instance_variable_get(config[:var])
+              unless config[:values].include?(value)
+                raise ArgumentError, "#{config[:param].capitalize} non valido: #{value}. Valori supportati: #{config[:values].join(', ')}"
+              end
+            end
           end
         end
       end

@@ -46,7 +46,7 @@
           <%= bui_button(
             icon: "arrow-left",
             type: :white,
-            size: :small,
+            size: :sm,
             title: "Comprimi sidebar"
           ) %>
         <% end %>
@@ -88,13 +88,13 @@
                   <div class="flex items-center">
                     <% if item[:icon].present? %>
                       <span class="mr-3 text-gray-400 group-hover:text-gray-500">
-                        <%= bui_icon(item[:icon], size: :medium) %>
+                        <%= bui_icon(item[:icon], size: :md) %>
                       </span>
                     <% end %>
                     <span><%= item[:label] %></span>
                   </div>
                   <span class="ml-3 transform transition-transform duration-150 <%= 'rotate-90' if item[:expanded] %>" data-bui-sidebar-chevron>
-                    <%= bui_icon("chevron-right", size: :small) %>
+                    <%= bui_icon("chevron-right", size: :sm) %>
                   </span>
                 </button>
                 
@@ -111,7 +111,7 @@
                       >
                         <% if child[:icon].present? %>
                           <span class="mr-3">
-                            <%= bui_icon(child[:icon], size: :small) %>
+                            <%= bui_icon(child[:icon], size: :sm) %>
                           </span>
                         <% end %>
                         <%= child[:label] %>
@@ -120,7 +120,7 @@
                       <div class="<%= (child[:active] || false) ? 'group flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors duration-150 bg-gray-100 text-gray-900' : 'group flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors duration-150 text-gray-700 hover:bg-gray-50 hover:text-gray-900' %> pl-11 cursor-default">
                         <% if child[:icon].present? %>
                           <span class="mr-3">
-                            <%= bui_icon(child[:icon], size: :small) %>
+                            <%= bui_icon(child[:icon], size: :sm) %>
                           </span>
                         <% end %>
                         <%= child[:label] %>
@@ -138,7 +138,7 @@
                 >
                   <% if item[:icon].present? %>
                     <span class="mr-3 text-gray-400 group-hover:text-gray-500">
-                      <%= bui_icon(item[:icon], size: :medium) %>
+                      <%= bui_icon(item[:icon], size: :md) %>
                     </span>
                   <% end %>
                   <%= item[:label] %>
@@ -152,7 +152,7 @@
                 <div class="<%= (item[:active] || false) ? 'group flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors duration-150 bg-gray-100 text-gray-900' : 'group flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors duration-150 text-gray-700 hover:bg-gray-50 hover:text-gray-900' %> cursor-default">
                   <% if item[:icon].present? %>
                     <span class="mr-3 text-gray-400">
-                      <%= bui_icon(item[:icon], size: :medium) %>
+                      <%= bui_icon(item[:icon], size: :md) %>
                     </span>
                   <% end %>
                   <%= item[:label] %>

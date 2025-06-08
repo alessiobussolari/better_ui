@@ -7,7 +7,7 @@ module BetterUi
           #
           # @param value [Integer] percentuale di completamento (0-100)
           # @param theme [Symbol] tema del colore (:default, :white, :red, :rose, :orange, :green, :blue, :yellow, :violet)
-          # @param size [Symbol] dimensione della progress bar (:small, :medium, :large)
+          # @param size [Symbol] dimensione della progress bar (:sm, :md, :lg)
           # @param label [Boolean] mostra etichetta con percentuale
           # @param classes [String] classi CSS aggiuntive
           # @param html_options [Hash] opzioni HTML aggiuntive
@@ -24,7 +24,7 @@ module BetterUi
           #   bui_progress(
           #     value: 90,
           #     theme: :blue,
-          #     size: :large,
+          #     size: :lg,
           #     label: true,
           #     classes: "my-custom-class",
           #     id: "main-progress"
@@ -32,7 +32,7 @@ module BetterUi
           def bui_progress(
             value: 0,
             theme: :white,
-            size: :medium,
+            size: :md,
             label: false,
             classes: nil,
             **html_options

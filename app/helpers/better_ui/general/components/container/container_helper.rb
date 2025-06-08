@@ -8,7 +8,7 @@ module BetterUi
           # @param html_content [String] contenuto HTML del container (opzionale)
           # @param fluid [Boolean] se il container deve essere fluid (full width)
           # @param max_width [Symbol] larghezza massima del container (:sm, :md, :lg, :xl, :xxl)
-          # @param padding [Symbol] padding interno (:none, :small, :medium, :large)
+          # @param padding [Symbol] padding interno (:none, :sm, :md, :lg)
           # @param background [Symbol] colore di sfondo (:white, :light, :dark, :transparent)
           # @param html_options [Hash] opzioni HTML aggiuntive
           # @return [String] HTML del container renderizzato
@@ -26,7 +26,7 @@ module BetterUi
           #   bui_container(
           #     html_content: "Contenuto limitato",
           #     max_width: :lg,
-          #     padding: :large
+          #     padding: :lg
           #   )
           #
           # @example Con contenuto block
@@ -37,7 +37,7 @@ module BetterUi
             html_content: nil,
             fluid: false,
             max_width: :lg,
-            padding: :medium,
+            padding: :md,
             background: :white,
             border: false,
             **html_options,

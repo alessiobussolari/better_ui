@@ -47,7 +47,7 @@ module BetterUi
 
         # @param value [Integer] percentuale di completamento (0-100)
         # @param theme [Symbol] :default, :white, :red, :rose, :orange, :green, :blue, :yellow, :violet
-        # @param size [Symbol] :small, :medium, :large
+        # @param size [Symbol] :sm, :md, :lg
         # @param label [Boolean] mostra etichetta con percentuale
         # @param classes [String] classi CSS aggiuntive per il container
         # @param html_options [Hash] opzioni HTML per il container

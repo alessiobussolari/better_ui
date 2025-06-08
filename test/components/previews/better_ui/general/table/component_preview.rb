@@ -6,14 +6,16 @@ module BetterUi
 
         # @label Con Helper
         # @param theme select { choices: [default, white, red, rose, orange, green, blue, yellow, violet] } "Tema"
+        # @param size select { choices: [xxs, xs, sm, md, lg, xl, xxl] } "Dimensione"
         # @param bordered toggle "Bordi"
         # @param striped toggle "Righe alternate"
         # @param hoverable toggle "Hover"
         # @param compact toggle "Modalità compatta"
         # @param minimal toggle "Modalità minimale"
-        def default(theme: :default, bordered: true, striped: false, hoverable: false, compact: false, minimal: false)
+        def default(theme: :default, size: :md, bordered: true, striped: false, hoverable: false, compact: false, minimal: false)
           render_with_template(locals: {
             theme: theme.to_sym,
+            size: size.to_sym,
             bordered: bordered,
             striped: striped,
             hoverable: hoverable,
@@ -24,14 +26,16 @@ module BetterUi
 
         # @label Istanziazione Diretta
         # @param theme select { choices: [default, white, red, rose, orange, green, blue, yellow, violet] } "Tema"
+        # @param size select { choices: [xxs, xs, sm, md, lg, xl, xxl] } "Dimensione"
         # @param bordered toggle "Bordi"
         # @param striped toggle "Righe alternate"
         # @param hoverable toggle "Hover"
         # @param compact toggle "Modalità compatta"
         # @param minimal toggle "Modalità minimale"
-        def raw(theme: :default, bordered: true, striped: false, hoverable: false, compact: false, minimal: false)
+        def raw(theme: :default, size: :md, bordered: true, striped: false, hoverable: false, compact: false, minimal: false)
           render_with_template(locals: {
             theme: theme.to_sym,
+            size: size.to_sym,
             bordered: bordered,
             striped: striped,
             hoverable: hoverable,

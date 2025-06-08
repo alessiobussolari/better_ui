@@ -7,7 +7,7 @@ module BetterUi
           #
           # @param label [String] Testo del badge
           # @param theme [Symbol] Tema del badge (:default, :white, :red, etc.)
-          # @param size [Symbol] Dimensione del badge (:small, :medium, :large)
+          # @param size [Symbol] Dimensione del badge (:sm, :md, :lg)
           # @param shape [Symbol] Forma del badge (:square, :rounded)
           # @param style [Symbol] Stile del badge (:filled, :outline)
           # @param variant [Symbol] Variante del badge (:notification, :counter, :dot)
@@ -21,7 +21,7 @@ module BetterUi
           def bui_badge(
             label: nil,
             theme: :white,
-            size: :medium,
+            size: :md,
             shape: :rounded,
             style: :filled,
             variant: nil,

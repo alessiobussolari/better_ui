@@ -260,7 +260,7 @@ module BetterUi
 
         def validate_size
           unless AVATAR_SIZE_CLASSES.keys.include?(@size)
-            raise ArgumentError, "La dimensione deve essere una tra: #{AVATAR_SIZE_CLASSES.keys.join(', ')}"
+            raise ArgumentError, "BetterUi::General::Avatar::Component - parametro 'size' con valore '#{@size}' non è valido. La dimensione deve essere una tra: #{AVATAR_SIZE_CLASSES.keys.join(', ')}"
           end
         end
 

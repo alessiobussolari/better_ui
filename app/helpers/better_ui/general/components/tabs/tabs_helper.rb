@@ -9,7 +9,7 @@ module BetterUi
           #
           # @param variant [Symbol] lo stile delle tabs (:pills, :underline, :bordered, :minimal)
           # @param theme [Symbol] il tema di colore delle tabs (:default, :blue, :red, :green, :yellow, :violet, :orange, :rose, :white)
-          # @param size [Symbol] la dimensione delle tabs (:small, :medium, :large)
+          # @param size [Symbol] la dimensione delle tabs (:sm, :md, :lg)
           # @param orientation [Symbol] l'orientamento delle tabs (:horizontal, :vertical)
           # @param navigation_classes [String] classi CSS aggiuntive per la navigazione
           # @param panels_classes [String] classi CSS aggiuntive per i panel (default: 'mt-4')
@@ -34,7 +34,7 @@ module BetterUi
           #   <% end %>
           #
           # @example Con temi e dimensioni
-          #   <%= bui_tabs(variant: :underline, theme: :blue, size: :large) do |tabs| %>
+          #   <%= bui_tabs(variant: :underline, theme: :blue, size: :lg) do |tabs| %>
           #     <% tabs.with_navigation do %>
           #       <%= bui_tab(text: "Dashboard", target: "dashboard", active: true, icon: "chart-bar") %>
           #       <%= bui_tab(text: "Impostazioni", target: "settings", icon: "cog-6-tooth") %>
@@ -76,7 +76,7 @@ module BetterUi
           #       <% end %>
           #     <% end %>
           #   <% end %>
-          def bui_tabs(variant: :pills, theme: :default, size: :medium, orientation: :horizontal, 
+          def bui_tabs(variant: :pills, theme: :default, size: :md, orientation: :horizontal, 
                       navigation_classes: '', panels_classes: 'mt-4', **options, &block)
             render BetterUi::General::Tabs::Component.new(
               variant: variant,

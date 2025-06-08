@@ -18,10 +18,15 @@ module BetterUi
           purple: 'bg-purple-50 border-purple-200'
         }.freeze
 
+        # Dimensioni padding con classi Tailwind dirette - Sistema uniforme 7 livelli
         CARD_SIZE = {
-          small: 'p-4',
-          medium: 'p-6',
-          large: 'p-8'
+          xxs: 'p-1',                # Extra extra small
+          xs: 'p-2',                 # Extra small
+          sm: 'p-3',                 # Small
+          md: 'p-6',                 # Medium (default)
+          lg: 'p-8',                 # Large
+          xl: 'p-10',                # Extra large
+          xxl: 'p-12'                # Extra extra large
         }.freeze
 
         CARD_ROUNDED = {
@@ -49,16 +54,37 @@ module BetterUi
           gray: 'text-gray-600'
         }.freeze
 
+        # Dimensioni titolo con classi Tailwind dirette - Sistema uniforme 7 livelli
         CARD_TITLE_SIZE = {
-          small: 'text-xs',
-          medium: 'text-sm',
-          large: 'text-base'
+          xxs: 'text-[0.6rem]',      # Extra extra small
+          xs: 'text-xs',             # Extra small
+          sm: 'text-xs',             # Small
+          md: 'text-sm',             # Medium (default)
+          lg: 'text-base',           # Large
+          xl: 'text-lg',             # Extra large
+          xxl: 'text-xl'             # Extra extra large
         }.freeze
 
+        # Dimensioni valore con classi Tailwind dirette - Sistema uniforme 7 livelli
         CARD_VALUE_SIZE = {
-          small: 'text-lg',
-          medium: 'text-2xl',
-          large: 'text-3xl'
+          xxs: 'text-sm',            # Extra extra small
+          xs: 'text-base',           # Extra small
+          sm: 'text-lg',             # Small
+          md: 'text-2xl',            # Medium (default)
+          lg: 'text-3xl',            # Large
+          xl: 'text-4xl',            # Extra large
+          xxl: 'text-5xl'            # Extra extra large
+        }.freeze
+
+        # Dimensioni icone trend con classi Tailwind dirette - Sistema uniforme 7 livelli
+        CARD_TREND_ICON_SIZE = {
+          xxs: 'h-2 w-2 mr-0.5',    # Extra extra small
+          xs: 'h-2.5 w-2.5 mr-0.5', # Extra small
+          sm: 'h-3 w-3 mr-0.5',     # Small
+          md: 'h-4 w-4 mr-0.5',     # Medium (default)
+          lg: 'h-5 w-5 mr-1',       # Large
+          xl: 'h-6 w-6 mr-1',       # Extra large
+          xxl: 'h-7 w-7 mr-1.5'     # Extra extra large
         }.freeze
 
         def initialize(
@@ -68,9 +94,9 @@ module BetterUi
           change: nil,
           color: :green,
           theme: :default,
-          size: :medium,
-          rounded: :medium,
-          shadow: :small,
+          size: :md,
+          rounded: :md,
+          shadow: :sm,
           classes: nil,
           **options
         )
@@ -141,9 +167,9 @@ module BetterUi
         def card_classes
           base_classes = [
             CARD_THEME[theme],
-            CARD_SIZE[size],
-            CARD_ROUNDED[rounded],
-            CARD_SHADOW[shadow],
+            get_size_classes,
+            get_rounded_classes,
+            get_shadow_classes,
             'border'
           ]
 
@@ -153,7 +179,7 @@ module BetterUi
 
         def title_classes
           base_classes = [
-            CARD_TITLE_SIZE[size],
+            get_title_size_classes,
             'font-medium'
           ]
 
@@ -168,7 +194,7 @@ module BetterUi
 
         def value_classes
           base_classes = [
-            CARD_VALUE_SIZE[size],
+            get_value_size_classes,
             'font-semibold'
           ]
 
@@ -183,7 +209,7 @@ module BetterUi
 
         def trend_classes
           base_classes = [
-            CARD_TREND_COLOR[color],
+            get_trend_color_classes,
             'text-sm font-medium flex items-center'
           ]
 
@@ -199,14 +225,35 @@ module BetterUi
         end
 
         def trend_icon_size
-          case size
-          when :small
-            'h-3 w-3 mr-0.5'
-          when :medium
-            'h-4 w-4 mr-0.5'
-          when :large
-            'h-5 w-5 mr-1'
-          end
+          get_trend_icon_size_classes
+        end
+
+        def get_size_classes
+          CARD_SIZE[size] || CARD_SIZE[:md]
+        end
+
+        def get_rounded_classes
+          CARD_ROUNDED[rounded] || CARD_ROUNDED[:md]
+        end
+
+        def get_shadow_classes
+          CARD_SHADOW[shadow] || CARD_SHADOW[:sm]
+        end
+
+        def get_title_size_classes
+          CARD_TITLE_SIZE[size] || CARD_TITLE_SIZE[:md]
+        end
+
+        def get_value_size_classes
+          CARD_VALUE_SIZE[size] || CARD_VALUE_SIZE[:md]
+        end
+
+        def get_trend_color_classes
+          CARD_TREND_COLOR[color] || CARD_TREND_COLOR[:green]
+        end
+
+        def get_trend_icon_size_classes
+          CARD_TREND_ICON_SIZE[size] || CARD_TREND_ICON_SIZE[:md]
         end
       end
     end

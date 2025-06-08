@@ -15,7 +15,7 @@ module BetterUi
           # @param disabled toggle "Campo disabilitato"
           # @param type select { choices: [text, password, email, tel, url, number, search, date, time, datetime_local, month, week, color] } "Tipo del campo input"
           # @param theme select { choices: [default, white, red, rose, orange, green, blue, yellow, violet] } "Tema del componente"
-          # @param size select { choices: [small, medium, large] } "Dimensione del componente"
+          # @param size select { choices: [xxs, xs, sm, md, lg, xl, xxl] } "Dimensione del componente"
           # @param rounded select { choices: [none, small, medium, large, full] } "Border radius"
           # @param classes text "Classi CSS aggiuntive"
 
@@ -38,7 +38,7 @@ module BetterUi
           # - **required**: se il campo è obbligatorio
           # - **disabled**: se il campo è disabilitato
           # - **theme**: tema colore (default, white, red, rose, orange, green, blue, yellow, violet)
-          # - **size**: dimensione (small, medium, large)
+          # - **size**: dimensione (xxs, xs, sm, md, lg, xl, xxl)
           # - **rounded**: border radius (none, small, medium, large, full)
           # - **classes**: classi CSS aggiuntive
           #
@@ -46,7 +46,7 @@ module BetterUi
           # ```erb
           # <!-- Uso standalone -->
           # <%= bui_input_text(name: 'email', placeholder: 'Inserisci email') %>
-          # <%= bui_input_text(name: 'search', theme: :blue, size: :large, rounded: :full) %>
+          # <%= bui_input_text(name: 'search', theme: :blue, size: :lg, rounded: :full) %>
           # <%= bui_input_text(name: 'username', required: true, theme: :green) %>
           # <%= bui_input_text(name: 'error_field', theme: :red, 'aria-invalid': 'true') %>
           #
@@ -65,7 +65,7 @@ module BetterUi
             disabled: false,
             type: :text,
             theme: :default,
-            size: :medium,
+            size: :md,
             rounded: :medium,
             classes: ""
           )
@@ -92,7 +92,7 @@ module BetterUi
           # @param required toggle "Campo obbligatorio"
           # @param disabled toggle "Campo disabilitato"
           # @param theme select { choices: [default, white, red, rose, orange, green, blue, yellow, violet] } "Tema del componente"
-          # @param size select { choices: [small, medium, large] } "Dimensione del componente"
+          # @param size select { choices: [xxs, xs, sm, md, lg, xl, xxl] } "Dimensione del componente"
           # @param rounded select { choices: [none, small, medium, large, full] } "Border radius"
           # @param classes text "Classi CSS aggiuntive"
           def raw(
@@ -103,7 +103,7 @@ module BetterUi
             disabled: false,
             type: :text,
             theme: :default,
-            size: :medium,
+            size: :md,
             rounded: :medium,
             classes: ""
           )

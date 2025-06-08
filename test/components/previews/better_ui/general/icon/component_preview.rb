@@ -7,7 +7,7 @@ module BetterUi
         # @label Con Helper
         # @param name text "Nome dell'icona"
         # @param style select { choices: [solid, regular, brands] } "Stile dell'icona"
-        # @param size select { choices: [small, medium, large] } "Dimensione dell'icona"
+        # @param size select { choices: [xxs, xs, sm, md, lg, xl, xxl] } "Dimensione dell'icona"
         # @param theme select { choices: [default, white, red, rose, orange, green, blue, yellow, violet] } "Tema dell'icona"
         # @param spin toggle "Rotazione continua"
         # @param pulse toggle "Pulsazione"
@@ -18,7 +18,7 @@ module BetterUi
         def default(
           name: "star",
           style: :solid,
-          size: :medium,
+          size: :md,
           theme: :default,
           spin: false,
           pulse: false,
@@ -46,7 +46,7 @@ module BetterUi
         # @label Istanziazione Diretta
         # @param name text "Nome dell'icona"
         # @param style select { choices: [solid, regular, brands] } "Stile dell'icona"
-        # @param size select { choices: [small, medium, large] } "Dimensione dell'icona"
+        # @param size select { choices: [xxs, xs, sm, md, lg, xl, xxl] } "Dimensione dell'icona"
         # @param theme select { choices: [default, white, red, rose, orange, green, blue, yellow, violet] } "Tema dell'icona"
         # @param spin toggle "Rotazione continua"
         # @param pulse toggle "Pulsazione"
@@ -57,7 +57,7 @@ module BetterUi
         def raw(
           name: "star",
           style: :solid,
-          size: :medium,
+          size: :md,
           theme: :default,
           spin: false,
           pulse: false,
@@ -119,13 +119,13 @@ module BetterUi
 
           # Validazione
           valid_styles = [ :solid, :regular, :brands ]
-          valid_sizes = [ :small, :medium, :large ]
+          valid_sizes = [ :xxs, :xs, :sm, :md, :lg, :xl, :xxl ]
           valid_themes = [ :default, :white, :red, :rose, :orange, :green, :blue, :yellow, :violet ]
           valid_rotations = [ nil, 0, 90, 180, 270 ]
           valid_flips = [ nil, :horizontal, :vertical, :both ]
 
           options[:style] = :solid unless valid_styles.include?(options[:style])
-          options[:size] = :medium unless valid_sizes.include?(options[:size])
+          options[:size] = :md unless valid_sizes.include?(options[:size])
           options[:theme] = :default unless valid_themes.include?(options[:theme])
           options[:rotation] = nil unless valid_rotations.include?(options[:rotation])
           options[:flip] = nil unless valid_flips.include?(options[:flip])

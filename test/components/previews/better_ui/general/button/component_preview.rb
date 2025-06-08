@@ -16,7 +16,7 @@ module BetterUi
         #
         # ## Variabili Principali
         # - **type**: tema colore (default, white, red, rose, orange, green, blue, yellow, violet)
-        # - **size**: dimensione (small, medium, large)
+        # - **size**: dimensione (xxs, xs, sm, md, lg, xl, xxl)
         # - **rounded**: border radius (none, small, medium, large, full)
         # - **full_width**: larghezza completa del contenitore
         # - **disabled**: stato disabilitato
@@ -30,14 +30,14 @@ module BetterUi
         # <%= bui_button(label: 'Salva') %>
         # <%= bui_button(label: 'Elimina', type: :red, icon: 'trash') %>
         # <%= bui_button(label: 'Vai alla pagina', href: '/path', type: :blue) %>
-        # <%= bui_button(label: 'Invia', full_width: true, size: :large) %>
+        # <%= bui_button(label: 'Invia', full_width: true, size: :lg) %>
         # ```
         # @!group Esempi Base
 
         # @label Con Helper
         # @param label text "Testo del bottone"
         # @param type select { choices: [default, white, red, rose, orange, green, blue, yellow, violet] } "Tipo di bottone"
-        # @param size select { choices: [small, medium, large] } "Dimensione del bottone"
+        # @param size select { choices: [xxs, xs, sm, md, lg, xl, xxl] } "Dimensione del bottone"
         # @param rounded select { choices: [none, small, medium, large, full] } "Tipo di border-radius"
         # @param full_width toggle "Larghezza completa"
         # @param disabled toggle "Disabilitato"
@@ -48,7 +48,7 @@ module BetterUi
         def default(
           label: "Bottone",
           type: :white,
-          size: :medium,
+          size: :md,
           rounded: :medium,
           full_width: false,
           disabled: false,
@@ -76,7 +76,7 @@ module BetterUi
         # @label Istanziazione Diretta
         # @param label text "Testo del bottone"
         # @param type select { choices: [default, white, red, rose, orange, green, blue, yellow, violet] } "Tipo di bottone"
-        # @param size select { choices: [small, medium, large] } "Dimensione del bottone"
+        # @param size select { choices: [xxs, xs, sm, md, lg, xl, xxl] } "Dimensione del bottone"
         # @param rounded select { choices: [none, small, medium, large, full] } "Tipo di border-radius"
         # @param full_width toggle "Larghezza completa"
         # @param disabled toggle "Disabilitato"
@@ -87,7 +87,7 @@ module BetterUi
         def raw(
           label: "Bottone",
           type: :white,
-          size: :medium,
+          size: :md,
           rounded: :medium,
           full_width: false,
           disabled: false,

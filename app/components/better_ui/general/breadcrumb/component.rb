@@ -39,12 +39,15 @@ module BetterUi
           gray: "text-gray-500"
         }
 
-        # Dimensioni con classi Tailwind dirette
+        # Dimensioni con classi Tailwind dirette - Sistema uniforme 7 livelli
         BREADCRUMB_SIZE_CLASSES = {
-          extra_small: "text-[0.65rem]",
-          small: "text-xs",
-          medium: "text-sm",
-          large: "text-base"
+          xxs: "text-[0.65rem]",           # Extra extra small
+          xs: "text-xs",                   # Extra small
+          sm: "text-xs",                   # Small
+          md: "text-sm",                   # Medium (default)
+          lg: "text-base",                 # Large
+          xl: "text-lg",                   # Extra large
+          xxl: "text-xl"                   # Extra extra large
         }
 
         # Separatori predefiniti
@@ -61,7 +64,7 @@ module BetterUi
           items: [],
           separator: :chevron,
           theme: :white,
-          size: :medium,
+          size: :md,
           classes: nil,
           **html_options
         )
@@ -155,7 +158,7 @@ module BetterUi
         end
 
         def get_size_class
-          BREADCRUMB_SIZE_CLASSES[@size] || BREADCRUMB_SIZE_CLASSES[:medium]
+          BREADCRUMB_SIZE_CLASSES[@size] || BREADCRUMB_SIZE_CLASSES[:md]
         end
 
         def validate_params

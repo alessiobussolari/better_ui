@@ -179,9 +179,9 @@ module BetterUi
         def render_icon(icon_name)
           # Mappa le dimensioni del badge alle dimensioni dell'icona
           icon_size = case @size
-          when :large
-                       :small
-          when :small
+          when :lg
+                       :sm
+          when :sm
                        :tiny
           else
                        :tiny

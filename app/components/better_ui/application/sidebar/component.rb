@@ -157,7 +157,7 @@ module BetterUi
             end
 
             chevron_section = content_tag(:div, class: "ml-auto flex-shrink-0") do
-              bui_icon("chevron-down", size: :small, classes: "text-gray-400")
+              bui_icon("chevron-down", size: :sm, classes: "text-gray-400")
             end
 
             (avatar_section + text_section + chevron_section).html_safe

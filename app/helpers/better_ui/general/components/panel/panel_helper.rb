@@ -11,8 +11,8 @@ module BetterUi
           # @param footer [String] footer del pannello (opzionale)
           # @param theme [Symbol] tema del colore (:default, :white, etc.)
           # @param style [Symbol] stile (:default, :flat, :raised, :bordered)
-          # @param padding [Symbol] padding interno (:none, :small, :medium, :large)
-          # @param radius [Symbol] raggio dei bordi (:none, :small, :medium, :large, :full)
+          # @param padding [Symbol] padding interno (:none, :sm, :md, :lg)
+          # @param radius [Symbol] raggio dei bordi (:none, :sm, :md, :lg, :full)
           # @param html_options [Hash] opzioni HTML aggiuntive
           # @return [String] HTML del pannello renderizzato
           #
@@ -42,8 +42,8 @@ module BetterUi
           #     body: "Contenuto speciale",
           #     theme: :violet,
           #     style: :bordered,
-          #     padding: :large,
-          #     radius: :large,
+          #     padding: :lg,
+          #     radius: :lg,
           #     id: "premium-panel",
           #     class: "special-panel"
           #   )
@@ -59,8 +59,8 @@ module BetterUi
             footer: nil,
             theme: :white,
             style: :default,
-            padding: :medium,
-            radius: :small,
+            padding: :md,
+            radius: :sm,
             **html_options,
             &block
           )

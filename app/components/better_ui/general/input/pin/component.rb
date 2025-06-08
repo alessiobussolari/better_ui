@@ -50,7 +50,7 @@ module BetterUi
           # @param required [Boolean] Se il campo è obbligatorio
           # @param disabled [Boolean] Se il campo è disabilitato
           # @param theme [Symbol] Tema del componente (:default, :white, :red, :rose, :orange, :green, :blue, :yellow, :violet)
-          # @param size [Symbol] Dimensione del componente (:small, :medium, :large)
+          # @param size [Symbol] Dimensione del componente (:sm, :md, :lg)
           # @param form [ActionView::Helpers::FormBuilder, nil] Form builder Rails opzionale
           # @param classes [String] Classi CSS aggiuntive
           # @param options [Hash] Opzioni aggiuntive per attributi HTML

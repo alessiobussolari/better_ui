@@ -14,7 +14,7 @@ module BetterUi
             # @param readonly [Boolean] Se il rating è in sola lettura
             # @param half_stars [Boolean] Se supportare mezze stelle
             # @param theme [Symbol] Tema del componente (:default, :yellow, :orange, :red, :pink, :purple, :blue, :green, :gray)
-            # @param size [Symbol] Dimensione del componente (:small, :medium, :large)
+            # @param size [Symbol] Dimensione del componente (:sm, :md, :lg)
             # @param show_value [Boolean] Se mostrare il valore numerico accanto alle stelle
             # @param form [ActionView::Helpers::FormBuilder, nil] Form builder Rails opzionale
             # @param classes [String] Classi CSS aggiuntive
@@ -29,7 +29,7 @@ module BetterUi
             #   <%= bui_input_rating(value: 4.5, readonly: true, show_value: true) %>
             #
             # @example Con tema e dimensioni personalizzate
-            #   <%= bui_input_rating(name: 'quality', theme: :orange, size: :large, max_stars: 10) %>
+            #   <%= bui_input_rating(name: 'quality', theme: :orange, size: :lg, max_stars: 10) %>
             #
             # @example Con Rails form builder
             #   <%= form_with model: @review do |form| %>
@@ -42,11 +42,11 @@ module BetterUi
             #         value: 3.5,
             #         half_stars: true,
             #         theme: :green,
-            #         size: :medium,
+            #         size: :md,
             #         show_value: true
             #       ) %>
             def bui_input_rating(name: nil, value: 0, max_stars: 5, readonly: false, half_stars: true,
-                                 theme: :default, size: :medium, show_value: false, form: nil,
+                                 theme: :default, size: :md, show_value: false, form: nil,
                                  classes: '', **options)
               render BetterUi::General::Input::Rating::Component.new(
                 name: name,

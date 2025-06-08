@@ -48,7 +48,7 @@ module BetterUi
           title:,
           theme: :default,
           size: :md,
-          rounded: :medium,
+          rounded: :md,
           backdrop: true,
           closable: true,
           classes: nil,
@@ -99,7 +99,7 @@ module BetterUi
         end
 
         def get_modal_rounded_classes
-          MODAL_ROUNDED[@rounded] || MODAL_ROUNDED[:medium]
+          MODAL_ROUNDED[@rounded] || MODAL_ROUNDED[:md]
         end
 
         # Restituisce gli attributi per il backdrop

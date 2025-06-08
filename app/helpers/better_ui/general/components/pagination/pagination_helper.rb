@@ -11,7 +11,7 @@ module BetterUi
           # @param total_pages [Integer] Il numero totale di pagine
           # @param path [String] L'URL base per costruire i link di paginazione
           # @param theme [Symbol] Il tema del componente (:default, :blue, :red, :green, :yellow, :violet, :orange, :rose, :white)
-          # @param size [Symbol] La dimensione del componente (:small, :medium, :large)
+          # @param size [Symbol] La dimensione del componente (:sm, :md, :lg)
           # @param window [Integer] Il numero di pagine da mostrare intorno alla pagina corrente (default: 2)
           # @param show_info [Boolean] Se mostrare le informazioni sui risultati (default: false)
           # @param per_page [Integer] Il numero di elementi per pagina (richiesto se show_info è true)
@@ -29,7 +29,7 @@ module BetterUi
           #     total_pages: 20, 
           #     path: '/articles',
           #     theme: :blue,
-          #     size: :large
+          #     size: :lg
           #   ) %>
           #
           # @example Con informazioni sui risultati
@@ -48,7 +48,7 @@ module BetterUi
           #     total_pages: 50,
           #     path: '/orders',
           #     window: 3,
-          #     size: :small
+          #     size: :sm
           #   ) %>
           #
           # @example Con attributi HTML aggiuntivi
@@ -59,7 +59,7 @@ module BetterUi
           #     classes: 'my-4',
           #     data: { turbo_frame: 'content' }
           #   ) %>
-          def bui_pagination(current_page:, total_pages:, path:, theme: :default, size: :medium,
+          def bui_pagination(current_page:, total_pages:, path:, theme: :default, size: :md,
                              window: 2, show_info: false, per_page: nil, classes: '', 
                              form: nil, **options)
             render BetterUi::General::Pagination::Component.new(

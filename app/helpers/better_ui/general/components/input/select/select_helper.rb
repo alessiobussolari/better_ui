@@ -16,8 +16,8 @@ module BetterUi
             # @param multiple [Boolean] Se multiple opzioni possono essere selezionate
             # @param searchable [Boolean] Se abilitare la ricerca
             # @param theme [Symbol] Tema del componente (:default, :white, :red, :rose, :orange, :green, :blue, :yellow, :violet)
-            # @param size [Symbol] Dimensione del componente (:small, :medium, :large)
-            # @param rounded [Symbol] Border radius (:none, :small, :medium, :large, :full)
+            # @param size [Symbol] Dimensione del componente (:sm, :md, :lg)
+            # @param rounded [Symbol] Border radius (:none, :sm, :md, :lg, :full)
             # @param placeholder [String] Testo placeholder per il trigger
             # @param search_placeholder [String] Testo placeholder per il campo search
             # @param max_height [String] Altezza massima del dropdown (default: "300px")
@@ -37,7 +37,7 @@ module BetterUi
             #   <%= bui_input_select(name: 'category', searchable: true, theme: :blue, options: categories) %>
             #
             # @example Con dimensioni personalizzate
-            #   <%= bui_input_select(name: 'priority', size: :large, options: priorities, selected: 'high') %>
+            #   <%= bui_input_select(name: 'priority', size: :lg, options: priorities, selected: 'high') %>
             #
             # @example Con Rails form builder
             #   <%= form_with model: @user do |form| %>
@@ -56,8 +56,8 @@ module BetterUi
             #         selected: ['ruby', 'rails']
             #       ) %>
             def bui_input_select(name:, options:, selected: nil, required: false, disabled: false, 
-                                 multiple: false, searchable: true, theme: :default, size: :medium, 
-                                 rounded: :medium, placeholder: nil, search_placeholder: nil, 
+                                 multiple: false, searchable: true, theme: :default, size: :md, 
+                                 rounded: :md, placeholder: nil, search_placeholder: nil, 
                                  max_height: "300px", form: nil, classes: '', **html_options)
               render BetterUi::General::Input::Select::Component.new(
                 name: name,

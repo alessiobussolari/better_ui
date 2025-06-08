@@ -11,8 +11,8 @@ module BetterUi
           # @param trigger [String] Il testo del pulsante trigger (obbligatorio)
           # @param position [Symbol] La posizione del menu dropdown (:bottom, :top, :left, :right)
           # @param theme [Symbol] Il tema colore del trigger (:default, :white, :red, :rose, :orange, :green, :blue, :yellow, :violet)
-          # @param size [Symbol] La dimensione del trigger (:small, :medium, :large)
-          # @param rounded [Symbol] Il border radius (:none, :small, :medium, :large, :full)
+          # @param size [Symbol] La dimensione del trigger (:sm, :md, :lg)
+          # @param rounded [Symbol] Il border radius (:none, :sm, :md, :lg, :full)
           # @param animation [Symbol] Il tipo di animazione (:fade, :slide, :none)
           # @param fullwidth [Boolean] Se il trigger deve occupare tutta la larghezza disponibile
           # @param show_chevron [Boolean] Se mostrare l'icona chevron automatica
@@ -36,7 +36,7 @@ module BetterUi
           #   <% end %>
           #
           # @example Con dimensioni e stile
-          #   <%= bui_dropdown(trigger: "Opzioni", size: :large, rounded: :full, animation: :slide) do %>
+          #   <%= bui_dropdown(trigger: "Opzioni", size: :lg, rounded: :full, animation: :slide) do %>
           #     <%= bui_dropdown_item(text: "Impostazioni", icon: "cog") %>
           #   <% end %>
           #
@@ -57,8 +57,8 @@ module BetterUi
             trigger:,
             position: :bottom,
             theme: :default,
-            size: :medium,
-            rounded: :medium,
+            size: :md,
+            rounded: :md,
             animation: :fade,
             fullwidth: false,
             show_chevron: true,

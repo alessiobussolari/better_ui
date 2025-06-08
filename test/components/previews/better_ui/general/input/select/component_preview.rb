@@ -4,156 +4,120 @@ module BetterUi
   module General
     module Input
       module Select
-        # @label Select
         class ComponentPreview < ViewComponent::Preview
-
-          #
-          # ## Utilizzo Base
-          # Componente select personalizzato con ricerca, animazioni e multi-selezione. Sostituisce completamente
-          # il select HTML nativo con un'interfaccia moderna e interattiva gestita da Stimulus.
-          #
-          # ## Funzionalità Principali
-          # - **Ricerca real-time**: Filtraggio istantaneo delle opzioni
-          # - **Multi-selezione**: Con badge removibili per ogni opzione selezionata
-          # - **Animazioni smooth**: Transizioni fluide per apertura/chiusura
-          # - **Navigazione da tastiera**: Arrow keys, Enter, Escape
-          # - **Click outside**: Chiusura automatica
-          #
-          # ## Casi d'Uso Comuni
-          # - **Selezione singola**: Paesi, categorie, utenti
-          # - **Multi-selezione**: Tag, skills, permessi
-          # - **Con ricerca**: Liste lunghe di opzioni
-          # - **Form integration**: Compatibile con Rails form builder
-          #
-          # ## Variabili Principali
-          # - **name**: nome del campo (obbligatorio)
-          # - **options**: array di opzioni nel formato [{value: 'val', label: 'Label'}, ...]
-          # - **multiple**: abilita selezione multipla
-          # - **searchable**: abilita campo di ricerca
-          # - **theme**: colori disponibili (default, white, red, rose, orange, green, blue, yellow, violet)
-          # - **size**: dimensioni disponibili (small, medium, large)
-          # - **rounded**: border radius (none, small, medium, large, full)
-          # - **selected**: valore/i preselezionato/i
-          #
-          # ## Esempi Codice
-          # ```erb
-          # <%# Selezione singola base %>
-          # <%= bui_input_select(name: 'country', options: countries_options) %>
-          #
-          # <%# Multi-selezione con ricerca %>
-          # <%= bui_input_select(name: 'skills', multiple: true, searchable: true, options: skills_options) %>
-          #
-          # <%# Con selezione preimpostata %>
-          # <%= bui_input_select(name: 'category', options: categories, selected: 'tech') %>
-          #
-          # <%# Con Rails form builder %>
-          # <%= form_with model: @user do |form| %>
-          #   <%= bui_input_select(name: :role, form: form, options: role_options) %>
-          # <% end %>
-          #
-          # <%# Personalizzato con tema %>
-          # <%= bui_input_select(name: 'priority', theme: :red, size: :large, options: priorities) %>
-          # ```
-
           # @!group Esempi Base
 
           # @label Con Helper
-          # @param name text "Nome del campo"
-          # @param options textarea "Opzioni JSON"
-          # @param selected text "Valore selezionato"
+          # @param name text "Nome del campo select"
+          # @param options text "Opzioni (JSON array)"
+          # @param value text "Valore selezionato"
+          # @param prompt text "Prompt iniziale"
+          # @param required toggle "Campo obbligatorio"
+          # @param disabled toggle "Campo disabilitato"
           # @param multiple toggle "Selezione multipla"
-          # @param searchable toggle "Ricerca abilitata"
-          # @param theme select { choices: [default, white, red, rose, orange, green, blue, yellow, violet] } "Tema colore"
-          # @param size select { choices: [small, medium, large] } "Dimensione"
+          # @param theme select { choices: [default, white, red, rose, orange, green, blue, yellow, violet] } "Tema del componente"
+          # @param size select { choices: [xxs, xs, sm, md, lg, xl, xxl] } "Dimensione del componente"
           # @param rounded select { choices: [none, small, medium, large, full] } "Border radius"
-          # @param required toggle "Obbligatorio"
-          # @param disabled toggle "Disabilitato"
-          # @param placeholder text "Placeholder"
-          # @param search_placeholder text "Placeholder ricerca"
-          # @param max_height text "Altezza massima dropdown"
           # @param classes text "Classi CSS aggiuntive"
+
+          #
+          # ## Utilizzo Base
+          # Il componente Select è un dropdown per selezioni da liste di opzioni.
+          # Supporta selezione singola, multipla, temi, dimensioni e stati.
+          #
+          # ## Casi d'Uso Comuni
+          # - Selezione paese, regione, città in form
+          # - Scelta categorie e tag in content management
+          # - Filtri con opzioni predefinite
+          # - Selezione multipla per preferenze utente
+          # - Dropdown di navigazione e menu
+          #
+          # ## Variabili Principali
+          # - **name**: nome del campo select (obbligatorio)
+          # - **options**: array di opzioni [value, label]
+          # - **value**: valore/i selezionato/i
+          # - **prompt**: testo prompt iniziale
+          # - **multiple**: selezione multipla
+          # - **theme**: tema colore (default, white, red, rose, orange, green, blue, yellow, violet)
+          # - **size**: dimensione (xxs, xs, sm, md, lg, xl, xxl)
+          # - **rounded**: border radius (none, small, medium, large, full)
+          #
+          # ## Esempi Codice
+          # ```erb
+          # <%= bui_input_select(name: 'country', options: [['IT', 'Italia'], ['US', 'USA']]) %>
+          # <%= bui_input_select(name: 'category', options: @categories, theme: :blue, size: :lg) %>
+          # <%= bui_input_select(name: 'tags', options: @tags, multiple: true, theme: :green) %>
+          # ```
+          
           def default(
-            name: "demo_select",
-            options: default_options_json,
-            selected: "",
-            multiple: false,
-            searchable: true,
-            theme: :default,
-            size: :medium,
-            rounded: :medium,
+            name: "select_field",
+            options: '[["option1", "Opzione 1"], ["option2", "Opzione 2"], ["option3", "Opzione 3"]]',
+            value: "",
+            prompt: "Seleziona un'opzione",
             required: false,
             disabled: false,
-            placeholder: "",
-            search_placeholder: "",
-            max_height: "300px",
-            classes: ''
+            multiple: false,
+            theme: :default,
+            size: :md,
+            rounded: :medium,
+            classes: ""
           )
             normalized = normalize_params!(
               name: name,
-              options: parse_options(options),
-              selected: parse_selected(selected, multiple),
+              options: options,
+              value: value,
+              prompt: prompt,
+              required: required,
+              disabled: disabled,
               multiple: multiple,
-              searchable: searchable,
               theme: theme,
               size: size,
               rounded: rounded,
-              required: required,
-              disabled: disabled,
-              placeholder: placeholder.present? ? placeholder : nil,
-              search_placeholder: search_placeholder.present? ? search_placeholder : nil,
-              max_height: max_height,
               classes: classes
             )
+
             render_with_template(locals: normalized)
           end
 
           # @label Istanziazione Diretta
-          # @param name text "Nome del campo"
-          # @param options textarea "Opzioni JSON"
-          # @param selected text "Valore selezionato"
+          # @param name text "Nome del campo select"
+          # @param options text "Opzioni (JSON array)"
+          # @param value text "Valore selezionato"
+          # @param prompt text "Prompt iniziale"
+          # @param required toggle "Campo obbligatorio"
+          # @param disabled toggle "Campo disabilitato"
           # @param multiple toggle "Selezione multipla"
-          # @param searchable toggle "Ricerca abilitata"
-          # @param theme select { choices: [default, white, red, rose, orange, green, blue, yellow, violet] } "Tema colore"
-          # @param size select { choices: [small, medium, large] } "Dimensione"
+          # @param theme select { choices: [default, white, red, rose, orange, green, blue, yellow, violet] } "Tema del componente"
+          # @param size select { choices: [xxs, xs, sm, md, lg, xl, xxl] } "Dimensione del componente"
           # @param rounded select { choices: [none, small, medium, large, full] } "Border radius"
-          # @param required toggle "Obbligatorio"
-          # @param disabled toggle "Disabilitato"
-          # @param placeholder text "Placeholder"
-          # @param search_placeholder text "Placeholder ricerca"
-          # @param max_height text "Altezza massima dropdown"
           # @param classes text "Classi CSS aggiuntive"
           def raw(
-            name: "demo_select",
-            options: default_options_json,
-            selected: "",
-            multiple: false,
-            searchable: true,
-            theme: :default,
-            size: :medium,
-            rounded: :medium,
+            name: "select_field",
+            options: '[["option1", "Opzione 1"], ["option2", "Opzione 2"], ["option3", "Opzione 3"]]',
+            value: "",
+            prompt: "Seleziona un'opzione",
             required: false,
             disabled: false,
-            placeholder: "",
-            search_placeholder: "",
-            max_height: "300px",
-            classes: ''
+            multiple: false,
+            theme: :default,
+            size: :md,
+            rounded: :medium,
+            classes: ""
           )
             normalized = normalize_params!(
               name: name,
-              options: parse_options(options),
-              selected: parse_selected(selected, multiple),
+              options: options,
+              value: value,
+              prompt: prompt,
+              required: required,
+              disabled: disabled,
               multiple: multiple,
-              searchable: searchable,
               theme: theme,
               size: size,
               rounded: rounded,
-              required: required,
-              disabled: disabled,
-              placeholder: placeholder.present? ? placeholder : nil,
-              search_placeholder: search_placeholder.present? ? search_placeholder : nil,
-              max_height: max_height,
               classes: classes
             )
+
             render BetterUi::General::Input::Select::Component.new(**normalized)
           end
 
@@ -161,59 +125,25 @@ module BetterUi
 
           private
 
-          def normalize_params!(**params)
-            {
-              name: params[:name],
-              options: params[:options],
-              selected: params[:selected],
-              multiple: params[:multiple],
-              searchable: params[:searchable],
-              theme: params[:theme].to_sym,
-              size: params[:size].to_sym,
-              rounded: params[:rounded].to_sym,
-              required: params[:required],
-              disabled: params[:disabled],
-              placeholder: params[:placeholder],
-              search_placeholder: params[:search_placeholder],
-              max_height: params[:max_height],
-              classes: params[:classes]
-            }
-          end
+          def normalize_params!(options)
+            # Normalizzazione parametri
+            options[:theme] = options[:theme].to_sym if options[:theme].is_a?(String)
+            options[:size] = options[:size].to_sym if options[:size].is_a?(String)
+            options[:rounded] = options[:rounded].to_sym if options[:rounded].is_a?(String)
 
-          def default_options_json
-            [
-              { value: 'ruby', label: 'Ruby' },
-              { value: 'rails', label: 'Ruby on Rails' },
-              { value: 'javascript', label: 'JavaScript' },
-              { value: 'typescript', label: 'TypeScript' },
-              { value: 'python', label: 'Python' },
-              { value: 'golang', label: 'Go' },
-              { value: 'rust', label: 'Rust' },
-              { value: 'elixir', label: 'Elixir' }
-            ].to_json
-          end
-
-          def parse_options(options_param)
-            if options_param.is_a?(String)
-              JSON.parse(options_param, symbolize_names: true)
-            else
-              options_param
+            # Parse options JSON
+            if options[:options].is_a?(String)
+              begin
+                options[:options] = JSON.parse(options[:options])
+              rescue JSON::ParserError
+                options[:options] = [["option1", "Opzione 1"], ["option2", "Opzione 2"]]
+              end
             end
-          rescue JSON::ParserError
-            [
-              { value: 'option1', label: 'Opzione 1' },
-              { value: 'option2', label: 'Opzione 2' }
-            ]
-          end
 
-          def parse_selected(selected_param, multiple)
-            return nil if selected_param.blank?
-            
-            if multiple
-              selected_param.is_a?(String) ? selected_param.split(',').map(&:strip) : selected_param
-            else
-              selected_param.is_a?(Array) ? selected_param.first : selected_param
-            end
+            # Pulizia valori vuoti
+            options[:classes] = '' if options[:classes].is_a?(String) && options[:classes].strip.empty?
+
+            options
           end
         end
       end

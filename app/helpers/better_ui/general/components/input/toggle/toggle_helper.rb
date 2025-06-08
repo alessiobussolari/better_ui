@@ -16,7 +16,7 @@ module BetterUi
             # @param label [String, nil] Testo della label associata al toggle
             # @param label_position [Symbol] Posizione della label (:left, :right)
             # @param theme [Symbol] Tema del componente (:default, :white, :red, :rose, :orange, :green, :blue, :yellow, :violet)
-            # @param size [Symbol] Dimensione del componente (:small, :medium, :large)
+            # @param size [Symbol] Dimensione del componente (:sm, :md, :lg)
             # @param form [ActionView::Helpers::FormBuilder, nil] Form builder Rails opzionale
             # @param classes [String] Classi CSS aggiuntive
             # @param options [Hash] Opzioni aggiuntive per attributi HTML
@@ -30,7 +30,7 @@ module BetterUi
             #   <%= bui_input_toggle(name: 'dark_mode', label: 'Modalità scura', checked: true) %>
             #
             # @example Con tema e dimensioni
-            #   <%= bui_input_toggle(name: 'premium', label: 'Account Premium', theme: :green, size: :large) %>
+            #   <%= bui_input_toggle(name: 'premium', label: 'Account Premium', theme: :green, size: :lg) %>
             #
             # @example Con posizione label e stato disabilitato
             #   <%= bui_input_toggle(name: 'maintenance', label: 'Modalità manutenzione', label_position: :left, disabled: true) %>
@@ -46,13 +46,13 @@ module BetterUi
             #         name: 'api_access', 
             #         label: 'Accesso API',
             #         theme: :violet,
-            #         size: :small,
+            #         size: :sm,
             #         required: true,
             #         data: { action: 'toggle-api-access' },
             #         'aria-describedby': 'api-help-text'
             #       ) %>
             def bui_input_toggle(name:, value: '1', checked: false, required: false, disabled: false, 
-                                 label: nil, label_position: :right, theme: :default, size: :medium, 
+                                 label: nil, label_position: :right, theme: :default, size: :md, 
                                  form: nil, classes: '', **options)
               render BetterUi::General::Input::Toggle::Component.new(
                 name: name,

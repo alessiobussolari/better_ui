@@ -21,20 +21,28 @@ module BetterUi
             violet: 'border-violet-300 focus:border-violet-500 focus:ring-violet-500'
           }.freeze
 
-          # Dimensioni supportate per il Textarea
+          # Dimensioni supportate per il Textarea - Sistema uniforme 7 livelli
           TEXTAREA_SIZES = {
-            small: 'px-2 py-1 text-xs',
-            medium: 'px-3 py-2 text-sm',
-            large: 'px-4 py-3 text-base'
+            xxs: 'px-1 py-0.5 text-xs',     # Extra extra small
+            xs: 'px-1.5 py-0.5 text-xs',    # Extra small
+            sm: 'px-2 py-1 text-xs',        # Small
+            md: 'px-3 py-2 text-sm',        # Medium (default)
+            lg: 'px-4 py-3 text-base',      # Large
+            xl: 'px-5 py-3.5 text-lg',      # Extra large
+            xxl: 'px-6 py-4 text-xl'        # Extra extra large
           }.freeze
 
           # Border radius supportati per il Textarea
           TEXTAREA_RADIUS = {
             none: 'rounded-none',
-            small: 'rounded-sm',
-            medium: 'rounded-md',
-            large: 'rounded-lg',
-            full: 'rounded-2xl'
+            xxs: 'rounded-sm',
+            xs: 'rounded',
+            sm: 'rounded-md',
+            md: 'rounded-lg',
+            lg: 'rounded-xl',
+            xl: 'rounded-2xl',
+            xxl: 'rounded-3xl',
+            full: 'rounded-full'
           }.freeze
 
           # Classi base per il Textarea
@@ -47,13 +55,13 @@ module BetterUi
           # @param disabled [Boolean] Se il campo è disabilitato
           # @param rows [Integer] Numero di righe per la textarea
           # @param theme [Symbol] Tema del componente (:default, :white, :red, :rose, :orange, :green, :blue, :yellow, :violet)
-          # @param size [Symbol] Dimensione del componente (:small, :medium, :large)
-          # @param rounded [Symbol] Border radius (:none, :small, :medium, :large, :full)
+          # @param size [Symbol] Dimensione del componente (:sm, :md, :lg)
+          # @param rounded [Symbol] Border radius (:none, :sm, :md, :lg, :full)
           # @param classes [String] Classi CSS aggiuntive
           # @param form [ActionView::Helpers::FormBuilder] Form builder Rails opzionale
           # @param options [Hash] Opzioni aggiuntive per la textarea
           def initialize(name:, value: nil, placeholder: nil, required: false, disabled: false, 
-                         rows: 3, theme: :default, size: :medium, rounded: :medium, classes: '', form: nil, **options)
+                         rows: 3, theme: :default, size: :md, rounded: :md, classes: '', form: nil, **options)
             @name = name
             @value = value
             @placeholder = placeholder
@@ -109,19 +117,15 @@ module BetterUi
             ].compact.join(' ')
           end
 
-          # Restituisce le classi del tema
-          def get_theme_classes
-            TEXTAREA_THEME[@theme]
-          end
-
-          # Restituisce le classi della dimensione
-          def get_size_classes
-            TEXTAREA_SIZES[@size]
-          end
-
-          # Restituisce le classi del border radius
-          def get_rounded_classes
-            TEXTAREA_RADIUS[@rounded]
+          # Definizione dinamica dei metodi get
+          [
+            { constant: :TEXTAREA_THEME, var: :@theme, default: :default, method: :get_theme_classes },
+            { constant: :TEXTAREA_SIZES, var: :@size, default: :md, method: :get_size_classes },
+            { constant: :TEXTAREA_RADIUS, var: :@rounded, default: :md, method: :get_rounded_classes }
+          ].each do |config|
+            define_method(config[:method]) do
+              self.class.const_get(config[:constant])[instance_variable_get(config[:var])] || self.class.const_get(config[:constant])[config[:default]]
+            end
           end
 
           # Valida i parametri del componente
@@ -132,25 +136,18 @@ module BetterUi
             validate_rows
           end
 
-          # Valida il tema
-          def validate_theme
-            return if TEXTAREA_THEME.key?(@theme)
-
-            raise ArgumentError, "Tema non valido: #{@theme}. Temi supportati: #{TEXTAREA_THEME.keys.join(', ')}"
-          end
-
-          # Valida la dimensione
-          def validate_size
-            return if TEXTAREA_SIZES.key?(@size)
-
-            raise ArgumentError, "Dimensione non valida: #{@size}. Dimensioni supportate: #{TEXTAREA_SIZES.keys.join(', ')}"
-          end
-
-          # Valida il border radius
-          def validate_rounded
-            return if TEXTAREA_RADIUS.key?(@rounded)
-
-            raise ArgumentError, "Border radius non valido: #{@rounded}. Valori supportati: #{TEXTAREA_RADIUS.keys.join(', ')}"
+          # Definizione dinamica delle validazioni
+          [
+            { values: TEXTAREA_THEME.keys, method: :validate_theme, param: 'theme', var: :@theme },
+            { values: TEXTAREA_SIZES.keys, method: :validate_size, param: 'size', var: :@size },
+            { values: TEXTAREA_RADIUS.keys, method: :validate_rounded, param: 'rounded', var: :@rounded }
+          ].each do |config|
+            define_method(config[:method]) do
+              value = instance_variable_get(config[:var])
+              unless config[:values].include?(value)
+                raise ArgumentError, "#{config[:param].capitalize} non valido: #{value}. Valori supportati: #{config[:values].join(', ')}"
+              end
+            end
           end
 
           # Valida il numero di righe

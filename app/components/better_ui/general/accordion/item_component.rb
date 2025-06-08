@@ -47,7 +47,7 @@ module BetterUi
         }.freeze
 
         def initialize(title:, expanded: false, disabled: false, icon: 'chevron-down', 
-                      theme: :default, size: :medium, classes: '', **options)
+                      theme: :default, size: :md, classes: '', **options)
           @title = title
           @expanded = expanded
           @disabled = disabled

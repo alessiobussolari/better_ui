@@ -17,7 +17,7 @@
                   class="inline-flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors duration-150 <%= action[:theme] == :primary ? 'bg-gray-900 text-white hover:bg-gray-700' : 'bg-gray-100 text-gray-700 hover:bg-gray-200' %>"
                 >
                   <% if action[:icon].present? %>
-                    <%= bui_icon(action[:icon], size: :small) %>
+                    <%= bui_icon(action[:icon], size: :sm) %>
                     <% if action[:label].present? %>
                       <span class="ml-2"><%= action[:label] %></span>
                     <% end %>
@@ -36,7 +36,7 @@
                   <% end %>
                 >
                   <% if action[:icon].present? %>
-                    <%= bui_icon(action[:icon], size: :small) %>
+                    <%= bui_icon(action[:icon], size: :sm) %>
                     <% if action[:label].present? %>
                       <span class="ml-2"><%= action[:label] %></span>
                     <% end %>
@@ -65,7 +65,7 @@
                   href="<%= action[:href] %>" 
                   class="p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-md transition-colors duration-150"
                 >
-                  <%= bui_icon(action[:icon], size: :medium) %>
+                  <%= bui_icon(action[:icon], size: :md) %>
                 </a>
               <% else %>
                 <button 
@@ -77,7 +77,7 @@
                     <% end %>
                   <% end %>
                 >
-                  <%= bui_icon(action[:icon], size: :medium) %>
+                  <%= bui_icon(action[:icon], size: :md) %>
                 </button>
               <% end %>
             <% else %>

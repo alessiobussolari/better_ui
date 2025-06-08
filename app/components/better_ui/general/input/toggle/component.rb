@@ -83,7 +83,7 @@ module BetterUi
           # @param label [String, nil] Testo della label associata al toggle
           # @param label_position [Symbol] Posizione della label (:left, :right)
           # @param theme [Symbol] Tema del componente (:default, :white, :red, :rose, :orange, :green, :blue, :yellow, :violet)
-          # @param size [Symbol] Dimensione del componente (:small, :medium, :large)
+          # @param size [Symbol] Dimensione del componente (:sm, :md, :lg)
           # @param form [ActionView::Helpers::FormBuilder, nil] Form builder Rails opzionale
           # @param classes [String] Classi CSS aggiuntive
           # @param options [Hash] Opzioni aggiuntive per l'input (es. data attributes)

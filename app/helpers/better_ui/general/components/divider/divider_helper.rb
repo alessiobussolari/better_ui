@@ -8,7 +8,7 @@ module BetterUi
           # @param theme [Symbol] tema del divider (:default, :white, etc.)
           # @param orientation [Symbol] orientamento del divider (:horizontal, :vertical)
           # @param style [Symbol] stile della linea (:solid, :dashed, :dotted, :double)
-          # @param size [Symbol] dimensione della linea (:thin, :medium, :thick)
+          # @param size [Symbol] dimensione della linea (:thin, :md, :thick)
           # @param label [String] testo opzionale da mostrare al centro del divider
           # @param height [String] altezza per divider verticale (es. "100px", "100%")
           # @param classes [String] classi CSS aggiuntive
@@ -30,7 +30,7 @@ module BetterUi
           #     theme: :violet,
           #     orientation: :horizontal,
           #     style: :dashed,
-          #     size: :medium,
+          #     size: :md,
           #     label: "Sezione",
           #     classes: "my-8",
           #     id: "main-divider"
@@ -39,7 +39,7 @@ module BetterUi
             theme: :white,
             orientation: :horizontal,
             style: :solid,
-            size: :medium,
+            size: :md,
             label: nil,
             height: nil,
             classes: nil,

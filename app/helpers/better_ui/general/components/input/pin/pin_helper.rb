@@ -15,7 +15,7 @@ module BetterUi
             # @param required [Boolean] Se il campo è obbligatorio
             # @param disabled [Boolean] Se il campo è disabilitato
             # @param theme [Symbol] Tema del componente (:default, :white, :red, :rose, :orange, :green, :blue, :yellow, :violet)
-            # @param size [Symbol] Dimensione del componente (:small, :medium, :large)
+            # @param size [Symbol] Dimensione del componente (:sm, :md, :lg)
             # @param form [ActionView::Helpers::FormBuilder, nil] Form builder Rails opzionale
             # @param classes [String] Classi CSS aggiuntive
             # @param options [Hash] Opzioni aggiuntive per attributi HTML
@@ -26,7 +26,7 @@ module BetterUi
             #   <%= bui_input_pin(name: 'verification_code') %>
             #
             # @example Con lunghezza personalizzata e tema
-            #   <%= bui_input_pin(name: 'pin_code', length: 4, theme: :blue, size: :large) %>
+            #   <%= bui_input_pin(name: 'pin_code', length: 4, theme: :blue, size: :lg) %>
             #
             # @example Con Rails form builder
             #   <%= form_with model: @user do |form| %>
@@ -49,11 +49,11 @@ module BetterUi
             #         name: 'bank_code',
             #         length: 8,
             #         theme: :violet,
-            #         size: :small,
+            #         size: :sm,
             #         placeholder: '0'
             #       ) %>
             def bui_input_pin(name:, value: '', length: 6, placeholder: '•', required: false, disabled: false,
-                              theme: :default, size: :medium, form: nil, classes: '', **options)
+                              theme: :default, size: :md, form: nil, classes: '', **options)
               render BetterUi::General::Input::Pin::Component.new(
                 name: name,
                 value: value,

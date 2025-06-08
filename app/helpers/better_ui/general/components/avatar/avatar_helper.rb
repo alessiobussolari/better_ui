@@ -9,7 +9,7 @@ module BetterUi
           #
           # @option options [String] :name (nil) nome per le iniziali
           # @option options [String] :src (nil) URL dell'immagine
-          # @option options [Symbol] :size (:medium) :xxsmall, :xsmall, :small, :medium, :large, :xlarge, :xxlarge
+          # @option options [Symbol] :size (:md) :xxsmall, :xsmall, :sm, :md, :lg, :xlarge, :xxlarge
           # @option options [Symbol] :shape (:circle) :circle, :square, :rounded
           # @option options [Symbol] :status (nil) :online, :offline, :busy, :away
           # @option options [Symbol] :status_position (:bottom_right) :bottom_right, :bottom_left, :top_right, :top_left

@@ -9,9 +9,9 @@ module BetterUi
           #
           # @param text [String] testo da mostrare (nil se si usa blocco)
           # @param theme [Symbol] tema del colore (:default, :white, :red, :blue, etc.)
-          # @param size [Symbol] dimensione (:xs, :small, :medium, :large, :xl, :"2xl")
+          # @param size [Symbol] dimensione (:xs, :sm, :md, :lg, :xl, :"2xl")
           # @param align [Symbol] allineamento (:left, :center, :right, :justify)
-          # @param weight [Symbol] peso font (:thin, :light, :normal, :medium, :semibold, :bold, :extrabold)
+          # @param weight [Symbol] peso font (:thin, :light, :normal, :md, :semibold, :bold, :extrabold)
           # @param style [Symbol] stile (:normal, :italic, :underline, :line_through)
           # @param classes [String] classi CSS aggiuntive
           # @param html_options [Hash] opzioni HTML aggiuntive
@@ -23,7 +23,7 @@ module BetterUi
           #
           # @example Con dimensioni e stili
           #   bui_text("Titolo grande", size: :xl, weight: :bold)
-          #   bui_text("Testo sottile", theme: :muted, size: :small)
+          #   bui_text("Testo sottile", theme: :muted, size: :sm)
           #
           # @example Con allineamento
           #   bui_text("Testo centrato", align: :center)
@@ -51,13 +51,13 @@ module BetterUi
           # @example Combinazioni complesse
           #   bui_text("Messaggio di errore", 
           #            theme: :red, 
-          #            size: :small, 
-          #            weight: :medium,
+          #            size: :sm, 
+          #            weight: :md,
           #            classes: "mb-2")
           def bui_text(
             text = nil,
             theme: :default,
-            size: :medium,
+            size: :md,
             align: :left,
             weight: :normal,
             style: :normal,

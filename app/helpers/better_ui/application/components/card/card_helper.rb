@@ -13,9 +13,9 @@ module BetterUi
           # @param change [String, nil] Il valore del cambiamento (es. "+12%"), default nil
           # @param color [Symbol] Il colore del trend (:green, :red, :blue, :yellow, :purple, :indigo, :gray), default :green
           # @param theme [Symbol] Il tema della card (:default, :white, :red, :rose, :orange, :green, :blue, :yellow, :violet, :purple), default :default
-          # @param size [Symbol] La dimensione della card (:small, :medium, :large), default :medium
-          # @param rounded [Symbol] Il livello di arrotondamento (:none, :small, :medium, :large, :full), default :medium
-          # @param shadow [Symbol] Il tipo di ombra (:none, :small, :medium, :large), default :small
+          # @param size [Symbol] La dimensione della card (:sm, :md, :lg), default :md
+          # @param rounded [Symbol] Il livello di arrotondamento (:none, :sm, :md, :lg, :full), default :md
+          # @param shadow [Symbol] Il tipo di ombra (:none, :sm, :md, :lg), default :sm
           # @param classes [String, nil] Classi CSS aggiuntive per il contenitore principale
           # @param form [Nil] Parametro form per compatibilità con form builder (non utilizzato)
           # @param options [Hash] Attributi HTML aggiuntivi da passare al div principale
@@ -48,9 +48,9 @@ module BetterUi
           #     title: "Revenue",
           #     value: "$89,432",
           #     theme: :primary,
-          #     size: :large,
-          #     rounded: :large,
-          #     shadow: :medium
+          #     size: :lg,
+          #     rounded: :lg,
+          #     shadow: :md
           #   ) %>
           #
           # @example Card con attributi HTML aggiuntivi
@@ -68,9 +68,9 @@ module BetterUi
             change: nil,
             color: :green,
             theme: :default,
-            size: :medium,
-            rounded: :medium,
-            shadow: :small,
+            size: :md,
+            rounded: :md,
+            shadow: :sm,
             classes: nil,
             form: nil,
             **options

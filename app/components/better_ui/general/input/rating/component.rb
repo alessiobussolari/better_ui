@@ -40,7 +40,7 @@ module BetterUi
           # @param readonly [Boolean] Se il rating è in sola lettura
           # @param half_stars [Boolean] Se supportare mezze stelle
           # @param theme [Symbol] Tema del componente (:default, :yellow, :orange, :red, :pink, :purple, :blue, :green, :gray)
-          # @param size [Symbol] Dimensione del componente (:small, :medium, :large)
+          # @param size [Symbol] Dimensione del componente (:sm, :md, :lg)
           # @param show_value [Boolean] Se mostrare il valore numerico accanto alle stelle
           # @param form [ActionView::Helpers::FormBuilder, nil] Form builder Rails opzionale
           # @param classes [String] Classi CSS aggiuntive

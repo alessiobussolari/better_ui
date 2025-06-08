@@ -17,7 +17,7 @@ module BetterUi
           # @param data [Hash] Attributi data
           # @param classes [String] Classi CSS aggiuntive
           # @param id [String] ID elemento
-          # @param rounded [Symbol] Tipo di border-radius (:none, :small, :medium, :large, :full)
+          # @param rounded [Symbol] Tipo di border-radius (:none, :sm, :md, :lg, :full)
           # @param html_options [Hash] Opzioni HTML aggiuntive
           # @params button_type [Symbol] Tipo di bottone (:button, :submit, :reset)
           #
@@ -35,7 +35,7 @@ module BetterUi
             data: {},
             classes: nil,
             id: nil,
-            rounded: :medium,
+            rounded: :md,
             button_type: :button,
             **html_options,
             &block

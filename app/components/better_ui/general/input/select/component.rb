@@ -30,9 +30,13 @@ module BetterUi
 
           SELECT_ROUNDED = {
             none: 'rounded-none',
-            small: 'rounded-sm',
-            medium: 'rounded',
-            large: 'rounded-lg',
+            xxs: 'rounded-sm',
+            xs: 'rounded',
+            sm: 'rounded-md',
+            md: 'rounded-lg',
+            lg: 'rounded-xl',
+            xl: 'rounded-2xl',
+            xxl: 'rounded-3xl',
             full: 'rounded-full'
           }.freeze
 
@@ -50,8 +54,8 @@ module BetterUi
           # @param multiple [Boolean] Se multiple opzioni possono essere selezionate
           # @param searchable [Boolean] Se abilitare la ricerca
           # @param theme [Symbol] Tema del componente (:default, :white, :red, :rose, :orange, :green, :blue, :yellow, :violet)
-          # @param size [Symbol] Dimensione del componente (:small, :medium, :large)
-          # @param rounded [Symbol] Border radius (:none, :small, :medium, :large, :full)
+          # @param size [Symbol] Dimensione del componente (:sm, :md, :lg)
+          # @param rounded [Symbol] Border radius (:none, :sm, :md, :lg, :full)
           # @param placeholder [String] Testo placeholder per il trigger
           # @param search_placeholder [String] Testo placeholder per il campo search
           # @param max_height [String] Altezza massima del dropdown (default: "300px")
@@ -68,7 +72,7 @@ module BetterUi
             searchable: true,
             theme: :default, 
             size: :md,
-            rounded: :medium, 
+            rounded: :md, 
             placeholder: nil,
             search_placeholder: nil,
             max_height: "300px",
@@ -104,22 +108,18 @@ module BetterUi
             validate_rounded
           end
 
-          def validate_theme
-            return if SELECT_THEME.key?(@theme)
-
-            raise ArgumentError, "Invalid theme: #{@theme}. Valid themes are: #{SELECT_THEME.keys.join(', ')}"
-          end
-
-          def validate_size
-            return if SELECT_SIZE.key?(@size)
-
-            raise ArgumentError, "Invalid size: #{@size}. Valid sizes are: #{SELECT_SIZE.keys.join(', ')}"
-          end
-
-          def validate_rounded
-            return if SELECT_ROUNDED.key?(@rounded)
-
-            raise ArgumentError, "Invalid rounded: #{@rounded}. Valid rounded options are: #{SELECT_ROUNDED.keys.join(', ')}"
+          # Definizione dinamica delle validazioni
+          [
+            { values: SELECT_THEME.keys, method: :validate_theme, param: 'theme', var: :@theme },
+            { values: SELECT_SIZE.keys, method: :validate_size, param: 'size', var: :@size },
+            { values: SELECT_ROUNDED.keys, method: :validate_rounded, param: 'rounded', var: :@rounded }
+          ].each do |config|
+            define_method(config[:method]) do
+              value = instance_variable_get(config[:var])
+              unless config[:values].include?(value)
+                raise ArgumentError, "#{config[:param].capitalize} non valido: #{value}. Valori supportati: #{config[:values].join(', ')}"
+              end
+            end
           end
 
           def normalize_selected(selected)

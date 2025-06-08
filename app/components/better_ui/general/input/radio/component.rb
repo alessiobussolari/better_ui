@@ -30,9 +30,13 @@ module BetterUi
 
           RADIO_ROUNDED = {
             none: 'rounded-none',
-            small: 'rounded-sm',
-            medium: 'rounded',
-            large: 'rounded-lg',
+            xxs: 'rounded-sm',
+            xs: 'rounded',
+            sm: 'rounded-md',
+            md: 'rounded-lg',
+            lg: 'rounded-xl',
+            xl: 'rounded-2xl',
+            xxl: 'rounded-3xl',
             full: 'rounded-full'
           }.freeze
 
@@ -69,8 +73,8 @@ module BetterUi
           # @param label [String, nil] Testo della label associata al radio
           # @param label_position [Symbol] Posizione della label (:left, :right)
           # @param theme [Symbol] Tema del componente (:default, :white, :red, :rose, :orange, :green, :blue, :yellow, :violet)
-          # @param size [Symbol] Dimensione del componente (:small, :medium, :large)
-          # @param rounded [Symbol] Border radius (:none, :small, :medium, :large, :full)
+          # @param size [Symbol] Dimensione del componente (:sm, :md, :lg)
+          # @param rounded [Symbol] Border radius (:none, :sm, :md, :lg, :full)
           # @param classes [String] Classi CSS aggiuntive
           # @param form [ActionView::Helpers::FormBuilder, nil] Form builder Rails opzionale
           # @param options [Hash] Opzioni aggiuntive per l'input (es. data attributes, aria attributes)
@@ -103,22 +107,18 @@ module BetterUi
             validate_label_position
           end
 
-          def validate_theme
-            return if RADIO_THEME.key?(@theme)
-
-            raise ArgumentError, "Invalid theme: #{@theme}. Valid themes are: #{RADIO_THEME.keys.join(', ')}"
-          end
-
-          def validate_size
-            return if RADIO_SIZE.key?(@size)
-
-            raise ArgumentError, "Invalid size: #{@size}. Valid sizes are: #{RADIO_SIZE.keys.join(', ')}"
-          end
-
-          def validate_rounded
-            return if RADIO_ROUNDED.key?(@rounded)
-
-            raise ArgumentError, "Invalid rounded: #{@rounded}. Valid rounded options are: #{RADIO_ROUNDED.keys.join(', ')}"
+          # Definizione dinamica delle validazioni
+          [
+            { values: RADIO_THEME.keys, method: :validate_theme, param: 'theme', var: :@theme },
+            { values: RADIO_SIZE.keys, method: :validate_size, param: 'size', var: :@size },
+            { values: RADIO_ROUNDED.keys, method: :validate_rounded, param: 'rounded', var: :@rounded }
+          ].each do |config|
+            define_method(config[:method]) do
+              value = instance_variable_get(config[:var])
+              unless config[:values].include?(value)
+                raise ArgumentError, "#{config[:param].capitalize} non valido: #{value}. Valori supportati: #{config[:values].join(', ')}"
+              end
+            end
           end
 
           def validate_label_position

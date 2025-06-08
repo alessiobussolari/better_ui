@@ -67,7 +67,7 @@ module BetterUi
         # @param theme [Symbol] tema del colore (:default, :white, :red, :blue, etc.)
         # @param size [Symbol] dimensione (:xxs, :xs, :sm, :md, :lg, :xl, :xxl)
         # @param align [Symbol] allineamento (:left, :center, :right, :justify)
-        # @param weight [Symbol] peso font (:thin, :light, :normal, :medium, :semibold, :bold, :extrabold)
+        # @param weight [Symbol] peso font (:thin, :light, :normal, :md, :semibold, :bold, :extrabold)
         # @param style [Symbol] stile (:normal, :italic, :underline, :line_through)
         # @param classes [String] classi CSS aggiuntive
         # @param html_options [Hash] opzioni HTML aggiuntive

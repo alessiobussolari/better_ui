@@ -40,7 +40,7 @@ module BetterUi
         }.freeze
 
         # @param theme [Symbol] Tema colori (default, white, red, rose, orange, green, blue, yellow, violet), default :default
-        # @param shadow [Symbol] Tipo di ombra (none, small, medium, large), default :small
+        # @param shadow [Symbol] Tipo di ombra (none, small, medium, large), default :sm
         # @param border [Boolean] Se mostrare il bordo inferiore, default true
         # @param actions [Array] Array di azioni/pulsanti a destra
         # @param classes [String] Classi CSS aggiuntive
@@ -48,7 +48,7 @@ module BetterUi
         # @param sidebar_width [Symbol] Larghezza della sidebar affiancata (:sm, :md, :lg, :xl), default :md
         def initialize(
           theme: :default,
-          shadow: :small,
+          shadow: :sm,
           border: false,
           actions: [],
           classes: nil,
@@ -67,15 +67,24 @@ module BetterUi
         end
 
         def container_classes
-          base_classes = %w[h-[81px] px-6 py-4]
+          base_classes = %w[fixed top-0 right-0 h-[81px] px-6 py-4 z-50]
           
-          # Width
+          # Width e posizionamento con sidebar
           if with_sidebar
-            sidebar_width_value = NAVBAR_SIDEBAR_WIDTH[@sidebar_width] || NAVBAR_SIDEBAR_WIDTH[:md]
-            base_classes << "pl-#{sidebar_width_value}"
-            base_classes << "ml-auto"
+            case @sidebar_width
+            when :sm
+              base_classes << "left-48"  # w-48 = 12rem = 192px
+            when :md
+              base_classes << "left-64"  # w-64 = 16rem = 256px  
+            when :lg
+              base_classes << "left-72"  # w-72 = 18rem = 288px
+            when :xl
+              base_classes << "left-80"  # w-80 = 20rem = 320px
+            else
+              base_classes << "left-64"  # default md
+            end
           else
-            base_classes << "w-full"
+            base_classes << "left-0 right-0"
           end
 
           # Tema
@@ -104,7 +113,7 @@ module BetterUi
         end
 
         def shadow_class
-          NAVBAR_SHADOW[@shadow] || NAVBAR_SHADOW[:small]
+          NAVBAR_SHADOW[@shadow] || NAVBAR_SHADOW[:sm]
         end
         
         def validate_params

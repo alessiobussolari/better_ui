@@ -14,8 +14,8 @@ module BetterUi
           # @param responsive [Boolean] Rende la tabella responsiva (scrollabile orizzontalmente)
           # @param compact [Boolean] Riduce la spaziatura interna
           # @param theme [Symbol] Tema della tabella (:default, :white, :gray)
-          # @param size [Symbol] Dimensione della tabella (:small, :medium, :large)
-          # @param rounded [Symbol] Arrotondamento degli angoli (:none, :small, :medium, :large)
+          # @param size [Symbol] Dimensione della tabella (:sm, :md, :lg)
+          # @param rounded [Symbol] Arrotondamento degli angoli (:none, :sm, :md, :lg)
           # @param classes [String] Classi CSS aggiuntive
           # @param options [Hash] Attributi HTML aggiuntivi
           #
@@ -32,7 +32,7 @@ module BetterUi
           # @example Tabella con stile personalizzato
           #   <%= bui_table(headers: ['Data', 'Evento'], 
           #                rows: [['10/01/2023', 'Riunione'], ['15/01/2023', 'Scadenza']], 
-          #                theme: :blue, size: :large, hover: true) %>
+          #                theme: :blue, size: :lg, hover: true) %>
           #
           # @example Tabella responsiva per dispositivi mobili
           #   <%= bui_table(headers: ['Prodotto', 'Descrizione', 'Prezzo', 'Disponibilità'], 

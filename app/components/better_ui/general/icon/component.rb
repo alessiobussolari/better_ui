@@ -183,7 +183,7 @@ module BetterUi
         def validate_size!
           unless ICON_SIZE_CLASSES.key?(@size)
             valid_sizes = ICON_SIZE_CLASSES.keys
-            raise ArgumentError, "La dimensione deve essere una tra: #{valid_sizes.join(', ')}"
+            raise ArgumentError, "BetterUi::General::Icon::Component - parametro 'size' con valore '#{@size}' non è valido. La dimensione deve essere una tra: #{valid_sizes.join(', ')}"
           end
         end
 

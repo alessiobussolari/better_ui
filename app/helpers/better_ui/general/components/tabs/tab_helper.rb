@@ -14,7 +14,7 @@ module BetterUi
           # @param disabled [Boolean] se questa tab è disabilitata
           # @param badge [String] il testo/numero del badge opzionale
           # @param theme [Symbol] il tema di colore della tab (:default, :blue, :red, :green, :yellow, :violet, :orange, :rose, :white)
-          # @param size [Symbol] la dimensione della tab (:small, :medium, :large)
+          # @param size [Symbol] la dimensione della tab (:sm, :md, :lg)
           # @param classes [String] classi CSS aggiuntive da applicare alla tab
           # @param options [Hash] attributi HTML aggiuntivi da applicare all'elemento
           # @return [String] l'HTML della tab
@@ -34,7 +34,7 @@ module BetterUi
           # @example Con attributi personalizzati
           #   <%= bui_tab(text: "Settings", target: "settings", classes: "font-bold", data: { testid: "settings-tab" }) %>
           def bui_tab(text:, target:, active: false, icon: nil, disabled: false, badge: nil, 
-                     theme: :default, size: :medium, classes: '', **options)
+                     theme: :default, size: :md, classes: '', **options)
             render BetterUi::General::Tabs::TabComponent.new(
               text: text,
               target: target,

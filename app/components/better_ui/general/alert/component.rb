@@ -82,8 +82,8 @@ module BetterUi
         # @param icon [String] nome dell'icona (opzionale)
         # @param icon_position [Symbol] :left, :right posizione dell'icona
         # @param dismissible [Boolean] se l'alert può essere chiuso
-        # @param rounded [Symbol] :none, :small, :medium, :large, :full arrotondamento degli angoli
-        # @param importance [Symbol] :high, :medium, :low livello di importanza per accessibilità
+        # @param rounded [Symbol] :none, :sm, :md, :lg, :full arrotondamento degli angoli
+        # @param importance [Symbol] :high, :md, :low livello di importanza per accessibilità
         # @param html_content [Boolean] se il messaggio contiene HTML
         # @param classes [String] classi CSS aggiuntive
         # @param html_options [Hash] opzioni HTML per il container
@@ -94,8 +94,8 @@ module BetterUi
           icon: nil,
           icon_position: :left,
           dismissible: false,
-          rounded: :medium,
-          importance: :medium,
+          rounded: :md,
+          importance: :md,
           html_content: false,
           classes: nil,
           **html_options
@@ -149,7 +149,7 @@ module BetterUi
           }
 
           # Aggiungi attributi ARIA in base al livello di importanza
-          importance_attrs = IMPORTANCE_LEVELS[@importance] || IMPORTANCE_LEVELS[:medium]
+          importance_attrs = IMPORTANCE_LEVELS[@importance] || IMPORTANCE_LEVELS[:md]
           importance_attrs.each do |key, value|
             attrs[key] = value
           end
@@ -169,7 +169,7 @@ module BetterUi
 
         # Genera le classi per il border radius
         def get_border_radius_class
-          ALERT_RADIUS_CLASSES[@rounded] || ALERT_RADIUS_CLASSES[:medium]
+          ALERT_RADIUS_CLASSES[@rounded] || ALERT_RADIUS_CLASSES[:md]
         end
 
         # Genera la classe per la posizione dell'icona (layout)

@@ -19,11 +19,15 @@ module BetterUi
           left: "right-full top-1/2 transform -translate-y-1/2 mr-2"
         }
 
-        # Dimensioni del tooltip con classi Tailwind dirette
+        # Dimensioni del tooltip con classi Tailwind dirette - Sistema uniforme 7 livelli
         TOOLTIP_SIZES = {
-          small: "px-1.5 py-0.5 text-xs",
-          medium: "px-2 py-1 text-sm",
-          large: "px-3 py-2 text-base"
+          xxs: "px-1 py-0.5 text-xs",        # Extra extra small
+          xs: "px-1.5 py-0.5 text-xs",       # Extra small
+          sm: "px-1.5 py-0.5 text-xs",       # Small
+          md: "px-2 py-1 text-sm",           # Medium (default)
+          lg: "px-3 py-2 text-base",         # Large
+          xl: "px-4 py-2.5 text-lg",         # Extra large
+          xxl: "px-5 py-3 text-xl"           # Extra extra large
         }
 
         # Temi di tooltip con classi Tailwind dirette - Stile filled
@@ -89,7 +93,7 @@ module BetterUi
         # @param text [String] testo del tooltip
         # @param theme [Symbol] :default, :white, :red, :rose, :orange, :green, :blue, :yellow, :violet
         # @param position [Symbol] :top, :right, :bottom, :left posizione del tooltip
-        # @param size [Symbol] :small, :medium, :large dimensione del tooltip
+        # @param size [Symbol] :sm, :md, :lg dimensione del tooltip
         # @param style [Symbol] :filled, :outline stile del tooltip
         # @param classes [String] classi CSS aggiuntive per il container
         # @param html_options [Hash] opzioni HTML per il container
@@ -97,7 +101,7 @@ module BetterUi
           text: nil,
           theme: :white,
           position: :top,
-          size: :medium,
+          size: :md,
           style: :filled,
           classes: nil,
           **html_options
@@ -166,7 +170,7 @@ module BetterUi
 
         # Genera le classi per la dimensione
         def get_size_class
-          TOOLTIP_SIZES[@size] || TOOLTIP_SIZES[:medium]
+          TOOLTIP_SIZES[@size] || TOOLTIP_SIZES[:md]
         end
 
         # Genera le classi per il tema

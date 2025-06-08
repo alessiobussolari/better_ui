@@ -30,9 +30,13 @@ module BetterUi
 
           CHECKBOX_ROUNDED = {
             none: 'rounded-none',
-            small: 'rounded-sm',
-            medium: 'rounded',
-            large: 'rounded-lg',
+            xxs: 'rounded-sm',
+            xs: 'rounded',
+            sm: 'rounded-md',
+            md: 'rounded-lg',
+            lg: 'rounded-xl',
+            xl: 'rounded-2xl',
+            xxl: 'rounded-3xl',
             full: 'rounded-full'
           }.freeze
 
@@ -70,14 +74,14 @@ module BetterUi
           # @param label [String, nil] Testo della label associata al checkbox
           # @param label_position [Symbol] Posizione della label (:left, :right)
           # @param theme [Symbol] Tema del componente (:default, :white, :red, :rose, :orange, :green, :blue, :yellow, :violet)
-          # @param size [Symbol] Dimensione del componente (:small, :medium, :large)
-          # @param rounded [Symbol] Border radius (:none, :small, :medium, :large, :full)
+          # @param size [Symbol] Dimensione del componente (:sm, :md, :lg)
+          # @param rounded [Symbol] Border radius (:none, :sm, :md, :lg, :full)
           # @param classes [String] Classi CSS aggiuntive
           # @param form [ActionView::Helpers::FormBuilder, nil] Form builder Rails opzionale
           # @param options [Hash] Opzioni aggiuntive per l'input (es. data attributes, aria attributes)
           def initialize(name:, value: "1", checked: false, required: false, disabled: false, 
                          indeterminate: false, label: nil, label_position: :right, theme: :default, 
-                         size: :md, rounded: :medium, classes: '', form: nil, **options)
+                         size: :md, rounded: :md, classes: '', form: nil, **options)
             @name = name
             @value = value
             @checked = checked
@@ -105,22 +109,18 @@ module BetterUi
             validate_label_position
           end
 
-          def validate_theme
-            return if CHECKBOX_THEME.key?(@theme)
-
-            raise ArgumentError, "Invalid theme: #{@theme}. Valid themes are: #{CHECKBOX_THEME.keys.join(', ')}"
-          end
-
-          def validate_size
-            return if CHECKBOX_SIZE.key?(@size)
-
-            raise ArgumentError, "Invalid size: #{@size}. Valid sizes are: #{CHECKBOX_SIZE.keys.join(', ')}"
-          end
-
-          def validate_rounded
-            return if CHECKBOX_ROUNDED.key?(@rounded)
-
-            raise ArgumentError, "Invalid rounded: #{@rounded}. Valid rounded options are: #{CHECKBOX_ROUNDED.keys.join(', ')}"
+          # Definizione dinamica delle validazioni
+          [
+            { values: CHECKBOX_THEME.keys, method: :validate_theme, param: 'theme', var: :@theme },
+            { values: CHECKBOX_SIZE.keys, method: :validate_size, param: 'size', var: :@size },
+            { values: CHECKBOX_ROUNDED.keys, method: :validate_rounded, param: 'rounded', var: :@rounded }
+          ].each do |config|
+            define_method(config[:method]) do
+              value = instance_variable_get(config[:var])
+              unless config[:values].include?(value)
+                raise ArgumentError, "#{config[:param].capitalize} non valido: #{value}. Valori supportati: #{config[:values].join(', ')}"
+              end
+            end
           end
 
           def validate_label_position
