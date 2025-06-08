@@ -7,7 +7,7 @@ module BetterUi
           #
           # @param text [String] Testo del bottone (argomento posizionale)
           # @param theme [Symbol] Tema del bottone (:default, :white, :red, etc.)
-          # @param size [Symbol] Dimensione del bottone (:small, :medium, :large)
+          # @param size [Symbol] Dimensione del bottone (:xxs, :xs, :sm, :md, :lg, :xl, :xxl)
           # @param full_width [Boolean] Larghezza completa
           # @param disabled [Boolean] Stato disabilitato
           # @param icon [String] Nome icona (opzionale)
@@ -25,7 +25,7 @@ module BetterUi
           def bui_button(
             text = nil,
             theme: :white,
-            size: :medium,
+            size: :md,
             full_width: false,
             disabled: false,
             icon: nil,

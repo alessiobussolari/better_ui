@@ -28,9 +28,25 @@ module BetterUi
           right: "text-right"
         }
 
-        # Dimensioni base (verranno combinate con level)
+        # Dimensioni base (verranno combinate con level) - Sistema uniforme 7 livelli
         HEADING_SIZE_CLASSES = {
-          small: {
+          xxs: {
+            1 => "text-lg sm:text-xl",
+            2 => "text-base sm:text-lg",
+            3 => "text-sm sm:text-base",
+            4 => "text-xs sm:text-sm",
+            5 => "text-xs",
+            6 => "text-xs"
+          },
+          xs: {
+            1 => "text-xl sm:text-2xl",
+            2 => "text-lg sm:text-xl",
+            3 => "text-base sm:text-lg",
+            4 => "text-sm sm:text-base",
+            5 => "text-xs sm:text-sm",
+            6 => "text-xs"
+          },
+          sm: {
             1 => "text-2xl sm:text-3xl",
             2 => "text-xl sm:text-2xl",
             3 => "text-lg sm:text-xl",
@@ -38,7 +54,7 @@ module BetterUi
             5 => "text-sm sm:text-base",
             6 => "text-xs sm:text-sm"
           },
-          medium: {
+          md: {
             1 => "text-3xl sm:text-4xl",
             2 => "text-2xl sm:text-3xl",
             3 => "text-xl sm:text-2xl",
@@ -46,13 +62,29 @@ module BetterUi
             5 => "text-base sm:text-lg",
             6 => "text-sm sm:text-base"
           },
-          large: {
+          lg: {
             1 => "text-4xl sm:text-5xl",
             2 => "text-3xl sm:text-4xl",
             3 => "text-2xl sm:text-3xl",
             4 => "text-xl sm:text-2xl",
             5 => "text-lg sm:text-xl",
             6 => "text-base sm:text-lg"
+          },
+          xl: {
+            1 => "text-5xl sm:text-6xl",
+            2 => "text-4xl sm:text-5xl",
+            3 => "text-3xl sm:text-4xl",
+            4 => "text-2xl sm:text-3xl",
+            5 => "text-xl sm:text-2xl",
+            6 => "text-lg sm:text-xl"
+          },
+          xxl: {
+            1 => "text-6xl sm:text-7xl",
+            2 => "text-5xl sm:text-6xl",
+            3 => "text-4xl sm:text-5xl",
+            4 => "text-3xl sm:text-4xl",
+            5 => "text-2xl sm:text-3xl",
+            6 => "text-xl sm:text-2xl"
           }
         }
 
@@ -103,7 +135,7 @@ module BetterUi
           level: 2,
           theme: :white,
           align: :left,
-          size: :medium,
+          size: :md,
           style: :normal,
           icon: nil,
           subtitle: nil,
@@ -205,7 +237,7 @@ module BetterUi
         end
 
         def get_size_class
-          size_map = HEADING_SIZE_CLASSES[@size] || HEADING_SIZE_CLASSES[:medium]
+          size_map = HEADING_SIZE_CLASSES[@size] || HEADING_SIZE_CLASSES[:md]
           size_map[@level] || size_map[2]
         end
 

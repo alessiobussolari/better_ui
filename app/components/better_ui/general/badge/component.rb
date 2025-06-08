@@ -41,11 +41,15 @@ module BetterUi
           gray: "border border-gray-500 text-gray-500 bg-transparent"
         }
 
-        # Dimensioni con classi Tailwind dirette
+        # Dimensioni con classi Tailwind dirette - Sistema uniforme 7 livelli
         BADGE_SIZE_CLASSES = {
-          small: "text-xs px-2 py-0.5",
-          medium: "text-sm px-2.5 py-0.5",
-          large: "text-sm px-3 py-1"
+          xxs: "text-xs px-1 py-0.5",        # Extra extra small
+          xs: "text-xs px-1.5 py-0.5",       # Extra small  
+          sm: "text-xs px-2 py-0.5",         # Small
+          md: "text-sm px-2.5 py-0.5",       # Medium (default)
+          lg: "text-sm px-3 py-1",           # Large
+          xl: "text-base px-4 py-1.5",       # Extra large
+          xxl: "text-lg px-5 py-2"           # Extra extra large
         }
 
         # Forme con classi Tailwind dirette
@@ -70,7 +74,7 @@ module BetterUi
 
         # @param label [String] Testo del badge
         # @param theme [Symbol] default, white, red, rose, orange, green, blue, yellow, violet, gray
-        # @param size [Symbol] small, medium, large
+        # @param size [Symbol] xxs, xs, sm, md, lg, xl, xxl
         # @param shape [Symbol] square, rounded
         # @param style [Symbol] filled, outline
         # @param variant [Symbol] nil, notification, counter, dot
@@ -80,7 +84,7 @@ module BetterUi
         def initialize(
           label: nil,
           theme: :white,
-          size: :medium,
+          size: :md,
           shape: :rounded,
           style: :filled,
           variant: nil,
@@ -126,7 +130,7 @@ module BetterUi
         end
 
         def get_size_class
-          BADGE_SIZE_CLASSES[@size] || BADGE_SIZE_CLASSES[:medium]
+          BADGE_SIZE_CLASSES[@size] || BADGE_SIZE_CLASSES[:md]
         end
 
         def get_shape_class

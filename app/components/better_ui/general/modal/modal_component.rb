@@ -23,11 +23,15 @@ module BetterUi
           violet: "bg-violet-50 border-b border-violet-200 text-violet-900"
         }
 
-        # Dimensioni con classi Tailwind dirette
+        # Dimensioni con classi Tailwind dirette - Sistema uniforme 7 livelli
         MODAL_SIZES = {
-          small: "max-w-sm",
-          medium: "max-w-md",
-          large: "max-w-2xl"
+          xxs: "max-w-xs",       # Extra extra small
+          xs: "max-w-sm",        # Extra small
+          sm: "max-w-md",        # Small
+          md: "max-w-lg",        # Medium (default)
+          lg: "max-w-2xl",       # Large
+          xl: "max-w-4xl",       # Extra large
+          xxl: "max-w-6xl"       # Extra extra large
         }
 
         # Border radius con classi Tailwind dirette
@@ -43,7 +47,7 @@ module BetterUi
         def initialize(
           title:,
           theme: :default,
-          size: :medium,
+          size: :md,
           rounded: :medium,
           backdrop: true,
           closable: true,
@@ -91,7 +95,7 @@ module BetterUi
         end
 
         def get_modal_size_classes
-          MODAL_SIZES[@size] || MODAL_SIZES[:medium]
+          MODAL_SIZES[@size] || MODAL_SIZES[:md]
         end
 
         def get_modal_rounded_classes

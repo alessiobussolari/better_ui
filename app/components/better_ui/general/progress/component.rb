@@ -8,11 +8,15 @@ module BetterUi
         # Classi per la barra di progresso
         PROGRESS_BAR_BASE_CLASSES = "h-full transition-all duration-300 ease-in-out"
 
-        # Dimensioni della progress bar con classi Tailwind dirette
+        # Dimensioni della progress bar con classi Tailwind dirette - Sistema uniforme 7 livelli
         PROGRESS_SIZES = {
-          small: "h-2",
-          medium: "h-4",
-          large: "h-6"
+          xxs: "h-1",          # Extra extra small
+          xs: "h-1.5",         # Extra small
+          sm: "h-2",           # Small
+          md: "h-4",           # Medium (default)
+          lg: "h-6",           # Large
+          xl: "h-8",           # Extra large
+          xxl: "h-10"          # Extra extra large
         }
 
         # Temi di progress bar con classi Tailwind dirette
@@ -50,7 +54,7 @@ module BetterUi
         def initialize(
           value: 0,
           theme: :white,
-          size: :medium,
+          size: :md,
           label: false,
           classes: nil,
           **html_options
@@ -142,7 +146,7 @@ module BetterUi
 
         # Genera le classi per la dimensione
         def get_size_class
-          PROGRESS_SIZES[@size] || PROGRESS_SIZES[:medium]
+          PROGRESS_SIZES[@size] || PROGRESS_SIZES[:md]
         end
 
         # Genera le classi per il tema della barra

@@ -22,11 +22,15 @@ module BetterUi
           purple: "bg-purple-500 text-white hover:bg-purple-600 focus:ring-purple-500"
         }
 
-        # Dimensioni con classi Tailwind dirette
+        # Dimensioni con classi Tailwind dirette - Sistema uniforme 7 livelli
         BUTTON_SIZES = {
-          small: "px-2.5 py-1.5 text-xs",
-          medium: "px-4 py-2 text-sm",
-          large: "px-6 py-3 text-base"
+          xxs: "px-1 py-0.5 text-xs",      # Extra extra small
+          xs: "px-1.5 py-1 text-xs",       # Extra small  
+          sm: "px-2.5 py-1.5 text-xs",     # Small
+          md: "px-4 py-2 text-sm",         # Medium (default)
+          lg: "px-6 py-3 text-base",       # Large
+          xl: "px-8 py-4 text-lg",         # Extra large
+          xxl: "px-10 py-5 text-xl"        # Extra extra large
         }
 
         # Border radius con classi Tailwind dirette
@@ -42,7 +46,7 @@ module BetterUi
         def initialize(
           text: nil,
           theme: :white,
-          size: :medium,
+          size: :md,
           full_width: false,
           disabled: false,
           icon: nil,
@@ -103,7 +107,7 @@ module BetterUi
         end
 
         def get_button_size_classes
-          BUTTON_SIZES[@size] || BUTTON_SIZES[:medium]
+          BUTTON_SIZES[@size] || BUTTON_SIZES[:md]
         end
 
         # Restituisce gli attributi per il bottone
@@ -155,12 +159,14 @@ module BetterUi
         def render_icon(icon_name)
           # Mappa le dimensioni del bottone alle dimensioni dell'icona
           icon_size = case @size
-          when :large
-                       :large
-          when :small
-                       :small
-          else
-                       :medium
+          when :xxs then :xxs
+          when :xs then :xs
+          when :sm then :sm
+          when :md then :md
+          when :lg then :lg
+          when :xl then :xl
+          when :xxl then :xxl
+          else :md
           end
 
           # Utilizziamo il componente Icon

@@ -26,9 +26,13 @@ module BetterUi
         }.freeze
 
         TABS_SIZE = {
-          small: 'text-sm',
-          medium: 'text-base',
-          large: 'text-lg'
+          xxs: 'text-xs',        # Extra extra small
+          xs: 'text-xs',         # Extra small
+          sm: 'text-sm',         # Small
+          md: 'text-base',       # Medium (default)
+          lg: 'text-lg',         # Large
+          xl: 'text-xl',         # Extra large
+          xxl: 'text-2xl'        # Extra extra large
         }.freeze
 
         TABS_ORIENTATION = {
@@ -36,7 +40,7 @@ module BetterUi
           vertical: 'flex-col'
         }.freeze
 
-        def initialize(variant: :pills, theme: :default, size: :medium, orientation: :horizontal, 
+        def initialize(variant: :pills, theme: :default, size: :md, orientation: :horizontal,
                       navigation_classes: '', panels_classes: 'mt-4', **options)
           @variant = variant
           @theme = theme

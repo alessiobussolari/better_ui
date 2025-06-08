@@ -19,36 +19,56 @@ module BetterUi
           }.freeze
 
           TOGGLE_TRACK_SIZE = {
-            small: 'w-9 h-5',
-            medium: 'w-11 h-6',
-            large: 'w-14 h-7'
+            xxs: 'w-6 h-3',       # Extra extra small
+            xs: 'w-7 h-4',        # Extra small
+            sm: 'w-9 h-5',        # Small
+            md: 'w-11 h-6',       # Medium (default)
+            lg: 'w-14 h-7',       # Large
+            xl: 'w-16 h-8',       # Extra large
+            xxl: 'w-20 h-10'      # Extra extra large
           }.freeze
 
           TOGGLE_THUMB_SIZE = {
-            small: 'w-4 h-4',
-            medium: 'w-5 h-5',
-            large: 'w-6 h-6'
+            xxs: 'w-2 h-2',       # Extra extra small
+            xs: 'w-3 h-3',        # Extra small
+            sm: 'w-4 h-4',        # Small
+            md: 'w-5 h-5',        # Medium (default)
+            lg: 'w-6 h-6',        # Large
+            xl: 'w-7 h-7',        # Extra large
+            xxl: 'w-9 h-9'        # Extra extra large
           }.freeze
 
           TOGGLE_THUMB_POSITION = {
-            small: 'peer-checked:translate-x-4',
-            medium: 'peer-checked:translate-x-5',
-            large: 'peer-checked:translate-x-7'
+            xxs: 'peer-checked:translate-x-3',    # Extra extra small
+            xs: 'peer-checked:translate-x-3',     # Extra small
+            sm: 'peer-checked:translate-x-4',     # Small
+            md: 'peer-checked:translate-x-5',     # Medium (default)
+            lg: 'peer-checked:translate-x-7',     # Large
+            xl: 'peer-checked:translate-x-8',     # Extra large
+            xxl: 'peer-checked:translate-x-10'    # Extra extra large
           }.freeze
 
           TOGGLE_BASE_TRACK = 'relative bg-gray-300 rounded-full transition-colors duration-200 ease-in-out'.freeze
           TOGGLE_BASE_THUMB = 'bg-white rounded-full shadow-sm transform transition-transform duration-200 ease-in-out absolute top-0.5 left-0.5'.freeze
 
           TOGGLE_LABEL_GAP = {
-            small: 'gap-2',
-            medium: 'gap-2.5',
-            large: 'gap-3'
+            xxs: 'gap-1',          # Extra extra small
+            xs: 'gap-1.5',         # Extra small
+            sm: 'gap-2',           # Small
+            md: 'gap-2.5',         # Medium (default)
+            lg: 'gap-3',           # Large
+            xl: 'gap-3.5',         # Extra large
+            xxl: 'gap-4'           # Extra extra large
           }.freeze
 
           TOGGLE_LABEL_TEXT = {
-            small: 'text-sm',
-            medium: 'text-base',
-            large: 'text-lg'
+            xxs: 'text-xs',        # Extra extra small
+            xs: 'text-xs',         # Extra small
+            sm: 'text-sm',         # Small
+            md: 'text-base',       # Medium (default)
+            lg: 'text-lg',         # Large
+            xl: 'text-xl',         # Extra large
+            xxl: 'text-2xl'        # Extra extra large
           }.freeze
 
           attr_reader :name, :value, :checked, :required, :disabled, 
@@ -69,7 +89,7 @@ module BetterUi
           # @param options [Hash] Opzioni aggiuntive per l'input (es. data attributes)
           def initialize(name:, value: '1', checked: false, required: false, disabled: false, 
                          label: nil, label_position: :right, theme: :default, 
-                         size: :medium, form: nil, classes: '', **options)
+                         size: :md, form: nil, classes: '', **options)
             @name = name
             @value = value
             @checked = checked

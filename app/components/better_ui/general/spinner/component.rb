@@ -3,17 +3,21 @@ module BetterUi
     module Spinner
       class Component < ViewComponent::Base
         THEMES = %i[default white red rose orange green blue yellow violet].freeze
-        SIZES = %i[small medium large].freeze
+        SIZES = %i[xxs xs sm md lg xl xxl].freeze
         STYLES = %i[default outline].freeze
 
         # Classi base sempre presenti
         SPINNER_BASE_CLASSES = "inline-flex items-center gap-2"
 
-        # Dimensioni SVG con classi Tailwind dirette
+        # Dimensioni SVG con classi Tailwind dirette - Sistema uniforme 7 livelli
         SPINNER_SIZES = {
-          small: "w-4 h-4",    # 16px
-          medium: "w-6 h-6",   # 24px
-          large: "w-8 h-8"     # 32px
+          xxs: "w-3 h-3",      # 12px - Extra extra small
+          xs: "w-3.5 h-3.5",   # 14px - Extra small
+          sm: "w-4 h-4",       # 16px - Small
+          md: "w-6 h-6",       # 24px - Medium (default)
+          lg: "w-8 h-8",       # 32px - Large
+          xl: "w-10 h-10",     # 40px - Extra large
+          xxl: "w-12 h-12"     # 48px - Extra extra large
         }
 
         # Temi colore con classi Tailwind dirette
@@ -35,7 +39,7 @@ module BetterUi
           outline: "opacity-75"
         }
 
-        def initialize(theme: :default, size: :medium, style: :default, label: nil, **html_options)
+        def initialize(theme: :default, size: :md, style: :default, label: nil, **html_options)
           @theme = theme.to_sym
           @size = size.to_sym
           @style = style.to_sym
@@ -73,7 +77,7 @@ module BetterUi
         end
 
         def get_spinner_size_classes
-          SPINNER_SIZES[size] || SPINNER_SIZES[:medium]
+          SPINNER_SIZES[size] || SPINNER_SIZES[:md]
         end
 
         def container_attributes

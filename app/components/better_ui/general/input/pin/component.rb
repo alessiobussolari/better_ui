@@ -19,15 +19,23 @@ module BetterUi
           }.freeze
 
           PIN_SIZE = {
-            small: 'w-8 h-8 text-sm',
-            medium: 'w-12 h-12 text-base',
-            large: 'w-16 h-16 text-lg'
+            xxs: 'w-6 h-6 text-xs',     # Extra extra small
+            xs: 'w-7 h-7 text-xs',      # Extra small
+            sm: 'w-8 h-8 text-sm',      # Small
+            md: 'w-12 h-12 text-base',  # Medium (default)
+            lg: 'w-16 h-16 text-lg',    # Large
+            xl: 'w-20 h-20 text-xl',    # Extra large
+            xxl: 'w-24 h-24 text-2xl'   # Extra extra large
           }.freeze
 
           PIN_GAP = {
-            small: 'gap-2',
-            medium: 'gap-3',
-            large: 'gap-4'
+            xxs: 'gap-1',        # Extra extra small
+            xs: 'gap-1.5',       # Extra small
+            sm: 'gap-2',         # Small
+            md: 'gap-3',         # Medium (default)
+            lg: 'gap-4',         # Large
+            xl: 'gap-5',         # Extra large
+            xxl: 'gap-6'         # Extra extra large
           }.freeze
 
           PIN_BASE_CLASSES = 'rounded-md border text-center font-mono focus:outline-none focus:ring-2 focus:ring-offset-1 transition-colors'.freeze
@@ -47,7 +55,7 @@ module BetterUi
           # @param classes [String] Classi CSS aggiuntive
           # @param options [Hash] Opzioni aggiuntive per attributi HTML
           def initialize(name:, value: '', length: 6, placeholder: '•', required: false, disabled: false,
-                         theme: :default, size: :medium, form: nil, classes: '', **options)
+                         theme: :default, size: :md, form: nil, classes: '', **options)
             @name = name
             @value = value.to_s
             @length = length.to_i

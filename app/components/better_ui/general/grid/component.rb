@@ -6,52 +6,115 @@ module BetterUi
       class Component < ViewComponent::Base
         attr_reader :cols, :rows, :gap, :flow, :align_items, :justify_items, :classes, :id, :html_options
 
-        # Classi base grid
-        GRID_BASE_CLASSES = "grid"
-
-        # Valori supportati per validazione
-        VALID_GRID_COLS = (1..12).to_a + [:auto, :none].freeze
-        VALID_GRID_ROWS = (1..6).to_a + [:auto, :none].freeze
-        VALID_BREAKPOINTS = [:sm, :md, :lg, :xl].freeze
-
-        # Gap (spaziatura)
-        GRID_GAP = {
-          none: 'gap-0', small: 'gap-2', medium: 'gap-4', large: 'gap-6'
+        # ===== CONSTANTS =====
+        
+        # Valid values for grid columns (1-12)
+        GRID_COLS_VALUES = (1..12).to_a.freeze
+        
+        # Valid values for grid rows (1-6)
+        GRID_ROWS_VALUES = (1..6).to_a.freeze
+        
+        # Valid breakpoints for responsive design
+        GRID_BREAKPOINTS = %i[sm md lg xl].freeze
+        
+        # Base grid classes
+        GRID_BASE_CLASSES = "grid".freeze
+        
+        # Pre-generated grid column classes for all valid combinations
+        GRID_COLS_CLASSES = {
+          # Base classes
+          1 => "grid-cols-1", 2 => "grid-cols-2", 3 => "grid-cols-3", 4 => "grid-cols-4",
+          5 => "grid-cols-5", 6 => "grid-cols-6", 7 => "grid-cols-7", 8 => "grid-cols-8",
+          9 => "grid-cols-9", 10 => "grid-cols-10", 11 => "grid-cols-11", 12 => "grid-cols-12",
+          :auto => "grid-cols-auto", :none => "grid-cols-none",
+          
+          # Responsive classes
+          sm: {
+            1 => "sm:grid-cols-1", 2 => "sm:grid-cols-2", 3 => "sm:grid-cols-3", 4 => "sm:grid-cols-4",
+            5 => "sm:grid-cols-5", 6 => "sm:grid-cols-6", 7 => "sm:grid-cols-7", 8 => "sm:grid-cols-8",
+            9 => "sm:grid-cols-9", 10 => "sm:grid-cols-10", 11 => "sm:grid-cols-11", 12 => "sm:grid-cols-12",
+            :auto => "sm:grid-cols-auto", :none => "sm:grid-cols-none"
+          },
+          md: {
+            1 => "md:grid-cols-1", 2 => "md:grid-cols-2", 3 => "md:grid-cols-3", 4 => "md:grid-cols-4",
+            5 => "md:grid-cols-5", 6 => "md:grid-cols-6", 7 => "md:grid-cols-7", 8 => "md:grid-cols-8",
+            9 => "md:grid-cols-9", 10 => "md:grid-cols-10", 11 => "md:grid-cols-11", 12 => "md:grid-cols-12",
+            :auto => "md:grid-cols-auto", :none => "md:grid-cols-none"
+          },
+          lg: {
+            1 => "lg:grid-cols-1", 2 => "lg:grid-cols-2", 3 => "lg:grid-cols-3", 4 => "lg:grid-cols-4",
+            5 => "lg:grid-cols-5", 6 => "lg:grid-cols-6", 7 => "lg:grid-cols-7", 8 => "lg:grid-cols-8",
+            9 => "lg:grid-cols-9", 10 => "lg:grid-cols-10", 11 => "lg:grid-cols-11", 12 => "lg:grid-cols-12",
+            :auto => "lg:grid-cols-auto", :none => "lg:grid-cols-none"
+          },
+          xl: {
+            1 => "xl:grid-cols-1", 2 => "xl:grid-cols-2", 3 => "xl:grid-cols-3", 4 => "xl:grid-cols-4",
+            5 => "xl:grid-cols-5", 6 => "xl:grid-cols-6", 7 => "xl:grid-cols-7", 8 => "xl:grid-cols-8",
+            9 => "xl:grid-cols-9", 10 => "xl:grid-cols-10", 11 => "xl:grid-cols-11", 12 => "xl:grid-cols-12",
+            :auto => "xl:grid-cols-auto", :none => "xl:grid-cols-none"
+          }
         }.freeze
-
-        # Flow (direzione)
+        
+        # Pre-generated grid row classes for all valid combinations
+        GRID_ROWS_CLASSES = {
+          # Base classes
+          1 => "grid-rows-1", 2 => "grid-rows-2", 3 => "grid-rows-3",
+          4 => "grid-rows-4", 5 => "grid-rows-5", 6 => "grid-rows-6",
+          :auto => "grid-rows-auto", :none => "grid-rows-none",
+          
+          # Responsive classes
+          sm: {
+            1 => "sm:grid-rows-1", 2 => "sm:grid-rows-2", 3 => "sm:grid-rows-3",
+            4 => "sm:grid-rows-4", 5 => "sm:grid-rows-5", 6 => "sm:grid-rows-6",
+            :auto => "sm:grid-rows-auto", :none => "sm:grid-rows-none"
+          },
+          md: {
+            1 => "md:grid-rows-1", 2 => "md:grid-rows-2", 3 => "md:grid-rows-3",
+            4 => "md:grid-rows-4", 5 => "md:grid-rows-5", 6 => "md:grid-rows-6",
+            :auto => "md:grid-rows-auto", :none => "md:grid-rows-none"
+          },
+          lg: {
+            1 => "lg:grid-rows-1", 2 => "lg:grid-rows-2", 3 => "lg:grid-rows-3",
+            4 => "lg:grid-rows-4", 5 => "lg:grid-rows-5", 6 => "lg:grid-rows-6",
+            :auto => "lg:grid-rows-auto", :none => "lg:grid-rows-none"
+          },
+          xl: {
+            1 => "xl:grid-rows-1", 2 => "xl:grid-rows-2", 3 => "xl:grid-rows-3",
+            4 => "xl:grid-rows-4", 5 => "xl:grid-rows-5", 6 => "xl:grid-rows-6",
+            :auto => "xl:grid-rows-auto", :none => "xl:grid-rows-none"
+          }
+        }.freeze
+        
+        # Grid flow options
         GRID_FLOW = {
-          row: 'grid-flow-row', col: 'grid-flow-col',
-          row_dense: 'grid-flow-row-dense', col_dense: 'grid-flow-col-dense'
+          row: "grid-flow-row",
+          col: "grid-flow-col",
+          dense: "grid-flow-dense",
+          row_dense: "grid-flow-row-dense",
+          col_dense: "grid-flow-col-dense"
         }.freeze
-
-        # Align items
+        
+        # Grid alignment options
         GRID_ALIGN_ITEMS = {
-          start: 'items-start', center: 'items-center',
-          end: 'items-end', stretch: 'items-stretch'
+          start: "items-start",
+          end: "items-end",
+          center: "items-center",
+          baseline: "items-baseline",
+          stretch: "items-stretch"
         }.freeze
-
-        # Justify items  
+        
         GRID_JUSTIFY_ITEMS = {
-          start: 'justify-items-start', center: 'justify-items-center',
-          end: 'justify-items-end', stretch: 'justify-items-stretch'
+          start: "justify-items-start",
+          end: "justify-items-end",
+          center: "justify-items-center",
+          stretch: "justify-items-stretch"
         }.freeze
 
-        def initialize(
-          cols: 1,
-          rows: nil,
-          gap: :medium,
-          flow: :row,
-          align_items: nil,
-          justify_items: nil,
-          classes: '',
-          id: nil,
-          **html_options
-        )
-          @cols = normalize_grid_cols_with_defaults(cols)
-          @rows = normalize_grid_rows_with_defaults(rows) if rows
-          @gap = normalize_grid_gap_with_defaults(gap)
-          @flow = flow.to_sym
+        def initialize(cols: nil, rows: nil, gap: nil, flow: nil, align_items: nil, justify_items: nil, classes: nil, id: nil, **html_options)
+          @cols = cols
+          @rows = rows
+          @gap = gap
+          @flow = flow&.to_sym
           @align_items = align_items&.to_sym
           @justify_items = justify_items&.to_sym
           @classes = classes
@@ -62,17 +125,16 @@ module BetterUi
         end
 
         def combined_classes
-          [
-            GRID_BASE_CLASSES,
-            generate_cols_classes,
-            generate_rows_classes,
-            generate_gap_classes,
-            GRID_FLOW[@flow],
-            @align_items ? GRID_ALIGN_ITEMS[@align_items] : nil,
-            @justify_items ? GRID_JUSTIFY_ITEMS[@justify_items] : nil,
-            @classes,
-            @html_options[:class]
-          ].compact.join(" ")
+          classes = [GRID_BASE_CLASSES]
+          classes << get_cols_classes(@cols) if @cols
+          classes << get_rows_classes(@rows) if @rows
+          classes << @gap if @gap
+          classes << get_flow_class(@flow) if @flow
+          classes << get_align_items_class(@align_items) if @align_items
+          classes << get_justify_items_class(@justify_items) if @justify_items
+          classes << @classes if @classes
+          classes << @html_options[:class] if @html_options[:class]
+          classes.compact.join(" ")
         end
 
         def grid_attributes
@@ -90,209 +152,153 @@ module BetterUi
 
         private
 
-        # Genera classi CSS dinamicamente invece di usare costanti massive
-        def generate_grid_cols_class(cols, breakpoint = nil)
-          prefix = breakpoint ? "#{breakpoint}:" : ""
-          "#{prefix}grid-cols-#{cols}"
-        end
-
-        def generate_grid_rows_class(rows, breakpoint = nil)
-          prefix = breakpoint ? "#{breakpoint}:" : ""
-          "#{prefix}grid-rows-#{rows}"
-        end
-
-        def generate_grid_gap_class(gap, breakpoint = nil)
-          prefix = breakpoint ? "#{breakpoint}:" : ""
-          gap_class = GRID_GAP[gap.to_sym]
-          return nil unless gap_class
+        # ===== HELPER METHODS =====
+        
+        def get_normalized_cols(cols)
+          return 1 if cols.nil?
+          return cols if cols.is_a?(Hash)
+          return cols if %i[auto none].include?(cols)
           
+          cols.to_i
+        end
+        
+        def get_normalized_rows(rows)
+          return 1 if rows.nil?
+          return rows if rows.is_a?(Hash)
+          return rows if %i[auto none].include?(rows)
+          
+          rows.to_i
+        end
+        
+        def get_grid_cols_class(cols, breakpoint = nil)
           if breakpoint
-            "#{breakpoint}:#{gap_class.sub(/^gap-/, 'gap-')}"
+            GRID_COLS_CLASSES[breakpoint]&.[](cols) || ""
           else
-            gap_class
+            GRID_COLS_CLASSES[cols] || ""
           end
         end
-
-        # Normalizza cols con default intelligenti per tutti i breakpoint
-        def normalize_grid_cols_with_defaults(cols)
-          # Se è un valore semplice, lo usiamo per tutti i breakpoint
-          return cols unless cols.is_a?(Hash)
-
-          # Se è un hash, riempiamo i breakpoint mancanti con fallback intelligente
-          normalized = {}
-          last_value = 1  # Default base
-
-          # Base (senza breakpoint)
-          normalized[:base] = 1
-
-          # Processa i breakpoint in ordine
-          VALID_BREAKPOINTS.each do |breakpoint|
-            if cols.key?(breakpoint)
-              last_value = cols[breakpoint]
-            end
-            normalized[breakpoint] = last_value
-          end
-
-          normalized
-        end
-
-        # Normalizza rows con default intelligenti (solo se specificato)
-        def normalize_grid_rows_with_defaults(rows)
-          return rows unless rows.is_a?(Hash)
-
-          normalized = {}
-          last_value = nil
-
-          VALID_BREAKPOINTS.each do |breakpoint|
-            if rows.key?(breakpoint)
-              last_value = rows[breakpoint]
-            end
-            normalized[breakpoint] = last_value if last_value
-          end
-
-          normalized
-        end
-
-        # Normalizza gap con default intelligenti
-        def normalize_grid_gap_with_defaults(gap)
-          return gap unless gap.is_a?(Hash)
-
-          normalized = {}
-          last_value = :medium  # Default base
-
-          VALID_BREAKPOINTS.each do |breakpoint|
-            if gap.key?(breakpoint)
-              last_value = gap[breakpoint]
-            end
-            normalized[breakpoint] = last_value
-          end
-
-          normalized
-        end
-
-        def generate_cols_classes
-          return nil unless @cols
-
-          if @cols.is_a?(Hash)
-            classes = []
-            
-            # Base class (senza breakpoint)
-            if @cols[:base]
-              classes << generate_grid_cols_class(@cols[:base])
-            end
-            
-            # Responsive classes
-            VALID_BREAKPOINTS.each do |breakpoint|
-              if @cols[breakpoint]
-                classes << generate_grid_cols_class(@cols[breakpoint], breakpoint)
-              end
-            end
-            
-            classes.join(" ")
+        
+        def get_grid_rows_class(rows, breakpoint = nil)
+          if breakpoint
+            GRID_ROWS_CLASSES[breakpoint]&.[](rows) || ""
           else
-            generate_grid_cols_class(@cols)
+            GRID_ROWS_CLASSES[rows] || ""
           end
         end
-
-        def generate_rows_classes
-          return nil unless @rows
-
-          if @rows.is_a?(Hash)
-            @rows.map do |breakpoint, rows_value|
-              generate_grid_rows_class(rows_value, breakpoint)
-            end.compact.join(" ")
+        
+        def get_cols_classes(cols)
+          normalized_cols = get_normalized_cols(cols)
+          
+          if normalized_cols.is_a?(Hash)
+            # Handle responsive breakpoints
+            normalized_cols.map do |breakpoint, value|
+              get_grid_cols_class(value, breakpoint)
+            end.join(" ")
           else
-            generate_grid_rows_class(@rows)
+            # Handle single value
+            get_grid_cols_class(normalized_cols)
           end
         end
-
-        def generate_gap_classes
-          if @gap.is_a?(Hash)
-            @gap.map do |breakpoint, gap_value|
-              generate_grid_gap_class(gap_value, breakpoint)
-            end.compact.join(" ")
+        
+        def get_rows_classes(rows)
+          normalized_rows = get_normalized_rows(rows)
+          
+          if normalized_rows.is_a?(Hash)
+            # Handle responsive breakpoints
+            normalized_rows.map do |breakpoint, value|
+              get_grid_rows_class(value, breakpoint)
+            end.join(" ")
           else
-            GRID_GAP[@gap.to_sym]
+            # Handle single value
+            get_grid_rows_class(normalized_rows)
           end
         end
+        
+        def get_flow_class(flow)
+          GRID_FLOW[flow]
+        end
+        
+        def get_align_items_class(align_items)
+          GRID_ALIGN_ITEMS[align_items]
+        end
+        
+        def get_justify_items_class(justify_items)
+          GRID_JUSTIFY_ITEMS[justify_items]
+        end
 
+        # ===== VALIDATION METHODS =====
+        
         def validate_grid_params
-          validate_grid_cols
-          validate_grid_rows if @rows
-          validate_grid_gap
-          validate_grid_flow
-          validate_grid_align_items if @align_items
-          validate_grid_justify_items if @justify_items
+          validate_cols(@cols) if @cols
+          validate_rows(@rows) if @rows
+          validate_flow(@flow) if @flow
+          validate_align_items(@align_items) if @align_items
+          validate_justify_items(@justify_items) if @justify_items
         end
-
-        def validate_grid_cols
-          if @cols.is_a?(Hash)
-            @cols.each do |breakpoint, cols_value|
-              next if breakpoint == :base  # Skip validation for base
-              
-              unless VALID_BREAKPOINTS.include?(breakpoint)
-                raise ArgumentError, "Breakpoint #{breakpoint} non supportato per cols"
-              end
-              unless VALID_GRID_COLS.include?(cols_value)
-                raise ArgumentError, "Valore cols #{cols_value} non supportato per breakpoint #{breakpoint}"
-              end
+        
+        def validate_cols(cols)
+          return if cols.nil?
+          
+          if cols.is_a?(Hash)
+            cols.each do |breakpoint, value|
+              validate_breakpoint(breakpoint)
+              validate_single_cols_value(value)
             end
           else
-            unless VALID_GRID_COLS.include?(@cols)
-              raise ArgumentError, "cols deve essere uno tra: #{VALID_GRID_COLS.join(', ')}"
-            end
+            validate_single_cols_value(cols)
           end
         end
-
-        def validate_grid_rows
-          if @rows.is_a?(Hash)
-            @rows.each do |breakpoint, rows_value|
-              unless VALID_BREAKPOINTS.include?(breakpoint)
-                raise ArgumentError, "Breakpoint #{breakpoint} non supportato per rows"
-              end
-              unless VALID_GRID_ROWS.include?(rows_value)
-                raise ArgumentError, "Valore rows #{rows_value} non supportato per breakpoint #{breakpoint}"
-              end
+        
+        def validate_rows(rows)
+          return if rows.nil?
+          
+          if rows.is_a?(Hash)
+            rows.each do |breakpoint, value|
+              validate_breakpoint(breakpoint)
+              validate_single_rows_value(value)
             end
           else
-            unless VALID_GRID_ROWS.include?(@rows)
-              raise ArgumentError, "rows deve essere uno tra: #{VALID_GRID_ROWS.join(', ')}"
-            end
+            validate_single_rows_value(rows)
           end
         end
-
-        def validate_grid_gap
-          if @gap.is_a?(Hash)
-            @gap.each do |breakpoint, gap_value|
-              unless VALID_BREAKPOINTS.include?(breakpoint)
-                raise ArgumentError, "Breakpoint #{breakpoint} non supportato per gap"
-              end
-              unless GRID_GAP.keys.include?(gap_value.to_sym)
-                raise ArgumentError, "Valore gap #{gap_value} non supportato per breakpoint #{breakpoint}"
-              end
-            end
-          else
-            unless GRID_GAP.keys.include?(@gap.to_sym)
-              raise ArgumentError, "gap deve essere uno tra: #{GRID_GAP.keys.join(', ')}"
-            end
+        
+        def validate_single_cols_value(value)
+          return if %i[auto none].include?(value)
+          
+          unless GRID_COLS_VALUES.include?(value.to_i)
+            raise ArgumentError, "Invalid cols value: #{value}. Must be one of #{GRID_COLS_VALUES}, :auto, or :none"
           end
         end
-
-        def validate_grid_flow
-          unless GRID_FLOW.keys.include?(@flow)
-            raise ArgumentError, "flow deve essere uno tra: #{GRID_FLOW.keys.join(', ')}"
+        
+        def validate_single_rows_value(value)
+          return if %i[auto none].include?(value)
+          
+          unless GRID_ROWS_VALUES.include?(value.to_i)
+            raise ArgumentError, "Invalid rows value: #{value}. Must be one of #{GRID_ROWS_VALUES}, :auto, or :none"
           end
         end
-
-        def validate_grid_align_items
-          unless GRID_ALIGN_ITEMS.keys.include?(@align_items)
-            raise ArgumentError, "align_items deve essere uno tra: #{GRID_ALIGN_ITEMS.keys.join(', ')}"
+        
+        def validate_breakpoint(breakpoint)
+          unless GRID_BREAKPOINTS.include?(breakpoint.to_sym)
+            raise ArgumentError, "Invalid breakpoint: #{breakpoint}. Must be one of #{GRID_BREAKPOINTS}"
           end
         end
-
-        def validate_grid_justify_items
-          unless GRID_JUSTIFY_ITEMS.keys.include?(@justify_items)
-            raise ArgumentError, "justify_items deve essere uno tra: #{GRID_JUSTIFY_ITEMS.keys.join(', ')}"
+        
+        def validate_flow(flow)
+          unless GRID_FLOW.key?(flow)
+            raise ArgumentError, "Invalid flow value: #{flow}. Must be one of #{GRID_FLOW.keys}"
+          end
+        end
+        
+        def validate_align_items(align_items)
+          unless GRID_ALIGN_ITEMS.key?(align_items)
+            raise ArgumentError, "Invalid align_items value: #{align_items}. Must be one of #{GRID_ALIGN_ITEMS.keys}"
+          end
+        end
+        
+        def validate_justify_items(justify_items)
+          unless GRID_JUSTIFY_ITEMS.key?(justify_items)
+            raise ArgumentError, "Invalid justify_items value: #{justify_items}. Must be one of #{GRID_JUSTIFY_ITEMS.keys}"
           end
         end
       end

@@ -23,11 +23,15 @@ module BetterUi
           violet: "bg-violet-600 border-violet-600 text-white hover:bg-violet-700 focus:ring-violet-500"
         }.freeze
 
-        # Dimensioni del trigger con classi Tailwind dirette
+        # Dimensioni del trigger con classi Tailwind dirette - Sistema uniforme 7 livelli
         DROPDOWN_TRIGGER_SIZE = {
-          small: "px-3 py-1.5 text-sm",
-          medium: "px-4 py-2 text-sm",
-          large: "px-6 py-3 text-base"
+          xxs: "px-1 py-0.5 text-xs",     # Extra extra small
+          xs: "px-2 py-1 text-xs",        # Extra small
+          sm: "px-3 py-1.5 text-sm",      # Small
+          md: "px-4 py-2 text-sm",        # Medium (default)
+          lg: "px-6 py-3 text-base",      # Large
+          xl: "px-8 py-4 text-lg",        # Extra large
+          xxl: "px-10 py-5 text-xl"       # Extra extra large
         }.freeze
 
         # Border radius con classi Tailwind dirette
@@ -64,7 +68,7 @@ module BetterUi
           trigger:,
           position: :bottom,
           theme: :default,
-          size: :medium,
+          size: :md,
           rounded: :medium,
           animation: :fade,
           fullwidth: false,
@@ -126,7 +130,7 @@ module BetterUi
         end
 
         def get_trigger_size_classes
-          DROPDOWN_TRIGGER_SIZE[@size] || DROPDOWN_TRIGGER_SIZE[:medium]
+          DROPDOWN_TRIGGER_SIZE[@size] || DROPDOWN_TRIGGER_SIZE[:md]
         end
 
         def get_trigger_rounded_classes

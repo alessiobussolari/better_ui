@@ -34,19 +34,35 @@ module BetterUi
           double: "border-double"
         }
 
-        # Dimensioni con classi Tailwind dirette
+        # Dimensioni con classi Tailwind dirette - Sistema uniforme 7 livelli
         DIVIDER_SIZE_CLASSES = {
-          thin: {
+          xxs: {
             horizontal: "border-t",
             vertical: "border-l"
           },
-          medium: {
+          xs: {
+            horizontal: "border-t",
+            vertical: "border-l"
+          },
+          sm: {
+            horizontal: "border-t",
+            vertical: "border-l"
+          },
+          md: {
             horizontal: "border-t-2",
             vertical: "border-l-2"
           },
-          thick: {
+          lg: {
             horizontal: "border-t-4",
             vertical: "border-l-4"
+          },
+          xl: {
+            horizontal: "border-t-8",
+            vertical: "border-l-8"
+          },
+          xxl: {
+            horizontal: "border-t-8",
+            vertical: "border-l-8"
           }
         }
 
@@ -75,7 +91,7 @@ module BetterUi
           theme: :white,
           orientation: :horizontal,
           style: :solid,
-          size: :medium,
+          size: :md,
           label: nil,
           height: nil,
           classes: nil,
@@ -182,7 +198,7 @@ module BetterUi
         end
 
         def get_size_class
-          size_map = DIVIDER_SIZE_CLASSES[@size] || DIVIDER_SIZE_CLASSES[:medium]
+          size_map = DIVIDER_SIZE_CLASSES[@size] || DIVIDER_SIZE_CLASSES[:md]
           size_map[@orientation] || size_map[:horizontal]
         end
 

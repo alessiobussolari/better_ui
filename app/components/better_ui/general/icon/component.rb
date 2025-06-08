@@ -5,12 +5,15 @@ module BetterUi
         # Classi base per l'icona con nomenclatura BEM
         ICON_BASE_CLASSES = "bui-icon inline-flex items-center justify-center"
 
-        # Dimensioni dell'icona (standardizzate: small, medium, large)
+        # Dimensioni dell'icona - Sistema uniforme 7 livelli
         ICON_SIZE_CLASSES = {
-          small: "bui-icon--small w-4 h-4 text-sm",
-          medium: "bui-icon--medium w-5 h-5 text-base",
-          large: "bui-icon--large w-6 h-6 text-lg",
-          xlarge: "bui-icon--large w-7 h-7 text-xl"
+          xxs: "bui-icon--xxs w-3 h-3 text-xs",       # Extra extra small
+          xs: "bui-icon--xs w-3.5 h-3.5 text-xs",     # Extra small
+          sm: "bui-icon--sm w-4 h-4 text-sm",         # Small
+          md: "bui-icon--md w-5 h-5 text-base",       # Medium (default)
+          lg: "bui-icon--lg w-6 h-6 text-lg",         # Large
+          xl: "bui-icon--xl w-7 h-7 text-xl",         # Extra large
+          xxl: "bui-icon--xxl w-8 h-8 text-2xl"       # Extra extra large
         }.freeze
 
         # Temi dell'icona con colori coerenti
@@ -55,7 +58,7 @@ module BetterUi
 
         # @param name [String] Nome dell'icona (richiesto)
         # @param style [Symbol] Stile dell'icona (:solid, :regular, :brands)
-        # @param size [Symbol] Dimensione (:small, :medium, :large)
+        # @param size [Symbol] Dimensione (:xxs, :xs, :sm, :md, :lg, :xl, :xxl)
         # @param theme [Symbol] Tema colore (:default, :white, :red, :rose, :orange, :green, :blue, :yellow, :violet)
         # @param spin [Boolean] Rotazione continua
         # @param pulse [Boolean] Animazione pulsazione
@@ -70,7 +73,7 @@ module BetterUi
         def initialize(
           name:,
           style: :solid,
-          size: :medium,
+          size: :md,
           theme: :default,
           spin: false,
           pulse: false,

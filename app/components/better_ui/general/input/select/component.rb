@@ -19,9 +19,13 @@ module BetterUi
           }.freeze
 
           SELECT_SIZE = {
-            small: 'px-2 py-1.5 text-xs',
-            medium: 'px-3 py-2 text-sm',
-            large: 'px-4 py-3 text-base'
+            xxs: 'px-1 py-1 text-xs',        # Extra extra small
+            xs: 'px-1.5 py-1.5 text-xs',     # Extra small
+            sm: 'px-2 py-1.5 text-xs',       # Small
+            md: 'px-3 py-2 text-sm',         # Medium (default)
+            lg: 'px-4 py-3 text-base',       # Large
+            xl: 'px-5 py-4 text-lg',         # Extra large
+            xxl: 'px-6 py-5 text-xl'         # Extra extra large
           }.freeze
 
           SELECT_ROUNDED = {
@@ -63,7 +67,7 @@ module BetterUi
             multiple: false,
             searchable: true,
             theme: :default, 
-            size: :medium, 
+            size: :md,
             rounded: :medium, 
             placeholder: nil,
             search_placeholder: nil,

@@ -25,12 +25,16 @@ module BetterUi
         }.freeze
 
         ACCORDION_SIZE = {
-          small: 'text-sm',
-          medium: 'text-base',
-          large: 'text-lg'
+          xxs: 'text-xs',        # Extra extra small
+          xs: 'text-xs',         # Extra small
+          sm: 'text-sm',         # Small
+          md: 'text-base',       # Medium (default)
+          lg: 'text-lg',         # Large
+          xl: 'text-xl',         # Extra large
+          xxl: 'text-2xl'        # Extra extra large
         }.freeze
 
-        def initialize(multiple: false, theme: :default, variant: :bordered, size: :medium, 
+        def initialize(multiple: false, theme: :default, variant: :bordered, size: :md,
                       classes: '', **options)
           @multiple = multiple
           @theme = theme

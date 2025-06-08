@@ -25,14 +25,15 @@ module BetterUi
           muted: "text-gray-500"
         }.freeze
 
-        # Dimensioni con classi Tailwind dirette
+        # Dimensioni con classi Tailwind dirette - Sistema uniforme 7 livelli  
         TEXT_SIZE_CLASSES = {
-          xs: "text-xs",
-          small: "text-sm",
-          medium: "text-base",
-          large: "text-lg",
-          xl: "text-xl",
-          "2xl": "text-2xl"
+          xxs: "text-xs",        # Extra extra small
+          xs: "text-xs",         # Extra small
+          sm: "text-sm",         # Small 
+          md: "text-base",       # Medium (default)
+          lg: "text-lg",         # Large
+          xl: "text-xl",         # Extra large
+          xxl: "text-2xl"        # Extra extra large
         }.freeze
 
         # Allineamenti con classi Tailwind dirette
@@ -64,7 +65,7 @@ module BetterUi
 
         # @param text [String] testo da mostrare (opzionale se si usa blocco)
         # @param theme [Symbol] tema del colore (:default, :white, :red, :blue, etc.)
-        # @param size [Symbol] dimensione (:xs, :small, :medium, :large, :xl, :"2xl")
+        # @param size [Symbol] dimensione (:xxs, :xs, :sm, :md, :lg, :xl, :xxl)
         # @param align [Symbol] allineamento (:left, :center, :right, :justify)
         # @param weight [Symbol] peso font (:thin, :light, :normal, :medium, :semibold, :bold, :extrabold)
         # @param style [Symbol] stile (:normal, :italic, :underline, :line_through)
@@ -73,7 +74,7 @@ module BetterUi
         def initialize(
           text: nil,
           theme: :default,
-          size: :medium,
+          size: :md,
           align: :left,
           weight: :normal,
           style: :normal,

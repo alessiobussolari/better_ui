@@ -21,11 +21,15 @@ module BetterUi
             violet: 'border-violet-300 focus:border-violet-500 focus:ring-violet-500'
           }.freeze
 
-          # Dimensioni supportate per il Text Input
+          # Dimensioni supportate per il Text Input - Sistema uniforme 7 livelli
           TEXT_INPUT_SIZES = {
-            small: 'h-8 px-2 py-1 text-xs',
-            medium: 'h-10 px-3 py-2 text-sm',
-            large: 'h-12 px-4 py-3 text-base'
+            xxs: 'h-6 px-1 py-0.5 text-xs',      # Extra extra small
+            xs: 'h-7 px-1.5 py-1 text-xs',       # Extra small
+            sm: 'h-8 px-2 py-1 text-xs',         # Small
+            md: 'h-10 px-3 py-2 text-sm',        # Medium (default)
+            lg: 'h-12 px-4 py-3 text-base',      # Large
+            xl: 'h-14 px-5 py-4 text-lg',        # Extra large
+            xxl: 'h-16 px-6 py-5 text-xl'        # Extra extra large
           }.freeze
 
           # Border radius supportati per il Text Input
@@ -53,13 +57,13 @@ module BetterUi
           # @param disabled [Boolean] Se il campo è disabilitato
           # @param type [Symbol] Tipo del campo input (:text, :password, :email, :tel, :url, :number, :search, :date, :time, :datetime_local, :month, :week, :color)
           # @param theme [Symbol] Tema del componente (:default, :white, :red, :rose, :orange, :green, :blue, :yellow, :violet)
-          # @param size [Symbol] Dimensione del componente (:small, :medium, :large)
+          # @param size [Symbol] Dimensione del componente (:xxs, :xs, :sm, :md, :lg, :xl, :xxl)
           # @param rounded [Symbol] Border radius (:none, :small, :medium, :large, :full)
           # @param classes [String] Classi CSS aggiuntive
           # @param form [ActionView::Helpers::FormBuilder] Form builder Rails opzionale
           # @param options [Hash] Opzioni aggiuntive per l'input
           def initialize(name:, value: nil, placeholder: nil, required: false, disabled: false, 
-                         type: :text, theme: :default, size: :medium, rounded: :medium, classes: '', form: nil, **options)
+                         type: :text, theme: :default, size: :md, rounded: :medium, classes: '', form: nil, **options)
             @name = name
             @value = value
             @placeholder = placeholder

@@ -19,9 +19,13 @@ module BetterUi
           }.freeze
 
           RATING_SIZE = {
-            small: 'text-sm',
-            medium: 'text-xl',
-            large: 'text-3xl'
+            xxs: 'text-xs',        # Extra extra small
+            xs: 'text-sm',         # Extra small
+            sm: 'text-base',       # Small
+            md: 'text-xl',         # Medium (default)
+            lg: 'text-2xl',        # Large
+            xl: 'text-3xl',        # Extra large
+            xxl: 'text-4xl'        # Extra extra large
           }.freeze
 
           RATING_EMPTY_COLOR = 'text-gray-300'.freeze
@@ -42,7 +46,7 @@ module BetterUi
           # @param classes [String] Classi CSS aggiuntive
           # @param options [Hash] Opzioni aggiuntive per attributi HTML
           def initialize(name: nil, value: 0, max_stars: 5, readonly: false, half_stars: true,
-                         theme: :default, size: :medium, show_value: false, form: nil,
+                         theme: :default, size: :md, show_value: false, form: nil,
                          classes: '', **options)
             @name = name
             @value = value.to_f

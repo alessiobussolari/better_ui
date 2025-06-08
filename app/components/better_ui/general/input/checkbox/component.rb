@@ -19,9 +19,13 @@ module BetterUi
           }.freeze
 
           CHECKBOX_SIZE = {
-            small: 'h-2.5 w-2.5',
-            medium: 'h-3 w-3',
-            large: 'h-4 w-4'
+            xxs: 'h-2 w-2',        # Extra extra small
+            xs: 'h-2.5 w-2.5',     # Extra small
+            sm: 'h-2.5 w-2.5',     # Small
+            md: 'h-3 w-3',         # Medium (default)
+            lg: 'h-4 w-4',         # Large
+            xl: 'h-5 w-5',         # Extra large
+            xxl: 'h-6 w-6'         # Extra extra large
           }.freeze
 
           CHECKBOX_ROUNDED = {
@@ -35,15 +39,23 @@ module BetterUi
           CHECKBOX_BASE_CLASSES = 'appearance-none border-2 focus:outline-none focus:ring-2 focus:ring-offset-2 transition-colors duration-200 cursor-pointer disabled:cursor-not-allowed disabled:opacity-50'.freeze
 
           CHECKBOX_LABEL_GAP = {
-            small: 'gap-1.5',
-            medium: 'gap-2',
-            large: 'gap-2.5'
+            xxs: 'gap-1',          # Extra extra small
+            xs: 'gap-1.5',         # Extra small
+            sm: 'gap-1.5',         # Small
+            md: 'gap-2',           # Medium (default)
+            lg: 'gap-2.5',         # Large
+            xl: 'gap-3',           # Extra large
+            xxl: 'gap-3.5'         # Extra extra large
           }.freeze
 
           CHECKBOX_LABEL_TEXT = {
-            small: 'text-xs',
-            medium: 'text-sm',
-            large: 'text-base'
+            xxs: 'text-xs',        # Extra extra small
+            xs: 'text-xs',         # Extra small
+            sm: 'text-xs',         # Small
+            md: 'text-sm',         # Medium (default)
+            lg: 'text-base',       # Large
+            xl: 'text-lg',         # Extra large
+            xxl: 'text-xl'         # Extra extra large
           }.freeze
 
           attr_reader :name, :value, :checked, :required, :disabled, :indeterminate, 
@@ -65,7 +77,7 @@ module BetterUi
           # @param options [Hash] Opzioni aggiuntive per l'input (es. data attributes, aria attributes)
           def initialize(name:, value: "1", checked: false, required: false, disabled: false, 
                          indeterminate: false, label: nil, label_position: :right, theme: :default, 
-                         size: :medium, rounded: :medium, classes: '', form: nil, **options)
+                         size: :md, rounded: :medium, classes: '', form: nil, **options)
             @name = name
             @value = value
             @checked = checked

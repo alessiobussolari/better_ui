@@ -12,26 +12,26 @@ module BetterUi
         AVATAR_PLACEHOLDER_BASE_CLASSES = "flex items-center justify-center h-full w-full font-medium"
         AVATAR_STATUS_BASE_CLASSES = "absolute rounded-full border-2 border-white"
 
-        # Dimensioni container con classi Tailwind dirette
+        # Dimensioni container con classi Tailwind dirette - Sistema uniforme 7 livelli
         AVATAR_SIZE_CLASSES = {
-          xxsmall: "h-5 w-5",
-          xsmall: "h-6 w-6",
-          small: "h-8 w-8",
-          medium: "h-10 w-10",
-          large: "h-12 w-12",
-          xlarge: "h-16 w-16",
-          xxlarge: "h-24 w-24"
+          xxs: "h-5 w-5",        # Extra extra small
+          xs: "h-6 w-6",         # Extra small  
+          sm: "h-8 w-8",         # Small
+          md: "h-10 w-10",       # Medium (default)
+          lg: "h-12 w-12",       # Large
+          xl: "h-16 w-16",       # Extra large
+          xxl: "h-24 w-24"       # Extra extra large
         }
 
         # Dimensioni testo placeholder
         AVATAR_PLACEHOLDER_SIZE_CLASSES = {
-          xxsmall: "text-xs",
-          xsmall: "text-xs",
-          small: "text-sm",
-          medium: "text-base",
-          large: "text-lg",
-          xlarge: "text-xl",
-          xxlarge: "text-2xl"
+          xxs: "text-xs",        # Extra extra small
+          xs: "text-xs",         # Extra small
+          sm: "text-sm",         # Small
+          md: "text-base",       # Medium (default)
+          lg: "text-lg",         # Large
+          xl: "text-xl",         # Extra large
+          xxl: "text-2xl"        # Extra extra large
         }
 
         # Forme con classi Tailwind dirette
@@ -64,13 +64,13 @@ module BetterUi
 
         # Dimensioni indicatore stato
         AVATAR_STATUS_SIZE_CLASSES = {
-          xxsmall: "h-1 w-1",
-          xsmall: "h-1.5 w-1.5",
-          small: "h-2 w-2",
-          medium: "h-2.5 w-2.5",
-          large: "h-3 w-3",
-          xlarge: "h-3.5 w-3.5",
-          xxlarge: "h-4 w-4"
+          xxs: "h-1 w-1",        # Extra extra small
+          xs: "h-1.5 w-1.5",     # Extra small
+          sm: "h-2 w-2",         # Small
+          md: "h-2.5 w-2.5",     # Medium (default)
+          lg: "h-3 w-3",         # Large
+          xl: "h-3.5 w-3.5",     # Extra large
+          xxl: "h-4 w-4"         # Extra extra large
         }
 
         # Posizioni dell'indicatore di stato
@@ -91,7 +91,7 @@ module BetterUi
         def initialize(
           name: nil,
           src: nil,
-          size: :medium,
+          size: :md,
           shape: :circle,
           status: nil,
           status_position: :bottom_right,
@@ -157,7 +157,7 @@ module BetterUi
         end
 
         def get_size_class
-          AVATAR_SIZE_CLASSES[@size] || AVATAR_SIZE_CLASSES[:medium]
+          AVATAR_SIZE_CLASSES[@size] || AVATAR_SIZE_CLASSES[:md]
         end
 
         def get_shape_class
@@ -173,7 +173,7 @@ module BetterUi
         end
 
         def get_placeholder_size_class
-          AVATAR_PLACEHOLDER_SIZE_CLASSES[@size] || AVATAR_PLACEHOLDER_SIZE_CLASSES[:medium]
+          AVATAR_PLACEHOLDER_SIZE_CLASSES[@size] || AVATAR_PLACEHOLDER_SIZE_CLASSES[:md]
         end
 
         def get_status_theme_class
@@ -181,7 +181,7 @@ module BetterUi
         end
 
         def get_status_size_class
-          AVATAR_STATUS_SIZE_CLASSES[@size] || AVATAR_STATUS_SIZE_CLASSES[:medium]
+          AVATAR_STATUS_SIZE_CLASSES[@size] || AVATAR_STATUS_SIZE_CLASSES[:md]
         end
 
         def get_status_position_class
@@ -228,19 +228,19 @@ module BetterUi
         # Ottiene le dimensioni dell'avatar in pixel (per attributi width/height img)
         def pixel_size
           case @size
-          when :xxsmall
+          when :xxs
             20
-          when :xsmall
+          when :xs
             24
-          when :small
+          when :sm
             32
-          when :medium
+          when :md
             40
-          when :large
+          when :lg
             48
-          when :xlarge
+          when :xl
             64
-          when :xxlarge
+          when :xxl
             96
           else
             40

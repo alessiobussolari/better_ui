@@ -34,12 +34,15 @@ module BetterUi
           text: "no-underline"
         }
 
-        # Dimensioni con classi Tailwind dirette
+        # Dimensioni con classi Tailwind dirette - Sistema uniforme 7 livelli
         LINK_SIZE_CLASSES = {
-          extra_small: "text-xs",
-          small: "text-sm",
-          medium: "text-base",
-          large: "text-lg"
+          xxs: "text-xs",        # Extra extra small
+          xs: "text-xs",         # Extra small
+          sm: "text-sm",         # Small
+          md: "text-base",       # Medium (default)
+          lg: "text-lg",         # Large
+          xl: "text-xl",         # Extra large
+          xxl: "text-2xl"        # Extra extra large
         }
 
         # Stati con classi Tailwind dirette
@@ -68,7 +71,7 @@ module BetterUi
           theme: :white,
           orientation: :horizontal,
           style: :default,
-          size: :medium,
+          size: :md,
           icon: nil,
           active: false,
           disabled: false,
@@ -137,14 +140,20 @@ module BetterUi
           end
 
           icon_size = case @size
-          when :extra_small
+          when :xxs
             "w-3 h-3"
-          when :small
+          when :xs
+            "w-3 h-3"
+          when :sm
             "w-4 h-4"
-          when :medium
+          when :md
             "w-5 h-5"
-          when :large
+          when :lg
             "w-6 h-6"
+          when :xl
+            "w-7 h-7"
+          when :xxl
+            "w-8 h-8"
           else
             "w-5 h-5"
           end
@@ -213,7 +222,7 @@ module BetterUi
         end
 
         def get_size_class
-          LINK_SIZE_CLASSES[@size] || LINK_SIZE_CLASSES[:medium]
+          LINK_SIZE_CLASSES[@size] || LINK_SIZE_CLASSES[:md]
         end
 
         def get_state_class
