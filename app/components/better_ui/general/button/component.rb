@@ -181,6 +181,13 @@ module BetterUi
 
         private
 
+        def validate_params
+          validate_theme
+          validate_size
+          validate_icon_position
+          validate_rounded
+        end
+
         [
           { constant: :BUTTON_THEME, var: :@theme, default: :white, method: :get_button_type_classes },
           { constant: :BUTTON_RADIUS, var: :@rounded, default: :xs, method: :get_border_radius_class },
@@ -191,14 +198,6 @@ module BetterUi
             value = instance_variable_get(config[:var])
             constant_hash[value] || constant_hash[config[:default]]
           end
-        end
-
-
-        def validate_params
-          validate_theme # ← SENZA @theme
-          validate_size # ← SENZA @size
-          validate_icon_position
-          validate_rounded
         end
 
         [

@@ -11,7 +11,7 @@ module BetterUi
           # @param footer [String] footer del pannello (opzionale)
           # @param theme [Symbol] tema del colore (:default, :white, etc.)
           # @param style [Symbol] stile (:default, :flat, :raised, :bordered)
-          # @param padding [Symbol] padding interno (:none, :sm, :md, :lg)
+          # @param padding [Symbol] padding interno (:xxs, :xs, :sm, :md, :lg, :xl, :xxl)
           # @param radius [Symbol] raggio dei bordi (:none, :sm, :md, :lg, :full)
           # @param html_options [Hash] opzioni HTML aggiuntive
           # @return [String] HTML del pannello renderizzato

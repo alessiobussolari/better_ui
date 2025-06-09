@@ -3,10 +3,8 @@
 module BetterUi
   module General
     module Dropdown
-      class Component < ViewComponent::Base
+      class Component < BetterUi::Component
         include BetterUi::General::Components::Icon::IconHelper
-        
-        attr_reader :trigger, :position, :theme, :size, :rounded, :animation, :fullwidth, :show_chevron, :selectable, :classes, :html_options
 
         # Classi base spostate nel template HTML per migliore leggibilità
 
@@ -68,6 +66,45 @@ module BetterUi
           false => "inline-flex justify-center"
         }.freeze
 
+        configure_attributes({
+          theme: {
+            var: :@theme,
+            default: :default,
+            constants: [:DROPDOWN_TRIGGER_THEME],
+            methods: [:get_trigger_theme_class]
+          },
+          size: {
+            var: :@size,
+            default: :md,
+            constants: [:DROPDOWN_TRIGGER_SIZE],
+            methods: [:get_trigger_size_class]
+          },
+          rounded: {
+            var: :@rounded,
+            default: :md,
+            constants: [:DROPDOWN_ROUNDED],
+            methods: [:get_rounded_class]
+          },
+          position: {
+            var: :@position,
+            default: :bottom,
+            constants: [:DROPDOWN_POSITION],
+            methods: [:get_position_class]
+          },
+          animation: {
+            var: :@animation,
+            default: :fade,
+            constants: [:DROPDOWN_ANIMATION],
+            methods: [:get_animation_class]
+          },
+          fullwidth: {
+            var: :@fullwidth,
+            default: false,
+            constants: [:DROPDOWN_FULLWIDTH],
+            methods: [:get_fullwidth_class]
+          }
+        })
+
         def initialize(
           trigger:,
           position: :bottom,
@@ -82,93 +119,47 @@ module BetterUi
           **html_options
         )
           @trigger = trigger
-          @position = position.to_sym
-          @theme = theme.to_sym
-          @size = size.to_sym
-          @rounded = rounded.to_sym
-          @animation = animation.to_sym
           @fullwidth = fullwidth
           @show_chevron = show_chevron
           @selectable = selectable
           @classes = classes
           @html_options = html_options
 
-          validate_params
+          super(theme: theme, size: size, rounded: rounded, position: position, animation: animation)
         end
 
         def fullwidth_classes
           [
-            get_fullwidth_classes
+            get_fullwidth_class
           ].compact.join(" ")
         end
 
         # Restituisce solo le classi dinamiche per il trigger
         def dynamic_trigger_classes
           [
-            get_trigger_theme_classes,
-            get_trigger_size_classes,
-            get_trigger_rounded_classes
+            get_trigger_theme_class,
+            get_trigger_size_class,
+            get_rounded_class
           ].compact.join(" ")
         end
 
         # Restituisce solo le classi dinamiche per il menu
         def dynamic_menu_classes
           [
-            get_position_classes,
-            get_animation_classes,
-            get_menu_rounded_classes
+            get_position_class,
+            get_animation_class,
+            get_rounded_class
           ].compact.join(" ")
         end
-
-        # Metodi per attributi rimossi - ora gestiti direttamente nel template HTML
 
         # Verifica se rendere il componente
         def render?
           @trigger.present?
         end
 
+
+
         private
-
-        # Definizione dinamica dei metodi get
-        [
-          { constant: 'DROPDOWN_TRIGGER_THEME', method: :get_trigger_theme_classes, var: :@theme, default: :default },
-          { constant: 'DROPDOWN_TRIGGER_SIZE', method: :get_trigger_size_classes, var: :@size, default: :md },
-          { constant: 'DROPDOWN_ROUNDED', method: :get_trigger_rounded_classes, var: :@rounded, default: :md },
-          { constant: 'DROPDOWN_ROUNDED', method: :get_menu_rounded_classes, var: :@rounded, default: :md },
-          { constant: 'DROPDOWN_POSITION', method: :get_position_classes, var: :@position, default: :bottom },
-          { constant: 'DROPDOWN_ANIMATION', method: :get_animation_classes, var: :@animation, default: :fade },
-          { constant: 'DROPDOWN_FULLWIDTH', method: :get_fullwidth_classes, var: :@fullwidth, default: false }
-        ].each do |config|
-          define_method(config[:method]) do
-            constant_value = self.class.const_get(config[:constant])
-            value = instance_variable_get(config[:var])
-            constant_value[value] || constant_value[config[:default]]
-          end
-        end
-
-        def validate_params
-          validate_theme
-          validate_size
-          validate_rounded
-          validate_position
-          validate_animation
-        end
-
-        # Definizione dinamica delle validazioni
-        [
-          { values: DROPDOWN_TRIGGER_THEME.keys, method: :validate_theme, param: 'tema', var: :@theme },
-          { values: DROPDOWN_TRIGGER_SIZE.keys, method: :validate_size, param: 'dimensione', var: :@size },
-          { values: DROPDOWN_ROUNDED.keys, method: :validate_rounded, param: 'border radius', var: :@rounded },
-          { values: DROPDOWN_POSITION.keys, method: :validate_position, param: 'posizione', var: :@position },
-          { values: DROPDOWN_ANIMATION.keys, method: :validate_animation, param: 'animazione', var: :@animation }
-        ].each do |config|
-          define_method(config[:method]) do
-            value = instance_variable_get(config[:var])
-            unless config[:values].include?(value)
-              raise ArgumentError, "#{config[:param].capitalize} non valido: #{value}. Valori supportati: #{config[:values].join(', ')}"
-            end
-          end
-        end
       end
     end
   end

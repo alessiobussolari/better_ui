@@ -3,10 +3,13 @@
 module BetterUi
   module General
     module Accordion
-      class Component < ViewComponent::Base
+      class Component < BetterUi::Component
         renders_many :items, "BetterUi::General::Accordion::ItemComponent"
+        
+        attr_reader :multiple, :theme, :variant, :size
 
-        ACCORDION_THEME = {
+        # Costanti rinominate secondo le convenzioni
+        ACCORDION_THEME_CLASSES = {
           default: 'border-gray-200',
           white: 'border-gray-100 bg-white',
           blue: 'border-blue-200',
@@ -18,13 +21,13 @@ module BetterUi
           rose: 'border-rose-200'
         }.freeze
 
-        ACCORDION_VARIANT = {
+        ACCORDION_VARIANT_CLASSES = {
           minimal: '',
           bordered: 'border rounded-lg',
           separated: 'space-y-2'
         }.freeze
 
-        ACCORDION_SIZE = {
+        ACCORDION_SIZE_CLASSES = {
           xxs: 'text-xs',        # Extra extra small
           xs: 'text-xs',         # Extra small
           sm: 'text-sm',         # Small
@@ -34,61 +37,63 @@ module BetterUi
           xxl: 'text-2xl'        # Extra extra large
         }.freeze
 
-        def initialize(multiple: false, theme: :default, variant: :bordered, size: :md,
-                      classes: '', **options)
+        # Configurazione con configure_attributes
+        configure_attributes({
+          theme: {
+            var: :@theme,
+            default: :default,
+            constants: [:ACCORDION_THEME_CLASSES],
+            methods: [:get_theme_class]
+          },
+          variant: {
+            var: :@variant,
+            default: :bordered,
+            constants: [:ACCORDION_VARIANT_CLASSES],
+            methods: [:get_variant_class]
+          },
+          size: {
+            var: :@size,
+            default: :md,
+            constants: [:ACCORDION_SIZE_CLASSES],
+            methods: [:get_size_class]
+          }
+        })
+
+        def initialize(
+          multiple: false,
+          theme: :default,
+          variant: :bordered,
+          size: :md,
+          **html_options
+        )
           @multiple = multiple
-          @theme = theme
-          @variant = variant
-          @size = size
-          @classes = classes
-          @options = options
+          @theme = theme.to_sym
+          @variant = variant.to_sym
+          @size = size.to_sym
+          @html_options = html_options
 
           validate_params
         end
 
         private
 
-        attr_reader :multiple, :theme, :variant, :size, :classes, :options
-
-        def validate_params
-          validate_theme
-          validate_variant
-          validate_size
-        end
-
-        def validate_theme
-          return if ACCORDION_THEME.key?(theme)
-
-          raise ArgumentError, "Invalid theme: #{theme}. Must be one of #{ACCORDION_THEME.keys}"
-        end
-
-        def validate_variant
-          return if ACCORDION_VARIANT.key?(variant)
-
-          raise ArgumentError, "Invalid variant: #{variant}. Must be one of #{ACCORDION_VARIANT.keys}"
-        end
-
-        def validate_size
-          return if ACCORDION_SIZE.key?(size)
-
-          raise ArgumentError, "Invalid size: #{size}. Must be one of #{ACCORDION_SIZE.keys}"
-        end
+        attr_reader :html_options
 
         # Attributi per il wrapper principale
         def wrapper_attributes
           base_classes = [
             'bui-accordion',
-            ACCORDION_SIZE[size],
-            ACCORDION_VARIANT[variant],
-            ACCORDION_THEME[theme],
-            classes
+            get_size_class,
+            get_variant_class,
+            get_theme_class,
+            @html_options[:class]
           ].compact.join(' ')
 
           {
             class: base_classes,
             'data-controller': 'bui-accordion',
             'data-bui-accordion-multiple-value': multiple
-          }.merge(options)
+          }.merge(@html_options.except(:class))
         end
       end
     end

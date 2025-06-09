@@ -14,7 +14,7 @@ module BetterUi
           # @param disabled [Boolean] se questa tab è disabilitata
           # @param badge [String] il testo/numero del badge opzionale
           # @param theme [Symbol] il tema di colore della tab (:default, :blue, :red, :green, :yellow, :violet, :orange, :rose, :white)
-          # @param size [Symbol] la dimensione della tab (:sm, :md, :lg)
+          # @param size [Symbol] la dimensione della tab (:xxs, :xs, :sm, :md, :lg, :xl, :xxl)
           # @param classes [String] classi CSS aggiuntive da applicare alla tab
           # @param options [Hash] attributi HTML aggiuntivi da applicare all'elemento
           # @return [String] l'HTML della tab

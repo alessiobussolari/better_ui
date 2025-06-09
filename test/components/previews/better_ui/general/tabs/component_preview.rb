@@ -20,7 +20,7 @@ module BetterUi
         # ## Variabili Principali
         # - **variant**: stile delle tabs (:pills, :underline, :bordered, :minimal)
         # - **theme**: colori del sistema (:default, :blue, :red, :green, :yellow, :violet, :orange, :rose, :white)
-        # - **size**: dimensioni delle tabs (:small, :medium, :large)
+        # - **size**: dimensioni delle tabs (:xxs, :xs, :sm, :md, :lg, :xl, :xxl)
         # - **orientation**: layout delle tabs (:horizontal, :vertical)
         #
         # ## Esempi Codice
@@ -46,11 +46,11 @@ module BetterUi
         # @label Con Helper
         # @param variant select { choices: [pills, underline, bordered, minimal] }
         # @param theme select { choices: [default, blue, red, green, yellow, violet, orange, rose, white] }
-        # @param size select { choices: [small, medium, large] }
+        # @param size select { choices: [xxs, xs, sm, md, lg, xl, xxl] }
         # @param orientation select { choices: [horizontal, vertical] }
         # @param navigation_classes text
         # @param panels_classes text
-        def default(variant: :pills, theme: :default, size: :medium, orientation: :horizontal, 
+        def default(variant: :pills, theme: :default, size: :md, orientation: :horizontal, 
                    navigation_classes: '', panels_classes: 'mt-4')
           normalized = normalize_params!(
             variant: variant,
@@ -67,11 +67,11 @@ module BetterUi
         # @label Istanziazione Diretta
         # @param variant select { choices: [pills, underline, bordered, minimal] }
         # @param theme select { choices: [default, blue, red, green, yellow, violet, orange, rose, white] }
-        # @param size select { choices: [small, medium, large] }
+        # @param size select { choices: [xxs, xs, sm, md, lg, xl, xxl] }
         # @param orientation select { choices: [horizontal, vertical] }
         # @param navigation_classes text
         # @param panels_classes text
-        def raw(variant: :pills, theme: :default, size: :medium, orientation: :horizontal,
+        def raw(variant: :pills, theme: :default, size: :md, orientation: :horizontal,
                navigation_classes: '', panels_classes: 'mt-4')
           normalized = normalize_params!(
             variant: variant,

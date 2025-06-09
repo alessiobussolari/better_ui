@@ -22,7 +22,7 @@ module BetterUi
         # - **multiple**: permette multipli item aperti contemporaneamente (default: false)
         # - **theme**: colori del componente (default, white, blue, red, green, yellow, violet, orange, rose)
         # - **variant**: stile visivo (minimal, bordered, separated)
-        # - **size**: dimensioni testo e padding (small, medium, large)
+        # - **size**: dimensioni testo e padding (xxs, xs, sm, md, lg, xl, xxl)
         # - **title**: testo dell'header cliccabile per ogni item
         # - **expanded**: se l'item è inizialmente aperto (default: false)
         # - **disabled**: se l'item non è cliccabile (default: false)
@@ -61,9 +61,9 @@ module BetterUi
         # @param multiple toggle
         # @param theme select { choices: [default, white, blue, red, green, yellow, violet, orange, rose] }
         # @param variant select { choices: [minimal, bordered, separated] }
-        # @param size select { choices: [small, medium, large] }
+        # @param size select { choices: [xxs, xs, sm, md, lg, xl, xxl] }
         # @param classes text
-        def default(multiple: false, theme: :default, variant: :bordered, size: :medium, classes: '')
+        def default(multiple: false, theme: :default, variant: :bordered, size: :md, classes: '')
           normalized = normalize_params!(
             multiple: multiple,
             theme: theme,
@@ -78,9 +78,9 @@ module BetterUi
         # @param multiple toggle
         # @param theme select { choices: [default, white, blue, red, green, yellow, violet, orange, rose] }
         # @param variant select { choices: [minimal, bordered, separated] }
-        # @param size select { choices: [small, medium, large] }
+        # @param size select { choices: [xxs, xs, sm, md, lg, xl, xxl] }
         # @param classes text
-        def raw(multiple: false, theme: :default, variant: :bordered, size: :medium, classes: '')
+        def raw(multiple: false, theme: :default, variant: :bordered, size: :md, classes: '')
           normalized = normalize_params!(
             multiple: multiple,
             theme: theme,

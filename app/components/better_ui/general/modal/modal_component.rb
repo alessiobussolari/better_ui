@@ -1,7 +1,7 @@
 module BetterUi
   module General
     module Modal
-      class ModalComponent < ViewComponent::Base
+      class ModalComponent < BetterUi::Component
         attr_reader :title, :theme, :size, :backdrop, :closable, :classes, :html_options
 
         # Classi base sempre presenti per il backdrop
@@ -43,12 +43,33 @@ module BetterUi
           full: "rounded-full"
         }
 
+        configure_attributes(
+          theme: {
+            var: :@theme,
+            default: :default,
+            constants: [:MODAL_THEME],
+            methods: [:get_modal_theme_classes]
+          },
+          size: {
+            var: :@size,
+            default: :md,
+            constants: [:MODAL_SIZES],
+            methods: [:get_modal_size_classes]
+          },
+          rounded: {
+            var: :@rounded,
+            default: :medium,
+            constants: [:MODAL_ROUNDED],
+            methods: [:get_modal_rounded_classes]
+          }
+        )
+
         # Inizializzazione del modal component
         def initialize(
           title:,
           theme: :default,
           size: :md,
-          rounded: :md,
+          rounded: :medium,
           backdrop: true,
           closable: true,
           classes: nil,
@@ -90,17 +111,7 @@ module BetterUi
           ].compact.join(" ")
         end
 
-        def get_modal_theme_classes
-          MODAL_THEME[@theme] || MODAL_THEME[:default]
-        end
-
-        def get_modal_size_classes
-          MODAL_SIZES[@size] || MODAL_SIZES[:md]
-        end
-
-        def get_modal_rounded_classes
-          MODAL_ROUNDED[@rounded] || MODAL_ROUNDED[:md]
-        end
+        # I metodi getter sono ora generati automaticamente da configure_attributes
 
         # Restituisce gli attributi per il backdrop
         def backdrop_attributes
@@ -135,29 +146,7 @@ module BetterUi
 
         private
 
-        def validate_params
-          validate_theme
-          validate_size
-          validate_rounded
-        end
-
-        def validate_theme
-          unless MODAL_THEME.keys.include?(@theme)
-            raise ArgumentError, "Il tema deve essere uno tra: #{MODAL_THEME.keys.join(', ')}"
-          end
-        end
-
-        def validate_size
-          unless MODAL_SIZES.keys.include?(@size)
-            raise ArgumentError, "La dimensione deve essere una tra: #{MODAL_SIZES.keys.join(', ')}"
-          end
-        end
-
-        def validate_rounded
-          unless MODAL_ROUNDED.keys.include?(@rounded)
-            raise ArgumentError, "Il border radius deve essere uno tra: #{MODAL_ROUNDED.keys.join(', ')}"
-          end
-        end
+        # Le validazioni sono ora gestite automaticamente da BetterUi::Component
       end
     end
   end

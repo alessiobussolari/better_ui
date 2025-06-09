@@ -1,8 +1,15 @@
 module BetterUi
   module General
     module Link
-      class Component < ViewComponent::Base
-        attr_reader :label, :href, :theme, :orientation, :style, :size, :icon, :active, :disabled, :data, :method, :target
+      class Component < BetterUi::Component
+        configure_attributes(
+          theme: { constant: :LINK_THEME_CLASSES, default: :white },
+          orientation: { constant: :LINK_ORIENTATION_CLASSES, default: :horizontal },
+          style: { constant: :LINK_STYLE_CLASSES, default: :default },
+          size: { constant: :LINK_SIZE_CLASSES, default: :md }
+        )
+
+        attr_reader :label, :href, :icon, :active, :disabled, :data, :method, :target
 
         # Classi base sempre presenti
         LINK_BASE_CLASSES = "transition-colors duration-200 no-underline"
@@ -82,10 +89,6 @@ module BetterUi
         )
           @label = label
           @href = href
-          @theme = theme.to_sym
-          @orientation = orientation.to_sym
-          @style = style.to_sym
-          @size = size.to_sym
           @icon = icon
           @active = active
           @disabled = disabled
@@ -94,7 +97,7 @@ module BetterUi
           @target = target
           @html_options = html_options
 
-          validate_params
+          super(theme: theme, orientation: orientation, style: style, size: size)
         end
 
         # Determina se è un link attivo/corrente
@@ -130,7 +133,7 @@ module BetterUi
           return "" unless @icon.present?
 
           # Definisce spacing e dimensioni icona basate su size
-          base_spacing = case @orientation
+          base_spacing = case orientation
           when :horizontal
             "mr-2"
           when :vertical
@@ -139,7 +142,7 @@ module BetterUi
             "mr-2"
           end
 
-          icon_size = case @size
+          icon_size = case size
           when :xxs
             "w-3 h-3"
           when :xs
@@ -209,57 +212,43 @@ module BetterUi
 
         private
 
+        # Metodi getter per gli attributi (generati automaticamente da BetterUi::Component)
+        def theme
+          @theme
+        end
+
+        def orientation
+          @orientation
+        end
+
+        def style
+          @style
+        end
+
+        def size
+          @size
+        end
+
         def get_theme_class
-          LINK_THEME_CLASSES[@theme] || LINK_THEME_CLASSES[:white]
+          LINK_THEME_CLASSES[theme] || LINK_THEME_CLASSES[:white]
         end
 
         def get_orientation_class
-          LINK_ORIENTATION_CLASSES[@orientation] || LINK_ORIENTATION_CLASSES[:horizontal]
+          LINK_ORIENTATION_CLASSES[orientation] || LINK_ORIENTATION_CLASSES[:horizontal]
         end
 
         def get_style_class
-          LINK_STYLE_CLASSES[@style] || LINK_STYLE_CLASSES[:default]
+          LINK_STYLE_CLASSES[style] || LINK_STYLE_CLASSES[:default]
         end
 
         def get_size_class
-          LINK_SIZE_CLASSES[@size] || LINK_SIZE_CLASSES[:md]
+          LINK_SIZE_CLASSES[size] || LINK_SIZE_CLASSES[:md]
         end
 
         def get_state_class
           return LINK_STATE_CLASSES[:disabled] if disabled?
           return LINK_STATE_CLASSES[:active] if active?
           LINK_STATE_CLASSES[:normal]
-        end
-
-        def validate_params
-          validate_theme
-          validate_orientation
-          validate_style
-          validate_size
-        end
-
-        def validate_theme
-          unless LINK_THEME_CLASSES.keys.include?(@theme)
-            raise ArgumentError, "Il tema deve essere uno tra: #{LINK_THEME_CLASSES.keys.join(', ')}"
-          end
-        end
-
-        def validate_orientation
-          unless LINK_ORIENTATION_CLASSES.keys.include?(@orientation)
-            raise ArgumentError, "L'orientamento deve essere uno tra: #{LINK_ORIENTATION_CLASSES.keys.join(', ')}"
-          end
-        end
-
-        def validate_style
-          unless LINK_STYLE_CLASSES.keys.include?(@style)
-            raise ArgumentError, "Lo stile deve essere uno tra: #{LINK_STYLE_CLASSES.keys.join(', ')}"
-          end
-        end
-
-        def validate_size
-          unless LINK_SIZE_CLASSES.keys.include?(@size)
-            raise ArgumentError, "La dimensione deve essere una tra: #{LINK_SIZE_CLASSES.keys.join(', ')}"
-          end
         end
       end
     end

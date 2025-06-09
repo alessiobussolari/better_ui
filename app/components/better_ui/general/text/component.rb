@@ -3,7 +3,7 @@
 module BetterUi
   module General
     module Text
-      class Component < ViewComponent::Base
+      class Component < BetterUi::Component
         attr_reader :text, :theme, :size, :align, :weight, :style, :classes, :html_options
 
         # Classi base sempre presenti
@@ -62,6 +62,39 @@ module BetterUi
           underline: "underline",
           line_through: "line-through"
         }.freeze
+
+        configure_attributes({
+          theme: {
+            var: :@theme,
+            default: :default,
+            constants: [:TEXT_THEME_CLASSES],
+            methods: [:get_theme_classes]
+          },
+          size: {
+            var: :@size,
+            default: :md,
+            constants: [:TEXT_SIZE_CLASSES],
+            methods: [:get_size_classes]
+          },
+          align: {
+            var: :@align,
+            default: :left,
+            constants: [:TEXT_ALIGN_CLASSES],
+            methods: [:get_align_classes]
+          },
+          weight: {
+            var: :@weight,
+            default: :normal,
+            constants: [:TEXT_WEIGHT_CLASSES],
+            methods: [:get_weight_classes]
+          },
+          style: {
+            var: :@style,
+            default: :normal,
+            constants: [:TEXT_STYLE_CLASSES],
+            methods: [:get_style_classes]
+          }
+        })
 
         # @param text [String] testo da mostrare (opzionale se si usa blocco)
         # @param theme [Symbol] tema del colore (:default, :white, :red, :blue, etc.)
@@ -126,69 +159,6 @@ module BetterUi
         end
 
         private
-
-        def validate_params
-          validate_theme
-          validate_size
-          validate_align
-          validate_weight
-          validate_style
-        end
-
-        def validate_theme
-          unless TEXT_THEME_CLASSES.key?(@theme)
-            valid_themes = TEXT_THEME_CLASSES.keys
-            raise ArgumentError, "Il tema deve essere uno tra: #{valid_themes.join(', ')}"
-          end
-        end
-
-        def validate_size
-          unless TEXT_SIZE_CLASSES.key?(@size)
-            valid_sizes = TEXT_SIZE_CLASSES.keys
-            raise ArgumentError, "La dimensione deve essere una tra: #{valid_sizes.join(', ')}"
-          end
-        end
-
-        def validate_align
-          unless TEXT_ALIGN_CLASSES.key?(@align)
-            valid_aligns = TEXT_ALIGN_CLASSES.keys
-            raise ArgumentError, "L'allineamento deve essere uno tra: #{valid_aligns.join(', ')}"
-          end
-        end
-
-        def validate_weight
-          unless TEXT_WEIGHT_CLASSES.key?(@weight)
-            valid_weights = TEXT_WEIGHT_CLASSES.keys
-            raise ArgumentError, "Il peso deve essere uno tra: #{valid_weights.join(', ')}"
-          end
-        end
-
-        def validate_style
-          unless TEXT_STYLE_CLASSES.key?(@style)
-            valid_styles = TEXT_STYLE_CLASSES.keys
-            raise ArgumentError, "Lo stile deve essere uno tra: #{valid_styles.join(', ')}"
-          end
-        end
-
-        def get_theme_classes
-          TEXT_THEME_CLASSES[@theme]
-        end
-
-        def get_size_classes
-          TEXT_SIZE_CLASSES[@size]
-        end
-
-        def get_align_classes
-          TEXT_ALIGN_CLASSES[@align]
-        end
-
-        def get_weight_classes
-          TEXT_WEIGHT_CLASSES[@weight]
-        end
-
-        def get_style_classes
-          TEXT_STYLE_CLASSES[@style]
-        end
       end
     end
   end

@@ -9,7 +9,9 @@ module BetterUi
         # @param tag select { choices: [p, span, div, h1, h2, h3, h4, h5, h6, strong, em] } "Tag HTML"
         # @param size select { choices: [xxs, xs, sm, md, lg, xl, xxl] } "Dimensione del testo"
         # @param variant select { choices: [default, white, red, rose, orange, green, blue, yellow, violet] } "Variante colore"
+        # @param align select { choices: [left, center, right, justify] } "Allineamento del testo"
         # @param weight select { choices: [normal, medium, semibold, bold] } "Peso del font"
+        # @param style select { choices: [normal, italic, underline] } "Stile del testo"
         # @param leading select { choices: [tight, normal, relaxed, loose] } "Interlinea"
         # @param tracking select { choices: [tight, normal, wide] } "Spaziatura caratteri"
         # @param classes text "Classi CSS aggiuntive"
@@ -50,7 +52,9 @@ module BetterUi
           tag: :p,
           size: :md,
           variant: :default,
+          align: :left,
           weight: :normal,
+          style: :normal,
           leading: :normal,
           tracking: :normal,
           classes: ""
@@ -60,7 +64,9 @@ module BetterUi
             tag: tag,
             size: size,
             variant: variant,
+            align: align,
             weight: weight,
+            style: style,
             leading: leading,
             tracking: tracking,
             classes: classes
@@ -74,7 +80,9 @@ module BetterUi
         # @param tag select { choices: [p, span, div, h1, h2, h3, h4, h5, h6, strong, em] } "Tag HTML"
         # @param size select { choices: [xxs, xs, sm, md, lg, xl, xxl] } "Dimensione del testo"
         # @param variant select { choices: [default, white, red, rose, orange, green, blue, yellow, violet] } "Variante colore"
+        # @param align select { choices: [left, center, right, justify] } "Allineamento del testo"
         # @param weight select { choices: [normal, medium, semibold, bold] } "Peso del font"
+        # @param style select { choices: [normal, italic, underline] } "Stile del testo"
         # @param leading select { choices: [tight, normal, relaxed, loose] } "Interlinea"
         # @param tracking select { choices: [tight, normal, wide] } "Spaziatura caratteri"
         # @param classes text "Classi CSS aggiuntive"
@@ -83,7 +91,9 @@ module BetterUi
           tag: :p,
           size: :md,
           variant: :default,
+          align: :left,
           weight: :normal,
+          style: :normal,
           leading: :normal,
           tracking: :normal,
           classes: ""
@@ -93,7 +103,9 @@ module BetterUi
             tag: tag,
             size: size,
             variant: variant,
+            align: align,
             weight: weight,
+            style: style,
             leading: leading,
             tracking: tracking,
             classes: classes
@@ -111,7 +123,9 @@ module BetterUi
           options[:tag] = options[:tag].to_sym if options[:tag].is_a?(String)
           options[:size] = options[:size].to_sym if options[:size].is_a?(String)
           options[:variant] = options[:variant].to_sym if options[:variant].is_a?(String)
+          options[:align] = options[:align].to_sym if options[:align].is_a?(String)
           options[:weight] = options[:weight].to_sym if options[:weight].is_a?(String)
+          options[:style] = options[:style].to_sym if options[:style].is_a?(String)
           options[:leading] = options[:leading].to_sym if options[:leading].is_a?(String)
           options[:tracking] = options[:tracking].to_sym if options[:tracking].is_a?(String)
 

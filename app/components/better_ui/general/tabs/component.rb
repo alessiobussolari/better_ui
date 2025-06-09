@@ -3,17 +3,17 @@
 module BetterUi
   module General
     module Tabs
-      class Component < ViewComponent::Base
+      class Component < BetterUi::Component
         renders_one :navigation
         renders_one :panels
-        TABS_VARIANT = {
+        TABS_VARIANT_CLASSES = {
           pills: 'bg-gray-100 rounded-lg p-1',
           underline: 'border-b border-gray-200',
           bordered: 'border border-gray-200 rounded-lg',
           minimal: ''
         }.freeze
 
-        TABS_THEME_DEFAULT = {
+        TABS_THEME_CLASSES = {
           default: 'text-gray-600',
           blue: 'text-blue-600',
           red: 'text-red-600',
@@ -25,7 +25,7 @@ module BetterUi
           white: 'text-white'
         }.freeze
 
-        TABS_SIZE = {
+        TABS_SIZE_CLASSES = {
           xxs: 'text-xs',        # Extra extra small
           xs: 'text-xs',         # Extra small
           sm: 'text-sm',         # Small
@@ -35,10 +35,37 @@ module BetterUi
           xxl: 'text-2xl'        # Extra extra large
         }.freeze
 
-        TABS_ORIENTATION = {
+        TABS_ORIENTATION_CLASSES = {
           horizontal: 'flex-row',
           vertical: 'flex-col'
         }.freeze
+
+        configure_attributes({
+          variant: {
+            var: :@variant,
+            default: :pills,
+            constants: [:TABS_VARIANT_CLASSES],
+            methods: [:get_variant_class]
+          },
+          theme: {
+            var: :@theme,
+            default: :default,
+            constants: [:TABS_THEME_CLASSES],
+            methods: [:get_theme_class]
+          },
+          size: {
+            var: :@size,
+            default: :md,
+            constants: [:TABS_SIZE_CLASSES],
+            methods: [:get_size_class]
+          },
+          orientation: {
+            var: :@orientation,
+            default: :horizontal,
+            constants: [:TABS_ORIENTATION_CLASSES],
+            methods: [:get_orientation_class]
+          }
+        })
 
         def initialize(variant: :pills, theme: :default, size: :md, orientation: :horizontal,
                       navigation_classes: '', panels_classes: 'mt-4', **options)
@@ -57,36 +84,7 @@ module BetterUi
 
         attr_reader :variant, :theme, :size, :orientation, :navigation_classes, :panels_classes, :options
 
-        def validate_params
-          validate_variant
-          validate_theme
-          validate_size
-          validate_orientation
-        end
 
-        def validate_variant
-          return if TABS_VARIANT.key?(variant)
-
-          raise ArgumentError, "Invalid variant: #{variant}. Must be one of #{TABS_VARIANT.keys}"
-        end
-
-        def validate_theme
-          return if TABS_THEME_DEFAULT.key?(theme)
-
-          raise ArgumentError, "Invalid theme: #{theme}. Must be one of #{TABS_THEME_DEFAULT.keys}"
-        end
-
-        def validate_size
-          return if TABS_SIZE.key?(size)
-
-          raise ArgumentError, "Invalid size: #{size}. Must be one of #{TABS_SIZE.keys}"
-        end
-
-        def validate_orientation
-          return if TABS_ORIENTATION.key?(orientation)
-
-          raise ArgumentError, "Invalid orientation: #{orientation}. Must be one of #{TABS_ORIENTATION.keys}"
-        end
 
         # Attributi per il wrapper principale (con data-controller)
         def wrapper_attributes
@@ -99,10 +97,10 @@ module BetterUi
         def navigation_attributes
           base_classes = [
             'flex',
-            TABS_ORIENTATION[orientation],
-            TABS_VARIANT[variant],
-            TABS_THEME_DEFAULT[theme],
-            TABS_SIZE[size],
+            get_orientation_class,
+            get_variant_class,
+            get_theme_class,
+            get_size_class,
             navigation_classes
           ].compact.join(' ')
 

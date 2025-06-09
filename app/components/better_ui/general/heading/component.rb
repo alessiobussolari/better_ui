@@ -1,8 +1,7 @@
 module BetterUi
   module General
     module Heading
-      class Component < ViewComponent::Base
-        attr_reader :level, :theme, :align, :size, :style, :icon, :subtitle, :with_divider
+      class Component < BetterUi::Component
 
         # Classi base sempre presenti
         HEADING_BASE_CLASSES = "font-bold leading-tight"
@@ -122,10 +121,43 @@ module BetterUi
           violet: "border-violet-200"
         }
 
+        configure_attributes(
+          theme: {
+            var: :@theme,
+            default: :default,
+            constants: [:HEADING_THEME_CLASSES],
+            methods: [:get_theme_class]
+          },
+          subtitle_theme: {
+            var: :@theme,
+            default: :default,
+            constants: [:HEADING_SUBTITLE_THEME_CLASSES],
+            methods: [:get_subtitle_theme_class]
+          },
+          divider_theme: {
+            var: :@theme,
+            default: :default,
+            constants: [:HEADING_DIVIDER_THEME_CLASSES],
+            methods: [:get_divider_theme_class]
+          },
+          align: {
+            var: :@align,
+            default: :left,
+            constants: [:HEADING_ALIGN_CLASSES],
+            methods: [:get_align_class]
+          },
+          style: {
+            var: :@style,
+            default: :normal,
+            constants: [:HEADING_STYLE_CLASSES],
+            methods: [:get_style_class]
+          }
+        )
+
         # @param level [Integer] livello del heading (1-6)
         # @param theme [Symbol] tema del colore (:default, :white, etc.)
         # @param align [Symbol] allineamento (:left, :center, :right)
-        # @param size [Symbol] dimensione (:sm, :md, :lg)
+        # @param size [Symbol] dimensione (:xxs, :xs, :sm, :md, :lg, :xl, :xxl)
         # @param style [Symbol] stile (:normal, :bold, :italic, :underline)
         # @param icon [String] icona opzionale
         # @param subtitle [String] sottotitolo opzionale
@@ -133,7 +165,7 @@ module BetterUi
         # @param html_options [Hash] opzioni HTML per il container
         def initialize(
           level: 2,
-          theme: :white,
+          theme: :default,
           align: :left,
           size: :md,
           style: :normal,
@@ -143,15 +175,14 @@ module BetterUi
           **html_options
         )
           @level = level.to_i.clamp(1, 6)
-          @theme = theme.to_sym
-          @align = align.to_sym
-          @size = size.to_sym
-          @style = style.to_sym
           @icon = icon
+          @size = size
           @subtitle = subtitle
           @with_divider = with_divider
           @html_options = html_options
 
+          # Utilizza il metodo della classe base per impostare automaticamente le variabili di istanza
+          set_instance_variables(theme: theme, align: align, style: style)
           validate_params
         end
 
@@ -228,47 +259,10 @@ module BetterUi
 
         private
 
-        # Metodi get dinamici
-        [
-          { constant: :HEADING_THEME_CLASSES, var: :@theme, default: :white, method: :get_theme_class },
-          { constant: :HEADING_ALIGN_CLASSES, var: :@align, default: :left, method: :get_align_class },
-          { constant: :HEADING_STYLE_CLASSES, var: :@style, default: :normal, method: :get_style_class },
-          { constant: :HEADING_SUBTITLE_THEME_CLASSES, var: :@theme, default: :white, method: :get_subtitle_theme_class },
-          { constant: :HEADING_DIVIDER_THEME_CLASSES, var: :@theme, default: :white, method: :get_divider_theme_class }
-        ].each do |config|
-          define_method config[:method] do
-            constant_hash = self.class.const_get(config[:constant])
-            value = instance_variable_get(config[:var])
-            constant_hash[value] || constant_hash[config[:default]]
-          end
-        end
-
-        # Metodo speciale per get_size_class che ha logica diversa
+        # Override per get_size_class che ha logica speciale (combina size e level)
         def get_size_class
           size_map = HEADING_SIZE_CLASSES[@size] || HEADING_SIZE_CLASSES[:md]
           size_map[@level] || size_map[2]
-        end
-
-        def validate_params
-          validate_theme
-          validate_align
-          validate_size
-          validate_style
-        end
-
-        # Validazioni dinamiche
-        [
-          { values: HEADING_THEME_CLASSES.keys, method: :validate_theme, param: 'theme', var: :@theme },
-          { values: HEADING_ALIGN_CLASSES.keys, method: :validate_align, param: 'align', var: :@align },
-          { values: HEADING_SIZE_CLASSES.keys, method: :validate_size, param: 'size', var: :@size },
-          { values: HEADING_STYLE_CLASSES.keys, method: :validate_style, param: 'style', var: :@style }
-        ].each do |validation|
-          define_method validation[:method] do
-            value = instance_variable_get(validation[:var])
-            unless validation[:values].include?(value)
-              raise ArgumentError, "#{self.class.name} - parametro '#{validation[:param]}' con valore '#{value}' non è valido. Deve essere uno tra: #{validation[:values].join(', ')}"
-            end
-          end
         end
 
       end

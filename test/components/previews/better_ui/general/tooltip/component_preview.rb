@@ -8,13 +8,13 @@ module BetterUi
         # @param text text "Testo del tooltip"
         # @param theme select { choices: [default, white, red, rose, orange, green, blue, yellow, violet] } "Tema di colore"
         # @param position select { choices: [top, right, bottom, left] } "Posizione"
-        # @param size select { choices: [small, medium, large] } "Dimensione"
+        # @param size select { choices: [xxs, xs, sm, md, lg, xl, xxl] } "Dimensione"
         # @param style select { choices: [filled, outline] } "Stile"
         def default(
           text: "Questo è un tooltip di esempio",
           theme: :white,
           position: :top,
-          size: :medium,
+          size: :md,
           style: :filled
         )
           normalized = normalize_params!(
@@ -32,13 +32,13 @@ module BetterUi
         # @param text text "Testo del tooltip"
         # @param theme select { choices: [default, white, red, rose, orange, green, blue, yellow, violet] } "Tema di colore"
         # @param position select { choices: [top, right, bottom, left] } "Posizione"
-        # @param size select { choices: [small, medium, large] } "Dimensione"
+        # @param size select { choices: [xxs, xs, sm, md, lg, xl, xxl] } "Dimensione"
         # @param style select { choices: [filled, outline] } "Stile"
         def raw(
           text: "Questo è un tooltip di esempio",
           theme: :white,
           position: :top,
-          size: :medium,
+          size: :md,
           style: :filled
         )
           normalized = normalize_params!(

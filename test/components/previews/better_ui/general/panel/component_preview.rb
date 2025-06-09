@@ -21,7 +21,7 @@ module BetterUi
         # - **footer**: contenuto per il footer
         # - **theme**: tema colore (default, white, red, rose, orange, green, blue, yellow, violet)
         # - **style**: stile del pannello (default, flat, raised, bordered)
-        # - **padding**: dimensione del padding interno (none, small, medium, large)
+        # - **padding**: dimensione del padding interno (xxs, xs, sm, md, lg, xl, xxl)
         # - **radius**: border radius (none, small, medium, large, full)
         #
         # ## Esempi Codice
@@ -44,7 +44,7 @@ module BetterUi
         # @param footer text "Footer del pannello (opzionale)"
         # @param theme select { choices: [default, white, red, rose, orange, green, blue, yellow, violet] } "Tema di colore"
         # @param style select { choices: [default, flat, raised, bordered] } "Stile del pannello"
-        # @param padding select { choices: [none, small, medium, large] } "Dimensione del padding interno"
+        # @param padding select { choices: [xxs, xs, sm, md, lg, xl, xxl] } "Dimensione del padding interno"
         # @param radius select { choices: [none, small, medium, large, full] } "Raggio dei bordi"
         def default(
           title: "Titolo Pannello",
@@ -53,8 +53,8 @@ module BetterUi
           footer: "",
           theme: :white,
           style: :default,
-          padding: :medium,
-          radius: :small
+          padding: :md,
+          radius: :sm
         )
           normalized = normalize_params!(
             title: title,
@@ -77,7 +77,7 @@ module BetterUi
         # @param footer text "Footer del pannello (opzionale)"
         # @param theme select { choices: [default, white, red, rose, orange, green, blue, yellow, violet] } "Tema di colore"
         # @param style select { choices: [default, flat, raised, bordered] } "Stile del pannello"
-        # @param padding select { choices: [none, small, medium, large] } "Dimensione del padding interno"
+        # @param padding select { choices: [xxs, xs, sm, md, lg, xl, xxl] } "Dimensione del padding interno"
         # @param radius select { choices: [none, small, medium, large, full] } "Raggio dei bordi"
         def raw(
           title: "Titolo Pannello",
@@ -86,8 +86,8 @@ module BetterUi
           footer: "",
           theme: :white,
           style: :default,
-          padding: :medium,
-          radius: :small
+          padding: :md,
+          radius: :sm
         )
           normalized = normalize_params!(
             title: title,

@@ -5,8 +5,8 @@
 ) do |modal| %>
   <% modal.with_trigger do %>
     <%= bui_button(
-      label: trigger_label, 
-      type: trigger_type, 
+      text: trigger_label, 
+      theme: trigger_type, 
       data: { action: "click->bui-modal#open" }
     ) %>
   <% end %>
@@ -28,8 +28,8 @@
         </p>
         
         <div class="flex justify-end space-x-3 pt-4 border-t border-gray-200">
-          <%= bui_button(label: "Annulla", type: :white) %>
-          <%= bui_button(label: "Elimina", type: :red) %>
+          <%= bui_button(text: "Annulla", theme: :white) %>
+          <%= bui_button(text: "Elimina", theme: :red) %>
         </div>
       </div>
     <% end %>

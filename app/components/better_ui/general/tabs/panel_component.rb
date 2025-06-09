@@ -3,7 +3,7 @@
 module BetterUi
   module General
     module Tabs
-      class PanelComponent < ViewComponent::Base
+      class PanelComponent < BetterUi::Component
         def initialize(id:, active: false, classes: '', **options)
           @id = id
           @active = active

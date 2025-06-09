@@ -21,8 +21,8 @@ module BetterUi
         # - **trigger**: testo del pulsante trigger (obbligatorio)
         # - **position**: posizione del menu (:bottom, :top, :left, :right)
         # - **theme**: tema colore trigger (default, white, red, rose, orange, green, blue, yellow, violet)
-        # - **size**: dimensione trigger (small, medium, large)
-        # - **rounded**: border radius (none, small, medium, large, full)
+        # - **size**: dimensione trigger (xxs, xs, sm, md, lg, xl, xxl)
+        # - **rounded**: border radius (none, xxs, xs, sm, md, lg, xl, xxl, full)
         # - **animation**: tipo animazione (fade, slide, none)
         #
         # ## Esempi Codice
@@ -49,16 +49,16 @@ module BetterUi
         # @param trigger text "Testo del pulsante trigger"
         # @param position select { choices: [bottom, top, left, right] }
         # @param theme select { choices: [default, white, red, rose, orange, green, blue, yellow, violet] }
-        # @param size select { choices: [small, medium, large] }
-        # @param rounded select { choices: [none, small, medium, large, full] }
+        # @param size select { choices: [xxs, xs, sm, md, lg, xl, xxl] }
+        # @param rounded select { choices: [none, xxs, xs, sm, md, lg, xl, xxl, full] }
         # @param animation select { choices: [fade, slide, none] }
         # @param classes text "Classi CSS aggiuntive"
         def default(
           trigger: "Menu Azioni",
           position: :bottom,
           theme: :default,
-          size: :medium,
-          rounded: :medium,
+          size: :md,
+          rounded: :md,
           animation: :fade,
           classes: ""
         )
@@ -78,16 +78,16 @@ module BetterUi
         # @param trigger text "Testo del pulsante trigger"
         # @param position select { choices: [bottom, top, left, right] }
         # @param theme select { choices: [default, white, red, rose, orange, green, blue, yellow, violet] }
-        # @param size select { choices: [small, medium, large] }
-        # @param rounded select { choices: [none, small, medium, large, full] }
+        # @param size select { choices: [xxs, xs, sm, md, lg, xl, xxl] }
+        # @param rounded select { choices: [none, xxs, xs, sm, md, lg, xl, xxl, full] }
         # @param animation select { choices: [fade, slide, none] }
         # @param classes text "Classi CSS aggiuntive"
         def raw(
           trigger: "Menu Azioni",
           position: :bottom,
           theme: :default,
-          size: :medium,
-          rounded: :medium,
+          size: :md,
+          rounded: :md,
           animation: :fade,
           classes: ""
         )

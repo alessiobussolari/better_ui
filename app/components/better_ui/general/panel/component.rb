@@ -1,7 +1,7 @@
 module BetterUi
   module General
     module Panel
-      class Component < ViewComponent::Base
+      class Component < BetterUi::Component
         attr_reader :header, :footer, :body, :title, :padding, :theme, :style, :radius
 
         # Classi base sempre presenti
@@ -77,6 +77,33 @@ module BetterUi
           yellow: "border-yellow-100",
           violet: "border-violet-100"
         }
+
+        configure_attributes({
+          theme: {
+            var: :@theme,
+            default: :white,
+            constants: [:PANEL_THEME_CLASSES, :PANEL_TEXT_THEME_CLASSES, :PANEL_BORDER_THEME_CLASSES],
+            methods: [:get_theme_class, :get_text_theme_class, :get_border_theme_class]
+          },
+          style: {
+            var: :@style,
+            default: :default,
+            constants: [:PANEL_STYLE_CLASSES],
+            methods: [:get_style_class]
+          },
+          radius: {
+            var: :@radius,
+            default: :sm,
+            constants: [:PANEL_RADIUS_CLASSES],
+            methods: [:get_radius_class]
+          },
+          padding: {
+            var: :@padding,
+            default: :md,
+            constants: [:PANEL_PADDING_CLASSES],
+            methods: [:get_padding_class]
+          }
+        })
 
         # @param title [String] titolo del pannello (opzionale)
         # @param body [String] contenuto HTML del pannello (opzionale)
@@ -187,45 +214,6 @@ module BetterUi
 
         private
 
-        def get_theme_class
-          PANEL_THEME_CLASSES[@theme] || PANEL_THEME_CLASSES[:white]
-        end
-
-        [
-          { constant: :PANEL_THEME_CLASSES, var: :@theme, default: :white, method: :get_theme_class },
-          { constant: :PANEL_TEXT_THEME_CLASSES, var: :@theme, default: :white, method: :get_text_theme_class },
-          { constant: :PANEL_BORDER_THEME_CLASSES, var: :@theme, default: :white, method: :get_border_theme_class },
-          { constant: :PANEL_STYLE_CLASSES, var: :@style, default: :default, method: :get_style_class },
-          { constant: :PANEL_RADIUS_CLASSES, var: :@radius, default: :sm, method: :get_radius_class },
-          { constant: :PANEL_PADDING_CLASSES, var: :@padding, default: :md, method: :get_padding_class }
-        ].each do |config|
-          define_method config[:method] do
-            constant_hash = self.class.const_get(config[:constant])
-            value = instance_variable_get(config[:var])
-            constant_hash[value] || constant_hash[config[:default]]
-          end
-        end
-
-        def validate_params
-          validate_theme
-          validate_style
-          validate_padding
-          validate_radius
-        end
-
-        [
-          { values: PANEL_THEME_CLASSES.keys, method: :validate_theme, param: 'theme', var: :@theme },
-          { values: PANEL_STYLE_CLASSES.keys, method: :validate_style, param: 'style', var: :@style },
-          { values: PANEL_PADDING_CLASSES.keys, method: :validate_padding, param: 'padding', var: :@padding },
-          { values: PANEL_RADIUS_CLASSES.keys, method: :validate_radius, param: 'radius', var: :@radius },
-        ].each do |validation|
-          define_method validation[:method] do
-            value = instance_variable_get(validation[:var])
-            unless validation[:values].include?(value)
-              raise ArgumentError, "#{self.class.name} - parametro '#{validation[:param]}' con valore '#{value}' non è valido. Deve essere uno tra: #{validation[:values].join(', ')}"
-            end
-          end
-        end
       end
     end
   end

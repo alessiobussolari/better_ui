@@ -10,7 +10,7 @@ module BetterUi
         # @param theme select { choices: [default, white, red, rose, orange, green, blue, yellow, violet] } "Tema di colore"
         # @param orientation select { choices: [horizontal, vertical] } "Orientamento"
         # @param style select { choices: [default, underline, bold, text] } "Stile del link"
-        # @param size select { choices: [extra_small, small, medium, large] } "Dimensione del link"
+        # @param size select { choices: [xxs, xs, sm, md, lg, xl, xxl] } "Dimensione del link"
         # @param icon text "Nome icona (opzionale)"
         # @param active toggle "Link attivo/corrente"
         # @param disabled toggle "Link disabilitato"
@@ -21,7 +21,7 @@ module BetterUi
           theme: :white,
           orientation: :horizontal,
           style: :default,
-          size: :medium,
+          size: :md,
           icon: "",
           active: false,
           disabled: false,
@@ -49,7 +49,7 @@ module BetterUi
         # @param theme select { choices: [default, white, red, rose, orange, green, blue, yellow, violet] } "Tema di colore"
         # @param orientation select { choices: [horizontal, vertical] } "Orientamento"
         # @param style select { choices: [default, underline, bold, text] } "Stile del link"
-        # @param size select { choices: [extra_small, small, medium, large] } "Dimensione del link"
+        # @param size select { choices: [xxs, xs, sm, md, lg, xl, xxl] } "Dimensione del link"
         # @param icon text "Nome icona (opzionale)"
         # @param active toggle "Link attivo/corrente"
         # @param disabled toggle "Link disabilitato"
@@ -60,7 +60,7 @@ module BetterUi
           theme: :white,
           orientation: :horizontal,
           style: :default,
-          size: :medium,
+          size: :md,
           icon: "",
           active: false,
           disabled: false,

@@ -57,8 +57,8 @@ module BetterUi
           #       <p class="text-sm text-gray-600 mt-2">Questa azione non può essere annullata.</p>
           #       
           #       <div class="flex justify-end space-x-3 mt-6">
-          #         <%= bui_button(label: "Annulla", type: :white, size: :md) %>
-          #         <%= bui_button(label: "Elimina", type: :red, size: :md) %>
+          #         <%= bui_button(text: "Annulla", theme: :white, size: :md) %>
+          #         <%= bui_button(text: "Elimina", theme: :red, size: :md) %>
           #       </div>
           #     <% end %>
           #   <% end %>

@@ -1,7 +1,7 @@
 module BetterUi
   module General
     module Tooltip
-      class Component < ViewComponent::Base
+      class Component < BetterUi::Component
         # Classi base sempre presenti
         TOOLTIP_BASE_CLASSES = "relative inline-block"
 
@@ -90,10 +90,45 @@ module BetterUi
           violet: "bg-white border border-violet-600"
         }
 
+        # Stili disponibili per il tooltip
+        TOOLTIP_STYLES = {
+          filled: "filled",
+          outline: "outline"
+        }
+
+        configure_attributes(
+          theme: {
+            var: :@theme,
+            default: :white,
+            constants: [:TOOLTIP_FILLED_THEMES],
+            methods: [:get_theme_class]
+          },
+          position: {
+            var: :@position,
+            default: :top,
+            constants: [:TOOLTIP_POSITIONS],
+            methods: [:get_position_class]
+          },
+          size: {
+            var: :@size,
+            default: :md,
+            constants: [:TOOLTIP_SIZES],
+            methods: [:get_size_class]
+          },
+          style: {
+            var: :@style,
+            default: :filled,
+            constants: [:TOOLTIP_STYLES],
+            methods: []
+          }
+        )
+
+        attr_reader :text, :theme, :position, :size, :style, :classes, :html_options
+
         # @param text [String] testo del tooltip
         # @param theme [Symbol] :default, :white, :red, :rose, :orange, :green, :blue, :yellow, :violet
         # @param position [Symbol] :top, :right, :bottom, :left posizione del tooltip
-        # @param size [Symbol] :sm, :md, :lg dimensione del tooltip
+        # @param size [Symbol] :xxs, :xs, :sm, :md, :lg, :xl, :xxl dimensione del tooltip
         # @param style [Symbol] :filled, :outline stile del tooltip
         # @param classes [String] classi CSS aggiuntive per il container
         # @param html_options [Hash] opzioni HTML per il container
@@ -163,17 +198,18 @@ module BetterUi
           attrs
         end
 
-        # Genera le classi per la posizione
-        def get_position_class
-          TOOLTIP_POSITIONS[@position] || TOOLTIP_POSITIONS[:top]
+        # Metodi get dinamici per arrow position (non gestito da configure_attributes)
+        [
+          { constant: :TOOLTIP_ARROW_POSITIONS, var: :@position, default: :top, method: :get_arrow_position_class }
+        ].each do |config|
+          define_method config[:method] do
+            constant_hash = self.class.const_get(config[:constant])
+            value = instance_variable_get(config[:var])
+            constant_hash[value] || constant_hash[config[:default]]
+          end
         end
 
-        # Genera le classi per la dimensione
-        def get_size_class
-          TOOLTIP_SIZES[@size] || TOOLTIP_SIZES[:md]
-        end
-
-        # Genera le classi per il tema
+        # Metodi get per tema (gestione speciale per filled/outline)
         def get_theme_class
           if @style == :outline
             TOOLTIP_OUTLINE_THEMES[@theme] || TOOLTIP_OUTLINE_THEMES[:white]
@@ -182,12 +218,6 @@ module BetterUi
           end
         end
 
-        # Genera le classi per la posizione della freccia
-        def get_arrow_position_class
-          TOOLTIP_ARROW_POSITIONS[@position] || TOOLTIP_ARROW_POSITIONS[:top]
-        end
-
-        # Genera le classi per il tema della freccia
         def get_arrow_theme_class
           if @style == :outline
             TOOLTIP_ARROW_OUTLINE_THEMES[@theme] || TOOLTIP_ARROW_OUTLINE_THEMES[:white]
@@ -204,37 +234,17 @@ module BetterUi
         private
 
         def validate_params
-          validate_theme
-          validate_position
-          validate_size
+          # Validazione automatica tramite BetterUi::Component per theme, position, size
+          super
+          
+          # Validazione manuale per style (non gestito da configure_attributes)
           validate_style
-        end
-
-        def validate_theme
-          valid_themes = TOOLTIP_FILLED_THEMES.keys
-          unless valid_themes.include?(@theme)
-            raise ArgumentError, "Il tema deve essere uno tra: #{valid_themes.join(', ')}"
-          end
-        end
-
-        def validate_position
-          valid_positions = TOOLTIP_POSITIONS.keys
-          unless valid_positions.include?(@position)
-            raise ArgumentError, "La posizione deve essere una tra: #{valid_positions.join(', ')}"
-          end
-        end
-
-        def validate_size
-          valid_sizes = TOOLTIP_SIZES.keys
-          unless valid_sizes.include?(@size)
-            raise ArgumentError, "La dimensione deve essere una tra: #{valid_sizes.join(', ')}"
-          end
         end
 
         def validate_style
           valid_styles = [ :filled, :outline ]
           unless valid_styles.include?(@style)
-            raise ArgumentError, "Lo stile deve essere uno tra: #{valid_styles.join(', ')}"
+            raise ArgumentError, "#{self.class.name} - parametro 'style' con valore '#{@style}' non è valido. Deve essere uno tra: #{valid_styles.join(', ')}"
           end
         end
       end

@@ -3,7 +3,7 @@
 module BetterUi
   module General
     module Tag
-      class Component < ViewComponent::Base
+      class Component < BetterUi::Component
         # Classi base sempre presenti
         TAG_BASE_CLASSES = "inline-flex items-center justify-center font-medium transition-colors duration-200 bui-tag".freeze
 
@@ -44,6 +44,32 @@ module BetterUi
           violet: "bg-transparent border border-violet-300 text-violet-700 hover:bg-violet-50"
         }.freeze
 
+        TAG_STYLE_CLASSES = {
+          filled: :filled,
+          outline: :outline
+        }.freeze
+
+        configure_attributes({
+          theme: {
+            var: :@theme,
+            default: :white,
+            constants: [:TAG_THEME_FILLED_CLASSES, :TAG_THEME_OUTLINE_CLASSES],
+            methods: [:get_theme_filled_class, :get_theme_outline_class]
+          },
+          size: {
+            var: :@size,
+            default: :md,
+            constants: [:TAG_SIZE_CLASSES],
+            methods: [:get_size_class]
+          },
+          style: {
+            var: :@style,
+            default: :filled,
+            constants: [:TAG_STYLE_CLASSES],
+            methods: [:get_style_class]
+          }
+        })
+
         def initialize(text:, theme: :white, size: :md, style: :filled, **options)
           @text = text
           @theme = theme.to_sym
@@ -61,50 +87,20 @@ module BetterUi
         def tag_classes
           [
             TAG_BASE_CLASSES,
-            get_size_classes,
+            get_size_class,
             get_theme_classes,
             @options[:class]
           ].compact.join(" ")
         end
 
-        def get_size_classes
-          TAG_SIZE_CLASSES[@size] || TAG_SIZE_CLASSES[:md]
-        end
-
         def get_theme_classes
           if @style == :outline
-            TAG_THEME_OUTLINE_CLASSES[@theme] || TAG_THEME_OUTLINE_CLASSES[:white]
+            get_theme_outline_class
           else
-            TAG_THEME_FILLED_CLASSES[@theme] || TAG_THEME_FILLED_CLASSES[:white]
+            get_theme_filled_class
           end
         end
 
-        def validate_params
-          validate_theme
-          validate_size
-          validate_style
-        end
-
-        def validate_theme
-          valid_themes = TAG_THEME_FILLED_CLASSES.keys
-          unless valid_themes.include?(@theme)
-            raise ArgumentError, "Il tema deve essere uno tra: #{valid_themes.join(', ')}"
-          end
-        end
-
-        def validate_size
-          valid_sizes = TAG_SIZE_CLASSES.keys
-          unless valid_sizes.include?(@size)
-            raise ArgumentError, "La dimensione deve essere una tra: #{valid_sizes.join(', ')}"
-          end
-        end
-
-        def validate_style
-          valid_styles = [:filled, :outline]
-          unless valid_styles.include?(@style)
-            raise ArgumentError, "Lo stile deve essere uno tra: #{valid_styles.join(', ')}"
-          end
-        end
       end
     end
   end

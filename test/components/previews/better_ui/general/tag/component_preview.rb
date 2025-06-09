@@ -7,12 +7,12 @@ module BetterUi
         # @label Con Helper
         # @param text text "Testo del tag"
         # @param theme select { choices: [default, white, red, rose, orange, green, blue, yellow, violet] } "Tema di colore"
-        # @param size select { choices: [small, medium, large] } "Dimensione"
+        # @param size select { choices: [xxs, xs, sm, md, lg, xl, xxl] } "Dimensione"
         # @param style select { choices: [filled, outline] } "Stile"
         def default(
           text: "Tag di esempio",
           theme: :white,
-          size: :medium,
+          size: :md,
           style: :filled
         )
           normalized = normalize_params!(
@@ -28,12 +28,12 @@ module BetterUi
         # @label Istanziazione Diretta
         # @param text text "Testo del tag"
         # @param theme select { choices: [default, white, red, rose, orange, green, blue, yellow, violet] } "Tema di colore"
-        # @param size select { choices: [small, medium, large] } "Dimensione"
+        # @param size select { choices: [xxs, xs, sm, md, lg, xl, xxl] } "Dimensione"
         # @param style select { choices: [filled, outline] } "Stile"
         def raw(
           text: "Tag di esempio",
           theme: :white,
-          size: :medium,
+          size: :md,
           style: :filled
         )
           normalized = normalize_params!(

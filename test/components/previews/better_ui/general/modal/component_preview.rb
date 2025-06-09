@@ -47,7 +47,7 @@ module BetterUi
         # @param trigger_type select { choices: [default, white, red, rose, orange, green, blue, yellow, violet] }
         # @param modal_title text "Titolo del modal"
         # @param modal_theme select { choices: [default, white, red, rose, orange, green, blue, yellow, violet] }
-        # @param modal_size select { choices: [small, medium, large] }
+        # @param modal_size select { choices: [xxs, xs, sm, md, lg, xl, xxl] }
         # @param modal_backdrop toggle "Mostra overlay di sfondo"
         # @param modal_closable toggle "Mostra pulsante di chiusura"
         # @param close_on_backdrop toggle "Chiudi cliccando backdrop"
@@ -59,7 +59,7 @@ module BetterUi
           trigger_type: :default,
           modal_title: "Conferma eliminazione",
           modal_theme: :default,
-          modal_size: :medium,
+          modal_size: :md,
           modal_backdrop: true,
           modal_closable: true,
           close_on_backdrop: true,
@@ -88,7 +88,7 @@ module BetterUi
         # @param trigger_type select { choices: [default, white, red, rose, orange, green, blue, yellow, violet] }
         # @param modal_title text "Titolo del modal"
         # @param modal_theme select { choices: [default, white, red, rose, orange, green, blue, yellow, violet] }
-        # @param modal_size select { choices: [small, medium, large] }
+        # @param modal_size select { choices: [xxs, xs, sm, md, lg, xl, xxl] }
         # @param modal_backdrop toggle "Mostra overlay di sfondo"
         # @param modal_closable toggle "Mostra pulsante di chiusura"
         # @param close_on_backdrop toggle "Chiudi cliccando backdrop"
@@ -100,7 +100,7 @@ module BetterUi
           trigger_type: :default,
           modal_title: "Conferma eliminazione",
           modal_theme: :default,
-          modal_size: :medium,
+          modal_size: :md,
           modal_backdrop: true,
           modal_closable: true,
           close_on_backdrop: true,

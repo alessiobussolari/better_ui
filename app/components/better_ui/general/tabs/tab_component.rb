@@ -3,10 +3,10 @@
 module BetterUi
   module General
     module Tabs
-      class TabComponent < ViewComponent::Base
+      class TabComponent < BetterUi::Component
         include BetterUi::General::Components::Icon::IconHelper
 
-        TAB_THEME_ACTIVE = {
+        TAB_THEME_ACTIVE_CLASSES = {
           default: 'bg-white text-gray-900 shadow-sm',
           blue: 'bg-blue-600 text-white',
           red: 'bg-red-600 text-white',
@@ -18,7 +18,7 @@ module BetterUi
           white: 'bg-white text-gray-900'
         }.freeze
 
-        TAB_THEME_INACTIVE = {
+        TAB_THEME_INACTIVE_CLASSES = {
           default: 'text-gray-500 hover:text-gray-700',
           blue: 'text-blue-600 hover:text-blue-700',
           red: 'text-red-600 hover:text-red-700',
@@ -30,11 +30,30 @@ module BetterUi
           white: 'text-gray-600 hover:text-gray-700'
         }.freeze
 
-        TAB_SIZE = {
-          small: 'px-3 py-1.5 text-sm',
-          medium: 'px-4 py-2 text-base',
-          large: 'px-6 py-3 text-lg'
+        TAB_SIZE_CLASSES = {
+          xxs: 'px-1 py-0.5 text-xs',
+          xs: 'px-2 py-1 text-xs',
+          sm: 'px-3 py-1.5 text-sm',
+          md: 'px-4 py-2 text-base',
+          lg: 'px-6 py-3 text-lg',
+          xl: 'px-8 py-4 text-xl',
+          xxl: 'px-10 py-5 text-2xl'
         }.freeze
+
+        configure_attributes({
+          theme: {
+            var: :@theme,
+            default: :default,
+            constants: [:TAB_THEME_ACTIVE_CLASSES, :TAB_THEME_INACTIVE_CLASSES],
+            methods: [:get_theme_active_class, :get_theme_inactive_class]
+          },
+          size: {
+            var: :@size,
+            default: :md,
+            constants: [:TAB_SIZE_CLASSES],
+            methods: [:get_size_class]
+          }
+        })
 
         def initialize(text:, target:, active: false, icon: nil, disabled: false, badge: nil, 
                       theme: :default, size: :md, classes: '', **options)
@@ -56,30 +75,15 @@ module BetterUi
 
         attr_reader :text, :target, :active, :icon, :disabled, :badge, :theme, :size, :classes, :options
 
-        def validate_params
-          validate_theme
-          validate_size
-        end
 
-        def validate_theme
-          return if TAB_THEME_ACTIVE.key?(theme)
-
-          raise ArgumentError, "Invalid theme: #{theme}. Must be one of #{TAB_THEME_ACTIVE.keys}"
-        end
-
-        def validate_size
-          return if TAB_SIZE.key?(size)
-
-          raise ArgumentError, "Invalid size: #{size}. Must be one of #{TAB_SIZE.keys}"
-        end
 
         def tab_attributes
-          theme_classes = active ? TAB_THEME_ACTIVE[theme] : TAB_THEME_INACTIVE[theme]
+          theme_classes = active ? get_theme_active_class : get_theme_inactive_class
           
           base_classes = [
             'inline-flex items-center justify-center gap-2 font-medium rounded-md transition-colors',
             'focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500',
-            TAB_SIZE[size],
+            get_size_class,
             theme_classes,
             disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer',
             classes

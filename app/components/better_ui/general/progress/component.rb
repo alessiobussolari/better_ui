@@ -1,7 +1,7 @@
 module BetterUi
   module General
     module Progress
-      class Component < ViewComponent::Base
+      class Component < BetterUi::Component
         # Classi base sempre presenti
         PROGRESS_BASE_CLASSES = "relative w-full bg-gray-200 rounded-full overflow-hidden"
 
@@ -9,7 +9,7 @@ module BetterUi
         PROGRESS_BAR_BASE_CLASSES = "h-full transition-all duration-300 ease-in-out"
 
         # Dimensioni della progress bar con classi Tailwind dirette - Sistema uniforme 7 livelli
-        PROGRESS_SIZES = {
+        PROGRESS_SIZE_CLASSES = {
           xxs: "h-1",          # Extra extra small
           xs: "h-1.5",         # Extra small
           sm: "h-2",           # Small
@@ -20,7 +20,7 @@ module BetterUi
         }
 
         # Temi di progress bar con classi Tailwind dirette
-        PROGRESS_THEMES = {
+        PROGRESS_THEME_CLASSES = {
           default: "bg-gray-600",
           white: "bg-white border border-gray-300",
           red: "bg-red-600",
@@ -33,7 +33,7 @@ module BetterUi
         }
 
         # Classi per il background container
-        PROGRESS_CONTAINER_THEMES = {
+        PROGRESS_CONTAINER_THEME_CLASSES = {
           default: "bg-gray-200",
           white: "bg-gray-100",
           red: "bg-red-100",
@@ -44,6 +44,21 @@ module BetterUi
           yellow: "bg-yellow-100",
           violet: "bg-violet-100"
         }
+
+        configure_attributes({
+          theme: {
+            var: :@theme,
+            default: :white,
+            constants: [:PROGRESS_THEME_CLASSES, :PROGRESS_CONTAINER_THEME_CLASSES],
+            methods: [:get_theme_class, :get_container_theme_class]
+          },
+          size: {
+            var: :@size,
+            default: :md,
+            constants: [:PROGRESS_SIZE_CLASSES],
+            methods: [:get_size_class]
+          }
+        })
 
         # @param value [Integer] percentuale di completamento (0-100)
         # @param theme [Symbol] :default, :white, :red, :rose, :orange, :green, :blue, :yellow, :violet
@@ -124,40 +139,6 @@ module BetterUi
         end
 
         private
-
-        def validate_params
-          validate_theme
-          validate_size
-        end
-
-        def validate_theme
-          valid_themes = PROGRESS_THEMES.keys
-          unless valid_themes.include?(@theme)
-            raise ArgumentError, "Il tema deve essere uno tra: #{valid_themes.join(', ')}"
-          end
-        end
-
-        def validate_size
-          valid_sizes = PROGRESS_SIZES.keys
-          unless valid_sizes.include?(@size)
-            raise ArgumentError, "La dimensione deve essere una tra: #{valid_sizes.join(', ')}"
-          end
-        end
-
-        # Genera le classi per la dimensione
-        def get_size_class
-          PROGRESS_SIZES[@size] || PROGRESS_SIZES[:md]
-        end
-
-        # Genera le classi per il tema della barra
-        def get_theme_class
-          PROGRESS_THEMES[@theme] || PROGRESS_THEMES[:white]
-        end
-
-        # Genera le classi per il tema del container
-        def get_container_theme_class
-          PROGRESS_CONTAINER_THEMES[@theme] || PROGRESS_CONTAINER_THEMES[:white]
-        end
       end
     end
   end

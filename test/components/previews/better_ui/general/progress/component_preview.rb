@@ -7,12 +7,12 @@ module BetterUi
         # @label Con Helper
         # @param value range { min: 0, max: 100, step: 1 } "Percentuale di completamento"
         # @param theme select { choices: [default, white, red, rose, orange, green, blue, yellow, violet] } "Tema di colore"
-        # @param size select { choices: [small, medium, large] } "Dimensione"
+        # @param size select { choices: [xxs, xs, sm, md, lg, xl, xxl] } "Dimensione"
         # @param label toggle "Mostra etichetta percentuale"
         def default(
           value: 65,
           theme: :white,
-          size: :medium,
+          size: :md,
           label: true
         )
           normalized = normalize_params!(
@@ -33,12 +33,12 @@ module BetterUi
         # @label Istanziazione Diretta
         # @param value range { min: 0, max: 100, step: 1 } "Percentuale di completamento"
         # @param theme select { choices: [default, white, red, rose, orange, green, blue, yellow, violet] } "Tema di colore"
-        # @param size select { choices: [small, medium, large] } "Dimensione"
+        # @param size select { choices: [xxs, xs, sm, md, lg, xl, xxl] } "Dimensione"
         # @param label toggle "Mostra etichetta percentuale"
         def raw(
           value: 65,
           theme: :white,
-          size: :medium,
+          size: :md,
           label: true
         )
           normalized = normalize_params!(
