@@ -26,12 +26,52 @@
         state: :active
       ) %>
       
+      <!-- Esempio con children -->
       <% section.with_navigation_item(
         label: "Projects",
         href: "#",
         icon: { name: "folder", size: :sm },
         badge: { text: "3", theme: :blue }
-      ) %>
+      ) do |item| %>
+        <% item.with_child(
+          label: "Web Application",
+          href: "/projects/web-app",
+          icon: { name: "globe-alt", size: :sm }
+        ) %>
+        <% item.with_child(
+          label: "Mobile App",
+          href: "/projects/mobile-app",
+          icon: { name: "device-phone-mobile", size: :sm },
+          badge: { text: "New", theme: :green }
+        ) %>
+        <% item.with_child(
+          label: "Desktop Client",
+          href: "/projects/desktop",
+          icon: { name: "computer-desktop", size: :sm }
+        ) %>
+      <% end %>
+      
+      <!-- Altro esempio con children -->
+      <% section.with_navigation_item(
+        label: "Analytics",
+        href: "#",
+        icon: { name: "chart-bar", size: :sm }
+      ) do |item| %>
+        <% item.with_child(
+          label: "Overview",
+          href: "/analytics/overview"
+        ) %>
+        <% item.with_child(
+          label: "Reports",
+          href: "/analytics/reports",
+          badge: { text: "5", theme: :blue }
+        ) %>
+        <% item.with_child(
+          label: "Real-time",
+          href: "/analytics/realtime",
+          badge: { text: "Live", theme: :green }
+        ) %>
+      <% end %>
       
       <% section.with_navigation_item(
         label: "Settings",
@@ -41,18 +81,55 @@
     <% end %>
     
     <% sidebar.with_navigation_section(title: "Development", collapsible: true) do |section| %>
+      <!-- Esempio con children multi-livello -->
       <% section.with_navigation_item(
         label: "Components",
         href: "#",
         icon: { name: "cube", size: :sm }
-      ) %>
+      ) do |item| %>
+        <% item.with_child(
+          label: "General",
+          href: "/components/general"
+        ) do |subitem| %>
+          <% subitem.with_child(
+            label: "Buttons",
+            href: "/components/general/buttons"
+          ) %>
+          <% subitem.with_child(
+            label: "Forms",
+            href: "/components/general/forms"
+          ) %>
+        <% end %>
+        <% item.with_child(
+          label: "Application",
+          href: "/components/application"
+        ) %>
+        <% item.with_child(
+          label: "Layout",
+          href: "/components/layout"
+        ) %>
+      <% end %>
       
       <% section.with_navigation_item(
         label: "Documentation",
         href: "#",
         icon: { name: "document-text", size: :sm },
         badge: { text: "New", theme: :green }
-      ) %>
+      ) do |item| %>
+        <% item.with_child(
+          label: "Getting Started",
+          href: "/docs/getting-started"
+        ) %>
+        <% item.with_child(
+          label: "API Reference",
+          href: "/docs/api"
+        ) %>
+        <% item.with_child(
+          label: "Examples",
+          href: "/docs/examples",
+          badge: { text: "12", theme: :blue }
+        ) %>
+      <% end %>
       
       <% section.with_navigation_item(
         label: "API Reference",
@@ -119,18 +196,27 @@
   <!-- Content Area -->
   <div class="flex-1 p-8">
     <h1 class="text-2xl font-bold text-gray-900 mb-4">Dashboard</h1>
-    <p class="text-gray-600">Contenuto principale dell'applicazione con sidebar refactorizzata secondo le nuove regole.</p>
+    <p class="text-gray-600">Contenuto principale dell'applicazione con sidebar che supporta navigazione annidata.</p>
     <div class="mt-6 p-4 bg-white rounded-lg shadow">
-      <h2 class="text-lg font-semibold mb-2">Caratteristiche della Sidebar Refactorizzata</h2>
+      <h2 class="text-lg font-semibold mb-2">Caratteristiche della Navigazione Annidata</h2>
       <ul class="list-disc list-inside space-y-1 text-sm text-gray-600">
-        <li>Ereditanza da BetterUi::Component</li>
-        <li>Costanti conformi alle regole (SIDEBAR_SIZE_CLASSES, etc.)</li>
-        <li>Sistema configure_attributes con validazione automatica</li>
-        <li>renders_one per header e footer</li>
-        <li>renders_many per navigation_sections</li>
-        <li>Separazione corretta tra THEME (colori) e VARIANT (stili)</li>
-        <li>Attributi Stimulus con prefisso bui_</li>
+        <li>Supporto per elementi figli con <code>with_child</code></li>
+        <li>Navigazione multi-livello (children di children)</li>
+        <li>Icone e badge per ogni livello</li>
+        <li>Collassamento automatico delle sezioni</li>
+        <li>Gestione dello stato attivo</li>
+        <li>Rendering corretto dei ViewComponent::Slot</li>
       </ul>
+    </div>
+    
+    <div class="mt-6 p-4 bg-blue-50 rounded-lg">
+      <h3 class="text-md font-semibold mb-2 text-blue-900">Esempi di Utilizzo</h3>
+      <div class="text-sm text-blue-800">
+        <p class="mb-2"><strong>Projects:</strong> Mostra 3 sotto-progetti con icone diverse</p>
+        <p class="mb-2"><strong>Analytics:</strong> Sezioni con badge live e contatori</p>
+        <p class="mb-2"><strong>Components:</strong> Navigazione multi-livello (General → Buttons/Forms)</p>
+        <p><strong>Documentation:</strong> Struttura documentazione con badge "New" e contatori</p>
+      </div>
     </div>
   </div>
 </div>

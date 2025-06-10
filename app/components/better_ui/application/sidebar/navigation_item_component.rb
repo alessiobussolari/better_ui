@@ -136,7 +136,7 @@ delegate :bui_icon, :bui_badge, to: :helpers
 
         def button_classes
           base_classes = %w[
-            group w-full flex items-center pr-2 py-2 text-left text-sm font-medium
+            group w-full flex items-center px-2 py-2 text-left text-sm font-medium
             rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500
           ]
           
@@ -161,7 +161,7 @@ delegate :bui_icon, :bui_badge, to: :helpers
 
         def children_classes
           %w[
-            mt-1 space-y-1 pl-4 border-l border-gray-200
+            mt-1 space-y-1 border-l border-gray-200
           ].join(" ")
         end
       end

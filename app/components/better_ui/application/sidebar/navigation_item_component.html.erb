@@ -1,12 +1,12 @@
-<% if collapsible? %>
+<% if @item_type == :section %>
   <!-- Collapsible Section -->
   <div>
     <button 
       type="button" 
       class="<%= button_classes %>"
-      data-action="click->sidebar#toggleSection"
-      data-sidebar-target="sectionButton"
-      data-section-id="<%= section_id %>"
+      data-action="click->bui-sidebar#toggleSection"
+      data-bui-sidebar-target="sectionButton"
+      data-bui-sidebar-section-id="<%= section_id %>"
       aria-expanded="false"
     >
       <div class="flex items-center flex-1">
@@ -33,7 +33,7 @@
         <% end %>
       </div>
       
-      <div class="<%= chevron_classes %>">
+      <div class="<%= chevron_classes %>" data-bui-sidebar-chevron>
         <%= bui_icon("chevron-right", size: :sm, classes: "text-gray-400") %>
       </div>
     </button>
@@ -42,15 +42,68 @@
       <div 
         id="<%= section_id %>"
         class="<%= children_classes %> hidden"
-        data-sidebar-target="sectionContent"
+        data-bui-sidebar-target="sectionContent"
+        data-bui-sidebar-section-id="<%= section_id %>"
       >
-        <%= render children %>
+        <% children.each do |child| %>
+          <%= child %>
+        <% end %>
       </div>
     <% end %>
   </div>
 <% else %>
 <li>
-  <% if is_link? %>
+  <% if has_children? %>
+    <!-- Navigation Item con Children Collapsibili -->
+    <button 
+      type="button" 
+      class="<%= button_classes %>"
+      data-action="click->bui-sidebar#toggleSection"
+      data-bui-sidebar-target="sectionButton"
+      data-bui-sidebar-section-id="<%= section_id %>"
+      aria-expanded="false"
+    >
+      <% if has_icon? %>
+        <span class="<%= icon_classes %>">
+          <% if @icon.is_a?(Hash) %>
+            <%= bui_icon(**@icon) %>
+          <% else %>
+            <%= bui_icon(@icon, size: :sm) %>
+          <% end %>
+        </span>
+      <% end %>
+      
+      <span class="flex-1"><%= @label %></span>
+      
+      <% if has_badge? %>
+        <span class="ml-auto mr-2">
+          <% if @badge.is_a?(Hash) %>
+            <%= render BetterUi::General::Badge::Component.new(**@badge) %>
+          <% else %>
+            <%= render BetterUi::General::Badge::Component.new(content: @badge) %>
+          <% end %>
+        </span>
+      <% end %>
+      
+      <div class="<%= chevron_classes %>" data-bui-sidebar-chevron>
+        <%= bui_icon("chevron-right", size: :sm, classes: "text-gray-400") %>
+      </div>
+    </button>
+    
+    <div 
+        id="<%= section_id %>"
+        class="<%= children_classes %> hidden"
+        data-bui-sidebar-target="sectionContent"
+        data-bui-sidebar-section-id="<%= section_id %>"
+      >
+      <ul class="mt-1 space-y-1">
+        <% children.each do |child| %>
+          <%= child %>
+        <% end %>
+      </ul>
+    </div>
+  <% elsif is_link? %>
+    <!-- Navigation Item normale (link) -->
     <%= link_to @href, link_options do %>
       <% if has_icon? %>
         <span class="<%= icon_classes %>">
@@ -75,6 +128,7 @@
       <% end %>
     <% end %>
   <% else %>
+    <!-- Navigation Item statico -->
     <div class="<%= item_classes %>">
       <% if has_icon? %>
         <span class="<%= icon_classes %>">
@@ -98,14 +152,6 @@
         </span>
       <% end %>
     </div>
-  <% end %>
-  
-  <% if has_children? %>
-    <ul class="ml-6 mt-1 space-y-1">
-      <% children.each do |child| %>
-        <%= child %>
-      <% end %>
-    </ul>
   <% end %>
 </li>
 <% end %>
