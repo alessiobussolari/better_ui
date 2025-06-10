@@ -25,6 +25,7 @@ module BetterUi
           })
         end
 
+        # @!group Raw
         # @label Istanziazione Diretta (Component.new)
         # @param width select { choices: [sm, md, lg, xl] } "Larghezza della sidebar"
         # @param position select { choices: [left, right] } "Posizione della sidebar"

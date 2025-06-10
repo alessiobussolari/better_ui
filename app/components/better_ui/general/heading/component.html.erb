@@ -3,7 +3,7 @@
   <%= tag.public_send(heading_tag, **heading_attributes) do %>
     <% if show_icon? %>
       <span class="<%= icon_classes %>">
-        <%= render BetterUi::General::Icon::Component.new(name: @icon) %>
+        <%= bui_icon(@icon, size: icon_size, classes: "flex-shrink-0 #{icon_color_class}") %>
       </span>
     <% end %>
     

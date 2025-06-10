@@ -1,13 +1,5 @@
 <div class="<%= header_classes %>">
-  <% if has_logo? %>
-    <div class="<%= logo_classes %>">
-      <% if @logo.is_a?(Hash) %>
-        <%= render BetterUi::General::Icon::Component.new(**@logo) %>
-      <% else %>
-        <%= @logo.html_safe %>
-      <% end %>
-    </div>
-  <% end %>
+  
   
   <% if has_title? || has_subtitle? %>
     <div class="<%= has_logo? ? 'ml-3' : '' %>">

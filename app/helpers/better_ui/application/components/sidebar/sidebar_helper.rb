@@ -22,7 +22,31 @@ module BetterUi
           #       <% section.with_navigation_item(label: "Home", href: "/", icon: { name: "home" }) %>
 #       <% section.with_navigation_item(label: "Settings", href: "/settings", icon: { name: "cog" }) %>
           #     <% end %>
-          #     <% sidebar.with_footer(user_info: { name: "John Doe", email: "john@example.com" }) %>
+          #     <!-- Footer Semplice -->
+#     <% sidebar.with_footer(
+#       variant: :simple,
+#       user_info: { 
+#         name: "John Doe", 
+#         email: "john@example.com",
+#         avatar: { initials: "JD", size: :sm, theme: :blue }
+#       }
+#     ) %>
+#
+#     <!-- Footer con Dropdown -->
+#     <% sidebar.with_footer(
+#       variant: :dropdown,
+#       user_info: { 
+#         name: "John Doe", 
+#         email: "john@example.com",
+#         avatar: { initials: "JD", size: :sm, theme: :blue }
+#       },
+#       dropdown_items: [
+#         { text: "Profilo", href: "#", icon: { name: "user", size: :sm } },
+#         { text: "Impostazioni", href: "#", icon: { name: "cog-6-tooth", size: :sm } },
+#         { type: :divider },
+#         { text: "Esci", href: "#", icon: { name: "arrow-right-on-rectangle", size: :sm }, variant: :destructive }
+#       ]
+#     ) %>
           #   <% end %>
           def bui_sidebar(
             width: :md,

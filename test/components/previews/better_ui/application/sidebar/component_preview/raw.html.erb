@@ -1,3 +1,4 @@
+
 <div class="flex h-screen bg-gray-100">
   <%= render BetterUi::Application::Sidebar::Component.new(
     width: width,
@@ -61,15 +62,16 @@
       ) %>
     <% end %>
     
-    <!-- Footer con renders_one -->
+    <!-- Footer Semplice -->
     <% sidebar.with_footer(
+      variant: :simple,
       user_info: {
         name: "Alessio Bussolari",
         email: "alessio@example.com",
         avatar: {
           initials: "AB",
           size: :sm,
-          theme: :blue
+          theme: :green
         }
       }
     ) %>

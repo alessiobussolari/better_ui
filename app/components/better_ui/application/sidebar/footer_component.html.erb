@@ -1,42 +1,49 @@
-<div class="<%= footer_classes %>">
-  <% if has_content? %>
-    <div class="mb-4">
-      <%= @footer_content.html_safe %>
-    </div>
-  <% end %>
-  
-  <% if has_user_info? %>
-    <div class="flex items-center">
-      <% if @user_info[:avatar].present? %>
-        <div class="flex-shrink-0">
-          <%= render BetterUi::General::Avatar::Component.new(**@user_info[:avatar]) %>
-        </div>
-      <% end %>
-      
-      <% if @user_info[:name].present? || @user_info[:email].present? %>
-        <div class="<%= @user_info[:avatar].present? ? 'ml-3' : '' %> min-w-0 flex-1">
-          <% if @user_info[:name].present? %>
-            <p class="text-sm font-medium text-gray-900 truncate">
-              <%= @user_info[:name] %>
-            </p>
-          <% end %>
-          <% if @user_info[:email].present? %>
-            <p class="text-xs text-gray-500 truncate">
-              <%= @user_info[:email] %>
-            </p>
-          <% end %>
-        </div>
-      <% end %>
-      
-      <% if has_user_dropdown? %>
-        <div class="flex-shrink-0 ml-3">
-          <%= render BetterUi::General::Dropdown::Component.new(**@user_dropdown) do %>
-            <% @user_dropdown[:items].each do |item| %>
-              <%= render BetterUi::General::Dropdown::ItemComponent.new(**item) %>
+<% if render? %>
+  <div class="<%= footer_classes %>">
+    <% if has_content? %>
+      <div class="px-4 py-3 border-t border-gray-200">
+        <%= @footer_content %>
+      </div>
+    <% end %>
+
+    <% if has_user_info? %>
+        <%= render BetterUi::General::Dropdown::Component.new(
+          trigger: user_dropdown_trigger,
+          position: :top,
+          fullwidth: true,
+          show_chevron: false
+        ) do %>
+          <% if has_dropdown_items? %>
+            <% @dropdown_items.each do |item| %>
+              <% if item[:type] == :divider %>
+                <%= render BetterUi::General::Dropdown::DividerComponent.new %>
+              <% else %>
+                <%= render BetterUi::General::Dropdown::ItemComponent.new(
+                  text: item[:text],
+                  icon: item[:icon],
+                  href: item[:href] || '#'
+                ) %>
+              <% end %>
             <% end %>
           <% end %>
-        </div>
-      <% end %>
-    </div>
-  <% end %>
-</div>
+
+          <% if has_user_dropdown? %>
+            <% if has_dropdown_items? %>
+              <%= render BetterUi::General::Dropdown::DividerComponent.new %>
+            <% end %>
+            <% @user_dropdown.each do |item| %>
+              <% if item[:type] == :divider %>
+                <%= render BetterUi::General::Dropdown::DividerComponent.new %>
+              <% else %>
+                <%= render BetterUi::General::Dropdown::ItemComponent.new(
+                  text: item[:text],
+                  icon: item[:icon],
+                  href: item[:href] || '#'
+                ) %>
+              <% end %>
+            <% end %>
+          <% end %>
+        <% end %>
+    <% end %>
+  </div>
+<% end %>

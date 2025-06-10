@@ -6,7 +6,7 @@
       <%= tag.div **header_attributes do %>
         <h3 class="text-lg font-semibold" id="modal-title"><%= @title %></h3>
         <% if @closable %>
-          <%= helpers.bui_button(
+          <%= bui_button(
             label: "Chiudi", 
             icon: "x-mark",
             type: :white,
@@ -31,7 +31,7 @@
     <%= tag.div **header_attributes do %>
       <h3 class="text-lg font-semibold" id="modal-title"><%= @title %></h3>
       <% if @closable %>
-        <%= helpers.bui_button(
+        <%= bui_button(
           label: "Chiudi", 
           icon: "x-mark",
           type: :white,

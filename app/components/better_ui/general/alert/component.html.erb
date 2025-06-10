@@ -1,7 +1,7 @@
 <div <%= tag.attributes(alert_attributes) %>>
   <% if (@icon.blank? ? default_icon : @icon) && @icon_position == :left %>
     <div class="<%= get_icon_classes %> <%= get_icon_theme_class %>">
-      <%= render BetterUi::General::Icon::Component.new(name: @icon.blank? ? default_icon : @icon) %>
+      <%= bui_icon(@icon.blank? ? default_icon : @icon) %>
     </div>
   <% end %>
 
@@ -20,13 +20,13 @@
 
   <% if (@icon.blank? ? default_icon : @icon) && @icon_position == :right %>
     <div class="<%= get_icon_classes %> <%= get_icon_theme_class %>">
-      <%= render BetterUi::General::Icon::Component.new(name: @icon.blank? ? default_icon : @icon) %>
+      <%= bui_icon(@icon.blank? ? default_icon : @icon) %>
     </div>
   <% end %>
 
   <% if @dismissible %>
     <button type="button" class="<%= get_close_classes %>" aria-label="Chiudi">
-      <%= render BetterUi::General::Icon::Component.new(name: "x", size: :sm) %>
+      <%= bui_icon("x", size: :sm) %>
     </button>
   <% end %>
 </div>

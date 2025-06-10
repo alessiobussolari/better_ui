@@ -36,7 +36,7 @@
       <% section.with_navigation_item(
         label: "Settings",
         href: "#",
-        icon: { name: "cog-6-tooth", size: :sm }
+        icon: { name: "cog", size: :sm }
       ) %>
     <% end %>
     
@@ -63,6 +63,7 @@
     
     <!-- Footer con renders_one -->
     <% sidebar.with_footer(
+      variant: :dropdown,
       user_info: {
         name: "Alessio Bussolari",
         email: "alessio@example.com",
@@ -72,32 +73,45 @@
           theme: :blue
         }
       },
-      user_dropdown: {
-        trigger: {
-          variant: :ghost,
-          size: :sm,
-          icon: { name: "ellipsis-vertical", size: :sm }
+      dropdown_items: [
+        {
+          text: "Il mio Profilo",
+          href: "#",
+          icon: { name: "user", size: :sm }
         },
-        position: :top_right,
-        items: [
-          {
-            text: "Profile",
-            href: "#",
-            icon: { name: "user", size: :sm }
-          },
-          {
-            text: "Settings",
-            href: "#",
-            icon: { name: "cog-6-tooth", size: :sm }
-          },
-          {
-            text: "Logout",
-            href: "#",
-            icon: { name: "arrow-right-on-rectangle", size: :sm },
-            variant: :destructive
-          }
-        ]
-      }
+        {
+          text: "Impostazioni Account",
+          href: "#",
+          icon: { name: "cog-6-tooth", size: :sm }
+        },
+        {
+          text: "Preferenze",
+          href: "#",
+          icon: { name: "adjustments-horizontal", size: :sm }
+        },
+        {
+          type: :divider
+        },
+        {
+          text: "Centro Assistenza",
+          href: "#",
+          icon: { name: "question-mark-circle", size: :sm }
+        },
+        {
+          text: "Feedback",
+          href: "#",
+          icon: { name: "chat-bubble-left-right", size: :sm }
+        },
+        {
+          type: :divider
+        },
+        {
+          text: "Esci",
+          href: "#",
+          icon: { name: "arrow-right-on-rectangle", size: :sm },
+          variant: :destructive
+        }
+      ]
     ) %>
     
   <% end %>

@@ -55,9 +55,9 @@
       <% if has_icon? %>
         <span class="<%= icon_classes %>">
           <% if @icon.is_a?(Hash) %>
-            <%= render BetterUi::General::Icon::Component.new(**@icon) %>
+            <%= bui_icon(**@icon) %>
           <% else %>
-            <%= render BetterUi::General::Icon::Component.new(name: @icon, size: :sm) %>
+            <%= bui_icon(@icon, size: :sm) %>
           <% end %>
         </span>
       <% end %>
@@ -79,9 +79,9 @@
       <% if has_icon? %>
         <span class="<%= icon_classes %>">
           <% if @icon.is_a?(Hash) %>
-            <%= render BetterUi::General::Icon::Component.new(**@icon) %>
+            <%= bui_icon(**@icon) %>
           <% else %>
-            <%= render BetterUi::General::Icon::Component.new(name: @icon, size: :sm) %>
+            <%= bui_icon(@icon, size: :sm) %>
           <% end %>
         </span>
       <% end %>
