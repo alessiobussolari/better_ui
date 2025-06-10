@@ -10,8 +10,8 @@ delegate :bui_avatar, to: :helpers
 
         # Costanti per le varianti del footer
         FOOTER_VARIANT_CLASSES = {
-          simple: "flex-shrink-0 px-4 py-4 border-t border-gray-200",
-          dropdown: "flex-shrink-0 px-4 py-4 border-t border-gray-200 relative"
+          simple: "flex-shrink-0 p-2 border-t border-gray-200",
+          dropdown: "flex-shrink-0 p-2 border-t border-gray-200 relative"
         }.freeze
 
         # Configurazione con validazione automatica

@@ -40,7 +40,7 @@ module BetterUi
             full: 'rounded-full'
           }.freeze
 
-          CHECKBOX_BASE_CLASSES = 'appearance-none border-2 focus:outline-none focus:ring-2 focus:ring-offset-2 transition-colors duration-200 cursor-pointer disabled:cursor-not-allowed disabled:opacity-50'.freeze
+          CHECKBOX_BASE_CLASSES = 'appearance-none border-2 focus:outline-none transition-colors duration-200 cursor-pointer disabled:cursor-not-allowed disabled:opacity-50'.freeze
 
           CHECKBOX_LABEL_GAP = {
             xxs: 'gap-1',          # Extra extra small

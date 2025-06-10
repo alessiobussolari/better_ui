@@ -40,7 +40,7 @@ module BetterUi
             full: 'rounded-full'
           }.freeze
 
-          SELECT_BASE_CLASSES = 'block w-full bg-white border-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 transition-colors duration-200'.freeze
+          SELECT_BASE_CLASSES = 'block w-full bg-white border-2 shadow-sm focus:outline-none transition-colors duration-200'.freeze
 
           attr_reader :name, :options, :selected, :required, :disabled, :multiple, :searchable,
                       :theme, :size, :rounded, :placeholder, :search_placeholder, :max_height,

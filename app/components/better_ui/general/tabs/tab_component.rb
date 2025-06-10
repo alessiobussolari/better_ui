@@ -82,7 +82,7 @@ module BetterUi
           
           base_classes = [
             'inline-flex items-center justify-center gap-2 font-medium rounded-md transition-colors',
-            'focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500',
+            'focus:outline-none focus:ring-blue-500',
             get_size_class,
             theme_classes,
             disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer',

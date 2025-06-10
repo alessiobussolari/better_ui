@@ -13,7 +13,7 @@ module BetterUi
         ALERT_CONTENT_CLASSES = "flex-1"
         ALERT_TITLE_CLASSES = "font-medium mb-1"
         ALERT_MESSAGE_CLASSES = "text-sm"
-        ALERT_CLOSE_CLASSES = "ml-auto -my-1.5 -mr-1.5 p-1.5 rounded-md focus:ring-2 focus:ring-offset-2 hover:bg-gray-100"
+        ALERT_CLOSE_CLASSES = "ml-auto -my-1.5 -mr-1.5 p-1.5 rounded-md hover:bg-gray-100"
 
         # Costanti per configure_attributes
         ALERT_THEME_CLASSES = {

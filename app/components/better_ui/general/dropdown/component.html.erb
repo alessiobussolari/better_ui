@@ -5,7 +5,7 @@
      <%= tag.attributes(@html_options.except(:class)) %>>
   
   <button type="button"
-          class="items-center border font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 transition-colors <%= dynamic_trigger_classes %> <%= fullwidth_classes %>"
+          class="items-center border font-medium focus:outline-none transition-colors <%= dynamic_trigger_classes %> <%= fullwidth_classes %>"
           data-bui-dropdown-target="trigger"
           data-action="click->bui-dropdown#toggle keydown->bui-dropdown#keydown"
           aria-expanded="false"
