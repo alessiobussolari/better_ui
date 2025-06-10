@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module BetterUi
   module Application
     module Components
@@ -7,28 +9,27 @@ module BetterUi
           #
           # @param width [Symbol] Larghezza della sidebar (:sm, :md, :lg, :xl), default :md
           # @param position [Symbol] Posizione della sidebar (:left, :right), default :left
-          # @param theme [Symbol] Tema colori (:default, :dark, :light), default :default
+          # @param theme [Symbol] Tema colori (default, white, red, rose, orange, green, blue, yellow, violet), default :blue
           # @param shadow [Symbol] Tipo di ombra (:none, :sm, :md, :lg), default :lg
-          # @param border [Boolean] Se mostrare il bordo destro/sinistro, default true
-          # @param header [Hash] Configurazione header (logo, title, subtitle)
-          # @param footer [Hash] Configurazione footer (content, user_info)
-          # @param navigation_sections [Array] Array di sezioni di navigazione
-          # @param collapsible [Boolean] Se abilitare sezioni collassabili, default true
-          # @param classes [String] Classi CSS aggiuntive
-          # @param block [Proc] Blocco contenente contenuto aggiuntivo della sidebar
+          # @param block [Proc] Blocco per configurare header, footer e navigation_sections usando renders_one/renders_many
           #
           # @return [String] HTML del componente sidebar
+          #
+          # @example Uso base
+          #   <%= bui_sidebar(width: :lg, theme: :blue) do |sidebar| %>
+          #     <% sidebar.with_header(title: "Dashboard", logo: { name: "home", size: :md }) %>
+          #     <% sidebar.with_navigation_section(title: "Menu") do |section| %>
+          #       <% section.with_navigation_item(label: "Home", href: "/", icon: { name: "home" }) %>
+#       <% section.with_navigation_item(label: "Settings", href: "/settings", icon: { name: "cog" }) %>
+          #     <% end %>
+          #     <% sidebar.with_footer(user_info: { name: "John Doe", email: "john@example.com" }) %>
+          #   <% end %>
           def bui_sidebar(
             width: :md,
             position: :left,
             theme: :default,
             shadow: :lg,
-            border: true,
-            header: {},
-            footer: {},
-            navigation_sections: [],
-            collapsible: true,
-            classes: nil,
+            **html_options,
             &block
           )
             render BetterUi::Application::Sidebar::Component.new(
@@ -36,12 +37,7 @@ module BetterUi
               position: position,
               theme: theme,
               shadow: shadow,
-              border: border,
-              header: header,
-              footer: footer,
-              navigation_sections: navigation_sections,
-              collapsible: collapsible,
-              classes: classes
+              **html_options
             ), &block
           end
         end

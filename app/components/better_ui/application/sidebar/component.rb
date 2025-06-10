@@ -3,101 +3,107 @@
 module BetterUi
   module Application
     module Sidebar
-      class Component < ViewComponent::Base
-        # Include degli helper per utilizzare bui_icon, bui_avatar, bui_button e bui_dropdown
-        include BetterUi::General::Components::Icon::IconHelper
-        include BetterUi::General::Components::Avatar::AvatarHelper
-        include BetterUi::General::Components::Button::ButtonHelper
-        include BetterUi::General::Components::Dropdown::DropdownHelper
-        include BetterUi::General::Components::Dropdown::ItemHelper
-        attr_reader :width, :position, :theme, :shadow, :border, :header, :footer, :navigation_sections, :collapsible, :classes
+      class Component < BetterUi::Component
+        attr_reader :width, :position, :theme, :shadow
 
-        # Larghezze sidebar con classi Tailwind dirette
-        SIDEBAR_WIDTHS = {
+        # renders_one e renders_many per la nuova struttura
+        renders_one :header, "BetterUi::Application::Sidebar::HeaderComponent"
+        renders_one :footer, "BetterUi::Application::Sidebar::FooterComponent"
+        renders_many :navigation_sections, "BetterUi::Application::Sidebar::NavigationSectionComponent"
+
+        # Costanti seguendo le regole del progetto
+        SIDEBAR_WIDTH_CLASSES = {
           sm: "w-48",
           md: "w-64",
           lg: "w-72",
           xl: "w-80"
-        }
+        }.freeze
 
-        # Temi sidebar con classi Tailwind dirette
-        SIDEBAR_THEMES = {
+        SIDEBAR_POSITION_CLASSES = {
+          left: "left-0",
+          right: "right-0"
+        }.freeze
+
+        SIDEBAR_THEME_CLASSES = {
           default: "bg-white text-gray-900",
-          dark: "bg-gray-900 text-white",
-          light: "bg-white text-gray-900"
-        }
+          white: "bg-white text-gray-900",
+          red: "bg-red-50 text-red-900",
+          rose: "bg-rose-50 text-rose-900",
+          orange: "bg-orange-50 text-orange-900",
+          green: "bg-green-50 text-green-900",
+          blue: "bg-blue-50 text-blue-900",
+          yellow: "bg-yellow-50 text-yellow-900",
+          violet: "bg-violet-50 text-violet-900"
+        }.freeze
 
-        # Ombre sidebar con classi Tailwind dirette
-        SIDEBAR_SHADOWS = {
+        SIDEBAR_SHADOW_CLASSES = {
           none: "",
           sm: "shadow-sm",
           md: "shadow-md",
           lg: "shadow-lg",
           xl: "shadow-xl"
-        }
+        }.freeze
 
-        # Bordi sidebar con classi Tailwind dirette
-        SIDEBAR_BORDERS = {
-          left: "border-r border-gray-200",
-          right: "border-l border-gray-200"
-        }
+        # Configurazione con validazione automatica
+        configure_attributes({
+          width: {
+            var: :@width,
+            default: :md,
+            constants: [:SIDEBAR_WIDTH_CLASSES],
+            methods: [:get_width_class]
+          },
+          position: {
+            var: :@position,
+            default: :left,
+            constants: [:SIDEBAR_POSITION_CLASSES],
+            methods: [:get_position_class]
+          },
+          theme: {
+            var: :@theme,
+            default: :default,
+            constants: [:SIDEBAR_THEME_CLASSES],
+            methods: [:get_theme_class]
+          },
+          shadow: {
+            var: :@shadow,
+            default: :lg,
+            constants: [:SIDEBAR_SHADOW_CLASSES],
+            methods: [:get_shadow_class]
+          }
+        })
 
-        # @param width [Symbol] Larghezza della sidebar (:sm, :md, :lg, :xl), default :md (w-64)
-        # @param position [Symbol] Posizione della sidebar (:left, :right), default :left
-        # @param theme [Symbol] Tema colori (:default, :dark, :light), default :default
-        # @param shadow [Symbol] Tipo di ombra (:none, :sm, :md, :lg), default :lg
-        # @param border [Boolean] Se mostrare il bordo destro/sinistro, default true
-        # @param header [Hash] Configurazione header (logo, title, subtitle)
-        # @param footer [Hash] Configurazione footer (content, user_info, user_dropdown)
-        # @param navigation_sections [Array] Array di sezioni di navigazione
-        # @param collapsible [Boolean] Se abilitare sezioni collassabili, default true
-        # @param classes [String] Classi CSS aggiuntive
         def initialize(
           width: :md,
           position: :left,
           theme: :default,
           shadow: :lg,
-          border: true,
-          header: {},
-          footer: {},
-          navigation_sections: [],
-          collapsible: true,
-          classes: nil
+          **html_options
         )
           @width = width.to_sym
           @position = position.to_sym
           @theme = theme.to_sym
           @shadow = shadow.to_sym
-          @border = border
-          @header = header || {}
-          @footer = footer || {}
-          @navigation_sections = navigation_sections || []
-          @collapsible = collapsible
-          @classes = classes
+          @html_options = html_options
+          
+          validate_params  # Validazione automatica generata da configure_attributes
         end
 
         def wrapper_classes
-          base_classes = %w[fixed top-0 inset-y-0 h-screen z-[9999]]
-
-          # Posizione
-          base_classes << (position == :right ? "right-0" : "left-0")
-
-          # Larghezza
-          base_classes << width_class
-
-          base_classes.compact.join(" ")
+          classes = [
+            "fixed top-0 h-full z-40 transition-transform duration-300 ease-in-out",
+            get_width_class,
+            get_position_class,
+            get_theme_class,
+            get_shadow_class
+          ]
+          
+          classes << @html_options[:class] if @html_options[:class].present?
+          
+          classes.compact.join(" ")
         end
 
-        def container_classes
-          [
-            "flex flex-col h-full",
-            get_theme_class,   # Metodo generato automaticamente
-            get_shadow_class,  # Metodo generato automaticamente
-            "border-r border-gray-200" # Border fisso per ora
-          ].compact.join(" ")
-        end
+        private
 
-        # Metodi helper per il template
         def has_header?
           header.present?
         end

@@ -3,46 +3,38 @@
 module BetterUi
   module Application
     module Sidebar
-      class FooterComponent < ViewComponent::Base
-        include BetterUi::General::Components::Icon::IconHelper
-        include BetterUi::General::Components::Avatar::AvatarHelper
-        include BetterUi::General::Components::Dropdown::DropdownHelper
-        include BetterUi::General::Components::Dropdown::ItemHelper
-
-        attr_reader :user_info, :user_dropdown, :content, :classes
+      class FooterComponent < BetterUi::Component
+        attr_reader :footer_content, :user_info, :user_dropdown
 
         def initialize(
-          user_info: nil,
-          user_dropdown: nil,
-          content: nil,
-          classes: nil
+          footer_content: nil, 
+          user_info: nil, 
+          user_dropdown: nil, 
+          **html_options
         )
+          @footer_content = footer_content
           @user_info = user_info
           @user_dropdown = user_dropdown
-          @content = content
-          @classes = classes
+          @html_options = html_options
         end
 
         def footer_classes
-          base_classes = %w[mt-auto border-t border-gray-200 p-4]
-          base_classes << @classes if @classes.present?
-          base_classes.compact.join(" ")
-        end
-
-        def has_user_info?
-          user_info.present? && (user_info[:name].present? || user_info[:email].present? || user_info[:avatar].present?)
-        end
-
-        def has_user_dropdown?
-          user_dropdown.present? && user_dropdown[:items].present?
+          [
+            "flex-shrink-0 px-4 py-4 border-t border-gray-200",
+            @html_options[:class]
+          ].compact.join(" ")
         end
 
         def has_content?
-          content.present? || has_user_info? || has_user_dropdown?
+          @footer_content.present?
         end
 
-        def render?
-          has_content?
+        def has_user_info?
+          @user_info.present?
+        end
+
+        def has_user_dropdown?
+          @user_dropdown.present?
         end
 
         def user_dropdown_trigger

@@ -1,83 +1,122 @@
-<div class="h-screen bg-gray-50 flex">
+<div class="flex h-screen bg-gray-100">
   <%= bui_sidebar(
     width: width,
     position: position,
     theme: theme,
-    shadow: shadow,
-    border: border,
-    collapsible: collapsible
+    shadow: shadow
   ) do |sidebar| %>
     
-    <!-- Header -->
-    <% sidebar.with_header do %>
-      <div class="flex items-center space-x-3">
-        <div class="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center">
-          <span class="text-white font-bold text-sm">B</span>
-        </div>
-        <div>
-          <h1 class="text-lg font-semibold">Better UI</h1>
-          <p class="text-sm text-gray-500">Component Library</p>
-        </div>
-      </div>
-    <% end %>
+    <!-- Header con renders_one -->
+    <% sidebar.with_header(
+      title: "Better UI",
+      subtitle: "Component Library",
+      logo: {
+        name: "squares-2x2",
+        size: :md,
+        classes: "text-blue-600"
+      }
+    ) %>
     
-    <!-- Navigation Sections -->
-    <% sidebar.with_navigation_section(title: "Platform") do |section| %>
-      <% section.with_item(
-        type: :collapsible,
-        label: "Playground"
-      ) do |item| %>
-        <% item.with_children(label: "Workspace", href: "#", active: true) %>
-        <% item.with_children(label: "Projects", href: "#") %>
-        <% item.with_children(label: "Experiments", href: "#") %>
-      <% end %>
-      
-      <% section.with_item(
-        label: "History",
-        href: "#"
+    <!-- Navigation Sections con renders_many -->
+    <% sidebar.with_navigation_section(title: "Platform", collapsible: true) do |section| %>
+      <% section.with_navigation_item(
+        label: "Dashboard",
+        href: "#",
+        icon: { name: "home", size: :sm },
+        state: :active
       ) %>
       
-      <% section.with_item(
+      <% section.with_navigation_item(
+        label: "Projects",
+        href: "#",
+        icon: { name: "folder", size: :sm },
+        badge: { text: "3", theme: :blue }
+      ) %>
+      
+      <% section.with_navigation_item(
         label: "Settings",
-        href: "#"
+        href: "#",
+        icon: { name: "cog-6-tooth", size: :sm }
       ) %>
     <% end %>
     
-    <% sidebar.with_navigation_section(title: "Development") do |section| %>
-      <% section.with_item(
-        type: :collapsible,
-        label: "Models"
-      ) do |item| %>
-        <% item.with_children(label: "GPT-4", href: "#") %>
-        <% item.with_children(label: "Claude", href: "#") %>
-        <% item.with_children(label: "Gemini", href: "#") %>
-      <% end %>
+    <% sidebar.with_navigation_section(title: "Development", collapsible: true) do |section| %>
+      <% section.with_navigation_item(
+        label: "Components",
+        href: "#",
+        icon: { name: "cube", size: :sm }
+      ) %>
       
-      <% section.with_item(
+      <% section.with_navigation_item(
         label: "Documentation",
         href: "#",
-        badge: "New"
+        icon: { name: "document-text", size: :sm },
+        badge: { text: "New", theme: :green }
+      ) %>
+      
+      <% section.with_navigation_item(
+        label: "API Reference",
+        href: "#",
+        icon: { name: "code-bracket", size: :sm }
       ) %>
     <% end %>
     
-    <!-- Footer -->
-    <% sidebar.with_footer do %>
-      <div class="flex items-center space-x-3 p-3 bg-gray-50 rounded-lg">
-        <div class="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center">
-          <span class="text-gray-600 text-sm font-medium">AB</span>
-        </div>
-        <div class="flex-1">
-          <p class="text-sm font-medium">Alessio Bussolari</p>
-          <p class="text-xs text-gray-500">Piano Pro</p>
-        </div>
-      </div>
-    <% end %>
+    <!-- Footer con renders_one -->
+    <% sidebar.with_footer(
+      user_info: {
+        name: "Alessio Bussolari",
+        email: "alessio@example.com",
+        avatar: {
+          initials: "AB",
+          size: :sm,
+          theme: :blue
+        }
+      },
+      user_dropdown: {
+        trigger: {
+          variant: :ghost,
+          size: :sm,
+          icon: { name: "ellipsis-vertical", size: :sm }
+        },
+        position: :top_right,
+        items: [
+          {
+            text: "Profile",
+            href: "#",
+            icon: { name: "user", size: :sm }
+          },
+          {
+            text: "Settings",
+            href: "#",
+            icon: { name: "cog-6-tooth", size: :sm }
+          },
+          {
+            text: "Logout",
+            href: "#",
+            icon: { name: "arrow-right-on-rectangle", size: :sm },
+            variant: :destructive
+          }
+        ]
+      }
+    ) %>
     
   <% end %>
   
   <!-- Content Area -->
   <div class="flex-1 p-8">
     <h1 class="text-2xl font-bold text-gray-900 mb-4">Dashboard</h1>
-    <p class="text-gray-600">Contenuto principale dell'applicazione.</p>
+    <p class="text-gray-600">Contenuto principale dell'applicazione con sidebar refactorizzata secondo le nuove regole.</p>
+    <div class="mt-6 p-4 bg-white rounded-lg shadow">
+      <h2 class="text-lg font-semibold mb-2">Caratteristiche della Sidebar Refactorizzata</h2>
+      <ul class="list-disc list-inside space-y-1 text-sm text-gray-600">
+        <li>Ereditanza da BetterUi::Component</li>
+        <li>Costanti conformi alle regole (SIDEBAR_SIZE_CLASSES, etc.)</li>
+        <li>Sistema configure_attributes con validazione automatica</li>
+        <li>renders_one per header e footer</li>
+        <li>renders_many per navigation_sections</li>
+        <li>Separazione corretta tra THEME (colori) e VARIANT (stili)</li>
+        <li>Attributi Stimulus con prefisso bui_</li>
+      </ul>
+    </div>
   </div>
 </div>

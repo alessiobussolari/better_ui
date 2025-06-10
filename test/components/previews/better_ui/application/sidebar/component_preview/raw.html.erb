@@ -3,100 +3,86 @@
     width: width,
     position: position,
     theme: theme,
-    shadow: shadow,
-    border: border,
-    collapsible: collapsible
+    shadow: shadow
   ) do |sidebar| %>
     
-    <!-- Header -->
-    <% sidebar.with_header do %>
-      <div class="flex items-center space-x-3">
-        <div class="w-8 h-8 bg-purple-600 rounded-lg flex items-center justify-center">
-          <span class="text-white font-bold text-sm">R</span>
-        </div>
-        <div>
-          <h1 class="text-lg font-semibold">Raw Component</h1>
-          <p class="text-sm text-gray-500">Direct Instantiation</p>
-        </div>
-      </div>
-    <% end %>
+    <!-- Header con renders_one -->
+    <% sidebar.with_header(
+      title: "Better UI",
+      subtitle: "Component Library",
+      logo: {
+        name: "squares-2x2",
+        size: :md,
+        classes: "text-blue-600"
+      }
+    ) %>
     
-    <!-- Navigation Sections -->
-    <% sidebar.with_navigation_section(title: "Main Menu") do |section| %>
-      <% section.with_item(
-        type: :collapsible,
-        label: "Dashboard"
-      ) do |item| %>
-        <% item.with_children(
-          label: "Overview",
-          href: "#",
-          active: true
-        ) %>
-        <% item.with_children(
-          label: "Analytics",
-          href: "#"
-        ) %>
-        <% item.with_children(
-          label: "Reports",
-          href: "#"
-        ) %>
-      <% end %>
-      
-      <% section.with_item(
-        label: "Users",
-        href: "#"
+    <!-- Navigation Sections con renders_many -->
+    <% sidebar.with_navigation_section(title: "Platform", collapsible: true) do |section| %>
+      <% section.with_navigation_item(
+        label: "Dashboard",
+        href: "#",
+        icon: { name: "home", size: :sm },
+        state: :active
       ) %>
       
-      <% section.with_item(
+      <% section.with_navigation_item(
+        label: "Projects",
+        href: "#",
+        icon: { name: "folder", size: :sm },
+        badge: { text: "3", theme: :blue }
+      ) %>
+      
+      <% section.with_navigation_item(
         label: "Settings",
-        href: "#"
+        href: "#",
+        icon: { name: "cog-6-tooth", size: :sm }
       ) %>
     <% end %>
     
-    <% sidebar.with_navigation_section(title: "Tools") do |section| %>
-      <% section.with_item(
-        type: :collapsible,
-        label: "API"
-      ) do |item| %>
-        <% item.with_children(
-          label: "Endpoints",
-          href: "#"
-        ) %>
-        <% item.with_children(
-          label: "Authentication",
-          href: "#"
-        ) %>
-        <% item.with_children(
-          label: "Rate Limits",
-          href: "#"
-        ) %>
-      <% end %>
+    <% sidebar.with_navigation_section(title: "Development", collapsible: true) do |section| %>
+      <% section.with_navigation_item(
+        label: "Components",
+        href: "#",
+        icon: { name: "cube", size: :sm }
+      ) %>
       
-      <% section.with_item(
+      <% section.with_navigation_item(
         label: "Documentation",
         href: "#",
-        badge: "Beta"
+        icon: { name: "document-text", size: :sm },
+        badge: { text: "New", theme: :green }
+      ) %>
+      
+      <% section.with_navigation_item(
+        label: "API Reference",
+        href: "#",
+        icon: { name: "code-bracket", size: :sm }
       ) %>
     <% end %>
     
-    <!-- Footer -->
-    <% sidebar.with_footer do %>
-      <div class="flex items-center space-x-3 p-3 bg-purple-50 rounded-lg">
-        <div class="w-8 h-8 bg-purple-600 rounded-full flex items-center justify-center">
-          <span class="text-white text-sm font-medium">U</span>
-        </div>
-        <div class="flex-1">
-          <p class="text-sm font-medium">Demo User</p>
-          <p class="text-xs text-gray-500">Raw Instance</p>
-        </div>
-      </div>
-    <% end %>
+    <!-- Footer con renders_one -->
+    <% sidebar.with_footer(
+      user_info: {
+        name: "Alessio Bussolari",
+        email: "alessio@example.com",
+        avatar: {
+          initials: "AB",
+          size: :sm,
+          theme: :blue
+        }
+      }
+    ) %>
     
   <% end %>
   
   <!-- Content Area -->
   <div class="flex-1 p-8">
-    <h1 class="text-2xl font-bold text-gray-900 mb-4">Raw Component Demo</h1>
-    <p class="text-gray-600">Esempio di sidebar con istanziazione diretta della classe.</p>
+    <h1 class="text-2xl font-bold text-gray-900 mb-4">Dashboard</h1>
+    <p class="text-gray-600">Contenuto principale dell'applicazione (istanziazione diretta con Component.new).</p>
+    <div class="mt-6 p-4 bg-white rounded-lg shadow">
+      <h2 class="text-lg font-semibold mb-2">Istanziazione Diretta</h2>
+      <p class="text-sm text-gray-600">Questo esempio mostra come usare direttamente <code class="bg-gray-100 px-1 rounded">BetterUi::Application::Sidebar::Component.new</code> invece dell'helper <code class="bg-gray-100 px-1 rounded">bui_sidebar</code>.</p>
+    </div>
   </div>
 </div>
