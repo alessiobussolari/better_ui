@@ -72,17 +72,11 @@ module BetterUi
 
         def initialize(text:, theme: :white, size: :md, style: :filled, **options)
           @text = text
-          @theme = theme.to_sym
-          @size = size.to_sym
-          @style = style.to_sym
           @options = options
-
-          validate_params
+          super(theme: theme, size: size, style: style)
         end
 
-        private
-
-        attr_reader :text, :theme, :size, :style, :options
+        attr_reader :text, :options
 
         def tag_classes
           [
@@ -100,7 +94,6 @@ module BetterUi
             get_theme_filled_class
           end
         end
-
       end
     end
   end

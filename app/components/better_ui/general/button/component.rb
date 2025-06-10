@@ -1,15 +1,14 @@
 module BetterUi
   module General
     module Button
-      class Component < ViewComponent::Base
-        attr_reader :text, :theme, :size, :full_width, :disabled,
-                    :icon, :icon_position, :href, :method, :data, :classes, :id, :rounded, :button_type, :html_options
+      class Component < BetterUi::Component
+        attr_reader :text, :full_width, :disabled, :icon, :icon_position, :href, :method, :data, :classes, :id, :button_type, :html_options
 
         # Classi base sempre presenti
         BUTTON_BASE_CLASSES = "inline-flex items-center justify-center font-medium transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2"
 
-        # Temi di bottoni con classi Tailwind dirette
-        BUTTON_THEME = {
+        # Costanti rinominate secondo convenzione
+        BUTTON_THEME_CLASSES = {
           default: "bg-black text-white hover:bg-gray-900 focus:ring-gray-900",
           white: "bg-white text-black border border-gray-300 hover:bg-gray-50 focus:ring-gray-400",
           red: "bg-red-500 text-white hover:bg-red-600 focus:ring-red-500",
@@ -22,19 +21,17 @@ module BetterUi
           purple: "bg-purple-500 text-white hover:bg-purple-600 focus:ring-purple-500"
         }
 
-        # Dimensioni con classi Tailwind dirette - Sistema uniforme 7 livelli
-        BUTTON_SIZES = {
-          xxs: "px-1 py-0.5 text-xs", # Extra extra small
-          xs: "px-1.5 py-1 text-xs", # Extra small
-          sm: "px-2.5 py-1.5 text-xs", # Small
-          md: "px-4 py-2 text-sm", # Medium (default)
-          lg: "px-6 py-3 text-base", # Large
-          xl: "px-8 py-4 text-lg", # Extra large
-          xxl: "px-10 py-5 text-xl" # Extra extra large
+        BUTTON_SIZE_CLASSES = {
+          xxs: "px-1 py-0.5 text-xs",
+          xs: "px-1.5 py-1 text-xs",
+          sm: "px-2.5 py-1.5 text-xs",
+          md: "px-4 py-2 text-sm",
+          lg: "px-6 py-3 text-base",
+          xl: "px-8 py-4 text-lg",
+          xxl: "px-10 py-5 text-xl"
         }
 
-        # Border radius con classi Tailwind dirette
-        BUTTON_RADIUS = {
+        BUTTON_ROUNDED_CLASSES = {
           none: "rounded-none",
           xxs: "rounded-sm",
           xs: "rounded",
@@ -46,12 +43,31 @@ module BetterUi
           full: "rounded-full"
         }
 
-        BUTTON_ICON_POSITION = {
-          left: :left,
-          right: :right
-        }
+        # Costanti per validazione
+        BUTTON_ICON_POSITION_VALUES = [:left, :right]
 
-        # Inizializzazione del componente
+        # Configurazione con configure_attributes
+        configure_attributes({
+          theme: {
+            var: :@theme,
+            default: :white,
+            constants: [:BUTTON_THEME_CLASSES],
+            methods: [:get_theme_class]
+          },
+          size: {
+            var: :@size,
+            default: :md,
+            constants: [:BUTTON_SIZE_CLASSES],
+            methods: [:get_size_class]
+          },
+          rounded: {
+            var: :@rounded,
+            default: :md,
+            constants: [:BUTTON_ROUNDED_CLASSES],
+            methods: [:get_rounded_class]
+          }
+        })
+
         def initialize(
           text: nil,
           theme: :white,
@@ -88,18 +104,16 @@ module BetterUi
           validate_params
         end
 
-        # Determina se il bottone è un link o un button
         def link?
           @href.present?
         end
 
-        # Combina tutte le classi
         def combined_classes
           [
             BUTTON_BASE_CLASSES,
-            get_button_type_classes,
-            get_button_size_classes,
-            get_border_radius_class,
+            get_theme_class,
+            get_size_class,
+            get_rounded_class,
             @full_width ? "w-full" : nil,
             @disabled ? "opacity-50 cursor-not-allowed" : nil,
             @classes,
@@ -107,7 +121,6 @@ module BetterUi
           ].compact.join(" ")
         end
 
-        # Restituisce gli attributi per il bottone
         def button_attributes
           attrs = {
             class: combined_classes,
@@ -118,7 +131,6 @@ module BetterUi
           attrs[:disabled] = true if @disabled
           attrs[:data] = @data if @data.present?
 
-          # Aggiungi altri attributi HTML se presenti
           @html_options.except(:class).each do |key, value|
             attrs[key] = value
           end
@@ -126,7 +138,6 @@ module BetterUi
           attrs
         end
 
-        # Restituisce gli attributi per il link
         def link_attributes
           attrs = {
             class: combined_classes,
@@ -140,7 +151,6 @@ module BetterUi
           attrs[:tabindex] = @disabled ? "-1" : "0"
           attrs[:aria] = { disabled: @disabled } if @disabled
 
-          # Aggiungi altri attributi HTML se presenti
           @html_options.except(:class).each do |key, value|
             attrs[key] = value
           end
@@ -152,9 +162,7 @@ module BetterUi
           @button_type || "button"
         end
 
-        # Helper per renderizzare le icone
         def render_icon(icon_name)
-          # Mappa le dimensioni del bottone alle dimensioni dell'icona
           icon_size = case @size
                       when :xxs then :xxs
                       when :xs then :xs
@@ -166,7 +174,6 @@ module BetterUi
                       else :md
                       end
 
-          # Utilizziamo il componente Icon
           render BetterUi::General::Icon::Component.new(
             name: icon_name,
             size: icon_size,
@@ -174,46 +181,23 @@ module BetterUi
           )
         end
 
-        # Verifica se rendere il componente
         def render?
           @text.present? || @icon.present? || content.present?
         end
 
         private
 
+        # Override validate_params per aggiungere validazioni custom
         def validate_params
-          validate_theme
-          validate_size
+          super # Chiama le validazioni automatiche di configure_attributes
           validate_icon_position
-          validate_rounded
         end
 
-        [
-          { constant: :BUTTON_THEME, var: :@theme, default: :white, method: :get_button_type_classes },
-          { constant: :BUTTON_RADIUS, var: :@rounded, default: :xs, method: :get_border_radius_class },
-          { constant: :BUTTON_SIZES, var: :@size, default: :md, method: :get_button_size_classes }
-        ].each do |config|
-          define_method config[:method] do
-            constant_hash = self.class.const_get(config[:constant])
-            value = instance_variable_get(config[:var])
-            constant_hash[value] || constant_hash[config[:default]]
+        def validate_icon_position
+          unless BUTTON_ICON_POSITION_VALUES.include?(@icon_position)
+            raise ArgumentError, "#{self.class.name} - parametro 'icon_position' con valore '#{@icon_position}' non è valido. Deve essere uno tra: #{BUTTON_ICON_POSITION_VALUES.join(', ')}"
           end
         end
-
-        [
-          { values: BUTTON_THEME.keys, method: :validate_theme, param: 'theme', var: :@theme },
-          { values: BUTTON_SIZES.keys, method: :validate_size, param: 'size', var: :@size },
-          { values: BUTTON_ICON_POSITION.keys, method: :validate_icon_position, param: 'icon_position', var: :@icon_position },
-          { values: BUTTON_RADIUS.keys, method: :validate_rounded, param: 'rounded', var: :@rounded },
-        ].each do |validation|
-          define_method validation[:method] do
-            value = instance_variable_get(validation[:var])
-            unless validation[:values].include?(value)
-              raise ArgumentError, "#{self.class.name} - parametro '#{validation[:param]}' con valore '#{value}' non è valido. Deve essere uno tra: #{validation[:values].join(', ')}"
-            end
-          end
-        end
-
       end
     end
   end

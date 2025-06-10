@@ -1,10 +1,7 @@
 module BetterUi
   module General
     module Table
-      class Component < ViewComponent::Base
-        attr_reader :data, :headers, :caption, :size, :striped, :hoverable, :bordered, :compact, :minimal, :footer,
-                    :header_rows_partial, :body_row_partial, :footer_rows_partial, :thead_partial, :tfoot_partial
-
+      class Component < BetterUi::Component
         # Classi base sempre presenti
         TABLE_BASE_CLASSES = "w-full table-auto border-collapse"
 
@@ -24,9 +21,11 @@ module BetterUi
         # Opzioni di bordi arrotondati con classi Tailwind dirette
         TABLE_RADIUS = {
           none: "rounded-none",
-          small: "rounded-md",
-          medium: "rounded-lg",
-          large: "rounded-xl",
+          xs: "rounded",
+          sm: "rounded-md",
+          md: "rounded-lg",
+          lg: "rounded-xl",
+          xl: "rounded-2xl",
           full: "rounded-full"
         }.freeze
 
@@ -41,24 +40,42 @@ module BetterUi
           xxl: "text-xl [&_th]:px-8 [&_th]:py-6 [&_td]:px-8 [&_td]:py-6"
         }.freeze
 
-
         # Classi per container
         CONTAINER_BASE_CLASSES = "overflow-x-auto"
-
-        # Classi per elementi della tabella
-        THEAD_CLASSES = "bg-gray-100 border-b border-gray-200"
-        TBODY_CLASSES = ""
-        TFOOT_CLASSES = "bg-gray-50 border-t border-gray-200"
-        TR_CLASSES = "border-b border-gray-100 hover:bg-gray-50"
-        TH_CLASSES = "px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-        TD_CLASSES = "px-4 py-3 text-sm text-gray-900"
-        TF_CLASSES = "px-4 py-3 text-sm font-medium text-gray-900"
         CAPTION_CLASSES = "mb-2 text-sm text-gray-600 text-left"
+
+        # Definizione dei sub-componenti con renders_one e renders_many
+        renders_one :caption, CaptionComponent
+        renders_one :thead, TheadComponent
+        renders_one :tbody, TbodyComponent
+        renders_one :tfoot, TfootComponent  # ← AGGIUNTO
+
+        configure_attributes({
+          theme: {
+            var: :@theme,
+            default: :default,
+            constants: [:TABLE_THEME],
+            methods: [:get_theme_class]
+          },
+          radius: {
+            var: :@radius,
+            default: :sm,
+            constants: [:TABLE_RADIUS],
+            methods: [:get_radius_class]
+          },
+          size: {
+            var: :@size,
+            default: :md,
+            constants: [:TABLE_SIZE_CLASSES],
+            methods: [:get_size_class]
+          }
+        })
+
+        attr_reader :data, :headers, :striped, :hoverable, :bordered, :compact, :minimal
 
         def initialize(
           data: nil,
           headers: nil,
-          caption: nil,
           theme: :default,
           radius: :sm,
           size: :md,
@@ -67,32 +84,19 @@ module BetterUi
           bordered: false,
           compact: false,
           minimal: false,
-          footer: nil,
-          header_rows_partial: nil,
-          body_row_partial: nil,
-          footer_rows_partial: nil,
-          thead_partial: nil,
-          tfoot_partial: nil,
           **html_options
         )
+          super()
           @data = data || []
           @headers = headers
-          @caption = caption
           @theme = theme.to_sym
           @radius = radius.to_sym
           @size = size.to_sym
-          # Flag boolean combinabili
           @striped = !!striped
           @hoverable = !!hoverable
           @bordered = !!bordered
           @compact = !!compact
           @minimal = !!minimal
-          @footer = footer.is_a?(Array) ? footer : nil
-          @header_rows_partial = header_rows_partial
-          @body_row_partial = body_row_partial
-          @footer_rows_partial = footer_rows_partial
-          @thead_partial = thead_partial
-          @tfoot_partial = tfoot_partial
           @html_options = html_options
 
           validate_params
@@ -135,51 +139,6 @@ module BetterUi
           }
         end
 
-        def get_radius_class
-          TABLE_RADIUS[@radius] || TABLE_RADIUS[:sm]
-        end
-
-        def get_theme_class
-          TABLE_THEME[@theme] || TABLE_THEME[:default]
-        end
-
-        def get_size_class
-          TABLE_SIZE_CLASSES[@size] || TABLE_SIZE_CLASSES[:md]
-        end
-
-
-        def caption_classes
-          CAPTION_CLASSES
-        end
-
-        def thead_classes
-          THEAD_CLASSES
-        end
-
-        def tbody_classes
-          TBODY_CLASSES
-        end
-
-        def tfoot_classes
-          TFOOT_CLASSES
-        end
-
-        def tr_classes(index)
-          TR_CLASSES
-        end
-
-        def th_classes
-          TH_CLASSES
-        end
-
-        def td_classes
-          TD_CLASSES
-        end
-
-        def tf_classes
-          TF_CLASSES
-        end
-
         def headers_for_display
           return @headers if @headers.present?
           return [] if @data.empty?
@@ -209,32 +168,6 @@ module BetterUi
 
         def render?
           true
-        end
-
-        private
-
-        def validate_params
-          validate_theme
-          validate_radius
-          validate_size
-        end
-
-        def validate_theme
-          unless TABLE_THEME.keys.include?(@theme)
-            raise ArgumentError, "Il tema deve essere uno tra: #{TABLE_THEME.keys.join(', ')}"
-          end
-        end
-
-        def validate_radius
-          unless TABLE_RADIUS.keys.include?(@radius)
-            raise ArgumentError, "Il radius deve essere uno tra: #{TABLE_RADIUS.keys.join(', ')}"
-          end
-        end
-
-        def validate_size
-          unless TABLE_SIZE_CLASSES.keys.include?(@size)
-            raise ArgumentError, "La size deve essere una tra: #{TABLE_SIZE_CLASSES.keys.join(', ')}"
-          end
         end
       end
     end

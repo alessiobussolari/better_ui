@@ -1,7 +1,7 @@
 module BetterUi
   module General
     module Badge
-      class Component < ViewComponent::Base
+      class Component < BetterUi::Component
         attr_reader :label, :theme, :size, :shape, :style, :variant, :icon, :icon_position, :classes, :id
 
         # Classi base sempre presenti
@@ -58,6 +58,25 @@ module BetterUi
           rounded: "rounded-full"
         }
 
+        # Stili per la validazione
+        BADGE_STYLE_CLASSES = {
+          filled: "filled",
+          outline: "outline"
+        }
+
+        # Varianti per la validazione
+        BADGE_VARIANT_CLASSES = {
+          notification: "notification",
+          counter: "counter",
+          dot: "dot"
+        }
+
+        # Posizioni icona per la validazione
+        BADGE_ICON_POSITION_CLASSES = {
+          left: "left",
+          right: "right"
+        }
+
         # Colori dot per ogni tema
         BADGE_DOT_COLOR_CLASSES = {
           default: "bg-gray-500",
@@ -71,6 +90,40 @@ module BetterUi
           violet: "bg-violet-700",
           gray: "bg-gray-700"
         }
+
+        # Configurazione degli attributi
+        configure_attributes({
+          theme: {
+            var: :@theme,
+            default: :white,
+            constants: [:BADGE_THEME_FILLED_CLASSES],
+            methods: [:get_theme_class]
+          },
+          size: {
+            var: :@size,
+            default: :md,
+            constants: [:BADGE_SIZE_CLASSES],
+            methods: [:get_size_class]
+          },
+          shape: {
+            var: :@shape,
+            default: :rounded,
+            constants: [:BADGE_SHAPE_CLASSES],
+            methods: [:get_shape_class]
+          },
+          style: {
+            var: :@style,
+            default: :filled,
+            constants: [:BADGE_STYLE_CLASSES],
+            methods: [:get_style_class]
+          },
+          icon_position: {
+            var: :@icon_position,
+            default: :left,
+            constants: [:BADGE_ICON_POSITION_CLASSES],
+            methods: [:get_icon_position_class]
+          }
+        })
 
         # @param label [String] Testo del badge
         # @param theme [Symbol] default, white, red, rose, orange, green, blue, yellow, violet, gray
@@ -107,6 +160,16 @@ module BetterUi
           @html_options = html_options
 
           validate_params
+          validate_variant if @variant
+        end
+
+        # Override del metodo get_theme_class per gestire filled/outline
+        def get_theme_class
+          if @style == :outline
+            BADGE_THEME_OUTLINE_CLASSES[@theme] || BADGE_THEME_OUTLINE_CLASSES[:white]
+          else
+            BADGE_THEME_FILLED_CLASSES[@theme] || BADGE_THEME_FILLED_CLASSES[:white]
+          end
         end
 
         # Combina tutte le classi
@@ -119,22 +182,6 @@ module BetterUi
             @classes,
             @html_options[:class]
           ].compact.join(" ")
-        end
-
-        def get_theme_class
-          if @style == :outline
-            BADGE_THEME_OUTLINE_CLASSES[@theme] || BADGE_THEME_OUTLINE_CLASSES[:white]
-          else
-            BADGE_THEME_FILLED_CLASSES[@theme] || BADGE_THEME_FILLED_CLASSES[:white]
-          end
-        end
-
-        def get_size_class
-          BADGE_SIZE_CLASSES[@size] || BADGE_SIZE_CLASSES[:md]
-        end
-
-        def get_shape_class
-          BADGE_SHAPE_CLASSES[@shape] || BADGE_SHAPE_CLASSES[:rounded]
         end
 
         # Restituisce gli attributi per il badge
@@ -197,53 +244,12 @@ module BetterUi
 
         private
 
-        def validate_params
-          validate_theme
-          validate_size
-          validate_shape
-          validate_style
-          validate_variant
-          validate_icon_position
-        end
-
-        def validate_theme
-          unless BADGE_THEME_FILLED_CLASSES.keys.include?(@theme)
-            raise ArgumentError, "Il tema deve essere uno tra: #{BADGE_THEME_FILLED_CLASSES.keys.join(', ')}"
-          end
-        end
-
-        def validate_size
-          unless BADGE_SIZE_CLASSES.keys.include?(@size)
-            raise ArgumentError, "La dimensione deve essere una tra: #{BADGE_SIZE_CLASSES.keys.join(', ')}"
-          end
-        end
-
-        def validate_shape
-          unless BADGE_SHAPE_CLASSES.keys.include?(@shape)
-            raise ArgumentError, "La forma deve essere una tra: #{BADGE_SHAPE_CLASSES.keys.join(', ')}"
-          end
-        end
-
-        def validate_style
-          valid_styles = [ :filled, :outline ]
-          unless valid_styles.include?(@style)
-            raise ArgumentError, "Lo stile deve essere uno tra: #{valid_styles.join(', ')}"
-          end
-        end
-
         def validate_variant
           return if @variant.nil?
 
-          valid_variants = [ :notification, :counter, :dot ]
+          valid_variants = [:notification, :counter, :dot]
           unless valid_variants.include?(@variant)
             raise ArgumentError, "La variante deve essere una tra: #{valid_variants.join(', ')}"
-          end
-        end
-
-        def validate_icon_position
-          valid_positions = [ :left, :right ]
-          unless valid_positions.include?(@icon_position)
-            raise ArgumentError, "La posizione dell'icona deve essere una tra: #{valid_positions.join(', ')}"
           end
         end
       end

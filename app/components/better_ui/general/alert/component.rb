@@ -1,7 +1,9 @@
 module BetterUi
   module General
     module Alert
-      class Component < ViewComponent::Base
+      class Component < BetterUi::Component
+        attr_reader :title, :message, :icon, :icon_position, :dismissible, :html_content, :classes
+
         # Classi base sempre presenti
         ALERT_BASE_CLASSES = "flex p-4 mb-4 border"
 
@@ -13,7 +15,7 @@ module BetterUi
         ALERT_MESSAGE_CLASSES = "text-sm"
         ALERT_CLOSE_CLASSES = "ml-auto -my-1.5 -mr-1.5 p-1.5 rounded-md focus:ring-2 focus:ring-offset-2 hover:bg-gray-100"
 
-        # Temi di alert con classi Tailwind dirette
+        # Costanti per configure_attributes
         ALERT_THEME_CLASSES = {
           default: "bg-black text-white border-gray-900",
           white: "bg-white text-black border-gray-200",
@@ -24,9 +26,8 @@ module BetterUi
           blue: "bg-blue-500 text-white border-blue-600",
           yellow: "bg-yellow-500 text-black border-yellow-600",
           violet: "bg-violet-500 text-white border-violet-600"
-        }
+        }.freeze
 
-        # Colori icone per ogni tema
         ALERT_ICON_THEME_CLASSES = {
           default: "text-white",
           white: "text-black",
@@ -37,9 +38,8 @@ module BetterUi
           blue: "text-white",
           yellow: "text-black",
           violet: "text-white"
-        }
+        }.freeze
 
-        # Colori close button per ogni tema
         ALERT_CLOSE_THEME_CLASSES = {
           default: "text-white focus:ring-gray-600",
           white: "text-black focus:ring-gray-400",
@@ -50,16 +50,61 @@ module BetterUi
           blue: "text-white focus:ring-blue-400",
           yellow: "text-black focus:ring-yellow-400",
           violet: "text-white focus:ring-violet-400"
-        }
+        }.freeze
 
-        # Border radius con classi Tailwind dirette
         ALERT_RADIUS_CLASSES = {
           none: "rounded-none",
-          small: "rounded-sm",
-          medium: "rounded-md",
-          large: "rounded-lg",
+          sm: "rounded-sm",
+          md: "rounded-md",
+          lg: "rounded-lg",
           full: "rounded-full"
-        }
+        }.freeze
+
+        ALERT_ICON_POSITION_CLASSES = {
+          left: "",
+          right: "flex-row-reverse"
+        }.freeze
+
+        ALERT_IMPORTANCE_CLASSES = {
+          high: "high",
+          md: "medium", 
+          low: "low"
+        }.freeze
+
+        # Configurazione con configure_attributes
+        configure_attributes({
+          theme: {
+            var: :@theme,
+            default: :white,
+            constants: [:ALERT_THEME_CLASSES, :ALERT_ICON_THEME_CLASSES, :ALERT_CLOSE_THEME_CLASSES],
+            methods: [:get_theme_class, :get_icon_theme_class, :get_close_theme_class]
+          },
+          rounded: {
+            var: :@rounded,
+            default: :md,
+            constants: [:ALERT_RADIUS_CLASSES],
+            methods: [:get_border_radius_class]
+          },
+          icon_position: {
+            var: :@icon_position,
+            default: :left,
+            constants: [:ALERT_ICON_POSITION_CLASSES],
+            methods: [:get_icon_position_class]
+          },
+          importance: {
+            var: :@importance,
+            default: :md,
+            constants: [:ALERT_IMPORTANCE_CLASSES],
+            methods: [:get_importance_class]
+          }
+        })
+
+        # Livelli di importanza con attributi ARIA
+        IMPORTANCE_LEVELS = {
+          high: { role: "alert", "aria-live": "assertive" },
+          md: { role: "status", "aria-live": "polite" },
+          low: { role: "status", "aria-live": "polite" }
+        }.freeze
 
         # Classi per layout quando icon è a destra
         ALERT_ICON_RIGHT_LAYOUT_CLASSES = "flex-row-reverse"
@@ -69,24 +114,6 @@ module BetterUi
         ALERT_DISMISSIBLE_CLASSES = "pr-12 relative"
         ALERT_CLOSE_POSITION_CLASSES = "absolute right-4 top-4"
 
-        # Livelli di importanza con attributi ARIA
-        IMPORTANCE_LEVELS = {
-          high: { role: "alert", "aria-live": "assertive" },
-          medium: { role: "status", "aria-live": "polite" },
-          low: { role: "status", "aria-live": "polite" }
-        }
-
-        # @param title [String] titolo dell'alert (opzionale)
-        # @param message [String] contenuto dell'alert
-        # @param theme [Symbol] :default, :white, :red, :rose, :orange, :green, :blue, :yellow, :violet
-        # @param icon [String] nome dell'icona (opzionale)
-        # @param icon_position [Symbol] :left, :right posizione dell'icona
-        # @param dismissible [Boolean] se l'alert può essere chiuso
-        # @param rounded [Symbol] :none, :sm, :md, :lg, :full arrotondamento degli angoli
-        # @param importance [Symbol] :high, :md, :low livello di importanza per accessibilità
-        # @param html_content [Boolean] se il messaggio contiene HTML
-        # @param classes [String] classi CSS aggiuntive
-        # @param html_options [Hash] opzioni HTML per il container
         def initialize(
           title: nil,
           message: nil,
@@ -162,21 +189,6 @@ module BetterUi
           attrs
         end
 
-        # Genera le classi del tema
-        def get_theme_class
-          ALERT_THEME_CLASSES[@theme] || ALERT_THEME_CLASSES[:white]
-        end
-
-        # Genera le classi per il border radius
-        def get_border_radius_class
-          ALERT_RADIUS_CLASSES[@rounded] || ALERT_RADIUS_CLASSES[:md]
-        end
-
-        # Genera la classe per la posizione dell'icona (layout)
-        def get_icon_position_class
-          @icon_position == :right ? ALERT_ICON_RIGHT_LAYOUT_CLASSES : nil
-        end
-
         # Genera le classi per l'icona
         def get_icon_classes
           if @icon_position == :right
@@ -195,46 +207,13 @@ module BetterUi
           end
         end
 
-        # Genera le classi per l'icona del tema
-        def get_icon_theme_class
-          ALERT_ICON_THEME_CLASSES[@theme] || ALERT_ICON_THEME_CLASSES[:white]
-        end
-
         # Genera le classi per il close button
         def get_close_classes
           base_classes = ALERT_CLOSE_CLASSES
-          theme_classes = ALERT_CLOSE_THEME_CLASSES[@theme] || ALERT_CLOSE_THEME_CLASSES[:white]
+          theme_classes = get_close_theme_class
           position_classes = @dismissible ? ALERT_CLOSE_POSITION_CLASSES : nil
 
           [ base_classes, theme_classes, position_classes ].compact.join(" ")
-        end
-
-        private
-
-        def validate_params
-          # Validazione tema
-          valid_themes = ALERT_THEME_CLASSES.keys
-          unless valid_themes.include?(@theme)
-            raise ArgumentError, "Il tema deve essere uno tra: #{valid_themes.join(', ')}"
-          end
-
-          # Validazione border radius
-          valid_radius = ALERT_RADIUS_CLASSES.keys
-          unless valid_radius.include?(@rounded)
-            raise ArgumentError, "Il border radius deve essere uno tra: #{valid_radius.join(', ')}"
-          end
-
-          # Validazione posizione icona
-          valid_positions = [ :left, :right ]
-          unless valid_positions.include?(@icon_position)
-            raise ArgumentError, "La posizione dell'icona deve essere una tra: #{valid_positions.join(', ')}"
-          end
-
-          # Validazione livello di importanza
-          valid_importance = IMPORTANCE_LEVELS.keys
-          unless valid_importance.include?(@importance)
-            raise ArgumentError, "Il livello di importanza deve essere uno tra: #{valid_importance.join(', ')}"
-          end
         end
       end
     end

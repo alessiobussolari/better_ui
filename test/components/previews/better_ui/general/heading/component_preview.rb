@@ -17,7 +17,7 @@ module BetterUi
         def default(
           text: "Titolo di esempio",
           level: 2,
-          theme: :white,
+          theme: :default,
           align: :left,
           size: :md,
           style: :normal,
@@ -53,7 +53,7 @@ module BetterUi
         def raw(
           text: "Titolo di esempio",
           level: 2,
-          theme: :white,
+          theme: :default,
           align: :left,
           size: :md,
           style: :normal,

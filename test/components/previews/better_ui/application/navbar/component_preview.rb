@@ -125,7 +125,7 @@ module BetterUi
             },
             {
               type: :avatar,
-              avatar: { initials: "DU", size: :small, theme: :green },
+              avatar: { initials: "DU", size: :sm, theme: :green },
               href: "/profile"
             }
           ]

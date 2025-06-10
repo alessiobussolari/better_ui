@@ -2,7 +2,7 @@ module BetterUi
   module General
     module Modal
       class ModalComponent < BetterUi::Component
-        attr_reader :title, :theme, :size, :backdrop, :closable, :classes, :html_options
+        attr_reader :title, :backdrop, :closable, :classes, :html_options
 
         # Classi base sempre presenti per il backdrop
         MODAL_BACKDROP_CLASSES = "fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-50"
@@ -11,7 +11,7 @@ module BetterUi
         MODAL_CONTAINER_CLASSES = "relative bg-white shadow-xl w-full"
 
         # Temi dell'header del modal con classi Tailwind dirette
-        MODAL_THEME = {
+        MODAL_THEME_CLASSES = {
           default: "bg-gray-50 border-b border-gray-200 text-gray-900",
           white: "bg-white border-b border-gray-200 text-gray-900",
           red: "bg-red-50 border-b border-red-200 text-red-900",
@@ -24,7 +24,7 @@ module BetterUi
         }
 
         # Dimensioni con classi Tailwind dirette - Sistema uniforme 7 livelli
-        MODAL_SIZES = {
+        MODAL_SIZE_CLASSES = {
           xxs: "max-w-xs",       # Extra extra small
           xs: "max-w-sm",        # Extra small
           sm: "max-w-md",        # Small
@@ -35,7 +35,7 @@ module BetterUi
         }
 
         # Border radius con classi Tailwind dirette
-        MODAL_ROUNDED = {
+        MODAL_ROUNDED_CLASSES = {
           none: "rounded-none",
           small: "rounded-md",
           medium: "rounded-lg",
@@ -43,26 +43,26 @@ module BetterUi
           full: "rounded-full"
         }
 
-        configure_attributes(
+        configure_attributes({
           theme: {
             var: :@theme,
             default: :default,
-            constants: [:MODAL_THEME],
-            methods: [:get_modal_theme_classes]
+            constants: [:MODAL_THEME_CLASSES],
+            methods: [:get_theme_class]
           },
           size: {
             var: :@size,
             default: :md,
-            constants: [:MODAL_SIZES],
-            methods: [:get_modal_size_classes]
+            constants: [:MODAL_SIZE_CLASSES],
+            methods: [:get_size_class]
           },
           rounded: {
             var: :@rounded,
             default: :medium,
-            constants: [:MODAL_ROUNDED],
-            methods: [:get_modal_rounded_classes]
+            constants: [:MODAL_ROUNDED_CLASSES],
+            methods: [:get_rounded_class]
           }
-        )
+        })
 
         # Inizializzazione del modal component
         def initialize(
@@ -96,8 +96,8 @@ module BetterUi
         def container_classes
           [
             MODAL_CONTAINER_CLASSES,
-            get_modal_size_classes,
-            get_modal_rounded_classes,
+            get_size_class,
+            get_rounded_class,
             @classes,
             @html_options[:class]
           ].compact.join(" ")
@@ -107,11 +107,9 @@ module BetterUi
         def header_classes
           [
             "flex items-center justify-between p-6",
-            get_modal_theme_classes
+            get_theme_class
           ].compact.join(" ")
         end
-
-        # I metodi getter sono ora generati automaticamente da configure_attributes
 
         # Restituisce gli attributi per il backdrop
         def backdrop_attributes
@@ -143,10 +141,6 @@ module BetterUi
         def render?
           @title.present?
         end
-
-        private
-
-        # Le validazioni sono ora gestite automaticamente da BetterUi::Component
       end
     end
   end

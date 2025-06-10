@@ -145,6 +145,7 @@ module BetterUi
             get_theme_class,
             get_style_class,
             get_radius_class,
+            get_padding_class,  # CORREZIONE: Aggiunto il padding che mancava
             @html_options[:class]
           ].compact.join(" ")
         end

@@ -1,3 +1,6 @@
 <tbody <%= tag.attributes(tbody_attributes) %>>
+  <% rows.each do |row| %>
+    <%= row %>
+  <% end %>
   <%= content %>
 </tbody>

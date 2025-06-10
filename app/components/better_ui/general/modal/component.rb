@@ -1,13 +1,11 @@
 module BetterUi
   module General
     module Modal
-      class Component < ViewComponent::Base
+      class Component < BetterUi::Component
         renders_one :trigger
         renders_one :modal
         
         attr_reader :close_on_backdrop, :close_on_escape, :lock_scroll, :classes, :html_options
-
-
 
         # Inizializzazione del wrapper component
         def initialize(
@@ -22,6 +20,8 @@ module BetterUi
           @lock_scroll = lock_scroll
           @classes = classes
           @html_options = html_options
+          
+          validate_params
         end
 
         # Combina tutte le classi per il wrapper
@@ -39,8 +39,6 @@ module BetterUi
             'data-bui-modal-lock-scroll-value': lock_scroll
           }.merge(@html_options.except(:class))
         end
-
-
       end
     end
   end

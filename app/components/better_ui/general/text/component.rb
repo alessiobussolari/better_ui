@@ -4,8 +4,6 @@ module BetterUi
   module General
     module Text
       class Component < BetterUi::Component
-        attr_reader :text, :theme, :size, :align, :weight, :style, :classes, :html_options
-
         # Classi base sempre presenti
         TEXT_BASE_CLASSES = "block"
 
@@ -68,31 +66,31 @@ module BetterUi
             var: :@theme,
             default: :default,
             constants: [:TEXT_THEME_CLASSES],
-            methods: [:get_theme_classes]
+            methods: [:get_theme_class]
           },
           size: {
             var: :@size,
             default: :md,
             constants: [:TEXT_SIZE_CLASSES],
-            methods: [:get_size_classes]
+            methods: [:get_size_class]
           },
           align: {
             var: :@align,
             default: :left,
             constants: [:TEXT_ALIGN_CLASSES],
-            methods: [:get_align_classes]
+            methods: [:get_align_class]
           },
           weight: {
             var: :@weight,
             default: :normal,
             constants: [:TEXT_WEIGHT_CLASSES],
-            methods: [:get_weight_classes]
+            methods: [:get_weight_class]
           },
           style: {
             var: :@style,
             default: :normal,
             constants: [:TEXT_STYLE_CLASSES],
-            methods: [:get_style_classes]
+            methods: [:get_style_class]
           }
         })
 
@@ -115,27 +113,22 @@ module BetterUi
           **html_options
         )
           @text = text
-          @theme = theme.to_sym
-          @size = size.to_sym
-          @align = align.to_sym
-          @weight = weight.to_sym
-          @style = style.to_sym
           @classes = classes
           @html_options = html_options
-
-          validate_params
-          super()
+          super(theme: theme, size: size, align: align, weight: weight, style: style)
         end
+
+        attr_reader :text, :classes, :html_options
 
         # Combina tutte le classi CSS
         def combined_classes
           [
             TEXT_BASE_CLASSES,
-            get_theme_classes,
-            get_size_classes,
-            get_align_classes,
-            get_weight_classes,
-            get_style_classes,
+            get_theme_class,
+            get_size_class,
+            get_align_class,
+            get_weight_class,
+            get_style_class,
             @classes,
             @html_options[:class]
           ].compact.join(" ")
@@ -157,8 +150,6 @@ module BetterUi
         def text_content
           @text.present? ? @text : content
         end
-
-        private
       end
     end
   end

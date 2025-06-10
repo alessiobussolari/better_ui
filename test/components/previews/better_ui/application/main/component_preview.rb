@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module BetterUi
   module Application
     module Main
@@ -17,8 +19,8 @@ module BetterUi
         # - Area di lavoro principale in interfacce multi-pannello
         #
         # ## Variabili Principali
-        # - **rounded**: tipi di arrotondamento (none, small, medium, large, full)
-        # - **shadow**: tipi di ombra (none, sm, md, lg)
+        # - **rounded**: tipi di arrotondamento (none, sm, md, lg, xl, full)
+        # - **shadow**: tipi di ombra (none, sm, md, lg, xl)
         # - **padding/inner_padding**: gestione spaziatura interna ed esterna
         # - **with_sidebar**: adattamento automatico per sidebar
         # - **sidebar_width**: larghezza della sidebar (sm, md, lg, xl)
@@ -27,7 +29,7 @@ module BetterUi
         # ```erb
         # <%= bui_main %>
         # <%= bui_main(with_sidebar: true, sidebar_width: :lg) %>
-        # <%= bui_main(rounded: :medium, shadow: :lg) do %>
+        # <%= bui_main(rounded: :md, shadow: :lg) do %>
         #   <!-- contenuto -->
         # <% end %>
         # ```
@@ -35,16 +37,16 @@ module BetterUi
         # @label Con Helper
         # @param padding toggle "Padding del contenitore principale"
         # @param inner_padding toggle "Padding del contenitore interno"
-        # @param rounded select { choices: [none, small, medium, large, full] } "Arrotondamento degli angoli"
-        # @param shadow select { choices: [none, small, medium, large] } "Tipo di ombra"
+        # @param rounded select { choices: [none, sm, md, lg, xl, full] } "Arrotondamento degli angoli"
+        # @param shadow select { choices: [none, sm, md, lg, xl] } "Tipo di ombra"
         # @param with_sidebar toggle "Spazio per la sidebar"
         # @param sidebar_width select { choices: [sm, md, lg, xl] } "Larghezza sidebar"
         # @param classes text "Classi CSS aggiuntive (opzionale)"
         def default(
           padding: true,
           inner_padding: true,
-          rounded: :small,
-          shadow: :medium,
+          rounded: :sm,
+          shadow: :md,
           with_sidebar: true,
           sidebar_width: :md,
           classes: ""
@@ -65,16 +67,16 @@ module BetterUi
         # @label Istanziazione Diretta
         # @param padding toggle "Padding del contenitore principale"
         # @param inner_padding toggle "Padding del contenitore interno"
-        # @param rounded select { choices: [none, small, medium, large, full] } "Arrotondamento degli angoli"
-        # @param shadow select { choices: [none, small, medium, large] } "Tipo di ombra"
+        # @param rounded select { choices: [none, sm, md, lg, xl, full] } "Arrotondamento degli angoli"
+        # @param shadow select { choices: [none, sm, md, lg, xl] } "Tipo di ombra"
         # @param with_sidebar toggle "Spazio per la sidebar"
         # @param sidebar_width select { choices: [sm, md, lg, xl] } "Larghezza sidebar"
         # @param classes text "Classi CSS aggiuntive (opzionale)"
         def raw(
           padding: true,
           inner_padding: true,
-          rounded: :small,
-          shadow: :medium,
+          rounded: :sm,
+          shadow: :md,
           with_sidebar: true,
           sidebar_width: :md,
           classes: ""

@@ -2,14 +2,7 @@ module BetterUi
   module General
     module Link
       class Component < BetterUi::Component
-        configure_attributes(
-          theme: { constant: :LINK_THEME_CLASSES, default: :white },
-          orientation: { constant: :LINK_ORIENTATION_CLASSES, default: :horizontal },
-          style: { constant: :LINK_STYLE_CLASSES, default: :default },
-          size: { constant: :LINK_SIZE_CLASSES, default: :md }
-        )
-
-        attr_reader :label, :href, :icon, :active, :disabled, :data, :method, :target
+        attr_reader :label, :href, :icon, :active, :disabled, :data, :method, :target, :theme, :orientation, :style, :size
 
         # Classi base sempre presenti
         LINK_BASE_CLASSES = "transition-colors duration-200 no-underline"
@@ -59,12 +52,39 @@ module BetterUi
           disabled: "opacity-50 cursor-not-allowed pointer-events-none"
         }
 
+        configure_attributes({
+          theme: {
+            var: :@theme,
+            default: :white,
+            constants: [:LINK_THEME_CLASSES],
+            methods: [:get_theme_class]
+          },
+          orientation: {
+            var: :@orientation,
+            default: :horizontal,
+            constants: [:LINK_ORIENTATION_CLASSES],
+            methods: [:get_orientation_class]
+          },
+          style: {
+            var: :@style,
+            default: :default,
+            constants: [:LINK_STYLE_CLASSES],
+            methods: [:get_style_class]
+          },
+          size: {
+            var: :@size,
+            default: :md,
+            constants: [:LINK_SIZE_CLASSES],
+            methods: [:get_size_class]
+          }
+        })
+
         # @param label [String] testo del link
         # @param href [String] URL di destinazione (nil per semplice testo)
         # @param theme [Symbol] tema del colore (:default, :white, etc.)
         # @param orientation [Symbol] orientamento (:horizontal, :vertical)
         # @param style [Symbol] stile (:default, :underline, :bold, :text)
-        # @param size [Symbol] dimensione (:xs, :sm, :md, :lg)
+        # @param size [Symbol] dimensione (:xxs, :xs, :sm, :md, :lg, :xl, :xxl)
         # @param icon [String] icona opzionale
         # @param active [Boolean] stato attivo del link
         # @param disabled [Boolean] stato disabilitato del link
@@ -97,7 +117,13 @@ module BetterUi
           @target = target
           @html_options = html_options
 
-          super(theme: theme, orientation: orientation, style: style, size: size)
+          # Conversione esplicita a simboli per i parametri configurabili
+          @theme = theme.to_sym
+          @orientation = orientation.to_sym
+          @style = style.to_sym
+          @size = size.to_sym
+
+          validate_params
         end
 
         # Determina se è un link attivo/corrente
@@ -133,7 +159,7 @@ module BetterUi
           return "" unless @icon.present?
 
           # Definisce spacing e dimensioni icona basate su size
-          base_spacing = case orientation
+          base_spacing = case @orientation
           when :horizontal
             "mr-2"
           when :vertical
@@ -142,7 +168,7 @@ module BetterUi
             "mr-2"
           end
 
-          icon_size = case size
+          icon_size = case @size
           when :xxs
             "w-3 h-3"
           when :xs
@@ -211,39 +237,6 @@ module BetterUi
         end
 
         private
-
-        # Metodi getter per gli attributi (generati automaticamente da BetterUi::Component)
-        def theme
-          @theme
-        end
-
-        def orientation
-          @orientation
-        end
-
-        def style
-          @style
-        end
-
-        def size
-          @size
-        end
-
-        def get_theme_class
-          LINK_THEME_CLASSES[theme] || LINK_THEME_CLASSES[:white]
-        end
-
-        def get_orientation_class
-          LINK_ORIENTATION_CLASSES[orientation] || LINK_ORIENTATION_CLASSES[:horizontal]
-        end
-
-        def get_style_class
-          LINK_STYLE_CLASSES[style] || LINK_STYLE_CLASSES[:default]
-        end
-
-        def get_size_class
-          LINK_SIZE_CLASSES[size] || LINK_SIZE_CLASSES[:md]
-        end
 
         def get_state_class
           return LINK_STATE_CLASSES[:disabled] if disabled?

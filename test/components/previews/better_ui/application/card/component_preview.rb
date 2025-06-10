@@ -44,9 +44,9 @@ module BetterUi
         # @param change text "Valore del cambiamento (es. +12%)"
         # @param color select { choices: [green, red, blue, yellow, purple, indigo, gray] } "Colore del trend"
         # @param theme select { choices: [default, white, red, rose, orange, green, blue, yellow, violet, purple] } "Tema della card"
-        # @param size select { choices: [small, medium, large] } "Dimensione della card"
-        # @param rounded select { choices: [none, small, medium, large, full] } "Arrotondamento degli angoli"
-        # @param shadow select { choices: [none, small, medium, large] } "Tipo di ombra"
+        # @param size select { choices: [xxs, xs, sm, md, lg, xl, xxl] } "Dimensione della card"
+        # @param rounded select { choices: [none, sm, md, lg, full] } "Arrotondamento degli angoli"
+        # @param shadow select { choices: [none, sm, md, lg] } "Tipo di ombra"
         # @param classes text "Classi CSS aggiuntive (opzionale)"
         def default(
           title: "Vendite Totali",
@@ -55,9 +55,9 @@ module BetterUi
           change: "+12%",
           color: :green,
           theme: :default,
-          size: :medium,
-          rounded: :medium,
-          shadow: :small,
+          size: :md,
+          rounded: :md,
+          shadow: :sm,
           classes: ""
         )
           normalized = normalize_params!(
@@ -83,9 +83,9 @@ module BetterUi
         # @param change text "Valore del cambiamento (es. +12%)"
         # @param color select { choices: [green, red, blue, yellow, purple, indigo, gray] } "Colore del trend"
         # @param theme select { choices: [default, white, red, rose, orange, green, blue, yellow, violet, purple] } "Tema della card"
-        # @param size select { choices: [small, medium, large] } "Dimensione della card"
-        # @param rounded select { choices: [none, small, medium, large, full] } "Arrotondamento degli angoli"
-        # @param shadow select { choices: [none, small, medium, large] } "Tipo di ombra"
+        # @param size select { choices: [xxs, xs, sm, md, lg, xl, xxl] } "Dimensione della card"
+        # @param rounded select { choices: [none, sm, md, lg, full] } "Arrotondamento degli angoli"
+        # @param shadow select { choices: [none, sm, md, lg] } "Tipo di ombra"
         # @param classes text "Classi CSS aggiuntive (opzionale)"
         def raw(
           title: "Vendite Totali",
@@ -94,9 +94,9 @@ module BetterUi
           change: "+12%",
           color: :green,
           theme: :default,
-          size: :medium,
-          rounded: :medium,
-          shadow: :small,
+          size: :md,
+          rounded: :md,
+          shadow: :sm,
           classes: ""
         )
           normalized = normalize_params!(

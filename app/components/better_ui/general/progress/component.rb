@@ -60,9 +60,11 @@ module BetterUi
           }
         })
 
+        attr_reader :value, :label, :classes, :html_options
+
         # @param value [Integer] percentuale di completamento (0-100)
         # @param theme [Symbol] :default, :white, :red, :rose, :orange, :green, :blue, :yellow, :violet
-        # @param size [Symbol] :sm, :md, :lg
+        # @param size [Symbol] :xxs, :xs, :sm, :md, :lg, :xl, :xxl
         # @param label [Boolean] mostra etichetta con percentuale
         # @param classes [String] classi CSS aggiuntive per il container
         # @param html_options [Hash] opzioni HTML per il container
@@ -75,13 +77,11 @@ module BetterUi
           **html_options
         )
           @value = [ 0, [ value.to_i, 100 ].min ].max # Clamp tra 0 e 100
-          @theme = theme.to_sym
-          @size = size.to_sym
           @label = label
           @classes = classes
           @html_options = html_options
 
-          validate_params
+          super(theme: theme, size: size)
         end
 
         # Combina tutte le classi per il container
@@ -130,15 +130,10 @@ module BetterUi
           }
         end
 
-        # Restituisce il valore percentuale
-        attr_reader :value
-
         # Verifica se mostrare l'etichetta
         def show_label?
           @label
         end
-
-        private
       end
     end
   end

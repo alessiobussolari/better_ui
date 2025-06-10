@@ -1,10 +1,13 @@
 module BetterUi
   module General
     module Table
-      class TbodyComponent < ViewComponent::Base
+      class TbodyComponent < BetterUi::Component
+        renders_many :rows, "BetterUi::General::Table::TrComponent"
+        
         attr_reader :theme, :striped, :hoverable
 
         def initialize(theme: :default, striped: false, hoverable: false, **html_options)
+          super()
           @theme = theme.to_sym
           @striped = !!striped
           @hoverable = !!hoverable

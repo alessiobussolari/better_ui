@@ -1,5 +1,8 @@
-<div <%= tag.attributes(container_attributes) %>>
-  <table <%= tag.attributes(table_attributes) %>>
-    <%= content %>
-  </table>
-</div>
+<%= tag.div **container_attributes do %>
+  <%= tag.table **table_attributes do %>
+      <%= caption if caption? %>
+      <%= thead if thead? %>
+      <%= tbody if tbody? %>
+      <%= tfoot if tfoot? %>
+  <% end %>
+<% end %>

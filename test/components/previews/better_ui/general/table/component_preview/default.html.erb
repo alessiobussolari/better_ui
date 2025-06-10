@@ -1,35 +1,52 @@
-<%= bui_table(theme: theme, size: size, bordered: bordered, compact: compact, minimal: minimal) do %>
-  <%= bui_thead do %>
-    <%= bui_tr do %>
-      <%= bui_th("Nome", sortable: true) %>
-      <%= bui_th("Email") %>
-      <%= bui_th("Ruolo") %>
-    <% end %>
-  <% end %>
+<%
+  # Utilizzo dell'approccio programmatico per risolvere i problemi di rendering
+  table = BetterUi::General::Table::Component.new(
+    theme: theme, 
+    size: size, 
+    bordered: bordered, 
+    compact: compact, 
+    minimal: minimal
+  )
   
-  <%= bui_tbody(striped: striped, hoverable: hoverable) do %>
-    <%= bui_tr do %>
-      <%= bui_td("Mario Rossi") %>
-      <%= bui_td("mario.rossi@example.com") %>
-      <%= bui_td do %>
-        <span class="px-2 py-1 text-xs bg-blue-100 text-blue-800 rounded">Admin</span>
-      <% end %>
-    <% end %>
+  # Configurazione thead
+  table.with_thead do |thead|
+    # Aggiungo una riga all'header
+    thead.with_row do |row|
+      row.with_header(sortable: true) { "Nome" }
+      row.with_header { "Email" }
+      row.with_header { "Ruolo" }
+    end
+  end
+  
+  # Configurazione tbody
+  table.with_tbody(striped: striped, hoverable: hoverable) do |tbody|
+    # Prima riga
+    tbody.with_row do |row|
+      row.with_cell { "Mario Rossi" }
+      row.with_cell { "mario.rossi@example.com" }
+      row.with_cell do
+        content_tag(:span, "Admin", class: "px-2 py-1 text-xs bg-blue-100 text-blue-800 rounded")
+      end
+    end
     
-    <%= bui_tr do %>
-      <%= bui_td("Giulia Bianchi") %>
-      <%= bui_td("giulia.bianchi@example.com") %>
-      <%= bui_td do %>
-        <span class="px-2 py-1 text-xs bg-green-100 text-green-800 rounded">User</span>
-      <% end %>
-    <% end %>
+    # Seconda riga
+    tbody.with_row do |row|
+      row.with_cell { "Giulia Bianchi" }
+      row.with_cell { "giulia.bianchi@example.com" }
+      row.with_cell do
+        content_tag(:span, "User", class: "px-2 py-1 text-xs bg-green-100 text-green-800 rounded")
+      end
+    end
     
-    <%= bui_tr(highlighted: true) do %>
-      <%= bui_td("Paolo Verdi") %>
-      <%= bui_td("paolo.verdi@example.com") %>
-      <%= bui_td do %>
-        <span class="px-2 py-1 text-xs bg-yellow-100 text-yellow-800 rounded">Moderator</span>
-      <% end %>
-    <% end %>
-  <% end %>
-<% end %>
+    # Terza riga (evidenziata)
+    tbody.with_row(highlighted: true) do |row|
+      row.with_cell { "Paolo Verdi" }
+      row.with_cell { "paolo.verdi@example.com" }
+      row.with_cell do
+        content_tag(:span, "Moderator", class: "px-2 py-1 text-xs bg-yellow-100 text-yellow-800 rounded")
+      end
+    end
+  end
+%>
+
+<%= render table %>

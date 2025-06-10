@@ -1,10 +1,14 @@
 module BetterUi
   module General
     module Table
-      class TrComponent < ViewComponent::Base
+      class TrComponent < BetterUi::Component
+        renders_many :cells, "BetterUi::General::Table::TdComponent"
+        renders_many :headers, "BetterUi::General::Table::ThComponent"
+        
         attr_reader :theme, :highlighted, :striped_index
 
         def initialize(theme: :default, highlighted: false, striped_index: nil, **html_options)
+          super()
           @theme = theme.to_sym
           @highlighted = !!highlighted
           @striped_index = striped_index

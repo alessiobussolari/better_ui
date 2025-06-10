@@ -1,4 +1,4 @@
-<div class="<%= card_classes %>" <%= options.map { |k, v| "#{k}=\"#{v}\"" }.join(' ').html_safe %>>
+<div class="<%= card_classes %>" <%= @html_options.except(:class).map { |k, v| "#{k}=\"#{v}\"" }.join(' ').html_safe %>>
   <p class="<%= title_classes %>"><%= title %></p>
   <div class="mt-2 flex items-baseline justify-between">
     <p class="<%= value_classes %>"><%= value %></p>

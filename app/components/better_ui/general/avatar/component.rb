@@ -1,8 +1,8 @@
 module BetterUi
   module General
     module Avatar
-      class Component < ViewComponent::Base
-        attr_reader :name, :src, :size, :shape, :status, :status_position, :theme, :style, :classes, :id
+      class Component < BetterUi::Component
+        attr_reader :name, :src, :classes, :id
 
         # Classi base sempre presenti
         AVATAR_BASE_CLASSES = "relative inline-flex items-center justify-center flex-shrink-0 overflow-hidden"
@@ -88,6 +88,40 @@ module BetterUi
           light: "opacity-75"
         }
 
+        # Configurazione con configure_attributes
+        configure_attributes({
+          size: {
+            var: :@size,
+            default: :md,
+            constants: [:AVATAR_SIZE_CLASSES, :AVATAR_PLACEHOLDER_SIZE_CLASSES, :AVATAR_STATUS_SIZE_CLASSES],
+            methods: [:get_size_class, :get_placeholder_size_class, :get_status_size_class]
+          },
+          shape: {
+            var: :@shape,
+            default: :circle,
+            constants: [:AVATAR_SHAPE_CLASSES],
+            methods: [:get_shape_class]
+          },
+          theme: {
+            var: :@theme,
+            default: :white,
+            constants: [:AVATAR_PLACEHOLDER_THEME_CLASSES],
+            methods: [:get_placeholder_theme_class]
+          },
+          style: {
+            var: :@style,
+            default: :filled,
+            constants: [:AVATAR_STYLE_CLASSES],
+            methods: [:get_style_class]
+          },
+          status_position: {
+            var: :@status_position,
+            default: :bottom_right,
+            constants: [:AVATAR_STATUS_POSITION_CLASSES],
+            methods: [:get_status_position_class]
+          }
+        })
+
         def initialize(
           name: nil,
           src: nil,
@@ -156,36 +190,10 @@ module BetterUi
           ].compact.join(" ")
         end
 
-        def get_size_class
-          AVATAR_SIZE_CLASSES[@size] || AVATAR_SIZE_CLASSES[:md]
-        end
-
-        def get_shape_class
-          AVATAR_SHAPE_CLASSES[@shape] || AVATAR_SHAPE_CLASSES[:circle]
-        end
-
-        def get_style_class
-          AVATAR_STYLE_CLASSES[@style] || AVATAR_STYLE_CLASSES[:filled]
-        end
-
-        def get_placeholder_theme_class
-          AVATAR_PLACEHOLDER_THEME_CLASSES[@theme] || AVATAR_PLACEHOLDER_THEME_CLASSES[:white]
-        end
-
-        def get_placeholder_size_class
-          AVATAR_PLACEHOLDER_SIZE_CLASSES[@size] || AVATAR_PLACEHOLDER_SIZE_CLASSES[:md]
-        end
-
+        # Metodo per ottenere la classe del tema dello status (gestione manuale per attributo opzionale)
         def get_status_theme_class
+          return "" if @status.nil?
           AVATAR_STATUS_THEME_CLASSES[@status] || ""
-        end
-
-        def get_status_size_class
-          AVATAR_STATUS_SIZE_CLASSES[@size] || AVATAR_STATUS_SIZE_CLASSES[:md]
-        end
-
-        def get_status_position_class
-          AVATAR_STATUS_POSITION_CLASSES[@status_position] || AVATAR_STATUS_POSITION_CLASSES[:bottom_right]
         end
 
         # Restituisce gli attributi per l'avatar
@@ -249,50 +257,15 @@ module BetterUi
 
         private
 
+        # Validazione personalizzata per status (attributo opzionale)
         def validate_params
-          validate_size
-          validate_shape
-          validate_theme
-          validate_style
-          validate_status
-          validate_status_position
-        end
-
-        def validate_size
-          unless AVATAR_SIZE_CLASSES.keys.include?(@size)
-            raise ArgumentError, "BetterUi::General::Avatar::Component - parametro 'size' con valore '#{@size}' non è valido. La dimensione deve essere una tra: #{AVATAR_SIZE_CLASSES.keys.join(', ')}"
-          end
-        end
-
-        def validate_shape
-          unless AVATAR_SHAPE_CLASSES.keys.include?(@shape)
-            raise ArgumentError, "La forma deve essere una tra: #{AVATAR_SHAPE_CLASSES.keys.join(', ')}"
-          end
-        end
-
-        def validate_theme
-          unless AVATAR_PLACEHOLDER_THEME_CLASSES.keys.include?(@theme)
-            raise ArgumentError, "Il tema deve essere uno tra: #{AVATAR_PLACEHOLDER_THEME_CLASSES.keys.join(', ')}"
-          end
-        end
-
-        def validate_style
-          unless AVATAR_STYLE_CLASSES.keys.include?(@style)
-            raise ArgumentError, "Lo stile deve essere uno tra: #{AVATAR_STYLE_CLASSES.keys.join(', ')}"
-          end
+          super # Chiama la validazione automatica per gli altri attributi
+          validate_status if @status.present?
         end
 
         def validate_status
-          return if @status.nil?
-
           unless AVATAR_STATUS_THEME_CLASSES.keys.include?(@status)
-            raise ArgumentError, "Lo stato deve essere uno tra: #{AVATAR_STATUS_THEME_CLASSES.keys.join(', ')}"
-          end
-        end
-
-        def validate_status_position
-          unless AVATAR_STATUS_POSITION_CLASSES.keys.include?(@status_position)
-            raise ArgumentError, "La posizione dello stato deve essere una tra: #{AVATAR_STATUS_POSITION_CLASSES.keys.join(', ')}"
+            raise ArgumentError, "BetterUi::General::Avatar::Component - parametro 'status' con valore '#{@status}' non è valido. Deve essere uno tra: #{AVATAR_STATUS_THEME_CLASSES.keys.join(', ')}"
           end
         end
       end

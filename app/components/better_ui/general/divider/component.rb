@@ -1,13 +1,13 @@
 module BetterUi
   module General
     module Divider
-      class Component < ViewComponent::Base
-        attr_reader :theme, :orientation, :style, :size, :label, :height, :classes
+      class Component < BetterUi::Component
+        attr_reader :label, :height, :classes
 
         # Classi base sempre presenti
         DIVIDER_BASE_CLASSES = "my-4"
 
-        # Temi con classi Tailwind dirette - LOGICA CORRETTA
+        # Temi con classi Tailwind dirette
         DIVIDER_THEME_CLASSES = {
           default: "border-white",         # Bordo bianco (per sfondi scuri)
           white: "border-gray-300",        # Bordo grigio (per sfondi chiari)
@@ -66,7 +66,7 @@ module BetterUi
           }
         }
 
-        # Classi per label con classi Tailwind dirette - LOGICA CORRETTA
+        # Classi per label con classi Tailwind dirette
         DIVIDER_LABEL_THEME_CLASSES = {
           default: "text-white bg-transparent px-3",     # Testo bianco trasparente (per sfondi scuri)
           white: "text-gray-900 bg-white px-3",          # Testo nero su bianco (per sfondi chiari)
@@ -79,14 +79,34 @@ module BetterUi
           violet: "text-violet-500 bg-white px-3"
         }
 
-        # @param theme [Symbol] tema del divider (:default, :white, etc.)
-        # @param orientation [Symbol] orientamento del divider (:horizontal, :vertical)
-        # @param style [Symbol] stile della linea (:solid, :dashed, :dotted, :double)
-        # @param size [Symbol] dimensione della linea (:thin, :md, :thick)
-        # @param label [String] testo opzionale da mostrare al centro del divider
-        # @param height [String] altezza per divider verticale (es. "100px", "100%")
-        # @param classes [String] classi CSS aggiuntive
-        # @param html_options [Hash] opzioni HTML per il container
+        # Configurazione automatica degli attributi
+        configure_attributes({
+          theme: {
+            var: :@theme,
+            default: :white,
+            constants: [:DIVIDER_THEME_CLASSES, :DIVIDER_LABEL_THEME_CLASSES],
+            methods: [:get_theme_class, :get_label_theme_class]
+          },
+          orientation: {
+            var: :@orientation,
+            default: :horizontal,
+            constants: [:DIVIDER_ORIENTATION_CLASSES],
+            methods: [:get_orientation_class]
+          },
+          style: {
+            var: :@style,
+            default: :solid,
+            constants: [:DIVIDER_STYLE_CLASSES],
+            methods: [:get_style_class]
+          },
+          size: {
+            var: :@size,
+            default: :md,
+            constants: [:DIVIDER_SIZE_CLASSES],
+            methods: [:get_size_class]
+          }
+        })
+
         def initialize(
           theme: :white,
           orientation: :horizontal,
@@ -185,56 +205,10 @@ module BetterUi
 
         private
 
-        def get_theme_class
-          DIVIDER_THEME_CLASSES[@theme] || DIVIDER_THEME_CLASSES[:white]
-        end
-
-        def get_orientation_class
-          DIVIDER_ORIENTATION_CLASSES[@orientation] || DIVIDER_ORIENTATION_CLASSES[:horizontal]
-        end
-
-        def get_style_class
-          DIVIDER_STYLE_CLASSES[@style] || DIVIDER_STYLE_CLASSES[:solid]
-        end
-
+        # Override del metodo get_size_class per gestire la logica speciale
         def get_size_class
           size_map = DIVIDER_SIZE_CLASSES[@size] || DIVIDER_SIZE_CLASSES[:md]
           size_map[@orientation] || size_map[:horizontal]
-        end
-
-        def get_label_theme_class
-          DIVIDER_LABEL_THEME_CLASSES[@theme] || DIVIDER_LABEL_THEME_CLASSES[:white]
-        end
-
-        def validate_params
-          validate_theme
-          validate_orientation
-          validate_style
-          validate_size
-        end
-
-        def validate_theme
-          unless DIVIDER_THEME_CLASSES.keys.include?(@theme)
-            raise ArgumentError, "Il tema deve essere uno tra: #{DIVIDER_THEME_CLASSES.keys.join(', ')}"
-          end
-        end
-
-        def validate_orientation
-          unless DIVIDER_ORIENTATION_CLASSES.keys.include?(@orientation)
-            raise ArgumentError, "L'orientamento deve essere uno tra: #{DIVIDER_ORIENTATION_CLASSES.keys.join(', ')}"
-          end
-        end
-
-        def validate_style
-          unless DIVIDER_STYLE_CLASSES.keys.include?(@style)
-            raise ArgumentError, "Lo stile deve essere uno tra: #{DIVIDER_STYLE_CLASSES.keys.join(', ')}"
-          end
-        end
-
-        def validate_size
-          unless DIVIDER_SIZE_CLASSES.keys.include?(@size)
-            raise ArgumentError, "La dimensione deve essere una tra: #{DIVIDER_SIZE_CLASSES.keys.join(', ')}"
-          end
         end
       end
     end

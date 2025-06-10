@@ -1,7 +1,7 @@
 module BetterUi
   module General
     module Breadcrumb
-      class Component < ViewComponent::Base
+      class Component < BetterUi::Component
         attr_reader :items, :separator, :size, :theme, :classes, :html_options
 
         # Classi base sempre presenti
@@ -51,13 +51,35 @@ module BetterUi
         }
 
         # Separatori predefiniti
-        BREADCRUMB_SEPARATOR_TYPES = {
+        BREADCRUMB_SEPARATOR_CLASSES = {
           slash: "/",
           chevron: "›",
           arrow: "→",
           dot: "•",
           pipe: "|"
         }
+
+        # Configurazione degli attributi
+        configure_attributes({
+          theme: {
+            var: :@theme,
+            default: :white,
+            constants: [:BREADCRUMB_THEME_CLASSES],
+            methods: [:get_theme_class]
+          },
+          size: {
+            var: :@size,
+            default: :md,
+            constants: [:BREADCRUMB_SIZE_CLASSES],
+            methods: [:get_size_class]
+          },
+          separator: {
+            var: :@separator,
+            default: :chevron,
+            constants: [:BREADCRUMB_SEPARATOR_CLASSES],
+            methods: [:get_separator_class]
+          }
+        })
 
         # Inizializzazione del componente
         def initialize(
@@ -80,11 +102,7 @@ module BetterUi
 
         # Restituisce il separatore come stringa
         def separator_text
-          if BREADCRUMB_SEPARATOR_TYPES.key?(@separator)
-            BREADCRUMB_SEPARATOR_TYPES[@separator]
-          else
-            @separator.to_s
-          end
+          get_separator_class
         end
 
         # Genera le classi per il container
@@ -98,7 +116,7 @@ module BetterUi
           ].compact.join(" ")
         end
 
-        # Verifica se un item è l'ultimo (attivo)
+        # Verifica se è l'ultimo item
         def last_item?(index)
           index == @items.length - 1
         end
@@ -149,40 +167,6 @@ module BetterUi
         # Verifica se rendere il componente
         def render?
           @items.present? && @items.length > 0
-        end
-
-        private
-
-        def get_theme_class
-          BREADCRUMB_THEME_CLASSES[@theme] || BREADCRUMB_THEME_CLASSES[:white]
-        end
-
-        def get_size_class
-          BREADCRUMB_SIZE_CLASSES[@size] || BREADCRUMB_SIZE_CLASSES[:md]
-        end
-
-        def validate_params
-          validate_theme
-          validate_size
-          validate_separator
-        end
-
-        def validate_theme
-          unless BREADCRUMB_THEME_CLASSES.keys.include?(@theme)
-            raise ArgumentError, "Il tema deve essere uno tra: #{BREADCRUMB_THEME_CLASSES.keys.join(', ')}"
-          end
-        end
-
-        def validate_size
-          unless BREADCRUMB_SIZE_CLASSES.keys.include?(@size)
-            raise ArgumentError, "La dimensione deve essere una tra: #{BREADCRUMB_SIZE_CLASSES.keys.join(', ')}"
-          end
-        end
-
-        def validate_separator
-          return if !@separator.is_a?(Symbol) || BREADCRUMB_SEPARATOR_TYPES.keys.include?(@separator)
-
-          raise ArgumentError, "Il separatore predefinito deve essere uno tra: #{BREADCRUMB_SEPARATOR_TYPES.keys.join(', ')}"
         end
       end
     end

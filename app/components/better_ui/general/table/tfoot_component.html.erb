@@ -1,3 +1,9 @@
-<tfoot <%= tag.attributes(tfoot_attributes) %>>
-  <%= content %>
+<tfoot <%= tfoot_attributes %>>
+  <% if trs? %>
+    <% trs.each do |tr| %>
+      <%= tr %>
+    <% end %>
+  <% else %>
+    <%= content %>
+  <% end %>
 </tfoot>

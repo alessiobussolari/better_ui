@@ -3,9 +3,11 @@
 module BetterUi
   module Application
     module Card
-      class Component < ViewComponent::Base
-        # Costanti per le classi CSS
-        CARD_THEME = {
+      class Component < BetterUi::Component
+        attr_reader :title, :value, :trend, :change
+        
+        # Costanti per le classi CSS - Nomi corretti secondo convenzione
+        CARD_THEME_CLASSES = {
           default: 'bg-gray-900 border-gray-800',
           white: 'bg-white border-gray-200',
           red: 'bg-red-50 border-red-200',
@@ -18,8 +20,8 @@ module BetterUi
           purple: 'bg-purple-50 border-purple-200'
         }.freeze
 
-        # Dimensioni padding con classi Tailwind dirette - Sistema uniforme 7 livelli
-        CARD_SIZE = {
+        # Sistema uniforme 7 livelli per size
+        CARD_SIZE_CLASSES = {
           xxs: 'p-1',                # Extra extra small
           xs: 'p-2',                 # Extra small
           sm: 'p-3',                 # Small
@@ -29,22 +31,25 @@ module BetterUi
           xxl: 'p-12'                # Extra extra large
         }.freeze
 
-        CARD_ROUNDED = {
+        # Chiavi uniformi per rounded
+        CARD_ROUNDED_CLASSES = {
           none: 'rounded-none',
-          small: 'rounded-md',
-          medium: 'rounded-lg',
-          large: 'rounded-xl',
+          sm: 'rounded-md',          # Cambiato da :small
+          md: 'rounded-lg',          # Cambiato da :medium
+          lg: 'rounded-xl',          # Cambiato da :large
           full: 'rounded-2xl'
         }.freeze
 
-        CARD_SHADOW = {
+        # Chiavi uniformi per shadow
+        CARD_SHADOW_CLASSES = {
           none: 'shadow-none',
-          small: 'shadow-sm',
-          medium: 'shadow-md',
-          large: 'shadow-lg'
+          sm: 'shadow-sm',           # Cambiato da :small
+          md: 'shadow-md',           # Cambiato da :medium
+          lg: 'shadow-lg'            # Cambiato da :large
         }.freeze
 
-        CARD_TREND_COLOR = {
+        # Colori trend con nome corretto
+        CARD_COLOR_CLASSES = {
           green: 'text-green-600',
           red: 'text-red-600',
           blue: 'text-blue-600',
@@ -54,8 +59,8 @@ module BetterUi
           gray: 'text-gray-600'
         }.freeze
 
-        # Dimensioni titolo con classi Tailwind dirette - Sistema uniforme 7 livelli
-        CARD_TITLE_SIZE = {
+        # Dimensioni titolo
+        CARD_TITLE_SIZE_CLASSES = {
           xxs: 'text-[0.6rem]',      # Extra extra small
           xs: 'text-xs',             # Extra small
           sm: 'text-xs',             # Small
@@ -65,8 +70,8 @@ module BetterUi
           xxl: 'text-xl'             # Extra extra large
         }.freeze
 
-        # Dimensioni valore con classi Tailwind dirette - Sistema uniforme 7 livelli
-        CARD_VALUE_SIZE = {
+        # Dimensioni valore
+        CARD_VALUE_SIZE_CLASSES = {
           xxs: 'text-sm',            # Extra extra small
           xs: 'text-base',           # Extra small
           sm: 'text-lg',             # Small
@@ -76,8 +81,8 @@ module BetterUi
           xxl: 'text-5xl'            # Extra extra large
         }.freeze
 
-        # Dimensioni icone trend con classi Tailwind dirette - Sistema uniforme 7 livelli
-        CARD_TREND_ICON_SIZE = {
+        # Dimensioni icone trend
+        CARD_TREND_ICON_SIZE_CLASSES = {
           xxs: 'h-2 w-2 mr-0.5',    # Extra extra small
           xs: 'h-2.5 w-2.5 mr-0.5', # Extra small
           sm: 'h-3 w-3 mr-0.5',     # Small
@@ -86,6 +91,40 @@ module BetterUi
           xl: 'h-6 w-6 mr-1',       # Extra large
           xxl: 'h-7 w-7 mr-1.5'     # Extra extra large
         }.freeze
+
+        # Configurazione con configure_attributes
+        configure_attributes({
+          theme: {
+            var: :@theme,
+            default: :default,
+            constants: [:CARD_THEME_CLASSES],
+            methods: [:get_theme_class]
+          },
+          size: {
+            var: :@size,
+            default: :md,
+            constants: [:CARD_SIZE_CLASSES, :CARD_TITLE_SIZE_CLASSES, :CARD_VALUE_SIZE_CLASSES, :CARD_TREND_ICON_SIZE_CLASSES],
+            methods: [:get_size_class, :get_title_size_class, :get_value_size_class, :get_trend_icon_size_class]
+          },
+          rounded: {
+            var: :@rounded,
+            default: :md,
+            constants: [:CARD_ROUNDED_CLASSES],
+            methods: [:get_rounded_class]
+          },
+          shadow: {
+            var: :@shadow,
+            default: :sm,
+            constants: [:CARD_SHADOW_CLASSES],
+            methods: [:get_shadow_class]
+          },
+          color: {
+            var: :@color,
+            default: :green,
+            constants: [:CARD_COLOR_CLASSES],
+            methods: [:get_color_class]
+          }
+        })
 
         def initialize(
           title:,
@@ -97,93 +136,42 @@ module BetterUi
           size: :md,
           rounded: :md,
           shadow: :sm,
-          classes: nil,
-          **options
+          **html_options
         )
           @title = title
           @value = value
           @trend = trend
           @change = change
-          @color = color
-          @theme = theme
-          @size = size
-          @rounded = rounded
-          @shadow = shadow
-          @classes = classes
-          @options = options
+          @color = color.to_sym
+          @theme = theme.to_sym
+          @size = size.to_sym
+          @rounded = rounded.to_sym
+          @shadow = shadow.to_sym
+          @html_options = html_options
 
           validate_params
         end
 
-        private
-
-        attr_reader :title, :value, :trend, :change, :color, :theme, :size, :rounded, :shadow, :classes, :options
-
-        def validate_params
-          validate_theme
-          validate_size
-          validate_rounded
-          validate_shadow
-          validate_trend
-          validate_color
-        end
-
-        def validate_theme
-          return if CARD_THEME.key?(theme)
-          
-          raise ArgumentError, "Invalid theme: #{theme}. Valid options: #{CARD_THEME.keys.join(', ')}"
-        end
-
-        def validate_size
-          return if CARD_SIZE.key?(size)
-          
-          raise ArgumentError, "Invalid size: #{size}. Valid options: #{CARD_SIZE.keys.join(', ')}"
-        end
-
-        def validate_rounded
-          return if CARD_ROUNDED.key?(rounded)
-          
-          raise ArgumentError, "Invalid rounded: #{rounded}. Valid options: #{CARD_ROUNDED.keys.join(', ')}"
-        end
-
-        def validate_shadow
-          return if CARD_SHADOW.key?(shadow)
-          
-          raise ArgumentError, "Invalid shadow: #{shadow}. Valid options: #{CARD_SHADOW.keys.join(', ')}"
-        end
-
-        def validate_trend
-          return if trend.nil? || [:up, :down].include?(trend)
-          
-          raise ArgumentError, "Invalid trend: #{trend}. Valid options: :up, :down, nil"
-        end
-
-        def validate_color
-          return if CARD_TREND_COLOR.key?(color)
-          
-          raise ArgumentError, "Invalid color: #{color}. Valid options: #{CARD_TREND_COLOR.keys.join(', ')}"
-        end
-
         def card_classes
           base_classes = [
-            CARD_THEME[theme],
-            get_size_classes,
-            get_rounded_classes,
-            get_shadow_classes,
+            get_theme_class,
+            get_size_class,
+            get_rounded_class,
+            get_shadow_class,
             'border'
           ]
 
-          base_classes << classes if classes.present?
+          base_classes << @html_options[:class] if @html_options[:class].present?
           base_classes.compact.join(' ')
         end
 
         def title_classes
           base_classes = [
-            get_title_size_classes,
+            get_title_size_class,
             'font-medium'
           ]
 
-          if theme == :default
+          if @theme == :default
             base_classes << 'text-gray-300'
           else
             base_classes << 'text-gray-500'
@@ -194,11 +182,11 @@ module BetterUi
 
         def value_classes
           base_classes = [
-            get_value_size_classes,
+            get_value_size_class,
             'font-semibold'
           ]
 
-          if theme == :default
+          if @theme == :default
             base_classes << 'text-white'
           else
             base_classes << 'text-gray-900'
@@ -209,7 +197,7 @@ module BetterUi
 
         def trend_classes
           base_classes = [
-            get_trend_color_classes,
+            get_color_class,
             'text-sm font-medium flex items-center'
           ]
 
@@ -225,35 +213,20 @@ module BetterUi
         end
 
         def trend_icon_size
-          get_trend_icon_size_classes
+          get_trend_icon_size_class
         end
 
-        def get_size_classes
-          CARD_SIZE[size] || CARD_SIZE[:md]
+        def validate_trend
+          return if trend.nil? || [:up, :down].include?(trend)
+          
+          raise ArgumentError, "Invalid trend: #{trend}. Valid options: :up, :down, nil"
         end
 
-        def get_rounded_classes
-          CARD_ROUNDED[rounded] || CARD_ROUNDED[:md]
-        end
+        private
 
-        def get_shadow_classes
-          CARD_SHADOW[shadow] || CARD_SHADOW[:sm]
-        end
-
-        def get_title_size_classes
-          CARD_TITLE_SIZE[size] || CARD_TITLE_SIZE[:md]
-        end
-
-        def get_value_size_classes
-          CARD_VALUE_SIZE[size] || CARD_VALUE_SIZE[:md]
-        end
-
-        def get_trend_color_classes
-          CARD_TREND_COLOR[color] || CARD_TREND_COLOR[:green]
-        end
-
-        def get_trend_icon_size_classes
-          CARD_TREND_ICON_SIZE[size] || CARD_TREND_ICON_SIZE[:md]
+        def validate_params
+          super # Chiama la validazione di BetterUi::Component
+          validate_trend
         end
       end
     end

@@ -7,14 +7,14 @@ module BetterUi
         # @label Con Helper
         # @param orientation select { choices: [horizontal, vertical] } "Orientamento del divisore"
         # @param style select { choices: [solid, dashed, dotted, double] } "Stile del divisore"
-        # @param size select { choices: [thin, medium, thick] } "Dimensione del divisore"
+        # @param size select { choices: [xxs, xs, sm, md, lg, xl, xxl] } "Dimensione del divisore"
         # @param theme select { choices: [default, white, red, rose, orange, green, blue, yellow, violet] } "Tema del divisore"
         # @param label text "Testo del divisore (opzionale)"
         # @param height text "Altezza (solo per orientamento verticale, es. 100px)"
         def default(
           orientation: :horizontal,
           style: :solid,
-          size: :medium,
+          size: :md,
           theme: :white,
           label: "",
           height: "50px"
@@ -34,14 +34,14 @@ module BetterUi
         # @label Istanziazione Diretta
         # @param orientation select { choices: [horizontal, vertical] } "Orientamento del divisore"
         # @param style select { choices: [solid, dashed, dotted, double] } "Stile del divisore"
-        # @param size select { choices: [thin, medium, thick] } "Dimensione del divisore"
+        # @param size select { choices: [xxs, xs, sm, md, lg, xl, xxl] } "Dimensione del divisore"
         # @param theme select { choices: [default, white, red, rose, orange, green, blue, yellow, violet] } "Tema del divisore"
         # @param label text "Testo del divisore (opzionale)"
         # @param height text "Altezza (solo per orientamento verticale, es. 100px)"
         def raw(
           orientation: :horizontal,
           style: :solid,
-          size: :medium,
+          size: :md,
           theme: :white,
           label: "",
           height: "50px"

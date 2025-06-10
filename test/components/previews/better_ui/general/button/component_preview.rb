@@ -49,7 +49,7 @@ module BetterUi
           label: "Bottone",
           type: :white,
           size: :md,
-          rounded: :medium,
+          rounded: :md,  # Cambiato da :medium a :md
           full_width: false,
           disabled: false,
           icon: nil,
@@ -88,7 +88,7 @@ module BetterUi
           label: "Bottone",
           type: :white,
           size: :md,
-          rounded: :medium,
+          rounded: :md,  # Cambiato da :medium a :md
           full_width: false,
           disabled: false,
           icon: nil,
@@ -97,7 +97,7 @@ module BetterUi
           method: nil
         )
           normalized = normalize_params!(
-            label: label,
+            text: label,
             type: type,
             size: size,
             rounded: rounded,

@@ -31,7 +31,7 @@ module BetterUi
       def default(
         navbar_theme: :default,
         sidebar_theme: :default,
-        main_rounded: :small
+        main_rounded: :sm
       )
         render_with_template(
           locals: {

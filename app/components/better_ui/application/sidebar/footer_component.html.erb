@@ -1,0 +1,71 @@
+<% if render? %>
+  <div class="<%= footer_classes %>">
+    <% if has_user_dropdown? %>
+      <!-- User Dropdown -->
+      <%= bui_dropdown(
+        trigger_classes: "w-full p-0 bg-transparent border-0 hover:bg-gray-50 rounded-md transition-colors duration-200",
+        position: :top,
+        classes: "w-full"
+      ) do |dropdown| %>
+        <% dropdown.with_trigger do %>
+          <%= user_dropdown_trigger %>
+        <% end %>
+        
+        <% user_dropdown[:items].each do |item| %>
+          <% dropdown.with_item do %>
+            <%= bui_dropdown_item(
+              label: item[:label],
+              href: item[:href],
+              icon: item[:icon],
+              classes: item[:classes],
+              method: item[:method],
+              target: item[:target]
+            ) %>
+          <% end %>
+        <% end %>
+      <% end %>
+    <% elsif has_user_info? %>
+      <!-- Static User Info -->
+      <div class="flex items-center">
+        <% if user_info[:avatar].present? %>
+          <div class="flex-shrink-0">
+            <% if user_info[:avatar].is_a?(Hash) %>
+              <%= bui_avatar(**user_info[:avatar]) %>
+            <% else %>
+              <%= user_info[:avatar].html_safe %>
+            <% end %>
+          </div>
+        <% end %>
+        
+        <div class="<%= user_info[:avatar].present? ? 'ml-3 min-w-0 flex-1' : 'min-w-0 flex-1' %>">
+          <% if user_info[:name].present? %>
+            <p class="text-sm font-medium text-gray-700 truncate">
+              <%= user_info[:name] %>
+            </p>
+          <% end %>
+          
+          <% if user_info[:email].present? %>
+            <p class="text-xs text-gray-500 truncate">
+              <%= user_info[:email] %>
+            </p>
+          <% end %>
+        </div>
+        
+        <% if user_info[:menu_button] %>
+          <div class="ml-auto flex-shrink-0">
+            <button type="button" class="p-1 rounded-md text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+              <%= bui_icon("ellipsis-vertical", size: :sm) %>
+            </button>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+    
+    <% if content.present? %>
+      <!-- Additional Footer Content -->
+      <div class="<%= (has_user_info? || has_user_dropdown?) ? 'mt-4 pt-4 border-t border-gray-200' : '' %>">
+        <%= content.html_safe %>
+      </div>
+    <% end %>
+  </div>
+<% end %>

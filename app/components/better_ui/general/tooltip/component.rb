@@ -123,7 +123,7 @@ module BetterUi
           }
         )
 
-        attr_reader :text, :theme, :position, :size, :style, :classes, :html_options
+        attr_reader :text, :classes, :html_options
 
         # @param text [String] testo del tooltip
         # @param theme [Symbol] :default, :white, :red, :rose, :orange, :green, :blue, :yellow, :violet
@@ -141,15 +141,10 @@ module BetterUi
           classes: nil,
           **html_options
         )
+          super(theme: theme, position: position, size: size, style: style)
           @text = text
-          @theme = theme.to_sym
-          @position = position.to_sym
-          @size = size.to_sym
-          @style = style.to_sym
           @classes = classes
           @html_options = html_options
-
-          validate_params
         end
 
         # Combina tutte le classi per il container
@@ -198,7 +193,19 @@ module BetterUi
           attrs
         end
 
-        # Metodi get dinamici per arrow position (non gestito da configure_attributes)
+        # Metodi get generati dinamicamente per position, size
+        [
+          { constant: :TOOLTIP_POSITIONS, var: :@position, default: :top, method: :get_position_class },
+          { constant: :TOOLTIP_SIZES, var: :@size, default: :md, method: :get_size_class }
+        ].each do |config|
+          define_method config[:method] do
+            constant_hash = self.class.const_get(config[:constant])
+            value = instance_variable_get(config[:var])
+            constant_hash[value] || constant_hash[config[:default]]
+          end
+        end
+
+        # Metodo get per arrow position
         [
           { constant: :TOOLTIP_ARROW_POSITIONS, var: :@position, default: :top, method: :get_arrow_position_class }
         ].each do |config|
@@ -229,23 +236,6 @@ module BetterUi
         # Verifica se il componente deve essere renderizzato
         def render?
           @text.present? && content.present?
-        end
-
-        private
-
-        def validate_params
-          # Validazione automatica tramite BetterUi::Component per theme, position, size
-          super
-          
-          # Validazione manuale per style (non gestito da configure_attributes)
-          validate_style
-        end
-
-        def validate_style
-          valid_styles = [ :filled, :outline ]
-          unless valid_styles.include?(@style)
-            raise ArgumentError, "#{self.class.name} - parametro 'style' con valore '#{@style}' non è valido. Deve essere uno tra: #{valid_styles.join(', ')}"
-          end
         end
       end
     end

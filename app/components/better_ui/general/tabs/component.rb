@@ -6,6 +6,7 @@ module BetterUi
       class Component < BetterUi::Component
         renders_one :navigation
         renders_one :panels
+        
         TABS_VARIANT_CLASSES = {
           pills: 'bg-gray-100 rounded-lg p-1',
           underline: 'border-b border-gray-200',
@@ -67,30 +68,22 @@ module BetterUi
           }
         })
 
+        attr_reader :navigation_classes, :panels_classes, :options
+
         def initialize(variant: :pills, theme: :default, size: :md, orientation: :horizontal,
                       navigation_classes: '', panels_classes: 'mt-4', **options)
-          @variant = variant
-          @theme = theme
-          @size = size
-          @orientation = orientation
           @navigation_classes = navigation_classes
           @panels_classes = panels_classes
           @options = options
 
-          validate_params
+          super(variant: variant, theme: theme, size: size, orientation: orientation)
         end
-
-        private
-
-        attr_reader :variant, :theme, :size, :orientation, :navigation_classes, :panels_classes, :options
-
-
 
         # Attributi per il wrapper principale (con data-controller)
         def wrapper_attributes
           {
             'data-controller': 'bui-tabs'
-          }.merge(options)
+          }.merge(@options)
         end
 
         # Attributi per il container della navigazione tabs
@@ -101,7 +94,7 @@ module BetterUi
             get_variant_class,
             get_theme_class,
             get_size_class,
-            navigation_classes
+            @navigation_classes
           ].compact.join(' ')
 
           {
@@ -113,7 +106,7 @@ module BetterUi
         # Attributi per il container dei panel
         def panels_attributes
           {
-            class: panels_classes
+            class: @panels_classes
           }
         end
       end

@@ -3,8 +3,11 @@
 module BetterUi
   module General
     module Accordion
-      class ItemComponent < ViewComponent::Base
-        ITEM_THEME = {
+      class ItemComponent < BetterUi::Component
+        attr_reader :title, :expanded, :disabled, :icon
+
+        # Costanti aggiornate con simboli
+        ITEM_THEME_CLASSES = {
           default: 'border-gray-200 bg-white',
           white: 'border-gray-100 bg-white',
           blue: 'border-blue-200 bg-blue-50',
@@ -16,7 +19,7 @@ module BetterUi
           rose: 'border-rose-200 bg-rose-50'
         }.freeze
 
-        ITEM_HEADER_THEME = {
+        ITEM_HEADER_THEME_CLASSES = {
           default: 'text-gray-900 hover:bg-gray-50',
           white: 'text-gray-900 hover:bg-gray-50',
           blue: 'text-blue-900 hover:bg-blue-100',
@@ -28,60 +31,78 @@ module BetterUi
           rose: 'text-rose-900 hover:bg-rose-100'
         }.freeze
 
-        ITEM_SIZE_HEADER = {
-          small: 'text-sm px-4 py-3',
-          medium: 'text-base px-5 py-4',
-          large: 'text-lg px-6 py-5'
+        ITEM_SIZE_HEADER_CLASSES = {
+          xxs: 'text-xs px-2 py-1',
+          xs: 'text-xs px-3 py-2',
+          sm: 'text-sm px-4 py-3',
+          md: 'text-base px-5 py-4',
+          lg: 'text-lg px-6 py-5',
+          xl: 'text-xl px-7 py-6',
+          xxl: 'text-2xl px-8 py-7'
         }.freeze
 
-        ITEM_SIZE_CONTENT = {
-          small: 'px-4 py-3',
-          medium: 'px-5 py-4',
-          large: 'px-6 py-5'
+        ITEM_SIZE_CONTENT_CLASSES = {
+          xxs: 'px-2 py-1',
+          xs: 'px-3 py-2',
+          sm: 'px-4 py-3',
+          md: 'px-5 py-4',
+          lg: 'px-6 py-5',
+          xl: 'px-7 py-6',
+          xxl: 'px-8 py-7'
         }.freeze
 
-        ITEM_SIZE_ICON = {
-          small: 'w-4 h-4',
-          medium: 'w-5 h-5',
-          large: 'w-6 h-6'
+        ITEM_SIZE_ICON_CLASSES = {
+          xxs: 'w-3 h-3',
+          xs: 'w-3 h-3',
+          sm: 'w-4 h-4',
+          md: 'w-5 h-5',
+          lg: 'w-6 h-6',
+          xl: 'w-7 h-7',
+          xxl: 'w-8 h-8'
         }.freeze
 
-        def initialize(title:, expanded: false, disabled: false, icon: 'chevron-down', 
-                      theme: :default, size: :md, classes: '', **options)
+        # Configurazione con configure_attributes
+        configure_attributes({
+          theme: {
+            var: :@theme,
+            default: :default,
+            constants: [:ITEM_THEME_CLASSES, :ITEM_HEADER_THEME_CLASSES],
+            methods: [:get_theme_class, :get_header_theme_class]
+          },
+          size: {
+            var: :@size,
+            default: :md,
+            constants: [:ITEM_SIZE_HEADER_CLASSES, :ITEM_SIZE_CONTENT_CLASSES, :ITEM_SIZE_ICON_CLASSES],
+            methods: [:get_size_header_class, :get_size_content_class, :get_size_icon_class]
+          }
+        })
+
+        def initialize(
+          title:,
+          expanded: false,
+          disabled: false,
+          icon: 'chevron-down',
+          theme: :default,
+          size: :md,
+          classes: '',
+          **options
+        )
           @title = title
           @expanded = expanded
           @disabled = disabled
           @icon = icon
-          @theme = theme
-          @size = size
+          @theme = theme.to_sym
+          @size = size.to_sym
           @classes = classes
           @options = options
 
           validate_params
+          raise ArgumentError, 'title cannot be blank' if title.blank?
         end
 
         private
 
         attr_reader :title, :expanded, :disabled, :icon, :theme, :size, :classes, :options
-
-        def validate_params
-          validate_theme
-          validate_size
-          
-          raise ArgumentError, 'title cannot be blank' if title.blank?
-        end
-
-        def validate_theme
-          return if ITEM_THEME.key?(theme)
-
-          raise ArgumentError, "Invalid theme: #{theme}. Must be one of #{ITEM_THEME.keys}"
-        end
-
-        def validate_size
-          return if ITEM_SIZE_HEADER.key?(size)
-
-          raise ArgumentError, "Invalid size: #{size}. Must be one of #{ITEM_SIZE_HEADER.keys}"
-        end
 
         def unique_id
           @unique_id ||= "accordion-item-#{SecureRandom.hex(4)}"
@@ -99,14 +120,14 @@ module BetterUi
         def item_attributes
           base_classes = [
             'bui-accordion-item',
-            ITEM_THEME[theme],
-            classes
+            get_theme_class,
+            @classes
           ].compact.join(' ')
 
           {
             class: base_classes,
             'data-bui-accordion-target': 'item'
-          }.merge(options)
+          }.merge(@options)
         end
 
         # Attributi per il button header
@@ -114,8 +135,8 @@ module BetterUi
           base_classes = [
             'bui-accordion-header',
             'w-full flex items-center justify-between text-left font-medium transition-colors duration-200',
-            ITEM_SIZE_HEADER[size],
-            ITEM_HEADER_THEME[theme],
+            get_size_header_class,
+            get_header_theme_class,
             disabled? ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'
           ].compact.join(' ')
 
@@ -136,7 +157,7 @@ module BetterUi
           base_classes = [
             'bui-accordion-content',
             'transition-all duration-300 ease-in-out overflow-hidden',
-            ITEM_SIZE_CONTENT[size],
+            get_size_content_class,
             expanded? ? 'block' : 'hidden'
           ].compact.join(' ')
 
@@ -153,7 +174,7 @@ module BetterUi
           base_classes = [
             'bui-accordion-icon',
             'transition-transform duration-200',
-            ITEM_SIZE_ICON[size],
+            get_size_icon_class,
             expanded? ? 'rotate-180' : ''
           ].compact.join(' ')
 

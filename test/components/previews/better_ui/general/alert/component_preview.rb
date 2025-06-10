@@ -21,8 +21,8 @@ module BetterUi
         # - **icon**: nome icona opzionale (se vuoto usa icona predefinita basata sul tema)
         # - **icon_position**: posizione icona (left, right)
         # - **dismissible**: se l'alert può essere chiuso dall'utente
-        # - **rounded**: border radius (none, small, medium, large, full)
-        # - **importance**: livello di importanza (high, medium, low)
+        # - **rounded**: border radius (none, sm, md, lg, full)
+        # - **importance**: livello di importanza (high, md, low)
         #
         # ## Esempi Codice
         # ```erb
@@ -40,8 +40,8 @@ module BetterUi
         # @param icon text "Nome dell'icona (opzionale, usa predefinita se vuoto)"
         # @param icon_position select { choices: [left, right] } "Posizione dell'icona"
         # @param dismissible toggle "Permette di chiudere l'alert"
-        # @param rounded select { choices: [none, small, medium, large, full] } "Arrotondamento degli angoli"
-        # @param importance select { choices: [high, medium, low] } "Livello di importanza"
+        # @param rounded select { choices: [none, sm, md, lg, full] } "Arrotondamento degli angoli"
+        # @param importance select { choices: [high, md, low] } "Livello di importanza"
         # @param html_content toggle "Il messaggio contiene HTML"
         # @param classes text "Classi CSS aggiuntive (opzionale)"
         def default(
@@ -51,8 +51,8 @@ module BetterUi
           icon: "",
           icon_position: :left,
           dismissible: false,
-          rounded: :medium,
-          importance: :medium,
+          rounded: :md,
+          importance: :md,
           html_content: false,
           classes: ""
         )
@@ -79,8 +79,8 @@ module BetterUi
         # @param icon text "Nome dell'icona (opzionale, usa predefinita se vuoto)"
         # @param icon_position select { choices: [left, right] } "Posizione dell'icona"
         # @param dismissible toggle "Permette di chiudere l'alert"
-        # @param rounded select { choices: [none, small, medium, large, full] } "Arrotondamento degli angoli"
-        # @param importance select { choices: [high, medium, low] } "Livello di importanza"
+        # @param rounded select { choices: [none, sm, md, lg, full] } "Arrotondamento degli angoli"
+        # @param importance select { choices: [high, md, low] } "Livello di importanza"
         # @param html_content toggle "Il messaggio contiene HTML"
         # @param classes text "Classi CSS aggiuntive (opzionale)"
         def raw(
@@ -90,8 +90,8 @@ module BetterUi
           icon: "",
           icon_position: :left,
           dismissible: false,
-          rounded: :medium,
-          importance: :medium,
+          rounded: :md,
+          importance: :md,
           html_content: false,
           classes: ""
         )
@@ -112,7 +112,6 @@ module BetterUi
         end
 
         # @!endgroup
-
 
         private
 

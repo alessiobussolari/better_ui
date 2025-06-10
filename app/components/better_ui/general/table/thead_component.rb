@@ -1,10 +1,13 @@
 module BetterUi
   module General
     module Table
-      class TheadComponent < ViewComponent::Base
+      class TheadComponent < BetterUi::Component
+        renders_many :rows, "BetterUi::General::Table::TrComponent"
+        
         attr_reader :theme, :bordered
 
         def initialize(theme: :default, bordered: false, **html_options)
+          super()
           @theme = theme.to_sym
           @bordered = !!bordered
           @html_options = html_options

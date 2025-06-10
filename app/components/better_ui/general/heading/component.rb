@@ -2,6 +2,7 @@ module BetterUi
   module General
     module Heading
       class Component < BetterUi::Component
+        attr_reader :level, :icon, :subtitle, :with_divider, :theme, :align, :size, :style
 
         # Classi base sempre presenti
         HEADING_BASE_CLASSES = "font-bold leading-tight"
@@ -121,24 +122,12 @@ module BetterUi
           violet: "border-violet-200"
         }
 
-        configure_attributes(
+        configure_attributes({
           theme: {
             var: :@theme,
             default: :default,
-            constants: [:HEADING_THEME_CLASSES],
-            methods: [:get_theme_class]
-          },
-          subtitle_theme: {
-            var: :@theme,
-            default: :default,
-            constants: [:HEADING_SUBTITLE_THEME_CLASSES],
-            methods: [:get_subtitle_theme_class]
-          },
-          divider_theme: {
-            var: :@theme,
-            default: :default,
-            constants: [:HEADING_DIVIDER_THEME_CLASSES],
-            methods: [:get_divider_theme_class]
+            constants: [:HEADING_THEME_CLASSES, :HEADING_SUBTITLE_THEME_CLASSES, :HEADING_DIVIDER_THEME_CLASSES],
+            methods: [:get_theme_class, :get_subtitle_theme_class, :get_divider_theme_class]
           },
           align: {
             var: :@align,
@@ -151,8 +140,14 @@ module BetterUi
             default: :normal,
             constants: [:HEADING_STYLE_CLASSES],
             methods: [:get_style_class]
+          },
+          size: {
+            var: :@size,
+            default: :md,
+            constants: [:HEADING_SIZE_CLASSES],
+            methods: [:get_size_class]
           }
-        )
+        })
 
         # @param level [Integer] livello del heading (1-6)
         # @param theme [Symbol] tema del colore (:default, :white, etc.)
@@ -176,13 +171,16 @@ module BetterUi
         )
           @level = level.to_i.clamp(1, 6)
           @icon = icon
-          @size = size
           @subtitle = subtitle
           @with_divider = with_divider
           @html_options = html_options
 
-          # Utilizza il metodo della classe base per impostare automaticamente le variabili di istanza
-          set_instance_variables(theme: theme, align: align, style: style)
+          # Conversione esplicita a simboli per i parametri configurabili
+          @theme = theme.to_sym
+          @align = align.to_sym
+          @size = size.to_sym
+          @style = style.to_sym
+
           validate_params
         end
 

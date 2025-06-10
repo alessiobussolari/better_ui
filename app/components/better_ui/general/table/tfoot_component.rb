@@ -1,8 +1,11 @@
 module BetterUi
   module General
     module Table
-      class TfootComponent < ViewComponent::Base
+      class TfootComponent < BetterUi::Component  # ← Cambiato da ViewComponent::Base
         attr_reader :theme, :bordered
+        
+        # Supporto per righe multiple nel tfoot
+        renders_many :trs, TrComponent  # ← AGGIUNTO
 
         def initialize(theme: :default, bordered: false, **html_options)
           @theme = theme.to_sym

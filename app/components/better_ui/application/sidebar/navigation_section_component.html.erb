@@ -1,0 +1,17 @@
+<% if render? %>
+  <div class="<%= section_classes %>">
+    <% if has_title? %>
+      <h3 class="<%= title_classes %>">
+        <%= @title %>
+      </h3>
+    <% end %>
+    
+    <% if has_navigation_items? %>
+      <ul class="space-y-1">
+        <% navigation_items.each do |item| %>
+          <%= item %>
+        <% end %>
+      </ul>
+    <% end %>
+  </div>
+<% end %>

@@ -22,7 +22,7 @@ module BetterUi
         # - **theme**: tema colore (default, white, red, rose, orange, green, blue, yellow, violet)
         # - **style**: stile del pannello (default, flat, raised, bordered)
         # - **padding**: dimensione del padding interno (xxs, xs, sm, md, lg, xl, xxl)
-        # - **radius**: border radius (none, small, medium, large, full)
+        # - **radius**: border radius (none, xxs, xs, sm, md, lg, xl, xxl, full)
         #
         # ## Esempi Codice
         # ```erb
@@ -45,7 +45,7 @@ module BetterUi
         # @param theme select { choices: [default, white, red, rose, orange, green, blue, yellow, violet] } "Tema di colore"
         # @param style select { choices: [default, flat, raised, bordered] } "Stile del pannello"
         # @param padding select { choices: [xxs, xs, sm, md, lg, xl, xxl] } "Dimensione del padding interno"
-        # @param radius select { choices: [none, small, medium, large, full] } "Raggio dei bordi"
+        # @param radius select { choices: [none, xxs, xs, sm, md, lg, xl, xxl, full] } "Raggio dei bordi"
         def default(
           title: "Titolo Pannello",
           body: "Questo è il contenuto del pannello.",
@@ -78,7 +78,7 @@ module BetterUi
         # @param theme select { choices: [default, white, red, rose, orange, green, blue, yellow, violet] } "Tema di colore"
         # @param style select { choices: [default, flat, raised, bordered] } "Stile del pannello"
         # @param padding select { choices: [xxs, xs, sm, md, lg, xl, xxl] } "Dimensione del padding interno"
-        # @param radius select { choices: [none, small, medium, large, full] } "Raggio dei bordi"
+        # @param radius select { choices: [none, xxs, xs, sm, md, lg, xl, xxl, full] } "Raggio dei bordi"
         def raw(
           title: "Titolo Pannello",
           body: "Questo è il contenuto del pannello.",

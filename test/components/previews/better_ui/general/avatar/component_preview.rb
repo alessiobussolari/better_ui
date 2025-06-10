@@ -7,16 +7,16 @@ module BetterUi
         # @label Con Helper
         # @param name text "Nome per le iniziali"
         # @param src url "URL dell'immagine"
-        # @param size select { choices: [xxsmall, xsmall, small, medium, large, xlarge, xxlarge] } "Dimensione dell'avatar"
-        # @param shape select { choices: [circle, square, rounded] } "Forma dell'avatar"
-        # @param status select { choices: [online, offline, busy, away] } "Stato online"
-        # @param status_position select { choices: [bottom_right, bottom_left, top_right, top_left] } "Posizione indicatore stato"
-        # @param theme select { choices: [default, white, red, rose, orange, green, blue, yellow, violet] } "Tema dell'avatar"
-        # @param style select { choices: [filled, outline, light] } "Stile dell'avatar"
+        # @param size select { choices: [:xxs, :xs, :sm, :md, :lg, :xl, :xxl] } "Dimensione dell'avatar"
+        # @param shape select { choices: [:circle, :square, :rounded] } "Forma dell'avatar"
+        # @param status select { choices: ["", :online, :offline, :busy, :away] } "Stato online"
+        # @param status_position select { choices: [:bottom_right, :bottom_left, :top_right, :top_left] } "Posizione indicatore stato"
+        # @param theme select { choices: [:default, :white, :red, :rose, :orange, :green, :blue, :yellow, :violet] } "Tema dell'avatar"
+        # @param style select { choices: [:filled, :outline, :light] } "Stile dell'avatar"
         def default(
           name: "Mario Rossi",
           src: "",
-          size: :medium,
+          size: :md,
           shape: :circle,
           status: "",
           status_position: :bottom_right,
@@ -40,16 +40,16 @@ module BetterUi
         # @label Istanziazione Diretta
         # @param name text "Nome per le iniziali"
         # @param src url "URL dell'immagine"
-        # @param size select { choices: [xxsmall, xsmall, small, medium, large, xlarge, xxlarge] } "Dimensione dell'avatar"
-        # @param shape select { choices: [circle, square, rounded] } "Forma dell'avatar"
-        # @param status select { choices: [online, offline, busy, away] } "Stato online"
-        # @param status_position select { choices: [bottom_right, bottom_left, top_right, top_left] } "Posizione indicatore stato"
-        # @param theme select { choices: [default, white, red, rose, orange, green, blue, yellow, violet] } "Tema dell'avatar"
-        # @param style select { choices: [filled, outline, light] } "Stile dell'avatar"
+        # @param size select { choices: [:xxs, :xs, :sm, :md, :lg, :xl, :xxl] } "Dimensione dell'avatar"
+        # @param shape select { choices: [:circle, :square, :rounded] } "Forma dell'avatar"
+        # @param status select { choices: ["", :online, :offline, :busy, :away] } "Stato online"
+        # @param status_position select { choices: [:bottom_right, :bottom_left, :top_right, :top_left] } "Posizione indicatore stato"
+        # @param theme select { choices: [:default, :white, :red, :rose, :orange, :green, :blue, :yellow, :violet] } "Tema dell'avatar"
+        # @param style select { choices: [:filled, :outline, :light] } "Stile dell'avatar"
         def raw(
           name: "Mario Rossi",
           src: "",
-          size: :medium,
+          size: :md,
           shape: :circle,
           status: "",
           status_position: :bottom_right,
@@ -82,14 +82,17 @@ module BetterUi
           options[:theme] = options[:theme].to_sym if options[:theme].is_a?(String)
           options[:style] = options[:style].to_sym if options[:style].is_a?(String)
 
-          # Gestione stato (può essere vuoto)
-          if options[:status].is_a?(String)
-            options[:status] = options[:status].strip.empty? ? nil : options[:status].to_sym
+          # Rimuovi parametri vuoti - IMPORTANTE: gestire status correttamente
+          options[:name] = nil if options[:name].blank?
+          options[:src] = nil if options[:src].blank?
+          
+          # Per status: se è stringa vuota o blank, impostalo a nil
+          # Se è una stringa valida, convertila a simbolo
+          if options[:status].blank?
+            options[:status] = nil
+          elsif options[:status].is_a?(String)
+            options[:status] = options[:status].to_sym
           end
-
-          # Pulizia valori vuoti
-          options[:name] = nil if options[:name].is_a?(String) && options[:name].strip.empty?
-          options[:src] = nil if options[:src].is_a?(String) && options[:src].strip.empty?
 
           options
         end

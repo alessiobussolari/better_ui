@@ -48,7 +48,7 @@ module BetterUi
         # @param show_info toggle
         # @param per_page number { value: 25 }
         # @param classes text
-        def default(current_page: 3, total_pages: 10, path: '/products', theme: :default, size: :medium,
+        def default(current_page: 3, total_pages: 10, path: '/products', theme: :default, size: :md,
                     window: 2, show_info: false, per_page: 25, classes: '', **params)
           normalized = normalize_params!(
             current_page: current_page,
@@ -76,7 +76,7 @@ module BetterUi
         # @param show_info toggle
         # @param per_page number { value: 25 }
         # @param classes text
-        def raw(current_page: 3, total_pages: 10, path: '/products', theme: :default, size: :medium,
+        def raw(current_page: 3, total_pages: 10, path: '/products', theme: :default, size: :md,
                 window: 2, show_info: false, per_page: 25, classes: '', **params)
           normalized = normalize_params!(
             current_page: current_page,

@@ -10,7 +10,7 @@
   <!-- Navbar -->
   <%= bui_navbar(
     theme: navbar_theme,
-    shadow: :small,
+    shadow: :sm,
     border: true,
     with_sidebar: with_sidebar,
     sidebar_width: sidebar_width,
@@ -27,7 +27,7 @@
       },
       {
         type: :avatar,
-        avatar: { initials: "AB", size: :small, theme: :green },
+        avatar: { initials: "AB", size: :sm, theme: :green },
         href: "/profile"
       }
     ]
@@ -125,8 +125,8 @@
       <% cards.each_with_index do |card, index| %>
         <%= bui_card(
           theme: card[:theme],
-          shadow: :small,
-          rounded: :medium,
+          shadow: :sm,
+          rounded: :md,
           padding: true,
           border: true
         ) do %>
@@ -136,7 +136,7 @@
               <%= bui_badge(
                 label: "#{index + 1} nuovi", 
                 theme: card[:theme] == :default ? :blue : card[:theme],
-                size: :small
+                size: :sm
               ) %>
             </div>
           </div>
