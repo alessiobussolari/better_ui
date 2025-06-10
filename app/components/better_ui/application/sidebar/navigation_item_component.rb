@@ -6,7 +6,7 @@ module BetterUi
       class NavigationItemComponent < BetterUi::Component
         attr_reader :label, :href, :icon, :badge, :state, :item_type, :target, :method, :data
 
-delegate :bui_icon, to: :helpers
+delegate :bui_icon, :bui_badge, to: :helpers
 
         # Costanti conformi alle regole
         NAVIGATION_ITEM_STATE_CLASSES = {

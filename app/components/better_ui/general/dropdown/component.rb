@@ -47,10 +47,10 @@ module BetterUi
 
         # Posizioni del menu dropdown
         DROPDOWN_POSITION = {
-          bottom: "top-full left-0",
-          top: "bottom-full left-0",
-          left: "top-0 right-full mr-2",
-          right: "top-0 left-full ml-2"
+          bottom: "top-full left-0 mt-2 origin-top-left",
+          top: "bottom-full left-0 mb-2 origin-bottom-left",
+          left: "top-0 right-full mr-2 origin-top-right",
+          right: "top-0 left-full ml-2 origin-top-left"
         }.freeze
 
         # Animazioni del dropdown
@@ -123,6 +123,7 @@ module BetterUi
           @show_chevron = show_chevron
           @selectable = selectable
           @classes = classes
+          @position = position
           @html_options = html_options
 
           super(theme: theme, size: size, rounded: rounded, position: position, animation: animation)
@@ -145,11 +146,16 @@ module BetterUi
 
         # Restituisce solo le classi dinamiche per il menu
         def dynamic_menu_classes
-          [
+          classes = [
             get_position_class,
             get_animation_class,
             get_rounded_class
           ].compact.join(" ")
+          
+          # Debug temporaneo
+          Rails.logger.debug "Dropdown position: #{@position}, classes: #{classes}"
+          
+          classes
         end
 
         # Verifica se rendere il componente

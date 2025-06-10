@@ -1,5 +1,13 @@
 <div class="<%= header_classes %>">
-  
+  <% if has_logo? %>
+    <div class="<%= logo_classes %>">
+      <% if has_icon? %>
+        <%= bui_icon(**@icon) %>
+      <% elsif has_image? %>
+        <%= image_tag(@image[:src], **@image.except(:src)) %>
+      <% end %>
+    </div>
+  <% end %>
   
   <% if has_title? || has_subtitle? %>
     <div class="<%= has_logo? ? 'ml-3' : '' %>">

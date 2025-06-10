@@ -4,15 +4,26 @@ module BetterUi
   module Application
     module Sidebar
       class HeaderComponent < BetterUi::Component
-        attr_reader :logo, :title, :subtitle
+        attr_reader :icon, :image, :title, :subtitle
 
         def initialize(
-          logo: nil, 
+          icon: nil,
+          image: nil, 
           title: nil, 
           subtitle: nil, 
           **html_options
         )
-          @logo = logo
+          # Validazione: solo uno tra icon e image può essere presente
+          if icon.present? && image.present?
+            raise ArgumentError, "Non è possibile specificare sia 'icon' che 'image'. Scegli solo uno dei due."
+          end
+          
+          # Normalizzazione: icon deve essere sempre un hash con :name
+          @icon = normalize_icon(icon) if icon.present?
+          
+          # Normalizzazione: image deve essere sempre un hash con :src
+          @image = normalize_image(image) if image.present?
+          
           @title = title
           @subtitle = subtitle
           @html_options = html_options
@@ -38,7 +49,15 @@ module BetterUi
         end
 
         def has_logo?
-          @logo.present?
+          has_icon? || has_image?
+        end
+        
+        def has_icon?
+          @icon.present?
+        end
+        
+        def has_image?
+          @image.present?
         end
 
         def has_title?
@@ -47,6 +66,36 @@ module BetterUi
 
         def has_subtitle?
           @subtitle.present?
+        end
+
+        private
+
+        def normalize_icon(icon)
+          case icon
+          when String
+            { name: icon }
+          when Hash
+            raise ArgumentError, "Icon hash deve contenere la chiave :name" unless icon[:name].present?
+            icon
+          else
+            raise ArgumentError, "Icon deve essere una stringa o un hash con chiave :name"
+          end
+        end
+
+        def normalize_image(image)
+          case image
+          when String
+            { src: image, alt: "Logo", class: "h-full w-full object-contain" }
+          when Hash
+            raise ArgumentError, "Image hash deve contenere la chiave :src" unless image[:src].present?
+            # Aggiungi valori di default se non presenti
+            {
+              alt: "Logo",
+              class: "h-full w-full object-contain"
+            }.merge(image)
+          else
+            raise ArgumentError, "Image deve essere una stringa o un hash con chiave :src"
+          end
         end
       end
     end
