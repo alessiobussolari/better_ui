@@ -1,92 +1,47 @@
-<header class="<%= container_classes %>">
-  <div class="flex items-center justify-between">
+<header <%= tag.attributes(wrapper_attributes) %>>
+  <div class="flex items-center h-full justify-between">
     <!-- Left side - custom content-->
     <div class="flex items-center">
       <%= content %>
     </div>
 
-    <!-- User actions -->
-    <div class="flex items-center space-x-4">
-      <% if has_actions? %>
-        <% actions.each do |action| %>
-          <div class="flex-shrink-0">
-            <% if action[:type] == :button %>
-              <% if action[:href].present? %>
-                <a 
-                  href="<%= action[:href] %>" 
-                  class="inline-flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors duration-150 <%= action[:theme] == :primary ? 'bg-gray-900 text-white hover:bg-gray-700' : 'bg-gray-100 text-gray-700 hover:bg-gray-200' %>"
-                >
-                  <% if action[:icon].present? %>
-                    <%= bui_icon(action[:icon], size: :sm) %>
-                    <% if action[:label].present? %>
-                      <span class="ml-2"><%= action[:label] %></span>
-                    <% end %>
-                  <% else %>
-                    <%= action[:label] %>
-                  <% end %>
-                </a>
-              <% else %>
-                <button 
-                  type="button"
-                  class="inline-flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors duration-150 <%= action[:theme] == :primary ? 'bg-gray-900 text-white hover:bg-gray-700' : 'bg-gray-100 text-gray-700 hover:bg-gray-200' %>"
-                  <% if action[:data].present? %>
-                    <% action[:data].each do |key, value| %>
-                      data-<%= key %>="<%= value %>"
-                    <% end %>
-                  <% end %>
-                >
-                  <% if action[:icon].present? %>
-                    <%= bui_icon(action[:icon], size: :sm) %>
-                    <% if action[:label].present? %>
-                      <span class="ml-2"><%= action[:label] %></span>
-                    <% end %>
-                  <% else %>
-                    <%= action[:label] %>
-                  <% end %>
-                </button>
-              <% end %>
-            <% elsif action[:type] == :avatar %>
-              <% if action[:href].present? %>
-                <a href="<%= action[:href] %>" class="flex-shrink-0 hover:opacity-75 transition-opacity duration-150">
-              <% end %>
-              
-              <% if action[:avatar].is_a?(Hash) %>
-                <%= bui_avatar(**action[:avatar]) %>
-              <% else %>
-                <%= action[:avatar].html_safe %>
-              <% end %>
-              
-              <% if action[:href].present? %>
-                </a>
-              <% end %>
-            <% elsif action[:type] == :icon %>
-              <% if action[:href].present? %>
-                <a 
-                  href="<%= action[:href] %>" 
-                  class="p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-md transition-colors duration-150"
-                >
-                  <%= bui_icon(action[:icon], size: :md) %>
-                </a>
-              <% else %>
-                <button 
-                  type="button"
-                  class="p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-md transition-colors duration-150"
-                  <% if action[:data].present? %>
-                    <% action[:data].each do |key, value| %>
-                      data-<%= key %>="<%= value %>"
-                    <% end %>
-                  <% end %>
-                >
-                  <%= bui_icon(action[:icon], size: :md) %>
-                </button>
-              <% end %>
-            <% else %>
-              <!-- Custom content -->
-              <%= action[:content].html_safe if action[:content].present? %>
+    <!-- Right side - actions, avatar, dropdown, icon buttons -->
+    <% if has_right_section? %>
+      <div class="flex items-center space-x-3">
+        <!-- Legacy actions -->
+        <% if has_actions? %>
+          <% actions.each do |action| %>
+            <div class="flex-shrink-0">
+              <%= render_action_content(action) %>
+            </div>
+          <% end %>
+        <% end %>
+        
+        <!-- Icon buttons -->
+        <% if has_icon_buttons? %>
+          <div class="flex items-center space-x-2">
+            <% icon_buttons.each do |icon_button| %>
+              <div class="flex-shrink-0">
+                <%= icon_button %>
+              </div>
             <% end %>
           </div>
         <% end %>
-      <% end %>
-    </div>
+        
+        <!-- Avatar -->
+        <% if has_avatar? %>
+          <div class="flex-shrink-0">
+            <%= avatar %>
+          </div>
+        <% end %>
+        
+        <!-- User dropdown -->
+        <% if has_user_dropdown? %>
+          <div class="flex-shrink-0">
+            <%= user_dropdown %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
   </div>
 </header>

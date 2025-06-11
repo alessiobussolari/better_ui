@@ -1,9 +1,13 @@
-<%= render BetterUi::Application::Navbar::Component.new(
+<%= bui_navbar(
+  size: size,
   theme: theme,
+  variant: variant,
   shadow: shadow,
   border: border,
   with_sidebar: with_sidebar,
   sidebar_width: sidebar_width,
+  action_button_theme: action_button_theme,
+  action_icon_theme: action_icon_theme,
   actions: [
     {
       type: :icon,

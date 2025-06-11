@@ -257,7 +257,7 @@ delegate :bui_icon, :bui_badge, to: :helpers
 
         def children_classes
           %w[
-            mt-1 space-y-1 border-l border-gray-200
+            mt-1 ml-4 space-y-1 border-l border-gray-200
           ].join(" ")
         end
       end

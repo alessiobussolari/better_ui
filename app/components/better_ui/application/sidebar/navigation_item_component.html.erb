@@ -12,11 +12,7 @@
       <div class="flex items-center flex-1">
         <% if icon.present? %>
           <div class="<%= icon_classes %>">
-            <% if icon.is_a?(Hash) %>
-              <%= bui_icon(icon[:name], size: icon[:size] || :sm, classes: icon[:classes]) %>
-            <% else %>
-              <%= bui_icon(icon, size: :sm) %>
-            <% end %>
+            <%= bui_icon(**icon) %>
           </div>
         <% end %>
         
@@ -24,11 +20,7 @@
         
         <% if badge.present? %>
           <div class="ml-auto mr-2">
-            <% if badge.is_a?(Hash) %>
-              <%= bui_badge(**badge) %>
-            <% else %>
-              <%= bui_badge(text: badge, variant: :secondary, size: :sm) %>
-            <% end %>
+            <%= bui_badge(**badge) %>
           </div>
         <% end %>
       </div>
@@ -65,11 +57,7 @@
     >
       <% if has_icon? %>
         <span class="<%= icon_classes %>">
-          <% if @icon.is_a?(Hash) %>
-            <%= bui_icon(**@icon) %>
-          <% else %>
-            <%= bui_icon(@icon, size: :sm) %>
-          <% end %>
+          <%= bui_icon(**@icon) %>
         </span>
       <% end %>
       
@@ -77,11 +65,7 @@
       
       <% if has_badge? %>
         <span class="ml-auto mr-2">
-          <% if @badge.is_a?(Hash) %>
-            <%= render BetterUi::General::Badge::Component.new(**@badge) %>
-          <% else %>
-            <%= render BetterUi::General::Badge::Component.new(content: @badge) %>
-          <% end %>
+          <%= bui_badge(**@badge) %>
         </span>
       <% end %>
       
@@ -107,23 +91,15 @@
     <%= link_to @href, link_options do %>
       <% if has_icon? %>
         <span class="<%= icon_classes %>">
-          <% if @icon.is_a?(Hash) %>
-            <%= bui_icon(**@icon) %>
-          <% else %>
-            <%= bui_icon(@icon, size: :sm) %>
-          <% end %>
+          <%= bui_icon(**@icon) %>
         </span>
       <% end %>
       
-      <span class="flex-1"><%= @label %></span>
+      <span class="flex-1 <%= has_icon? ? '' : 'ml-9' %>"><%= @label %></span>
       
       <% if has_badge? %>
         <span class="ml-auto">
-          <% if @badge.is_a?(Hash) %>
-            <%= render BetterUi::General::Badge::Component.new(**@badge) %>
-          <% else %>
-            <%= render BetterUi::General::Badge::Component.new(content: @badge) %>
-          <% end %>
+          <%= bui_badge(**@badge) %>
         </span>
       <% end %>
     <% end %>
@@ -132,11 +108,7 @@
     <div class="<%= item_classes %>">
       <% if has_icon? %>
         <span class="<%= icon_classes %>">
-          <% if @icon.is_a?(Hash) %>
-            <%= bui_icon(**@icon) %>
-          <% else %>
-            <%= bui_icon(@icon, size: :sm) %>
-          <% end %>
+          <%= bui_icon(**@icon) %>
         </span>
       <% end %>
       
@@ -144,11 +116,7 @@
       
       <% if has_badge? %>
         <span class="ml-auto">
-          <% if @badge.is_a?(Hash) %>
-            <%= render BetterUi::General::Badge::Component.new(**@badge) %>
-          <% else %>
-            <%= render BetterUi::General::Badge::Component.new(content: @badge) %>
-          <% end %>
+          <%= bui_badge(**@badge) %>
         </span>
       <% end %>
     </div>

@@ -1,0 +1,97 @@
+<h1>Navbar Component Examples</h1>
+
+<!-- Basic Navbar usando helper -->
+<h2>Basic Navbar</h2>
+<%= bui_navbar do %>
+  <div class="flex items-center space-x-4">
+    <h1 class="text-lg font-semibold">My App</h1>
+  </div>
+<% end %>
+
+<!-- Navbar with Avatar usando helper -->
+<h2>Navbar with Avatar</h2>
+<%= bui_navbar(show_avatar: true) do |navbar| %>
+  <div class="flex items-center space-x-4">
+    <h1 class="text-lg font-semibold">My App</h1>
+  </div>
+  <% navbar.with_avatar(name: "John Doe", size: :md, theme: :blue) %>
+<% end %>
+
+<!-- Navbar with User Dropdown usando helper -->
+<h2>Navbar with User Dropdown</h2>
+<%= bui_navbar(show_user_dropdown: true) do |navbar| %>
+  <div class="flex items-center space-x-4">
+    <h1 class="text-lg font-semibold">My App</h1>
+  </div>
+  <% navbar.with_user_dropdown(trigger: "User Menu", position: :bottom_right) do %>
+    <%= render BetterUi::General::Dropdown::ItemComponent.new("Profile", icon: "user") %>
+    <%= render BetterUi::General::Dropdown::ItemComponent.new("Settings", icon: "settings") %>
+    <%= render BetterUi::General::Dropdown::DividerComponent.new %>
+    <%= render BetterUi::General::Dropdown::ItemComponent.new("Logout", icon: "logout") %>
+  <% end %>
+<% end %>
+
+<!-- Navbar with Icon Buttons usando helper -->
+<h2>Navbar with Icon Buttons</h2>
+<%= bui_navbar(show_icon_buttons: true) do |navbar| %>
+  <div class="flex items-center space-x-4">
+    <h1 class="text-lg font-semibold">My App</h1>
+  </div>
+  <% navbar.with_icon_button(icon: "bell", theme: :default, size: :sm) %>
+  <% navbar.with_icon_button(icon: "search", theme: :default, size: :sm) %>
+<% end %>
+
+<!-- Complete Navbar with All Features usando helper -->
+<h2>Complete Navbar</h2>
+<%= bui_navbar(
+  theme: :blue,
+  show_avatar: true,
+  show_user_dropdown: true,
+  show_icon_buttons: true
+) do |navbar| %>
+  <div class="flex items-center space-x-4">
+    <h1 class="text-lg font-semibold text-white">My App</h1>
+  </div>
+  
+  <% navbar.with_icon_button(icon: "bell", theme: :default, size: :sm) %>
+  <% navbar.with_icon_button(icon: "search", theme: :default, size: :sm) %>
+  
+  <% navbar.with_user_dropdown(trigger: "Menu", position: :bottom_right) do %>
+    <%= render BetterUi::General::Dropdown::ItemComponent.new("Profile", icon: "user") %>
+    <%= render BetterUi::General::Dropdown::ItemComponent.new("Settings", icon: "settings") %>
+    <%= render BetterUi::General::Dropdown::DividerComponent.new %>
+    <%= render BetterUi::General::Dropdown::ItemComponent.new("Logout", icon: "logout") %>
+  <% end %>
+  
+  <% navbar.with_avatar(name: "John Doe", size: :md, theme: :blue) %>
+<% end %>
+
+<!-- Navbar with Legacy Actions (Backward Compatibility) usando helper -->
+<h2>Navbar with Legacy Actions</h2>
+<%= bui_navbar(
+  actions: [
+    { type: :button, text: "Save", theme: :green },
+    { type: :icon, icon: "share" }
+  ]
+) do %>
+  <div class="flex items-center space-x-4">
+    <h1 class="text-lg font-semibold">Legacy App</h1>
+  </div>
+<% end %>
+
+<!-- Mixed: New Components + Legacy Actions usando helper -->
+<h2>Mixed: New Components + Legacy Actions</h2>
+<%= bui_navbar(
+  show_icon_buttons: true,
+  actions: [
+    { type: :button, text: "Export", theme: :blue }
+  ]
+) do |navbar| %>
+  <div class="flex items-center space-x-4">
+    <h1 class="text-lg font-semibold">Mixed App</h1>
+  </div>
+  
+  <% navbar.with_icon_button(icon: "download", theme: :default, size: :sm) %>
+  <% navbar.with_icon_button(icon: "printer", theme: :default, size: :sm) %>
+  <% navbar.with_avatar(name: "Jane Smith", size: :sm) %>
+<% end %>
