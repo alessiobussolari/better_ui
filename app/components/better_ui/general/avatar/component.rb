@@ -21,7 +21,7 @@ module BetterUi
           lg: "h-12 w-12",       # Large
           xl: "h-16 w-16",       # Extra large
           xxl: "h-24 w-24"       # Extra extra large
-        }
+        }.freeze
 
         # Dimensioni testo placeholder
         AVATAR_PLACEHOLDER_SIZE_CLASSES = {
@@ -32,14 +32,14 @@ module BetterUi
           lg: "text-lg",         # Large
           xl: "text-xl",         # Extra large
           xxl: "text-2xl"        # Extra extra large
-        }
+        }.freeze
 
         # Forme con classi Tailwind dirette
         AVATAR_SHAPE_CLASSES = {
           circle: "rounded-full",
           square: "rounded-none",
           rounded: "rounded-lg"
-        }
+        }.freeze
 
         # Temi placeholder con classi Tailwind dirette
         AVATAR_PLACEHOLDER_THEME_CLASSES = {
@@ -52,7 +52,7 @@ module BetterUi
           blue: "bg-blue-500 text-white",
           yellow: "bg-yellow-500 text-black",
           violet: "bg-violet-500 text-white"
-        }
+        }.freeze
 
         # Stati online con classi Tailwind dirette
         AVATAR_STATUS_THEME_CLASSES = {
@@ -60,7 +60,7 @@ module BetterUi
           offline: "bg-gray-400",
           busy: "bg-red-400",
           away: "bg-yellow-400"
-        }
+        }.freeze
 
         # Dimensioni indicatore stato
         AVATAR_STATUS_SIZE_CLASSES = {
@@ -71,7 +71,7 @@ module BetterUi
           lg: "h-3 w-3",         # Large
           xl: "h-3.5 w-3.5",     # Extra large
           xxl: "h-4 w-4"         # Extra extra large
-        }
+        }.freeze
 
         # Posizioni dell'indicatore di stato
         AVATAR_STATUS_POSITION_CLASSES = {
@@ -79,14 +79,14 @@ module BetterUi
           bottom_left: "bottom-0 left-0",
           top_right: "top-0 right-0",
           top_left: "top-0 left-0"
-        }
+        }.freeze
 
         # Stili disponibili (mantenuto per compatibilità)
         AVATAR_STYLE_CLASSES = {
           filled: "",
           outline: "border-2 border-gray-300",
           light: "opacity-75"
-        }
+        }.freeze
 
         # Configurazione con configure_attributes
         configure_attributes({

@@ -17,9 +17,8 @@ module BetterUi
           green: "bg-green-500 text-white hover:bg-green-600 focus:ring-green-500",
           blue: "bg-blue-500 text-white hover:bg-blue-600 focus:ring-blue-500",
           yellow: "bg-yellow-500 text-black hover:bg-yellow-600 focus:ring-yellow-500",
-          violet: "bg-violet-500 text-white hover:bg-violet-600 focus:ring-violet-500",
-          purple: "bg-purple-500 text-white hover:bg-purple-600 focus:ring-purple-500"
-        }
+          violet: "bg-violet-500 text-white hover:bg-violet-600 focus:ring-violet-500"
+        }.freeze
 
         BUTTON_SIZE_CLASSES = {
           xxs: "px-1 py-0.5 text-xs",
@@ -29,7 +28,7 @@ module BetterUi
           lg: "px-6 py-3 text-base",
           xl: "px-8 py-4 text-lg",
           xxl: "px-10 py-5 text-xl"
-        }
+        }.freeze
 
         BUTTON_ROUNDED_CLASSES = {
           none: "rounded-none",
@@ -41,7 +40,7 @@ module BetterUi
           xl: "rounded-2xl",
           xxl: "rounded-3xl",
           full: "rounded-full"
-        }
+        }.freeze
 
         # Costanti per validazione
         BUTTON_ICON_POSITION_VALUES = [:left, :right]

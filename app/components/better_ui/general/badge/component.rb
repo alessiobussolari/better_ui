@@ -23,9 +23,8 @@ module BetterUi
           green: "bg-green-500 text-white",
           blue: "bg-blue-500 text-white",
           yellow: "bg-yellow-500 text-black",
-          violet: "bg-violet-500 text-white",
-          gray: "bg-gray-500 text-white"
-        }
+          violet: "bg-violet-500 text-white"
+        }.freeze
 
         # Temi di badge con stile OUTLINE - classi Tailwind dirette
         BADGE_THEME_OUTLINE_CLASSES = {
@@ -37,9 +36,8 @@ module BetterUi
           green: "border border-green-500 text-green-500 bg-transparent",
           blue: "border border-blue-500 text-blue-500 bg-transparent",
           yellow: "border border-yellow-500 text-yellow-500 bg-transparent",
-          violet: "border border-violet-500 text-violet-500 bg-transparent",
-          gray: "border border-gray-500 text-gray-500 bg-transparent"
-        }
+          violet: "border border-violet-500 text-violet-500 bg-transparent"
+        }.freeze
 
         # Dimensioni con classi Tailwind dirette - Sistema uniforme 7 livelli
         BADGE_SIZE_CLASSES = {
@@ -87,9 +85,8 @@ module BetterUi
           green: "bg-green-700",
           blue: "bg-blue-700",
           yellow: "bg-yellow-700",
-          violet: "bg-violet-700",
-          gray: "bg-gray-700"
-        }
+          violet: "bg-violet-700"
+        }.freeze
 
         # Configurazione degli attributi
         configure_attributes({

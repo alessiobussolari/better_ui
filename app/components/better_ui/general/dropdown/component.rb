@@ -4,12 +4,13 @@ module BetterUi
   module General
     module Dropdown
       class Component < BetterUi::Component
-        include BetterUi::General::Components::Icon::IconHelper
+        # Delega per rendere disponibile bui_icon nel template
+        delegate :bui_icon, to: :helpers
 
         # Classi base spostate nel template HTML per migliore leggibilità
 
         # Temi per il trigger del dropdown con classi Tailwind dirette
-        DROPDOWN_TRIGGER_THEME = {
+        DROPDOWN_THEME_CLASSES = {
           default: "bg-white border-gray-300 text-gray-700 hover:bg-gray-50 focus:ring-blue-500",
           white: "bg-white border-gray-300 text-gray-900 hover:bg-gray-50 focus:ring-gray-500",
           red: "bg-red-600 border-red-600 text-white hover:bg-red-700 focus:ring-red-500",
@@ -22,7 +23,7 @@ module BetterUi
         }.freeze
 
         # Dimensioni del trigger con classi Tailwind dirette - Sistema uniforme 7 livelli
-        DROPDOWN_TRIGGER_SIZE = {
+        DROPDOWN_SIZE_CLASSES = {
           xxs: "px-1 py-0.5 text-xs",     # Extra extra small
           xs: "px-2 py-1 text-xs",        # Extra small
           sm: "px-3 py-1.5 text-sm",      # Small
@@ -33,7 +34,7 @@ module BetterUi
         }.freeze
 
         # Border radius con classi Tailwind dirette
-        DROPDOWN_ROUNDED = {
+        DROPDOWN_ROUNDED_CLASSES = {
           none: "rounded-none",
           xxs: "rounded-sm",
           xs: "rounded",
@@ -46,7 +47,7 @@ module BetterUi
         }.freeze
 
         # Posizioni del menu dropdown
-        DROPDOWN_POSITION = {
+        DROPDOWN_POSITION_CLASSES = {
           bottom: "top-full left-0 mt-2 origin-top-left",
           top: "bottom-full left-0 mb-2 origin-bottom-left",
           left: "top-0 right-full mr-2 origin-top-right",
@@ -54,14 +55,14 @@ module BetterUi
         }.freeze
 
         # Animazioni del dropdown
-        DROPDOWN_ANIMATION = {
+        DROPDOWN_ANIMATION_CLASSES = {
           fade: "transition-opacity duration-150",
           slide: "transition-all duration-150 transform",
           none: ""
         }.freeze
 
         # Stili per full-width del trigger
-        DROPDOWN_FULLWIDTH = {
+        DROPDOWN_FULLWIDTH_CLASSES = {
           true => "w-full text-left justify-start",
           false => "inline-flex justify-center"
         }.freeze
@@ -70,37 +71,37 @@ module BetterUi
           theme: {
             var: :@theme,
             default: :default,
-            constants: [:DROPDOWN_TRIGGER_THEME],
+            constants: [:DROPDOWN_THEME_CLASSES],
             methods: [:get_trigger_theme_class]
           },
           size: {
             var: :@size,
             default: :md,
-            constants: [:DROPDOWN_TRIGGER_SIZE],
+            constants: [:DROPDOWN_SIZE_CLASSES],
             methods: [:get_trigger_size_class]
           },
           rounded: {
             var: :@rounded,
             default: :md,
-            constants: [:DROPDOWN_ROUNDED],
+            constants: [:DROPDOWN_ROUNDED_CLASSES],
             methods: [:get_rounded_class]
           },
           position: {
             var: :@position,
             default: :bottom,
-            constants: [:DROPDOWN_POSITION],
+            constants: [:DROPDOWN_POSITION_CLASSES],
             methods: [:get_position_class]
           },
           animation: {
             var: :@animation,
             default: :fade,
-            constants: [:DROPDOWN_ANIMATION],
+            constants: [:DROPDOWN_ANIMATION_CLASSES],
             methods: [:get_animation_class]
           },
           fullwidth: {
             var: :@fullwidth,
             default: false,
-            constants: [:DROPDOWN_FULLWIDTH],
+            constants: [:DROPDOWN_FULLWIDTH_CLASSES],
             methods: [:get_fullwidth_class]
           }
         })

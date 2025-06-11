@@ -1,0 +1,11 @@
+<div class="<%= grid_classes %>">
+  <% if items.any? %>
+    <!-- Se ci sono items configurati, usali -->
+    <% items.each do |item| %>
+      <%= item %>
+    <% end %>
+  <% else %>
+    <!-- Altrimenti usa il contenuto normale del blocco -->
+    <%= content %>
+  <% end %>
+</div>

@@ -21,9 +21,8 @@ module BetterUi
           green: "text-white",
           blue: "text-white",
           yellow: "text-black",
-          violet: "text-white",
-          gray: "text-gray-900"
-        }
+          violet: "text-white"
+        }.freeze
 
         # Classi per separatori con temi
         BREADCRUMB_SEPARATOR_THEME_CLASSES = {
@@ -35,9 +34,8 @@ module BetterUi
           green: "text-green-300",
           blue: "text-blue-300",
           yellow: "text-yellow-600",
-          violet: "text-violet-300",
-          gray: "text-gray-500"
-        }
+          violet: "text-violet-300"
+        }.freeze
 
         # Dimensioni con classi Tailwind dirette - Sistema uniforme 7 livelli
         BREADCRUMB_SIZE_CLASSES = {
@@ -48,7 +46,7 @@ module BetterUi
           lg: "text-base",                 # Large
           xl: "text-lg",                   # Extra large
           xxl: "text-xl"                   # Extra extra large
-        }
+        }.freeze
 
         # Separatori predefiniti
         BREADCRUMB_SEPARATOR_CLASSES = {
@@ -57,7 +55,7 @@ module BetterUi
           arrow: "→",
           dot: "•",
           pipe: "|"
-        }
+        }.freeze
 
         # Configurazione degli attributi
         configure_attributes({

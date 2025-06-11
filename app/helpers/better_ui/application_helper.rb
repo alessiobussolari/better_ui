@@ -14,6 +14,7 @@ module BetterUi
     include General::Components::Dropdown::DropdownHelper
     include General::Components::Dropdown::ItemHelper
     include General::Components::Dropdown::DividerHelper
+    include General::Components::Grid::GridHelper
     include General::Components::Heading::HeadingHelper
     include General::Components::Icon::IconHelper
     include General::Components::Link::LinkHelper

@@ -4,6 +4,9 @@ module BetterUi
       class Component < BetterUi::Component
         attr_reader :title, :message, :icon, :icon_position, :dismissible, :html_content, :classes
 
+        # Delega per rendere disponibile bui_icon nel template
+        delegate :bui_icon, to: :helpers
+
         # Classi base sempre presenti
         ALERT_BASE_CLASSES = "flex p-4 mb-4 border"
 

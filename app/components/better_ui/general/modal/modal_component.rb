@@ -4,6 +4,9 @@ module BetterUi
       class ModalComponent < BetterUi::Component
         attr_reader :title, :backdrop, :closable, :classes, :html_options
 
+        # Delega per rendere disponibile bui_button nel template
+        delegate :bui_button, to: :helpers
+
         # Classi base sempre presenti per il backdrop
         MODAL_BACKDROP_CLASSES = "fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-50"
 
