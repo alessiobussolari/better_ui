@@ -1,7 +1,7 @@
 <div <%= tag.attributes(alert_attributes) %>>
   <% if (@icon.blank? ? default_icon : @icon) && @icon_position == :left %>
     <div class="<%= get_icon_classes %> <%= get_icon_theme_class %>">
-      <%= bui_icon(@icon.blank? ? default_icon : @icon) %>
+      <%= bui_icon(@icon.blank? ? default_icon : @icon, size: :xxl, theme: :white) %>
     </div>
   <% end %>
 

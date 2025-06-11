@@ -8,7 +8,7 @@ module BetterUi
         delegate :bui_icon, to: :helpers
 
         # Classi base sempre presenti
-        ALERT_BASE_CLASSES = "flex p-4 mb-4 border"
+        ALERT_BASE_CLASSES = "flex p-4 m-4 border"
 
         # Classi per elementi interni
         ALERT_ICON_CLASSES = "flex-shrink-0 mr-3 w-5 h-5"

@@ -305,6 +305,39 @@ module BetterUi
           stretch: "items-stretch"
         }.freeze
         
+        configure_attributes({
+          theme: {
+            var: :@theme,
+            default: :white,
+            constants: [:GRID_THEME_CLASSES],
+            methods: [:get_theme_class]
+          },
+          padding: {
+            var: :@padding,
+            default: :none,
+            constants: [:GRID_PADDING_CLASSES],
+            methods: [:get_padding_class]
+          },
+          rounded: {
+            var: :@rounded,
+            default: :none,
+            constants: [:GRID_ROUNDED_CLASSES],
+            methods: [:get_rounded_class]
+          },
+          justify: {
+            var: :@justify,
+            default: :start,
+            constants: [:GRID_JUSTIFY_CLASSES],
+            methods: [:get_justify_class]
+          },
+          align: {
+            var: :@align,
+            default: :start,
+            constants: [:GRID_ALIGN_CLASSES],
+            methods: [:get_align_class]
+          }
+        })
+        
         def initialize(
           cols: {sm: 1},
           gap: {sm: :md},
@@ -336,19 +369,21 @@ module BetterUi
           @ended = ended ? self.class.normalize_responsive_hash(ended) : nil
           @row_started = row_started ? self.class.normalize_responsive_hash(row_started) : nil
           @row_ended = row_ended ? self.class.normalize_responsive_hash(row_ended) : nil
+          @html_options = html_options
+          
+          # Conversione esplicita a simboli per i parametri configurabili
           @theme = theme.to_sym
           @padding = padding.to_sym
           @rounded = rounded.to_sym
           @justify = justify.to_sym
           @align = align.to_sym
-          @html_options = html_options
           
           # Estrai i valori di default base
           @cols_default = extract_base_default(@cols, 1)
           @gap_default = extract_base_default(@gap, :md)
           @rows_default = @rows ? extract_base_default(@rows, 1) : nil
           
-          validate_params
+          validate_params                         # ✅ Validazione automatica BetterUi + component-specific
         end
         
         # Combinazione delle classi
@@ -412,25 +447,12 @@ module BetterUi
           parse_responsive_classes(@row_ended, :row_ended, nil)
         end
         
-        def get_theme_class
-          GRID_THEME_CLASSES[@theme]
-        end
-        
-        def get_padding_class
-          GRID_PADDING_CLASSES[@padding]
-        end
-        
-        def get_rounded_class
-          GRID_ROUNDED_CLASSES[@rounded]
-        end
-        
-        def get_justify_class
-          GRID_JUSTIFY_CLASSES[@justify]
-        end
-        
-        def get_align_class
-          GRID_ALIGN_CLASSES[@align]
-        end
+        # Metodi generati automaticamente da configure_attributes:
+        # - get_theme_class (sostituisce la versione manuale)
+        # - get_padding_class (sostituisce la versione manuale)
+        # - get_rounded_class (sostituisce la versione manuale)
+        # - get_justify_class (sostituisce la versione manuale)
+        # - get_align_class (sostituisce la versione manuale)
         
         def parse_responsive_classes(responsive_hash, type, default_value)
           classes = []
@@ -453,8 +475,12 @@ module BetterUi
         end
         
         def validate_params
-          # Validazione automatica sarà aggiunta dal sistema configure_attributes se necessario
-          # Per ora validiamo manualmente i parametri essenziali
+          super                           # ✅ Validazioni automatiche configure_attributes (theme, padding, rounded, justify, align)
+          validate_component_params       # ✅ Validazioni specifiche di questo componente
+        end
+        
+        def validate_component_params
+          # Validazione solo per parametri grid-specific (non quelli configurabili)
           validate_hash_values(@cols, self.class::GRID_COLS_BASE_CLASSES.keys, "cols")
           validate_hash_values(@gap, self.class::GRID_GAP_BASE_CLASSES.keys, "gap")
           validate_hash_values(@rows, self.class::GRID_ROWS_BASE_CLASSES.keys, "rows") if @rows
@@ -462,12 +488,6 @@ module BetterUi
           validate_hash_values(@ended, self.class::GRID_ENDED_BASE_CLASSES.keys, "ended") if @ended
           validate_hash_values(@row_started, self.class::GRID_ROW_STARTED_BASE_CLASSES.keys, "row_started") if @row_started
           validate_hash_values(@row_ended, self.class::GRID_ROW_ENDED_BASE_CLASSES.keys, "row_ended") if @row_ended
-          
-          validate_single_value(@theme, self.class::GRID_THEME_CLASSES.keys, "theme")
-          validate_single_value(@padding, self.class::GRID_PADDING_CLASSES.keys, "padding")
-          validate_single_value(@rounded, self.class::GRID_ROUNDED_CLASSES.keys, "rounded")
-          validate_single_value(@justify, self.class::GRID_JUSTIFY_CLASSES.keys, "justify")
-          validate_single_value(@align, self.class::GRID_ALIGN_CLASSES.keys, "align")
         end
         
         def validate_hash_values(hash, valid_values, param_name)

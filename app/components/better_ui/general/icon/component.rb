@@ -1,7 +1,7 @@
 module BetterUi
   module General
     module Icon
-      class Component < ViewComponent::Base
+      class Component < BetterUi::Component
         # Classi base per l'icona con nomenclatura BEM
         ICON_BASE_CLASSES = "bui-icon inline-flex items-center justify-center"
 
@@ -26,8 +26,7 @@ module BetterUi
           green: "bui-icon--green text-green-600",
           blue: "bui-icon--blue text-blue-600",
           yellow: "bui-icon--yellow text-yellow-600",
-          violet: "bui-icon--violet text-violet-600",
-          purple: "bui-icon--purple text-purple-600"
+          violet: "bui-icon--violet text-violet-600"
         }.freeze
 
         # Animazioni disponibili
@@ -52,6 +51,21 @@ module BetterUi
         # Bordo e larghezza fissa
         ICON_BORDER_CLASSES = "bui-icon--border border border-current rounded-full p-1"
         ICON_FIXED_WIDTH_CLASSES = "bui-icon--fixed-width w-5"
+
+        configure_attributes({
+          theme: {
+            var: :@theme,
+            default: :default,
+            constants: [:ICON_THEME_CLASSES],
+            methods: [:get_theme_class]
+          },
+          size: {
+            var: :@size,
+            default: :md,
+            constants: [:ICON_SIZE_CLASSES],
+            methods: [:get_size_class]
+          }
+        })
 
         attr_reader :name, :style, :size, :theme, :spin, :pulse, :border, :fixed_width, 
                     :rotation, :flip, :classes, :id, :href, :method, :target, :html_options
@@ -90,8 +104,6 @@ module BetterUi
         )
           @name = name
           @style = style.to_sym
-          @size = size.to_sym
-          @theme = theme.to_sym
           @spin = spin
           @pulse = pulse
           @border = border
@@ -105,15 +117,20 @@ module BetterUi
           @target = target
           @html_options = html_options
 
-          validate_params!
+          # Conversione esplicita a simboli per i parametri configurabili
+          @size = size.to_sym
+          @theme = theme.to_sym
+
+          validate_params
+          validate_icon_specific_params!
         end
 
         # Genera le classi CSS complete per l'icona
         def icon_classes
           classes = [
             ICON_BASE_CLASSES,
-            size_classes,
-            theme_classes,
+            get_size_class,      # Metodo generato automaticamente da configure_attributes
+            get_theme_class,     # Metodo generato automaticamente da configure_attributes
             animation_classes,
             transformation_classes,
             border_classes,
@@ -160,11 +177,9 @@ module BetterUi
 
         private
 
-        def validate_params!
+        def validate_icon_specific_params!
           validate_name!
           validate_style!
-          validate_size!
-          validate_theme!
           validate_rotation!
           validate_flip!
         end
@@ -180,20 +195,6 @@ module BetterUi
           end
         end
 
-        def validate_size!
-          unless ICON_SIZE_CLASSES.key?(@size)
-            valid_sizes = ICON_SIZE_CLASSES.keys
-            raise ArgumentError, "BetterUi::General::Icon::Component - parametro 'size' con valore '#{@size}' non è valido. La dimensione deve essere una tra: #{valid_sizes.join(', ')}"
-          end
-        end
-
-        def validate_theme!
-          unless ICON_THEME_CLASSES.key?(@theme)
-            valid_themes = ICON_THEME_CLASSES.keys
-            raise ArgumentError, "Il tema deve essere uno tra: #{valid_themes.join(', ')}"
-          end
-        end
-
         def validate_rotation!
           if @rotation && !ICON_ROTATION_CLASSES.key?(@rotation)
             valid_rotations = ICON_ROTATION_CLASSES.keys
@@ -206,14 +207,6 @@ module BetterUi
             valid_flips = ICON_FLIP_CLASSES.keys
             raise ArgumentError, "Il flip deve essere uno tra: #{valid_flips.join(', ')}"
           end
-        end
-
-        def size_classes
-          ICON_SIZE_CLASSES[@size]
-        end
-
-        def theme_classes
-          ICON_THEME_CLASSES[@theme]
         end
 
         def animation_classes

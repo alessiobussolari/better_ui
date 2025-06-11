@@ -17,10 +17,7 @@ module BetterUi
           green: "text-green-600",
           blue: "text-blue-600",
           yellow: "text-yellow-600",
-          violet: "text-violet-600",
-          purple: "text-purple-600",
-          gray: "text-gray-600",
-          muted: "text-gray-500"
+          violet: "text-violet-600"
         }.freeze
 
         # Dimensioni con classi Tailwind dirette - Sistema uniforme 7 livelli  

@@ -4,7 +4,8 @@ module BetterUi
   module General
     module Pagination
       class Component < BetterUi::Component
-        include BetterUi::Engine.helpers
+        # Delega per metodi helper necessari
+        delegate :link_to, to: :helpers
         
         attr_reader :current_page, :total_pages, :path, :window, :show_info, :per_page, :classes, :options
 

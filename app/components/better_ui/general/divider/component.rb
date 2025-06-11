@@ -18,13 +18,13 @@ module BetterUi
           blue: "border-blue-500",
           yellow: "border-yellow-500",
           violet: "border-violet-500"
-        }
+        }.freeze
 
         # Orientamento con classi Tailwind dirette
         DIVIDER_ORIENTATION_CLASSES = {
           horizontal: "w-full border-t",
           vertical: "h-full border-l"
-        }
+        }.freeze
 
         # Stili di linea con classi Tailwind dirette
         DIVIDER_STYLE_CLASSES = {
@@ -32,7 +32,7 @@ module BetterUi
           dashed: "border-dashed",
           dotted: "border-dotted",
           double: "border-double"
-        }
+        }.freeze
 
         # Dimensioni con classi Tailwind dirette - Sistema uniforme 7 livelli
         DIVIDER_SIZE_CLASSES = {
@@ -64,7 +64,7 @@ module BetterUi
             horizontal: "border-t-8",
             vertical: "border-l-8"
           }
-        }
+        }.freeze
 
         # Classi per label con classi Tailwind dirette
         DIVIDER_LABEL_THEME_CLASSES = {
@@ -77,7 +77,7 @@ module BetterUi
           blue: "text-blue-500 bg-white px-3",
           yellow: "text-yellow-600 bg-white px-3",
           violet: "text-violet-500 bg-white px-3"
-        }
+        }.freeze
 
         # Configurazione automatica degli attributi
         configure_attributes({

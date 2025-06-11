@@ -258,6 +258,27 @@ GRID_ITEM_BASE_CLASSES = 'w-full'.freeze
           full: "rounded-full"
         }.freeze
         
+        configure_attributes({
+          theme: {
+            var: :@theme,
+            default: :transparent,
+            constants: [:GRID_ITEM_THEME_CLASSES],
+            methods: [:get_theme_class]
+          },
+          padding: {
+            var: :@padding,
+            default: :none,
+            constants: [:GRID_ITEM_PADDING_CLASSES],
+            methods: [:get_padding_class]
+          },
+          rounded: {
+            var: :@rounded,
+            default: :none,
+            constants: [:GRID_ITEM_ROUNDED_CLASSES],
+            methods: [:get_rounded_class]
+          }
+        })
+        
         def initialize(
           span: nil,
           started: nil,
@@ -284,12 +305,14 @@ GRID_ITEM_BASE_CLASSES = 'w-full'.freeze
           @row_span = row_span ? BetterUi::General::Grid::Component.normalize_responsive_hash(row_span) : nil
           @row_started = row_started ? BetterUi::General::Grid::Component.normalize_responsive_hash(row_started) : nil
           @row_ended = row_ended ? BetterUi::General::Grid::Component.normalize_responsive_hash(row_ended) : nil
+          @html_options = html_options
+
+          # Conversione esplicita a simboli per i parametri configurabili
           @theme = theme.to_sym
           @padding = padding.to_sym
           @rounded = rounded.to_sym
-          @html_options = html_options
           
-          validate_params
+          validate_params                         # ✅ Validazione automatica BetterUi + component-specific
         end
         
         # Combinazione delle classi
@@ -341,17 +364,10 @@ GRID_ITEM_BASE_CLASSES = 'w-full'.freeze
           parse_responsive_classes(@row_ended, :row_ended)
         end
         
-        def get_theme_class
-          GRID_ITEM_THEME_CLASSES[@theme]
-        end
-        
-        def get_padding_class
-          GRID_ITEM_PADDING_CLASSES[@padding]
-        end
-        
-        def get_rounded_class
-          GRID_ITEM_ROUNDED_CLASSES[@rounded]
-        end
+        # Metodi generati automaticamente da configure_attributes:
+        # - get_theme_class (sostituisce la versione manuale)
+        # - get_padding_class (sostituisce la versione manuale)  
+        # - get_rounded_class (sostituisce la versione manuale)
         
         def parse_responsive_classes(responsive_hash, type)
           classes = []
@@ -371,16 +387,17 @@ GRID_ITEM_BASE_CLASSES = 'w-full'.freeze
         end
         
         def validate_params
+          super                           # ✅ Validazioni automatiche configure_attributes (theme, padding, rounded)
+          validate_component_params       # ✅ Validazioni specifiche di questo componente
+        end
+        
+        def validate_component_params
           validate_hash_values(@span, GRID_ITEM_SPAN_BASE_CLASSES.keys, "span") if @span
           validate_hash_values(@started, GRID_ITEM_STARTED_BASE_CLASSES.keys, "started") if @started
           validate_hash_values(@ended, GRID_ITEM_ENDED_BASE_CLASSES.keys, "ended") if @ended
           validate_hash_values(@row_span, GRID_ITEM_ROW_SPAN_BASE_CLASSES.keys, "row_span") if @row_span
           validate_hash_values(@row_started, GRID_ITEM_ROW_STARTED_BASE_CLASSES.keys, "row_started") if @row_started
           validate_hash_values(@row_ended, GRID_ITEM_ROW_ENDED_BASE_CLASSES.keys, "row_ended") if @row_ended
-          
-          validate_single_value(@theme, GRID_ITEM_THEME_CLASSES.keys, "theme")
-          validate_single_value(@padding, GRID_ITEM_PADDING_CLASSES.keys, "padding")
-          validate_single_value(@rounded, GRID_ITEM_ROUNDED_CLASSES.keys, "rounded")
         end
         
         def validate_hash_values(hash, valid_values, param_name)

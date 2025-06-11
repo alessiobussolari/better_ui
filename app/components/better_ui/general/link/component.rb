@@ -18,13 +18,13 @@ module BetterUi
           blue: "text-blue-500 hover:text-blue-600",
           yellow: "text-yellow-600 hover:text-yellow-700",
           violet: "text-violet-500 hover:text-violet-600"
-        }
+        }.freeze
 
         # Orientamenti con classi Tailwind dirette
         LINK_ORIENTATION_CLASSES = {
           horizontal: "inline-flex items-center",
           vertical: "flex flex-col items-center"
-        }
+        }.freeze
 
         # Stili con classi Tailwind dirette
         LINK_STYLE_CLASSES = {
@@ -32,7 +32,7 @@ module BetterUi
           underline: "underline",
           bold: "font-bold",
           text: "no-underline"
-        }
+        }.freeze
 
         # Dimensioni con classi Tailwind dirette - Sistema uniforme 7 livelli
         LINK_SIZE_CLASSES = {
@@ -43,14 +43,14 @@ module BetterUi
           lg: "text-lg",         # Large
           xl: "text-xl",         # Extra large
           xxl: "text-2xl"        # Extra extra large
-        }
+        }.freeze
 
         # Stati con classi Tailwind dirette
         LINK_STATE_CLASSES = {
           normal: "",
           active: "font-semibold",
           disabled: "opacity-50 cursor-not-allowed pointer-events-none"
-        }
+        }.freeze
 
         configure_attributes({
           theme: {

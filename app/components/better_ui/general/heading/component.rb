@@ -17,16 +17,15 @@ module BetterUi
           green: "text-green-500",
           blue: "text-blue-500",
           yellow: "text-yellow-600",
-          violet: "text-violet-500",
-          purple: "text-purple-500"
-        }
+          violet: "text-violet-500"
+        }.freeze
 
         # Allineamenti con classi Tailwind dirette
         HEADING_ALIGN_CLASSES = {
           left: "text-left",
           center: "text-center",
           right: "text-right"
-        }
+        }.freeze
 
         # Dimensioni base (verranno combinate con level) - Sistema uniforme 7 livelli
         HEADING_SIZE_CLASSES = {
@@ -86,7 +85,7 @@ module BetterUi
             5 => "text-2xl sm:text-3xl",
             6 => "text-xl sm:text-2xl"
           }
-        }
+        }.freeze
 
         # Stili con classi Tailwind dirette
         HEADING_STYLE_CLASSES = {
@@ -94,7 +93,7 @@ module BetterUi
           bold: "font-extrabold",
           italic: "italic",
           underline: "underline"
-        }
+        }.freeze
 
         # Temi per subtitle - LOGICA CORRETTA
         HEADING_SUBTITLE_THEME_CLASSES = {
@@ -107,7 +106,7 @@ module BetterUi
           blue: "text-blue-400",
           yellow: "text-yellow-500",
           violet: "text-violet-400"
-        }
+        }.freeze
 
         # Temi per divider - LOGICA CORRETTA
         HEADING_DIVIDER_THEME_CLASSES = {
@@ -120,7 +119,7 @@ module BetterUi
           blue: "border-blue-200",
           yellow: "border-yellow-200",
           violet: "border-violet-200"
-        }
+        }.freeze
 
         configure_attributes({
           theme: {

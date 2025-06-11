@@ -17,7 +17,7 @@ module BetterUi
           lg: "h-6",           # Large
           xl: "h-8",           # Extra large
           xxl: "h-10"          # Extra extra large
-        }
+        }.freeze
 
         # Temi di progress bar con classi Tailwind dirette
         PROGRESS_THEME_CLASSES = {
@@ -30,7 +30,7 @@ module BetterUi
           blue: "bg-blue-600",
           yellow: "bg-yellow-600",
           violet: "bg-violet-600"
-        }
+        }.freeze
 
         # Classi per il background container
         PROGRESS_CONTAINER_THEME_CLASSES = {
@@ -43,7 +43,7 @@ module BetterUi
           blue: "bg-blue-100",
           yellow: "bg-yellow-100",
           violet: "bg-violet-100"
-        }
+        }.freeze
 
         configure_attributes({
           theme: {

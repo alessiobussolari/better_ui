@@ -18,7 +18,7 @@ module BetterUi
           blue: "bg-blue-50 border-blue-200",
           yellow: "bg-yellow-50 border-yellow-200",
           violet: "bg-violet-50 border-violet-200"
-        }
+        }.freeze
 
         # Temi per testo - LOGICA CORRETTA
         PANEL_TEXT_THEME_CLASSES = {
@@ -31,7 +31,7 @@ module BetterUi
           blue: "text-blue-900",
           yellow: "text-yellow-900",
           violet: "text-violet-900"
-        }
+        }.freeze
 
         # Stili con classi Tailwind dirette
         PANEL_STYLE_CLASSES = {
@@ -39,7 +39,7 @@ module BetterUi
           flat: "border-0",
           raised: "border shadow-lg",
           bordered: "border-2"
-        }
+        }.freeze
 
         # Padding con classi Tailwind dirette - Sistema uniforme 7 livelli
         PANEL_PADDING_CLASSES = {
@@ -50,7 +50,7 @@ module BetterUi
           lg: "p-6",            # Large
           xl: "p-8",            # Extra large
           xxl: "p-10"           # Extra extra large
-        }
+        }.freeze
 
         # Radius con classi Tailwind dirette
         PANEL_RADIUS_CLASSES = {
@@ -63,7 +63,7 @@ module BetterUi
           xl: "rounded-2xl",
           xxl: "rounded-3xl",
           full: "rounded-full"
-        }
+        }.freeze
 
         # Border theme con classi Tailwind dirette
         PANEL_BORDER_THEME_CLASSES = {
@@ -76,7 +76,7 @@ module BetterUi
           blue: "border-blue-100",
           yellow: "border-yellow-100",
           violet: "border-violet-100"
-        }
+        }.freeze
 
         configure_attributes({
           theme: {

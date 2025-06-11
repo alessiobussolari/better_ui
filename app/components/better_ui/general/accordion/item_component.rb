@@ -20,7 +20,7 @@ module BetterUi
         }.freeze
 
         ITEM_HEADER_THEME_CLASSES = {
-          default: 'text-gray-900 hover:bg-gray-50',
+          default: 'text-gray-900 hover:bg-gray-900 hover:text-gray-50',
           white: 'text-gray-900 hover:bg-gray-50',
           blue: 'text-blue-900 hover:bg-blue-100',
           red: 'text-red-900 hover:bg-red-100',
@@ -134,7 +134,7 @@ module BetterUi
         def header_attributes
           base_classes = [
             'bui-accordion-header',
-            'w-full flex items-center justify-between text-left font-medium transition-colors duration-200',
+            'rounded-lg w-full flex items-center justify-between text-left font-medium transition-colors duration-200',
             get_size_header_class,
             get_header_theme_class,
             disabled? ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'

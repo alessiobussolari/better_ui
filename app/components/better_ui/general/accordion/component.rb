@@ -23,7 +23,7 @@ module BetterUi
 
         ACCORDION_VARIANT_CLASSES = {
           minimal: '',
-          bordered: 'border rounded-lg',
+          bordered: 'border',
           separated: 'space-y-2'
         }.freeze
 
@@ -82,7 +82,7 @@ module BetterUi
         # Attributi per il wrapper principale
         def wrapper_attributes
           base_classes = [
-            'bui-accordion',
+            'bui-accordion m-4 p-2 rounded-lg',
             get_size_class,
             get_variant_class,
             get_theme_class,

@@ -17,7 +17,7 @@ module BetterUi
           right: "left-full top-1/2 transform -translate-y-1/2 ml-2",
           bottom: "top-full left-1/2 transform -translate-x-1/2 mt-2",
           left: "right-full top-1/2 transform -translate-y-1/2 mr-2"
-        }
+        }.freeze
 
         # Dimensioni del tooltip con classi Tailwind dirette - Sistema uniforme 7 livelli
         TOOLTIP_SIZES = {
@@ -28,7 +28,7 @@ module BetterUi
           lg: "px-3 py-2 text-base",         # Large
           xl: "px-4 py-2.5 text-lg",         # Extra large
           xxl: "px-5 py-3 text-xl"           # Extra extra large
-        }
+        }.freeze
 
         # Temi di tooltip con classi Tailwind dirette - Stile filled
         TOOLTIP_FILLED_THEMES = {
@@ -41,7 +41,7 @@ module BetterUi
           blue: "bg-blue-600 text-white",
           yellow: "bg-yellow-600 text-white",
           violet: "bg-violet-600 text-white"
-        }
+        }.freeze
 
         # Temi di tooltip con classi Tailwind dirette - Stile outline
         TOOLTIP_OUTLINE_THEMES = {
@@ -54,7 +54,7 @@ module BetterUi
           blue: "bg-white text-blue-600 border border-blue-600",
           yellow: "bg-white text-yellow-600 border border-yellow-600",
           violet: "bg-white text-violet-600 border border-violet-600"
-        }
+        }.freeze
 
         # Classi per le frecce del tooltip - Filled
         TOOLTIP_ARROW_BASE_CLASSES = "absolute w-2 h-2 transform rotate-45"
@@ -64,7 +64,7 @@ module BetterUi
           right: "right-full top-1/2 -translate-y-1/2 -mr-1",
           bottom: "bottom-full left-1/2 -translate-x-1/2 -mb-1",
           left: "left-full top-1/2 -translate-y-1/2 -ml-1"
-        }
+        }.freeze
 
         TOOLTIP_ARROW_FILLED_THEMES = {
           default: "bg-gray-900",
@@ -76,7 +76,7 @@ module BetterUi
           blue: "bg-blue-600",
           yellow: "bg-yellow-600",
           violet: "bg-violet-600"
-        }
+        }.freeze
 
         TOOLTIP_ARROW_OUTLINE_THEMES = {
           default: "bg-white border border-gray-900",
@@ -88,13 +88,13 @@ module BetterUi
           blue: "bg-white border border-blue-600",
           yellow: "bg-white border border-yellow-600",
           violet: "bg-white border border-violet-600"
-        }
+        }.freeze
 
         # Stili disponibili per il tooltip
         TOOLTIP_STYLES = {
           filled: "filled",
           outline: "outline"
-        }
+        }.freeze
 
         configure_attributes(
           theme: {
