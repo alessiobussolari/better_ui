@@ -41,14 +41,14 @@ module BetterUi
         }.freeze
 
         # Classi per container
-        CONTAINER_BASE_CLASSES = "overflow-x-auto"
+        CONTAINER_BASE_CLASSES = "overflow-x-auto w-full"
         CAPTION_CLASSES = "mb-2 text-sm text-gray-600 text-left"
 
         # Definizione dei sub-componenti con renders_one e renders_many
         renders_one :caption, CaptionComponent
         renders_one :thead, TheadComponent
         renders_one :tbody, TbodyComponent
-        renders_one :tfoot, TfootComponent  # ← AGGIUNTO
+        renders_one :tfoot, TfootComponent
 
         configure_attributes({
           theme: {

@@ -197,7 +197,7 @@ module BetterUi
 
         # Classi per il container principale
         def container_classes
-          "mb-4"
+          ""
         end
 
         # Classi per il subtitle

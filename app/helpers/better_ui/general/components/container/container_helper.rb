@@ -7,9 +7,10 @@ module BetterUi
           #
           # @param html_content [String] contenuto HTML del container (opzionale)
           # @param fluid [Boolean] se il container deve essere fluid (full width)
-          # @param max_width [Symbol] larghezza massima del container (:sm, :md, :lg, :xl, :xxl)
-          # @param padding [Symbol] padding interno (:none, :sm, :md, :lg)
-          # @param background [Symbol] colore di sfondo (:white, :light, :dark, :transparent)
+          # @param size [Symbol] dimensione del container (:xxs, :xs, :sm, :md, :lg, :xl, :xxl)
+          # @param padding [Symbol] padding interno (:none, :xxs, :xs, :sm, :md, :lg, :xl, :xxl)
+          # @param theme [Symbol] tema colore (:default, :white, :red, :rose, :orange, :green, :blue, :yellow, :violet)
+          # @param border [Boolean] se aggiungere il bordo
           # @param html_options [Hash] opzioni HTML aggiuntive
           # @return [String] HTML del container renderizzato
           #
@@ -22,23 +23,23 @@ module BetterUi
           #     fluid: true
           #   )
           #
-          # @example Container con larghezza massima
+          # @example Container con dimensione specifica
           #   bui_container(
           #     html_content: "Contenuto limitato",
-          #     max_width: :lg,
+          #     size: :lg,
           #     padding: :lg
           #   )
           #
-          # @example Con contenuto block
-          #   bui_container(background: :light) do
+          # @example Con contenuto block e tema
+          #   bui_container(theme: :blue, border: true) do
           #     "<div>Il mio contenuto</div>".html_safe
           #   end
           def bui_container(
             html_content: nil,
             fluid: false,
-            max_width: :lg,
+            size: :lg,
             padding: :md,
-            background: :white,
+            theme: :white,
             border: false,
             **html_options,
             &block
@@ -46,9 +47,9 @@ module BetterUi
             render BetterUi::General::Container::Component.new(
               html_content: html_content,
               fluid: fluid,
-              max_width: max_width,
+              size: size,
               padding: padding,
-              background: background,
+              theme: theme,
               border: border,
               **html_options
             ), &block

@@ -2,7 +2,7 @@ module BetterUi
   module General
     module Modal
       class ModalComponent < BetterUi::Component
-        attr_reader :title, :backdrop, :closable, :classes, :html_options
+        attr_reader :title, :closable, :classes, :html_options
 
         # Delega per rendere disponibile bui_button nel template
         delegate :bui_button, to: :helpers
@@ -37,14 +37,16 @@ module BetterUi
           xxl: "max-w-6xl"       # Extra extra large
         }
 
-        # Border radius con classi Tailwind dirette
+        # Border radius con classi Tailwind dirette - Sistema uniforme 7 livelli
         MODAL_ROUNDED_CLASSES = {
-          none: "rounded-none",
-          small: "rounded-md",
-          medium: "rounded-lg",
-          large: "rounded-xl",
-          full: "rounded-full"
-        }
+          none: "rounded-none",      # Nessun border radius
+          xs: "rounded-sm",          # Extra small
+          sm: "rounded-md",          # Small
+          md: "rounded-lg",          # Medium (default)
+          lg: "rounded-xl",          # Large
+          xl: "rounded-2xl",         # Extra large
+          full: "rounded-full"       # Border radius completo
+        }.freeze
 
         configure_attributes({
           theme: {
@@ -61,7 +63,7 @@ module BetterUi
           },
           rounded: {
             var: :@rounded,
-            default: :medium,
+            default: :md,
             constants: [:MODAL_ROUNDED_CLASSES],
             methods: [:get_rounded_class]
           }
@@ -72,8 +74,7 @@ module BetterUi
           title:,
           theme: :default,
           size: :md,
-          rounded: :medium,
-          backdrop: true,
+          rounded: :md,
           closable: true,
           classes: nil,
           **html_options
@@ -82,7 +83,6 @@ module BetterUi
           @theme = theme.to_sym
           @size = size.to_sym
           @rounded = rounded.to_sym
-          @backdrop = backdrop
           @closable = closable
           @classes = classes
           @html_options = html_options

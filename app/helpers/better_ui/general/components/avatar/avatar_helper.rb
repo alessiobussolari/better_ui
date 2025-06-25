@@ -19,7 +19,7 @@ module BetterUi
           #
           # @return [String] HTML dell'avatar
           def bui_avatar(
-            name: nil,
+            name = nil,
             src: nil,
             shape: :circle,
             size: :md,

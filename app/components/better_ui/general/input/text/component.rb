@@ -4,12 +4,12 @@ module BetterUi
   module General
     module Input
       module Text
-        class Component < ViewComponent::Base
+        class Component < BetterUi::Component
           attr_reader :name, :value, :placeholder, :required, :disabled, :classes, :options,
                       :theme, :size, :rounded, :form, :type
 
-          # Temi supportati per il Text Input
-          TEXT_INPUT_THEME = {
+          # Costanti con naming conforme alle nuove regole BetterUi
+          TEXT_INPUT_THEME_CLASSES = {
             default: 'border-gray-300 focus:border-blue-500 focus:ring-blue-500',
             white: 'border-white focus:border-gray-300 focus:ring-gray-300 bg-white',
             red: 'border-red-300 focus:border-red-500 focus:ring-red-500',
@@ -21,8 +21,8 @@ module BetterUi
             violet: 'border-violet-300 focus:border-violet-500 focus:ring-violet-500'
           }.freeze
 
-          # Dimensioni supportate per il Text Input - Sistema uniforme 7 livelli
-          TEXT_INPUT_SIZES = {
+          # Sistema uniforme 7 livelli per SIZE
+          TEXT_INPUT_SIZE_CLASSES = {
             xxs: 'h-6 px-1 py-0.5 text-xs',      # Extra extra small
             xs: 'h-7 px-1.5 py-1 text-xs',       # Extra small
             sm: 'h-8 px-2 py-1 text-xs',         # Small
@@ -32,17 +32,15 @@ module BetterUi
             xxl: 'h-16 px-6 py-5 text-xl'        # Extra extra large
           }.freeze
 
-          # Border radius supportati per il Text Input
-          TEXT_INPUT_RADIUS = {
-            none: 'rounded-none',
-            xxs: 'rounded-sm',
-            xs: 'rounded',
-            sm: 'rounded-md',
-            md: 'rounded-lg',
-            lg: 'rounded-xl',
-            xl: 'rounded-2xl',
-            xxl: 'rounded-3xl',
-            full: 'rounded-full'
+          # Sistema uniforme 7 livelli per ROUNDED
+          TEXT_INPUT_ROUNDED_CLASSES = {
+            none: 'rounded-none',      # Nessun border radius
+            xs: 'rounded-sm',          # Extra small
+            sm: 'rounded',             # Small
+            md: 'rounded-md',          # Medium (default)
+            lg: 'rounded-lg',          # Large
+            xl: 'rounded-xl',          # Extra large
+            full: 'rounded-full'       # Border radius completo
           }.freeze
 
           # Tipi supportati per il Text Input
@@ -52,37 +50,60 @@ module BetterUi
           ].freeze
 
           # Classi base per il Text Input
-          TEXT_INPUT_BASE_CLASSES = 'block w-full border shadow-sm disabled:bg-gray-100 disabled:cursor-not-allowed focus:outline-none focus:ring-1'
+          TEXT_INPUT_BASE_CLASSES = 'block w-full border shadow-sm disabled:bg-gray-100 disabled:cursor-not-allowed focus:outline-none focus:ring-1'.freeze
 
-          # @param name [String] Nome del campo input
-          # @param value [String] Valore del campo
-          # @param placeholder [String] Placeholder del campo
-          # @param required [Boolean] Se il campo è obbligatorio
-          # @param disabled [Boolean] Se il campo è disabilitato
-          # @param type [Symbol] Tipo del campo input (:text, :password, :email, :tel, :url, :number, :search, :date, :time, :datetime_local, :month, :week, :color)
-          # @param theme [Symbol] Tema del componente (:default, :white, :red, :rose, :orange, :green, :blue, :yellow, :violet)
-          # @param size [Symbol] Dimensione del componente (:xxs, :xs, :sm, :md, :lg, :xl, :xxl)
-          # @param rounded [Symbol] Border radius (:none, :sm, :md, :lg, :full)
-          # @param classes [String] Classi CSS aggiuntive
-          # @param form [ActionView::Helpers::FormBuilder] Form builder Rails opzionale
-          # @param options [Hash] Opzioni aggiuntive per l'input
-          def initialize(name:, value: nil, placeholder: nil, required: false, disabled: false, 
-                         type: :text, theme: :default, size: :md, rounded: :md, classes: '', form: nil, **options)
+          # Configurazione con sistema automatico configure_attributes
+          configure_attributes({
+            theme: {
+              var: :@theme,
+              default: :default,
+              constants: [:TEXT_INPUT_THEME_CLASSES],
+              methods: [:get_theme_class]
+            },
+            size: {
+              var: :@size,
+              default: :md,
+              constants: [:TEXT_INPUT_SIZE_CLASSES],
+              methods: [:get_size_class]
+            },
+            rounded: {
+              var: :@rounded,
+              default: :md,
+              constants: [:TEXT_INPUT_ROUNDED_CLASSES],
+              methods: [:get_rounded_class]
+            }
+          })
+
+          def initialize(
+            name:, 
+            value: nil, 
+            placeholder: nil, 
+            required: false, 
+            disabled: false, 
+            type: :text, 
+            theme: :default, 
+            size: :md, 
+            rounded: :md, 
+            classes: '', 
+            form: nil, 
+            **options
+          )
             @name = name
             @value = value
             @placeholder = placeholder
             @required = required
             @disabled = disabled
-            @type = type
-            @theme = theme
-            @size = size
-            @rounded = rounded
+            @type = type.to_sym
+            @theme = theme.to_sym
+            @size = size.to_sym
+            @rounded = rounded.to_sym
             @classes = classes
             @form = form
             @options = options
 
+            # Validazione automatica tramite configure_attributes + validazione tipo
             validate_params
-            super()
+            validate_type
           end
 
           # Attributi per l'elemento input standalone
@@ -115,44 +136,17 @@ module BetterUi
           def build_classes
             [
               TEXT_INPUT_BASE_CLASSES,
-              get_theme_classes,
-              get_size_classes,
-              get_rounded_classes,
+              get_theme_class,    # Metodo generato automaticamente
+              get_size_class,     # Metodo generato automaticamente
+              get_rounded_class,  # Metodo generato automaticamente
               @classes
             ].compact.join(' ')
           end
 
-          # Definizione dinamica dei metodi get
-          [
-            { constant: :TEXT_INPUT_THEME, var: :@theme, default: :default, method: :get_theme_classes },
-            { constant: :TEXT_INPUT_SIZES, var: :@size, default: :md, method: :get_size_classes },
-            { constant: :TEXT_INPUT_RADIUS, var: :@rounded, default: :md, method: :get_rounded_classes }
-          ].each do |config|
-            define_method(config[:method]) do
-              self.class.const_get(config[:constant])[instance_variable_get(config[:var])] || self.class.const_get(config[:constant])[config[:default]]
-            end
-          end
-
-          # Valida i parametri del componente
-          def validate_params
-            validate_type
-            validate_theme
-            validate_size
-            validate_rounded
-          end
-
-          # Definizione dinamica delle validazioni
-          [
-            { values: TEXT_INPUT_THEME.keys, method: :validate_theme, param: 'theme', var: :@theme },
-            { values: TEXT_INPUT_SIZES.keys, method: :validate_size, param: 'size', var: :@size },
-            { values: TEXT_INPUT_RADIUS.keys, method: :validate_rounded, param: 'rounded', var: :@rounded },
-            { values: TEXT_INPUT_TYPES, method: :validate_type, param: 'tipo', var: :@type }
-          ].each do |config|
-            define_method(config[:method]) do
-              value = instance_variable_get(config[:var])
-              unless config[:values].include?(value)
-                raise ArgumentError, "#{config[:param].capitalize} non valido: #{value}. Valori supportati: #{config[:values].join(', ')}"
-              end
+          # Validazione del tipo di input
+          def validate_type
+            unless TEXT_INPUT_TYPES.include?(@type)
+              raise ArgumentError, "Tipo non valido: #{@type}. Valori supportati: #{TEXT_INPUT_TYPES.join(', ')}"
             end
           end
         end

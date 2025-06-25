@@ -9,6 +9,7 @@ module BetterUi
         # ## Utilizzo Base
         # Il componente Modal fornisce un sistema completo con trigger (button/link) e modal content.
         # Include controller Stimulus per gestire l'apertura/chiusura e tutte le interazioni.
+        # Il backdrop è sempre presente per garantire una UX consistente.
         #
         # ## Casi d'Uso Comuni
         # - **Dialoghi di conferma**: Trigger button + modal conferma con azioni
@@ -19,7 +20,7 @@ module BetterUi
         #
         # ## Variabili Principali
         # - **Trigger**: `as` (:button, :link), `label`, `type`/`variant`
-        # - **Modal**: `title`, `theme`, `size`, `backdrop`, `closable`
+        # - **Modal**: `title`, `theme`, `size`, `closable` (backdrop sempre presente)
         # - **Controller**: `close_on_backdrop`, `close_on_escape`, `lock_scroll`
         #
         # ## Esempi Codice
@@ -33,7 +34,7 @@ module BetterUi
         # 
         # <%= bui_modal(close_on_backdrop: false) do |modal| %>
         #   <% modal.with_trigger(label: "Dettagli", as: :link, variant: :underline) %>
-        #   <% modal.with_modal(title: "Informazioni", theme: :blue, size: :large) do %>
+        #   <% modal.with_modal(title: "Informazioni", theme: :blue, size: :lg) do %>
         #     <p>Contenuto dettagliato</p>
         #   <% end %>
         # <% end %>
@@ -48,7 +49,7 @@ module BetterUi
         # @param modal_title text "Titolo del modal"
         # @param modal_theme select { choices: [default, white, red, rose, orange, green, blue, yellow, violet] }
         # @param modal_size select { choices: [xxs, xs, sm, md, lg, xl, xxl] }
-        # @param modal_backdrop toggle "Mostra overlay di sfondo"
+        # @param modal_rounded select { choices: [none, xs, sm, md, lg, xl, full] } "Border radius"
         # @param modal_closable toggle "Mostra pulsante di chiusura"
         # @param close_on_backdrop toggle "Chiudi cliccando backdrop"
         # @param close_on_escape toggle "Chiudi con tasto Escape"
@@ -60,7 +61,7 @@ module BetterUi
           modal_title: "Conferma eliminazione",
           modal_theme: :default,
           modal_size: :md,
-          modal_backdrop: true,
+          modal_rounded: :md,
           modal_closable: true,
           close_on_backdrop: true,
           close_on_escape: true,
@@ -73,7 +74,7 @@ module BetterUi
             modal_title: modal_title,
             modal_theme: modal_theme&.to_sym,
             modal_size: modal_size&.to_sym,
-            modal_backdrop: modal_backdrop,
+            modal_rounded: modal_rounded&.to_sym,
             modal_closable: modal_closable,
             close_on_backdrop: close_on_backdrop,
             close_on_escape: close_on_escape,
@@ -89,7 +90,7 @@ module BetterUi
         # @param modal_title text "Titolo del modal"
         # @param modal_theme select { choices: [default, white, red, rose, orange, green, blue, yellow, violet] }
         # @param modal_size select { choices: [xxs, xs, sm, md, lg, xl, xxl] }
-        # @param modal_backdrop toggle "Mostra overlay di sfondo"
+        # @param modal_rounded select { choices: [none, xs, sm, md, lg, xl, full] } "Border radius"
         # @param modal_closable toggle "Mostra pulsante di chiusura"
         # @param close_on_backdrop toggle "Chiudi cliccando backdrop"
         # @param close_on_escape toggle "Chiudi con tasto Escape"
@@ -101,7 +102,7 @@ module BetterUi
           modal_title: "Conferma eliminazione",
           modal_theme: :default,
           modal_size: :md,
-          modal_backdrop: true,
+          modal_rounded: :md,
           modal_closable: true,
           close_on_backdrop: true,
           close_on_escape: true,
@@ -114,7 +115,7 @@ module BetterUi
             modal_title: modal_title,
             modal_theme: modal_theme&.to_sym,
             modal_size: modal_size&.to_sym,
-            modal_backdrop: modal_backdrop,
+            modal_rounded: modal_rounded&.to_sym,
             modal_closable: modal_closable,
             close_on_backdrop: close_on_backdrop,
             close_on_escape: close_on_escape,
@@ -129,7 +130,7 @@ module BetterUi
 
         def normalize_params!(
           trigger_label:, trigger_as:, trigger_type:,
-          modal_title:, modal_theme:, modal_size:, modal_backdrop:, modal_closable:,
+          modal_title:, modal_theme:, modal_size:, modal_rounded:, modal_closable:,
           close_on_backdrop:, close_on_escape:, lock_scroll:
         )
           {
@@ -139,7 +140,7 @@ module BetterUi
             modal_title: modal_title,
             modal_theme: modal_theme,
             modal_size: modal_size,
-            modal_backdrop: modal_backdrop,
+            modal_rounded: modal_rounded,
             modal_closable: modal_closable,
             close_on_backdrop: close_on_backdrop,
             close_on_escape: close_on_escape,

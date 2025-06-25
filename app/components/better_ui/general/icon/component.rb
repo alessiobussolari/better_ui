@@ -2,55 +2,54 @@ module BetterUi
   module General
     module Icon
       class Component < BetterUi::Component
-        # Classi base per l'icona con nomenclatura BEM
-        ICON_BASE_CLASSES = "bui-icon inline-flex items-center justify-center"
+        # Classi base per l'icona
+        ICON_BASE_CLASSES = "inline-flex items-center justify-center"
 
         # Dimensioni dell'icona - Sistema uniforme 7 livelli
         ICON_SIZE_CLASSES = {
-          xxs: "bui-icon--xxs w-3 h-3 text-xs",       # Extra extra small
-          xs: "bui-icon--xs w-3.5 h-3.5 text-xs",     # Extra small
-          sm: "bui-icon--sm w-4 h-4 text-sm",         # Small
-          md: "bui-icon--md w-5 h-5 text-base",       # Medium (default)
-          lg: "bui-icon--lg w-6 h-6 text-lg",         # Large
-          xl: "bui-icon--xl w-7 h-7 text-xl",         # Extra large
-          xxl: "bui-icon--xxl w-8 h-8 text-2xl"       # Extra extra large
+          xs: "text-xs",     # Extra small
+          sm: "text-sm",         # Small
+          md: "text-base",       # Medium (default)
+          lg: "text-lg",         # Large
+          xl: "text-xl",         # Extra large
+          xxl: "text-2xl"        # Extra extra large
         }.freeze
 
         # Temi dell'icona con colori coerenti
         ICON_THEME_CLASSES = {
-          default: "bui-icon--default text-gray-600",
-          white: "bui-icon--white text-white",
-          red: "bui-icon--red text-red-600",
-          rose: "bui-icon--rose text-rose-600",
-          orange: "bui-icon--orange text-orange-600",
-          green: "bui-icon--green text-green-600",
-          blue: "bui-icon--blue text-blue-600",
-          yellow: "bui-icon--yellow text-yellow-600",
-          violet: "bui-icon--violet text-violet-600"
+          default: "text-gray-600",
+          white: "text-white",
+          red: "text-red-600",
+          rose: "text-rose-600",
+          orange: "text-orange-600",
+          green: "text-green-600",
+          blue: "text-blue-600",
+          yellow: "text-yellow-600",
+          violet: "text-violet-600"
         }.freeze
 
         # Animazioni disponibili
         ICON_ANIMATION_CLASSES = {
-          spin: "bui-icon--spin animate-spin",
-          pulse: "bui-icon--pulse animate-pulse"
+          spin: "animate-spin",
+          pulse: "animate-pulse"
         }.freeze
 
         # Trasformazioni disponibili
         ICON_ROTATION_CLASSES = {
-          90 => "bui-icon--rotate-90 transform rotate-90",
-          180 => "bui-icon--rotate-180 transform rotate-180",
-          270 => "bui-icon--rotate-270 transform rotate-270"
+          90 => "transform rotate-90",
+          180 => "transform rotate-180",
+          270 => "transform rotate-270"
         }.freeze
 
         ICON_FLIP_CLASSES = {
-          horizontal: "bui-icon--flip-h transform scale-x-[-1]",
-          vertical: "bui-icon--flip-v transform scale-y-[-1]",
-          both: "bui-icon--flip-both transform scale-[-1]"
+          horizontal: "transform -scale-x-100",
+          vertical: "transform -scale-y-100",
+          both: "transform -scale-100"
         }.freeze
 
         # Bordo e larghezza fissa
-        ICON_BORDER_CLASSES = "bui-icon--border border border-current rounded-full p-1"
-        ICON_FIXED_WIDTH_CLASSES = "bui-icon--fixed-width w-5"
+        ICON_BORDER_CLASSES = "border border-current rounded-full p-1"
+        ICON_FIXED_WIDTH_CLASSES = "w-5"
 
         configure_attributes({
           theme: {

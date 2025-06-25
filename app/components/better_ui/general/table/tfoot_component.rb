@@ -5,7 +5,7 @@ module BetterUi
         attr_reader :theme, :bordered
         
         # Supporto per righe multiple nel tfoot
-        renders_many :trs, TrComponent  # ← AGGIUNTO
+        renders_many :rows, "BetterUi::General::Table::TrComponent"
 
         def initialize(theme: :default, bordered: false, **html_options)
           @theme = theme.to_sym

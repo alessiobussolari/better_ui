@@ -112,7 +112,13 @@ module BetterUi
           @text = text
           @classes = classes
           @html_options = html_options
-          super(theme: theme, size: size, align: align, weight: weight, style: style)
+          @align = align
+          @theme = theme 
+          @size = size
+          @weight = weight
+          @style = style
+
+          validate_params
         end
 
         attr_reader :text, :classes, :html_options
@@ -121,13 +127,13 @@ module BetterUi
         def combined_classes
           [
             TEXT_BASE_CLASSES,
+            @classes,               # ← Sposta qui
+            @html_options[:class],  # ← Sposta qui
             get_theme_class,
             get_size_class,
-            get_align_class,
+            get_align_class,        # ← Così align ha priorità
             get_weight_class,
-            get_style_class,
-            @classes,
-            @html_options[:class]
+            get_style_class
           ].compact.join(" ")
         end
 

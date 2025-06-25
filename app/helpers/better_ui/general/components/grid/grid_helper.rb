@@ -31,7 +31,7 @@ module BetterUi
             ended: nil,
             row_started: nil,
             row_ended: nil,
-            theme: :white,
+            theme: :default,
             padding: :none,
             rounded: :none,
             justify: :start,

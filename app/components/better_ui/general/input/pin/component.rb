@@ -4,9 +4,12 @@ module BetterUi
   module General
     module Input
       module Pin
-        class Component < ViewComponent::Base
-          # Costanti con classi Tailwind dirette
-          PIN_THEME = {
+        class Component < BetterUi::Component
+          attr_reader :name, :value, :length, :placeholder, :required, :disabled,
+                      :theme, :size, :rounded, :form, :classes, :options
+
+          # Costanti con naming conforme alle regole BetterUi
+          PIN_THEME_CLASSES = {
             default: 'border-gray-300 focus:border-blue-500 focus:ring-blue-500',
             white: 'border-gray-300 bg-white focus:border-gray-900 focus:ring-gray-900',
             red: 'border-red-300 focus:border-red-500 focus:ring-red-500',
@@ -18,7 +21,8 @@ module BetterUi
             violet: 'border-violet-300 focus:border-violet-500 focus:ring-violet-500'
           }.freeze
 
-          PIN_SIZE = {
+          # Sistema uniforme 7 livelli per SIZE
+          PIN_SIZE_CLASSES = {
             xxs: 'w-6 h-6 text-xs',     # Extra extra small
             xs: 'w-7 h-7 text-xs',      # Extra small
             sm: 'w-8 h-8 text-sm',      # Small
@@ -28,7 +32,19 @@ module BetterUi
             xxl: 'w-24 h-24 text-2xl'   # Extra extra large
           }.freeze
 
-          PIN_GAP = {
+          # Sistema uniforme 7 livelli per ROUNDED
+          PIN_ROUNDED_CLASSES = {
+            none: 'rounded-none',        # Nessun border radius
+            xs: 'rounded-sm',           # Extra small
+            sm: 'rounded',              # Small
+            md: 'rounded-md',           # Medium (default)
+            lg: 'rounded-lg',           # Large
+            xl: 'rounded-xl',           # Extra large
+            full: 'rounded-full'        # Border radius completo
+          }.freeze
+
+          # Gap per spaziatura tra input PIN
+          PIN_GAP_CLASSES = {
             xxs: 'gap-1',        # Extra extra small
             xs: 'gap-1.5',       # Extra small
             sm: 'gap-2',         # Small
@@ -38,24 +54,45 @@ module BetterUi
             xxl: 'gap-6'         # Extra extra large
           }.freeze
 
-          PIN_BASE_CLASSES = 'rounded-md border text-center font-mono focus:outline-none focus:ring-2 focus:ring-offset-1 transition-colors'.freeze
+          # Classe base sempre presente
+          PIN_BASE_CLASSES = 'border text-center font-mono focus:outline-none focus:ring-2 focus:ring-offset-1 transition-colors'.freeze
 
-          attr_reader :name, :value, :length, :placeholder, :required, :disabled,
-                      :theme, :size, :form, :classes, :options
+          # Configurazione con sistema automatico configure_attributes
+          configure_attributes({
+            theme: {
+              var: :@theme,
+              default: :default,
+              constants: [:PIN_THEME_CLASSES],
+              methods: [:get_theme_class]
+            },
+            size: {
+              var: :@size,
+              default: :md,
+              constants: [:PIN_SIZE_CLASSES, :PIN_GAP_CLASSES],
+              methods: [:get_size_class, :get_gap_class]
+            },
+            rounded: {
+              var: :@rounded,
+              default: :md,
+              constants: [:PIN_ROUNDED_CLASSES],
+              methods: [:get_rounded_class]
+            }
+          })
 
-          # @param name [String] Nome del campo pin (obbligatorio)
-          # @param value [String] Valore del pin preimpostato
-          # @param length [Integer] Numero di campi pin (4-8, default: 6)
-          # @param placeholder [String] Placeholder per campi vuoti (default: '•')
-          # @param required [Boolean] Se il campo è obbligatorio
-          # @param disabled [Boolean] Se il campo è disabilitato
-          # @param theme [Symbol] Tema del componente (:default, :white, :red, :rose, :orange, :green, :blue, :yellow, :violet)
-          # @param size [Symbol] Dimensione del componente (:sm, :md, :lg)
-          # @param form [ActionView::Helpers::FormBuilder, nil] Form builder Rails opzionale
-          # @param classes [String] Classi CSS aggiuntive
-          # @param options [Hash] Opzioni aggiuntive per attributi HTML
-          def initialize(name:, value: '', length: 6, placeholder: '•', required: false, disabled: false,
-                         theme: :default, size: :md, form: nil, classes: '', **options)
+          def initialize(
+            name:, 
+            value: '', 
+            length: 6, 
+            placeholder: '•', 
+            required: false, 
+            disabled: false,
+            theme: :default, 
+            size: :md, 
+            rounded: :md,
+            form: nil, 
+            classes: '', 
+            **options
+          )
             @name = name
             @value = value.to_s
             @length = length.to_i
@@ -64,33 +101,18 @@ module BetterUi
             @disabled = disabled
             @theme = theme.to_sym
             @size = size.to_sym
+            @rounded = rounded.to_sym
             @form = form
             @classes = classes
             @options = options
 
+            # Validazione automatica tramite configure_attributes
             validate_params
-          end
-
-          private
-
-          def validate_params
-            validate_theme
-            validate_size
             validate_length
             validate_name
           end
 
-          def validate_theme
-            return if PIN_THEME.key?(@theme)
-
-            raise ArgumentError, "Invalid theme: #{@theme}. Valid themes are: #{PIN_THEME.keys.join(', ')}"
-          end
-
-          def validate_size
-            return if PIN_SIZE.key?(@size)
-
-            raise ArgumentError, "Invalid size: #{@size}. Valid sizes are: #{PIN_SIZE.keys.join(', ')}"
-          end
+          private
 
           def validate_length
             return if @length >= 4 && @length <= 8
@@ -106,7 +128,7 @@ module BetterUi
 
           def container_classes
             base_classes = ['flex', 'items-center']
-            base_classes << PIN_GAP[@size]
+            base_classes << get_gap_class    # Metodo generato automaticamente
             base_classes << @classes if @classes.present?
             base_classes.join(' ')
           end
@@ -114,8 +136,9 @@ module BetterUi
           def input_classes
             [
               PIN_BASE_CLASSES,
-              PIN_SIZE[@size],
-              PIN_THEME[@theme],
+              get_size_class,      # Metodo generato automaticamente
+              get_theme_class,     # Metodo generato automaticamente
+              get_rounded_class,   # Metodo generato automaticamente
               (@disabled ? 'opacity-50 cursor-not-allowed' : '')
             ].compact.join(' ')
           end

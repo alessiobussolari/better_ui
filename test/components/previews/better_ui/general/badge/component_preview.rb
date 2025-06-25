@@ -15,7 +15,7 @@ module BetterUi
         # @param icon_position select { choices: [left, right] } "Posizione icona"
         def default(
           label: "Badge",
-          theme: :white,
+          theme: :default,
           size: :md,
           shape: :rounded,
           style: :filled,
@@ -48,7 +48,7 @@ module BetterUi
         # @param icon_position select { choices: [left, right] } "Posizione icona"
         def raw(
           label: "Badge",
-          theme: :white,
+          theme: :default,
           size: :md,
           shape: :rounded,
           style: :filled,

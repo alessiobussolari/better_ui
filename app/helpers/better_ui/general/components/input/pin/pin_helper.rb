@@ -15,7 +15,8 @@ module BetterUi
             # @param required [Boolean] Se il campo è obbligatorio
             # @param disabled [Boolean] Se il campo è disabilitato
             # @param theme [Symbol] Tema del componente (:default, :white, :red, :rose, :orange, :green, :blue, :yellow, :violet)
-            # @param size [Symbol] Dimensione del componente (:sm, :md, :lg)
+            # @param size [Symbol] Dimensione del componente (:xxs, :xs, :sm, :md, :lg, :xl, :xxl)
+            # @param rounded [Symbol] Border radius (:none, :xs, :sm, :md, :lg, :xl, :full)
             # @param form [ActionView::Helpers::FormBuilder, nil] Form builder Rails opzionale
             # @param classes [String] Classi CSS aggiuntive
             # @param options [Hash] Opzioni aggiuntive per attributi HTML
@@ -53,7 +54,7 @@ module BetterUi
             #         placeholder: '0'
             #       ) %>
             def bui_input_pin(name:, value: '', length: 6, placeholder: '•', required: false, disabled: false,
-                              theme: :default, size: :md, form: nil, classes: '', **options)
+                              theme: :default, size: :md, rounded: :md, form: nil, classes: '', **options)
               render BetterUi::General::Input::Pin::Component.new(
                 name: name,
                 value: value,
@@ -63,6 +64,7 @@ module BetterUi
                 disabled: disabled,
                 theme: theme,
                 size: size,
+                rounded: rounded,
                 form: form,
                 classes: classes,
                 **options

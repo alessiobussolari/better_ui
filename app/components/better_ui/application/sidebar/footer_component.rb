@@ -6,7 +6,7 @@ module BetterUi
       class FooterComponent < BetterUi::Component
         attr_reader :footer_content, :user_info, :user_dropdown, :variant
 
-delegate :bui_avatar, to: :helpers
+        delegate :bui_avatar, to: :helpers
 
         # Costanti per le varianti del footer
         FOOTER_VARIANT_CLASSES = {

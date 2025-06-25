@@ -19,8 +19,8 @@ module BetterUi
           #
           # @return [String] HTML del badge
           def bui_badge(
-            label: nil,
-            theme: :white,
+            label = nil,
+            theme: :default,
             size: :md,
             shape: :rounded,
             style: :filled,

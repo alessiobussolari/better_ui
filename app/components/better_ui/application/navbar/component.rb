@@ -20,7 +20,7 @@ module BetterUi
         # Costanti per dimensioni
         NAVBAR_SIZE_CLASSES = {
           sm: "h-[65px] px-4 py-2",
-          md: "h-[81px] px-6 py-4",
+          md: "h-[77px] px-6 py-4",
           lg: "h-[97px] px-8 py-6"
         }.freeze
 

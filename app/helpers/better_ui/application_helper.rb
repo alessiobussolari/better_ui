@@ -27,15 +27,10 @@ module BetterUi
     include General::Components::Tooltip::TooltipHelper
     include General::Components::Field::FieldHelper
     include General::Components::Text::TextHelper
+    include General::Components::Container::ContainerHelper
     include General::Components::Dropdown::DropdownHelper
 
     include General::Components::Table::TableHelper
-    include General::Components::Table::TbodyHelper
-    include General::Components::Table::TdHelper
-    include General::Components::Table::TfootHelper
-    include General::Components::Table::ThHelper
-    include General::Components::Table::TheadHelper
-    include General::Components::Table::TrHelper
   
     include General::Components::Tabs::TabsHelper
     include General::Components::Tabs::TabHelper
@@ -43,7 +38,6 @@ module BetterUi
 
     # General Form Components
     include General::Components::Input::Checkbox::CheckboxHelper
-    include General::Components::Input::Datetime::DatetimeHelper
     include General::Components::Input::Radio::RadioHelper
     include General::Components::Input::RadioGroup::RadioGroupHelper
     include General::Components::Input::Select::SelectHelper

@@ -56,15 +56,9 @@ module BetterUi
         # - `BetterUi::General::Table::ThComponent` - Header cells (sortable, scope)
         # - `BetterUi::General::Table::TdComponent` - Data cells (align, compact)
         #
-        # ## 🔧 **HELPER MODULARI**
-        # ```ruby
-        # bui_thead         # Header section
-        # bui_tbody         # Body section
-        # bui_tfoot         # Footer section
-        # bui_tr            # Table row
-        # bui_th            # Header cell
-        # bui_td            # Data cell
-        # ```
+        # ## 🔧 **ARCHITETTURA A 4 LIVELLI**
+        # La tabella utilizza `renders_one` e `renders_many` per una struttura modulare:
+        # - Table → Section (thead/tbody/tfoot) → Row (tr) → Cell (th/td)
         #
         # ## ⚙️ **PARAMETRI SUB-COMPONENTI**
         #
@@ -85,28 +79,28 @@ module BetterUi
         # - `align: :left/:center/:right` - Allineamento testo
         # - `compact: true/false` - Padding ridotto
         #
-        # ## 🚀 **ESEMPIO UTILIZZO MODULARE**
+        # ## 🚀 **ESEMPIO UTILIZZO CON RENDERS_ONE/MANY**
         # ```ruby
-        # bui_table(theme: :blue, bordered: true) do
-        #   bui_thead do
-        #     bui_tr do
-        #       bui_th("Nome", sortable: true, sorted: true, sort_direction: :asc)
-        #       bui_th("Email")
-        #       bui_th("Ruolo", scope: "col")
+        # bui_table(theme: :blue, bordered: true) do |table|
+        #   table.with_thead do |thead|
+        #     thead.with_row do |row|
+        #       row.with_header("Nome", sortable: true, sorted: true, sort_direction: :asc)
+        #       row.with_header("Email")
+        #       row.with_header("Ruolo", scope: "col")
         #     end
         #   end
         #
-        #   bui_tbody(striped: true, hoverable: true) do
-        #     bui_tr(highlighted: true) do
-        #       bui_td("Mario Rossi")
-        #       bui_td("mario@example.com", align: :center)
-        #       bui_td("Admin", compact: true)
+        #   table.with_tbody(striped: true, hoverable: true) do |tbody|
+        #     tbody.with_row(highlighted: true) do |row|
+        #       row.with_cell("Mario Rossi")
+        #       row.with_cell("mario@example.com", align: :center)
+        #       row.with_cell("Admin", compact: true)
         #     end
         #   end
         #
-        #   bui_tfoot do
-        #     bui_tr do
-        #       bui_td("Totale", colspan: 3, align: :center)
+        #   table.with_tfoot do |tfoot|
+        #     tfoot.with_row do |row|
+        #       row.with_cell("Totale", colspan: 3, align: :center)
         #     end
         #   end
         # end

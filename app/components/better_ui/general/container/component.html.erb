@@ -1,0 +1,7 @@
+<div <%= tag.attributes(wrapper_attributes) %>>
+  <% if @html_content.present? %>
+    <%= raw @html_content %>
+  <% elsif content.present? %>
+    <%= content %>
+  <% end %>
+</div>

@@ -12,7 +12,8 @@ module BetterUi
           # @param theme [Symbol] tema del colore (:default, :white, etc.)
           # @param style [Symbol] stile (:default, :flat, :raised, :bordered)
           # @param padding [Symbol] padding interno (:xxs, :xs, :sm, :md, :lg, :xl, :xxl)
-          # @param radius [Symbol] raggio dei bordi (:none, :sm, :md, :lg, :full)
+          # @param rounded [Symbol] raggio dei bordi (:none, :sm, :md, :lg, :full)
+          # @param size [Symbol] dimensione del pannello (:auto, :full)
           # @param html_options [Hash] opzioni HTML aggiuntive
           # @return [String] HTML del pannello renderizzato
           #
@@ -43,10 +44,13 @@ module BetterUi
           #     theme: :violet,
           #     style: :bordered,
           #     padding: :lg,
-          #     radius: :lg,
+          #     rounded: :lg,
           #     id: "premium-panel",
           #     class: "special-panel"
           #   )
+          #
+          # @example Con dimensione full width
+          #   bui_panel(title: "Pannello Full Width", size: :full)
           #
           # @example Con contenuto block
           #   bui_panel(title: "Lista Utenti", theme: :white) do
@@ -60,7 +64,8 @@ module BetterUi
             theme: :white,
             style: :default,
             padding: :md,
-            radius: :sm,
+            rounded: :sm,
+            size: :auto,
             **html_options,
             &block
           )
@@ -72,7 +77,8 @@ module BetterUi
               theme: theme,
               style: style,
               padding: padding,
-              radius: radius,
+              rounded: rounded,
+              size: size,
               **html_options
             ), &block
           end

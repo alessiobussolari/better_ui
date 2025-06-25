@@ -21,14 +21,20 @@ module BetterUi
           # @option theme [Symbol] :yellow Header con sfondo giallo chiaro
           # @option theme [Symbol] :violet Header con sfondo violetto chiaro
           #
-          # @option size [Symbol] :sm (max-w-sm) Modal piccolo
-          # @option size [Symbol] :md (max-w-md, default) Modal medio
+          # @option size [Symbol] :xxs (max-w-xs) Modal extra extra piccolo
+          # @option size [Symbol] :xs (max-w-sm) Modal extra piccolo
+          # @option size [Symbol] :sm (max-w-md) Modal piccolo
+          # @option size [Symbol] :md (max-w-lg, default) Modal medio
           # @option size [Symbol] :lg (max-w-2xl) Modal grande
+          # @option size [Symbol] :xl (max-w-4xl) Modal extra grande
+          # @option size [Symbol] :xxl (max-w-6xl) Modal extra extra grande
           #
           # @option rounded [Symbol] :none (rounded-none) Nessun border radius
+          # @option rounded [Symbol] :xs (rounded-sm) Border radius extra piccolo
           # @option rounded [Symbol] :sm (rounded-md) Border radius piccolo
           # @option rounded [Symbol] :md (rounded-lg, default) Border radius medio
           # @option rounded [Symbol] :lg (rounded-xl) Border radius grande
+          # @option rounded [Symbol] :xl (rounded-2xl) Border radius extra grande
           # @option rounded [Symbol] :full (rounded-full) Border radius completo
           #
           # @return [String] HTML del modal

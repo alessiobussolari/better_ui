@@ -2,7 +2,7 @@ module BetterUi
   module General
     module Grid
       class Component < BetterUi::Component
-        attr_reader :cols, :gap, :rows, :started, :ended, :row_started, :row_ended, :theme, :padding, :rounded, :justify, :align
+        attr_reader :cols, :gap, :rows, :started, :ended, :row_started, :row_ended, :mx, :my, :theme, :padding, :rounded, :justify, :align
         
         # renders_many per gli items configurabili
         renders_many :items, "BetterUi::General::Grid::ItemComponent"
@@ -85,6 +85,78 @@ module BetterUi
         GRID_GAP_XL_CLASSES = {
           none: "xl:gap-0", xs: "xl:gap-1", sm: "xl:gap-2", 
           md: "xl:gap-4", lg: "xl:gap-6", xl: "xl:gap-8", xxl: "xl:gap-12"
+        }.freeze
+        
+        # Costanti per margin x base e responsive
+        GRID_MX_BASE_CLASSES = {
+          none: "mx-0", xs: "mx-1", sm: "mx-2", 
+          md: "mx-4", lg: "mx-6", xl: "mx-8", xxl: "mx-12",
+          1 => "mx-1", 2 => "mx-2", 3 => "mx-3", 4 => "mx-4",
+          5 => "mx-5", 6 => "mx-6", 8 => "mx-8", 12 => "mx-12"
+        }.freeze
+        
+        GRID_MX_SM_CLASSES = {
+          none: "sm:mx-0", xs: "sm:mx-1", sm: "sm:mx-2", 
+          md: "sm:mx-4", lg: "sm:mx-6", xl: "sm:mx-8", xxl: "sm:mx-12",
+          1 => "sm:mx-1", 2 => "sm:mx-2", 3 => "sm:mx-3", 4 => "sm:mx-4",
+          5 => "sm:mx-5", 6 => "sm:mx-6", 8 => "sm:mx-8", 12 => "sm:mx-12"
+        }.freeze
+        
+        GRID_MX_MD_CLASSES = {
+          none: "md:mx-0", xs: "md:mx-1", sm: "md:mx-2", 
+          md: "md:mx-4", lg: "md:mx-6", xl: "md:mx-8", xxl: "md:mx-12",
+          1 => "md:mx-1", 2 => "md:mx-2", 3 => "md:mx-3", 4 => "md:mx-4",
+          5 => "md:mx-5", 6 => "md:mx-6", 8 => "md:mx-8", 12 => "md:mx-12"
+        }.freeze
+        
+        GRID_MX_LG_CLASSES = {
+          none: "lg:mx-0", xs: "lg:mx-1", sm: "lg:mx-2", 
+          md: "lg:mx-4", lg: "lg:mx-6", xl: "lg:mx-8", xxl: "lg:mx-12",
+          1 => "lg:mx-1", 2 => "lg:mx-2", 3 => "lg:mx-3", 4 => "lg:mx-4",
+          5 => "lg:mx-5", 6 => "lg:mx-6", 8 => "lg:mx-8", 12 => "lg:mx-12"
+        }.freeze
+        
+        GRID_MX_XL_CLASSES = {
+          none: "xl:mx-0", xs: "xl:mx-1", sm: "xl:mx-2", 
+          md: "xl:mx-4", lg: "xl:mx-6", xl: "xl:mx-8", xxl: "xl:mx-12",
+          1 => "xl:mx-1", 2 => "xl:mx-2", 3 => "xl:mx-3", 4 => "xl:mx-4",
+          5 => "xl:mx-5", 6 => "xl:mx-6", 8 => "xl:mx-8", 12 => "xl:mx-12"
+        }.freeze
+        
+        # Costanti per margin y base e responsive
+        GRID_MY_BASE_CLASSES = {
+          none: "my-0", xs: "my-1", sm: "my-2", 
+          md: "my-4", lg: "my-6", xl: "my-8", xxl: "my-12",
+          1 => "my-1", 2 => "my-2", 3 => "my-3", 4 => "my-4",
+          5 => "my-5", 6 => "my-6", 8 => "my-8", 12 => "my-12"
+        }.freeze
+        
+        GRID_MY_SM_CLASSES = {
+          none: "sm:my-0", xs: "sm:my-1", sm: "sm:my-2", 
+          md: "sm:my-4", lg: "sm:my-6", xl: "sm:my-8", xxl: "sm:my-12",
+          1 => "sm:my-1", 2 => "sm:my-2", 3 => "sm:my-3", 4 => "sm:my-4",
+          5 => "sm:my-5", 6 => "sm:my-6", 8 => "sm:my-8", 12 => "sm:my-12"
+        }.freeze
+        
+        GRID_MY_MD_CLASSES = {
+          none: "md:my-0", xs: "md:my-1", sm: "md:my-2", 
+          md: "md:my-4", lg: "md:my-6", xl: "md:my-8", xxl: "md:my-12",
+          1 => "md:my-1", 2 => "md:my-2", 3 => "md:my-3", 4 => "md:my-4",
+          5 => "md:my-5", 6 => "md:my-6", 8 => "md:my-8", 12 => "md:my-12"
+        }.freeze
+        
+        GRID_MY_LG_CLASSES = {
+          none: "lg:my-0", xs: "lg:my-1", sm: "lg:my-2", 
+          md: "lg:my-4", lg: "lg:my-6", xl: "lg:my-8", xxl: "lg:my-12",
+          1 => "lg:my-1", 2 => "lg:my-2", 3 => "lg:my-3", 4 => "lg:my-4",
+          5 => "lg:my-5", 6 => "lg:my-6", 8 => "lg:my-8", 12 => "lg:my-12"
+        }.freeze
+        
+        GRID_MY_XL_CLASSES = {
+          none: "xl:my-0", xs: "xl:my-1", sm: "xl:my-2", 
+          md: "xl:my-4", lg: "xl:my-6", xl: "xl:my-8", xxl: "xl:my-12",
+          1 => "xl:my-1", 2 => "xl:my-2", 3 => "xl:my-3", 4 => "xl:my-4",
+          5 => "xl:my-5", 6 => "xl:my-6", 8 => "xl:my-8", 12 => "xl:my-12"
         }.freeze
         
         # Costanti per righe base e responsive
@@ -256,7 +328,7 @@ module BetterUi
         
         # Costanti per theme
         GRID_THEME_CLASSES = {
-          default: "bg-gray-50",
+          default: "",
           white: "bg-white",
           red: "bg-red-50",
           rose: "bg-rose-50",
@@ -308,7 +380,7 @@ module BetterUi
         configure_attributes({
           theme: {
             var: :@theme,
-            default: :white,
+            default: :default,
             constants: [:GRID_THEME_CLASSES],
             methods: [:get_theme_class]
           },
@@ -346,7 +418,9 @@ module BetterUi
           ended: nil,
           row_started: nil,
           row_ended: nil,
-          theme: :white,
+          mx: nil,
+          my: {sm: 4},
+          theme: :default,
           padding: :none,
           rounded: :none,
           justify: :start,
@@ -361,6 +435,8 @@ module BetterUi
           raise ArgumentError, "ended must be a Hash or nil" unless ended.nil? || ended.is_a?(Hash)
           raise ArgumentError, "row_started must be a Hash or nil" unless row_started.nil? || row_started.is_a?(Hash)
           raise ArgumentError, "row_ended must be a Hash or nil" unless row_ended.nil? || row_ended.is_a?(Hash)
+          raise ArgumentError, "mx must be a Hash or nil" unless mx.nil? || mx.is_a?(Hash)
+          raise ArgumentError, "my must be a Hash or nil" unless my.nil? || my.is_a?(Hash)
           
           @cols = self.class.normalize_responsive_hash(cols)
           @gap = self.class.normalize_responsive_hash(gap)
@@ -369,6 +445,8 @@ module BetterUi
           @ended = ended ? self.class.normalize_responsive_hash(ended) : nil
           @row_started = row_started ? self.class.normalize_responsive_hash(row_started) : nil
           @row_ended = row_ended ? self.class.normalize_responsive_hash(row_ended) : nil
+          @mx = mx ? self.class.normalize_responsive_hash(mx) : nil
+          @my = my ? self.class.normalize_responsive_hash(my) : nil
           @html_options = html_options
           
           # Conversione esplicita a simboli per i parametri configurabili
@@ -397,6 +475,8 @@ module BetterUi
             get_ended_classes,
             get_row_started_classes,
             get_row_ended_classes,
+            get_mx_classes,
+            get_my_classes,
             get_theme_class,
             get_padding_class,
             get_rounded_class,
@@ -447,6 +527,17 @@ module BetterUi
           parse_responsive_classes(@row_ended, :row_ended, nil)
         end
         
+        def get_mx_classes
+          return nil unless @mx
+          parse_responsive_classes(@mx, :mx, nil)
+        end
+        
+        def get_my_classes
+          return nil unless @my
+          my_default = extract_base_default(@my, :md)
+          parse_responsive_classes(@my, :my, my_default)
+        end
+        
         # Metodi generati automaticamente da configure_attributes:
         # - get_theme_class (sostituisce la versione manuale)
         # - get_padding_class (sostituisce la versione manuale)
@@ -488,6 +579,8 @@ module BetterUi
           validate_hash_values(@ended, self.class::GRID_ENDED_BASE_CLASSES.keys, "ended") if @ended
           validate_hash_values(@row_started, self.class::GRID_ROW_STARTED_BASE_CLASSES.keys, "row_started") if @row_started
           validate_hash_values(@row_ended, self.class::GRID_ROW_ENDED_BASE_CLASSES.keys, "row_ended") if @row_ended
+          validate_hash_values(@mx, self.class::GRID_MX_BASE_CLASSES.keys, "mx") if @mx
+          validate_hash_values(@my, self.class::GRID_MY_BASE_CLASSES.keys, "my") if @my
         end
         
         def validate_hash_values(hash, valid_values, param_name)

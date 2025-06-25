@@ -133,7 +133,7 @@ module BetterUi
         # @param html_options [Hash] Opzioni HTML aggiuntive
         def initialize(
           label: nil,
-          theme: :white,
+          theme: :default,
           size: :md,
           shape: :rounded,
           style: :filled,

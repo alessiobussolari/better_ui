@@ -2,7 +2,7 @@ module BetterUi
   module General
     module Panel
       class Component < BetterUi::Component
-        attr_reader :header, :footer, :body, :title, :padding, :theme, :style, :radius
+        attr_reader :header, :footer, :body, :title, :padding, :theme, :style, :rounded, :size
 
         # Classi base sempre presenti
         PANEL_BASE_CLASSES = "overflow-hidden"
@@ -43,6 +43,7 @@ module BetterUi
 
         # Padding con classi Tailwind dirette - Sistema uniforme 7 livelli
         PANEL_PADDING_CLASSES = {
+          none: "p-0",           # Nessun padding
           xxs: "p-1",           # Extra extra small
           xs: "p-1.5",          # Extra small
           sm: "p-2",            # Small
@@ -52,8 +53,8 @@ module BetterUi
           xxl: "p-10"           # Extra extra large
         }.freeze
 
-        # Radius con classi Tailwind dirette
-        PANEL_RADIUS_CLASSES = {
+        # Rounded con classi Tailwind dirette
+        PANEL_ROUNDED_CLASSES = {
           none: "rounded-none",
           xxs: "rounded-sm",
           xs: "rounded",
@@ -63,6 +64,17 @@ module BetterUi
           xl: "rounded-2xl",
           xxl: "rounded-3xl",
           full: "rounded-full"
+        }.freeze
+
+        PANEL_SIZE_CLASSES = {
+          auto: "",
+          xs: "w-xs",
+          sm: "w-sm",
+          md: "w-md",
+          lg: "w-lg",
+          xl: "w-xl",
+          xxl: "w-2xl",
+          full: "w-full"
         }.freeze
 
         # Border theme con classi Tailwind dirette
@@ -91,17 +103,23 @@ module BetterUi
             constants: [:PANEL_STYLE_CLASSES],
             methods: [:get_style_class]
           },
-          radius: {
-            var: :@radius,
+          rounded: {
+            var: :@rounded,
             default: :sm,
-            constants: [:PANEL_RADIUS_CLASSES],
-            methods: [:get_radius_class]
+            constants: [:PANEL_ROUNDED_CLASSES],
+            methods: [:get_rounded_class]
           },
           padding: {
             var: :@padding,
             default: :md,
             constants: [:PANEL_PADDING_CLASSES],
             methods: [:get_padding_class]
+          },
+          size: {
+            var: :@size,
+            default: :auto,
+            constants: [:PANEL_SIZE_CLASSES],
+            methods: [:get_size_class]
           }
         })
 
@@ -112,7 +130,7 @@ module BetterUi
         # @param theme [Symbol] tema del colore (:default, :white, etc.)
         # @param style [Symbol] stile (:default, :flat, :raised, :bordered)
         # @param padding [Symbol] padding interno (:none, :sm, :md, :lg)
-        # @param radius [Symbol] raggio dei bordi (:none, :sm, :md, :lg, :full)
+        # @param rounded [Symbol] raggio dei bordi (:none, :sm, :md, :lg, :full)
         # @param html_options [Hash] opzioni HTML aggiuntive
         def initialize(
           title: nil,
@@ -122,7 +140,8 @@ module BetterUi
           theme: :white,
           style: :default,
           padding: :md,
-          radius: :sm,
+          rounded: :sm,
+          size: :auto,
           **html_options
         )
           @title = title
@@ -132,7 +151,8 @@ module BetterUi
           @theme = theme.to_sym
           @style = style.to_sym
           @padding = padding.to_sym
-          @radius = radius.to_sym
+          @rounded = rounded.to_sym
+          @size = size.to_sym
           @html_options = html_options
 
           validate_params
@@ -144,8 +164,9 @@ module BetterUi
             PANEL_BASE_CLASSES,
             get_theme_class,
             get_style_class,
-            get_radius_class,
+            get_rounded_class,
             get_padding_class,  # CORREZIONE: Aggiunto il padding che mancava
+            get_size_class,
             @html_options[:class]
           ].compact.join(" ")
         end
@@ -163,15 +184,14 @@ module BetterUi
             "border-b",
             get_border_theme_class,
             get_text_theme_class,
-            get_padding_class
           ].compact.join(" ")
         end
 
         # Classi per il body
         def body_classes
-          [
+          [ 
+            "w-full flex flex-col content-center",
             get_text_theme_class,
-            get_padding_class
           ].compact.join(" ")
         end
 
@@ -181,7 +201,6 @@ module BetterUi
             "border-t",
             get_border_theme_class,
             get_text_theme_class,
-            get_padding_class
           ].compact.join(" ")
         end
 
