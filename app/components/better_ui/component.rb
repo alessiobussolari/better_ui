@@ -60,15 +60,42 @@ module BetterUi
           value = instance_variable_get("@#{param}".to_sym)
         end
         
-        # Determina quale constant usare
-        constant_name = config[:constants] ? config[:constants].first : config[:constant]
-        constant_hash = self.class.const_get(constant_name)
-        valid_values = constant_hash.keys
+        # Validazione custom se presente
+        if config[:validator]
+          validator_method = config[:validator]
+          send(validator_method, value, param) if respond_to?(validator_method, true)
+          next
+        end
         
-        next if valid_values.include?(value)
+        # Validazione con costanti (comportamento esistente)
+        if config[:constants] || config[:constant]
+          constant_name = config[:constants] ? config[:constants].first : config[:constant]
+          constant_hash = self.class.const_get(constant_name)
+          valid_values = constant_hash.keys
+          
+          next if valid_values.include?(value)
+          
+          raise ArgumentError, "#{self.class.name} - parametro '#{param}' con valore '#{value}' " \
+                              "non è valido. Deve essere uno tra: #{valid_values.join(', ')}"
+        end
         
-        raise ArgumentError, "#{self.class.name} - parametro '#{param}' con valore '#{value}' " \
-                            "non è valido. Deve essere uno tra: #{valid_values.join(', ')}"
+        # Validazione con array di valori
+        if config[:valid_values]
+          valid_values = config[:valid_values]
+          next if valid_values.include?(value)
+          
+          raise ArgumentError, "#{self.class.name} - parametro '#{param}' con valore '#{value}' " \
+                              "non è valido. Deve essere uno tra: #{valid_values.join(', ')}"
+        end
+        
+        # Validazione con condizioni
+        if config[:condition]
+          condition = config[:condition]
+          next if condition.call(value)
+          
+          error_message = config[:error_message] || "valore non valido per #{param}: #{value}"
+          raise ArgumentError, "#{self.class.name} - #{error_message}"
+        end
       end
     end
 

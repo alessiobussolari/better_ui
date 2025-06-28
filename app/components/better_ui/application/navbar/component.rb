@@ -239,10 +239,6 @@ module BetterUi
           end
         end
 
-        def has_actions?
-          @actions.present? && @actions.any?
-        end
-
         def actions
           @actions || []
         end

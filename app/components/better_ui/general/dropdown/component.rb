@@ -153,9 +153,6 @@ module BetterUi
             get_rounded_class
           ].compact.join(" ")
           
-          # Debug temporaneo
-          Rails.logger.debug "Dropdown position: #{@position}, classes: #{classes}"
-          
           classes
         end
 
