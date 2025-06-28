@@ -1,0 +1,995 @@
+TITLE
+bui_accordion
+
+DESCRIPTION
+Accordion component for collapsible content sections
+
+SOURCE
+BetterUi Ruby on Rails Component Library
+
+LANGUAGE
+ruby
+
+CODE
+bui_accordion(items: [], theme: :default, size: :md, variant: :default, allow_multiple: false, classes: '', **html_options)
+
+# Parameters:
+# - items: Array - Array of accordion items with title and content
+# - theme: Symbol - Color theme (:default, :white, :red, :rose, :orange, :green, :blue, :yellow, :violet)
+# - size: Symbol - Accordion size (:xxs, :xs, :sm, :md, :lg, :xl, :xxl)
+# - variant: Symbol - Style variant (:default, :bordered, :separated)
+# - allow_multiple: Boolean - Allow multiple panels to be open
+# - classes: String - Additional CSS classes
+# - **html_options: Hash - Additional HTML attributes
+
+---
+
+TITLE
+bui_alert
+
+DESCRIPTION
+Alert component for displaying important messages and notifications
+
+SOURCE
+BetterUi Ruby on Rails Component Library
+
+LANGUAGE
+ruby
+
+CODE
+bui_alert(message: nil, title: nil, theme: :default, variant: :default, size: :md, dismissible: false, icon: nil, classes: '', **html_options)
+
+# Parameters:
+# - message: String - Alert message content
+# - title: String - Alert title (optional)
+# - theme: Symbol - Color theme (:default, :white, :red, :rose, :orange, :green, :blue, :yellow, :violet)
+# - variant: Symbol - Style variant (:default, :filled, :outline, :soft)
+# - size: Symbol - Alert size (:xxs, :xs, :sm, :md, :lg, :xl, :xxl)
+# - dismissible: Boolean - Show dismiss button
+# - icon: String - Icon name (optional)
+# - classes: String - Additional CSS classes
+# - **html_options: Hash - Additional HTML attributes
+
+---
+
+TITLE
+bui_avatar
+
+DESCRIPTION
+Avatar component for displaying user profile images or initials
+
+SOURCE
+BetterUi Ruby on Rails Component Library
+
+LANGUAGE
+ruby
+
+CODE
+bui_avatar(src: nil, alt: nil, initials: nil, theme: :default, size: :md, rounded: :full, classes: '', **html_options)
+
+# Parameters:
+# - src: String - Image source URL
+# - alt: String - Alt text for image
+# - initials: String - Initials to display if no image
+# - theme: Symbol - Color theme (:default, :white, :red, :rose, :orange, :green, :blue, :yellow, :violet)
+# - size: Symbol - Avatar size (:xxs, :xs, :sm, :md, :lg, :xl, :xxl)
+# - rounded: Symbol - Border radius (:none, :xs, :sm, :md, :lg, :xl, :full)
+# - classes: String - Additional CSS classes
+# - **html_options: Hash - Additional HTML attributes
+
+---
+
+TITLE
+bui_badge
+
+DESCRIPTION
+Badge component for displaying small status indicators and labels
+
+SOURCE
+BetterUi Ruby on Rails Component Library
+
+LANGUAGE
+ruby
+
+CODE
+bui_badge(text: '', theme: :default, variant: :default, size: :md, rounded: :full, classes: '', **html_options)
+
+# Parameters:
+# - text: String - Badge text content
+# - theme: Symbol - Color theme (:default, :white, :red, :rose, :orange, :green, :blue, :yellow, :violet)
+# - variant: Symbol - Style variant (:default, :outline, :soft)
+# - size: Symbol - Badge size (:xxs, :xs, :sm, :md, :lg, :xl, :xxl)
+# - rounded: Symbol - Border radius (:none, :xs, :sm, :md, :lg, :xl, :full)
+# - classes: String - Additional CSS classes
+# - **html_options: Hash - Additional HTML attributes
+
+---
+
+TITLE
+bui_breadcrumb
+
+DESCRIPTION
+Breadcrumb navigation component for showing page hierarchy
+
+SOURCE
+BetterUi Ruby on Rails Component Library
+
+LANGUAGE
+ruby
+
+CODE
+bui_breadcrumb(items: [], separator: '/', theme: :default, size: :md, classes: '', **html_options)
+
+# Parameters:
+# - items: Array - Array of breadcrumb items with label and href
+# - separator: String - Separator between items
+# - theme: Symbol - Color theme (:default, :white, :red, :rose, :orange, :green, :blue, :yellow, :violet)
+# - size: Symbol - Breadcrumb size (:xxs, :xs, :sm, :md, :lg, :xl, :xxl)
+# - classes: String - Additional CSS classes
+# - **html_options: Hash - Additional HTML attributes
+
+---
+
+TITLE
+bui_button
+
+DESCRIPTION
+Button component for user interactions and form submissions
+
+SOURCE
+BetterUi Ruby on Rails Component Library
+
+LANGUAGE
+ruby
+
+CODE
+bui_button(label = '', theme: :default, variant: :default, size: :md, rounded: :md, icon: nil, icon_position: :left, disabled: false, loading: false, type: :button, classes: '', **html_options)
+
+# Parameters:
+# - label: String - Button text
+# - theme: Symbol - Color theme (:default, :white, :red, :rose, :orange, :green, :blue, :yellow, :violet)
+# - variant: Symbol - Style variant (:default, :primary, :secondary, :tertiary, :outline, :ghost, :link)
+# - size: Symbol - Button size (:xxs, :xs, :sm, :md, :lg, :xl, :xxl)
+# - rounded: Symbol - Border radius (:none, :xs, :sm, :md, :lg, :xl, :full)
+# - icon: String - Icon name (optional)
+# - icon_position: Symbol - Icon position (:left, :right)
+# - disabled: Boolean - Disabled state
+# - loading: Boolean - Loading state
+# - type: Symbol - Button type (:button, :submit, :reset)
+# - classes: String - Additional CSS classes
+# - **html_options: Hash - Additional HTML attributes
+
+---
+
+TITLE
+bui_container
+
+DESCRIPTION
+Container component for wrapping and constraining content width
+
+SOURCE
+BetterUi Ruby on Rails Component Library
+
+LANGUAGE
+ruby
+
+CODE
+bui_container(size: :default, padding: :md, classes: '', **html_options)
+
+# Parameters:
+# - size: Symbol - Container size (:xs, :sm, :md, :lg, :xl, :xxl, :full, :default)
+# - padding: Symbol - Internal padding (:none, :xxs, :xs, :sm, :md, :lg, :xl, :xxl)
+# - classes: String - Additional CSS classes
+# - **html_options: Hash - Additional HTML attributes
+
+---
+
+TITLE
+bui_divider
+
+DESCRIPTION
+Divider component for separating content sections
+
+SOURCE
+BetterUi Ruby on Rails Component Library
+
+LANGUAGE
+ruby
+
+CODE
+bui_divider(orientation: :horizontal, theme: :default, size: :md, style: :solid, classes: '', **html_options)
+
+# Parameters:
+# - orientation: Symbol - Divider orientation (:horizontal, :vertical)
+# - theme: Symbol - Color theme (:default, :white, :red, :rose, :orange, :green, :blue, :yellow, :violet)
+# - size: Symbol - Divider thickness (:xxs, :xs, :sm, :md, :lg, :xl, :xxl)
+# - style: Symbol - Line style (:solid, :dashed, :dotted)
+# - classes: String - Additional CSS classes
+# - **html_options: Hash - Additional HTML attributes
+
+---
+
+TITLE
+bui_dropdown
+
+DESCRIPTION
+Dropdown component for displaying contextual menus and options
+
+SOURCE
+BetterUi Ruby on Rails Component Library
+
+LANGUAGE
+ruby
+
+CODE
+bui_dropdown(trigger_text: 'Dropdown', items: [], theme: :default, size: :md, position: :bottom_left, classes: '', **html_options)
+
+# Parameters:
+# - trigger_text: String - Text for the dropdown trigger
+# - items: Array - Array of dropdown items
+# - theme: Symbol - Color theme (:default, :white, :red, :rose, :orange, :green, :blue, :yellow, :violet)
+# - size: Symbol - Dropdown size (:xxs, :xs, :sm, :md, :lg, :xl, :xxl)
+# - position: Symbol - Dropdown position (:bottom_left, :bottom_right, :top_left, :top_right)
+# - classes: String - Additional CSS classes
+# - **html_options: Hash - Additional HTML attributes
+
+---
+
+TITLE
+bui_field
+
+DESCRIPTION
+Field wrapper component for form inputs with labels and validation
+
+SOURCE
+BetterUi Ruby on Rails Component Library
+
+LANGUAGE
+ruby
+
+CODE
+bui_field(label: nil, hint: nil, error: nil, required: false, classes: '', **html_options)
+
+# Parameters:
+# - label: String - Field label text
+# - hint: String - Help text for the field
+# - error: String - Error message
+# - required: Boolean - Required field indicator
+# - classes: String - Additional CSS classes
+# - **html_options: Hash - Additional HTML attributes
+
+---
+
+TITLE
+bui_grid
+
+DESCRIPTION
+Grid component for creating responsive layouts
+
+SOURCE
+BetterUi Ruby on Rails Component Library
+
+LANGUAGE
+ruby
+
+CODE
+bui_grid(cols: 1, gap: :md, responsive: true, classes: '', **html_options)
+
+# Parameters:
+# - cols: Integer, Hash - Number of columns or responsive breakpoint map
+# - gap: Symbol - Gap between grid items (:none, :xxs, :xs, :sm, :md, :lg, :xl, :xxl)
+# - responsive: Boolean - Enable responsive behavior
+# - classes: String - Additional CSS classes
+# - **html_options: Hash - Additional HTML attributes
+
+---
+
+TITLE
+bui_heading
+
+DESCRIPTION
+Heading component for page and section titles
+
+SOURCE
+BetterUi Ruby on Rails Component Library
+
+LANGUAGE
+ruby
+
+CODE
+bui_heading(text = '', level: 1, theme: :default, size: nil, weight: :bold, align: :left, classes: '', **html_options)
+
+# Parameters:
+# - text: String - Heading text
+# - level: Integer - Heading level (1-6)
+# - theme: Symbol - Color theme (:default, :white, :red, :rose, :orange, :green, :blue, :yellow, :violet)
+# - size: Symbol - Text size (:xxs, :xs, :sm, :md, :lg, :xl, :xxl)
+# - weight: Symbol - Font weight (:thin, :light, :normal, :medium, :semibold, :bold, :extrabold)
+# - align: Symbol - Text alignment (:left, :center, :right)
+# - classes: String - Additional CSS classes
+# - **html_options: Hash - Additional HTML attributes
+
+---
+
+TITLE
+bui_icon
+
+DESCRIPTION
+Icon component for displaying SVG icons
+
+SOURCE
+BetterUi Ruby on Rails Component Library
+
+LANGUAGE
+ruby
+
+CODE
+bui_icon(name:, theme: :default, size: :md, classes: '', **html_options)
+
+# Parameters:
+# - name: String - Icon name (required)
+# - theme: Symbol - Color theme (:default, :white, :red, :rose, :orange, :green, :blue, :yellow, :violet)
+# - size: Symbol - Icon size (:xxs, :xs, :sm, :md, :lg, :xl, :xxl)
+# - classes: String - Additional CSS classes
+# - **html_options: Hash - Additional HTML attributes
+
+---
+
+TITLE
+bui_input_checkbox
+
+DESCRIPTION
+Checkbox input component for boolean selections
+
+SOURCE
+BetterUi Ruby on Rails Component Library
+
+LANGUAGE
+ruby
+
+CODE
+bui_input_checkbox(name:, value: "1", checked: false, required: false, disabled: false, indeterminate: false, label: nil, label_position: :right, theme: :default, size: :md, rounded: :md, classes: '', form: nil, **options)
+
+# Parameters:
+# - name: String - Checkbox name (required)
+# - value: String - Checkbox value
+# - checked: Boolean - Checked state
+# - required: Boolean - Required field
+# - disabled: Boolean - Disabled state
+# - indeterminate: Boolean - Indeterminate state (requires Stimulus controller)
+# - label: String, nil - Label text
+# - label_position: Symbol - Label position (:left, :right)
+# - theme: Symbol - Color theme (:default, :white, :red, :rose, :orange, :green, :blue, :yellow, :violet)
+# - size: Symbol - Checkbox size (:xxs, :xs, :sm, :md, :lg, :xl, :xxl)
+# - rounded: Symbol - Border radius (:none, :xs, :sm, :md, :lg, :xl, :full)
+# - classes: String - Additional CSS classes
+# - form: ActionView::Helpers::FormBuilder, nil - Rails form builder
+# - **options: Hash - Additional HTML attributes
+
+---
+
+TITLE
+bui_input_pin
+
+DESCRIPTION
+PIN input component for secure numeric entry
+
+SOURCE
+BetterUi Ruby on Rails Component Library
+
+LANGUAGE
+ruby
+
+CODE
+bui_input_pin(name:, value: '', length: 6, placeholder: '•', required: false, disabled: false, theme: :default, size: :md, rounded: :md, form: nil, classes: '', **options)
+
+# Parameters:
+# - name: String - Pin input name (required)
+# - value: String - Initial value
+# - length: Integer - Number of pin digits (4-8)
+# - placeholder: String - Placeholder character
+# - required: Boolean - Required field
+# - disabled: Boolean - Disabled state
+# - theme: Symbol - Color theme (:default, :white, :red, :rose, :orange, :green, :blue, :yellow, :violet)
+# - size: Symbol - Pin input size (:xxs, :xs, :sm, :md, :lg, :xl, :xxl)
+# - rounded: Symbol - Border radius (:none, :xs, :sm, :md, :lg, :xl, :full)
+# - form: ActionView::Helpers::FormBuilder, nil - Rails form builder
+# - classes: String - Additional CSS classes
+# - **options: Hash - Additional HTML attributes
+
+---
+
+TITLE
+bui_input_radio
+
+DESCRIPTION
+Radio input component for single selections from multiple options
+
+SOURCE
+BetterUi Ruby on Rails Component Library
+
+LANGUAGE
+ruby
+
+CODE
+bui_input_radio(name:, value:, checked: false, required: false, disabled: false, label: nil, label_position: :right, theme: :default, size: :md, rounded: :full, classes: '', form: nil, **options)
+
+# Parameters:
+# - name: String - Radio name (required)
+# - value: String - Radio value (required)
+# - checked: Boolean - Checked state
+# - required: Boolean - Required field
+# - disabled: Boolean - Disabled state
+# - label: String, nil - Label text
+# - label_position: Symbol - Label position (:left, :right)
+# - theme: Symbol - Color theme (:default, :white, :red, :rose, :orange, :green, :blue, :yellow, :violet)
+# - size: Symbol - Radio size (:xxs, :xs, :sm, :md, :lg, :xl, :xxl)
+# - rounded: Symbol - Border radius (:none, :xxs, :xs, :sm, :md, :lg, :xl, :xxl, :full)
+# - classes: String - Additional CSS classes
+# - form: ActionView::Helpers::FormBuilder, nil - Rails form builder
+# - **options: Hash - Additional HTML attributes
+
+---
+
+TITLE
+bui_input_rating
+
+DESCRIPTION
+Rating input component for star-based ratings
+
+SOURCE
+BetterUi Ruby on Rails Component Library
+
+LANGUAGE
+ruby
+
+CODE
+bui_input_rating(name: nil, value: 0, max_stars: 5, readonly: false, half_stars: true, theme: :default, size: :md, show_value: false, form: nil, classes: '', **options)
+
+# Parameters:
+# - name: String, nil - Rating name (required if not readonly)
+# - value: Float, Integer - Current rating value (0.0 - max_stars)
+# - max_stars: Integer - Maximum number of stars (default: 5)
+# - readonly: Boolean - Readonly state
+# - half_stars: Boolean - Support half stars
+# - theme: Symbol - Color theme (:default, :yellow, :orange, :red, :pink, :purple, :blue, :green, :gray)
+# - size: Symbol - Rating size (:xxs, :xs, :sm, :md, :lg, :xl, :xxl)
+# - show_value: Boolean - Show numeric value next to stars
+# - form: ActionView::Helpers::FormBuilder, nil - Rails form builder
+# - classes: String - Additional CSS classes
+# - **options: Hash - Additional HTML attributes
+
+---
+
+TITLE
+bui_input_select
+
+DESCRIPTION
+Select input component for dropdown selections
+
+SOURCE
+BetterUi Ruby on Rails Component Library
+
+LANGUAGE
+ruby
+
+CODE
+bui_input_select(name:, options:, selected: nil, required: false, disabled: false, multiple: false, searchable: true, theme: :default, size: :md, rounded: :md, placeholder: nil, search_placeholder: nil, max_height: "300px", form: nil, classes: '', **html_options)
+
+# Parameters:
+# - name: String - Select name (required)
+# - options: Array<Hash> - Array of options [{value: 'value', label: 'label'}, ...]
+# - selected: String, Array, nil - Selected value(s)
+# - required: Boolean - Required field
+# - disabled: Boolean - Disabled state
+# - multiple: Boolean - Allow multiple selections
+# - searchable: Boolean - Enable search functionality
+# - theme: Symbol - Color theme (:default, :white, :red, :rose, :orange, :green, :blue, :yellow, :violet)
+# - size: Symbol - Select size (:xxs, :xs, :sm, :md, :lg, :xl, :xxl)
+# - rounded: Symbol - Border radius (:none, :xxs, :xs, :sm, :md, :lg, :xl, :xxl, :full)
+# - placeholder: String - Placeholder text for the trigger
+# - search_placeholder: String - Placeholder text for the search input
+# - max_height: String - Maximum height of the dropdown (e.g., "300px")
+# - form: ActionView::Helpers::FormBuilder, nil - Rails form builder
+# - classes: String - Additional CSS classes
+# - **html_options: Hash - Additional HTML attributes
+
+---
+
+TITLE
+bui_input_text
+
+DESCRIPTION
+Text input component for single-line text entry
+
+SOURCE
+BetterUi Ruby on Rails Component Library
+
+LANGUAGE
+ruby
+
+CODE
+bui_input_text(name:, value: nil, placeholder: nil, required: false, disabled: false, type: :text, theme: :default, size: :md, rounded: :md, classes: '', form: nil, **options)
+
+# Parameters:
+# - name: String - Input name (required)
+# - value: String - Input value
+# - placeholder: String - Placeholder text
+# - required: Boolean - Required field
+# - disabled: Boolean - Disabled state
+# - type: Symbol - Input type (:text, :password, :email, :tel, :url, :number, :search, :date, :time, :datetime_local, :month, :week, :color)
+# - theme: Symbol - Color theme (:default, :white, :red, :rose, :orange, :green, :blue, :yellow, :violet)
+# - size: Symbol - Input size (:xxs, :xs, :sm, :md, :lg, :xl, :xxl)
+# - rounded: Symbol - Border radius (:none, :xs, :sm, :md, :lg, :xl, :full)
+# - classes: String - Additional CSS classes
+# - form: ActionView::Helpers::FormBuilder, nil - Rails form builder
+# - **options: Hash - Additional HTML attributes
+
+---
+
+TITLE
+bui_input_textarea
+
+DESCRIPTION
+Textarea input component for multi-line text entry
+
+SOURCE
+BetterUi Ruby on Rails Component Library
+
+LANGUAGE
+ruby
+
+CODE
+bui_input_textarea(name:, value: nil, placeholder: nil, required: false, disabled: false, rows: 3, theme: :default, size: :md, rounded: :md, classes: '', form: nil, **options)
+
+# Parameters:
+# - name: String - Textarea name (required)
+# - value: String - Textarea value
+# - placeholder: String - Placeholder text
+# - required: Boolean - Required field
+# - disabled: Boolean - Disabled state
+# - rows: Integer - Number of rows
+# - theme: Symbol - Color theme (:default, :white, :red, :rose, :orange, :green, :blue, :yellow, :violet)
+# - size: Symbol - Textarea size (:xxs, :xs, :sm, :md, :lg, :xl, :xxl)
+# - rounded: Symbol - Border radius (:none, :xxs, :xs, :sm, :md, :lg, :xl, :xxl, :full)
+# - classes: String - Additional CSS classes
+# - form: ActionView::Helpers::FormBuilder, nil - Rails form builder
+# - **options: Hash - Additional HTML attributes
+
+---
+
+TITLE
+bui_input_toggle
+
+DESCRIPTION
+Toggle input component for on/off switches
+
+SOURCE
+BetterUi Ruby on Rails Component Library
+
+LANGUAGE
+ruby
+
+CODE
+bui_input_toggle(name:, value: '1', checked: false, required: false, disabled: false, label: nil, label_position: :right, theme: :default, size: :md, form: nil, classes: '', **options)
+
+# Parameters:
+# - name: String - Toggle name (required)
+# - value: String - Value when active
+# - checked: Boolean - Checked state
+# - required: Boolean - Required field
+# - disabled: Boolean - Disabled state
+# - label: String, nil - Label text
+# - label_position: Symbol - Label position (:left, :right)
+# - theme: Symbol - Color theme (:default, :white, :red, :rose, :orange, :green, :blue, :yellow, :violet)
+# - size: Symbol - Toggle size (:xxs, :xs, :sm, :md, :lg, :xl, :xxl)
+# - form: ActionView::Helpers::FormBuilder, nil - Rails form builder
+# - classes: String - Additional CSS classes
+# - **options: Hash - Additional HTML attributes
+
+---
+
+TITLE
+bui_link
+
+DESCRIPTION
+Link component for navigation and actions
+
+SOURCE
+BetterUi Ruby on Rails Component Library
+
+LANGUAGE
+ruby
+
+CODE
+bui_link(label, href: nil, theme: :white, orientation: :horizontal, style: :default, size: :md, icon: nil, active: false, disabled: false, data: {}, method: nil, target: nil, **html_options)
+
+# Parameters:
+# - label: String - Link text (required)
+# - href: String - Destination URL (nil for plain text)
+# - theme: Symbol - Color theme (:default, :white, :red, :rose, :orange, :green, :blue, :yellow, :violet)
+# - orientation: Symbol - Orientation (:horizontal, :vertical)
+# - style: Symbol - Style (:default, :underline, :bold, :text)
+# - size: Symbol - Link size (:xxs, :xs, :sm, :md, :lg, :xl, :xxl)
+# - icon: String - Icon name (optional)
+# - active: Boolean - Active state
+# - disabled: Boolean - Disabled state
+# - data: Hash - Data attributes
+# - method: Symbol - HTTP method for link (for Turbo)
+# - target: String - Link target (e.g., _blank)
+# - **html_options: Hash - Additional HTML attributes
+
+---
+
+TITLE
+bui_modal
+
+DESCRIPTION
+Modal component for overlay dialogs and popups
+
+SOURCE
+BetterUi Ruby on Rails Component Library
+
+LANGUAGE
+ruby
+
+CODE
+bui_modal(close_on_backdrop: true, close_on_escape: true, lock_scroll: true, classes: nil, **html_options)
+
+# Parameters:
+# - close_on_backdrop: Boolean - Close modal when clicking backdrop
+# - close_on_escape: Boolean - Close modal with Escape key
+# - lock_scroll: Boolean - Lock body scroll when modal is open
+# - classes: String - Additional CSS classes
+# - **html_options: Hash - Additional HTML attributes
+
+---
+
+TITLE
+bui_pagination
+
+DESCRIPTION
+Pagination component for navigating through multiple pages
+
+SOURCE
+BetterUi Ruby on Rails Component Library
+
+LANGUAGE
+ruby
+
+CODE
+bui_pagination(current_page:, total_pages:, path:, theme: :default, size: :md, window: 2, show_info: false, per_page: nil, classes: '', **options)
+
+# Parameters:
+# - current_page: Integer - Current page number (required)
+# - total_pages: Integer - Total number of pages (required)
+# - path: String - Base path for pagination links (required)
+# - theme: Symbol - Color theme (:default, :blue, :red, :green, :yellow, :violet, :orange, :rose, :white)
+# - size: Symbol - Pagination size (:xxs, :xs, :sm, :md, :lg, :xl, :xxl)
+# - window: Integer - Number of pages to show around current page
+# - show_info: Boolean - Show page info (e.g., "Showing X-Y of Z results")
+# - per_page: Integer, nil - Items per page (required if show_info is true)
+# - classes: String - Additional CSS classes
+# - **options: Hash - Additional HTML attributes
+
+---
+
+TITLE
+bui_panel
+
+DESCRIPTION
+Panel component for grouping related content
+
+SOURCE
+BetterUi Ruby on Rails Component Library
+
+LANGUAGE
+ruby
+
+CODE
+bui_panel(title: nil, body: nil, header: nil, footer: nil, theme: :white, style: :default, padding: :md, rounded: :sm, size: :auto, **html_options)
+
+# Parameters:
+# - title: String - Panel title (optional)
+# - body: String - Panel body content (optional)
+# - header: String - Custom header content (optional)
+# - footer: String - Footer content (optional)
+# - theme: Symbol - Color theme (:default, :white, :red, :rose, :orange, :green, :blue, :yellow, :violet)
+# - style: Symbol - Panel style (:default, :flat, :raised, :bordered)
+# - padding: Symbol - Internal padding (:none, :xxs, :xs, :sm, :md, :lg, :xl, :xxl)
+# - rounded: Symbol - Border radius (:none, :xxs, :xs, :sm, :md, :lg, :xl, :xxl, :full)
+# - size: Symbol - Panel size (:auto, :xs, :sm, :md, :lg, :xl, :xxl, :full)
+# - **html_options: Hash - Additional HTML attributes
+
+---
+
+TITLE
+bui_progress
+
+DESCRIPTION
+Progress bar component for showing completion status
+
+SOURCE
+BetterUi Ruby on Rails Component Library
+
+LANGUAGE
+ruby
+
+CODE
+bui_progress(value: 0, theme: :white, size: :md, label: false, classes: nil, **html_options)
+
+# Parameters:
+# - value: Integer - Percentage of completion (0-100)
+# - theme: Symbol - Color theme (:default, :white, :red, :rose, :orange, :green, :blue, :yellow, :violet)
+# - size: Symbol - Progress bar size (:xxs, :xs, :sm, :md, :lg, :xl, :xxl)
+# - label: Boolean - Show label with percentage
+# - classes: String - Additional CSS classes for the container
+# - **html_options: Hash - Additional HTML attributes
+
+---
+
+TITLE
+bui_spinner
+
+DESCRIPTION
+Spinner component for loading states
+
+SOURCE
+BetterUi Ruby on Rails Component Library
+
+LANGUAGE
+ruby
+
+CODE
+bui_spinner(theme: :default, size: :md, style: :default, label: nil, **html_options)
+
+# Parameters:
+# - theme: Symbol - Color theme (:default, :white, :red, :rose, :orange, :green, :blue, :yellow, :violet)
+# - size: Symbol - Spinner size (:xxs, :xs, :sm, :md, :lg, :xl, :xxl)
+# - style: Symbol - Spinner style (:default, :outline)
+# - label: String - Text label (optional)
+# - **html_options: Hash - Additional HTML attributes
+
+---
+
+TITLE
+bui_table
+
+DESCRIPTION
+Table component for displaying tabular data
+
+SOURCE
+BetterUi Ruby on Rails Component Library
+
+LANGUAGE
+ruby
+
+CODE
+bui_table(data: nil, headers: nil, theme: :default, radius: :sm, size: :md, striped: false, hoverable: false, bordered: false, compact: false, minimal: false, **html_options)
+
+# Parameters:
+# - data: Array - Table data (optional, for simple tables)
+# - headers: Array - Table headers (optional, for simple tables)
+# - theme: Symbol - Color theme (:default, :white, :red, :rose, :orange, :green, :blue, :yellow, :violet)
+# - radius: Symbol - Border radius (:none, :xs, :sm, :md, :lg, :xl, :full)
+# - size: Symbol - Table size (:xxs, :xs, :sm, :md, :lg, :xl, :xxl)
+# - striped: Boolean - Striped rows
+# - hoverable: Boolean - Hover effects on rows
+# - bordered: Boolean - Table borders
+# - compact: Boolean - Compact spacing
+# - minimal: Boolean - Minimal styling
+# - **html_options: Hash - Additional HTML attributes
+
+---
+
+TITLE
+bui_tabs
+
+DESCRIPTION
+Tabs component for organizing content into switchable panels
+
+SOURCE
+BetterUi Ruby on Rails Component Library
+
+LANGUAGE
+ruby
+
+CODE
+bui_tabs(variant: :pills, theme: :default, size: :md, orientation: :horizontal, navigation_classes: '', panels_classes: 'mt-4', **options)
+
+# Parameters:
+# - variant: Symbol - Style variant (:pills, :underline, :bordered, :minimal)
+# - theme: Symbol - Color theme (:default, :blue, :red, :green, :yellow, :violet, :orange, :rose, :white)
+# - size: Symbol - Tabs size (:xxs, :xs, :sm, :md, :lg, :xl, :xxl)
+# - orientation: Symbol - Tabs orientation (:horizontal, :vertical)
+# - navigation_classes: String - Additional CSS classes for navigation
+# - panels_classes: String - Additional CSS classes for panels
+# - **options: Hash - Additional HTML attributes
+
+---
+
+TITLE
+bui_tag
+
+DESCRIPTION
+Tag component for labels and categories
+
+SOURCE
+BetterUi Ruby on Rails Component Library
+
+LANGUAGE
+ruby
+
+CODE
+bui_tag(text:, theme: :white, size: :md, style: :filled, **options)
+
+# Parameters:
+# - text: String - Tag text (required)
+# - theme: Symbol - Color theme (:default, :white, :red, :rose, :orange, :green, :blue, :yellow, :violet)
+# - size: Symbol - Tag size (:xxs, :xs, :sm, :md, :lg, :xl, :xxl)
+# - style: Symbol - Tag style (:filled, :outline)
+# - **options: Hash - Additional HTML attributes
+
+---
+
+TITLE
+bui_text
+
+DESCRIPTION
+Text component for styled text content
+
+SOURCE
+BetterUi Ruby on Rails Component Library
+
+LANGUAGE
+ruby
+
+CODE
+bui_text(text = '', theme: :default, size: :md, align: :left, weight: :normal, style: :normal, classes: '', **html_options)
+
+# Parameters:
+# - text: String - Text content (optional, if block is used)
+# - theme: Symbol - Color theme (:default, :white, :red, :rose, :orange, :green, :blue, :yellow, :violet)
+# - size: Symbol - Text size (:xxs, :xs, :sm, :md, :lg, :xl, :xxl)
+# - align: Symbol - Text alignment (:left, :center, :right, :justify)
+# - weight: Symbol - Font weight (:thin, :light, :normal, :medium, :semibold, :bold, :extrabold)
+# - style: Symbol - Font style (:normal, :italic, :underline, :line_through)
+# - classes: String - Additional CSS classes
+# - **html_options: Hash - Additional HTML attributes
+
+---
+
+TITLE
+bui_tooltip
+
+DESCRIPTION
+Tooltip component for contextual help and information
+
+SOURCE
+BetterUi Ruby on Rails Component Library
+
+LANGUAGE
+ruby
+
+CODE
+bui_tooltip(text: nil, theme: :white, position: :top, size: :md, style: :filled, classes: nil, **html_options)
+
+# Parameters:
+# - text: String - Tooltip text (required)
+# - theme: Symbol - Color theme (:default, :white, :red, :rose, :orange, :green, :blue, :yellow, :violet)
+# - position: Symbol - Tooltip position (:top, :right, :bottom, :left)
+# - size: Symbol - Tooltip size (:xxs, :xs, :sm, :md, :lg, :xl, :xxl)
+# - style: Symbol - Tooltip style (:filled, :outline)
+# - classes: String - Additional CSS classes for the container
+# - **html_options: Hash - Additional HTML attributes
+
+---
+
+TITLE
+bui_card
+
+DESCRIPTION
+Card component for displaying metrics and data with trend indicators
+
+SOURCE
+BetterUi Ruby on Rails Component Library
+
+LANGUAGE
+ruby
+
+CODE
+bui_card(title:, value:, trend: nil, change: nil, color: :green, theme: :default, size: :md, rounded: :md, shadow: :sm, **html_options)
+
+# Parameters:
+# - title: String - The title/label of the metric
+# - value: String - The main value to display
+# - trend: Symbol, nil - The direction of the trend (:up, :down, nil), default nil
+# - change: String, nil - The value of the change (e.g., "+12%"), default nil
+# - color: Symbol - The color of the trend (:green, :red, :blue, :yellow, :purple, :indigo, :gray), default :green
+# - theme: Symbol - The card theme (:default, :white, :red, :rose, :orange, :green, :blue, :yellow, :violet, :purple), default :default
+# - size: Symbol - The size of the card (:xxs, :xs, :sm, :md, :lg, :xl, :xxl), default :md
+# - rounded: Symbol - The rounding level (:none, :sm, :md, :lg, :full), default :md
+# - shadow: Symbol - The type of shadow (:none, :sm, :md, :lg), default :sm
+# - **html_options: Hash - Additional HTML attributes to pass to the main div
+
+---
+
+TITLE
+bui_main
+
+DESCRIPTION
+Main layout component for application structure with sidebar and navbar
+
+SOURCE
+BetterUi Ruby on Rails Component Library
+
+LANGUAGE
+ruby
+
+CODE
+bui_main(rounded: :sm, shadow: :md, sidebar: true, navbar: true, classes: nil, **html_options)
+
+# Parameters:
+# - rounded: Symbol - The rounding level (:none, :sm, :md, :lg, :xl, :full), default :sm
+# - shadow: Symbol - The type of shadow (:none, :sm, :md, :lg, :xl), default :md
+# - sidebar: Boolean - Whether to show the sidebar, default true
+# - navbar: Boolean - Whether to show the navbar, default true
+# - classes: String - Additional CSS classes
+# - **html_options: Hash - Additional HTML attributes
+
+---
+
+TITLE
+bui_navbar
+
+DESCRIPTION
+Navigation bar component for top-level application navigation
+
+SOURCE
+BetterUi Ruby on Rails Component Library
+
+LANGUAGE
+ruby
+
+CODE
+bui_navbar(size: :md, theme: :default, variant: :default, shadow: :sm, border: false, actions: [], with_sidebar: false, sidebar_width: :md, action_button_theme: :default, action_icon_theme: :default, show_avatar: false, show_user_dropdown: false, show_icon_buttons: false, **html_options)
+
+# Parameters:
+# - size: Symbol - Navbar size (:sm, :md, :lg), default :md
+# - theme: Symbol - Color theme (:default, :white, :red, :rose, :orange, :green, :blue, :yellow, :violet), default :default
+# - variant: Symbol - Style variant (:default, :solid, :transparent, :glass), default :default
+# - shadow: Symbol - Type of shadow (:none, :sm, :md, :lg), default :sm
+# - border: Boolean - Whether to show the bottom border, default false
+# - actions: Array - Array of actions/buttons on the right
+# - with_sidebar: Boolean - Whether the navbar is alongside a sidebar, default false
+# - sidebar_width: Symbol - Width of the adjacent sidebar (:sm, :md, :lg, :xl), default :md
+# - action_button_theme: Symbol - Theme for buttons in actions, default :default
+# - action_icon_theme: Symbol - Theme for icons in actions, default :default
+# - show_avatar: Boolean - Whether to show the avatar, default false
+# - show_user_dropdown: Boolean - Whether to show the user dropdown, default false
+# - show_icon_buttons: Boolean - Whether to show the icon buttons, default false
+# - **html_options: Hash - Additional HTML attributes
+
+---
+
+TITLE
+bui_sidebar
+
+DESCRIPTION
+Sidebar component for secondary navigation and content
+
+SOURCE
+BetterUi Ruby on Rails Component Library
+
+LANGUAGE
+ruby
+
+CODE
+bui_sidebar(width: :md, position: :left, theme: :default, shadow: :lg, **html_options)
+
+# Parameters:
+# - width: Symbol - Sidebar width (:sm, :md, :lg, :xl), default :md
+# - position: Symbol - Sidebar position (:left, :right), default :left
+# - theme: Symbol - Color theme (:default, :white, :red, :rose, :orange, :green, :blue, :yellow, :violet), default :default
+# - shadow: Symbol - Type of shadow (:none, :sm, :md, :lg, :xl), default :lg
+# - **html_options: Hash - Additional HTML attributes
