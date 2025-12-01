@@ -1,0 +1,70 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  release:
+    name: Build and Release
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.3'
+          bundler-cache: true
+
+      - name: Extract version from tag
+        id: version
+        run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_OUTPUT
+
+      - name: Verify version matches gemspec
+        run: |
+          GEM_VERSION=$(ruby -e "require './lib/better_ui/version'; puts BetterUi::VERSION")
+          TAG_VERSION=${{ steps.version.outputs.VERSION }}
+          if [ "$GEM_VERSION" != "$TAG_VERSION" ]; then
+            echo "Version mismatch: gem version ($GEM_VERSION) != tag version ($TAG_VERSION)"
+            exit 1
+          fi
+          echo "Version verified: $GEM_VERSION"
+
+      - name: Run tests
+        env:
+          RAILS_ENV: test
+        run: bin/rails db:test:prepare test
+
+      - name: Build gem
+        run: gem build better_ui.gemspec
+
+      - name: Push to RubyGems
+        env:
+          GEM_HOST_API_KEY: ${{ secrets.RUBYGEMS_API_KEY }}
+        run: gem push better_ui-${{ steps.version.outputs.VERSION }}.gem
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: better_ui-${{ steps.version.outputs.VERSION }}.gem
+          generate_release_notes: true
+          body: |
+            ## BetterUi v${{ steps.version.outputs.VERSION }}
+
+            ### Installation
+
+            ```ruby
+            gem 'better_ui', '~> ${{ steps.version.outputs.VERSION }}'
+            ```
+
+            See [CHANGELOG.md](https://github.com/alessiobussolari/better_ui/blob/main/CHANGELOG.md) for details.
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
